@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2GemmyBusness", "2GemmyBusn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3GemmyTranslate", "3GemmyTranslate\3GemmyTranslate.csproj", "{10A313CD-1CE4-48FB-8A24-8296B7AC67CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4GemmyTools", "4GemmyTools\4GemmyTools.csproj", "{3EB1C5C6-0DC5-420B-AF5B-B68006D9581E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{10A313CD-1CE4-48FB-8A24-8296B7AC67CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10A313CD-1CE4-48FB-8A24-8296B7AC67CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10A313CD-1CE4-48FB-8A24-8296B7AC67CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB1C5C6-0DC5-420B-AF5B-B68006D9581E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB1C5C6-0DC5-420B-AF5B-B68006D9581E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB1C5C6-0DC5-420B-AF5B-B68006D9581E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB1C5C6-0DC5-420B-AF5B-B68006D9581E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
