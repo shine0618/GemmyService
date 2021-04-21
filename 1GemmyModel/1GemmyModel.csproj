@@ -56,6 +56,11 @@
       <DependentUpon>202104210543542_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Column.cs" />
+    <Compile Include="Model\ControlBox.cs" />
+    <Compile Include="Model\Foot.cs" />
+    <Compile Include="Model\Frame.cs" />
+    <Compile Include="Model\SideBracket.cs" />
     <Compile Include="Model\T_Base.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
