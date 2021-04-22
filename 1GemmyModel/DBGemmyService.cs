@@ -2,6 +2,7 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace _1GemmyModel
 {
@@ -18,11 +19,18 @@ namespace _1GemmyModel
         {
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+        }
+
 
         //为您要在模型中包含的每种实体类型都添加 DbSet。有关配置和使用 Code First  模型
         //的详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=390109。
 
-         public virtual DbSet<T_Base> T_Base { get; set; }
+        public virtual DbSet<T_Base> T_Base { get; set; }
     }
 
     //public class MyEntity
