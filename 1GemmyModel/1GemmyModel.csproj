@@ -60,6 +60,23 @@
       <DependentUpon>202104210734436_init222.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Accessory.cs" />
+    <Compile Include="Model\Color.cs" />
+    <Compile Include="Model\Column.cs" />
+    <Compile Include="Model\ControlBox.cs" />
+    <Compile Include="Model\DownloadFile.cs" />
+    <Compile Include="Model\File.cs" />
+    <Compile Include="Model\Foot.cs" />
+    <Compile Include="Model\Frame.cs" />
+    <Compile Include="Model\HandSet.cs" />
+    <Compile Include="Model\OfficeTFList.cs" />
+    <Compile Include="Model\OfficeTOList.cs" />
+    <Compile Include="Model\OfficeTSList.cs" />
+    <Compile Include="Model\OfficeTTList.cs" />
+    <Compile Include="Model\PowerCable.cs" />
+    <Compile Include="Model\ProductInsertByUser.cs" />
+    <Compile Include="Model\ProductView.cs" />
+    <Compile Include="Model\SideBracket.cs" />
     <Compile Include="Model\T_Base.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
