@@ -1,0 +1,121 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/resourse/style.css" rel="stylesheet" />
+    <title>test22</title>
+    <style>
+        /*设置html和body的高度为显示屏的高度*/
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .wrapflex {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            /*布局方向是垂直的*/
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+        /*设置顶部和底部的高度*/
+
+        .headerflex,
+        .footerflex {
+            height: 60px;
+            line-height: 60px;
+            background-color: #fff;
+            text-align: center;
+        }
+        /*设置高度是跟父元素的高度一致，100%；*/
+        /*实际高度是 100% 减去顶部高度和底部高度，左右两边固定，中间是剩余100%原理一致*/
+
+        .mainflex {
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            -ms-flex: 1;
+            flex: 1;
+            width: 100%;
+            overflow: auto;
+            background-image: url("/resourse/Img/newbg.82899ecd.jpg");
+        }
+        /* 定义导航栏 */
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: gray;
+        }
+
+        * {
+            font-family: 'Microsoft YaHei';
+        }
+        .atbbb
+        {
+            border:0;
+            width:100%;
+            height:100%
+        }
+        mainflex>div{
+            height:100%;
+        }
+    </style>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="wrapflex">
+        <div class="headerflex">E-Serveice</div>
+        <div class="mainflex">
+            <div style="height: 100%">
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <iframe class="atbbb" src="https://jiecang-embedded.partcommunity.com/?info=jiecang%2Flifting%5Ftable%2Fjc36ts%5Fasmtab%2Eprj&hidePortlets=navigation&showPortlets=preview&varset={COLOUR=B},{OF=-02}"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <!-- <div class="footerflex">footer</div> -->
+    </div>
+</body>
+</html>

@@ -138,6 +138,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="resourse\Img\newbg.82899ecd.jpg" />
+    <Content Include="resourse\style.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -269,6 +271,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\test.cshtml" />
+    <Content Include="Views\Home\test22.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
