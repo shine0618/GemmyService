@@ -59,6 +59,10 @@
     <Compile Include="Migrations\202104210734436_init222.Designer.cs">
       <DependentUpon>202104210734436_init222.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104290120236_init33332.cs" />
+    <Compile Include="Migrations\202104290120236_init33332.Designer.cs">
+      <DependentUpon>202104290120236_init33332.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\Color.cs" />
@@ -90,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104210734436_init222.resx">
       <DependentUpon>202104210734436_init222.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104290120236_init33332.resx">
+      <DependentUpon>202104290120236_init33332.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
