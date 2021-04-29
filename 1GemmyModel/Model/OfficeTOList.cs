@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class OfficeTOList
+   public class OfficeTOList:T_Base
     {
         /// <summary>
         /// 单腿桌型号
         /// </summary>
-        [Key]
+        [Index]
         public string Mode { get; set; }
         /// <summary>
         /// 单腿桌名称
         /// </summary>
-        [Key]
+        [Index]
         public string Type { get; set; }
         /// <summary>
         /// 立柱节数
@@ -120,9 +121,15 @@ namespace _1GemmyModel.Model
         /// </summary>
         public double? Weight { get; set; }
         /// <summary>
-        /// 描述
+        /// 中文描述
         /// </summary>
-        public string Description { get; set; }
+        [Column(TypeName = "ntext")]
+        public string DescriptionZH { get; set; }
+        /// <summary>
+        /// 英文描述
+        /// </summary>
+        [Column(TypeName = "ntext")]
+        public string DescriptionEN { get; set; }
         /// <summary>
         /// 立柱型号
         /// </summary>

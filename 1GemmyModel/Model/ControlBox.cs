@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class ControlBox
+   public class ControlBox:T_Base
     {
         /// <summary>
         /// 控制器型号
         /// </summary>
-        [Key]
+        [Index]
         public string Mode { get; set; }
         /// <summary>
         /// 控制器控制立柱数量
@@ -132,10 +132,15 @@ namespace _1GemmyModel.Model
         /// </summary>
         public double? Weight { get; set; }
         /// <summary>
-        /// 描述
+        /// 中文描述
         /// </summary>
-        [Column(TypeName ="ntext")]
-        public string Description { get; set; }
+        [Column(TypeName = "ntext")]
+        public string DescriptionZH { get; set; }
+        /// <summary>
+        /// 英文描述
+        /// </summary>
+        [Column(TypeName = "ntext")]
+        public string DescriptionEN { get; set; }
         /// <summary>
         /// 控制器适配手控器
         /// </summary>
@@ -170,7 +175,16 @@ namespace _1GemmyModel.Model
         public string Customization { get; set; }
 
 
-
+        /// <summary>
+        /// 中文特殊说明
+        /// </summary>
+        [Column(TypeName = "ntext")]
+        public string SpecialDescriptionZH { get; set; }
+        /// <summary>
+        /// 英文特殊说明
+        /// </summary>
+        [Column(TypeName = "ntext")]
+        public string SpecialDescriptionEN { get; set; }
 
     }
 }

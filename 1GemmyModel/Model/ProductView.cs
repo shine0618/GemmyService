@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-  public  class ProductView
+  public  class ProductView:T_Base
     {
         /// <summary>
         /// 查看产品的用户名

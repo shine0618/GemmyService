@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-  public   class OfficeTSList
+  public   class OfficeTSList:T_Base
     {
         /// <summary>
         /// 桌型号
         /// </summary>
-        [Key]
+        [Index]
         public string Mode { get; set; }
         /// <summary>
         /// 桌名称
         /// </summary>
-        [Key]
+        [Index]
         public string Type { get; set; }
         /// <summary>
         /// 立柱节数
@@ -129,10 +129,15 @@ namespace _1GemmyModel.Model
         /// </summary>
         public double? Weight { get; set; }
         /// <summary>
-        /// 内容
+        /// 中文描述
         /// </summary>
         [Column(TypeName = "ntext")]
-        public string Description { get; set; }
+        public string DescriptionZH { get; set; }
+        /// <summary>
+        /// 英文描述
+        /// </summary>
+        [Column(TypeName = "ntext")]
+        public string DescriptionEN { get; set; }
         /// <summary>
         /// 立柱型号
         /// </summary>

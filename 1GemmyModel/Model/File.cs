@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public  class File
+   public  class File:T_Base
     {
         /// <summary>
         /// 文件名
         /// </summary>
-        [Key]
+        [Index]
         public string FileName { get; set; }
         /// <summary>
         /// 文件种类
@@ -62,7 +63,9 @@ namespace _1GemmyModel.Model
         /// 是否被锁定
         /// </summary>
         public bool Lock { get; set; }
-        
-        
+        /// <summary>
+        /// 语言版本
+        /// </summary>
+        public string Language { get; set; }
     }
 }
