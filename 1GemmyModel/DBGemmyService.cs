@@ -31,6 +31,23 @@ namespace _1GemmyModel
         //的详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=390109。
 
         public virtual DbSet<T_Base> T_Base { get; set; }
+        public virtual DbSet<Accessory> Accessory { get; set; }
+        public virtual DbSet<Color> Color { get; set; }
+        public virtual DbSet<Column> Column { get; set; }
+        public virtual DbSet<ControlBox> ControlBox { get; set; }
+        public virtual DbSet<DownloadFile> DownloadFile { get; set; }
+        public virtual DbSet<File> File { get; set; }
+        public virtual DbSet<Foot> Foot { get; set; }
+        public virtual DbSet<Frame> Frame { get; set; }
+        public virtual DbSet<HandSet> HandSet { get; set; }
+        public virtual DbSet<OfficeTOList> OfficeTOList { get; set; }
+        public virtual DbSet<OfficeTSList> OfficeTsList { get; set; }
+        public virtual DbSet<OfficeTTList>OfficeTTList { get; set; }
+        public virtual DbSet<OfficeTFList> OfficeTFList { get; set; }
+        public virtual DbSet<PowerCable> PowerCable { get; set; }
+        public virtual DbSet<ProductInsertByUser> ProductInsertByUser { get; set; }
+        public virtual DbSet<ProductView> ProductView { get; set; }
+        public virtual DbSet<SideBracket> SideBracket { get; set; }
     }
 
     //public class MyEntity
