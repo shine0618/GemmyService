@@ -12,12 +12,10 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 单腿桌型号
         /// </summary>
-        [Key]
         public string Mode { get; set; }
         /// <summary>
         /// 单腿桌名称
         /// </summary>
-        [Key]
         public string Type { get; set; }
         /// <summary>
         /// 立柱节数
