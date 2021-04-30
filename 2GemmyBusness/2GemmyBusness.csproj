@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="BLL\AccessoryQueryable.cs" />
     <Compile Include="BLL\BLLBase.cs" />
+    <Compile Include="BLL\LanguageQueryable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
