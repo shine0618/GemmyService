@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class DownloadFile
+   public class DownloadFile:T_Base
     {
         /// <summary>
         /// 文件名

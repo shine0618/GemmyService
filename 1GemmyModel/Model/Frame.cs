@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class Frame
+   public class Frame:T_Base
     {
         /// <summary>
         /// 框架类型
         /// </summary>
-        [Key]
+        [Index]
         public string Mode { get; set; }
         /// <summary>
         /// 最大长度
@@ -120,10 +120,15 @@ namespace _1GemmyModel.Model
         /// </summary>
         public double? Weight { get; set; }
         /// <summary>
-        /// 描述
+        /// 中文描述
         /// </summary>
-        [Column(TypeName ="ntext")]
-        public string Description { get; set; }
+        [Column(TypeName = "ntext")]
+        public string DescriptionZH { get; set; }
+        /// <summary>
+        /// 英文描述
+        /// </summary>
+        [Column(TypeName = "ntext")]
+        public string DescriptionEN { get; set; }
         /// <summary>
         ///框架连接立柱
         /// </summary>
@@ -156,5 +161,15 @@ namespace _1GemmyModel.Model
         /// 定制客户
         /// </summary>
         public string Customization { get; set; }
+        /// <summary>
+        /// 中文特殊说明
+        /// </summary>
+        [Column(TypeName = "ntext")]
+        public string SpecialDescriptionZH { get; set; }
+        /// <summary>
+        /// 英文特殊说明
+        /// </summary>
+        [Column(TypeName = "ntext")]
+        public string SpecialDescriptionEN { get; set; }
     }
 }

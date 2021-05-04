@@ -6,12 +6,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using _1GemmyModel.Model;
 
 namespace _2GemmyBusness.BLL
 {
-    class BLLBase
-    {
-
+   public class BLLBase
+   {
+      
         //添加
         public int  AddEntities<T>(T entity) where T:class
         {
@@ -106,8 +107,35 @@ namespace _2GemmyBusness.BLL
         #endregion
 
 
+        
+        /// <summary>
+        /// 查询全部
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public  IQueryable<T> GetAll<T>() where T:class
+        {
+            using (DBGemmyService _db = new DBGemmyService())
+            {
+                var entity = _db.Set<T>().AsNoTracking();
+                return entity;
+            }
+        }
+        /// <summary>
+        /// 查询个体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IQueryable<T> GetAllById<T>(int id) where T : T_Base
+        {
+            using (DBGemmyService _db = new DBGemmyService())
+            {
+                var entity = _db.Set<T>().Where(m=>m.Id==id);
+                return entity;
+            }
+        }
 
-
-
-    }
+        
+   }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class ProductInsertByUser
+   public class ProductInsertByUser:T_Base
     {
         /// <summary>
         /// 添加者用户名
@@ -44,6 +44,10 @@ namespace _1GemmyModel.Model
         /// 配件编号
         /// </summary>
         public string AccessoryNo { get; set; }
+        /// <summary>
+        /// 走线槽编号
+        /// </summary>
+        public string CableTrayNo { get; set; }
         /// <summary>
         /// 新建时间
         /// </summary>

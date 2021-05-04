@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class Color
+   public class Color:T_Base
     {
         /// <summary>
         /// 颜色名称
         /// </summary>
-        [Key]
+        [Index]
         public string ColorName { get; set; }
         /// <summary>
         /// 颜色标准
@@ -29,7 +30,7 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 是否定制
         /// </summary>
-        public string Customization { get; set; }
+        public bool Customization { get; set; }
         /// <summary>
         /// 颜色简称
         /// </summary>

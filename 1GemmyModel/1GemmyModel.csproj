@@ -73,6 +73,7 @@
     <Compile Include="Model\Foot.cs" />
     <Compile Include="Model\Frame.cs" />
     <Compile Include="Model\HandSet.cs" />
+    <Compile Include="Model\LanguageType.cs" />
     <Compile Include="Model\OfficeTFList.cs" />
     <Compile Include="Model\OfficeTOList.cs" />
     <Compile Include="Model\OfficeTSList.cs" />
