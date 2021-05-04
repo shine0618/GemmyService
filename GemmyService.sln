@@ -13,7 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3GemmyTranslate", "3GemmyTr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4GemmyTools", "4GemmyTools\4GemmyTools.csproj", "{3EB1C5C6-0DC5-420B-AF5B-B68006D9581E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GemmyLanguageManageTool", "GemmyLanguageManageTool\GemmyLanguageManageTool.csproj", "{1DFC76FF-D874-4434-8B45-767A6036E07E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GemmyLanguageManageTool", "GemmyLanguageManageTool\GemmyLanguageManageTool.csproj", "{1DFC76FF-D874-4434-8B45-767A6036E07E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5.GemmyManagerWEB", "5.GemmyManagerWEB\5.GemmyManagerWEB.csproj", "{2A74EC0E-8D0B-4DBF-9F68-9E2CF5BECF00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{1DFC76FF-D874-4434-8B45-767A6036E07E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DFC76FF-D874-4434-8B45-767A6036E07E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DFC76FF-D874-4434-8B45-767A6036E07E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A74EC0E-8D0B-4DBF-9F68-9E2CF5BECF00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A74EC0E-8D0B-4DBF-9F68-9E2CF5BECF00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A74EC0E-8D0B-4DBF-9F68-9E2CF5BECF00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A74EC0E-8D0B-4DBF-9F68-9E2CF5BECF00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

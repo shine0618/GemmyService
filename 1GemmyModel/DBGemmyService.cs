@@ -3,6 +3,7 @@ using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using _1GemmyModel.Model.ModelSystem;
 
 namespace _1GemmyModel
 {
@@ -30,7 +31,9 @@ namespace _1GemmyModel
         //为您要在模型中包含的每种实体类型都添加 DbSet。有关配置和使用 Code First  模型
         //的详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=390109。
 
-        public virtual DbSet<T_Base> T_Base { get; set; }
+        public virtual DbSet<T_SYS_Language> T_SYS_Language { get; set; }
+
+
         public virtual DbSet<Accessory> Accessory { get; set; }
         public virtual DbSet<Color> Color { get; set; }
         public virtual DbSet<Column> Column { get; set; }
@@ -42,7 +45,7 @@ namespace _1GemmyModel
         public virtual DbSet<HandSet> HandSet { get; set; }
         public virtual DbSet<OfficeTOList> OfficeTOList { get; set; }
         public virtual DbSet<OfficeTSList> OfficeTsList { get; set; }
-        public virtual DbSet<OfficeTTList>OfficeTTList { get; set; }
+        public virtual DbSet<OfficeTTList> OfficeTTList { get; set; }
         public virtual DbSet<OfficeTFList> OfficeTFList { get; set; }
         public virtual DbSet<PowerCable> PowerCable { get; set; }
         public virtual DbSet<ProductInsertByUser> ProductInsertByUser { get; set; }

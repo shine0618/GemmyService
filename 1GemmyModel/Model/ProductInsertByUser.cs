@@ -48,9 +48,5 @@ namespace _1GemmyModel.Model
         /// 走线槽编号
         /// </summary>
         public string CableTrayNo { get; set; }
-        /// <summary>
-        /// 新建时间
-        /// </summary>
-        public DateTime CreateTime { get; set; }
     }
 }

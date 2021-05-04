@@ -82,12 +82,10 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 中文描述
         /// </summary>
-        [Column(TypeName = "ntext")]
         public string DescriptionZH { get; set; }
         /// <summary>
         /// 英文描述
         /// </summary>
-        [Column(TypeName = "ntext")]
         public string DescriptionEN { get; set; }
         /// <summary>
         /// 配件适配控制器
@@ -128,12 +126,10 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 中文特殊说明
         /// </summary>
-        [Column(TypeName = "ntext")]
         public string SpecialDescriptionZH { get; set; }
         /// <summary>
         /// 英文特殊说明
         /// </summary>
-        [Column(TypeName = "ntext")]
         public string SpecialDescriptionEN { get; set; }
     }
 }

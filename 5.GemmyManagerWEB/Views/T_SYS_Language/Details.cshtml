@@ -1,0 +1,106 @@
+﻿@model _1GemmyModel.Model.ModelSystem.T_SYS_Language
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_SYS_Language</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.lcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LanguageCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LanguageCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LanguageDesript)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LanguageDesript)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.verificationCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.verificationCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleteSign)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleteSign)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deletePerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deletePerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatePerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatePerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatePerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatePerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remark)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

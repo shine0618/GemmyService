@@ -407,6 +407,7 @@
     <Content Include="Views\JCSelection\office.cshtml" />
     <Content Include="Views\JCSelection\main.cshtml" />
     <Content Include="Views\JCSelection\office_Eservice.cshtml" />
+    <Content Include="Views\JCSelection\office_Eservice_test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

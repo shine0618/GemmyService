@@ -13,12 +13,10 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 单腿桌型号
         /// </summary>
-        [Key]
         public string Mode { get; set; }
         /// <summary>
         /// 单腿桌名称
         /// </summary>
-        [Key]
         public string Type { get; set; }
         /// <summary>
         /// 立柱节数
@@ -123,12 +121,10 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 中文描述
         /// </summary>
-        [Column(TypeName = "ntext")]
         public string DescriptionZH { get; set; }
         /// <summary>
         /// 英文描述
         /// </summary>
-        [Column(TypeName = "ntext")]
         public string DescriptionEN { get; set; }
         /// <summary>
         /// 立柱型号

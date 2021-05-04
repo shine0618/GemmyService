@@ -28,16 +28,18 @@ namespace _2GemmyBusness.BLL
            return _db.Set<T>().Where(lambdaString);
        }
 
-       public ArrayList GetAllMode()
+       public List<Accessory> GetAllMode()
        {
-           ArrayList newlist = new ArrayList();
-           var accessory = _db.Accessory;
-           foreach (var a in accessory)
-           {
-               newlist.Add(a.Mode);
-           }
-           return newlist;
+            var q = from x in _db.Accessory
+                    where x.deleteSign == 0
+                    select x;
+
+            return q.ToList();        
        }
+
+
+
+
 
        
 

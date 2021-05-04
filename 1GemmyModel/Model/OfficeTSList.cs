@@ -131,12 +131,10 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 中文描述
         /// </summary>
-        [Column(TypeName = "ntext")]
         public string DescriptionZH { get; set; }
         /// <summary>
         /// 英文描述
         /// </summary>
-        [Column(TypeName = "ntext")]
         public string DescriptionEN { get; set; }
         /// <summary>
         /// 立柱型号

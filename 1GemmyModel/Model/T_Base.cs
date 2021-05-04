@@ -24,7 +24,7 @@ namespace _1GemmyModel.Model
         public string verificationCode { get; set; }
 
 
-        public int deleteSign { get; set; }
+        public int? deleteSign { get; set; }
 
 
         public DateTime? UpdateTime { get; set; }

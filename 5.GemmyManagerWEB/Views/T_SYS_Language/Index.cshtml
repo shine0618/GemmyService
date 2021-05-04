@@ -1,0 +1,93 @@
+﻿@model IEnumerable<_1GemmyModel.Model.ModelSystem.T_SYS_Language>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.lcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LanguageCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LanguageDesript)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.verificationCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleteSign)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deletePerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatePerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatePerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remark)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.lcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LanguageCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LanguageDesript)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.verificationCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleteSign)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deletePerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatePerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatePerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remark)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
