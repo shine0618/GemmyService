@@ -241,5 +241,10 @@ namespace GemmyLanguageManageTool
             string jsonstr = DataTableToJsonWithJsonNet(hst);
             EditMainJson(jsonstr,"../../../json/text.json");
         }
+
+        private void insertbtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -134,6 +134,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomeViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\HomeViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\HomeViewModels\ResetPasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -408,10 +411,11 @@
     <Content Include="Views\JCSelection\main.cshtml" />
     <Content Include="Views\JCSelection\office_Eservice.cshtml" />
     <Content Include="Views\JCSelection\office_Eservice_test.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -426,6 +430,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\2GemmyBusness\2GemmyBusness.csproj">
+      <Project>{e60af72c-93b9-4e46-be42-d443c4b43d99}</Project>
+      <Name>2GemmyBusness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\4GemmyTools\4GemmyTools.csproj">
+      <Project>{3eb1c5c6-0dc5-420b-af5b-b68006d9581e}</Project>
+      <Name>4GemmyTools</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

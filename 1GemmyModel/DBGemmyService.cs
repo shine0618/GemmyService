@@ -52,6 +52,7 @@ namespace _1GemmyModel
         public virtual DbSet<ProductView> ProductView { get; set; }
         public virtual DbSet<SideBracket> SideBracket { get; set; }
         public virtual DbSet<LanguageType> LanguageType { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
     }
 
     //public class MyEntity

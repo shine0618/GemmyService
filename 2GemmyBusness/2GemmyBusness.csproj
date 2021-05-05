@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="BLL\AccessoryQueryable.cs" />
     <Compile Include="BLL\BLLBase.cs" />
+    <Compile Include="BLL\BLLUserAccount\UserManager.cs" />
     <Compile Include="BLL\LanguageQueryable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,8 +70,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BLL\BLLUserAccount\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

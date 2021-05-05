@@ -91,6 +91,7 @@
     <Compile Include="Model\ProductView.cs" />
     <Compile Include="Model\SideBracket.cs" />
     <Compile Include="Model\T_Base.cs" />
+    <Compile Include="Model\ModelUserAccount\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,9 +112,7 @@
       <DependentUpon>202105040949558_init6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\ModelUserAccount\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

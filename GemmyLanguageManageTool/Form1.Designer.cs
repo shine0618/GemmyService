@@ -192,6 +192,7 @@ namespace GemmyLanguageManageTool
             this.insertbtn.TabIndex = 8;
             this.insertbtn.Text = "添加语言";
             this.insertbtn.UseVisualStyleBackColor = true;
+            this.insertbtn.Click += new System.EventHandler(this.insertbtn_Click);
             // 
             // Form1
             // 
