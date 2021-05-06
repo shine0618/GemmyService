@@ -13,7 +13,7 @@ namespace _5.GemmyManagerWEB.Controllers
 {
     public class T_SYS_LanguageController : Controller
     {
-        private DBGemmyService db = new DBGemmyService();
+        private DBGemmyService2 db = new DBGemmyService2();
 
         // GET: T_SYS_Language
         public ActionResult Index()
@@ -47,7 +47,7 @@ namespace _5.GemmyManagerWEB.Controllers
         // 更多详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,lcode,LanguageCode,LanguageDesript,verificationCode,deleteSign,UpdateTime,CreateTime,deletePerson,CreatePerson,UpdatePerson,Remark")] T_SYS_Language t_SYS_Language)
+        public ActionResult Create([Bind(Include = "Id,LanguageCode,LanguageDesript,verificationCode,deleteSign,UpdateTime,CreateTime,deletePerson,CreatePerson,UpdatePerson,Remark")] T_SYS_Language t_SYS_Language)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace _5.GemmyManagerWEB.Controllers
         // 更多详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,lcode,LanguageCode,LanguageDesript,verificationCode,deleteSign,UpdateTime,CreateTime,deletePerson,CreatePerson,UpdatePerson,Remark")] T_SYS_Language t_SYS_Language)
+        public ActionResult Edit([Bind(Include = "Id,LanguageCode,LanguageDesript,verificationCode,deleteSign,UpdateTime,CreateTime,deletePerson,CreatePerson,UpdatePerson,Remark")] T_SYS_Language t_SYS_Language)
         {
             if (ModelState.IsValid)
             {

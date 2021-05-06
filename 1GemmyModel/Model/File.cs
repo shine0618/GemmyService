@@ -13,7 +13,6 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 文件名
         /// </summary>
-        [Index]
         public string FileName { get; set; }
         /// <summary>
         /// 文件种类

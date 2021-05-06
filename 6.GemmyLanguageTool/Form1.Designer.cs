@@ -1,5 +1,5 @@
 ﻿
-namespace GemmyLanguageManageTool
+namespace _6.GemmyLanguageTool
 {
     partial class Form1
     {
@@ -31,7 +31,7 @@ namespace GemmyLanguageManageTool
         {
             this.jsondgv = new System.Windows.Forms.DataGridView();
             this.languagetypelbl = new System.Windows.Forms.Label();
-            this.languagecbx = new System.Windows.Forms.ComboBox();
+            this.cbx_language = new System.Windows.Forms.ComboBox();
             this.importbtn = new System.Windows.Forms.Button();
             this.updatebtn = new System.Windows.Forms.Button();
             this.createbtn = new System.Windows.Forms.Button();
@@ -40,9 +40,9 @@ namespace GemmyLanguageManageTool
             this.improtmainbtn = new System.Windows.Forms.Button();
             this.updatemainbtn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.insertlanguagetxt = new System.Windows.Forms.TextBox();
             this.insertbtn = new System.Windows.Forms.Button();
+            this.insertlanguagetxt = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.jsondgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.jsonmaindgv)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -54,35 +54,41 @@ namespace GemmyLanguageManageTool
             this.jsondgv.AllowUserToAddRows = false;
             this.jsondgv.AllowUserToDeleteRows = false;
             this.jsondgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.jsondgv.Location = new System.Drawing.Point(20, 93);
+            this.jsondgv.Location = new System.Drawing.Point(23, 82);
+            this.jsondgv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.jsondgv.Name = "jsondgv";
             this.jsondgv.RowHeadersVisible = false;
+            this.jsondgv.RowHeadersWidth = 51;
             this.jsondgv.RowTemplate.Height = 25;
-            this.jsondgv.Size = new System.Drawing.Size(522, 450);
+            this.jsondgv.Size = new System.Drawing.Size(596, 397);
             this.jsondgv.TabIndex = 0;
             // 
             // languagetypelbl
             // 
             this.languagetypelbl.AutoSize = true;
-            this.languagetypelbl.Location = new System.Drawing.Point(20, 63);
+            this.languagetypelbl.Location = new System.Drawing.Point(23, 56);
+            this.languagetypelbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.languagetypelbl.Name = "languagetypelbl";
-            this.languagetypelbl.Size = new System.Drawing.Size(56, 17);
+            this.languagetypelbl.Size = new System.Drawing.Size(67, 15);
             this.languagetypelbl.TabIndex = 1;
             this.languagetypelbl.Text = "选择语言";
             // 
-            // languagecbx
+            // cbx_language
             // 
-            this.languagecbx.FormattingEnabled = true;
-            this.languagecbx.Location = new System.Drawing.Point(86, 60);
-            this.languagecbx.Name = "languagecbx";
-            this.languagecbx.Size = new System.Drawing.Size(100, 25);
-            this.languagecbx.TabIndex = 2;
+            this.cbx_language.FormattingEnabled = true;
+            this.cbx_language.Location = new System.Drawing.Point(99, 53);
+            this.cbx_language.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cbx_language.Name = "cbx_language";
+            this.cbx_language.Size = new System.Drawing.Size(113, 23);
+            this.cbx_language.TabIndex = 2;
+            this.cbx_language.SelectedIndexChanged += new System.EventHandler(this.languagecbx_SelectedIndexChanged);
             // 
             // importbtn
             // 
-            this.importbtn.Location = new System.Drawing.Point(201, 60);
+            this.importbtn.Location = new System.Drawing.Point(229, 53);
+            this.importbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.importbtn.Name = "importbtn";
-            this.importbtn.Size = new System.Drawing.Size(104, 23);
+            this.importbtn.Size = new System.Drawing.Size(119, 20);
             this.importbtn.TabIndex = 3;
             this.importbtn.Text = "导入多语言模板";
             this.importbtn.UseVisualStyleBackColor = true;
@@ -90,9 +96,10 @@ namespace GemmyLanguageManageTool
             // 
             // updatebtn
             // 
-            this.updatebtn.Location = new System.Drawing.Point(20, 563);
+            this.updatebtn.Location = new System.Drawing.Point(23, 496);
+            this.updatebtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.updatebtn.Name = "updatebtn";
-            this.updatebtn.Size = new System.Drawing.Size(75, 23);
+            this.updatebtn.Size = new System.Drawing.Size(85, 20);
             this.updatebtn.TabIndex = 4;
             this.updatebtn.Text = "修改";
             this.updatebtn.UseVisualStyleBackColor = true;
@@ -100,9 +107,10 @@ namespace GemmyLanguageManageTool
             // 
             // createbtn
             // 
-            this.createbtn.Location = new System.Drawing.Point(467, 563);
+            this.createbtn.Location = new System.Drawing.Point(533, 496);
+            this.createbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.createbtn.Name = "createbtn";
-            this.createbtn.Size = new System.Drawing.Size(75, 23);
+            this.createbtn.Size = new System.Drawing.Size(85, 20);
             this.createbtn.TabIndex = 5;
             this.createbtn.Text = "生成";
             this.createbtn.UseVisualStyleBackColor = true;
@@ -111,11 +119,13 @@ namespace GemmyLanguageManageTool
             // jsonmaindgv
             // 
             this.jsonmaindgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.jsonmaindgv.Location = new System.Drawing.Point(20, 93);
+            this.jsonmaindgv.Location = new System.Drawing.Point(23, 82);
+            this.jsonmaindgv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.jsonmaindgv.Name = "jsonmaindgv";
             this.jsonmaindgv.RowHeadersVisible = false;
+            this.jsonmaindgv.RowHeadersWidth = 51;
             this.jsonmaindgv.RowTemplate.Height = 25;
-            this.jsonmaindgv.Size = new System.Drawing.Size(543, 450);
+            this.jsonmaindgv.Size = new System.Drawing.Size(620, 397);
             this.jsonmaindgv.TabIndex = 6;
             // 
             // groupBox1
@@ -123,18 +133,21 @@ namespace GemmyLanguageManageTool
             this.groupBox1.Controls.Add(this.improtmainbtn);
             this.groupBox1.Controls.Add(this.updatemainbtn);
             this.groupBox1.Controls.Add(this.jsonmaindgv);
-            this.groupBox1.Location = new System.Drawing.Point(640, 12);
+            this.groupBox1.Location = new System.Drawing.Point(732, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(582, 595);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox1.Size = new System.Drawing.Size(665, 525);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "修改语言母版";
             // 
             // improtmainbtn
             // 
-            this.improtmainbtn.Location = new System.Drawing.Point(20, 60);
+            this.improtmainbtn.Location = new System.Drawing.Point(23, 53);
+            this.improtmainbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.improtmainbtn.Name = "improtmainbtn";
-            this.improtmainbtn.Size = new System.Drawing.Size(75, 23);
+            this.improtmainbtn.Size = new System.Drawing.Size(85, 20);
             this.improtmainbtn.TabIndex = 8;
             this.improtmainbtn.Text = "导入母版";
             this.improtmainbtn.UseVisualStyleBackColor = true;
@@ -142,9 +155,10 @@ namespace GemmyLanguageManageTool
             // 
             // updatemainbtn
             // 
-            this.updatemainbtn.Location = new System.Drawing.Point(20, 563);
+            this.updatemainbtn.Location = new System.Drawing.Point(23, 496);
+            this.updatemainbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.updatemainbtn.Name = "updatemainbtn";
-            this.updatemainbtn.Size = new System.Drawing.Size(75, 23);
+            this.updatemainbtn.Size = new System.Drawing.Size(85, 20);
             this.updatemainbtn.TabIndex = 7;
             this.updatemainbtn.Text = "修改";
             this.updatemainbtn.UseVisualStyleBackColor = true;
@@ -158,51 +172,58 @@ namespace GemmyLanguageManageTool
             this.groupBox2.Controls.Add(this.createbtn);
             this.groupBox2.Controls.Add(this.jsondgv);
             this.groupBox2.Controls.Add(this.importbtn);
-            this.groupBox2.Controls.Add(this.languagecbx);
+            this.groupBox2.Controls.Add(this.cbx_language);
             this.groupBox2.Controls.Add(this.updatebtn);
             this.groupBox2.Controls.Add(this.languagetypelbl);
-            this.groupBox2.Location = new System.Drawing.Point(12, 12);
+            this.groupBox2.Location = new System.Drawing.Point(13, 10);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(566, 595);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.groupBox2.Size = new System.Drawing.Size(647, 525);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "修改&&新建";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 17);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "新增语言";
-            // 
-            // insertlanguagetxt
-            // 
-            this.insertlanguagetxt.Location = new System.Drawing.Point(86, 25);
-            this.insertlanguagetxt.Name = "insertlanguagetxt";
-            this.insertlanguagetxt.Size = new System.Drawing.Size(100, 23);
-            this.insertlanguagetxt.TabIndex = 7;
-            // 
             // insertbtn
             // 
-            this.insertbtn.Location = new System.Drawing.Point(201, 25);
+            this.insertbtn.Location = new System.Drawing.Point(229, 22);
+            this.insertbtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.insertbtn.Name = "insertbtn";
-            this.insertbtn.Size = new System.Drawing.Size(75, 23);
+            this.insertbtn.Size = new System.Drawing.Size(85, 20);
             this.insertbtn.TabIndex = 8;
             this.insertbtn.Text = "添加语言";
             this.insertbtn.UseVisualStyleBackColor = true;
             this.insertbtn.Click += new System.EventHandler(this.insertbtn_Click);
             // 
+            // insertlanguagetxt
+            // 
+            this.insertlanguagetxt.Location = new System.Drawing.Point(99, 22);
+            this.insertlanguagetxt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.insertlanguagetxt.Name = "insertlanguagetxt";
+            this.insertlanguagetxt.Size = new System.Drawing.Size(113, 25);
+            this.insertlanguagetxt.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(23, 25);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "新增语言";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1234, 619);
+            this.ClientSize = new System.Drawing.Size(1460, 630);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Form1";
             this.Text = "GemmyLanguageTool";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.jsondgv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.jsonmaindgv)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -214,9 +235,9 @@ namespace GemmyLanguageManageTool
 
         #endregion
 
-        private  System.Windows.Forms.DataGridView jsondgv;
+        private System.Windows.Forms.DataGridView jsondgv;
         private System.Windows.Forms.Label languagetypelbl;
-        private System.Windows.Forms.ComboBox languagecbx;
+        private System.Windows.Forms.ComboBox cbx_language;
         private System.Windows.Forms.Button importbtn;
         private System.Windows.Forms.Button updatebtn;
         private System.Windows.Forms.Button createbtn;

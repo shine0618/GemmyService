@@ -13,7 +13,6 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 框架类型
         /// </summary>
-        [Index]
         public string Mode { get; set; }
         /// <summary>
         /// 最大长度

@@ -12,9 +12,6 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.lcode)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.LanguageCode)
         </th>
         <th>
@@ -49,9 +46,6 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.lcode)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.LanguageCode)
         </td>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class UserInfo : T_Base
+   public class T_USER_UserInfo : T_Base
     {
         /// <summary>
         /// 用户名

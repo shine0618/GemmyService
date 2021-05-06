@@ -12,11 +12,14 @@ namespace _2GemmyBusness.BLL
 {
    public class BLLBase
    {
-      
+
+        public DBGemmyService2 read_db = new DBGemmyService2();
+
+
         //添加
         public int  AddEntities<T>(T entity) where T:class
         {
-            using (DBGemmyService db = new DBGemmyService())
+            using (DBGemmyService2 db = new DBGemmyService2())
             {
                 try
                 {
@@ -37,7 +40,7 @@ namespace _2GemmyBusness.BLL
 
         public int DeleteEntity<T>(string ids) where T : class
         {
-            using (DBGemmyService _db= new DBGemmyService())
+            using (DBGemmyService2 _db= new DBGemmyService2())
             {
                 int suc = 0;
                 string[] idArr = ids.Split(',');
@@ -60,7 +63,7 @@ namespace _2GemmyBusness.BLL
         }
         public int DeleteEntityByid<T>(int id) where T : class
         {
-            using (DBGemmyService _db = new DBGemmyService())
+            using (DBGemmyService2 _db = new DBGemmyService2())
             {
 
                 var entity = _db.Set<T>().Find(id);
@@ -79,7 +82,7 @@ namespace _2GemmyBusness.BLL
 
         public int Update<T>(T entity) where T : class
         {
-            using (DBGemmyService dbcontext = new DBGemmyService())
+            using (DBGemmyService2 dbcontext = new DBGemmyService2())
             {
                 dbcontext.Set<T>().Attach(entity);
                 PropertyInfo[] props = entity.GetType().GetProperties();
@@ -115,7 +118,7 @@ namespace _2GemmyBusness.BLL
         /// <returns></returns>
         public  IQueryable<T> GetAll<T>() where T:class
         {
-            using (DBGemmyService _db = new DBGemmyService())
+            using (DBGemmyService2 _db = new DBGemmyService2())
             {
                 var entity = _db.Set<T>().AsNoTracking();
                 return entity;
@@ -129,7 +132,7 @@ namespace _2GemmyBusness.BLL
         /// <returns></returns>
         public IQueryable<T> GetAllById<T>(int id) where T : T_Base
         {
-            using (DBGemmyService _db = new DBGemmyService())
+            using (DBGemmyService2 _db = new DBGemmyService2())
             {
                 var entity = _db.Set<T>().Where(m=>m.Id==id);
                 return entity;

@@ -46,17 +46,17 @@ namespace GemmyService.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ViewResult Register(Models.HomeViewModels.RegisterViewModel model)
-        {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ViewResult Register(Models.HomeViewModels.RegisterViewModel model)
+        //{
             
-            if (!ModelState.IsValid) return View(model);
+        //    if (!ModelState.IsValid) return View(model);
 
-            _2GemmyBusness.BLL.BLLUserAccount.UserManager usermanager = new UserManager();
-            usermanager.Register(model.UserName,model.Password,model.Question,model.Answer,model.Email);
-            return View(Index());
-        }
+        //    _2GemmyBusness.BLL.BLLUserAccount.UserManager usermanager = new UserManager();
+        //    usermanager.Register(model.UserName,model.Password,model.Question,model.Answer,model.Email);
+        //    return View(Index());
+        //}
 
         [HttpGet]
         public ActionResult Login()
@@ -65,24 +65,24 @@ namespace GemmyService.Controllers
         }
 
 
-        [HttpPost]
-        public ViewResult Login(LoginViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                UserManager usermaganer = new UserManager();
-                bool isLogin = usermaganer.Login(model.UserName, model.Password);
-                if (isLogin==true)
-                {
-                    return View(Index());
-                }
-                else
-                {
-                    ModelState.AddModelError("","abc");
-                }
-            }
+        //    [HttpPost]
+        //    public ViewResult Login(LoginViewModel model)
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            UserManager usermaganer = new UserManager();
+        //            bool isLogin = usermaganer.Login(model.UserName, model.Password);
+        //            if (isLogin==true)
+        //            {
+        //                return View(Index());
+        //            }
+        //            else
+        //            {
+        //                ModelState.AddModelError("","abc");
+        //            }
+        //        }
 
-            return View(model);
-        }
+        //        return View(model);
+        //    }
     }
 }

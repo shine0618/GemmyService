@@ -13,7 +13,6 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 颜色名称
         /// </summary>
-        [Index]
         public string ColorName { get; set; }
         /// <summary>
         /// 颜色标准

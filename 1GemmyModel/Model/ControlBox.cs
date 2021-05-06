@@ -13,7 +13,6 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 控制器型号
         /// </summary>
-        [Index]
         public string Mode { get; set; }
         /// <summary>
         /// 控制器控制立柱数量

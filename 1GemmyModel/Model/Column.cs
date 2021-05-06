@@ -14,7 +14,6 @@ namespace _1GemmyModel.Model
         /// 立柱型号
         /// </summary>
        
-        [Index]
         public string Mode { get; set; }
         /// <summary>
         /// 正装倒装

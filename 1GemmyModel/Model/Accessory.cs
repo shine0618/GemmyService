@@ -13,7 +13,6 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 配件型号
         /// </summary>
-        [Index]
         public string Mode { get; set; }
         /// <summary>
         /// 配件英文名称

@@ -13,8 +13,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using _1GemmyModel;
 using _2GemmyBusness.BLL;
+using _2GemmyBusness.BLL.BLLSystem;
+using _1GemmyModel.Model.ModelSystem;
 
-namespace GemmyLanguageManageTool
+namespace _6.GemmyLanguageTool
 {
     public partial class Form1 : Form
     {
@@ -23,6 +25,24 @@ namespace GemmyLanguageManageTool
             InitializeComponent();
         }
 
+        BLL_SYS_language bll_langu = new BLL_SYS_language();
+
+        #region 获取语言
+        public void BindingLangu()
+        {
+            List<T_SYS_Language> list = bll_langu.GetT_SYS_Language();
+            foreach (T_SYS_Language m in list)
+            {
+                this.cbx_language.Items.Add(m.LanguageCode);
+            }
+            if (list.Count > 0)
+            {
+                this.cbx_language.SelectedIndex = 0;
+            }
+
+        }
+
+        #endregion
         private ArrayList language = new ArrayList();
         private ArrayList keylist = new ArrayList();
         private ArrayList valuelist = new ArrayList();
@@ -42,7 +62,7 @@ namespace GemmyLanguageManageTool
                     var value = o["language"];
                     foreach (JProperty item in value)
                     {
-                        multihst.Add(item.Name,item.Value);
+                        multihst.Add(item.Name, item.Value);
                     }
                     //return value;
                 }
@@ -55,7 +75,7 @@ namespace GemmyLanguageManageTool
                     var value = o["language"];
                     foreach (JProperty item in value)
                     {
-                        mainhst.Add(item.Name,item.Value);
+                        mainhst.Add(item.Name, item.Value);
                     }
                     //return value;
                 }
@@ -78,7 +98,7 @@ namespace GemmyLanguageManageTool
             int num = 0;
             foreach (DictionaryEntry a in mainhst)
             {
-                ((DataTable) jsondgv.DataSource).Rows.Add();
+                ((DataTable)jsondgv.DataSource).Rows.Add();
                 jsondgv.Rows[num].Cells[0].Value = a.Key;
                 if (multihst.ContainsKey(a.Key))
                 {
@@ -133,7 +153,7 @@ namespace GemmyLanguageManageTool
         {
             hst.Clear();
             // 循环行
-            for (int i = 0; i < dgv.Rows.Count-1; i++)
+            for (int i = 0; i < dgv.Rows.Count - 1; i++)
             {
                 hst.Add(dgv.Rows[i].Cells[0].Value, dgv.Rows[i].Cells[1].Value);
             }
@@ -164,7 +184,7 @@ namespace GemmyLanguageManageTool
         }
 
 
-        public  void EditJson(string jsonstr,string strPath)
+        public void EditJson(string jsonstr, string strPath)
         {
             //string strJson = File.ReadAllText(strPath, Encoding.UTF8);
             JObject oJson = JObject.Parse(jsonstr); //using Newtonsoft.Json.Linq
@@ -174,7 +194,7 @@ namespace GemmyLanguageManageTool
                 int num = 0;
                 for (int i = 0; i < jsondgv.RowCount; i++)
                 {
-                    if (a.Name==jsondgv.Rows[i].Cells[0].Value.ToString())
+                    if (a.Name == jsondgv.Rows[i].Cells[0].Value.ToString())
                     {
                         num = i;
                     }
@@ -184,7 +204,7 @@ namespace GemmyLanguageManageTool
             string strConvert = Convert.ToString(oJson); //将json装换为string
             File.WriteAllText(strPath, strConvert); //将内容写进json文件中
         }
-        public void EditMainJson(string jsonstr,string strPath)
+        public void EditMainJson(string jsonstr, string strPath)
         {
             //string strJson = File.ReadAllText(strPath, Encoding.UTF8);
             JObject oJson = JObject.Parse(jsonstr); //using Newtonsoft.Json.Linq
@@ -192,7 +212,7 @@ namespace GemmyLanguageManageTool
             foreach (JProperty a in o)
             {
                 int num = 0;
-                for (int i = 0; i < jsondgv.RowCount-1; i++)
+                for (int i = 0; i < jsondgv.RowCount - 1; i++)
                 {
                     if (a.Name == jsondgv.Rows[i].Cells[0].Value.ToString())
                     {
@@ -209,7 +229,7 @@ namespace GemmyLanguageManageTool
         {
             GetDgvToTable(jsondgv);
             string jsonstr = DataTableToJsonWithJsonNet(hst);
-            EditJson(jsonstr,"../../../json/text-en.json");
+            EditJson(jsonstr, "../../../json/text-en.json");
         }
 
         private void improtmainbtn_Click(object sender, EventArgs e)
@@ -239,12 +259,22 @@ namespace GemmyLanguageManageTool
         {
             GetMainDgvToTable(jsonmaindgv);
             string jsonstr = DataTableToJsonWithJsonNet(hst);
-            EditMainJson(jsonstr,"../../../json/text.json");
+            EditMainJson(jsonstr, "../../../json/text.json");
         }
 
         private void insertbtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void languagecbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            BindingLangu();
         }
     }
 }

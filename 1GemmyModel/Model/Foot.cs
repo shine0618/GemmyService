@@ -14,7 +14,6 @@ namespace _1GemmyModel.Model
         /// 地脚类型
         /// </summary>
         /// 
-        [Index]
         public string Mode { get; set; }
         /// <summary>
         /// 最大长度
