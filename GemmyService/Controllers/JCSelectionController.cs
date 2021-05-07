@@ -22,6 +22,8 @@ namespace GemmyService.Controllers
         {
             return View();
         }
+
+
         public ActionResult Eservice()
         {
             return View();
@@ -44,5 +46,21 @@ namespace GemmyService.Controllers
             return View();
 
         }
+
+
+        /// <summary>
+        /// 动态加载语言
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult qwertyui()
+        {
+            return View();
+        }
+
+        public ActionResult qwertyui2()
+        {
+            return View();
+        }
+
     }
 }

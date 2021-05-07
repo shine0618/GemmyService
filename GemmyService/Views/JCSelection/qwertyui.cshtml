@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "qwertyui";
+}
+
+<style>
+    h2{
+        height:900px;
+    }
+</style>
+<h2>qwertyui</h2>
+<h2>qwertyui</h2><h2>qwertyui</h2><h2>qwertyui</h2>
+<div id="app1">
+
+    <h1>{{title1}}</h1>
+
+</div>
+
+
+
+<script>
+
+    function GetText(languCode, key) {
+        var text = '';
+        $.ajaxSettings.async = false;
+        $.getJSON("/resourse/Language/text.json", function (result) {
+            //$.each(result, function (i, field) {
+
+
+
+            //});
+            var langu = result.language;            
+            text = langu[key];           
+        });
+
+
+
+        $.ajaxSettings.async = true;
+
+
+
+        return text;
+
+
+     
+    }
+
+    var vm = new Vue({
+        el: "#app1",//这里忘记加#号
+        data: {
+            personlist: [],
+            testvalue: '12222222',
+            title1: '',
+            title2: '',
+        },
+        methods: {
+            greet: function ( callback) {
+
+                this.$http.get('/resourse/Language/text.json').then(res => {
+                    console.log(res.body)//此处的res对象包含了json的文件信息和数据，我们需要的json数据存在于body属性中
+                    //console.log(res.body.language.a)
+                    var i = res.body.language[lkey];
+
+                    return i;
+                    
+                })
+
+            },
+            gettext: function (event) {
+
+                this.title1 = GetText('text', 'title1');
+            }
+
+        }
+    });
+
+    vm.gettext();
+
+
+
+  
+    
+
+
+
+
+
+</script>

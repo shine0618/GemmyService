@@ -254,6 +254,7 @@
     <Content Include="assets\js\theme.js" />
     <Content Include="assets\js\wNumb.min.js" />
     <Content Include="assets\js\wow.js" />
+    <Content Include="assets\old\main.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -264,6 +265,13 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="resourse\Img\newbg.82899ecd.jpg" />
+    <Content Include="resourse\page\bench.png" />
+    <Content Include="resourse\page\forelegs.png" />
+    <Content Include="resourse\page\JC35TF-DC2R.png" />
+    <Content Include="resourse\page\JC35TS-R13SF.png" />
+    <Content Include="resourse\page\singleLeg.png" />
+    <Content Include="resourse\page\threelegs.png" />
+    <Content Include="resourse\page\twolegs.png" />
     <Content Include="resourse\style.css" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -293,6 +301,7 @@
     <Content Include="assets\fonts\fa-solid-900.woff2" />
     <Content Include="assets\fonts\pylon-icon.ttf" />
     <Content Include="assets\images\favicons\site.webmanifest" />
+    <Content Include="resourse\Language\text.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -413,6 +422,7 @@
     <Content Include="Views\JCSelection\office_Eservice_test.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\JCSelection\qwertyui.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
