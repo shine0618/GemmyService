@@ -1,0 +1,212 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+<link href="~/assets/layui-v2.6.6/layui/css/layui.css" rel="stylesheet" />
+<script src="~/assets/layui-v2.6.6/layui/layui.js"></script>
+<style>
+    #shjahs {
+        width: 100%;
+        border: 0;
+        padding-left: 5px;
+        padding-right: 5px;
+        background-color: #F2F3F4;
+    }
+
+    .about-three {
+        padding-top: 20px;
+        padding-bottom: 40px;
+    }
+
+    * {
+        font-family: 'Microsoft YaHei'
+    }
+    /*    .block-title h6{
+        text-align:left;
+    }*/
+    .block-title {
+        margin-top: 30px;
+        margin-bottom:5px;
+    }
+
+    .fa-qrcode {
+        width: 120px;
+        height: 120px;
+    }
+
+    #FilesBox {
+
+    }
+</style>
+
+<section class="page-header" style="height:53px;">
+
+    @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
+    <!-- /.page-header__bg -->
+    <div class="container" style="padding:10px 10px ">
+        HOME / 标准配置选择 / 产品明细
+
+    </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+
+
+<section class="about-three">
+    <div class="container">
+        <div class="row">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8" id="asas">
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="about-three__image">
+                            <div class="block-title text-left">
+                                <p>产品信息</p>
+                                <h6>JC35TS-R13SF 快速升降桌</h6>
+                            </div><!-- /.block-title -->
+                            <div class="block-title text-left">
+                                <p>关键参数</p>
+                                <h6>最大负载（N）:800</h6>
+                                <h6>行程（mm):650</h6>
+                                <h6>遇阻回退功能,确保升降桌安全稳定运行</h6>
+
+                            </div><!-- /.block-title -->
+                            <div class="block-title text-left">
+                                <p>配置编号</p>
+                                <h6>JCFIG_A_2021050000002</h6>
+                            </div><!-- /.block-title -->
+
+                            <div class="block-title text-left">
+                                <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
+                            </div><!-- /.block-title -->
+                            @*   <button class="thm-btn">自定义</button>*@
+                        </div><!-- /.about-three__image -->
+                    </div><!-- /.col-lg-8 -->
+                </div><!-- /.row -->
+
+            </div><!-- /.container -->
+        </div>
+    </div>
+</section>
+
+<section class="blog-page pt-20 pb-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="block-title text-center">
+                    <p></p>
+                    <h3>产品配置列表</h3>
+                </div><!-- /.block-title -->
+
+            </div>
+
+
+            <div class="col-lg-12">
+
+                <table class="layui-hide" id="test"></table>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<section class="blog-page pt-20 pb-40">
+    <div class="container">
+        <div class="row" id="FilesBox">
+            <div class="col-lg-12">
+                <div class="block-title text-center">
+                    <p></p>
+                    <h3>产品资料与介绍</h3>
+                </div><!-- /.block-title -->
+            </div>
+
+            <div class="col-lg-12">
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">相关资料</li>
+                        <li>产品描述</li>
+                        <li>产品认证</li>
+                        <li>产品数据表</li>
+                        <li>文件下载</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            相关资料
+                        </div>
+                        <div class="layui-tab-item">产品描述</div>
+                        <div class="layui-tab-item">产品认证</div>
+                        <div class="layui-tab-item">产品数据表</div>
+                        <div class="layui-tab-item">文件下载</div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+<!--<section class="about-three">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="about-three__image">
+                    <img src="/assets/images/resources/about-3-1.png" alt="">
+                </div>--><!-- /.about-three__image -->
+            <!--</div>--><!-- /.col-lg-4 -->
+            <!--<div class="col-lg-8">
+                <div class="about-three__image">
+                    <img src="/assets/images/resources/about-3-2.png" alt="">
+
+                </div>--><!-- /.about-three__image -->
+            <!--</div>--><!-- /.col-lg-8 -->
+        <!--</div>--><!-- /.row -->
+        <!--<div class="row">
+            <div class="col-lg-6">
+                <div class="block-title text-left">
+                    <p>Get To Know About Us</p>
+                    <h2>Few Words About Our Company</h2>
+                </div>--><!-- /.block-title -->
+            <!--</div>--><!-- /.col-lg-6 -->
+            <!--<div class="col-lg-6">
+                <p class="block-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>--><!-- /.block-text -->
+            <!--</div>--><!-- /.col-lg-6 -->
+        <!--</div>--><!-- /.row -->
+    <!--</div>--><!-- /.container -->
+<!--</section>--><!-- /.about-three -->
+
+
+<script>
+    $(function () {
+
+        var hint = 550;
+        console.log(hint);
+        var i = '<iframe scrolling="no" style="height:' + hint + 'px"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36ts-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+        $('#asas').append(i);
+
+
+
+    })
+    layui.use('table', function () {
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            , url: '/demo/table/user/'
+            , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            , cols: [[
+                { field: 'id', title: '名称' }
+                , { field: 'username',  title: '参数/值' }
+            ]]
+        });
+    });
+</script>

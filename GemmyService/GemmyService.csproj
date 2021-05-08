@@ -254,6 +254,18 @@
     <Content Include="assets\js\theme.js" />
     <Content Include="assets\js\wNumb.min.js" />
     <Content Include="assets\js\wow.js" />
+    <Content Include="assets\layui-v2.6.6\layui\css\layui.css" />
+    <Content Include="assets\layui-v2.6.6\layui\css\modules\code.css" />
+    <Content Include="assets\layui-v2.6.6\layui\css\modules\laydate\default\laydate.css" />
+    <Content Include="assets\layui-v2.6.6\layui\css\modules\layer\default\icon-ext.png" />
+    <Content Include="assets\layui-v2.6.6\layui\css\modules\layer\default\icon.png" />
+    <Content Include="assets\layui-v2.6.6\layui\css\modules\layer\default\layer.css" />
+    <Content Include="assets\layui-v2.6.6\layui\css\modules\layer\default\loading-0.gif" />
+    <Content Include="assets\layui-v2.6.6\layui\css\modules\layer\default\loading-1.gif" />
+    <Content Include="assets\layui-v2.6.6\layui\css\modules\layer\default\loading-2.gif" />
+    <Content Include="assets\layui-v2.6.6\layui\font\iconfont.svg" />
+    <Content Include="assets\layui-v2.6.6\layui\layui.js" />
+    <Content Include="assets\layui-v2.6.6\test.html" />
     <Content Include="assets\old\main.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -270,6 +282,7 @@
     <Content Include="resourse\page\JC35TF-DC2R.png" />
     <Content Include="resourse\page\JC35TS-R13SF.png" />
     <Content Include="resourse\page\singleLeg.png" />
+    <Content Include="resourse\page\testqrcode.png" />
     <Content Include="resourse\page\threelegs.png" />
     <Content Include="resourse\page\twolegs.png" />
     <Content Include="resourse\style.css" />
@@ -302,6 +315,11 @@
     <Content Include="assets\fonts\pylon-icon.ttf" />
     <Content Include="assets\images\favicons\site.webmanifest" />
     <Content Include="resourse\Language\text.json" />
+    <Content Include="assets\layui-v2.6.6\layui\font\iconfont.eot" />
+    <Content Include="assets\layui-v2.6.6\layui\font\iconfont.ttf" />
+    <Content Include="assets\layui-v2.6.6\layui\font\iconfont.woff" />
+    <Content Include="assets\layui-v2.6.6\layui\font\iconfont.woff2" />
+    <Content Include="assets\layui-v2.6.6\免责声明.url" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -423,6 +441,8 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\JCSelection\qwertyui.cshtml" />
+    <Content Include="Views\JCSelection\ProductDetail.cshtml" />
+    <Content Include="Views\Shared\_PartialLayuiSource.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

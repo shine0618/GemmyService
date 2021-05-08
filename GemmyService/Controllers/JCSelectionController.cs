@@ -22,6 +22,10 @@ namespace GemmyService.Controllers
         {
             return View();
         }
+        public ActionResult ProductDetail()
+        {
+            return View();
+        }
 
 
         public ActionResult Eservice()

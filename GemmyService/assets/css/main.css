@@ -6085,9 +6085,12 @@ h6 {
     background-color: #e6eaef;
 }
 
-.blog-card__content a{
-    color:#090909;
+ .blog-card__content {
+    padding: 15px;
+}
 
+.blog-card__content a {
+    color: #090909;
 }
 .blog-card__content h6{
     margin-top:1rem;
