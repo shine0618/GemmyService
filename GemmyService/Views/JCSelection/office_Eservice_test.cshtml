@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "office_Eservice_test";
 }
+
+
 <style>
     #shjahs {
         width: 100%;
@@ -11,130 +13,108 @@
         padding-left: 5px;
         padding-right: 5px;
         background-color: #F2F3F4;
+        min-height: 500px;
+        height: calc(100vh - 170px);
     }
-    *{font-family:'Microsoft YaHei'}
+
+    * {
+        font-family: 'Microsoft YaHei';
+    }
 </style>
-<section class="service-details faq-one" style="padding:20px 0;">
-    <div class="container-fluid">
+
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="//unpkg.com/element-ui@2.15.1/lib/index.js"></script>
+
+<section class="page-header" style="height:53px;">
+
+    @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
+    <!-- /.page-header__bg -->
+    <div class="container" style="padding:10px 10px ">
+        HOME / 标准配置选择 / 产品明细
+
+    </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+
+<section class="blog-page pt-10">
+    <div class="container">
         <div class="row">
+            <div class="col-lg-12">
+                <!--<div class="block-title text-center">
+                    <p></p>
+                    <h3>产品配置列表</h3>
+                </div>-->
+                <!-- /.block-title -->
+                <div id="app">
+                    <template>
+                        <el-tabs v-model="activeName" @@tab-click="handleClick">
+                            <el-tab-pane label="1.选择立柱" name="first"></el-tab-pane>
+                            <el-tab-pane label="2.选择框架" name="second"></el-tab-pane>
+                            <el-tab-pane label="3.选择地脚" name="third"></el-tab-pane>
+                            <el-tab-pane label="4.选择配件" name="fourth"></el-tab-pane>
+                        </el-tabs>
+                    </template>
+                </div>
 
+                <script>
+                    var Main = {
+                        data() {
+                            return {
+                                activeName: 'first'
+                            };
+                        },
+                        methods: {
+                            handleClick(tab, event) {
+                                console.log(tab, event);
+                            }
+                        }
+                    };
+                    var Ctor = Vue.extend(Main)
+                    new Ctor().$mount('#app')
+                </script>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="blog-page pb-30">
+    <div class="container">
+        <div class="row">
             <div class="col-lg-4">
-                <div class="service-details__content">
+                <div class="service-details__image">
+                    <div class="block-title text-left">
+                        <h6>选择立柱类型</h6>
+                        <img src="~/resourse/page/2jie.png" />
+                        <img src="~/resourse/page/2jieR.png" />
+                        <img src="~/resourse/page/3jie.png" />
+                        <img src="~/resourse/page/3jieR.png" />
+                    </div><!-- /.block-title -->
 
-                    <ul id="accordion" class="mb-0 wow fadeInUp list-unstyled" data-wow-duration="1500ms">
-                        <li class="active">
-                            <h2 class="para-title active">
-                                <span class="collapsed" role="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <i class="far fa-minus"></i>
-                                    1.选择立柱
-                                </span>
-                            </h2>
-                            <div id="collapseTwo" class="collapse show" role="button" aria-labelledby="collapseTwo" data-parent="#accordion">
-                                <p>
-                                    立柱图片
-                                </p>
-                                <p>
-                                    立柱图片
-                                </p>
-                                <p>
-                                    立柱图片
-                                </p>
-                                <p>
-                                    立柱图片
-                                </p>
-                                <p>
-                                    立柱图片
-                                </p>
-                                <p>
-                                    立柱图片
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <h2 class="para-title ">
-                                <span class="collapsed" role="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    <i class="far fa-plus"></i>
-                                    2.选择框架
-                                </span>
-                            </h2>
-                            <div id="collapseOne" class="collapse" aria-labelledby="collapseOne" data-parent="#accordion">
-                                <p>
-                                    There are many variations of the have suffer in some fo injected humour, or words
-                                    believable. Lorem ipsum dolor sit amet, consectetur adip isicing elit, sed do
-                                    eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <h2 class="para-title">
-                                <span class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" role="button" aria-controls="collapseThree">
-                                    <i class="far fa-plus"></i>
-                                    3.选择地脚
-                                </span>
-                            </h2>
-                            <div id="collapseThree" class="collapse" aria-labelledby="collapseThree" data-parent="#accordion">
-                                <p>
-                                    There are many variations of the have suffer in some fo injected humour, or words
-                                    believable. Lorem ipsum dolor sit amet, consectetur adip isicing elit, sed do
-                                    eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <h2 class="para-title">
-                                <span class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" role="button" aria-controls="collapseThree3">
-                                    <i class="far fa-plus"></i>
-                                    4.选择控制器
-                                </span>
-                            </h2>
-                            <div id="collapseThree" class="collapse" aria-labelledby="collapseThree" data-parent="#accordion">
-                                <p>
-                                    There are many variations of the have suffer in some fo injected humour, or words
-                                    believable. Lorem ipsum dolor sit amet, consectetur adip isicing elit, sed do
-                                    eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <h2 class="para-title">
-                                <span class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" role="button" aria-controls="collapseThree4">
-                                    <i class="far fa-plus"></i>
-                                    5.选择手控器
-                                </span>
-                            </h2>
-                            <div id="collapseThree" class="collapse" aria-labelledby="collapseThree" data-parent="#accordion">
-                                <p>
-                                    There are many variations of the have suffer in some fo injected humour, or words
-                                    believable. Lorem ipsum dolor sit amet, consectetur adip isicing elit, sed do
-                                    eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div><!-- /.service-details__content -->
-            </div><!-- /.col-lg-8 -->
-
+                </div>
+            </div>
             <div class="col-lg-8">
                 <div class="service-details__image" id="asas">
 
                 </div><!-- /.service-details__image -->
             </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</section><!-- /.service-details -->
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
 
 
 <script>
 
     $(function () {
 
-        var hint = $(window).height() - 82;
-        console.log(hint);
-        var i = '<iframe scrolling="no" style="height:' + hint+'px"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36ts-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+     
+        var i = '<iframe scrolling="no"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36ts-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
         $('#asas').append(i);
 
 

@@ -277,6 +277,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="resourse\Img\newbg.82899ecd.jpg" />
+    <Content Include="resourse\page\2jie.png" />
+    <Content Include="resourse\page\2jieR.png" />
+    <Content Include="resourse\page\2jies.png" />
+    <Content Include="resourse\page\3jie.png" />
+    <Content Include="resourse\page\3jieR.png" />
+    <Content Include="resourse\page\3jies.png" />
     <Content Include="resourse\page\bench.png" />
     <Content Include="resourse\page\forelegs.png" />
     <Content Include="resourse\page\JC35TF-DC2R.png" />
