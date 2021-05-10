@@ -5,6 +5,7 @@
 
 <link href="~/assets/layui-v2.6.6/layui/css/layui.css" rel="stylesheet" />
 <script src="~/assets/layui-v2.6.6/layui/layui.js"></script>
+
 <style>
     #shjahs {
         width: 100%;
@@ -27,7 +28,7 @@
     }*/
     .block-title {
         margin-top: 30px;
-        margin-bottom:5px;
+        margin-bottom: 5px;
     }
 
     .fa-qrcode {
@@ -36,7 +37,29 @@
     }
 
     #FilesBox {
-
+    }
+    @@import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");
+    /*.el-tabs__nav-wrap {
+        width: 720px;
+        
+    }*/
+    .el-tab-pane {
+        width: 50% !important;
+        margin: 0 auto !important;
+        font-size: 30px !important;
+    }
+    /*.el-tabs el-tabs--top {
+        width: 720px;
+        
+        vertical-align: center;
+    }*/
+    .el-tabs__nav-scroll{
+        width: 50%!important;
+        margin: 0 auto!important;
+        
+    }
+    .el-tabs__item {
+        font-size: 18px !important;
     }
 </style>
 
@@ -153,6 +176,36 @@
 
         </div>
     </div>
+    @*<div id="app">
+            <template>
+                <el-tabs v-model="activeName" @tab-click="handleClick">
+                    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+                    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+                    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+                    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+                </el-tabs>
+            </template>
+        </div>*@
+
+    
+
+</section>
+<section>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="//unpkg.com/vue/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.15.1/lib/index.js"></script>
+
+    <div id="app">
+        <template>
+            <el-tabs v-model="activeName" @@tab-click="handleClick" stretch>
+                <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+                <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+                <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+                <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿</el-tab-pane>
+            </el-tabs>
+        </template>
+    </div>
 </section>
 
 <!--<section class="about-three">
@@ -161,27 +214,31 @@
             <div class="col-lg-4">
                 <div class="about-three__image">
                     <img src="/assets/images/resources/about-3-1.png" alt="">
-                </div>--><!-- /.about-three__image -->
-            <!--</div>--><!-- /.col-lg-4 -->
-            <!--<div class="col-lg-8">
-                <div class="about-three__image">
-                    <img src="/assets/images/resources/about-3-2.png" alt="">
+                </div>-->
+<!-- /.about-three__image -->
+<!--</div>--><!-- /.col-lg-4 -->
+<!--<div class="col-lg-8">
+    <div class="about-three__image">
+        <img src="/assets/images/resources/about-3-2.png" alt="">
 
-                </div>--><!-- /.about-three__image -->
-            <!--</div>--><!-- /.col-lg-8 -->
-        <!--</div>--><!-- /.row -->
-        <!--<div class="row">
-            <div class="col-lg-6">
-                <div class="block-title text-left">
-                    <p>Get To Know About Us</p>
-                    <h2>Few Words About Our Company</h2>
-                </div>--><!-- /.block-title -->
-            <!--</div>--><!-- /.col-lg-6 -->
-            <!--<div class="col-lg-6">
-                <p class="block-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>--><!-- /.block-text -->
-            <!--</div>--><!-- /.col-lg-6 -->
-        <!--</div>--><!-- /.row -->
-    <!--</div>--><!-- /.container -->
+    </div>-->
+<!-- /.about-three__image -->
+<!--</div>--><!-- /.col-lg-8 -->
+<!--</div>--><!-- /.row -->
+<!--<div class="row">
+    <div class="col-lg-6">
+        <div class="block-title text-left">
+            <p>Get To Know About Us</p>
+            <h2>Few Words About Our Company</h2>
+        </div>-->
+<!-- /.block-title -->
+<!--</div>--><!-- /.col-lg-6 -->
+<!--<div class="col-lg-6">
+    <p class="block-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>-->
+<!-- /.block-text -->
+<!--</div>--><!-- /.col-lg-6 -->
+<!--</div>--><!-- /.row -->
+<!--</div>--><!-- /.container -->
 <!--</section>--><!-- /.about-three -->
 
 
@@ -205,8 +262,26 @@
             , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             , cols: [[
                 { field: 'id', title: '名称' }
-                , { field: 'username',  title: '参数/值' }
+                , { field: 'username', title: '参数/值' }
             ]]
         });
     });
+
+</script>
+<script type="text/javascript">
+    
+    var Main = {
+        data() {
+            return {
+                activeName: 'second'
+            };
+        },
+        methods: {
+            handleClick(tab, event) {
+                console.log(tab, event);
+            }
+        }
+    };
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
 </script>
