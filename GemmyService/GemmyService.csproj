@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JCSelectionController.cs" />
+    <Compile Include="Controllers\JCSelectionLanguageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -452,6 +453,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\JCSelectionLanguage\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -468,6 +470,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\1GemmyModel\1GemmyModel.csproj">
+      <Project>{e085ba24-721a-4bb6-b507-9301d7690d77}</Project>
+      <Name>1GemmyModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\2GemmyBusness\2GemmyBusness.csproj">
       <Project>{e60af72c-93b9-4e46-be42-d443c4b43d99}</Project>
       <Name>2GemmyBusness</Name>

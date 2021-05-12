@@ -15,6 +15,7 @@ namespace _1GemmyModel.Model.ModelSystem
         /// </summary>
         public string LanguageCode { get; set; }
 
+        public string LanguageShortDesript { get; set; }
         /// <summary>
         /// 语言描述
         /// </summary>

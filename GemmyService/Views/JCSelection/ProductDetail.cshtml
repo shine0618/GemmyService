@@ -3,8 +3,8 @@
     ViewBag.Title = "ProductDetail";
 }
 
-<link href="~/assets/layui-v2.6.6/layui/css/layui.css" rel="stylesheet" />
-<script src="~/assets/layui-v2.6.6/layui/layui.js"></script>
+@*<link href="~/assets/layui-v2.6.6/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/assets/layui-v2.6.6/layui/layui.js"></script>*@
 
 <style>
     #shjahs {
@@ -13,6 +13,8 @@
         padding-left: 5px;
         padding-right: 5px;
         background-color: #F2F3F4;
+        min-height: 580px;
+        height: calc(100vh - 250px);
     }
 
     .about-three {
@@ -38,10 +40,11 @@
 
     #FilesBox {
     }
+
     @@import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");
     /*.el-tabs__nav-wrap {
         width: 720px;
-        
+
     }*/
     .el-tab-pane {
         width: 50% !important;
@@ -50,25 +53,29 @@
     }
     /*.el-tabs el-tabs--top {
         width: 720px;
-        
+
         vertical-align: center;
     }*/
-    .el-tabs__nav-scroll{
-        width: 50%!important;
-        margin: 0 auto!important;
-        
+    .el-tabs__nav-scroll {
+        width: 50% !important;
+        margin: 0 auto !important;
     }
+
     .el-tabs__item {
         font-size: 18px !important;
     }
 </style>
+
+
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
 <section class="page-header" style="height:53px;">
 
     @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
     <!-- /.page-header__bg -->
     <div class="container" style="padding:10px 10px ">
-        HOME / 标准配置选择 / 产品明细
+        HOME / 自定义配置选择
 
     </div><!-- /.container -->
 </section><!-- /.page-header -->
@@ -152,24 +159,18 @@
             </div>
 
             <div class="col-lg-12">
-                <div class="layui-tab">
-                    <ul class="layui-tab-title">
-                        <li class="layui-this">相关资料</li>
-                        <li>产品描述</li>
-                        <li>产品认证</li>
-                        <li>产品数据表</li>
-                        <li>文件下载</li>
-                    </ul>
-                    <div class="layui-tab-content">
-                        <div class="layui-tab-item layui-show">
-                            相关资料
-                        </div>
-                        <div class="layui-tab-item">产品描述</div>
-                        <div class="layui-tab-item">产品认证</div>
-                        <div class="layui-tab-item">产品数据表</div>
-                        <div class="layui-tab-item">文件下载</div>
-                    </div>
+
+                <div id="app">
+                    <template>
+                        <el-tabs v-model="activeName" @@tab-click="handleClick" stretch>
+                            <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+                            <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+                            <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+                            <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿</el-tab-pane>
+                        </el-tabs>
+                    </template>
                 </div>
+
             </div>
 
 
@@ -187,26 +188,10 @@
             </template>
         </div>*@
 
-    
+
 
 </section>
-<section>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="//unpkg.com/vue/dist/vue.js"></script>
-    <script src="//unpkg.com/element-ui@2.15.1/lib/index.js"></script>
 
-    <div id="app">
-        <template>
-            <el-tabs v-model="activeName" @@tab-click="handleClick" stretch>
-                <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-                <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-                <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-                <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿</el-tab-pane>
-            </el-tabs>
-        </template>
-    </div>
-</section>
 
 <!--<section class="about-three">
     <div class="container">
@@ -245,9 +230,7 @@
 <script>
     $(function () {
 
-        var hint = 550;
-        console.log(hint);
-        var i = '<iframe scrolling="no" style="height:' + hint + 'px"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36ts-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+        var i = '<iframe scrolling="no"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36ts-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
         $('#asas').append(i);
 
 
@@ -269,7 +252,7 @@
 
 </script>
 <script type="text/javascript">
-    
+
     var Main = {
         data() {
             return {

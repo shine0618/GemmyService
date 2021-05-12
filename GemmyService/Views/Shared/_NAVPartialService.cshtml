@@ -28,7 +28,7 @@
         </ul>
         <!-- /.main-menu__list -->
 
-        <div class="main-header__info">
+        <div class="main-header__info" id="nav_langu_box">
             <ul class="main-menu__list">
                 <li class="dropdown">
                     <div class="blog-card__author">
@@ -50,20 +50,14 @@
                 </li>
             
                 <li class="dropdown">
-                    <a href="index.html">简体中文</a>
+                    <a href="#">{{defaultLanguage}}</a>
                     <ul>
-                        <li>
-                            <a href="index.html">Home One</a>
+                        <li v-for="langu in list">
+                            <langu-a :url="'/JCSelectionLanguage/ChangeLangu?langu='+langu.LanguageCode" :text="langu.LanguageDesript" ></langu-a>
                         </li>
-                        <li><a href="index-2.html">Home Two</a></li>
-                        <li class="dropdown">
-                            <a href="#">Header Styles</a>
-                            <ul>
-                                <li><a href="index.html">Header One</a></li>
-                                <li><a href="index-2.html">Header Two</a></li>
-                            </ul>
-                        </li>
+
                     </ul>
+
                 </li>
             </ul>
             <!--<div class="main-header__info-phone">
@@ -77,3 +71,44 @@
 
     </div><!-- /.container -->
 </nav>
+
+<script>
+    Vue.component('langu-a', {
+        data: function () {
+            return {
+                data: '',
+            }
+        },
+        props: ['url', 'text'],
+        template: ' <a :href="url">{{text}}</a>'
+    })
+
+    var example2 = new Vue({
+        el: '#nav_langu_box',
+        data: {
+            defaultLanguage: 'ZH',
+            list: null,
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+            greet: function (event) {
+
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelectionLanguage/GetLanguages",
+                    params: {
+                        keys: '123',
+                    }
+                }).then(function (response) {  //接口返回数据
+                    console.log(response.body);
+                    this.list = response.body;
+                    //  console.log(this.list);
+
+
+                }, function (error) {
+                })
+            }
+        }
+    });
+    example2.greet();
+</script>
