@@ -50,7 +50,7 @@
                 </li>
             
                 <li class="dropdown">
-                    <a href="#">{{defaultLanguage}}</a>
+                    <a href="#" id="defaultLanguage" :data-langu="defaultLanguageCode">{{defaultLanguage}}</a>
                     <ul>
                         <li v-for="langu in list">
                             <langu-a :url="'/JCSelectionLanguage/ChangeLangu?langu='+langu.LanguageCode" :text="langu.LanguageDesript" ></langu-a>
@@ -83,15 +83,45 @@
         template: ' <a :href="url">{{text}}</a>'
     })
 
-    var example2 = new Vue({
+    var nav_langu_box = new Vue({
         el: '#nav_langu_box',
         data: {
-            defaultLanguage: 'ZH',
+            defaultLanguage: '',
+            defaultLanguageCode: '',
             list: null,
         },
         // 在 `methods` 对象中定义方法
         methods: {
-            greet: function (event) {
+            initNav: function (event) {
+
+
+                var CustomLang = '@Session["PageLanguage"].ToString()';
+                //如果客户语言
+                if (CustomLang == 'default') {
+                    var lang = navigator.language || navigator.userLanguage;//常规浏览器语言和IE浏览器
+                    lang = lang.substr(0, 2);//截取lang前2位字符
+                    this.defaultLanguageCode = lang;
+                }
+                else {
+                    this.defaultLanguageCode = CustomLang;
+                }
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelectionLanguage/GetLanguagesDetail",
+                    params: {
+                        keys: '123',
+                        code: this.defaultLanguageCode,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    this.defaultLanguage = response.body.LanguageShortDesript;
+                }, function (error) {
+                })
+
+
+
+            },
+
+            initlangubox: function (event) {
 
                 this.$http({           //调用接口
                     method: 'GET',
@@ -100,15 +130,16 @@
                         keys: '123',
                     }
                 }).then(function (response) {  //接口返回数据
-                    console.log(response.body);
                     this.list = response.body;
-                    //  console.log(this.list);
-
-
                 }, function (error) {
                 })
             }
         }
     });
-    example2.greet();
+    nav_langu_box.initNav();
+    nav_langu_box.initlangubox();
+
+
+
+  
 </script>

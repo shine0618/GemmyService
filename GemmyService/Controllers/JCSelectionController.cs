@@ -49,8 +49,18 @@ namespace GemmyService.Controllers
         }
         public ActionResult office()
         {
-            return View();
+          
+            //如果语言是默认的话
+            if (Session["PageLanguage"]==null)
+            {
+                Session["PageLanguage"] = "default";
+            }
 
+            
+            Session.Timeout = 9600;
+
+
+            return View();
         }
 
 

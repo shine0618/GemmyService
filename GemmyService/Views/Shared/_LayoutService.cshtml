@@ -35,6 +35,41 @@
     <script src="/Scripts/vue.min.js"></script>
     <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
 
+    @*自定义的*@
+    <script>
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+        }
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) { return c.substring(name.length, c.length); }
+            }
+            return "";
+        }
+        function checkCookie() {
+            var user = getCookie("username");
+
+        }
+
+        function GetLanguCode() {
+            var CustomLang = '@Session["PageLanguage"].ToString()';
+            //如果客户语言
+            if (CustomLang == 'default') {
+                var lang = navigator.language || navigator.userLanguage;//常规浏览器语言和IE浏览器
+                lang = lang.substr(0, 2);//截取lang前2位字符
+                return lang;
+            }
+            else {
+                return CustomLang;
+            }
+        }
+    </script>
 
 </head>
 
@@ -157,6 +192,7 @@
     <script src="/assets/js/theme.js"></script>
 
   
+   
 </body>
 
 </html>
