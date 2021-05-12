@@ -6100,5 +6100,17 @@ h6 {
     padding: 1.5px 39.5px;
 }
 
+/*ÌÆÎÄ½ÜÌí¼Ó*/
+.navigation_a {
+    color: #b7b7b7;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+    .navigation_a:hover {
+        color: #ffffff;
+        margin-left: 8px;
+        margin-right: 8px;
+    }
 
 @import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");
