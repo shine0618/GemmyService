@@ -50,10 +50,10 @@ namespace _6.GemmyLanguageTool
         private Hashtable mainhst = new Hashtable();
         private void importbtn_Click(object sender, EventArgs e)
         {
-            keylist.Clear();
-            valuelist.Clear();
-            string jsonfile = "../../../json/text-zh.json";//JSON文件路径
-            string jsonmainfile = "../../../json/text.json";//JSON文件路径
+            mainhst.Clear();
+            
+            string jsonfile = "../../json/text-"+ cbx_language.SelectedItem.ToString()+".json";//JSON文件路径
+            string jsonmainfile = "../../json/text.json";//JSON文件路径
             using (System.IO.StreamReader file = System.IO.File.OpenText(jsonfile))
             {
                 using (JsonTextReader reader = new JsonTextReader(file))
@@ -62,7 +62,7 @@ namespace _6.GemmyLanguageTool
                     var value = o["language"];
                     foreach (JProperty item in value)
                     {
-                        multihst.Add(item.Name, item.Value);
+                        multihst.Add(item.Name,item.Value);
                     }
                     //return value;
                 }
@@ -134,7 +134,7 @@ namespace _6.GemmyLanguageTool
         {
             GetDgvToTable(jsondgv);
             string jsonstr = DataTableToJsonWithJsonNet(hst);
-            CreatNewJson("text-en.json", jsonstr);
+            CreatNewJson("text-"+ cbx_language.SelectedItem.ToString()+".json", jsonstr);
         }
 
         private Hashtable hst = new Hashtable();
@@ -170,7 +170,7 @@ namespace _6.GemmyLanguageTool
         {
             try
             {
-                string path = "../../../json" + @"\" + Name;//System.IO.Directory.GetCurrentDirectory() + @"\" + Name;
+                string path = "../../json" + @"\" + Name;//System.IO.Directory.GetCurrentDirectory() + @"\" + Name;
                 FileStream fsvbs = new FileStream(path, FileMode.Create, FileAccess.Write);
                 fsvbs.Close();
                 StreamWriter runBat = new StreamWriter(path);
@@ -212,9 +212,9 @@ namespace _6.GemmyLanguageTool
             foreach (JProperty a in o)
             {
                 int num = 0;
-                for (int i = 0; i < jsondgv.RowCount - 1; i++)
+                for (int i = 0; i < jsonmaindgv.RowCount - 1; i++)
                 {
-                    if (a.Name == jsondgv.Rows[i].Cells[0].Value.ToString())
+                    if (a.Name == jsonmaindgv.Rows[i].Cells[0].Value.ToString())
                     {
                         num = i;
                     }
@@ -229,14 +229,14 @@ namespace _6.GemmyLanguageTool
         {
             GetDgvToTable(jsondgv);
             string jsonstr = DataTableToJsonWithJsonNet(hst);
-            EditJson(jsonstr, "../../../json/text-en.json");
+            EditJson(jsonstr, "../../json/text-"+ cbx_language.SelectedItem.ToString()+".json");
         }
 
         private void improtmainbtn_Click(object sender, EventArgs e)
         {
             keylist.Clear();
             valuelist.Clear();
-            string jsonfile = "../../../json/text.json";//JSON文件路径
+            string jsonfile = "../../json/text.json";//JSON文件路径
 
             using (System.IO.StreamReader file = System.IO.File.OpenText(jsonfile))
             {
@@ -259,7 +259,7 @@ namespace _6.GemmyLanguageTool
         {
             GetMainDgvToTable(jsonmaindgv);
             string jsonstr = DataTableToJsonWithJsonNet(hst);
-            EditMainJson(jsonstr, "../../../json/text.json");
+            EditMainJson(jsonstr, "../../json/text.json");
         }
 
         private void insertbtn_Click(object sender, EventArgs e)
