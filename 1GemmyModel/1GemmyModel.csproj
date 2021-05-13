@@ -73,6 +73,7 @@
     <Compile Include="Model\Frame.cs" />
     <Compile Include="Model\HandSet.cs" />
     <Compile Include="Model\LanguageType.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Product_office_desk.cs" />
     <Compile Include="Model\ModelSystem\T_SYS_Language.cs" />
     <Compile Include="Model\OfficeTFList.cs" />
     <Compile Include="Model\OfficeTOList.cs" />
