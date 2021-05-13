@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _1GemmyModel.Model
+namespace _1GemmyModel.Model.ModelProductOffice
 {
-  public   class OfficeTSList:T_Base
+   public class T_Product_office_desk_detail:T_Base
     {
         /// <summary>
         /// 桌型号
         /// </summary>
-        
         public string Mode { get; set; }
         /// <summary>
         /// 桌名称
         /// </summary>
-        
         public string Type { get; set; }
         /// <summary>
         /// 立柱节数
@@ -29,7 +25,7 @@ namespace _1GemmyModel.Model
         /// </summary>
         public string Form { get; set; }
         /// <summary>
-        /// 内管尺寸
+        /// 外管尺寸
         /// </summary>
         public string Size_Out { get; set; }
         /// <summary>
@@ -37,7 +33,7 @@ namespace _1GemmyModel.Model
         /// </summary>
         public string Size_Middle { get; set; }
         /// <summary>
-        /// 外管尺寸
+        /// 内管尺寸
         /// </summary>
         public string Size_Inside { get; set; }
         /// <summary>

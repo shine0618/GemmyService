@@ -44,6 +44,29 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// </summary>
         public double deskPrice { get; set; }
 
-        
+        /// <summary>
+        /// 稳定性指数
+        /// </summary>
+        public double deskStabilityLeave { get; set; }
+
+        /// <summary>
+        /// 负责指数
+        /// </summary>
+        public double deskMaxLoad { get; set; }
+
+        /// <summary>
+        /// 是否为新品推荐
+        /// </summary>
+        public bool deskNewProduct{ get; set; }
+
+        /// <summary>
+        /// 是否为捷昌推荐
+        /// </summary>
+        public bool deskJCRecommend { get; set; }
+
+        /// <summary>
+        /// 当前账户定制的产品
+        /// </summary>
+        public string deskCreateByUser { get; set; }
     }
 }
