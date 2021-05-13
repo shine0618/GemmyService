@@ -46,8 +46,9 @@ namespace GemmyService.Controllers
         }
 
 
-        public  ActionResult OfficeStandards(string domain,string Type)
+        public  ActionResult OfficeStandards(string domain,string Type,string recommend)
         {
+           
             //如果语言是默认的话
             if (Session["PageLanguage"] == null)
             {
@@ -55,6 +56,10 @@ namespace GemmyService.Controllers
             }
             Session.Timeout = 9600;
 
+
+
+            ViewBag.domain = domain;
+            ViewBag.recommend = recommend;
             ViewBag.Type = Type;
 
             return View();
