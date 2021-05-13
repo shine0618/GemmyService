@@ -280,5 +280,7 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 添加方案的用户名
         /// </summary>
         public string AddUserName { get; set; }
+
+        public int T_Product_office_desk_Id { get; set; }
     }
 }

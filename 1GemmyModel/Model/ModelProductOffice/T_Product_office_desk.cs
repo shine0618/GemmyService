@@ -13,11 +13,15 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// TO/TS/TT/TF...
         /// </summary>
         public string deskType { get; set; }
+
+        public int deskTagKsy { get; set; }
         /// <summary>
         /// 新品 畅销那个标签
         /// </summary>
         public string deskTag { get; set; }
 
+
+        public int deskShortDescriptionKey { get; set; }
         /// <summary>
         /// 小圆管
         /// </summary>

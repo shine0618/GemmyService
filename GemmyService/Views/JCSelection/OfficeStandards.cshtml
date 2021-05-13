@@ -4,10 +4,14 @@
 }
 
 <style>
-    #OfficeStandards_box {
+    #selectTypeBox {
         min-height: 580px;
-        height: calc(100vh - 262px);
-        overflow:auto;
+        height: calc(100vh - 230px);
+        overflow: auto;
+    }
+    #OfficeStandards_box
+    {
+        padding:0;
     }
 
 </style>
@@ -44,16 +48,14 @@
                     </div><!-- /.blog-sidebar -->
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-9 col-md-9" id="selectTypeBox">
-
-
                     <div class="row">
                         <div class="col-lg-12" style="margin-bottom:10px;">
-                            <button class="thm-btn">新品排序</button><button class="thm-btn">销量排序</button><button class="thm-btn">价格排序</button>  <button class="thm-btn">稳定排序</button>    <button class="thm-btn">负载排序</button>
+                            <button class="thm-btn">新品排序</button>  <button class="thm-btn">销量排序</button>  <button class="thm-btn">价格排序</button>  <button class="thm-btn">稳定排序</button>  <button class="thm-btn">负载排序</button>
                         </div>
 
 
                         <div class="col-lg-4 col-md-6 mb-20">
-                            <div class="blog-card">
+                            <div class="blog-card" v-on:click="window.location='http://www.baidu.com'">
                                 <div class="blog-card__image">
                                     <span>新品</span>
                                     <img class=".img-responsive" style="height: 240px;" src="~/resourse/page/JC35TS-R13SF.png" />
@@ -62,9 +64,9 @@
                                 <div class="blog-card__content">
                                     <div class="blog-card__meta">
                                         <i></i>
-                                        <a href="#"><i class="fa fa-comments"></i>1.快速释放</a>
+                                        <a><i class="fa fa-comments"></i>快速释放</a>
                                     </div><!-- /.blog-card__meta -->
-                                    <h6><a href="news-details.html">JC35TS-R13SF</a></h6>
+                                    <h6><a>JC35TS-R13SF</a></h6>
                                 </div><!-- /.blog-card__content -->
                             </div><!-- /.blog-card -->
                         </div><!-- /.col-lg-4 col-md-6 -->
@@ -105,12 +107,10 @@
             OfficeTSDesk: "",
             name: 'Vue.js'
         },
-        // 在 `methods` 对象中定义方法
         methods: {
             initPage: function (event) {
                 var code = GetLanguCode();
                 $.ajaxSettings.async = false;
-
                 var languText;
                 $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
                     languText = result.language;
@@ -146,6 +146,6 @@
 
         }
     })
-
-    office_selectbox.initPage();
+    //语言加载
+    OfficeStandards.initPage();
 </script>

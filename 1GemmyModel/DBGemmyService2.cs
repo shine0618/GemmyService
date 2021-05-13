@@ -1,4 +1,5 @@
 ﻿using _1GemmyModel.Model;
+using _1GemmyModel.Model.ModelProductOffice;
 using _1GemmyModel.Model.ModelSystem;
 using System;
 using System.Data.Entity;
@@ -22,7 +23,8 @@ namespace _1GemmyModel
 
         public virtual DbSet<T_SYS_Language> T_SYS_Language { get; set; }
         public virtual DbSet<T_USER_UserInfo> T_USER_UserInfo { get; set; }
-
+        public virtual DbSet<T_Product_office_desk> T_Product_office_desk { get; set; }
+        public virtual DbSet<T_Product_office_desk_detail> T_Product_office_desk_detail { get; set; }
 
 
 
