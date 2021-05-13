@@ -44,6 +44,6 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// </summary>
         public double deskPrice { get; set; }
 
-        public double 
+        
     }
 }

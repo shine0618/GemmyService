@@ -3,87 +3,87 @@
     ViewBag.Title = "office";
 }
 
+<div id="office_selectbox">
 
+    <section class="page-header" style="height:53px;">
 
-<section class="page-header" style="height:53px;">
+        @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
+        <!-- /.page-header__bg -->
+        <div class="container" style="padding:10px 10px ">
+            <a class="navigation_a" href="/JCSelection/main">主页</a>/
+            <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>
+        </div><!-- /.container -->
+    </section><!-- /.page-header -->
 
-    @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
-    <!-- /.page-header__bg -->
-    <div class="container" style="padding:10px 10px ">
-        <a class="navigation_a" href="/JCSelection/main">主页</a>/
-        <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>        
-    </div><!-- /.container -->
-</section><!-- /.page-header -->
+    <section class="service-page pt-40 pb-60" id="selectSerial">
+        <div class="container">
+            <div class="row" >
+                <div class="col-lg-4 col-md-6 mb-60">
+                    <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TO'">
+                        <div class="service-one__image">
+                            <img src="~/resourse/page/singleLeg.png" alt="" />
 
-<section class="service-page pt-40 pb-60" id="selectSerial">
-    <div class="container">
-        <div class="row" id="office_selectbox">
-            <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card" v-on:click ="window.location='/JCSelection/OfficeStandards?Type=TO'" >
-                    <div class="service-one__image"  >
-                        <img src="~/resourse/page/singleLeg.png" alt="" />
+                        </div><!-- /.service-one__image -->
+                        <div class="service-one__content">
+                            <h3><a href="service-details.html">{{OfficeTODesk}}</a></h3>
+                            <p>{{OfficeTODeskContent}}</p>
+                            <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        </div><!-- /.service-one__content -->
+                    </div><!-- /.service-one__card -->
+                </div><!-- /.col-lg-4 col-md-6 mb-60 -->
+                <div class="col-lg-4 col-md-6 mb-60">
+                    <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TS'">
+                        <div class="service-one__image">
+                            <img src="~/resourse/page/twolegs.png" />
+                        </div><!-- /.service-one__image -->
+                        <div class="service-one__content">
+                            <h3><a href="service-details.html">{{OfficeTSDesk}}</a></h3>
+                            <p>{{OfficeTSDeskContent}}</p>
+                            <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        </div><!-- /.service-one__content -->
+                    </div><!-- /.service-one__card -->
+                </div><!-- /.col-lg-4 col-md-6 mb-60 -->
+                <div class="col-lg-4 col-md-6 mb-60">
+                    <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TT'">
+                        <div class="service-one__image">
+                            <img src="~/resourse/page/threelegs.png" />
+                        </div><!-- /.service-one__image -->
+                        <div class="service-one__content">
+                            <h3><a href="service-details.html">{{OfficeTTDesk}}</a></h3>
+                            <p>{{OfficeTTDeskContent}}</p>
+                            <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        </div><!-- /.service-one__content -->
+                    </div><!-- /.service-one__card -->
+                </div><!-- /.col-lg-4 col-md-6 mb-60 -->
+                <div class="col-lg-4 col-md-6 mb-60">
+                    <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TF'">
+                        <div class="service-one__image">
+                            <img src="~/resourse/page/forelegs.png" />
+                        </div><!-- /.service-one__image -->
+                        <div class="service-one__content">
+                            <h3><a href="service-details.html">{{OfficeTFDesk}}</a></h3>
+                            <p>{{OfficeTFDeskContent}}</p>
+                            <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        </div><!-- /.service-one__content -->
+                    </div><!-- /.service-one__card -->
+                </div><!-- /.col-lg-4 col-md-6 mb-60 -->
+                <div class="col-lg-4 col-md-6 mb-60">
+                    <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=Bench'">
+                        <div class="service-one__image">
 
-                    </div><!-- /.service-one__image -->
-                    <div class="service-one__content">
-                        <h3><a href="service-details.html">{{OfficeTODesk}}</a></h3>
-                        <p>{{OfficeTODeskContent}}</p>
-                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
-                    </div><!-- /.service-one__content -->
-                </div><!-- /.service-one__card -->
-            </div><!-- /.col-lg-4 col-md-6 mb-60 -->
-            <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TS'">
-                    <div class="service-one__image">
-                        <img src="~/resourse/page/twolegs.png" />
-                    </div><!-- /.service-one__image -->
-                    <div class="service-one__content">
-                        <h3><a href="service-details.html">{{OfficeTSDesk}}</a></h3>
-                        <p>{{OfficeTSDeskContent}}</p>
-                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
-                    </div><!-- /.service-one__content -->
-                </div><!-- /.service-one__card -->
-            </div><!-- /.col-lg-4 col-md-6 mb-60 -->
-            <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TT'">
-                    <div class="service-one__image">
-                        <img src="~/resourse/page/threelegs.png" />
-                    </div><!-- /.service-one__image -->
-                    <div class="service-one__content">
-                        <h3><a href="service-details.html">{{OfficeTTDesk}}</a></h3>
-                        <p>{{OfficeTTDeskContent}}</p>
-                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
-                    </div><!-- /.service-one__content -->
-                </div><!-- /.service-one__card -->
-            </div><!-- /.col-lg-4 col-md-6 mb-60 -->
-            <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TF'">
-                    <div class="service-one__image">
-                        <img src="~/resourse/page/forelegs.png" />
-                    </div><!-- /.service-one__image -->
-                    <div class="service-one__content">
-                        <h3><a href="service-details.html">{{OfficeTFDesk}}</a></h3>
-                        <p>{{OfficeTFDeskContent}}</p>
-                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
-                    </div><!-- /.service-one__content -->
-                </div><!-- /.service-one__card -->
-            </div><!-- /.col-lg-4 col-md-6 mb-60 -->
-            <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=Bench'">
-                    <div class="service-one__image">
-
-                        <img src="~/resourse/page/bench.png" />
-                    </div><!-- /.service-one__image -->
-                    <div class="service-one__content">
-                        <h3><a href="service-details.html">{{OfficeBenchDesk}}</a></h3>
-                        <p>{{OfficeBenchDeskContent}}</p>
-                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
-                    </div><!-- /.service-one__content -->
-                </div><!-- /.service-one__card -->
-            </div><!-- /.col-lg-4 col-md-6 mb-60 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</section><!-- /.service-page -->
-
+                            <img src="~/resourse/page/bench.png" />
+                        </div><!-- /.service-one__image -->
+                        <div class="service-one__content">
+                            <h3><a href="service-details.html">{{OfficeBenchDesk}}</a></h3>
+                            <p>{{OfficeBenchDeskContent}}</p>
+                            <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        </div><!-- /.service-one__content -->
+                    </div><!-- /.service-one__card -->
+                </div><!-- /.col-lg-4 col-md-6 mb-60 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section><!-- /.service-page -->
+</div>
 
 
 <script>
