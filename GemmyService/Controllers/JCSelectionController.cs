@@ -93,7 +93,7 @@ namespace GemmyService.Controllers
         }
 
        
-        public ActionResult ProductDetail()
+        public ActionResult ProductDetail(string domain, string Type, string recommend,string productGuid)
         {
             //如果语言是默认的话
             if (Session["PageLanguage"] == null)
@@ -101,6 +101,10 @@ namespace GemmyService.Controllers
                 Session["PageLanguage"] = "default";
             }
             Session.Timeout = 9600;
+
+            ViewBag.domain = domain;
+            ViewBag.recommend = recommend;
+            ViewBag.Type = Type;
 
             return View();
         }
@@ -132,12 +136,22 @@ namespace GemmyService.Controllers
         /// </summary>
         /// <returns></returns>
         public ActionResult qwertyui()
-        {
+        {   //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            Session.Timeout = 9600;
             return View();
         }
 
         public ActionResult qwertyui2()
-        {
+        {   //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            Session.Timeout = 9600;
             return View();
         }
 

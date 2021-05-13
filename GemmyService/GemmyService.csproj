@@ -454,6 +454,7 @@
     <Content Include="Views\JCSelection\ProductDetail.cshtml" />
     <Content Include="Views\Shared\_PartialLayuiSource.cshtml" />
     <Content Include="Views\JCSelection\OfficeStandards.cshtml" />
+    <Content Include="Views\JCSelection\qwertyui2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

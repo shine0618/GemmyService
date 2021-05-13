@@ -66,7 +66,7 @@
     }
 </style>
 
-
+<!-- /.js  加载ele组件 -->
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
@@ -75,8 +75,11 @@
     @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
     <!-- /.page-header__bg -->
     <div class="container" style="padding:10px 10px ">
-        HOME / 自定义配置选择
+        <a class="navigation_a" href="/JCSelection/main">主页</a>/
+        <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>/
+        <a class="navigation_a" href="/JCSelection/OfficeStandards?domain=office&Type=@ViewBag.Type&recommend=@ViewBag.recommend">@ViewBag.Type</a>/
 
+        <a class="navigation_a">产品明细</a>
     </div><!-- /.container -->
 </section><!-- /.page-header -->
 
@@ -108,12 +111,12 @@
                                 <p>配置编号</p>
                                 <h6>JCFIG_A_2021050000002</h6>
                             </div><!-- /.block-title -->
-
                             <!--<div class="block-title text-left">
                                 <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
 
-                            </div>--><!-- /.block-title -->
-                            <div id="qrcode" ></div>
+                            </div>-->
+                            <!-- /.block-title -->
+                            <div id="qrcode"></div>
                             @*   <button class="thm-btn">自定义</button>*@
                         </div><!-- /.about-three__image -->
                     </div><!-- /.col-lg-8 -->
@@ -131,17 +134,32 @@
                 <div class="block-title text-center">
                     <p></p>
                     <h3>产品配置列表</h3>
+                   
+
                 </div><!-- /.block-title -->
 
             </div>
 
 
             <div class="col-lg-12">
-
-                <table class="layui-hide" id="test"></table>
-
-
-
+                <div id="paramTable">
+                    <el-table :data="paramTableData"
+                              border
+                              style="width: 100%">
+                        <el-table-column prop="date"
+                                         label="参数"
+                                         width="180">
+                        </el-table-column>
+                        <el-table-column prop="name"
+                                         label="参数值"
+                                         width="180">
+                        </el-table-column>
+                        <el-table-column prop="address"
+                                         label="参数说明"
+                                         width="180">
+                        </el-table-column>
+                    </el-table>
+                </div>
             </div>
 
         </div>
@@ -238,22 +256,9 @@
 
 
     })
-    layui.use('table', function () {
-        var table = layui.table;
-
-        table.render({
-            elem: '#test'
-            , url: '/demo/table/user/'
-            , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-            , cols: [[
-                { field: 'id', title: '名称' }
-                , { field: 'username', title: '参数/值' }
-            ]]
-        });
-    });
-
 </script>
 <script type="text/javascript">
+
 
     var Main = {
         data() {
@@ -271,45 +276,45 @@
     new Ctor().$mount('#app')
 </script>
 @*<script type="text/javascript">
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-        width : 100,
-        height : 100
-    });
-
-    function makeCode() {
-        var elText = document.getElementById("text");
-
-        if (!elText.value) {
-            alert("Input a text");
-            elText.focus();
-            return;
-        }
-        console.log(elText.value);
-        qrcode.makeCode(elText.value);
-    }
-
-    makeCode();
-
-    $("#text").
-        on("blur", function () {
-            makeCode();
-        }).
-        on("keydown", function (e) {
-            if (e.keyCode == 13) {
-                makeCode();
-            }
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width : 100,
+            height : 100
         });
-</script>*@
+
+        function makeCode() {
+            var elText = document.getElementById("text");
+
+            if (!elText.value) {
+                alert("Input a text");
+                elText.focus();
+                return;
+            }
+            console.log(elText.value);
+            qrcode.makeCode(elText.value);
+        }
+
+        makeCode();
+
+        $("#text").
+            on("blur", function () {
+                makeCode();
+            }).
+            on("keydown", function (e) {
+                if (e.keyCode == 13) {
+                    makeCode();
+                }
+            });
+    </script>*@
 
 <script type="text/javascript" src="//static.runoob.com/assets/qrcode/qrcode.min.js"></script>
 <script type="text/javascript">
-   // new QRCode(document.getElementById("qrcode"), "https://github.com/davidshimjs/qrcodejs");
+    // new QRCode(document.getElementById("qrcode"), "https://github.com/davidshimjs/qrcodejs");
     var qrcode = new QRCode(document.getElementById("qrcode"), {
         text: "JCFIG_A_2021050000002",
         width: 128,
         height: 128,
         colorDark: "#000000",
         colorLight: "#ffffff",
-        correctLevel : 0 // 二维码结构复杂性 0~3
+        correctLevel: 0 // 二维码结构复杂性 0~3
     });
 </script>
