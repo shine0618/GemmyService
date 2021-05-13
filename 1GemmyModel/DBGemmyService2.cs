@@ -26,6 +26,7 @@ namespace _1GemmyModel
         public virtual DbSet<T_Product_office_desk> T_Product_office_desk { get; set; }
         public virtual DbSet<T_Product_office_desk_detail> T_Product_office_desk_detail { get; set; }
 
+        public virtual DbSet<T_Product_office_text> T_Product_office_text { get; set; }
 
 
         //为您要在模型中包含的每种实体类型都添加 DbSet。有关配置和使用 Code First  模型

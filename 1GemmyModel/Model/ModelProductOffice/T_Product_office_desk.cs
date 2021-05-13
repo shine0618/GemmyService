@@ -58,6 +58,11 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// </summary>
         public double deskMaxLoad { get; set; }
 
+
+        /// <summary>
+        /// 新品指数
+        /// </summary>
+        public double deskNewProductNumber { get; set; }
         /// <summary>
         /// 是否为新品推荐
         /// </summary>
