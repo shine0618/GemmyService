@@ -1,6 +1,16 @@
 {
   "language": {
-    "a": "c",
-    "b": ""
+    "OfficeTSDeskContent": "",
+    "Office": "",
+    "OfficeTODesk": "",
+    "OfficeTFDesk": "",
+    "OfficeTTDeskContent": "a",
+    "OfficeTODeskContent": "",
+    "OfficeTTDesk": "",
+    "DeskType": "",
+    "OfficeBenchDeskContent": "",
+    "OfficeTFDeskContent": "",
+    "OfficeBenchDesk": "",
+    "OfficeTSDesk": ""
   }
 }
