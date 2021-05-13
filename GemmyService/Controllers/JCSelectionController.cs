@@ -14,10 +14,52 @@ namespace GemmyService.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 主页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult main()
         {
+            //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            Session.Timeout = 9600;
             return View();
         }
+
+        /// <summary>
+        /// 第二集办公
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult office()
+        {
+
+            //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            Session.Timeout = 9600;
+            return View();
+        }
+
+
+        public  ActionResult OfficeStandards(string domain,string Type)
+        {
+            //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            Session.Timeout = 9600;
+
+            ViewBag.Type = Type;
+
+            return View();
+        }
+
         public ActionResult selectType()
         {
             return View();
@@ -47,11 +89,8 @@ namespace GemmyService.Controllers
 
             return View();
         }
-        public ActionResult office()
-        {
-            return View();
 
-        }
+     
 
 
         /// <summary>

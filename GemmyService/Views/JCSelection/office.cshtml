@@ -4,85 +4,154 @@
 }
 
 
+
 <section class="page-header" style="height:53px;">
 
     @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
     <!-- /.page-header__bg -->
     <div class="container" style="padding:10px 10px ">
-        HOME / 自定义配置选择
-
+        <a class="navigation_a" href="/JCSelection/main">主页</a>/
+        <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>        
     </div><!-- /.container -->
 </section><!-- /.page-header -->
 
 <section class="service-page pt-40 pb-60" id="selectSerial">
     <div class="container">
-
-        <div class="row">
+        <div class="row" id="office_selectbox">
             <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card">
-                    <div class="service-one__image">
-
+                <div class="service-one__card" v-on:click ="window.location='/JCSelection/OfficeStandards?Type=TO'" >
+                    <div class="service-one__image"  >
                         <img src="~/resourse/page/singleLeg.png" alt="" />
+
                     </div><!-- /.service-one__image -->
                     <div class="service-one__content">
-                        <h3><a href="service-details.html">单腿桌</a></h3>
-                        <p>There are many variations of passages of lorem ipsum available the majority have some.</p>
-                        <a href="/JCSelection/selectType" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        <h3><a href="service-details.html">{{OfficeTODesk}}</a></h3>
+                        <p>{{OfficeTODeskContent}}</p>
+                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
                     </div><!-- /.service-one__content -->
                 </div><!-- /.service-one__card -->
             </div><!-- /.col-lg-4 col-md-6 mb-60 -->
             <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card">
+                <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TS'">
                     <div class="service-one__image">
-
                         <img src="~/resourse/page/twolegs.png" />
                     </div><!-- /.service-one__image -->
                     <div class="service-one__content">
-                        <h3><a href="service-details.html">双腿桌</a></h3>
-                        <p>There are many variations of passages of lorem ipsum available the majority have some.</p>
-                        <a href="/JCSelection/office_Eservice" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        <h3><a href="service-details.html">{{OfficeTSDesk}}</a></h3>
+                        <p>{{OfficeTSDeskContent}}</p>
+                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
                     </div><!-- /.service-one__content -->
                 </div><!-- /.service-one__card -->
             </div><!-- /.col-lg-4 col-md-6 mb-60 -->
             <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card">
+                <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TT'">
                     <div class="service-one__image">
-
                         <img src="~/resourse/page/threelegs.png" />
                     </div><!-- /.service-one__image -->
                     <div class="service-one__content">
-                        <h3><a href="service-details.html">三腿桌</a></h3>
-                        <p>There are many variations of passages of lorem ipsum available the majority have some.</p>
-                        <a href="service-details.html" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        <h3><a href="service-details.html">{{OfficeTTDesk}}</a></h3>
+                        <p>{{OfficeTTDeskContent}}</p>
+                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
                     </div><!-- /.service-one__content -->
                 </div><!-- /.service-one__card -->
             </div><!-- /.col-lg-4 col-md-6 mb-60 -->
             <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card">
+                <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TF'">
                     <div class="service-one__image">
-
                         <img src="~/resourse/page/forelegs.png" />
                     </div><!-- /.service-one__image -->
                     <div class="service-one__content">
-                        <h3><a href="service-details.html">四腿桌</a></h3>
-                        <p>There are many variations of passages of lorem ipsum available the majority have some.</p>
-                        <a href="service-details.html" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        <h3><a href="service-details.html">{{OfficeTFDesk}}</a></h3>
+                        <p>{{OfficeTFDeskContent}}</p>
+                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
                     </div><!-- /.service-one__content -->
                 </div><!-- /.service-one__card -->
             </div><!-- /.col-lg-4 col-md-6 mb-60 -->
             <div class="col-lg-4 col-md-6 mb-60">
-                <div class="service-one__card">
+                <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=Bench'">
                     <div class="service-one__image">
 
                         <img src="~/resourse/page/bench.png" />
                     </div><!-- /.service-one__image -->
                     <div class="service-one__content">
-                        <h3><a href="service-details.html">组合桌</a></h3>
-                        <p>There are many variations of passages of lorem ipsum available the majority have some.</p>
-                        <a href="service-details.html" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        <h3><a href="service-details.html">{{OfficeBenchDesk}}</a></h3>
+                        <p>{{OfficeBenchDeskContent}}</p>
+                        <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
                     </div><!-- /.service-one__content -->
                 </div><!-- /.service-one__card -->
             </div><!-- /.col-lg-4 col-md-6 mb-60 -->
         </div><!-- /.row -->
     </div><!-- /.container -->
 </section><!-- /.service-page -->
+
+
+
+<script>
+
+    
+    
+    var office_selectbox = new Vue({
+        el: '#office_selectbox',
+        data: {
+            OfficeTSDeskContent: "",
+            Office: "",
+            OfficeTODesk: "",
+            OfficeTFDesk: "",
+            OfficeTTDeskContent: "",
+            OfficeTODeskContent: "",
+            OfficeTTDesk: "",
+            DeskType: "",
+            OfficeBenchDeskContent: "",
+            OfficeTFDeskContent: "",
+            OfficeBenchDesk: "",
+            OfficeTSDesk: "",
+            name: 'Vue.js'
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+            initPage: function (event) {
+                var code = GetLanguCode();
+                $.ajaxSettings.async = false;
+
+                var languText; 
+                $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
+                    languText   = result.language;                  
+                });
+                $.ajaxSettings.async = true;
+
+                var obj = languText;
+                for (var p in obj) {
+                    // 方法
+                    if (typeof (obj[p]) == "function") {
+                        obj[p]();
+                    } else {
+                        // p 为属性名称，obj[p]为对应属性的值
+                        var key = p;
+                        var value = obj[p];
+                        this.setData(key, value);;
+                    }
+                }
+
+            },
+
+
+            setData: function (field, val) {
+                this.$set(this.$data, field, val);
+                ////如果需要提交请求,下面这样是不行的,提交的是field字符串
+                //$.post('url', { field: val }, function () { });
+                ////需要这样
+                //var json = {};
+                //json[field] = value
+                //$.post('url', json, function () { });
+
+            },
+          
+            
+        }
+    })
+
+    office_selectbox.initPage();
+
+    
+
+</script>

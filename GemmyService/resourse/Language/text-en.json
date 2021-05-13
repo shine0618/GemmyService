@@ -1,0 +1,16 @@
+{
+  "language": {
+    "OfficeTSDeskContent": "This is two-legs office lifting desk.",
+    "Office": "Office",
+    "OfficeTODesk": "One-legs office lifting desk",
+    "OfficeTFDesk": "Four-legs office lifting desk",
+    "OfficeTTDeskContent": "This is three-legs office lifting desk.",
+    "OfficeTODeskContent": "This is one-legs office lifting desk.",
+    "OfficeTTDesk": "Three-legs office lifting desk",
+    "DeskType": "DeskType",
+    "OfficeBenchDeskContent": "This is multi-legs office lifting desk.",
+    "OfficeTFDeskContent": "This is four-legs office lifting desk.",
+    "OfficeBenchDesk": "Multi-legs office lifting desk",
+    "OfficeTSDesk": "Two-legs office lifting desk"
+  }
+}

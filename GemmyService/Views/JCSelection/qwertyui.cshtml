@@ -8,13 +8,14 @@
         height:900px;
     }
 </style>
-<h2>qwertyui</h2>
-<h2>qwertyui</h2><h2>qwertyui</h2><h2>qwertyui</h2>
 <div id="app1">
 
     <h1>{{title1}}</h1>
 
 </div>
+<h2>qwertyui</h2>
+<h2>qwertyui</h2><h2>qwertyui</h2><h2>qwertyui</h2>
+
 
 
 
@@ -32,9 +33,6 @@
             var langu = result.language;            
             text = langu[key];           
         });
-
-
-
         $.ajaxSettings.async = true;
 
 
@@ -54,20 +52,7 @@
             title2: '',
         },
         methods: {
-            greet: function ( callback) {
-
-                this.$http.get('/resourse/Language/text.json').then(res => {
-                    console.log(res.body)//此处的res对象包含了json的文件信息和数据，我们需要的json数据存在于body属性中
-                    //console.log(res.body.language.a)
-                    var i = res.body.language[lkey];
-
-                    return i;
-                    
-                })
-
-            },
             gettext: function (event) {
-
                 this.title1 = GetText('text', 'title1');
             }
 

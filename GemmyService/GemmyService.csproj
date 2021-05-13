@@ -327,6 +327,8 @@
     <Content Include="assets\layui-v2.6.6\layui\font\iconfont.woff" />
     <Content Include="assets\layui-v2.6.6\layui\font\iconfont.woff2" />
     <Content Include="assets\layui-v2.6.6\免责声明.url" />
+    <Content Include="resourse\Language\text-zh.json" />
+    <Content Include="resourse\Language\text-en.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -451,6 +453,7 @@
     <Content Include="Views\JCSelection\qwertyui.cshtml" />
     <Content Include="Views\JCSelection\ProductDetail.cshtml" />
     <Content Include="Views\Shared\_PartialLayuiSource.cshtml" />
+    <Content Include="Views\JCSelection\OfficeStandards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
