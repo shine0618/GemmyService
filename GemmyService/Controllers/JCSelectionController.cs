@@ -1,4 +1,6 @@
-﻿using System;
+﻿using _1GemmyModel.Model.ModelProductOffice;
+using _2GemmyBusness.BLL.BLLOfficeDesk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,11 @@ namespace GemmyService.Controllers
 {
     public class JCSelectionController : Controller
     {
+
+        #region 字段
+        private BLL_Office_desk bll_desk = new BLL_Office_desk();
+
+        #endregion
         // GET: JCSelection
         public ActionResult Index()
         {
@@ -63,6 +70,21 @@ namespace GemmyService.Controllers
             ViewBag.Type = Type;
 
             return View();
+        }
+
+        [HttpGet]
+        public JsonResult GetOfficeStards(string domain,string Type, string recommend, string Order,string OrderValue, string langCode)
+        {
+
+
+            List<T_Product_office_desk> list = bll_desk.GetT_Product_office_desk(Type);
+
+
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+
+
         }
 
         public ActionResult selectType()

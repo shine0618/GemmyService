@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BLLBase.cs" />
+    <Compile Include="BLL\BLLOfficeDesk\BLL_Office_desk.cs" />
     <Compile Include="BLL\BLLSystem\BLL_SYS_Helper.cs" />
     <Compile Include="BLL\BLLSystem\BLL_SYS_language.cs" />
     <Compile Include="BLL\BLLUserAccount\UserManager.cs" />

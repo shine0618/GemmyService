@@ -1,16 +1,27 @@
 {
-  "language": {
-    "OfficeTSDeskContent": "This is two-legs office lifting desk.",
-    "Office": "Office",
-    "OfficeTODesk": "One-legs office lifting desk",
-    "OfficeTFDesk": "Four-legs office lifting desk",
-    "OfficeTTDeskContent": "This is three-legs office lifting desk.",
-    "OfficeTODeskContent": "This is one-legs office lifting desk.",
-    "OfficeTTDesk": "Three-legs office lifting desk",
+  "language": 
+  {
+    "SellCountOrderName": "SalesRanking",
+    "OfficeTTDeskContent": "This is TT desk.",
+    "OfficeBenchDeskContent": "This is Bench desk.",
+    "MyCollectName": "MyCollection",
+    "OfficeTFDesk": "OfficeTFDesk",
+    "OfficeBenchDesk": "OfficeBenchDesk",
+    "OfficeTODeskContent": "This is TO desk.",
+    "PriceOrderName": "PriceSorting",
+    "OfficeTSDeskContent": "This is TS desk.",
+    "NewProductOrderName": "NewProductSorting",
+    "JCRecommendName": "JCRecommend",
+    "StabilityLevelOrderName": "StabilityLevelSorting",
+    "OfficeTSDesk": "OfficeTSDesk",
     "DeskType": "DeskType",
-    "OfficeBenchDeskContent": "This is multi-legs office lifting desk.",
-    "OfficeTFDeskContent": "This is four-legs office lifting desk.",
-    "OfficeBenchDesk": "Multi-legs office lifting desk",
-    "OfficeTSDesk": "Two-legs office lifting desk"
+    "MaxLoadOrderName": "MaxLoadSorting",
+    "OfficeTODesk": "OfficeTODesk",
+    "Office": "Office",
+    "OfficeTFDeskContent": "This is TF desk.",
+    "DeskConfigurationName": "Configuration",
+    "OfficeTTDesk": "OfficeTTDesk",
+    "CustomerName": "Customer",
+    "NewProductName": "NewProduct"
   }
 }

@@ -13,7 +13,10 @@
     {
         padding:0;
     }
-
+    .orderbtn
+    {
+        width:160px;
+    }
 </style>
 <div id="OfficeStandards">
 
@@ -36,12 +39,14 @@
                 <div class="col-lg-3">
                     <div class="blog-sidebar">
                         <div class="blog-sidebar__box blog-sidebar__category service-sidebar__category">
-                            <h3 class="blog-sidebar__box-title">配置</h3><!-- /.blog-sidebar__title -->
+                            <h3 class="blog-sidebar__box-title">{{DeskConfigurationName}}</h3><!-- /.blog-sidebar__title -->
                             <ul class="list-unstyled service-sidebar__category-list">
-                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=newProduct">新品推荐</a></li>
-                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=jiecangProduct">捷昌推荐</a></li>
-                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=myCollect">我的收藏</a></li>
-                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=customer">自定义</a></li>
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=newProduct">{{NewProductName}}</a></li>
+
+
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=jiecangProduct">{{JCRecommendName}}</a></li>
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=myCollect">{{MyCollectName}}</a></li>
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=customer">{{CustomerName}}</a></li>
                             </ul><!-- /.list-unstyled -->
                         </div><!-- /.blog-sidebar__box -->
 
@@ -50,23 +55,30 @@
                 <div class="col-lg-9 col-md-9" id="selectTypeBox">
                     <div class="row">
                         <div class="col-lg-12" style="margin-bottom:10px;">
-                            <button class="thm-btn">新品排序</button>  <button class="thm-btn">销量排序</button>  <button class="thm-btn">价格排序</button>  <button class="thm-btn">稳定排序</button>  <button class="thm-btn">负载排序</button>
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('NewProductOrderName')">{{NewProductOrderName}}<span style="margin-left:8px" v-if="OrderValue=='NewProductOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='NewProductOrderName'&&Order==2">↓</span></button>
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('SellCountOrderName')">{{SellCountOrderName}}<span style="margin-left:8px" v-if="OrderValue=='SellCountOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='SellCountOrderName'&&Order==2">↓</span></button>
+
+
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('PriceOrderName')">{{PriceOrderName}}<span style="margin-left:8px" v-if="OrderValue=='PriceOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='PriceOrderName'&&Order==2">↓</span></button>
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('StabilityLevelOrderName')">{{StabilityLevelOrderName}}<span style="margin-left:8px" v-if="OrderValue=='StabilityLevelOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='StabilityLevelOrderName'&&Order==2">↓</span></button>
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('MaxLoadOrderName')">{{MaxLoadOrderName}}<span style="margin-left:8px" v-if="OrderValue=='MaxLoadOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='MaxLoadOrderName'&&Order==2">↓</span></button>
+
+
                         </div>
 
-
-                        <div class="col-lg-4 col-md-6 mb-20">
+                    
+                        <div class="col-lg-4 col-md-6 mb-20" v-for="item in deskList">
                             <div class="blog-card" v-on:click="window.location='http://www.baidu.com'">
                                 <div class="blog-card__image">
-                                    <span>新品</span>
+                                    <span v-if="item.deskTag!=''">{{item.deskTag}}</span>
                                     <img class=".img-responsive" style="height: 240px;" src="~/resourse/page/JC35TS-R13SF.png" />
-
                                 </div><!-- /.blog-card__image -->
                                 <div class="blog-card__content">
                                     <div class="blog-card__meta">
                                         <i></i>
-                                        <a><i class="fa fa-comments"></i>快速释放</a>
+                                        <a><i class="fa fa-comments"></i>{{item.deskShortDescription}}</a>
                                     </div><!-- /.blog-card__meta -->
-                                    <h6><a>JC35TS-R13SF</a></h6>
+                                    <h6><a>{{item.deskSerialName}}</a></h6>
                                 </div><!-- /.blog-card__content -->
                             </div><!-- /.blog-card -->
                         </div><!-- /.col-lg-4 col-md-6 -->
@@ -93,23 +105,29 @@
     var OfficeStandards = new Vue({
         el: '#OfficeStandards',
         data: {
-            OfficeTSDeskContent: "",
-            Office: "",
-            OfficeTODesk: "",
-            OfficeTFDesk: "",
-            OfficeTTDeskContent: "",
-            OfficeTODeskContent: "",
-            OfficeTTDesk: "",
-            DeskType: "",
-            OfficeBenchDeskContent: "",
-            OfficeTFDeskContent: "",
-            OfficeBenchDesk: "",
-            OfficeTSDesk: "",
-            name: 'Vue.js'
+            OrderValue: "",
+            Order: 0,//1正序 2倒序
+            domain: "@ViewBag.domain",
+            Type: "@ViewBag.Type",
+            recommend: "@ViewBag.recommend",
+            langCode:"",
+            deskList:null,
+
+            DeskConfigurationName: "",
+            NewProductName: "",
+            JCRecommendName: "",
+            MyCollectName: "",
+            CustomerName: "",
+            NewProductOrderName: "",
+            SellCountOrderName: "",
+            PriceOrderName: "",
+            StabilityLevelOrderName: "",
+            MaxLoadOrderName: "",
         },
         methods: {
             initPage: function (event) {
                 var code = GetLanguCode();
+                this.langCode = code;
                 $.ajaxSettings.async = false;
                 var languText;
                 $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
@@ -130,22 +148,59 @@
                 }
 
             },
+            getallDesk: function (event) {
+
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetOfficeStards",
+                    params: {
+                        domain: this.domain,
+                        Type: this.Type,
+                        recommend: this.recommend,
+                        Order: this.Order,
+                        OrderValue: this.OrderValue,
+                        langCode: this.langCode,
+                    }
+                }).then(function (response) {  //接口返回数据
+
+                    this.deskList = response.body;
+                    console.log(response.body);
 
 
-            setData: function (field, val) {
-                this.$set(this.$data, field, val);
-                ////如果需要提交请求,下面这样是不行的,提交的是field字符串
-                //$.post('url', { field: val }, function () { });
-                ////需要这样
-                //var json = {};
-                //json[field] = value
-                //$.post('url', json, function () { });
+                }, function (error) {
+                })
+
+
+
+
 
             },
+            orderBtnClick: function (ordervalue) {
+                this.OrderValue = ordervalue;
+                if (this.Order == 1) {
+                    this.Order = 2;
+                }
+                else {
+                    this.Order = 1;
+                }
+            },
+
+            setData: function (field, val) {
+                this.$set(this.$data, field, val);//vue 设定值
+            },
+            watch: {
+                firstName: function (val) {
+                    this.fullName = val + ' ' + this.lastName
+                },
+                lastName: function (val) {
+                    this.fullName = this.firstName + ' ' + val
+                }
+            }
 
 
         }
     })
     //语言加载
     OfficeStandards.initPage();
+    OfficeStandards.getallDesk();
 </script>

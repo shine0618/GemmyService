@@ -8,7 +8,10 @@ namespace _1GemmyModel.Model.ModelProductOffice
 {
    public class T_Product_office_desk:T_Base
     {
-
+        public T_Product_office_desk()
+        {
+            deskTag = "";
+        }
         /// <summary>
         /// TO/TS/TT/TF...
         /// </summary>
@@ -36,7 +39,6 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 图片地址
         /// </summary>
         public  string deskImgUrl { get; set; }
-
 
         /// <summary>
         /// 销量指数
