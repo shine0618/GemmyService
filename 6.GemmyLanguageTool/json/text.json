@@ -1,21 +1,26 @@
 {
   "language": {
-    //页面定位
-    "Office": "办公主页",
-    "DeskType": "桌型选择",
-
-
-
-    //桌型选择界面
+    "MyCollectName": "推荐界面左侧导航栏我的收藏",
+    "SellCountOrderName": "推荐界面上方销量排序",
+    "OfficeBenchDeskContent": "组合桌内容",
     "OfficeTODesk": "单腿桌名称",
-    "OfficeTODeskContent": "单腿桌内容",
-    "OfficeTSDesk": "两腿桌名称",
-    "OfficeTSDeskContent": "两腿桌内容",
-    "OfficeTTDesk": "三腿桌名称",
-    "OfficeTTDeskContent": "三腿桌内容",
     "OfficeTFDesk": "四腿桌名称",
-    "OfficeTFDeskContent": "四腿桌内容",
     "OfficeBenchDesk": "组合桌名称",
-    "OfficeBenchDeskContent": "组合桌内容"
+    "OfficeTODeskContent": "单腿桌内容",
+    "PriceOrderName": "推荐界面上方价格排序",
+    "OfficeTSDeskContent": "两腿桌内容",
+    "NewProductOrderName": "推荐界面上方新品排序",
+    "OfficeTTDeskContent": "三腿桌内容",
+    "StabilityLevelOrderName": "推荐界面上方稳定性排序",
+    "OfficeTSDesk": "两腿桌名称",
+    "DeskType": "桌型选择",
+    "MaxLoadOrderName": "推荐界面上方负载排序",
+    "JCRecommendName": "推荐界面左侧导航栏捷昌推荐",
+    "Office": "办公主页",
+    "OfficeTFDeskContent": "四腿桌内容",
+    "DeskConfigurationName": "推荐界面左侧导航栏的抬头名称",
+    "OfficeTTDesk": "三腿桌名称",
+    "CustomerName": "推荐界面左侧导航栏自定义",
+    "NewProductName": "推荐界面左侧导航栏新品推荐"
   }
 }

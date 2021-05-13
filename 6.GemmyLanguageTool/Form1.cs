@@ -51,7 +51,7 @@ namespace _6.GemmyLanguageTool
         private void importbtn_Click(object sender, EventArgs e)
         {
             mainhst.Clear();
-            
+            multihst.Clear();
             string jsonfile = "../../json/text-"+ cbx_language.SelectedItem.ToString()+".json";//JSON文件路径
             string jsonmainfile = "../../json/text.json";//JSON文件路径
             using (System.IO.StreamReader file = System.IO.File.OpenText(jsonfile))
@@ -120,7 +120,7 @@ namespace _6.GemmyLanguageTool
             jsonmaindgv.Columns[1].Width = jsonmaindgv.Width / 2 + 60;
             jsonmaindgv.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
             jsonmaindgv.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
-            jsonmaindgv.Columns[1].ReadOnly = true;
+            //jsonmaindgv.Columns[1].ReadOnly = true;
             for (int i = 0; i < keylist.Count; i++)
             {
                 ((DataTable)jsonmaindgv.DataSource).Rows.Add();

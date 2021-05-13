@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,12 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                         select x;
             return query.ToList();
 
+        }
+        public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string Recommend)
+        {
+            var query = read_db.T_Product_office_desk.Where(m => m.deskNewProduct == true);
+            
+            return query.ToList();
         }
 
         public static D Mapper<D, S>(S s)

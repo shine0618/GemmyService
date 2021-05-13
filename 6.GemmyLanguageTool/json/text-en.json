@@ -1,16 +1,27 @@
 {
-  "language": {
-    "OfficeTSDeskContent": "",
-    "Office": "",
-    "OfficeTODesk": "",
-    "OfficeTFDesk": "",
-    "OfficeTTDeskContent": "a",
-    "OfficeTODeskContent": "",
-    "OfficeTTDesk": "",
-    "DeskType": "",
-    "OfficeBenchDeskContent": "",
-    "OfficeTFDeskContent": "",
-    "OfficeBenchDesk": "",
-    "OfficeTSDesk": ""
+  "language": 
+  {
+    "SellCountOrderName": "SalesRanking",
+    "OfficeTTDeskContent": "This is TT desk.",
+    "OfficeBenchDeskContent": "This is Bench desk.",
+    "MyCollectName": "MyCollection",
+    "OfficeTFDesk": "OfficeTFDesk",
+    "OfficeBenchDesk": "OfficeBenchDesk",
+    "OfficeTODeskContent": "This is TO desk.",
+    "PriceOrderName": "PriceSorting",
+    "OfficeTSDeskContent": "This is TS desk.",
+    "NewProductOrderName": "NewProductSorting",
+    "JCRecommendName": "JCRecommend",
+    "StabilityLevelOrderName": "StabilityLevelSorting",
+    "OfficeTSDesk": "OfficeTSDesk",
+    "DeskType": "DeskType",
+    "MaxLoadOrderName": "MaxLoadSorting",
+    "OfficeTODesk": "OfficeTODesk",
+    "Office": "Office",
+    "OfficeTFDeskContent": "This is TF desk.",
+    "DeskConfigurationName": "Configuration",
+    "OfficeTTDesk": "OfficeTTDesk",
+    "CustomerName": "Customer",
+    "NewProductName": "NewProduct"
   }
 }
