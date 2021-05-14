@@ -11,13 +11,16 @@ namespace _1GemmyModel.Model.ModelProductOffice
         public T_Product_office_desk()
         {
             deskTag = "";
+            deskGuid = System.Guid.NewGuid().ToString("N");
         }
+        public string deskGuid { get; set; }
+
         /// <summary>
         /// TO/TS/TT/TF...
         /// </summary>
         public string deskType { get; set; }
 
-        public int deskTagKsy { get; set; }
+        public int deskTagKey { get; set; }
         /// <summary>
         /// 新品 畅销那个标签
         /// </summary>
@@ -79,5 +82,7 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 当前账户定制的产品
         /// </summary>
         public string deskCreateByUser { get; set; }
+
+
     }
 }
