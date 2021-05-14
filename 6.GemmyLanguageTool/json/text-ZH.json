@@ -21,6 +21,13 @@
     "DeskConfigurationName": "配置",
     "OfficeTTDesk": "办公三腿桌",
     "CustomerName": "自定义",
-    "NewProductName": "新品推荐"
+    "NewProductName": "新品推荐",
+
+    "deskNewProductNumber": "新品排序",
+    "deskSalesVolume": "销量排序",
+    "deskPrice": "价格排序",
+    "deskStabilityLeave": "稳定排序",
+    "deskMaxLoad": "负载排序"
+
   }
 }

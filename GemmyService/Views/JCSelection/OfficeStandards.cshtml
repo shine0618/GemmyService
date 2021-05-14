@@ -55,20 +55,18 @@
                 <div class="col-lg-9 col-md-9" id="selectTypeBox">
                     <div class="row">
                         <div class="col-lg-12" style="margin-bottom:10px;">
-                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('NewProductOrderName')">{{NewProductOrderName}}<span style="margin-left:8px" v-if="OrderValue=='NewProductOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='NewProductOrderName'&&Order==2">↓</span></button>
-                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('SellCountOrderName')">{{SellCountOrderName}}<span style="margin-left:8px" v-if="OrderValue=='SellCountOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='SellCountOrderName'&&Order==2">↓</span></button>
-
-
-                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('PriceOrderName')">{{PriceOrderName}}<span style="margin-left:8px" v-if="OrderValue=='PriceOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='PriceOrderName'&&Order==2">↓</span></button>
-                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('StabilityLevelOrderName')">{{StabilityLevelOrderName}}<span style="margin-left:8px" v-if="OrderValue=='StabilityLevelOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='StabilityLevelOrderName'&&Order==2">↓</span></button>
-                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('MaxLoadOrderName')">{{MaxLoadOrderName}}<span style="margin-left:8px" v-if="OrderValue=='MaxLoadOrderName'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='MaxLoadOrderName'&&Order==2">↓</span></button>
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('deskNewProductNumber')">{{deskNewProductNumber}}<span style="margin-left:8px" v-if="OrderValue=='deskNewProductNumber'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='deskNewProductNumber'&&Order==2">↓</span></button>
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('deskSalesVolume')">{{deskSalesVolume}}<span style="margin-left:8px" v-if="OrderValue=='deskSalesVolume'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='deskSalesVolume'&&Order==2">↓</span></button>
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('deskPrice')">{{deskPrice}}<span style="margin-left:8px" v-if="OrderValue=='deskPrice'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='deskPrice'&&Order==2">↓</span></button>
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('deskStabilityLeave')">{{deskStabilityLeave}}<span style="margin-left:8px" v-if="OrderValue=='deskStabilityLeave'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='deskStabilityLeave'&&Order==2">↓</span></button>
+                            <button class="orderbtn thm-btn" v-on:click="orderBtnClick('deskMaxLoad')">{{deskMaxLoad}}<span style="margin-left:8px" v-if="OrderValue=='deskMaxLoad'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='deskMaxLoad'&&Order==2">↓</span></button>
 
 
                         </div>
 
                     
                         <div class="col-lg-4 col-md-6 mb-20" v-for="item in deskList">
-                            <div class="blog-card" v-on:click="window.location='/JCSelection/ProductDetail?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productGuid='+item.Id">
+                            <div class="blog-card" v-on:click="window.location='/JCSelection/ProductDetail?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productGuid='+item.deskGuid">
                                 <div class="blog-card__image">
                                     <span v-if="item.deskTag!=''">{{item.deskTag}}</span>
                                     <img class=".img-responsive" style="height: 240px;" src="~/resourse/page/JC35TS-R13SF.png" />
@@ -118,11 +116,21 @@
             JCRecommendName: "",
             MyCollectName: "",
             CustomerName: "",
-            NewProductOrderName: "",
-            SellCountOrderName: "",
-            PriceOrderName: "",
-            StabilityLevelOrderName: "",
-            MaxLoadOrderName: "",
+
+
+            deskNewProductNumber: "",
+            deskSalesVolume: "",
+            deskPrice: "",
+            deskStabilityLeave: "",
+            deskMaxLoad: "",
+        },
+        watch: {
+            OrderValue: function (val) {
+                this.getallDesk();
+            },
+            Order: function (val) {
+                this.getallDesk();
+            }
         },
         methods: {
             initPage: function (event) {
@@ -143,6 +151,7 @@
                         // p 为属性名称，obj[p]为对应属性的值
                         var key = p;
                         var value = obj[p];
+                       // console.log('key:' + key + "  value:" + value);
                         this.setData(key, value);;
                     }
                 }
@@ -164,18 +173,14 @@
                 }).then(function (response) {  //接口返回数据
 
                     this.deskList = response.body;
-                    console.log(response.body);
+                    //console.log(response.body);
 
 
                 }, function (error) {
                 })
-
-
-
-
-
             },
             orderBtnClick: function (ordervalue) {
+             
                 this.OrderValue = ordervalue;
                 if (this.Order == 1) {
                     this.Order = 2;
@@ -188,16 +193,6 @@
             setData: function (field, val) {
                 this.$set(this.$data, field, val);//vue 设定值
             },
-            watch: {
-                firstName: function (val) {
-                    this.fullName = val + ' ' + this.lastName
-                },
-                lastName: function (val) {
-                    this.fullName = this.firstName + ' ' + val
-                }
-            }
-
-
         }
     })
     //语言加载

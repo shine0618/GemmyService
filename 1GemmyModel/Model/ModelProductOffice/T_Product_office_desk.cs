@@ -44,6 +44,10 @@ namespace _1GemmyModel.Model.ModelProductOffice
         public  string deskImgUrl { get; set; }
 
         /// <summary>
+        /// 新品指数
+        /// </summary>
+        public double deskNewProductNumber { get; set; }
+        /// <summary>
         /// 销量指数
         /// </summary>
         public double deskSalesVolume { get; set; }
@@ -64,10 +68,7 @@ namespace _1GemmyModel.Model.ModelProductOffice
         public double deskMaxLoad { get; set; }
 
 
-        /// <summary>
-        /// 新品指数
-        /// </summary>
-        public double deskNewProductNumber { get; set; }
+       
         /// <summary>
         /// 是否为新品推荐
         /// </summary>

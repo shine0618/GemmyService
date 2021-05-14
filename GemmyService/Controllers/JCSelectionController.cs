@@ -3,6 +3,7 @@ using _2GemmyBusness.BLL.BLLOfficeDesk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -55,6 +56,8 @@ namespace GemmyService.Controllers
 
         public  ActionResult OfficeStandards(string domain,string Type,string recommend)
         {
+
+          
            
             //如果语言是默认的话
             if (Session["PageLanguage"] == null)
@@ -63,6 +66,10 @@ namespace GemmyService.Controllers
             }
             Session.Timeout = 9600;
 
+            if (Type == null || Type == "")
+            {
+                return View("office");
+            }
 
 
             ViewBag.domain = domain;
@@ -77,8 +84,21 @@ namespace GemmyService.Controllers
         {
 
 
-            List<T_Product_office_desk> list = bll_desk.GetT_Product_office_desk(Type);
+            List<T_Product_office_desk> list = bll_desk.GetT_Product_office_desk(Type, langCode,recommend);
 
+            if(OrderValue!=null&&OrderValue!="")
+            {
+                if (Order == "2")//倒序
+                {
+                    list = list.OrderByDescending(DynamicLambda<T_Product_office_desk, double>(OrderValue)).ToList();
+
+                }
+                else
+                {
+                    list = list.OrderBy(DynamicLambda<T_Product_office_desk, double>(OrderValue)).ToList();
+                }
+            }
+          
 
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
@@ -154,6 +174,29 @@ namespace GemmyService.Controllers
             Session.Timeout = 9600;
             return View();
         }
+
+
+        #region 方法集
+
+        /// <summary>
+        /// 排序
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="Tkey"></typeparam>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        public static Func<T, Tkey> DynamicLambda<T, Tkey>(string propertyName)
+        {
+            //var query = list.OrderByDescending(DynamicLambda<T_Salary_report, string>(ordername)); 引用
+            ParameterExpression p = Expression.Parameter(typeof(T), "p");
+            Expression body = Expression.Property(p, typeof(T).GetProperty(propertyName));
+
+            var lambda = Expression.Lambda<Func<T, Tkey>>(body, p);
+
+            return lambda.Compile();
+        }
+
+        #endregion
 
     }
 }

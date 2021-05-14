@@ -70,251 +70,254 @@
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 
-<section class="page-header" style="height:53px;">
-
-    @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
-    <!-- /.page-header__bg -->
-    <div class="container" style="padding:10px 10px ">
-        <a class="navigation_a" href="/JCSelection/main">主页</a>/
-        <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>/
-        <a class="navigation_a" href="/JCSelection/OfficeStandards?domain=office&Type=@ViewBag.Type&recommend=@ViewBag.recommend">@ViewBag.Type</a>/
-
-        <a class="navigation_a">产品明细</a>
-    </div><!-- /.container -->
-</section><!-- /.page-header -->
+<div id="OfficeStandards">
 
 
+    <section class="page-header" style="height:53px;">
 
-<section class="about-three">
-    <div class="container">
-        <div class="row">
+        @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
+        <!-- /.page-header__bg -->
+        <div class="container" style="padding:10px 10px ">
+            <a class="navigation_a" href="/JCSelection/main">主页</a>/
+            <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>/
+            <a class="navigation_a" href="/JCSelection/OfficeStandards?domain=office&Type=@ViewBag.Type&recommend=@ViewBag.recommend">@ViewBag.Type</a>/
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8" id="asas">
+            <a class="navigation_a">产品明细</a>
+        </div><!-- /.container -->
+    </section><!-- /.page-header -->
 
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="about-three__image">
-                            <div class="block-title text-left">
-                                <p>产品信息</p>
-                                <h6>JC35TS-R13SF 快速升降桌</h6>
-                            </div><!-- /.block-title -->
-                            <div class="block-title text-left">
-                                <p>关键参数</p>
-                                <h6>最大负载（N）:800</h6>
-                                <h6>行程（mm):650</h6>
-                                <h6>遇阻回退功能,确保升降桌安全稳定运行</h6>
 
-                            </div><!-- /.block-title -->
-                            <div class="block-title text-left">
-                                <p>配置编号</p>
-                                <h6>JCFIG_A_2021050000002</h6>
-                            </div><!-- /.block-title -->
-                            <!--<div class="block-title text-left">
-                                <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
 
-                            </div>-->
-                            <!-- /.block-title -->
-                            <div id="qrcode"></div>
-                            @*   <button class="thm-btn">自定义</button>*@
-                        </div><!-- /.about-three__image -->
-                    </div><!-- /.col-lg-8 -->
-                </div><!-- /.row -->
+    <section class="about-three">
+        <div class="container">
+            <div class="row">
 
-            </div><!-- /.container -->
-        </div>
-    </div>
-</section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9" id="asas">
 
-<section class="blog-page pt-20 pb-40">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="block-title text-center">
-                    <p></p>
-                    <h3>产品配置列表</h3>
-                   
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="about-three__image">
+                                <div class="block-title text-left">
+                                    <p>{{text_detail_1}}</p>
+                                    <h6>JC35TS-R13SF 快速升降桌</h6>
+                                </div><!-- /.block-title -->
+                                <div class="block-title text-left">
+                                    <p>{{text_detail_2}}</p>
+                                    <h6>最大负载（N）:800</h6>
+                                    <h6>行程（mm):650</h6>
+                                    <h6>遇阻回退功能,确保升降桌安全稳定运行</h6>
 
-                </div><!-- /.block-title -->
+                                </div><!-- /.block-title -->
+                                <div class="block-title text-left">
+                                    <p>{{text_detail_3}}</p>
+                                    <h6>JCFIG_A_2021050000002</h6>
+                                </div><!-- /.block-title -->
+                                <!--<div class="block-title text-left">
+                                    <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
 
+                                </div>-->
+                                <!-- /.block-title -->
+                                <div id="qrcode"></div>
+                                @*   <button class="thm-btn">自定义</button>*@
+                            </div><!-- /.about-three__image -->
+                        </div><!-- /.col-lg-8 -->
+                    </div><!-- /.row -->
+
+                </div><!-- /.container -->
             </div>
+        </div>
+    </section>
 
-
-            <div class="col-lg-12">
-                <div id="paramTable">
+    <section class="blog-page pt-20 pb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="block-title text-center">
+                        <p></p>
+                        <h3>产品配置列表</h3>
+                    </div><!-- /.block-title -->
+                </div>
+                <div class="col-lg-12" id="paramTable">
                     <el-table :data="paramTableData"
-                              border
-                              style="width: 100%">
+                              border>
                         <el-table-column prop="date"
-                                         label="参数"
-                                         width="180">
+                                         label="参数">
                         </el-table-column>
                         <el-table-column prop="name"
-                                         label="参数值"
-                                         width="180">
+                                         label="参数值">
                         </el-table-column>
                         <el-table-column prop="address"
-                                         label="参数说明"
-                                         width="180">
+                                         label="参数说明">
                         </el-table-column>
                     </el-table>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 
-<section class="blog-page pt-20 pb-40">
-    <div class="container">
-        <div class="row" id="FilesBox">
-            <div class="col-lg-12">
-                <div class="block-title text-center">
-                    <p></p>
-                    <h3>产品资料与介绍</h3>
-                </div><!-- /.block-title -->
-            </div>
-
-            <div class="col-lg-12">
-
-                <div id="app">
-                    <template>
-                        <el-tabs v-model="activeName" @@tab-click="handleClick" stretch>
-                            <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-                            <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-                            <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-                            <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿定时任务补偿</el-tab-pane>
-                        </el-tabs>
-                    </template>
+    <section class="blog-page pt-20 pb-40">
+        <div class="container">
+            <div class="row" id="FilesBox">
+                <div class="col-lg-12">
+                    <div class="block-title text-center">
+                        <p></p>
+                        <h3>产品资料与介绍</h3>
+                    </div><!-- /.block-title -->
                 </div>
 
+                <div class="col-lg-12">
+
+                    <div id="app">
+                        <template>
+                            <el-tabs v-model="activeName" @@tab-click="handleClick" stretch>
+                                <el-tab-pane :label="text_detail_4" name="first">产品介绍</el-tab-pane>
+                                <el-tab-pane :label="text_detail_5" name="second">尺寸图</el-tab-pane>
+                                <el-tab-pane :label="text_detail_6" name="third">认证</el-tab-pane>
+                                <el-tab-pane :label="text_detail_7" name="fourth">文件资料</el-tab-pane>
+                            </el-tabs>
+                        </template>
+                    </div>
+
+                </div>
+
+
+
             </div>
-
-
-
         </div>
-    </div>
-    @*<div id="app">
-            <template>
-                <el-tabs v-model="activeName" @tab-click="handleClick">
-                    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-                    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-                    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-                    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
-                </el-tabs>
-            </template>
-        </div>*@
-
-
-
-</section>
-
-
-<!--<section class="about-three">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="about-three__image">
-                    <img src="/assets/images/resources/about-3-1.png" alt="">
-                </div>-->
-<!-- /.about-three__image -->
-<!--</div>--><!-- /.col-lg-4 -->
-<!--<div class="col-lg-8">
-    <div class="about-three__image">
-        <img src="/assets/images/resources/about-3-2.png" alt="">
-
-    </div>-->
-<!-- /.about-three__image -->
-<!--</div>--><!-- /.col-lg-8 -->
-<!--</div>--><!-- /.row -->
-<!--<div class="row">
-    <div class="col-lg-6">
-        <div class="block-title text-left">
-            <p>Get To Know About Us</p>
-            <h2>Few Words About Our Company</h2>
-        </div>-->
-<!-- /.block-title -->
-<!--</div>--><!-- /.col-lg-6 -->
-<!--<div class="col-lg-6">
-    <p class="block-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>-->
-<!-- /.block-text -->
-<!--</div>--><!-- /.col-lg-6 -->
-<!--</div>--><!-- /.row -->
-<!--</div>--><!-- /.container -->
-<!--</section>--><!-- /.about-three -->
-
+    </section>
+</div>
+    
 
 <script>
-    $(function () {
 
-        var i = '<iframe scrolling="no"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36ts-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
-        $('#asas').append(i);
+    var OfficeStandards = new Vue({
+        el: '#OfficeStandards',
+        data: {
+            OrderValue: "",
+            Order: 0,//1正序 2倒序
+            domain: "@ViewBag.domain",
+            Type: "@ViewBag.Type",
+            recommend: "@ViewBag.recommend",
+            langCode:"",
+            deskList: null,
+            activeName: 'first',
 
+            //text
+            text_detail_1: "",
+            text_detail_2: "",
+            text_detail_3: "",
+            text_detail_4: "",
+            text_detail_5: "",
+            text_detail_6: "",
+            text_detail_7: "",
 
-
-    })
-</script>
-<script type="text/javascript">
-
-
-    var Main = {
-        data() {
-            return {
-                activeName: 'second'
-            };
+            MyCollectName: "",
+            paramTableData : [{
+                date: '2016-05-02',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄'
+            }, {
+                date: '2016-05-04',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1517 弄'
+            }, {
+                date: '2016-05-01',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1519 弄'
+            }, {
+                date: '2016-05-03',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1516 弄'
+            }]
         },
+        //watch: {
+        //    OrderValue: function (val) {
+        //        this.getallDesk();
+        //    },
+        //    Order: function (val) {
+        //        this.getallDesk();
+        //    }
+        //},
         methods: {
             handleClick(tab, event) {
-                console.log(tab, event);
-            }
-        }
-    };
-    var Ctor = Vue.extend(Main)
-    new Ctor().$mount('#app')
-</script>
-@*<script type="text/javascript">
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
-            width : 100,
-            height : 100
-        });
-
-        function makeCode() {
-            var elText = document.getElementById("text");
-
-            if (!elText.value) {
-                alert("Input a text");
-                elText.focus();
-                return;
-            }
-            console.log(elText.value);
-            qrcode.makeCode(elText.value);
-        }
-
-        makeCode();
-
-        $("#text").
-            on("blur", function () {
-                makeCode();
-            }).
-            on("keydown", function (e) {
-                if (e.keyCode == 13) {
-                    makeCode();
+               
+            },
+            initPage: function (event) {
+                var code = GetLanguCode();
+                this.langCode = code;
+                $.ajaxSettings.async = false;
+                var languText;
+                $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
+                    languText = result.language;
+                });
+                $.ajaxSettings.async = true;
+                var obj = languText;
+                for (var p in obj) {
+                    // 方法
+                    if (typeof (obj[p]) == "function") {
+                        obj[p]();
+                    } else {
+                        // p 为属性名称，obj[p]为对应属性的值
+                        var key = p;
+                        var value = obj[p];
+                       // console.log('key:' + key + "  value:" + value);
+                        this.setData(key, value);;
+                    }
                 }
-            });
-    </script>*@
 
-<script type="text/javascript" src="//static.runoob.com/assets/qrcode/qrcode.min.js"></script>
-<script type="text/javascript">
-    // new QRCode(document.getElementById("qrcode"), "https://github.com/davidshimjs/qrcodejs");
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: "JCFIG_A_2021050000002",
-        width: 128,
-        height: 128,
-        colorDark: "#000000",
-        colorLight: "#ffffff",
-        correctLevel: 0 // 二维码结构复杂性 0~3
-    });
+
+                var i = '<iframe scrolling="no"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36ts-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+                $('#asas').append(i);
+
+            },
+            getallDesk: function (event) {
+
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetOfficeStards",
+                    params: {
+                        domain: this.domain,
+                        Type: this.Type,
+                        recommend: this.recommend,
+                        Order: this.Order,
+                        OrderValue: this.OrderValue,
+                        langCode: this.langCode,
+                    }
+                }).then(function (response) {  //接口返回数据
+
+                    this.deskList = response.body;
+                    //console.log(response.body);
+
+
+                }, function (error) {
+                })
+            },
+            orderBtnClick: function (ordervalue) {
+
+                this.OrderValue = ordervalue;
+                if (this.Order == 1) {
+                    this.Order = 2;
+                }
+                else {
+                    this.Order = 1;
+                }
+            },
+
+            setData: function (field, val) {
+                this.$set(this.$data, field, val);//vue 设定值
+            },
+        }
+    })
+    //语言加载
+    OfficeStandards.initPage();
+
 </script>
+
+
+
+
