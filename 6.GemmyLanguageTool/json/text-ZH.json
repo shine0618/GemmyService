@@ -1,16 +1,26 @@
 {
   "language": {
-    "OfficeTSDeskContent": "这是捷昌的两腿桌",
-    "Office": "办公产品",
-    "OfficeTODesk": "办公单腿桌",
-    "OfficeTFDesk": "办公四腿桌",
-    "OfficeTTDeskContent": "这是捷昌的三腿桌",
-    "OfficeTODeskContent": "这是捷昌的单腿桌",
-    "OfficeTTDesk": "办公三腿桌",
+    "SellCountOrderName": "销量排名",
     "DeskType": "办公桌型",
     "OfficeBenchDeskContent": "这是捷昌的组合桌",
-    "OfficeTFDeskContent": "这是捷昌的四腿桌",
+    "MyCollectName": "我的收藏",
+    "JCRecommendName": "捷昌推荐",
     "OfficeBenchDesk": "办公组合桌",
-    "OfficeTSDesk": "办公两腿桌"
+    "OfficeTODeskContent": "这是捷昌的单腿桌",
+    "PriceOrderName": "价格排序",
+    "OfficeTSDeskContent": "这是捷昌的两腿桌",
+    "NewProductOrderName": "新品排序",
+    "OfficeTTDeskContent": "这是捷昌的三腿桌",
+    "StabilityLevelOrderName": "稳定排序",
+    "OfficeTSDesk": "办公两腿桌",
+    "OfficeTFDesk": "办公四腿桌",
+    "MaxLoadOrderName": "负载排序",
+    "OfficeTODesk": "办公单腿桌",
+    "Office": "办公产品",
+    "OfficeTFDeskContent": "这是捷昌的四腿桌",
+    "DeskConfigurationName": "配置",
+    "OfficeTTDesk": "办公三腿桌",
+    "CustomerName": "自定义",
+    "NewProductName": "新品推荐"
   }
 }

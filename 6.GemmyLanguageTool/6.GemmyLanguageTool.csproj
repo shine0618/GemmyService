@@ -80,7 +80,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="json\text-EN-US.json" />
-    <None Include="json\text-ZH.json" />
+    <None Include="json\text-en.json" />
+    <None Include="json\text-zh.json" />
     <None Include="json\text.json" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
