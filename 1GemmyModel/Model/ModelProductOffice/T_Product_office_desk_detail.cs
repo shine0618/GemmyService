@@ -8,6 +8,11 @@ namespace _1GemmyModel.Model.ModelProductOffice
 {
    public class T_Product_office_desk_detail:T_Base
     {
+
+        
+
+        public string configurationNo { get; set; }
+
         /// <summary>
         /// 桌型号
         /// </summary>

@@ -35,7 +35,22 @@
     "text_detail_4": "产品介绍",
     "text_detail_5": "尺寸图",
     "text_detail_6": "认证",
-    "text_detail_7": "文件资料"
+    "text_detail_7": "文件资料",
+
+    "text_customer_1": "1.选择立柱",
+    "text_customer_2": "2.选择框架",
+    "text_customer_3": "3.选择地脚",
+    "text_customer_4": "4.选择侧板",
+    "text_customer_42": "5.选择配件",
+    "text_customer_5": "正装两节",
+    "text_customer_6": "倒装两节",
+    "text_customer_7": "正装三节",
+    "text_customer_8": "倒装三节",
+    "text_customer_9": "选择立柱类型",
+    "text_customer_10": "",
+    "text_customer_11": ""
+
+
 
 
 
