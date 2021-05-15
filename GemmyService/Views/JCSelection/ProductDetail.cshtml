@@ -101,7 +101,7 @@
                             <div class="about-three__image">
                                 <div class="block-title text-left">
                                     <p>{{text_detail_1}}</p>
-                                    <h6>JC35TS-R13SF 快速升降桌</h6>
+                                    <h6  v-text="deskSerialName"></h6>
                                 </div><!-- /.block-title -->
                                 <div class="block-title text-left">
                                     <p>{{text_detail_2}}</p>
@@ -112,14 +112,14 @@
                                 </div><!-- /.block-title -->
                                 <div class="block-title text-left">
                                     <p>{{text_detail_3}}</p>
-                                    <h6>JCFIG_A_2021050000002</h6>
+                                    <h6 v-text="configurationNo"></h6>
                                 </div><!-- /.block-title -->
                                 <!--<div class="block-title text-left">
                                     <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
 
                                 </div>-->
                                 <!-- /.block-title -->
-                                <div id="qrcode"></div>
+                                <div style="padding-top:30px" id="qrcodebox"></div>
                                 @*   <button class="thm-btn">自定义</button>*@
                             </div><!-- /.about-three__image -->
                         </div><!-- /.col-lg-8 -->
@@ -206,6 +206,13 @@
             langCode:"",
             deskList: null,
             activeName: 'first',
+            productName: '@ViewBag.productName',
+            productGuid: '@ViewBag.productGuid',
+            deskSerialName:'',
+            T_Product_office_desk: null,
+            T_Product_office_desk_detail: null,
+            configurationNo: "",
+
 
             //text
             text_detail_1: "",
@@ -215,6 +222,7 @@
             text_detail_5: "",
             text_detail_6: "",
             text_detail_7: "",
+            
 
             MyCollectName: "",
             paramTableData : [{
@@ -245,7 +253,7 @@
         //},
         methods: {
             handleClick(tab, event) {
-               
+
             },
             initPage: function (event) {
                 var code = GetLanguCode();
@@ -269,32 +277,36 @@
                         this.setData(key, value);;
                     }
                 }
-
-
-                var i = '<iframe scrolling="no"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36ts-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+                var i = '<iframe scrolling="no"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
                 $('#asas').append(i);
 
             },
-            getallDesk: function (event) {
-
+            getThisDesk: function (event) {
                 this.$http({           //调用接口
                     method: 'GET',
-                    url: "/JCSelection/GetOfficeStards",
+                    url: "/JCSelection/GetOfficeDeskDetail",
                     params: {
-                        domain: this.domain,
-                        Type: this.Type,
-                        recommend: this.recommend,
-                        Order: this.Order,
-                        OrderValue: this.OrderValue,
-                        langCode: this.langCode,
+                        productGuid: this.productGuid,
                     }
                 }).then(function (response) {  //接口返回数据
 
-                    this.deskList = response.body;
-                    //console.log(response.body);
+                   // this.deskList = response.body;
+                    this.T_Product_office_desk = response.body.T_Product_office_desk;
+                    this.T_Product_office_desk_detail = response.body.T_Product_office_desk_detail;
+
+                    this.deskSerialName = this.T_Product_office_desk.deskSerialName;
+                    this.configurationNo = this.T_Product_office_desk_detail.configurationNo
+
+                    initQRCode('qrcodebox', this.configurationNo);
+                    
+                   // console.log(this.T_Product_office_desk_detail);
+                    console.log(response.body);
 
 
                 }, function (error) {
+                        console.log(error);
+
+
                 })
             },
             orderBtnClick: function (ordervalue) {
@@ -315,7 +327,7 @@
     })
     //语言加载
     OfficeStandards.initPage();
-
+    OfficeStandards.getThisDesk();
 </script>
 
 

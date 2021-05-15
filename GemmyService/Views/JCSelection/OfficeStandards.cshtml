@@ -66,7 +66,7 @@
 
                     
                         <div class="col-lg-4 col-md-6 mb-20" v-for="item in deskList">
-                            <div class="blog-card" v-on:click="window.location='/JCSelection/ProductDetail?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productGuid='+item.deskGuid">
+                            <div class="blog-card" v-on:click="window.location='/JCSelection/ProductDetail?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productName='+item.deskSerialName+'&productGuid='+item.deskGuid">
                                 <div class="blog-card__image">
                                     <span v-if="item.deskTag!=''">{{item.deskTag}}</span>
                                     <img class=".img-responsive" style="height: 240px;" src="~/resourse/page/JC35TS-R13SF.png" />

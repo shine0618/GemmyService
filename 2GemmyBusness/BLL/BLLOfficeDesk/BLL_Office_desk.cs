@@ -12,6 +12,12 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 {
   public  class BLL_Office_desk:BLLBase
     {
+
+        public T_Product_office_desk GetT_Product_office_desk(string Guid)
+        {
+           return  read_db.T_Product_office_desk.Where(x => x.deskGuid == Guid).FirstOrDefault();
+        }
+
         public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string langCode,string recommend)
         {
 
@@ -83,13 +89,18 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         }
 
 
+        public T_Product_office_desk_detail GetT_Product_office_desk_detail(int desk_id)
+        {
+            return read_db.T_Product_office_desk_detail.Where(x => x.T_Product_office_desk_Id == desk_id).FirstOrDefault();
+        }
+
         //public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string Recommend)
         //{
         //    var query = read_db.T_Product_office_desk.Where(m => m.deskNewProduct == true);
-            
+
         //    return query.ToList();
         //}
 
-        
+
     }
 }

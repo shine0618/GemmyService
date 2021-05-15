@@ -53,8 +53,8 @@ namespace GemmyService.Controllers
             return View();
         }
 
-
-        public  ActionResult OfficeStandards(string domain,string Type,string recommend)
+        #region  捷昌标准推荐配置选择
+        public ActionResult OfficeStandards(string domain,string Type,string recommend)
         {
 
           
@@ -78,6 +78,8 @@ namespace GemmyService.Controllers
 
             return View();
         }
+
+      
 
         [HttpGet]
         public JsonResult GetOfficeStards(string domain,string Type, string recommend, string Order,string OrderValue, string langCode)
@@ -107,14 +109,17 @@ namespace GemmyService.Controllers
 
         }
 
+        #endregion
+
         public ActionResult selectType()
         {
             return View();
         }
 
-       
-        public ActionResult ProductDetail(string domain, string Type, string recommend,string productGuid)
+        #region 显示产品详细界面
+        public ActionResult ProductDetail(string domain, string Type, string recommend,string productName,string productGuid)
         {
+
             //如果语言是默认的话
             if (Session["PageLanguage"] == null)
             {
@@ -125,9 +130,29 @@ namespace GemmyService.Controllers
             ViewBag.domain = domain;
             ViewBag.recommend = recommend;
             ViewBag.Type = Type;
-
+            ViewBag.productGuid = productGuid;
+            ViewBag.productName = productName;
             return View();
         }
+        [HttpGet]
+        public ActionResult GetOfficeDeskDetail(string productGuid)
+        {
+
+            T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
+            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id);
+
+            var list = new
+            {
+                T_Product_office_desk = _T_Product_office_desk,
+                T_Product_office_desk_detail = _T_Product_office_desk_detail
+            };
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+
+        #endregion
 
 
         public ActionResult Eservice()
@@ -143,7 +168,12 @@ namespace GemmyService.Controllers
         }
 
         public ActionResult office_Eservice_test()
-        {
+        { //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            Session.Timeout = 9600;
 
             return View();
         }
@@ -152,7 +182,7 @@ namespace GemmyService.Controllers
 
 
         /// <summary>
-        /// 动态加载语言
+        /// 动态加载语言测试界面
         /// </summary>
         /// <returns></returns>
         public ActionResult qwertyui()
