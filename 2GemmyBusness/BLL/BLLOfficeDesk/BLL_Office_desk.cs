@@ -18,7 +18,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
            return  read_db.T_Product_office_desk.Where(x => x.deskGuid == Guid).FirstOrDefault();
         }
 
-        public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string langCode,string recommend)
+        public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string langCode,string recommend,string searchText)
         {
 
 
@@ -72,6 +72,12 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 default:
                     break;
             }
+
+            if (searchText.Trim() != "")
+            {
+                query = query.Where(x => x.deskSerialName.Contains(searchText.Trim()));
+            }
+
 
             List<T_Product_office_desk> list = new List<T_Product_office_desk>();
 

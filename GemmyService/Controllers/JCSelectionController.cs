@@ -82,12 +82,12 @@ namespace GemmyService.Controllers
       
 
         [HttpGet]
-        public JsonResult GetOfficeStards(string domain,string Type, string recommend, string Order,string OrderValue, string langCode)
+        public JsonResult GetOfficeStards(string domain,string Type, string recommend, string Order,string OrderValue, string langCode,string searchText)
         {
 
 
-            List<T_Product_office_desk> list = bll_desk.GetT_Product_office_desk(Type, langCode,recommend);
-
+            List<T_Product_office_desk> list = bll_desk.GetT_Product_office_desk(Type, langCode,recommend,searchText);
+          
             if(OrderValue!=null&&OrderValue!="")
             {
                 if (Order == "2")//倒序
