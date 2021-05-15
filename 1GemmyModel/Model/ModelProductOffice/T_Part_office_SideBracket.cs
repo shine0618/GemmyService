@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-  public  class Foot:T_Base
+   public class T_Part_office_SideBracket:T_Base
     {
         /// <summary>
-        /// 地脚类型
+        /// 侧板型号
         /// </summary>
-        /// 
+        
         public string Mode { get; set; }
         /// <summary>
         /// 最大长度
@@ -28,23 +28,23 @@ namespace _1GemmyModel.Model
         /// </summary>
         public int? StabilityLeave { get; set; }
         /// <summary>
-        /// 是否用于易安装
+        /// 是否易安装
         /// </summary>
         public bool CanEZ { get; set; }
         /// <summary>
-        /// 是否用于折叠桌
+        /// 是否折叠桌
         /// </summary>
         public bool CanFold { get; set; }
         /// <summary>
-        /// 是否用于翻转桌
+        /// 是否翻转桌
         /// </summary>
         public bool CanTurn { get; set; }
         /// <summary>
-        /// 是否用于直筒立柱
+        /// 是否直筒立柱
         /// </summary>
         public bool Inline { get; set; }
         /// <summary>
-        /// 是否用于内磨立柱
+        /// 是否内磨立柱
         /// </summary>
         public bool InsideSlider { get; set; }
         /// <summary>
@@ -80,7 +80,7 @@ namespace _1GemmyModel.Model
         /// </summary>
         public bool EMC { get; set; }
         /// <summary>
-        /// 是否通过BIFMA
+        ///是否通过BIFMA
         /// </summary>
         public bool BIFMA { get; set; }
         /// <summary>
@@ -122,18 +122,17 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 中文描述
         /// </summary>
-        [Column(TypeName = "ntext")]
+        
         public string DescriptionZH { get; set; }
         /// <summary>
         /// 英文描述
         /// </summary>
-        [Column(TypeName = "ntext")]
+        
         public string DescriptionEN { get; set; }
         /// <summary>
-        /// 地脚和立柱适配
+        /// 侧板适配框架
         /// </summary>
-
-        public string FootWithColumn { get; set; }
+        public string SideBracketWithFrame { get; set; }
         /// <summary>
         /// 含税成本
         /// </summary>
@@ -153,13 +152,12 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 中文特殊说明
         /// </summary>
-        [Column(TypeName = "ntext")]
+        
         public string SpecialDescriptionZH { get; set; }
         /// <summary>
         /// 英文特殊说明
         /// </summary>
-        [Column(TypeName = "ntext")]
+        
         public string SpecialDescriptionEN { get; set; }
-
     }
 }

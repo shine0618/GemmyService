@@ -91,7 +91,7 @@ namespace GemmyService.Controllers
                 if (Order == "2")//倒序
                 {
                     list = list.OrderByDescending(DynamicLambda<T_Product_office_desk, double>(OrderValue)).ToList();
-
+                    
                 }
                 else
                 {

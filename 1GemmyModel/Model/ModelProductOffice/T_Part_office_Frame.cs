@@ -8,85 +8,36 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class Column:T_Base
+   public class T_Part_office_Frame:T_Base
     {
         /// <summary>
-        /// 立柱型号
+        /// 框架类型
         /// </summary>
-       
         public string Mode { get; set; }
         /// <summary>
-        /// 正装倒装
+        /// 最大长度
         /// </summary>
-        public string Type { get; set; }
+        public int MaxLength { get; set; }
         /// <summary>
-        /// 立柱节数
+        /// 最小长度
         /// </summary>
-        public string Level { get; set; }
-        /// <summary>
-        /// 管形形状
-        /// </summary>
-        public string Form { get; set; }
-        /// <summary>
-        /// 内管尺寸
-        /// </summary>
-        public string Size_Out { get; set; }
-        /// <summary>
-        /// 中管尺寸
-        /// </summary>
-        public string Size_Middle { get; set; }
-        /// <summary>
-        /// 外管尺寸
-        /// </summary>
-        public string Size_Inside { get; set; }
-        /// <summary>
-        /// 行程
-        /// </summary>
-        public int StrokeLength { get; set; }
-        /// <summary>
-        /// 最大行程
-        /// </summary>
-        public int? MaxStroke { get; set; }
-        /// <summary>
-        /// 最低点(安装距)
-        /// </summary>
-        public int LowestPosition { get; set; }
-        /// <summary>
-        /// 最高点
-        /// </summary>
-        public int HighestPosition { get; set; }
-        /// <summary>
-        /// 额定负载
-        /// </summary>
-        public int LoadCapacity { get; set; }
-        /// <summary>
-        /// 最大负载
-        /// </summary>
-        public int? MaxLoad { get; set; }
-        /// <summary>
-        /// 额定速度
-        /// </summary>
-        public int Speed { get; set; }
-        /// <summary>
-        /// 最大速度
-        /// </summary>
-        public int? MaxSpeed { get; set; }
-        /// <summary>
-        /// 额定功率
-        /// </summary>
-        public int? Power { get; set; }
+        public int MinLength { get; set; }
         /// <summary>
         /// 稳定性等级
         /// </summary>
         public int? StabilityLeave { get; set; }
         /// <summary>
-        /// 电机代号
+        /// 是否易安装
         /// </summary>
-        public string MotorCode { get; set; }
+        public bool CanEZ { get; set; }
         /// <summary>
-        /// 是否带双电机
+        /// 是否折叠桌
         /// </summary>
-        public bool HaveMotor { get; set; }
+        public bool CanFold { get; set; }
+        /// <summary>
+        /// 是否翻转桌
+        /// </summary>
+        public bool CanTurn { get; set; }
         /// <summary>
         /// 是否直筒立柱
         /// </summary>
@@ -96,39 +47,31 @@ namespace _1GemmyModel.Model
         /// </summary>
         public bool InsideSlider { get; set; }
         /// <summary>
-        /// 是否适用单电机
+        /// 是否适用于双电机
         /// </summary>
-        public bool SingleMotor { get; set; }
+        public bool DoubleMotor { get; set; }
         /// <summary>
-        /// 是否适用手摇
+        /// 是否适用于手摇
         /// </summary>
         public bool HandCranking { get; set; }
         /// <summary>
-        /// 是否适用气动
+        /// 是否适用于气动
         /// </summary>
         public bool GasSpring { get; set; }
         /// <summary>
-        /// 是否能易安装
+        /// 是否适用于单电机
         /// </summary>
-        public bool CanEZ { get; set; }
+        public bool SingleMotor { get; set; }
         /// <summary>
-        /// 是否用于折叠桌
-        /// </summary>
-        public bool CanFold { get; set; }
-        /// <summary>
-        /// 是否用于翻转桌
-        /// </summary>
-        public bool CanTurn { get; set; }
-        /// <summary>
-        /// 是否通过GS认证
+        /// 是否通过GS
         /// </summary>
         public bool GS { get; set; }
         /// <summary>
-        /// 是否通过EN527认证
+        /// 是否通过EN527
         /// </summary>
         public bool EN527 { get; set; }
         /// <summary>
-        /// 是否通过CE认证
+        /// 是否通过CE
         /// </summary>
         public bool CE { get; set; }
         /// <summary>
@@ -160,7 +103,7 @@ namespace _1GemmyModel.Model
         /// </summary>
         public string DrawingName2D { get; set; }
         /// <summary>
-        /// 效果图
+        /// 效果图名
         /// </summary>
         public string PictureName { get; set; }
         /// <summary>
@@ -186,35 +129,27 @@ namespace _1GemmyModel.Model
         [Column(TypeName = "ntext")]
         public string DescriptionEN { get; set; }
         /// <summary>
-        /// 立柱和地脚适配
+        ///框架连接立柱
         /// </summary>
-        public string ColumnWithFoot { get; set; }
+        public string FrameWithColumn { get; set; }
         /// <summary>
-        /// 立柱和框架适配
+        /// 框架连接侧板
         /// </summary>
-        public string ColumnWithFrame { get; set; }
+        public string FrameWithSideBracket { get; set; }
         /// <summary>
-        /// 手控器连接
+        /// 框架连接配件
         /// </summary>
-        public string HandsetConnect { get; set; }
+        public string FrameWithAccessory { get; set; }
         /// <summary>
-        /// 控制器连接
+        /// 框架连接控制器
         /// </summary>
-        public string ControlboxConnect { get; set; }
-        /// <summary>
-        /// 配件连接
-        /// </summary>
-        public string AccessoryConnect { get; set; }
-        /// <summary>
-        /// 立柱和侧板适配
-        /// </summary>
-        public string ColumnWithSideBracket { get; set; }
+        public string FrameWithControlBox { get; set; }
         /// <summary>
         /// 含税成本
         /// </summary>
         public double? TaxCost { get; set; }
         /// <summary>
-        /// 转让价
+        /// 转让成本
         /// </summary>
         public double? TransferPrice { get; set; }
         /// <summary>

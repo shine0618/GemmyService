@@ -86,15 +86,19 @@
     <Compile Include="Migrations\202105140117271_init5142.designer.cs">
       <DependentUpon>202105140117271_init5142.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105140926251_init323232323232323232.cs" />
+    <Compile Include="Migrations\202105140926251_init323232323232323232.designer.cs">
+      <DependentUpon>202105140926251_init323232323232323232.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\Color.cs" />
-    <Compile Include="Model\Column.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Part_office_Column.cs" />
     <Compile Include="Model\ControlBox.cs" />
     <Compile Include="Model\DownloadFile.cs" />
     <Compile Include="Model\File.cs" />
-    <Compile Include="Model\Foot.cs" />
-    <Compile Include="Model\Frame.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Part_office_Foot.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Part_office_Frame.cs" />
     <Compile Include="Model\HandSet.cs" />
     <Compile Include="Model\LanguageType.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_desk.cs" />
@@ -108,7 +112,7 @@
     <Compile Include="Model\PowerCable.cs" />
     <Compile Include="Model\ProductInsertByUser.cs" />
     <Compile Include="Model\ProductView.cs" />
-    <Compile Include="Model\SideBracket.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Part_office_SideBracket.cs" />
     <Compile Include="Model\T_Base.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105140117271_init5142.resx">
       <DependentUpon>202105140117271_init5142.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105140926251_init323232323232323232.resx">
+      <DependentUpon>202105140926251_init323232323232323232.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

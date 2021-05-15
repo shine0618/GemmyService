@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class Frame:T_Base
+  public  class T_Part_office_Foot:T_Base
     {
         /// <summary>
-        /// 框架类型
+        /// 地脚类型
         /// </summary>
+        /// 
         public string Mode { get; set; }
         /// <summary>
         /// 最大长度
@@ -27,23 +28,23 @@ namespace _1GemmyModel.Model
         /// </summary>
         public int? StabilityLeave { get; set; }
         /// <summary>
-        /// 是否易安装
+        /// 是否用于易安装
         /// </summary>
         public bool CanEZ { get; set; }
         /// <summary>
-        /// 是否折叠桌
+        /// 是否用于折叠桌
         /// </summary>
         public bool CanFold { get; set; }
         /// <summary>
-        /// 是否翻转桌
+        /// 是否用于翻转桌
         /// </summary>
         public bool CanTurn { get; set; }
         /// <summary>
-        /// 是否直筒立柱
+        /// 是否用于直筒立柱
         /// </summary>
         public bool Inline { get; set; }
         /// <summary>
-        /// 是否内磨立柱
+        /// 是否用于内磨立柱
         /// </summary>
         public bool InsideSlider { get; set; }
         /// <summary>
@@ -129,21 +130,10 @@ namespace _1GemmyModel.Model
         [Column(TypeName = "ntext")]
         public string DescriptionEN { get; set; }
         /// <summary>
-        ///框架连接立柱
+        /// 地脚和立柱适配
         /// </summary>
-        public string FrameWithColumn { get; set; }
-        /// <summary>
-        /// 框架连接侧板
-        /// </summary>
-        public string FrameWithSideBracket { get; set; }
-        /// <summary>
-        /// 框架连接配件
-        /// </summary>
-        public string FrameWithAccessory { get; set; }
-        /// <summary>
-        /// 框架连接控制器
-        /// </summary>
-        public string FrameWithControlBox { get; set; }
+
+        public string FootWithColumn { get; set; }
         /// <summary>
         /// 含税成本
         /// </summary>
@@ -170,5 +160,6 @@ namespace _1GemmyModel.Model
         /// </summary>
         [Column(TypeName = "ntext")]
         public string SpecialDescriptionEN { get; set; }
+
     }
 }
