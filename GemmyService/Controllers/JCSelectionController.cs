@@ -1,4 +1,5 @@
-﻿using _1GemmyModel.Model.ModelProductOffice;
+﻿using _1GemmyModel.Model;
+using _1GemmyModel.Model.ModelProductOffice;
 using _2GemmyBusness.BLL.BLLOfficeDesk;
 using System;
 using System.Collections.Generic;
@@ -177,8 +178,38 @@ namespace GemmyService.Controllers
 
             return View();
         }
+        #region 3D选配界面
+        [HttpGet]
+        public JsonResult GetOfficeColumn()
+        {
 
-     
+
+            List<T_Part_office_Column> list = bll_desk.GetT_Part_office_Column();
+
+            //if (OrderValue != null && OrderValue != "")
+            //{
+            //    if (Order == "2")//倒序
+            //    {
+            //        list = list.OrderByDescending(DynamicLambda<T_Product_office_desk, double>(OrderValue)).ToList();
+
+            //    }
+            //    else
+            //    {
+            //        list = list.OrderBy(DynamicLambda<T_Product_office_desk, double>(OrderValue)).ToList();
+            //    }
+            //}
+
+
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+
+
+        }
+
+
+        #endregion
+
 
 
         /// <summary>

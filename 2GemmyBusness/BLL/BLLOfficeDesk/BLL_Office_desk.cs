@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using _1GemmyModel.Model;
 
 namespace _2GemmyBusness.BLL.BLLOfficeDesk
 {
@@ -107,6 +108,15 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         //    return query.ToList();
         //}
 
+
+
+        public List<T_Part_office_Column> GetT_Part_office_Column()
+        {
+            var query = from x in read_db.T_Part_office_Column
+                        select x;
+
+            return query.ToList();
+        }
 
     }
 }
