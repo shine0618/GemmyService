@@ -14,12 +14,12 @@
         padding-right: 5px;
         /*background-color: #F2F3F4;*/
         min-height: 500px;
-        height: calc(100vh - 280px);
+        height: calc(100vh - 300px);
     }
     #selectColumnPart {
         min-height: 500px;
-        height: calc(100vh - 280px);
-        overflow:auto;
+        height: calc(100vh - 300px);
+        overflow: auto;
     }
     * {
         font-family: 'Microsoft YaHei';
@@ -40,6 +40,8 @@
     .part_img {
         cursor: pointer;
         border-radius: 5px;
+        max-height:100%;
+        width:100%
     }
         .part_img:hover {
             background-color: rgb(12 33 57 / 0.4);
@@ -74,11 +76,11 @@
     <section class="about-three">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12" >
+                <div class="col-lg-12">
                     <!--<div class="block-title text-center">
-        <p></p>
-        <h3>产品配置列表</h3>
-    </div>-->
+                        <p></p>
+                        <h3>产品配置列表</h3>
+                    </div>-->
                     <!-- /.block-title -->
                     <div>
                         <template>
@@ -91,15 +93,15 @@
                             </el-tabs>
                         </template>
                     </div>
-                   
-                 
+
+
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section class="about-three" style="padding-bottom:30px;">
+    <section class="about-three" style="padding-bottom:0px;">
         <div class="container">
             <div class="row selectStep" v-if="selectStep=='s1'">
                 <div class="col-lg-12">
@@ -142,12 +144,37 @@
 
             <div class="row" style="margin-top:10px">
                 <div class="col-lg-4" id="selectColumnPart">
-                    <div class="row">
+                    @*s1*@
+                    <div class="row" v-if="selectStep=='s1'">
                         <div class="col-lg-6 col-md-6" v-for="item in list_column">
-                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id)" style="width:100%;" src="~/resourse/part_column/testcolumn.png" />
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id)" src="~/resourse/part_column/testcolumn.png" />
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_column_count}}条结果</h6></div>
                     </div>
+                    @*s2*@
+                    <div class="row" v-if="selectStep=='s2'">
+                        <div class="col-lg-6 col-md-6" v-for="item in list_frame">
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id)" src="~/resourse/part_column/testcolumn.png" />
+                            <h6 style="text-align:center" v-text="item.Mode"></h6>
+                        </div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_frame_count}}条结果</h6></div>
+                    </div>
+                    <div class="row" v-if="selectStep=='s3'">
+                        <div class="col-lg-6 col-md-6" v-for="item in list_foot">
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id)" src="~/resourse/part_column/testcolumn.png" />
+                            <h6 style="text-align:center" v-text="item.Mode"></h6>
+                        </div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_foot_count}}条结果</h6></div>
+                    </div>
+                    <div class="row" v-if="selectStep=='s4'">
+                        <div class="col-lg-6 col-md-6" v-for="item in list_SideBracket">
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id)" src="~/resourse/part_column/testcolumn.png" />
+                            <h6 style="text-align:center" v-text="item.Mode"></h6>
+                        </div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_SideBracket_count}}条结果</h6></div>
+                    </div>
+
                 </div>
                 <div class="col-lg-8">
                     <div class="service-details__image" id="asas">
@@ -160,6 +187,8 @@
 
 
     </section>
+
+    <button @@click="nextStep">下一步</button>
 
 </div>
 
@@ -191,8 +220,24 @@
             list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
 
             selectStep: 's1',//选择的步骤
+
             list_column: null,
-            select_column:"",
+            list_column_count: 0,
+            select_column: "",
+
+            list_frame: null,
+            list_frame_count: 0,
+            select_frame: "",
+
+            list_foot: null,
+            list_foot_count: 0,
+            select_foot: "",
+
+            list_SideBracket: null,
+            list_SideBracket_count: 0,
+            select_SideBracket: "",
+            
+          
             //text
         
             text_customer_1: "",
@@ -208,17 +253,46 @@
 
 
             MyCollectName: "",
+
+
+
             value:0,
         },
-        //watch: {
-        //    OrderValue: function (val) {
-        //        this.getallDesk();
-        //    },
-        //    Order: function (val) {
-        //        this.getallDesk();
-        //    }
-        //},
+        watch: {
+            selectStep: function (val) {
+                if (val == "s2") {
+                    this.getAllFrame();
+                }
+                if (val == "s3") {
+                    this.getAllFoot();
+                }
+                if (val == "s4") {
+                    this.getAllSideBracket();
+                }
+            },
+
+        },
         methods: {
+            nextStep: function(event) {
+               // console.log(this.selectStep);
+                switch (this.selectStep) {
+                    case "s1":
+                        this.selectStep = "s2";
+                        break;
+                    case "s2":
+                        this.selectStep = "s3";
+                        break;
+                    case "s3":
+                        this.selectStep = "s4";
+                        break;
+                    case "s4":
+                        this.selectStep = "s5";
+                        break;
+
+                    //default:
+                }
+            },
+
             handleClick(tab, event) {
 
             },
@@ -256,10 +330,9 @@
                        
                     }
                 }).then(function (response) {  //接口返回数据
-
-
                     this.list_column = response.body;
-                    console.log(response.body);
+                    this.list_column_count = this.list_column.length;
+                  //  console.log(response.body);
 
 
                 }, function (error) {
@@ -268,9 +341,72 @@
 
                 })
             },
+            getAllFrame: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetOfficeFrame",
+                    params: {
+
+                    }
+                }).then(function (response) {  //接口返回数据
+                    this.list_frame = response.body;
+                    this.list_frame_count = this.list_frame.length;
+                    console.log(response.body);
+
+
+                }, function (error) {
+                    console.log(error);
+
+
+                })
+            },
+            getAllFoot: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetOfficeFoot",
+                    params: {
+
+                    }
+                }).then(function (response) {  //接口返回数据
+                    this.list_foot = response.body;
+                    this.list_foot_count = this.list_foot.length;
+
+
+                }, function (error) {
+                    console.log(error);
+                })
+            },
+            getAllSideBracket: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetOfficeSideBracket",
+                    params: {
+
+                    }
+                }).then(function (response) {  //接口返回数据
+                    this.list_SideBracket = response.body;
+                    this.list_SideBracket_count = this.list_foot.length;
+
+
+                }, function (error) {
+                    console.log(error);
+                })
+            },
+            
+
             columnClick: function (id) {
                 this.select_column = id;
             },
+            frameClick: function (id) {
+                this.select_frame = id;
+            },
+            footClick: function (id) {
+                this.select_foot = id;
+            },
+            SideBracketClick: function (id) {
+                this.select_SideBracket = id;
+            },
+
             orderBtnClick: function (ordervalue) {
 
                 this.OrderValue = ordervalue;

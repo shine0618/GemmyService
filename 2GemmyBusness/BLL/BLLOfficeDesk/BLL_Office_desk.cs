@@ -118,5 +118,26 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             return query.ToList();
         }
 
+        public List<T_Part_office_Frame> GetT_Part_office_Frame()
+        {
+            var query = from x in read_db.T_Part_office_Frame
+                        select x;
+
+            return query.ToList();
+        }
+        public List<T_Part_office_Foot> GetT_Part_office_Foot()
+        {
+            var query = from x in read_db.T_Part_office_Foot
+                        select x;
+
+            return query.ToList();
+        }
+        public List<T_Part_office_SideBracket> GetT_Part_office_SideBracket()
+        {
+            var query = from x in read_db.T_Part_office_SideBracket
+                        select x;
+
+            return query.ToList();
+        }
     }
 }

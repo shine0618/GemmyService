@@ -206,6 +206,30 @@ namespace GemmyService.Controllers
 
 
         }
+        [HttpGet]
+        public JsonResult GetOfficeFrame()
+        {
+            List<T_Part_office_Frame> list = bll_desk.GetT_Part_office_Frame();
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+        [HttpGet]
+        public JsonResult GetOfficeFoot()
+        {
+            List<T_Part_office_Foot> list = bll_desk.GetT_Part_office_Foot();
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+        [HttpGet]
+        public JsonResult GetOfficeSideBracket()
+        {
+            List<T_Part_office_SideBracket> list = bll_desk.GetT_Part_office_SideBracket();
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
 
 
         #endregion
