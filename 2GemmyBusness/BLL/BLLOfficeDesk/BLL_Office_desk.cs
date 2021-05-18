@@ -98,8 +98,37 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
         public T_Product_office_desk_detail GetT_Product_office_desk_detail(int desk_id)
         {
-            return read_db.T_Product_office_desk_detail.Where(x => x.T_Product_office_desk_Id == desk_id).FirstOrDefault();
+            T_Product_office_desk_detail model =  read_db.T_Product_office_desk_detail.Where(x => x.T_Product_office_desk_Id == desk_id).FirstOrDefault();
+            if(model!=null)
+            {
+                //立柱
+                if(model.ColumnType!=null&&model.ColumnType!="")
+                {
+                    model.T_Part_office_Column = GetT_Part_office_Column(model.ColumnType);
+                }
+                //立柱
+                if (model.FrameType != null && model.FrameType != "")
+                {
+                    model.T_Part_office_Frame = GetT_Part_office_Frame(model.FrameType);
+                }
+                //立柱
+                if (model.FootType != null && model.FootType != "")
+                {
+                    model.T_Part_office_Foot = GetT_Part_office_Foot(model.FootType);
+                }
+                //立柱
+                if (model.SideBracketType != null && model.SideBracketType != "")
+                {
+                    model.T_Part_office_SideBracket = GetT_Part_office_SideBracket(model.SideBracketType);
+                }
+                return model;
+            }
+            else
+            {
+                return null;
+            }
         }
+  
 
         //public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string Recommend)
         //{
@@ -109,6 +138,54 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         //}
 
 
+
+        #region 部件表操作
+
+        /// <summary>
+        /// 根据mode获取
+        /// </summary>
+        /// <param name="mode"></param>
+        /// <returns></returns>
+
+        public T_Part_office_Column GetT_Part_office_Column(string mode)
+        {
+            var query = from x in read_db.T_Part_office_Column
+                        where x.Mode== mode
+                        select x;
+
+            return query.FirstOrDefault();
+        }
+
+        public T_Part_office_Frame GetT_Part_office_Frame(string mode)
+        {
+            var query = from x in read_db.T_Part_office_Frame
+                        where x.Mode == mode
+                        select x;
+
+            return query.FirstOrDefault();
+        }
+        public T_Part_office_Foot GetT_Part_office_Foot(string mode)
+        {
+            var query = from x in read_db.T_Part_office_Foot
+                        where x.Mode == mode
+                        select x;
+
+            return query.FirstOrDefault();
+        }
+        public T_Part_office_SideBracket GetT_Part_office_SideBracket(string mode)
+        {
+            var query = from x in read_db.T_Part_office_SideBracket
+                        where x.Mode == mode
+                        select x;
+
+            return query.FirstOrDefault();
+        }
+
+
+        /// <summary>
+        /// 获取所有的
+        /// </summary>
+        /// <returns></returns>
 
         public List<T_Part_office_Column> GetT_Part_office_Column()
         {
@@ -139,5 +216,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             return query.ToList();
         }
+
+        #endregion
     }
 }

@@ -91,6 +91,7 @@
                                 <el-tab-pane :label="text_customer_3" name="s3"></el-tab-pane>
                                 <el-tab-pane :label="text_customer_4" name="s4"></el-tab-pane>
                                 <el-tab-pane :label="text_customer_42" name="s5"></el-tab-pane>
+                                <el-tab-pane label="配置清单信息" name="s6"></el-tab-pane>
                             </el-tabs>
                         </template>
                     </div>
@@ -184,9 +185,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5'">
-        
-                </div>
 
+                </div>
+                <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s6'">
+                   <h6 v-text="'立柱'+select_column"></h6>
+                </div>
 
 
                 <div class="col-lg-8">

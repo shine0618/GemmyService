@@ -66,7 +66,8 @@
     }
     .paramDatatableIMG
     {
-        width:150px
+        width:150px;
+        padding:5px;
     }
 </style>
 
@@ -146,23 +147,36 @@
                 <div class="col-lg-12" id="paramTable">
                     <el-table :data="paramTableData"
                               border>
-                        <el-table-column prop="date"
-                                         label="参数">
-                        </el-table-column>
-                        <el-table-column prop="name"
-                                         label="参数值">
-                        </el-table-column>
-                        <el-table-column prop="address"
-                                         label="参数说明">
+
+                        <el-table-column prop="part"
+                                         label=""
+                                         align="center"
+                                         >
                         </el-table-column>
 
+
                         <el-table-column prop="tag"
-                                         label="部件"
-                                         width="150">
+                                         :label="text_detail_8"
+                                           align="center"
+                                       >
                             <template #default="scope">
-                                <img class="paramDatatableIMG img-response" src="~/resourse/page/JC35TF-DC2R.png" />
+                                <img class="paramDatatableIMG img-response" :src="scope.row.tag" />
+
                             </template>
                         </el-table-column>
+
+
+                        <el-table-column prop="model"
+                                         :label="text_detail_9"
+                                           align="center">
+                        </el-table-column>
+                        <el-table-column prop="name"
+                                         :label="text_detail_10"
+                                           align="center"
+                                      >
+                        </el-table-column>
+
+
 
 
 
@@ -238,30 +252,16 @@
             text_detail_5: "",
             text_detail_6: "",
             text_detail_7: "",
-
+            text_detail_8: "",
+            text_detail_9: "",
+            text_detail_10: "",
+            text_detail_11: "",
+            text_detail_12: "",
+            text_detail_13: "",
+            text_detail_14: "",
 
             MyCollectName: "",
-            paramTableData : [{
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄',
-                tag: "123",
-            }, {
-                date: '2016-05-04',
-                name: '王小虎',
-                    address: '上海市普陀区金沙江路 1517 弄',
-                    tag: "123",
-            }, {
-                date: '2016-05-01',
-                name: '王小虎',
-                    address: '上海市普陀区金沙江路 1519 弄',
-                    tag: "123",
-            }, {
-                date: '2016-05-03',
-                name: '王小虎',
-                    address: '',
-                    tag: "123",
-            }]
+            paramTableData: [],
         },
         //watch: {
         //    OrderValue: function (val) {
@@ -316,6 +316,27 @@
 
                     this.deskSerialName = this.T_Product_office_desk.deskSerialName;
                     this.configurationNo = this.T_Product_office_desk_detail.configurationNo
+
+                    //添加到产品配置列表 立柱
+                    if (this.T_Product_office_desk_detail.T_Part_office_Column != null) {
+                        var q = { part: this.text_detail_11, model: this.T_Product_office_desk_detail.T_Part_office_Column.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png" };
+                        this.paramTableData.push(q);
+                    }
+                    //添加到产品配置列表
+                    if (this.T_Product_office_desk_detail.T_Part_office_Foot != null) {
+                        var q = { part: this.text_detail_12, model: this.T_Product_office_desk_detail.T_Part_office_Foot.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png" };
+                        this.paramTableData.push(q);
+                    }
+                    //添加到产品配置列表
+                    if (this.T_Product_office_desk_detail.T_Part_office_Frame != null) {
+                        var q = { part: this.text_detail_13, model: this.T_Product_office_desk_detail.T_Part_office_Frame.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png" };
+                        this.paramTableData.push(q);
+                    }
+                    //添加到产品配置列表
+                    if (this.T_Product_office_desk_detail.T_Part_office_SideBracket != null) {
+                        var q = { part: this.text_detail_14, model: this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png" };
+                        this.paramTableData.push(q);
+                    }
 
                     initQRCode('qrcodebox', this.configurationNo);
 

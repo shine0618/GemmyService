@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,21 @@ namespace _1GemmyModel.Model.ModelProductOffice
 {
    public class T_Product_office_desk_detail:T_Base
     {
+        [NotMapped]
+        public T_Part_office_Column T_Part_office_Column { get; set; }
 
-        
+        [NotMapped]
+        public T_Part_office_Frame T_Part_office_Frame { get; set; }
+
+        [NotMapped]
+        public T_Part_office_Foot T_Part_office_Foot { get; set; }
+
+        [NotMapped]
+        public T_Part_office_SideBracket T_Part_office_SideBracket { get; set; }
+
+          
+
+
 
         public string configurationNo { get; set; }
 
@@ -138,11 +152,11 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// </summary>
         public string DescriptionEN { get; set; }
         /// <summary>
-        /// 立柱型号
+        /// 立柱型号 T_Part_office_Column.Mode
         /// </summary>
         public string ColumnType { get; set; }
         /// <summary>
-        /// 立柱信息
+        /// 立柱信息 
         /// </summary>
         public string ColumnInfo { get; set; }
         /// <summary>
