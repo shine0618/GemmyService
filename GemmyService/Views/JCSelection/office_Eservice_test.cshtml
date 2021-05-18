@@ -139,6 +139,12 @@
                     选择配件
                 </div>
             </div>
+            <div class="row selectStep" v-if="selectStep=='s6'">
+                <div class="col-lg-12">
+                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
+                    配置清单
+                </div>
+            </div>
         </div>
     </section>
 
@@ -150,7 +156,7 @@
                     @*s1*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_column">
-                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id)" src="~/resourse/part_column/testcolumn.png" />
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_column_count}}条结果</h6></div>
@@ -160,7 +166,7 @@
                     @*s2*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_frame">
-                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id)" src="~/resourse/part_column/testcolumn.png" />
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_frame_count}}条结果</h6></div>
@@ -169,7 +175,7 @@
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s3'">
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_foot">
-                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id)" src="~/resourse/part_column/testcolumn.png" />
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_foot_count}}条结果</h6></div>
@@ -178,7 +184,7 @@
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s4'">
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_SideBracket">
-                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id)" src="~/resourse/part_column/testcolumn.png" />
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_SideBracket_count}}条结果</h6></div>
@@ -188,7 +194,10 @@
 
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s6'">
-                   <h6 v-text="'立柱'+select_column"></h6>
+                    <h6 v-text="'立柱'+select_columnMode"></h6>
+                    <h6 v-text="'框架'+select_frameMode"></h6>
+                    <h6 v-text="'地脚'+select_footMode"></h6>
+                    <h6 v-text="'侧板'+select_SideBracketMode"></h6>
                 </div>
 
 
@@ -240,18 +249,22 @@
             list_column: null,
             list_column_count: 0,
             select_column: "",
+            select_columnMode: "",
 
             list_frame: null,
             list_frame_count: 0,
             select_frame: "",
+            select_frameMode:"",
 
             list_foot: null,
             list_foot_count: 0,
             select_foot: "",
+            select_footMode:"",
 
             list_SideBracket: null,
             list_SideBracket_count: 0,
             select_SideBracket: "",
+            select_SideBracketMode:"",
             
           
             //text
@@ -423,17 +436,21 @@
             },
             
 
-            columnClick: function (id) {
+            columnClick: function (id,mode) {
                 this.select_column = id;
+                this.select_columnMode = mode;
             },
-            frameClick: function (id) {
+            frameClick: function (id, mode) {
                 this.select_frame = id;
+                this.select_frameMode = mode;
             },
-            footClick: function (id) {
+            footClick: function (id, mode) {
                 this.select_foot = id;
+                this.select_footMode = mode;
             },
-            SideBracketClick: function (id) {
+            SideBracketClick: function (id, mode) {
                 this.select_SideBracket = id;
+                this.select_SideBracketMode = mode;
             },
 
             orderBtnClick: function (ordervalue) {
