@@ -17,13 +17,15 @@
         width: 160px;
         padding: 1.5px 39.5px;
     }
-
+    .service-sidebar__category
+    {
+        padding:20px 20px; 
+    }
 </style>
 <div id="OfficeStandards">
 
 
     <section class="page-header" style="height:53px;">
-
         @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
         <!-- /.page-header__bg -->
         <div class="container" style="padding:10px 10px ">
@@ -38,9 +40,14 @@
             <div class="row" id="OfficeStandards_box">
 
                 <div class="col-lg-3">
-                    <div class="blog-sidebar">
+                    <div class="blog">
                         <div class="blog-sidebar__box blog-sidebar__category service-sidebar__category">
-                            <h3 class="blog-sidebar__box-title">{{DeskConfigurationName}}</h3><!-- /.blog-sidebar__title -->
+                            <h6 style="margin:10px;" class="blog-sidebar__box-title">{{t_OfficeStandards_1}}</h6><!-- /.blog-sidebar__title -->
+
+
+                            <input type="text" class="form-control" v-model="searchText" @@keyup.enter="getallDesk" style="font-size:14px;width:100%;" />
+
+                            <h6 style="margin:10px;" class="blog-sidebar__box-title">{{DeskConfigurationName}}</h6><!-- /.blog-sidebar__title -->
                             <ul class="list-unstyled service-sidebar__category-list">
                                 <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=newProduct">{{NewProductName}}</a></li>
 
@@ -53,14 +60,11 @@
                         </div><!-- /.blog-sidebar__box -->
                     </div><!-- /.blog-sidebar -->
 
-                    <div class="blog-sidebar">
+                    <!--<div class="blog-sidebar">
                         <div class="blog-sidebar__box blog-sidebar__category service-sidebar__category">
-                            <h3 class="blog-sidebar__box-title">{{t_OfficeStandards_1}}</h3><!-- /.blog-sidebar__title -->
                            
-                        
-                            <input type="text" v-model="searchText"  @@keyup.enter="getallDesk" style="font-size:16px;width:100%;"/>
-                        </div><!-- /.blog-sidebar__box -->
-                    </div><!-- /.blog-sidebar -->
+                        </div>--><!-- /.blog-sidebar__box -->
+                    <!--</div>--><!-- /.blog-sidebar -->
 
 
                 </div><!-- /.col-lg-4 -->
@@ -74,10 +78,7 @@
                             <button class="orderbtn thm-btn" v-on:click="orderBtnClick('deskMaxLoad')">{{deskMaxLoad}}<span style="margin-left:8px" v-if="OrderValue=='deskMaxLoad'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='deskMaxLoad'&&Order==2">↓</span></button>
                         </div>
                     </div>
-                    <div class="row" id="selectTypeBox">
-                      
-
-                    
+                    <div class="row" id="selectTypeBox">                                        
                         <div class="col-lg-4 col-md-6 mb-20" v-for="item in deskList">
                             <div class="blog-card" v-on:click="window.location='/JCSelection/ProductDetail?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productName='+item.deskSerialName+'&productGuid='+item.deskGuid">
                                 <div class="blog-card__image">

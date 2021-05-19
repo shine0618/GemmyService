@@ -143,6 +143,16 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 重量
         /// </summary>
         public double? Weight { get; set; }
+
+        /// <summary>
+        /// 对应描述的index T_Product_office_description的textKay
+        /// </summary>
+        public int DescriptionIndex { get; set; }
+
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string Description { get; set; }
         /// <summary>
         /// 中文描述
         /// </summary>

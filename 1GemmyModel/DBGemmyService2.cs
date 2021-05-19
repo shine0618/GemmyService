@@ -31,7 +31,8 @@ namespace _1GemmyModel
         public virtual DbSet<T_Part_office_Foot> T_Part_office_Foot { get; set; }
         public virtual DbSet<T_Part_office_Frame> T_Part_office_Frame { get; set; }
         public virtual DbSet<T_Part_office_SideBracket> T_Part_office_SideBracket { get; set; }
-
+        public virtual DbSet<T_Product_office_description> T_Product_office_description { get; set; }
+        
 
         //为您要在模型中包含的每种实体类型都添加 DbSet。有关配置和使用 Code First  模型
         //的详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=390109。

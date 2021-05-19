@@ -90,6 +90,10 @@
     <Compile Include="Migrations\202105150543032_init3456543.designer.cs">
       <DependentUpon>202105150543032_init3456543.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105190608297_init761.cs" />
+    <Compile Include="Migrations\202105190608297_init761.designer.cs">
+      <DependentUpon>202105190608297_init761.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\Color.cs" />
@@ -115,6 +119,7 @@
     <Compile Include="Model\ModelProductOffice\T_Part_office_SideBracket.cs" />
     <Compile Include="Model\T_Base.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_UserInfo.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Product_office_description.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105150543032_init3456543.resx">
       <DependentUpon>202105150543032_init3456543.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105190608297_init761.resx">
+      <DependentUpon>202105190608297_init761.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
