@@ -152,6 +152,7 @@
     <Content Include="assets\css\odometer.min.css" />
     <Content Include="assets\css\pylon-icons.css" />
     <Content Include="assets\css\swiper.min.css" />
+    <Content Include="assets\eleindex.css" />
     <Content Include="assets\images\backgrounds\call-to-action-bg-1-1.jpg" />
     <Content Include="assets\images\backgrounds\footer-bg-1-1.jpg" />
     <Content Include="assets\images\backgrounds\funfact-bg-1-1.jpg" />
@@ -274,6 +275,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="assets\eleindex.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

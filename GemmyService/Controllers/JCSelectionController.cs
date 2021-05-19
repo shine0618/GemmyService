@@ -136,16 +136,17 @@ namespace GemmyService.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult GetOfficeDeskDetail(string productGuid)
+        public ActionResult GetOfficeDeskDetail(string productGuid,string lang)
         {
 
             T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
             T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id);
-
+            List<T_Product_office_description> descriptions = bll_desk.GetT_Product_office_description(_T_Product_office_desk_detail.DescriptionIndex, lang);
             var list = new
             {
                 T_Product_office_desk = _T_Product_office_desk,
-                T_Product_office_desk_detail = _T_Product_office_desk_detail
+                T_Product_office_desk_detail = _T_Product_office_desk_detail,
+                descriptions = descriptions
             };
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;

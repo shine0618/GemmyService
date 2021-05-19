@@ -64,16 +64,17 @@
     .el-tabs__item {
         font-size: 18px !important;
     }
-    .paramDatatableIMG
-    {
-        width:150px;
-        padding:5px;
+
+    .paramDatatableIMG {
+        width: 150px;
+        padding: 5px;
     }
 </style>
 
 <!-- /.js  加载ele组件 -->
-<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+<link href="~/assets/eleindex.css" rel="stylesheet" />
+<script src="~/assets/eleindex.js"></script>
 
 <div id="OfficeStandards">
 
@@ -110,9 +111,7 @@
                                 </div><!-- /.block-title -->
                                 <div class="block-title text-left">
                                     <p>{{text_detail_2}}</p>
-                                    <h6>最大负载（N）:800</h6>
-                                    <h6>行程（mm):650</h6>
-                                    <h6>遇阻回退功能,确保升降桌安全稳定运行</h6>
+                                    <h6 v-for="item in descriptions" v-text="item.textValue"></h6>
 
                                 </div><!-- /.block-title -->
                                 <div class="block-title text-left">
@@ -150,15 +149,13 @@
 
                         <el-table-column prop="part"
                                          label=""
-                                         align="center"
-                                         >
+                                         align="center">
                         </el-table-column>
 
 
                         <el-table-column prop="tag"
                                          :label="text_detail_8"
-                                           align="center"
-                                       >
+                                         align="center">
                             <template #default="scope">
                                 <img class="paramDatatableIMG img-response" :src="scope.row.tag" />
 
@@ -168,12 +165,11 @@
 
                         <el-table-column prop="model"
                                          :label="text_detail_9"
-                                           align="center">
+                                         align="center">
                         </el-table-column>
                         <el-table-column prop="name"
                                          :label="text_detail_10"
-                                           align="center"
-                                      >
+                                         align="center">
                         </el-table-column>
 
 
@@ -241,6 +237,7 @@
             deskSerialName:'',
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
+            descriptions: null,//关键参数
             configurationNo: "",
 
 
@@ -306,6 +303,7 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeDeskDetail",
                     params: {
+                        lang: this.langCode,
                         productGuid: this.productGuid,
                     }
                 }).then(function (response) {  //接口返回数据
@@ -313,6 +311,7 @@
                    // this.deskList = response.body;
                     this.T_Product_office_desk = response.body.T_Product_office_desk;
                     this.T_Product_office_desk_detail = response.body.T_Product_office_desk_detail;
+                    this.descriptions = response.body.descriptions;
 
                     this.deskSerialName = this.T_Product_office_desk.deskSerialName;
                     this.configurationNo = this.T_Product_office_desk_detail.configurationNo

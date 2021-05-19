@@ -130,6 +130,16 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         }
   
 
+        public List<T_Product_office_description> GetT_Product_office_description(int index,string lang)
+        {
+            var query = from x in read_db.T_Product_office_description
+                        where x.langCode == lang
+                        where x.textKay == index
+                        select x;
+
+            return query.ToList();
+        }
+
         //public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string Recommend)
         //{
         //    var query = read_db.T_Product_office_desk.Where(m => m.deskNewProduct == true);
