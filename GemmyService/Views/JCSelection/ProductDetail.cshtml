@@ -104,7 +104,9 @@
 
                         </div>
                         <div class="col-lg-3">
+                            <img class="img-response" style="width:40px;" src="~/assets/collect1.png" />
                             <div class="about-three__image">
+
                                 <div class="block-title text-left">
                                     <p>{{text_detail_1}}</p>
                                     <h6 v-text="deskSerialName"></h6>
@@ -119,11 +121,13 @@
                                     <h6 v-text="configurationNo"></h6>
                                 </div><!-- /.block-title -->
                                 <!--<div class="block-title text-left">
-                                    <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
+            <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
 
-                                </div>-->
+        </div>-->
                                 <!-- /.block-title -->
                                 <div style="padding-top:30px" id="qrcodebox"></div>
+
+
                                 @*   <button class="thm-btn">自定义</button>*@
                             </div><!-- /.about-three__image -->
                         </div><!-- /.col-lg-8 -->
@@ -142,9 +146,15 @@
                         <p></p>
                         <h3>产品配置列表</h3>
                     </div><!-- /.block-title -->
+                    <div>
+              <button class="orderbtn thm-btn" @@click="exportConfig" style="float:right;margin-bottom:5px;">导出配置</button>
+                     
+                    </div>
                 </div>
-                <div class="col-lg-12" id="paramTable">
+                
+                <div class="col-lg-12" >
                     <el-table :data="paramTableData"
+                              id="paramTable"
                               border>
 
                         <el-table-column prop="part"
@@ -158,7 +168,6 @@
                                          align="center">
                             <template #default="scope">
                                 <img class="paramDatatableIMG img-response" :src="scope.row.tag" />
-
                             </template>
                         </el-table-column>
 
@@ -170,6 +179,11 @@
                         <el-table-column prop="name"
                                          :label="text_detail_10"
                                          align="center">
+
+                            <template #default="scope">
+                                <li style="text-align:left" v-for="item in scope.row.paramList" v-text="item"></li>
+                            </template>
+
                         </el-table-column>
 
 
@@ -270,7 +284,11 @@
         //},
         methods: {
             handleClick(tab, event) {
+                
+            },
 
+            exportConfig: function (event) {
+                downloadPDF(false, $('.table__header'), this.productName);
             },
             initPage: function (event) {
                 var code = GetLanguCode();
@@ -318,22 +336,83 @@
 
                     //添加到产品配置列表 立柱
                     if (this.T_Product_office_desk_detail.T_Part_office_Column != null) {
-                        var q = { part: this.text_detail_11, model: this.T_Product_office_desk_detail.T_Part_office_Column.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png" };
+
+                        //立柱的参数表
+                        var it = this.T_Product_office_desk_detail.T_Part_office_Column;
+                        var paramList = new Array();
+                        if (it.Type != '') {
+                            paramList.push("安装方向：" + it.Type);
+                        }
+                        if (it.Level != '') {
+                            paramList.push("节数：" + it.Level);
+                        }
+                        if (it.Form != '') {
+                            paramList.push("管形形状：" + it.Form);
+                        }
+
+                        if (it.StrokeLength != '') {
+                            paramList.push("行程：" + it.StrokeLength);
+                        }
+                        if (it.MaxStroke != '') {
+                            paramList.push("最大行程：" + it.MaxStroke);
+                        }
+                        if (it.LoadCapacity != '') {
+                            paramList.push("额定负载：" + it.LoadCapacity);
+                        }
+                        if (it.MaxLoad != '') {
+                            paramList.push("最大负载：" + it.MaxLoad);
+                        }
+                        if (it.Speed != '') {
+                            paramList.push("额定速度：" + it.Speed);
+                        }
+                        
+
+                        var q = { part: this.text_detail_11, model: this.T_Product_office_desk_detail.T_Part_office_Column.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList};
                         this.paramTableData.push(q);
                     }
                     //添加到产品配置列表
                     if (this.T_Product_office_desk_detail.T_Part_office_Foot != null) {
-                        var q = { part: this.text_detail_12, model: this.T_Product_office_desk_detail.T_Part_office_Foot.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png" };
+
+                        var it = this.T_Product_office_desk_detail.T_Part_office_Foot;
+                        var paramList = new Array();
+                        if (it.MaxLength != '') {
+                            paramList.push("最大长度：" + it.MaxLength);
+                        }
+                        if (it.MinLength != '') {
+                            paramList.push("最小长度：" + it.MinLength);
+                        }
+
+                        var q = { part: this.text_detail_12, model: this.T_Product_office_desk_detail.T_Part_office_Foot.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList };
                         this.paramTableData.push(q);
                     }
                     //添加到产品配置列表
                     if (this.T_Product_office_desk_detail.T_Part_office_Frame != null) {
-                        var q = { part: this.text_detail_13, model: this.T_Product_office_desk_detail.T_Part_office_Frame.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png" };
+
+                        var it = this.T_Product_office_desk_detail.T_Part_office_Frame;
+                        var paramList = new Array();
+                        if (it.MaxLength != '') {
+                            paramList.push("最大长度：" + it.MaxLength);
+                        }
+                        if (it.MinLength != '') {
+                            paramList.push("最小长度：" + it.MinLength);
+                        }
+
+                        var q = { part: this.text_detail_13, model: this.T_Product_office_desk_detail.T_Part_office_Frame.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList };
                         this.paramTableData.push(q);
                     }
                     //添加到产品配置列表
                     if (this.T_Product_office_desk_detail.T_Part_office_SideBracket != null) {
-                        var q = { part: this.text_detail_14, model: this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png" };
+                        var it = this.T_Product_office_desk_detail.T_Part_office_SideBracket;
+                        var paramList = new Array();
+                        if (it.MaxLength != '') {
+                            paramList.push("最大长度：" + it.MaxLength);
+                        }
+                        if (it.MinLength != '') {
+                            paramList.push("最小长度：" + it.MinLength);
+                        }
+                      
+
+                        var q = { part: this.text_detail_14, model: this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList};
                         this.paramTableData.push(q);
                     }
 

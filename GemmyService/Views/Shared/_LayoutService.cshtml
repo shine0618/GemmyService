@@ -37,6 +37,10 @@
 
     <!-- 二维码vue js -->
     <script type="text/javascript" src="//static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+    <!-- table 导出 js -->
+
+    <script type="text/javascript" src="/assets/libs/jsPDF/jspdf.min.js"></script>
+    <script type="text/javascript" src="/assets/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
 
 
     @*自定义的*@
@@ -76,6 +80,23 @@
                 return CustomLang;
             }
         }
+
+
+        function downloadPDF(shouldDownload, $table, pdfName) {
+            shouldDownload = shouldDownload || false;    // 预览还是导出
+            var doc = new jsPDF('p', 'pt');          // 初始化示例，更多配置项看官网api
+            doc.text("From HTML", 40, 50);           // 表title、距离左边距离、距离上边距离
+            var res = doc.autoTableHtmlToJson($table);        // 获取当前表格的数据
+            doc.autoTable(res.columns, res.data, { startY: 60 });    // 渲染数据，列、数据、距离上边距离，更多配置项看官网api
+
+            if (shouldDownload) {
+                doc.save(pdfName+'.pdf');    // 导出名为tableName.pdf的文件
+            } else {
+                // doc.output('datauristring')：pdf预览的地址，一段base64地址
+                document.getElementById("output").src = doc.output('datauristring');
+            }
+        }
+
 
         //构造二维码
         function initQRCode(divid, qrvalue) {
