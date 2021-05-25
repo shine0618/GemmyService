@@ -80,10 +80,6 @@
 
 
 
-
-
-//  js
-
 <script src="libs/jspdf.min.js"></script>
 <script src="../dist/jspdf.plugin.autotable.js"></script>
 <script>
@@ -99,7 +95,7 @@
     function update(shouldDownload) {
         shouldDownload = shouldDownload || false;    // 预览还是导出
         var doc = new jsPDF('p', 'pt');          // 初始化示例，更多配置项看官网api
-        doc.text("From HTML", 40, 50);           // 表title、距离左边距离、距离上边距离
+        doc.text("JIECANG Office Configuration", 40, 50);           // 表title、距离左边距离、距离上边距离
         var res = doc.autoTableHtmlToJson(document.getElementById("basic-table"));        // 获取当前表格的数据
         doc.autoTable(res.columns, res.data, { startY: 60 });    // 渲染数据，列、数据、距离上边距离，更多配置项看官网api
 

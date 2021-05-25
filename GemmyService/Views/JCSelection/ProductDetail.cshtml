@@ -13,8 +13,9 @@
         padding-left: 5px;
         padding-right: 5px;
         background-color: #F2F3F4;
-        min-height: 580px;
-        height: calc(100vh - 250px);
+
+        min-height:550px;
+        height: calc(100vh - 280px);
     }
 
     .about-three {
@@ -46,20 +47,20 @@
         width: 720px;
 
     }*/
-    .el-tab-pane {
+    /*.el-tab-pane {
         width: 50% !important;
         margin: 0 auto !important;
         font-size: 30px !important;
-    }
+    }*/
     /*.el-tabs el-tabs--top {
         width: 720px;
 
         vertical-align: center;
     }*/
-    .el-tabs__nav-scroll {
+    /*.el-tabs__nav-scroll {
         width: 50% !important;
         margin: 0 auto !important;
-    }
+    }*/
 
     .el-tabs__item {
         font-size: 18px !important;
@@ -153,12 +154,28 @@
                 </div>
                 
                 <div class="col-lg-12" >
+                    <table id="paramTB" border="1" style="display:none">
+                        <tr>
+                            <th v-text="text_detail_8"></th>
+                            <th v-text="text_detail_8"></th>
+                            <th v-text="text_detail_9"></th>
+                            <th v-text="text_detail_10"></th>
+                        </tr>
+                        <tr v-for="item in paramTableData">
+                            <td v-text="item.part"></td>
+                            <td><img class="paramDatatableIMG img-response" :src="item.tag" /></td>
+                            <td v-text="item.model"></td>
+                            <td>
+                                <li style="text-align:left" v-for="itemt in item.paramList" v-text="itemt"></li>
+                            </td>
+                        </tr>
+
+                    </table>
                     <el-table :data="paramTableData"
-                              id="paramTable"
                               border>
 
                         <el-table-column prop="part"
-                                         label=""
+                                         :label="text_detail_8"
                                          align="center">
                         </el-table-column>
 
@@ -199,7 +216,7 @@
 
 
 
-    <section class="blog-page pt-20 pb-40">
+    <section class="blog-page pt-20 pb-120">
         <div class="container">
             <div class="row" id="FilesBox">
                 <div class="col-lg-12">
@@ -214,14 +231,141 @@
                     <div id="app">
                         <template>
                             <el-tabs v-model="activeName" @@tab-click="handleClick" stretch>
-                                <el-tab-pane :label="text_detail_4" name="first">产品介绍</el-tab-pane>
-                                <el-tab-pane :label="text_detail_5" name="second">尺寸图</el-tab-pane>
-                                <el-tab-pane :label="text_detail_6" name="third">认证</el-tab-pane>
-                                <el-tab-pane :label="text_detail_7" name="fourth">文件资料</el-tab-pane>
+                                <el-tab-pane :label="text_detail_4" name="d1"></el-tab-pane>
+                                <el-tab-pane :label="text_detail_5" name="d2"></el-tab-pane>
+                                <el-tab-pane :label="text_detail_6" name="d3"></el-tab-pane>
+                                <el-tab-pane :label="text_detail_7" name="d4"></el-tab-pane>
                             </el-tabs>
                         </template>
                     </div>
 
+                </div>
+
+
+            </div>
+
+            <div v-if="activeName=='d1'" class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                    <img class="img-response" style="width:100%;max-width:300px;" src="~/resourse/office/fileimg.png" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <h5>DL1A和CBD6S使用手册</h5>
+                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <button class="orderbtn thm-btn">下载</button>
+                </div>
+
+
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <img class="img-response" style="width:100%;max-width:300px" src="~/resourse/office/fileimg.png" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h5>DL1A和CBD6S使用手册</h5>
+                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <button class="orderbtn thm-btn">下载</button>
+                </div>
+
+
+
+            </div>
+
+            <div v-if="activeName=='d2'" class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    @*<img class="img-response" style="width:80%;max-width:300px" src="~/resourse/office/fileimg.png" />*@
+                    2D
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div style="margin-bottom:15px;">
+                        <h5>DL1A和CBD6S使用手册</h5>
+                        <button class="orderbtn thm-btn">下载</button>
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <h5>DL1A和CBD6S使用手册</h5>
+                        <button class="orderbtn thm-btn">下载</button>
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <h5>DL1A和CBD6S使用手册</h5>
+                        <button class="orderbtn thm-btn">下载</button>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    @*<img class="img-response" style="width:80%;max-width:300px" src="~/resourse/office/fileimg.png" />*@
+                    3D
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div style="margin-bottom:15px;">
+                        <h5>DL1A和CBD6S使用手册</h5>
+                        <button class="orderbtn thm-btn">下载</button>
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <h5>DL1A和CBD6S使用手册</h5>
+                        <button class="orderbtn thm-btn">下载</button>
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <h5>DL1A和CBD6S使用手册</h5>
+                        <button class="orderbtn thm-btn">下载</button>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div v-if="activeName=='d3'" class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                    <img class="img-response" style="width:100%;max-width:300px;" src="~/resourse/office/fileimg.png" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <h5>DL1A和CBD6S认证手册</h5>
+                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <button class="orderbtn thm-btn">下载</button>
+                </div>
+
+
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <img class="img-response" style="width:100%;max-width:300px" src="~/resourse/office/fileimg.png" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h5>DL1A和CBD6S使用手册</h5>
+                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <button class="orderbtn thm-btn">下载</button>
+                </div>
+
+
+
+            </div>
+
+            <div v-if="activeName=='d4'" class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                    <img class="img-response" style="width:100%;max-width:300px;" src="~/resourse/office/fileimg.png" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <h5>DL1A和CBD6S认证手册</h5>
+                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <button class="orderbtn thm-btn">下载</button>
+                </div>
+
+
+                <div class="col-lg-2 col-md-2 col-sm-2">
+                    <img class="img-response" style="width:100%;max-width:300px" src="~/resourse/office/fileimg.png" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h5>DL1A和CBD6S使用手册</h5>
+                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <button class="orderbtn thm-btn">下载</button>
                 </div>
 
 
@@ -245,7 +389,7 @@
             recommend: "@ViewBag.recommend",
             langCode:"",
             deskList: null,
-            activeName: 'first',
+            activeName: 'd1',
             productName: '@ViewBag.productName',
             productGuid: '@ViewBag.productGuid',
             deskSerialName:'',
@@ -288,7 +432,20 @@
             },
 
             exportConfig: function (event) {
-                downloadPDF(false, $('.table__header'), this.productName);
+
+                var doc = new jsPDF('p', 'pt');          // 初始化示例，更多配置项看官网api
+
+                //doc.addFont('msyh.ttf', 'msyh', 'normal');
+                doc.setFont('msyh');
+                doc.text("JIECANG Office Configuration", 40, 50);           // 表title、距离左边距离、距离上边距离
+                var res = doc.autoTableHtmlToJson(document.getElementById("paramTB"));     
+                console.log(res);
+                doc.autoTable(res.columns, res.data, { startY: 60 });    // 渲染数据，列、数据、距离上边距离，更多配置项看官网api
+
+                doc.save('tableName.pdf');    // 导出名为tableName.pdf的文件
+                 
+
+
             },
             initPage: function (event) {
                 var code = GetLanguCode();

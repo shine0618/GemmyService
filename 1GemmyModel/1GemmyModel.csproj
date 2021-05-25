@@ -94,9 +94,14 @@
     <Compile Include="Migrations\202105190608297_init761.designer.cs">
       <DependentUpon>202105190608297_init761.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105250811339_initajsgas.cs" />
+    <Compile Include="Migrations\202105250811339_initajsgas.designer.cs">
+      <DependentUpon>202105250811339_initajsgas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\Color.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Office_Files.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_Column.cs" />
     <Compile Include="Model\ControlBox.cs" />
     <Compile Include="Model\DownloadFile.cs" />
@@ -156,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105190608297_init761.resx">
       <DependentUpon>202105190608297_init761.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105250811339_initajsgas.resx">
+      <DependentUpon>202105250811339_initajsgas.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

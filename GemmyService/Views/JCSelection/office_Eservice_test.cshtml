@@ -6,15 +6,17 @@
 
 <style>
     #shjahs {
-        width: 100%;
-        border: 0;
+        /*width: 100%;
+   
         padding-top: 10px;
         padding-bottom: 14px;
         padding-left: 5px;
-        padding-right: 5px;
+        padding-right: 5px;*/
         /*background-color: #F2F3F4;*/
-        min-height: 500px;
-        height: calc(100vh - 300px);
+        /*min-height: 500px;
+        height: calc(100vh - 300px);*/
+      
+        border: 0;
     }
     .selectColumnPart  {
         min-height: 500px;
@@ -201,10 +203,8 @@
                 </div>
 
 
-                <div class="col-lg-8">
-                    <div class="service-details__image" id="asas">
-
-                    </div><!-- /.service-details__image -->
+                <div class="col-lg-8" id="asas">
+                
                 </div><!-- /.col-lg-4 -->
             </div>
 
@@ -360,7 +360,9 @@
                         this.setData(key, value);;
                     }
                 }
-                var i = '<iframe scrolling="no"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+
+
+                var i = '<iframe scrolling="no"  id="shjahs" style ="height:655px;width:800px"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
                 $('#asas').append(i);
 
             },
