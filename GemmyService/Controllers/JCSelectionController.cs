@@ -15,7 +15,7 @@ namespace GemmyService.Controllers
 
         #region 字段
         private BLL_Office_desk bll_desk = new BLL_Office_desk();
-
+        private BLL_Office_File bll_file = new BLL_Office_File();
         #endregion
         // GET: JCSelection
         public ActionResult Index()
@@ -142,16 +142,21 @@ namespace GemmyService.Controllers
             T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
             T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id);
             List<T_Product_office_description> descriptions = bll_desk.GetT_Product_office_description(_T_Product_office_desk_detail.DescriptionIndex, lang);
+
+            List<T_Office_Files> T_Office_Files = bll_file.GetT_Office_Files(_T_Product_office_desk.Id);
+
             var list = new
             {
                 T_Product_office_desk = _T_Product_office_desk,
                 T_Product_office_desk_detail = _T_Product_office_desk_detail,
-                descriptions = descriptions
+                descriptions = descriptions,
+                T_Office_Files = T_Office_Files
             };
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
 
 
         #endregion

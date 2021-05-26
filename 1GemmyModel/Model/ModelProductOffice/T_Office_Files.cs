@@ -25,7 +25,7 @@ namespace _1GemmyModel.Model.ModelProductOffice
 
         public string thumbnailImg { get; set; }
         /// <summary>
-        /// 文件种类 产品介绍 尺寸图 认证 文件资料
+        /// 文件种类 产品介绍 尺寸图2D 尺寸图3D  认证 文件资料
         /// </summary>
         public string Nature { get; set; }
         /// <summary>

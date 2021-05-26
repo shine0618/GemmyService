@@ -41,7 +41,10 @@
 
     #FilesBox {
     }
-
+    .filerow
+    {
+        margin-bottom:5px;
+    }
     @@import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");
     /*.el-tabs__nav-wrap {
         width: 720px;
@@ -61,7 +64,6 @@
         width: 50% !important;
         margin: 0 auto !important;
     }*/
-
     .el-tabs__item {
         font-size: 18px !important;
     }
@@ -70,6 +72,13 @@
         width: 150px;
         padding: 5px;
     }
+
+
+    .filethumbnail {
+        width: 100%;
+        max-width: 300px;
+    }
+ 
 </style>
 
 <!-- /.js  加载ele组件 -->
@@ -122,12 +131,12 @@
                                     <h6 v-text="configurationNo"></h6>
                                 </div><!-- /.block-title -->
                                 <!--<div class="block-title text-left">
-            <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
+        <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
 
-        </div>-->
+    </div>-->
                                 <!-- /.block-title -->
                                 <div style="padding-top:30px" id="qrcodebox"></div>
-
+                               
 
                                 @*   <button class="thm-btn">自定义</button>*@
                             </div><!-- /.about-three__image -->
@@ -148,8 +157,8 @@
                         <h3>产品配置列表</h3>
                     </div><!-- /.block-title -->
                     <div>
-              <button class="orderbtn thm-btn" @@click="exportConfig" style="float:right;margin-bottom:5px;">导出配置</button>
-                     
+                        <button class="orderbtn thm-btn" @@click="exportConfig" style="float:right;margin-bottom:5px;">配置定制</button>
+                        <button class="orderbtn thm-btn" @@click="gotoCustmer" style="float:right;margin-bottom:5px;">导出配置</button>
                     </div>
                 </div>
                 
@@ -243,30 +252,23 @@
 
 
             </div>
+           
 
-            <div v-if="activeName=='d1'" class="row">
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-                    <img class="img-response" style="width:100%;max-width:300px;" src="~/resourse/office/fileimg.png" />
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <h5>DL1A和CBD6S使用手册</h5>
-                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <button class="orderbtn thm-btn">下载</button>
+            <div v-if="activeName=='d1'">
+                
+                <div class="row filerow" v-for="item in files_d1">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                        <img class="img-response filethumbnail" :src="item.thumbnailImg" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <h5 v-text="item.FileName"></h5>
+                        <p style="font-size:14px" v-text="item.Information"></p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path)">下载</button>
+                    </div>
                 </div>
 
-
-                <div class="col-lg-2 col-md-2 col-sm-2">
-                    <img class="img-response" style="width:100%;max-width:300px" src="~/resourse/office/fileimg.png" />
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <h5>DL1A和CBD6S使用手册</h5>
-                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <button class="orderbtn thm-btn">下载</button>
-                </div>
 
 
 
@@ -316,28 +318,18 @@
             </div>
 
 
-            <div v-if="activeName=='d3'" class="row">
-                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-                    <img class="img-response" style="width:100%;max-width:300px;" src="~/resourse/office/fileimg.png" />
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <h5>DL1A和CBD6S认证手册</h5>
-                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <button class="orderbtn thm-btn">下载</button>
-                </div>
-
-
-                <div class="col-lg-2 col-md-2 col-sm-2">
-                    <img class="img-response" style="width:100%;max-width:300px" src="~/resourse/office/fileimg.png" />
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <h5>DL1A和CBD6S使用手册</h5>
-                    <p style="font-size:14px">本使用手册将会告诉您如何安装,使用并维护您的产品</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <button class="orderbtn thm-btn">下载</button>
+            <div v-if="activeName=='d3'">
+                <div class="row filerow" v-for="item in files_d3">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                        <img class="img-response filethumbnail" :src="item.thumbnailImg" />
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <h5 v-text="item.FileName"></h5>
+                        <p style="font-size:14px" v-text="item.Information"></p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path)">下载</button>
+                    </div>
                 </div>
 
 
@@ -398,6 +390,11 @@
             descriptions: null,//关键参数
             configurationNo: "",
 
+            //文件
+            files_d1: [],
+            //认证
+            files_d3: [],
+
 
             //text
             text_detail_1: "",
@@ -447,6 +444,12 @@
 
 
             },
+            downloadfile: function (url) {
+                window.open(url);
+            },
+            gotoCustmer: function (event) {
+
+            },
             initPage: function (event) {
                 var code = GetLanguCode();
                 this.langCode = code;
@@ -474,6 +477,12 @@
 
             },
             getThisDesk: function (event) {
+                //文件列表
+                //var fitem = { filethumbnail: '/resourse/office/fileimg.png', fileName: 'VUE的和CBD6S使用手册可下载pdf', fileDes: '本使用手册将会告诉您如何安装,使用并维护您的产品' };
+                //this.files_d1.push(fitem);
+            
+
+                //获取桌子详细信息
                 this.$http({           //调用接口
                     method: 'GET',
                     url: "/JCSelection/GetOfficeDeskDetail",
@@ -576,6 +585,19 @@
                     initQRCode('qrcodebox', this.configurationNo);
 
                    // console.log(this.T_Product_office_desk_detail);
+
+                    var ni = 0;
+                    for (ni in response.body.T_Office_Files) {
+                        var item = response.body.T_Office_Files[ni];
+                        switch (item.partType) {
+
+                            case "桌子": this.files_d1.push(item); break;
+                            case "认证": this.files_d3.push(item); break;
+                            default:
+                        }
+ 
+                    }
+
                     console.log(response.body);
 
 

@@ -782,24 +782,24 @@
 # Common
 --------------------------------------------------------------*/
 :root {
-  --thm-font: "Rubik", sans-serif;
-  --heading-font: "Rubik", serif;
-  --thm-color: #798490;
-  --thm-color-rgb: 121, 132, 144;
-  --thm-base: #008fd5;
-  --thm-base-rgb: 0, 143, 213;
-  --thm-primary: #004aa1;
-  --thm-primary-rgb: 0, 74, 161;
-  --thm-secondary: #ed4b4b;
-  --thm-secondary-rgb: 237, 75, 75;
-  --thm-special: #5366c2;
-  --thm-special-rgb: 83, 102, 194;
-  --thm-black: #0c2139;
-  --thm-black-rgb: 12, 33, 57;
-  --thm-black2: #1d1c1c;
-  --thm-black2-rgb: 29, 28, 28;
-  --thm-text-dark: #8e96a0;
-  --thm-text-dark-rgb: 142, 150, 160;
+    --thm-font: "Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;
+    --heading-font: "Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;
+    --thm-color: #798490;
+    --thm-color-rgb: 121, 132, 144;
+    --thm-base: #008fd5;
+    --thm-base-rgb: 0, 143, 213;
+    --thm-primary: #004aa1;
+    --thm-primary-rgb: 0, 74, 161;
+    --thm-secondary: #ed4b4b;
+    --thm-secondary-rgb: 237, 75, 75;
+    --thm-special: #5366c2;
+    --thm-special-rgb: 83, 102, 194;
+    --thm-black: #0c2139;
+    --thm-black-rgb: 12, 33, 57;
+    --thm-black2: #1d1c1c;
+    --thm-black2-rgb: 29, 28, 28;
+    --thm-text-dark: #8e96a0;
+    --thm-text-dark-rgb: 142, 150, 160;
 }
 
 body {
@@ -895,11 +895,15 @@ h6 {
   background-color: var(--thm-base);
   color: #fff;
 }
-
-.thm-btn:hover {
-  color: var(--thm-base);
+    /*在这里修改按钮的样式*/
+    .thm-btn:hover {
+         color: var(--thm-base);
   background-color: #fff;
-}
+
+
+      /*  background-color: var(--thm-black);
+        color: #fff;*/
+    }
 
 .block-text {
   font-size: 18px;
@@ -6102,14 +6106,14 @@ h6 {
     color: #b7b7b7;
     margin-left: 6px;
     margin-right: 6px;
-    font-size:16px;
+    font-size:15px;
 }
 
     .navigation_a:hover {
         color: #ffffff;
         margin-left: 6px;
         margin-right: 6px;
-        font-size: 16px;
+        font-size: 15px;
     }
 
 @import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");

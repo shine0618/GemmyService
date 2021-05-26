@@ -131,7 +131,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JCSelectionController.cs" />
     <Compile Include="Controllers\JCSelectionLanguageController.cs" />
-    <Compile Include="Controllers\T_Office_FilesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -488,6 +487,8 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
+    <Content Include="Upload\office\20210526\suoluetu.png" />
+    <Content Include="Upload\office\frame19.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -529,12 +530,9 @@
     <Content Include="Views\Shared\_PartialLayuiSource.cshtml" />
     <Content Include="Views\JCSelection\OfficeStandards.cshtml" />
     <Content Include="Views\JCSelection\qwertyui2.cshtml" />
-    <Content Include="Views\T_Office_Files\Create.cshtml" />
-    <Content Include="Views\T_Office_Files\Delete.cshtml" />
-    <Content Include="Views\T_Office_Files\Details.cshtml" />
-    <Content Include="Views\T_Office_Files\Edit.cshtml" />
-    <Content Include="Views\T_Office_Files\Index.cshtml" />
     <Content Include="Views\JCSelection\uploadFileTest.cshtml" />
+    <Content Include="Upload\office\Label Print.pdf" />
+    <Content Include="Upload\office\20210526\label.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
