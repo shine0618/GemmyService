@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "uploadFileTest";
+    Layout = null;
+}
+
+<script src="~/assets/bootstrap-fileinput/js/fileinput.min.js"></script>
+<link href="~/assets/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" />
+<script src="~/assets/bootstrap-fileinput/js/fileinput_locale_zh.js"></script>
+
+
+<h2>uploadFileTest</h2>
+
+
+
+<input type="file" name="file1" id="file1" multiple class="file-loading" />
+<input class="form-control displaynone fileinput1" readonly type="text" id="T_TR_nameOriginal3" name="T_TR_nameOriginal3" />
+<input class="form-control displaynone fileinput2" readonly type="text" id="T_TR_nameGuid3" name="T_TR_nameGuid3" />
+<input class="form-control displaynone fileinput3" readonly type="text" id="T_TR_nameExtend3" name="T_TR_nameExtend3" />
+
+
+<section class="about-three">
+    <div class="container" id="apptest">
+        <div class="row">
+
+
+
+
+
+
+        </div>
+    </div>
+</section>
+
+
+<script>
+
+    //上传文件
+    //初始化fileinput
+    var FileInput = function () {
+        var oFile = new Object();
+        //初始化fileinput控件（第一次初始化）
+        oFile.Init = function (ctrlName, uploadUrl) {
+            var control = $('#' + ctrlName);
+            //初始化上传控件的样式
+            control.fileinput({
+                language: 'zh', //设置语言
+                uploadUrl: uploadUrl, //上传的地址
+                allowedFileExtensions: ['doc', 'docx', 'xls', 'xlsx', 'pdf', 'jpg', 'gif', 'png', 'jpeg'],//接收的文件后缀
+                showUpload: true, //是否显示上传按钮
+                showCaption: false,//是否显示标题
+                browseClass: "btn btn-info", //按钮样式
+                dropZoneEnabled: false,//是否显示拖拽区域
+                //minImageWidth: 50, //图片的最小宽度
+                //minImageHeight: 50,//图片的最小高度
+                //maxImageWidth: 1000,//图片的最大宽度
+                //maxImageHeight: 1000,//图片的最大高度
+                maxFileSize: 102400,//单位为kb，如果为0表示不限制文件大小
+                minFileCount: 1,
+                maxFileCount: 10,
+                enctype: 'multipart/form-data',
+                validateInitialCount: true,
+                previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+                msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            });
+
+
+        }
+        return oFile;
+    };
+
+
+    $(function () {
+        var oFileInput = new FileInput();
+        oFileInput.Init("file1", "/JCTestReport/Add_File1");
+    })
+
+
+    //文件上传后
+    $("#file1").on("fileuploaded", function (event, data, previewId, index) {
+        //var arr = data.response.split('|');
+        //var fid = 'T_TR_nameOriginal3';
+        //var text = $('#' + fid).val();
+        //if (text != "") {
+        //    text += ",";
+        //}
+        //$('#' + fid).val(text + arr[0]);
+        //fid = 'T_TR_nameGuid3';
+        //var text = $('#' + fid).val();
+        //if (text != "") {
+        //    text += ",";
+        //}
+        //$('#' + fid).val(text + arr[1]);
+        //fid = 'T_TR_nameExtend3';
+        //var text = $('#' + fid).val();
+        //if (text != "") {
+        //    text += ",";
+        //}
+        //$('#' + fid).val(text + arr[2]);
+
+
+    });
+</script>
+
+
+
+

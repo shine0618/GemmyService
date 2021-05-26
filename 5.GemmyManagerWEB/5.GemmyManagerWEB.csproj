@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\T_Office_FilesController.cs" />
     <Compile Include="Controllers\T_SYS_LanguageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -177,6 +178,11 @@
     <Content Include="Views\T_SYS_Language\Details.cshtml" />
     <Content Include="Views\T_SYS_Language\Edit.cshtml" />
     <Content Include="Views\T_SYS_Language\Index.cshtml" />
+    <Content Include="Views\T_Office_Files\Create.cshtml" />
+    <Content Include="Views\T_Office_Files\Delete.cshtml" />
+    <Content Include="Views\T_Office_Files\Details.cshtml" />
+    <Content Include="Views\T_Office_Files\Edit.cshtml" />
+    <Content Include="Views\T_Office_Files\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,14 +14,18 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 关联的类型 比如说是地脚的Mode  还是框架的Mode
         /// </summary>
         public string partType { get; set; }
+
+
         public string Mode { get; set; }
          
         /// <summary>
         /// 文件名
         /// </summary>
         public string FileName { get; set; }
+
+        public string thumbnailImg { get; set; }
         /// <summary>
-        /// 文件种类
+        /// 文件种类 产品介绍 尺寸图 认证 文件资料
         /// </summary>
         public string Nature { get; set; }
         /// <summary>
@@ -32,26 +36,15 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 文件路径
         /// </summary>
         public string Path { get; set; }
+
         /// <summary>
         /// 文件大小
         /// </summary>
         public long Size { get; set; }
         /// <summary>
-        /// 创建日期
-        /// </summary>
-        public DateTime Createdate { get; set; }
-        /// <summary>
-        /// 修改日期
-        /// </summary>
-        public DateTime? Modifydate { get; set; }
-        /// <summary>
         /// 失效日期
         /// </summary>
         public DateTime? Outdate { get; set; }
-        /// <summary>
-        /// 添加者名称
-        /// </summary>
-        public string Person { get; set; }
         /// <summary>
         /// 文件后缀名
         /// </summary>

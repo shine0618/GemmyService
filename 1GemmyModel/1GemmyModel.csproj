@@ -98,6 +98,10 @@
     <Compile Include="Migrations\202105250811339_initajsgas.designer.cs">
       <DependentUpon>202105250811339_initajsgas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202105260058484_initfile2.cs" />
+    <Compile Include="Migrations\202105260058484_initfile2.designer.cs">
+      <DependentUpon>202105260058484_initfile2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\Color.cs" />
@@ -164,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105250811339_initajsgas.resx">
       <DependentUpon>202105250811339_initajsgas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202105260058484_initfile2.resx">
+      <DependentUpon>202105260058484_initfile2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

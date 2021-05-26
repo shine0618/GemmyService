@@ -262,6 +262,16 @@ namespace GemmyService.Controllers
         }
 
 
+        public ActionResult uploadFileTest()
+        {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            Session.Timeout = 9600;
+            return View();
+        }
+
         #region 方法集
 
         /// <summary>
