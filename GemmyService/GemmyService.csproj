@@ -533,6 +533,7 @@
     <Content Include="Views\JCSelection\uploadFileTest.cshtml" />
     <Content Include="Upload\office\Label Print.pdf" />
     <Content Include="Upload\office\20210526\label.pdf" />
+    <Content Include="Views\JCSelection\testpage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

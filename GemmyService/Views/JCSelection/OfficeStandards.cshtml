@@ -39,18 +39,15 @@
                     <div class="blog">
                         <div class="blog-sidebar__box blog-sidebar__category service-sidebar__category">
                             <h6 style="margin:10px;" class="blog-sidebar__box-title">{{t_OfficeStandards_1}}</h6><!-- /.blog-sidebar__title -->
-
-
                             <input type="text" class="form-control" v-model="searchText" @@keyup.enter="getallDesk" style="font-size:14px;width:100%;" />
 
                             <h6 style="margin:10px;" class="blog-sidebar__box-title">{{DeskConfigurationName}}</h6><!-- /.blog-sidebar__title -->
                             <ul class="list-unstyled service-sidebar__category-list">
-                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=newProduct">{{NewProductName}}</a></li>
-
-
-                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=jiecangProduct">{{JCRecommendName}}</a></li>
-                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=myCollect">{{MyCollectName}}</a></li>
-                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=customer">{{CustomerName}}</a></li>
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=all">全部<span v-if="recommend=='all'">  √</span></a></li>
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=newProduct">{{NewProductName}}<span v-if="recommend=='newProduct'">  √</span></a></li>
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=jiecangProduct">{{JCRecommendName}}<span v-if="recommend=='jiecangProduct'">  √</span></a></li>
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=myCollect">{{MyCollectName}}<span v-if="recommend=='myCollect'">  √</span></a></li>
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=customer">{{CustomerName}}<span v-if="recommend=='customer'">  √</span></a></li>
                                 <li><a href="/JCSelection/office_Eservice_test">{{t_OfficeStandards_2}}</a></li>
                             </ul><!-- /.list-unstyled -->
                         </div><!-- /.blog-sidebar__box -->

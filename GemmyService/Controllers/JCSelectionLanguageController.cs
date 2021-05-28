@@ -48,5 +48,20 @@ namespace GemmyService.Controllers
             T_SYS_Language lang = BLL_SYS_Helper.GetT_SYS_Language(code);
             return JsonConvert.SerializeObject(lang);
         }
+
+        [HttpPost]
+        public void ajaxChanggelangu(string keys)
+        {
+            if(!string.IsNullOrEmpty(keys))
+            {
+                T_SYS_Language lang = BLL_SYS_Helper.GetT_SYS_Language(keys);
+                if (lang != null)
+                {
+                    Session["PageLanguage"] = keys;
+                    Session.Timeout = 9600;
+                }
+            }
+            
+        }
     }
 }

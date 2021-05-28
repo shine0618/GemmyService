@@ -53,7 +53,7 @@
                     <a href="#" id="defaultLanguage" :data-langu="defaultLanguageCode">{{defaultLanguage}}</a>
                     <ul>
                         <li v-for="langu in list">
-                            <langu-a :url="'/JCSelectionLanguage/ChangeLangu?langu='+langu.LanguageCode" :text="langu.LanguageDesript" ></langu-a>
+                            <langu-a v-on:increment="ChanggeLangu(langu.LanguageCode)" :languCode="langu.LanguageCode" url="#"  :text="langu.LanguageDesript" ></langu-a>
                         </li>
 
                     </ul>
@@ -76,11 +76,16 @@
     Vue.component('langu-a', {
         data: function () {
             return {
-                data: '',
+                data: 'aaaa',
             }
         },
-        props: ['url', 'text'],
-        template: ' <a :href="url">{{text}}</a>'
+        props: ['url', 'text','languCode'],
+        template: ' <a :href="url"v-on:click="incrementHandler">{{text}}</a>',
+        methods: {
+            incrementHandler: function () {
+                this.$emit('increment')
+            }
+        },
     })
 
     var nav_langu_box = new Vue({
@@ -92,9 +97,22 @@
         },
         // 在 `methods` 对象中定义方法
         methods: {
+
+
+            ChanggeLangu: function (langcode) {
+              
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCSelectionLanguage/ajaxChanggelangu",
+                    params: {
+                        keys: langcode,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    location.reload();
+                }, function (error) {
+                })
+            },
             initNav: function (event) {
-
-
                 var CustomLang = '@Session["PageLanguage"].ToString()';
                 //如果客户语言
                 if (CustomLang == 'default') {
@@ -104,6 +122,8 @@
                 }
                 else {
                     this.defaultLanguageCode = CustomLang;
+
+
                 }
                 this.$http({           //调用接口
                     method: 'GET',

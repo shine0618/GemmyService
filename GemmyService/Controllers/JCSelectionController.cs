@@ -58,6 +58,10 @@ namespace GemmyService.Controllers
         public ActionResult OfficeStandards(string domain,string Type,string recommend)
         {
 
+            if(string.IsNullOrEmpty(recommend))
+            {
+                recommend = "all";
+            }
           
            
             //如果语言是默认的话
@@ -275,6 +279,18 @@ namespace GemmyService.Controllers
             }
             Session.Timeout = 9600;
             return View();
+        }
+
+        public ActionResult testpage()
+        {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            Session.Timeout = 9600;
+
+            return View();
+
         }
 
         #region 方法集
