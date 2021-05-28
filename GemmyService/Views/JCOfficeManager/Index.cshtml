@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutManager.cshtml";
+}
+
+<style>
+    .displaynone
+    {
+        display:none
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+
+
+        <h2>上传文件</h2>
+        <a href="/T_Office_Files/index">去管理</a>
+        @if (ViewBag.msg != "")
+        {
+            <h6 style="color:red">@ViewBag.msg </h6>
+        }
+
+        <br />
+        <label>缩略图</label>
+        <input type="file" name="file2" id="file2" multiple class="file-loading" />
+
+        <label>选择文件</label>
+        <input type="file" name="file1" id="file1" multiple class="file-loading" />
+
+        <form action="/JCOfficeManager/addT_file">
+            <label>请输入partType</label>
+            <select class="form-control" id="partType" name="partType">
+                <option>桌子</option>
+                <option>立柱</option>
+                <option>框架</option>
+                <option>侧板</option>
+                <option>地脚</option>
+                <option>控制器</option>
+                <option>手控器</option>
+            </select>
+
+            <label>请输入MODE</label>
+            <input class="form-control  fileinput1" type="text" id="Mode" name="Mode" required/>
+            <label>请输入文件名称</label>
+            <input class="form-control  fileinput1" type="text" id="FileName" name="FileName" required/>
+            <label>请输入文件介绍</label>
+            <input class="form-control  fileinput1" type="text" id="Information" name="Information" />
+            <label>请选择类别</label>
+            <select class="form-control" id="Nature" name="Nature">
+                <option>产品介绍</option>
+                <option>产品图2D</option>
+                <option>产品图3D</option>
+                <option>认证</option>
+                <option>文件资料</option>
+            </select>
+            <label>请选择语言</label>
+            <select class="form-control" name="Language">
+                <option>中文</option>
+                <option>English</option>
+            </select>
+
+            <div class="displaynone">
+                <label>缩略图文件路径</label>
+                <input class="form-control displaynone fileinput1" type="text" id="thumbnailImg" name="thumbnailImg" />
+                <label>文件路径</label>
+                <input class="form-control displaynone fileinput1" type="text" id="Path" name="Path" />
+
+                <label>文件类型</label>
+                <input class="form-control displaynone fileinput1" type="text" id="Type" name="Type" />
+
+                <label>文件大小kb</label>
+                <input class="form-control displaynone fileinput1" type="text" id="Size" name="Size" />
+            </div>
+
+
+
+
+            <button class="btn btn-primary">确认</button>
+        </form>
+
+    </div>
+</div>
+
+
+
+<script>
+    $(function () {
+        var oFileInput = new FileInput();
+        oFileInput.Init("file1", "/JCOfficeManager/Add_File1");
+
+        oFileInput.Init("file2", "/JCOfficeManager/Add_File2");
+        
+    })
+
+    $("#file1").on("fileuploaded", function (event, data, previewId, index) {
+
+
+        var arr = data.response.split('|');
+        console.log(arr);
+
+        $('#Path').val(arr[3]);
+        $('#Size').val(arr[4]);
+        $('#Type').val(arr[2]);
+
+        //var fid = 'T_TR_nameOriginal3';
+        //var text = $('#' + fid).val();
+        //if (text != "") {
+        //    text += ",";
+        //}
+        //$('#' + fid).val(text + arr[0]);
+        //fid = 'T_TR_nameGuid3';
+        //var text = $('#' + fid).val();
+        //if (text != "") {
+        //    text += ",";
+        //}
+        //$('#' + fid).val(text + arr[1]);
+        //fid = 'T_TR_nameExtend3';
+        //var text = $('#' + fid).val();
+        //if (text != "") {
+        //    text += ",";
+        //}
+        //$('#' + fid).val(text + arr[2]);
+
+
+    });
+
+    //文件上传后
+    $("#file2").on("fileuploaded", function (event, data, previewId, index) {
+       
+
+        var arr = data.response.split('|');
+        console.log(arr);
+
+        $('#thumbnailImg').val(arr[3]);
+        
+    });
+</script>

@@ -129,8 +129,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JCOfficeManagerController.cs" />
     <Compile Include="Controllers\JCSelectionController.cs" />
     <Compile Include="Controllers\JCSelectionLanguageController.cs" />
+    <Compile Include="Controllers\T_Office_FilesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -177,6 +179,13 @@
     <Content Include="assets\bootstrap-fileinput\js\fileinput_locale_zh.js" />
     <Content Include="assets\bootstrap-fileinput\js\plugins\canvas-to-blob.js" />
     <Content Include="assets\bootstrap-fileinput\js\plugins\canvas-to-blob.min.js" />
+    <Content Include="assets\bootstrap\bootstrap.css" />
+    <Content Include="assets\bootstrap\bootstrap.min.js" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\HELP-US-OUT.txt" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\css\animate.min.css" />
     <Content Include="assets\css\bootstrap-select.min.css" />
     <Content Include="assets\css\bootstrap.min.css" />
@@ -402,6 +411,43 @@
     <Content Include="assets\bootstrap-fileinput\nuget\Package.nuspec" />
     <Content Include="assets\bootstrap-fileinput\package.json" />
     <Content Include="assets\bootstrap-fileinput\README.md" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\core.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\list.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\path.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="assets\bootstrap\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -534,6 +580,13 @@
     <Content Include="Upload\office\Label Print.pdf" />
     <Content Include="Upload\office\20210526\label.pdf" />
     <Content Include="Views\JCSelection\testpage.cshtml" />
+    <Content Include="Views\Shared\_LayoutManager.cshtml" />
+    <Content Include="Views\JCOfficeManager\Index.cshtml" />
+    <Content Include="Views\T_Office_Files\Create.cshtml" />
+    <Content Include="Views\T_Office_Files\Delete.cshtml" />
+    <Content Include="Views\T_Office_Files\Details.cshtml" />
+    <Content Include="Views\T_Office_Files\Edit.cshtml" />
+    <Content Include="Views\T_Office_Files\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

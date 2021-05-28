@@ -1,0 +1,167 @@
+﻿@model IEnumerable<_1GemmyModel.Model.ModelProductOffice.T_Office_Files>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.partType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.thumbnailImg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Information)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Path)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Outdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Permission)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Products)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.verificationCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.deleteSign)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.deletePerson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatePerson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatePerson)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remark)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.partType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.thumbnailImg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Information)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Path)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Outdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Permission)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Products)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.verificationCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deleteSign)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deletePerson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatePerson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatePerson)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remark)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

@@ -1,4 +1,5 @@
-﻿using _1GemmyModel.Model.ModelProductOffice;
+﻿using _1GemmyModel;
+using _1GemmyModel.Model.ModelProductOffice;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,5 +37,23 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             return query.ToList();
         }
+
+
+        #region ADD
+
+        public int AddT_Office_Files(T_Office_Files model)
+        { 
+            //有效性检查
+
+
+            using(DBGemmyService2 d =new DBGemmyService2 () )
+            {
+                d.T_Office_Files.Add(model);
+                return d.SaveChanges();
+            }
+
+        }
+
+        #endregion
     }
 }
