@@ -145,6 +145,10 @@ namespace GemmyService.Controllers
 
             T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
             T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id);
+
+            T_Product_office_description m = bll_desk.GetT_Product_office_description_first(_T_Product_office_desk_detail.introductionIndex, lang);
+            _T_Product_office_desk_detail.introduction = m == null ? "" : m.textValue;
+
             List<T_Product_office_description> descriptions = bll_desk.GetT_Product_office_description(_T_Product_office_desk_detail.DescriptionIndex, lang);
 
             List<T_Office_Files> T_Office_Files = bll_file.GetT_Office_Files(_T_Product_office_desk.Id);

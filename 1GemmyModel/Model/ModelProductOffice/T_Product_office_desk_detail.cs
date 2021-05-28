@@ -145,7 +145,7 @@ namespace _1GemmyModel.Model.ModelProductOffice
         public double? Weight { get; set; }
 
         /// <summary>
-        /// 对应描述的index T_Product_office_description的textKay
+        /// 对应关键参数描述的index T_Product_office_description的textKay
         /// </summary>
         public int DescriptionIndex { get; set; }
 
@@ -153,6 +153,15 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 描述
         /// </summary>
         public string Description { get; set; }
+
+
+        /// <summary>
+        /// 产品介绍
+        /// </summary>
+        public int introductionIndex { get; set; }
+
+        public string  introduction { get; set; }
+      
         /// <summary>
         /// 中文描述
         /// </summary>

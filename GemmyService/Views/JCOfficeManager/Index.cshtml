@@ -4,15 +4,25 @@
     Layout = "~/Views/Shared/_LayoutManager.cshtml";
 }
 
+<style>
+    .displaynone
+    {
+        display:none
+    }
+</style>
+
 <div class="container">
     <div class="row">
 
 
         <h2>上传文件</h2>
-        @if(ViewBag.msg!="")
-            {
-                <h6 style="color:red">@ViewBag.msg </h6>
-            }
+        <a href="/T_Office_Files/index">去管理</a>
+        @if (ViewBag.msg != "")
+        {
+            <h6 style="color:red">@ViewBag.msg </h6>
+        }
+
+        <br />
         <label>缩略图</label>
         <input type="file" name="file2" id="file2" multiple class="file-loading" />
 
@@ -32,11 +42,11 @@
             </select>
 
             <label>请输入MODE</label>
-            <input class="form-control displaynone fileinput1" type="text" id="Mode" name="Mode" />
+            <input class="form-control  fileinput1" type="text" id="Mode" name="Mode" required/>
             <label>请输入文件名称</label>
-            <input class="form-control displaynone fileinput1" type="text" id="FileName" name="FileName"/>
+            <input class="form-control  fileinput1" type="text" id="FileName" name="FileName" required/>
             <label>请输入文件介绍</label>
-            <input class="form-control displaynone fileinput1" type="text" id="Information" name="Information"/>
+            <input class="form-control  fileinput1" type="text" id="Information" name="Information" />
             <label>请选择类别</label>
             <select class="form-control" id="Nature" name="Nature">
                 <option>产品介绍</option>
@@ -51,22 +61,25 @@
                 <option>English</option>
             </select>
 
+            <div class="displaynone">
+                <label>缩略图文件路径</label>
+                <input class="form-control displaynone fileinput1" type="text" id="thumbnailImg" name="thumbnailImg" />
+                <label>文件路径</label>
+                <input class="form-control displaynone fileinput1" type="text" id="Path" name="Path" />
 
-            <label>缩略图文件路径</label>
-            <input class="form-control displaynone fileinput1" type="text" id="thumbnailImg" name="thumbnailImg"/>
-            <label>文件路径</label>
-            <input class="form-control displaynone fileinput1" type="text" id="Path" name="Path"/>
+                <label>文件类型</label>
+                <input class="form-control displaynone fileinput1" type="text" id="Type" name="Type" />
 
-            <label>文件类型</label>
-            <input class="form-control displaynone fileinput1" type="text" id="Type" name="Type"/>
+                <label>文件大小kb</label>
+                <input class="form-control displaynone fileinput1" type="text" id="Size" name="Size" />
+            </div>
 
-            <label>文件大小kb</label>
-            <input class="form-control displaynone fileinput1" type="text" id="Size" name="Size"/>
+
 
 
             <button class="btn btn-primary">确认</button>
         </form>
-        
+
     </div>
 </div>
 

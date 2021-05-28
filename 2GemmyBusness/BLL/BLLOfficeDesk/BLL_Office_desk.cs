@@ -128,8 +128,16 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 return null;
             }
         }
-  
 
+        public T_Product_office_description GetT_Product_office_description_first(int index, string lang)
+        {
+            var query = from x in read_db.T_Product_office_description
+                        where x.langCode == lang
+                        where x.textKay == index
+                        select x;
+
+            return query.FirstOrDefault();
+        }
         public List<T_Product_office_description> GetT_Product_office_description(int index,string lang)
         {
             var query = from x in read_db.T_Product_office_description
