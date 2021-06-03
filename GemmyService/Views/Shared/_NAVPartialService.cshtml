@@ -17,8 +17,10 @@
 <div id="nav_langu_box">
     <div>
         <el-drawer title="注册"
+                   show-close="true"
                    :visible.sync="drawer"
-                   :with-header="false">
+                   :with-header="false"
+                   size="520px">
             <div class="container" style="padding:3rem">
                 <h4 class="drawerh5">登录</h4>
                 <el-form :model="ruleLoginForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
@@ -50,7 +52,7 @@
                     </el-form-item>
 
                     <el-form-item>
-                        <el-col :span="22" align="right"> <el-link type="danger" v-on:click="dialogVisible_forget=true">忘记密码?</el-link></el-col>
+                        <el-col :span="22" align="right"> <el-link type="primary" v-on:click="dialogVisible_forget=true">忘记密码?</el-link></el-col>
                     </el-form-item>
 
 
@@ -71,7 +73,7 @@
                             <span>验证码</span>
                             <i class="el-icon-postcard"></i>
                         </span>
-                        <el-col :span="18"><el-input typeof="text" v-model="ruleRegisterForm.retrieveUsername"></el-input></el-col>
+                        <el-col :span="16"><el-input typeof="text" v-model="ruleRegisterForm.retrieveUsername"></el-input></el-col>
 
                         <el-col :span="6" align="right"><el-button>发送邮件</el-button>
                     </el-form-item>
@@ -94,7 +96,7 @@
                         <button class="thm-btn orderbtn" style="width:100%"> 注册</button>
                     </el-form-item>
                     <el-form-item>
-                        <el-col :span="22" align="right"> <el-link type="danger" v-on:click="dialogVisible_use=true">注册须知</el-link></el-col>
+                        <el-col :span="22" align="right"> <el-link type="primary" v-on:click="dialogVisible_use=true">注册须知</el-link></el-col>
                     </el-form-item>
                 </el-form>
             </div>
@@ -204,8 +206,20 @@
             <div class="main-header__info">
                 <ul class="main-menu__list">
                     <li class="dropdown loginPersonBox" v-on:click="changeState(drawer)">
-                        <div class="blog-card__author">
-                            <img src="/assets/images/blog/blog-author-1-1.png" alt="">欢迎您
+                       
+                        <div class="blog-card__author" style="max-height:50px;overflow:hidden">
+                            @*<img src="/assets/images/blog/blog-author-1-1.png" alt="">*@
+                            @*   <el-avatar> Don </el-avatar>*@
+                            <i class="el-icon-s-custom" style="font-size:25px"></i>
+                            @if (@Session["configurationPerson"] == null)
+                            {
+                                <a>请登录</a>
+                            }
+                            else
+                            {
+                                <a>已经登录</a>
+                            }
+
 
                         </div><!-- /.blog-card__author -->
                     </li>

@@ -95,7 +95,7 @@ var nav_langu_box = new Vue({
             defaultLanguage: '',
             defaultLanguageCode: '',
             list: null,
-            drawer: true,
+            drawer: false,
             dialogVisible_forget: false,
             dialogVisible_use: false,
             ruleLoginForm: {
@@ -148,8 +148,6 @@ var nav_langu_box = new Vue({
     },
     // 在 `methods` 对象中定义方法
     methods: {
-
-
         ChanggeLangu: function (langcode) {
             this.$http({           //调用接口
                 method: 'POST',
@@ -184,6 +182,7 @@ var nav_langu_box = new Vue({
                     pagecode: lang,
                 }
             }).then(function (response) {  //接口返回数据
+                console.log(response);
                 this.defaultLanguage = response.body.LanguageShortDesript;
                 this.defaultLanguageCode = response.body.LanguageCode;
             }, function (error) {
