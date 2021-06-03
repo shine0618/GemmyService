@@ -1,118 +1,185 @@
-﻿<nav class="main-menu">
-    <div class="container">
-        <div class="logo-box">
-            <a href="/JCSelection/main" aria-label="logo image"><img src="/assets/images/logo-dark.png" width="155" alt=""></a>
-            <span class="fa fa-bars mobile-nav__toggler"></span>
-        </div><!-- /.logo-box -->
-        <ul class="main-menu__list">
-            <li class="dropdown">
-                <a href="index.html">Configuration</a>
-                <ul>
-                    <li>
-                        <a href="index.html">Home One</a>
-                    </li>
-                    <li><a href="index-2.html">Home Two</a></li>
-                    <li class="dropdown">
-                        <a href="#">Header Styles</a>
-                        <ul>
-                            <li><a href="index.html">Header One</a></li>
-                            <li><a href="index-2.html">Header Two</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
+﻿
 
-            <li class="search-btn search-toggler">
-                <a href="#"><i class="pylon-icon-magnifying-glass"></i></a>
-            </li>
-        </ul>
-        <!-- /.main-menu__list -->
+<style>
+    .loginPersonBox {
+        cursor: pointer;
+    }
 
-        <div class="main-header__info" id="nav_langu_box">
+    .drawerh5 {
+        color: var(--thm-base);
+    }
+    .explainText {
+        font-size: 13px;
+    }
+</style>
+
+
+<div id="nav_langu_box">
+    <div>
+        <el-drawer title="注册"
+                   :visible.sync="drawer"
+                   :with-header="false">
+            <div class="container" style="padding:3rem">
+                <h4 class="drawerh5">登录</h4>
+                <el-form :model="ruleLoginForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                    <el-form-item prop="username">
+                        <span slot="label">
+                            <span>账号</span>
+                            <i class="el-icon-user"></i>
+                        </span>
+                        <el-input typeof="text" v-model="ruleLoginForm.username"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="pass">
+                        <span slot="label">
+                            <span>密码</span>
+                            <i class="el-icon-lock"></i>
+                        </span>
+                        <el-input type="password" v-model="ruleLoginForm.pass" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="checkPass">
+                        <span slot="label">
+                            <span>确认密码</span>
+                            <i class="el-icon-key"></i>
+                        </span>
+                        <el-input type="password" v-model="ruleLoginForm.checkPass" autocomplete="off"></el-input>
+                    </el-form-item>
+
+
+                    <el-form-item>
+                        <button class="thm-btn orderbtn" style="width:100%"> 登录</button>
+                    </el-form-item>
+
+                    <el-form-item>
+                        <el-col :span="22" align="right"> <el-link type="danger" v-on:click="dialogVisible_forget=true">忘记密码?</el-link></el-col>
+                    </el-form-item>
+
+
+                </el-form>
+
+                <h4 class="drawerh5">注册</h4>
+                <p class="explainText">通过 Jiecang 捷昌的 G-Configration 在线服务，我们随时随地为您提供支持。我们始终以您的日常工作为导向。帮助您减轻个别工作量，或陪伴您完成多个过程步骤。助您更轻松、更快地获得最佳结果。</p>
+                <el-form :model="ruleRegisterForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                    <el-form-item prop="username">
+                        <span slot="label">
+                            <span>账号</span>
+                            <i class="el-icon-user"></i>
+                        </span>
+                        <el-input typeof="text" v-model="ruleRegisterForm.username"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="retrieveUsername">
+                        <span slot="label">
+                            <span>验证码</span>
+                            <i class="el-icon-postcard"></i>
+                        </span>
+                        <el-col :span="18"><el-input typeof="text" v-model="ruleRegisterForm.retrieveUsername"></el-input></el-col>
+
+                        <el-col :span="6" align="right"><el-button>发送邮件</el-button>
+                    </el-form-item>
+                    <el-form-item prop="pass">
+                        <span slot="label">
+                            <span>密码</span>
+                            <i class="el-icon-lock"></i>
+                        </span>
+                        <el-input type="password" v-model="ruleRegisterForm.pass" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item prop="checkPass">
+                        <span slot="label">
+                            <span>确认密码</span>
+                            <i class="el-icon-key"></i>
+                        </span>
+                        <el-input type="password" v-model="ruleRegisterForm.checkPass" autocomplete="off"></el-input>
+                    </el-form-item>
+
+                    <el-form-item>
+                        <button class="thm-btn orderbtn" style="width:100%"> 注册</button>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-col :span="22" align="right"> <el-link type="danger" v-on:click="dialogVisible_use=true">注册须知</el-link></el-col>
+                    </el-form-item>
+                </el-form>
+            </div>
+
+
+        </el-drawer>
+        <el-dialog title="忘记密码"
+                   :visible.sync="dialogVisible_forget"
+                   width="600px">
+            <el-form :model="ruleRetrieve" status-icon :rules="rulesRetrieve" ref="ruleRetrieve" label-width="100px" class="demo-ruleForm">
+                <el-form-item prop="retrieveUsername">
+                    <span slot="label">
+                        <span>账号</span>
+                        <i class="el-icon-postcard"></i>
+                    </span>
+                    <el-col :span="18"><el-input typeof="text" v-model="ruleRetrieve.retrieveUsername"></el-input></el-col>
+
+                    <el-col :span="6" align="right"><el-button>发送邮件</el-button>
+                </el-form-item>
+                <el-form-item prop="newPassword">
+                    <span slot="label">
+                        <span>新密码</span>
+                        <i class="el-icon-lock"></i>
+                    </span>
+                    <el-input type="password" v-model="ruleRetrieve.newPassword" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item prop="checkNewPassword">
+                    <span slot="label">
+                        <span>确认密码</span>
+                        <i class="el-icon-key"></i>
+                    </span>
+                    <el-input type="password" v-model="ruleRetrieve.checkNewPassword" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item prop="code">
+                    <span slot="label">
+                        <span>验证码</span>
+                        <i class="el-icon-message"></i>
+                    </span>
+                    <el-input v-model="ruleRetrieve.code" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <el-col :span="12" align="center">
+                        <el-button type="primary" @@click="submitForm('ruleRetrieve')">重置</el-button>
+                    </el-col>
+                    <el-col :span="11" align="left">
+                        <el-button @@click="resetForm('ruleForm')">清空</el-button>
+                    </el-col>
+                </el-form-item>
+            </el-form>
+        </el-dialog>
+
+        <el-dialog title="使用须知"
+                   :visible.sync="dialogVisible_use"
+                    width="600px">
+            <p class="explainText">
+                使用个人数据的同意声明
+
+                1. Julius Blum GmbH（Industriestraße 1，6973 Höchst，奥地利）的网站 www.blum.com 将通过“E-SERVICES 登记表”处理您的以下个人信息：<br>
+
+                - 姓名，称呼，
+                - 公司，行业，职务，
+                - 街道，邮编/城市，国家，地区，
+                - 电子邮件地址，网址，
+                - （移动）电话号码，传真号码，
+                - 您在 E-SERVICES 电子化服务中的使用行为,
+                - 关于所使用的 CAD 软件的信息，
+                - 上传的文件及其内容，
+                - 自动确认的通讯语言。<br>
+
+                2. 这些数据用于通过 E-SERVICES 进行营销以及改进我们的产品和服务。除了电子邮件、新闻邮件、电话、传真和信件，我们还会通过社交媒体 (Facebook、Twitter、Pinterest、LinkedIn、Houzz、Xing) 以及搜索引擎 Google、Yandex 或百度的通信渠道与您联系，前提是您在这些地方进行了注册或提供了有效的电子邮件地址。这些数据的保存时间为 3（三）年。<br>
+
+                3. 因第 2 项所描述之目的，这些数据将供我公司内部以及销售伙伴使用。Julius Blum GmbH 拥有以下子公司：
+
+            </p>
+        </el-dialog>
+    </div>
+    <nav class="main-menu">
+        <div class="container">
+            <div class="logo-box">
+                <a href="/JCSelection/main" aria-label="logo image"><img src="/assets/images/logo-dark.png" width="155" alt=""></a>
+                <span class="fa fa-bars mobile-nav__toggler"></span>
+            </div><!-- /.logo-box -->
             <ul class="main-menu__list">
                 <li class="dropdown">
-                    <div class="blog-card__author">
-                        <img src="/assets/images/blog/blog-author-1-1.png" alt="" v-on:click="changeState(drawer)">唐文杰
-                        <el-drawer title="注册"
-                                   :visible.sync="drawer"
-                                   :with-header="false">
-                            <span>注册</span>
-                            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                                <el-form-item prop="username">
-                                    <span slot="label">
-                                        <span>账号</span>
-                                        <i class="el-icon-user"></i>
-                                    </span>
-                                    <el-input typeof="text" v-model="ruleForm.username"></el-input>
-                                </el-form-item>
-                                <el-form-item prop="pass">
-                                    <span slot="label">
-                                        <span>密码</span>
-                                        <i class="el-icon-lock"></i>
-                                    </span>
-                                    <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item prop="checkPass">
-                                    <span slot="label">
-                                        <span>确认密码</span>
-                                        <i class="el-icon-key"></i>
-                                    </span>
-                                    <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-col :span="22" align="right"> <el-link type="danger" v-on:click="dialogVisible=true">忘记密码?</el-link></el-col>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-col :span="12" align="center"><el-button type="primary" @@click="submitForm('ruleForm')">提交</el-button></el-col>
-                                    <el-col :span="11" align="left"><el-button @@click="resetForm('ruleForm')">重置</el-button></el-col>
-                                </el-form-item>
-                            </el-form>                            
-                        </el-drawer>                            
-                        <el-dialog title="忘记密码"
-                                   :visible.sync="dialogVisible"
-                                   width="30%">
-                            <el-form :model="ruleRetrieve" status-icon :rules="rulesRetrieve" ref="ruleRetrieve" label-width="100px" class="demo-ruleForm">
-                                <el-form-item prop="retrieveUsername">
-                                    <span slot="label">
-                                        <span>账号</span>
-                                        <i class="el-icon-postcard"></i>
-                                    </span>
-                                    <el-col :span="18"><el-input typeof="text" v-model="ruleRetrieve.retrieveUsername"></el-input></el-col>
-
-                                    <el-col :span="6" align="right"><el-button>发送邮件</el-button>
-                                </el-form-item>
-                                <el-form-item prop="newPassword">
-                                    <span slot="label">
-                                        <span>新密码</span>
-                                        <i class="el-icon-lock"></i>
-                                    </span>
-                                    <el-input type="password" v-model="ruleRetrieve.newPassword" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item prop="checkNewPassword">
-                                    <span slot="label">
-                                        <span>确认密码</span>
-                                        <i class="el-icon-key"></i>
-                                    </span>
-                                    <el-input type="password" v-model="ruleRetrieve.checkNewPassword" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item prop="code">
-                                    <span slot="label">
-                                        <span>验证码</span>
-                                        <i class="el-icon-message"></i>
-                                    </span>
-                                    <el-input v-model="ruleRetrieve.code" autocomplete="off"></el-input>
-                                </el-form-item>
-                                <el-form-item>
-                                    <el-col :span="12" align="center">
-                                        <el-button type="primary" @@click="submitForm('ruleRetrieve')">重置</el-button>
-                                    </el-col>
-                                    <el-col :span="11" align="left">
-                                        <el-button @@click="resetForm('ruleForm')">清空</el-button>
-                                    </el-col>
-                                </el-form-item>
-                            </el-form>
-                        </el-dialog>
-                    </div><!-- /.blog-card__author -->
+                    <a href="index.html">Configuration</a>
                     <ul>
                         <li>
                             <a href="index.html">Home One</a>
@@ -128,259 +195,46 @@
                     </ul>
                 </li>
 
-                <li class="dropdown">
-                    <a href="#" id="defaultLanguage" :data-langu="defaultLanguageCode">{{defaultLanguage}}</a>
-                    <ul>
-                        <li v-for="langu in list">
-                            <langu-a v-on:increment="ChanggeLangu(langu.LanguageCode)" :languCode="langu.LanguageCode" url="#" :text="langu.LanguageDesript"></langu-a>
-                        </li>
-
-                    </ul>
-
+                <li class="search-btn search-toggler">
+                    <a href="#"><i class="pylon-icon-magnifying-glass"></i></a>
                 </li>
             </ul>
-            <!--<div class="main-header__info-phone">
-                <i class="pylon-icon-pin1"></i>
-                <div class="main-header__info-phone-content">
-                    <span>Call Anytime</span>
-                    <h3><a href="tel:0575-86287980">0575-86287980</a></h3>
-                </div>-->
-            <!-- /.main-header__info-phone-content -->
-            <!--</div>--><!-- /.main-header__info-phone -->
-        </div><!-- /.main-header__info -->
+            <!-- /.main-menu__list -->
 
-    </div><!-- /.container -->
-</nav>
+            <div class="main-header__info">
+                <ul class="main-menu__list">
+                    <li class="dropdown loginPersonBox" v-on:click="changeState(drawer)">
+                        <div class="blog-card__author">
+                            <img src="/assets/images/blog/blog-author-1-1.png" alt="">唐文杰
 
-<script>
-    Vue.component('langu-a', {
-        data: function () {
-            return {
-                data: 'aaaa',
-            }
-        },
-        props: ['url', 'text','languCode'],
-        template: ' <a :href="url"v-on:click="incrementHandler">{{text}}</a>',
-        methods: {
-            incrementHandler: function () {
-                this.$emit('increment')
-            }
-        },
-    })
+                        </div><!-- /.blog-card__author -->
+                    </li>
 
+                    <li class="dropdown">
+                        <a href="#" id="defaultLanguage" :data-langu="defaultLanguageCode">{{defaultLanguage}}</a>
+                        <ul>
+                            <li v-for="langu in list">
+                                <langu-a v-on:increment="ChanggeLangu(langu.LanguageCode)" :languCode="langu.LanguageCode" url="#" :text="langu.LanguageDesript"></langu-a>
+                            </li>
 
+                        </ul>
 
-    var nav_langu_box = new Vue({
-        el: '#nav_langu_box',
-        data() {
-            var checkUsername = (rule, value, callback) => {
-               const mailReg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
-                if (!value) {
-                return callback(new Error('邮箱不能为空'))
-                }
-                setTimeout(() => {
-            if (mailReg.test(value)) {
-                    callback()
-}               else {
-                callback(new Error('请输入正确的邮箱格式'))
-                }
-                }, 100)
-
-            };
-            var validatePass = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入密码'));
-                } else {
-                    if (this.ruleForm.checkPass !== '') {
-                        this.$refs.ruleForm.validateField('checkPass');
-                    }
-                    callback();
-                }
-            };
-            var validatePass2 = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请再次输入密码'));
-                } else if (value !== this.ruleForm.pass) {
-                    callback(new Error('两次输入密码不一致!'));
-                } else {
-                    callback();
-                }
-            };
-            var validretrieveUsername = (rule, value, callback) => {
-                const mailReg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
-                if (!value) {
-                    return callback(new Error('不能为空'))
-                }
-                setTimeout(() => {
-                    if (mailReg.test(value)) {
-                        callback();
-                    } else {
-                        callback(new Error('请输入正确的邮箱格式'));
-                    }
-                }, 100)
-
-            };
-            var validnewPassword = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请输入密码'));
-                } else {
-                    if (this.ruleRetrieve.checkNewPassword !== '') {
-                        this.$refs.ruleRetrieve.validateField('checkNewPassword');
-                    }
-                    callback();
-                }
-            };
-            var validcheckNewPassword = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('请再次输入密码'));
-                } else if (value !== this.ruleRetrieve.newPassword) {
-                    callback(new Error('两次输入密码不一致!'));
-                } else {
-                    callback();
-                }
-            };
-            var validcode = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('验证码为空!'));
-                }  else {
-                    callback();
-                }
-            };
-            return {
-                defaultLanguage: '',
-                defaultLanguageCode: '',
-                list: null,
-                drawer: false,
-                dialogVisible: false,
-                ruleForm: {
-                    pass: '',
-                    checkPass: '',
-                    username: ''
-                },
-                ruleRetrieve: {
-                    retrieveUsername: '',
-                    code: '',
-                    newPassword: '',
-                    checkNewPassword:''
-                },
-                rules: {
-                    pass: [
-                        { validator: validatePass, trigger: 'blur' }
-                    ],
-                    checkPass: [
-                        { validator: validatePass2, trigger: 'blur' }
-                    ],
-                    username: [
-                        { validator: checkUsername, trigger: 'blur' },
-                        //{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'}
-                    ]
-                },
-                rulesRetrieve: {
-                    retrieveUsername: [
-                        { validator: validretrieveUsername, trigger: 'blur' },
-                    ],
-                    code: [
-                        { validator: validcode, trigger: 'blur' },
-                    ],
-                    newPassword: [
-                        { validator: validnewPassword, trigger: 'blur' },
-                    ],
-                    checkNewPassword: [
-                        { validator: validcheckNewPassword, trigger: 'blur' },
-                    ]
-                }
-            }
-
-
-        },
-        // 在 `methods` 对象中定义方法
-        methods: {
-
-
-            ChanggeLangu: function (langcode) {
-
-                this.$http({           //调用接口
-                    method: 'POST',
-                    url: "/JCSelectionLanguage/ajaxChanggelangu",
-                    params: {
-                        keys: langcode,
-                    }
-                }).then(function (response) {  //接口返回数据
-                    location.reload();
-                }, function (error) {
-                })
-            },
-            initNav: function (event) {
-                var CustomLang = '@Session["PageLanguage"].ToString()';
-                //如果客户语言
-                if (CustomLang == 'default') {
-                    var lang = navigator.language || navigator.userLanguage;//常规浏览器语言和IE浏览器
-                    lang = lang.substr(0, 2);//截取lang前2位字符
-                    this.defaultLanguageCode = lang;
-                }
-                else {
-                    this.defaultLanguageCode = CustomLang;
-
-
-                }
-                this.$http({           //调用接口
-                    method: 'GET',
-                    url: "/JCSelectionLanguage/GetLanguagesDetail",
-                    params: {
-                        keys: '123',
-                        code: this.defaultLanguageCode,
-                    }
-                }).then(function (response) {  //接口返回数据
-                    this.defaultLanguage = response.body.LanguageShortDesript;
-                }, function (error) {
-                })
+                    </li>
+                </ul>
+                <!--<div class="main-header__info-phone">
+                    <i class="pylon-icon-pin1"></i>
+                    <div class="main-header__info-phone-content">
+                        <span>Call Anytime</span>
+                        <h3><a href="tel:0575-86287980">0575-86287980</a></h3>
+                    </div>-->
+                <!-- /.main-header__info-phone-content -->
+                <!--</div>--><!-- /.main-header__info-phone -->
 
 
 
-            },
+            </div><!-- /.main-header__info -->
 
-            initlangubox: function (event) {
-
-                this.$http({           //调用接口
-                    method: 'GET',
-                    url: "/JCSelectionLanguage/GetLanguages",
-                    params: {
-                        keys: '123',
-                    }
-                }).then(function (response) {  //接口返回数据
-                    this.list = response.body;
-                }, function (error) {
-                })
-            },
-
-            changeState: function (drawer) {
-                this.drawer = !drawer;
-            },
-            submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        alert('submit!');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
-                });
-            },
-            resetForm(formName) {
-                this.$refs[formName].resetFields();
-            },
-            
-        }
-    });
-    nav_langu_box.initNav();
-    nav_langu_box.initlangubox();
-
-</script>
-<link href="~/assets/eleindex.css" rel="stylesheet" />
-<script src="~/assets/eleindex.js"></script>
-
-<link href="//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css" rel="stylesheet" />
-
-<style>
-
-</style>
+        </div><!-- /.container -->
+    </nav>
+</div>
+<script src="~/Scripts/pageScript/nav.js"></script>
