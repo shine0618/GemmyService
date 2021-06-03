@@ -151,7 +151,6 @@ var nav_langu_box = new Vue({
 
 
         ChanggeLangu: function (langcode) {
-
             this.$http({           //调用接口
                 method: 'POST',
                 url: "/JCSelectionLanguage/ajaxChanggelangu",
@@ -164,28 +163,32 @@ var nav_langu_box = new Vue({
             })
         },
         initNav: function (event) {
-            var CustomLang = '@Session["PageLanguage"].ToString()';
-            //如果客户语言
-            if (CustomLang == 'default') {
-                var lang = navigator.language || navigator.userLanguage;//常规浏览器语言和IE浏览器
-                lang = lang.substr(0, 2);//截取lang前2位字符
-                this.defaultLanguageCode = lang;
-            }
-            else {
-                this.defaultLanguageCode = CustomLang;
-
-
-            }
+            
+            //var CustomLang = '';
+            ////如果客户语言
+            //if (CustomLang == 'default') {
+               
+            //    this.defaultLanguageCode = lang;
+            //}
+            //else {
+            //    this.defaultLanguageCode = CustomLang;
+            //}
+            var lang = navigator.language || navigator.userLanguage;//常规浏览器语言和IE浏览器
+            lang = lang.substr(0, 2);//截取lang前2位字符
             this.$http({           //调用接口
                 method: 'GET',
                 url: "/JCSelectionLanguage/GetLanguagesDetail",
                 params: {
                     keys: '123',
                     code: this.defaultLanguageCode,
+                    pagecode: lang,
                 }
             }).then(function (response) {  //接口返回数据
                 this.defaultLanguage = response.body.LanguageShortDesript;
+                this.defaultLanguageCode = response.body.LanguageCode;
             }, function (error) {
+
+                    console.log(error);
             })
 
 
@@ -193,7 +196,7 @@ var nav_langu_box = new Vue({
         },
 
         initlangubox: function (event) {
-
+          
             this.$http({           //调用接口
                 method: 'GET',
                 url: "/JCSelectionLanguage/GetLanguages",
@@ -201,8 +204,10 @@ var nav_langu_box = new Vue({
                     keys: '123',
                 }
             }).then(function (response) {  //接口返回数据
+              //  console.log(response);
                 this.list = response.body;
             }, function (error) {
+                    console.log(error);
             })
         },
 

@@ -51,5 +51,17 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
         //    }
 
         //}
+
+
+
+
+        /// <summary>
+        /// 获取盐值
+        /// </summary>
+        /// <returns></returns>
+        public string GetSalt()
+        {
+            return System.Guid.NewGuid().ToString("D");
+        }
     }
 }
