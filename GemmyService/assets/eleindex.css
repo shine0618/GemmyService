@@ -14,7 +14,7 @@
 
 @font-face {
     font-family: element-icons;
-    src: url(fonts/element-icons.woff) format("woff"),url(fonts/element-icons.ttf) format("truetype");
+    src: url(/assets/element-icons.woff) format("woff"),url(/assets/element-icons.ttf) format("truetype");
     font-weight: 400;
     font-display: "auto";
     font-style: normal
@@ -12398,6 +12398,10 @@
     text-align: center
 }
 
+.el-input__inner::-ms-reveal {
+    display: none
+}
+
 .el-input__inner::-webkit-input-placeholder {
     color: #C0C4CC
 }
@@ -15288,7 +15292,8 @@
 .el-drawer__body {
     -webkit-box-flex: 1;
     -ms-flex: 1;
-    flex: 1
+    flex: 1;
+    overflow: auto
 }
 
     .el-drawer__body > * {
