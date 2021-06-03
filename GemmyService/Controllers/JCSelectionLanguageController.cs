@@ -43,8 +43,16 @@ namespace GemmyService.Controllers
         }
 
         [HttpGet]
-        public string GetLanguagesDetail(string keys,string code)
+        public string GetLanguagesDetail(string keys,string code,string pagecode)
         {
+            if(Session["PageLanguage"]==null||Session["PageLanguage"].ToString()=="default")
+            {
+                code = pagecode;
+            }
+            else
+            {
+                code = Session["PageLanguage"].ToString();
+            }
             T_SYS_Language lang = BLL_SYS_Helper.GetT_SYS_Language(code);
             return JsonConvert.SerializeObject(lang);
         }
