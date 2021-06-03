@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class T_USER_UserInfo : T_Base
-    {
+   public class T_USER_Temporary_UserInfo:T_Base
+   {
         /// <summary>
         /// 密码
         /// </summary>
@@ -29,8 +29,12 @@ namespace _1GemmyModel.Model
         /// </summary>
         public string PicPath { get; set; }
         /// <summary>
-        /// 账号封禁
+        /// 失效时间
         /// </summary>
-        public bool Lock { get; set; }
-    }
+        public DateTime FailTime { get; set; }
+        /// <summary>
+        /// 验证码
+        /// </summary>
+        public string Code { get; set; }
+   }
 }
