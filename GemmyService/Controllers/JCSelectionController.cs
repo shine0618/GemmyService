@@ -182,14 +182,14 @@ namespace GemmyService.Controllers
             return View();
         }
 
-        public ActionResult office_Eservice_test()
+        public ActionResult office_Eservice_test(string productGuid)
         { //如果语言是默认的话
             if (Session["PageLanguage"] == null)
             {
                 Session["PageLanguage"] = "default";
             }
             Session.Timeout = 9600;
-
+            ViewBag.productGuid = productGuid;            
             return View();
         }
         #region 3D选配界面
@@ -244,7 +244,22 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+        [HttpGet]
+        public ActionResult GetOfficeDeskDetail2(string productGuid, string lang)
+        {
 
+            T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
+            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id);
+
+            var list = new
+            {
+                T_Product_office_desk = _T_Product_office_desk,
+                T_Product_office_desk_detail = _T_Product_office_desk_detail,
+            };
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
 
         #endregion
 

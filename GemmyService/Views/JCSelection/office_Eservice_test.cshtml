@@ -226,7 +226,7 @@
         el: '#OfficeStandards',
         data: {
 
-            
+
             @*OrderValue: "",
             Order: 0,//1正序 2倒序
             domain: "@ViewBag.domain",
@@ -234,9 +234,9 @@
             recommend: "@ViewBag.recommend",
             langCode:"",
             deskList: null,
-         
+
             productName: '@ViewBag.productName',
-            productGuid: '@ViewBag.productGuid',
+
             deskSerialName:'',
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
@@ -265,10 +265,12 @@
             list_SideBracket_count: 0,
             select_SideBracket: "",
             select_SideBracketMode:"",
-            
-          
+            T_Product_office_desk: null,
+            T_Product_office_desk_detail: null,
+            productGuid:'@ViewBag.productGuid',
+
             //text
-        
+
             text_customer_1: "",
             text_customer_2: "",
             text_customer_3: "",
@@ -292,13 +294,13 @@
 
                 switch (this.selectStep) {
                     case "s1":
-                       
+
                         break;
                     case "s2":
                         if (this.select_frame == "") {
                             this.getAllFrame();
                         }
-                   
+
                         break;
                     case "s3":
                         this.getAllFoot();
@@ -336,7 +338,7 @@
             handleClick(tab, event) {
                // console.log(tab);
 
-               
+
             },
             initPage: function (event) {
                 var code = GetLanguCode();
@@ -360,30 +362,22 @@
                         this.setData(key, value);;
                     }
                 }
-
-
                 var i = '<iframe scrolling="no"  id="shjahs" style ="height:655px;width:800px"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
                 $('#asas').append(i);
-
             },
             getAllColumn: function (event) {
                 this.$http({           //调用接口
                     method: 'GET',
                     url: "/JCSelection/GetOfficeColumn",
                     params: {
-                       
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_column = response.body;
                     this.list_column_count = this.list_column.length;
                   //  console.log(response.body);
-
-
                 }, function (error) {
                         console.log(error);
-
-
-                })
+               })
             },
             getAllFrame: function (event) {
                 this.$http({           //调用接口
@@ -396,26 +390,19 @@
                     this.list_frame = response.body;
                     this.list_frame_count = this.list_frame.length;
                     console.log(response.body);
-
-
                 }, function (error) {
                     console.log(error);
-
-
-                })
+               })
             },
             getAllFoot: function (event) {
                 this.$http({           //调用接口
                     method: 'GET',
                     url: "/JCSelection/GetOfficeFoot",
                     params: {
-
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_foot = response.body;
                     this.list_foot_count = this.list_foot.length;
-
-
                 }, function (error) {
                     console.log(error);
                 })
@@ -425,22 +412,19 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeSideBracket",
                     params: {
-
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_SideBracket = response.body;
                     this.list_SideBracket_count = this.list_foot.length;
-
-
                 }, function (error) {
                     console.log(error);
                 })
             },
-            
-
             columnClick: function (id,mode) {
                 this.select_column = id;
                 this.select_columnMode = mode;
+                console.log(this.select_column);
+                console.log(this.select_columnMode);
             },
             frameClick: function (id, mode) {
                 this.select_frame = id;
@@ -454,9 +438,7 @@
                 this.select_SideBracket = id;
                 this.select_SideBracketMode = mode;
             },
-
             orderBtnClick: function (ordervalue) {
-
                 this.OrderValue = ordervalue;
                 if (this.Order == 1) {
                     this.Order = 2;
@@ -465,14 +447,66 @@
                     this.Order = 1;
                 }
             },
-
             setData: function (field, val) {
                 this.$set(this.$data, field, val);//vue 设定值
+            },
+            getThisDesk: function (event) {                
+                //获取桌子详细信息
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCSelection/GetOfficeDeskDetail2",
+                        params: {
+                            lang: this.langCode,
+                            productGuid: this.productGuid,
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        // this.deskList = response.body;
+                        this.T_Product_office_desk = response.body.T_Product_office_desk;
+                        this.T_Product_office_desk_detail = response.body.T_Product_office_desk_detail;
+                        //添加到产品配置列表 立柱
+                        if (this.T_Product_office_desk_detail.T_Part_office_Column != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_Column;
+                            if (it.Mode != '') {
+                                select_column = it.Id;
+                                select_columnMode = it.Mode;
+                                this.$options.methods.columnClick(select_column, select_columnMode);
+                                console.log(select_column);
+                                console.log(select_columnMode);
+                            }
+                        }
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_Foot != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_Foot;
+                            select_foot = it.Id;
+                            select_footMode = it.Mode;
+                            console.log(select_foot);
+                            console.log(select_footMode);
+                        }
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_Frame != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_Frame;
+                            select_frame = it.Id;
+                            select_frameMode = it.Mode;
+                            console.log(select_frame);
+                            console.log(select_frameMode);
+                        }
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_SideBracket != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_SideBracket;
+                            select_SideBracket = it.Id;
+                            select_SideBracketMode = it.Mode;
+                            console.log(select_SideBracket);
+                            console.log(select_SideBracketMode);
+                        }
+                        console.log(response.body);
+                    }, function (error) {
+                        console.log(error);
+                    })                
             },
         }
     })
     //语言加载
     OfficeStandards.initPage();
     OfficeStandards.getAllColumn();
-
+    OfficeStandards.getThisDesk();
 </script>

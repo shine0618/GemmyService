@@ -42,15 +42,23 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         #region ADD
 
         public int AddT_Office_Files(T_Office_Files model)
-        { 
+        {
             //有效性检查
-
-
-            using(DBGemmyService2 d =new DBGemmyService2 () )
+            try
             {
-                d.T_Office_Files.Add(model);
-                return d.SaveChanges();
+                using (DBGemmyService2 d = new DBGemmyService2())
+                {
+                    d.T_Office_Files.Add(model);
+                    return d.SaveChanges();
+                }
             }
+            catch (Exception)
+            {
+
+                return 0;
+            }
+
+            
 
         }
 

@@ -164,8 +164,8 @@
                         <h3>产品配置列表</h3>
                     </div><!-- /.block-title -->
                     <div>
-                        <button class="orderbtn thm-btn" @@click="exportConfig" style="float:right;margin-bottom:5px;margin-left:5px">配置定制</button>
-                        <button class="orderbtn thm-btn" @@click="gotoCustmer" style="float:right;margin-bottom:5px;">导出配置</button>
+                        <button class="orderbtn thm-btn" @@click="gotoCustmer" style="float:right;margin-bottom:5px;margin-left:5px">配置定制</button>
+                        <button class="orderbtn thm-btn" @@click="exportConfig" style="float:right;margin-bottom:5px;">导出配置</button>
                     </div>
                 </div>
                 
@@ -412,7 +412,7 @@
         //},
         methods: {
             handleClick(tab, event) {
-                
+
             },
 
             exportConfig: function (event) {
@@ -422,12 +422,12 @@
                 //doc.addFont('msyh.ttf', 'msyh', 'normal');
                 doc.setFont('msyh');
                 doc.text("JIECANG Office Configuration", 40, 50);           // 表title、距离左边距离、距离上边距离
-                var res = doc.autoTableHtmlToJson(document.getElementById("paramTB"));     
+                var res = doc.autoTableHtmlToJson(document.getElementById("paramTB"));
                 console.log(res);
                 doc.autoTable(res.columns, res.data, { startY: 60 });    // 渲染数据，列、数据、距离上边距离，更多配置项看官网api
 
                 doc.save('tableName.pdf');    // 导出名为tableName.pdf的文件
-                 
+
 
 
             },
@@ -442,7 +442,7 @@
                 link.click();
             },
             gotoCustmer: function (event) {
-
+                window.location = "/JCSelection/office_Eservice_test?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productName=@ViewBag.productName&productGuid=@ViewBag.productGuid";
             },
             initPage: function (event) {
                 var code = GetLanguCode();
@@ -474,7 +474,7 @@
                 //文件列表
                 //var fitem = { filethumbnail: '/resourse/office/fileimg.png', fileName: 'VUE的和CBD6S使用手册可下载pdf', fileDes: '本使用手册将会告诉您如何安装,使用并维护您的产品' };
                 //this.files_d1.push(fitem);
-            
+
 
                 //获取桌子详细信息
                 this.$http({           //调用接口
@@ -526,7 +526,7 @@
                         if (it.Speed != '') {
                             paramList.push("额定速度：" + it.Speed);
                         }
-                        
+
 
                         var q = { part: this.text_detail_11, model: this.T_Product_office_desk_detail.T_Part_office_Column.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList};
                         this.paramTableData.push(q);
@@ -571,7 +571,7 @@
                         if (it.MinLength != '') {
                             paramList.push("最小长度：" + it.MinLength);
                         }
-                      
+
 
                         var q = { part: this.text_detail_14, model: this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList};
                         this.paramTableData.push(q);
@@ -596,7 +596,7 @@
                             case "文件资料": this.files_d4.push(item); break;
                             default:
                         }
- 
+
                     }
 
                     console.log(response.body);

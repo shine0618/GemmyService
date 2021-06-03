@@ -358,6 +358,8 @@
     <Content Include="resourse\page\testqrcode.png" />
     <Content Include="resourse\page\threelegs.png" />
     <Content Include="resourse\page\twolegs.png" />
+    <Content Include="resourse\part_column\1.png" />
+    <Content Include="resourse\part_column\2.png" />
     <Content Include="resourse\part_column\testcolumn.png" />
     <Content Include="resourse\part_frame\frame19.png" />
     <Content Include="resourse\style.css" />

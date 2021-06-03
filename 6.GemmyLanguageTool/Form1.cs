@@ -18,7 +18,7 @@ using _2GemmyBusness.BLL.BLLOfficeDesk;
 using _1GemmyModel.Model.ModelSystem;
 using _1GemmyModel.Model.ModelProductOffice;
 using System.Net;
-
+using System.Net.Mail;
 
 namespace _6.GemmyLanguageTool
 {
@@ -683,9 +683,38 @@ namespace _6.GemmyLanguageTool
             return hst;
         }
 
+
+
         #endregion
 
+        private void btn_sendemail_Click(object sender, EventArgs e)
+        {
+            //设置要调用的发送邮件的服务器
+            SmtpClient smtp = new SmtpClient("smtp.qq.com");
+            //创建发件人对象
+            MailAddress from = new MailAddress("1194778796@qq.com");
+            //创建收件人对象
+            MailAddress to = new MailAddress("tangwj@qq.com");
+            //要发送的邮件对象，包含四个内容要填充
+            MailMessage mail = new MailMessage(from, to);
+            //设置邮件的标题
+            mail.Subject = "Test";
+            mail.IsBodyHtml = true;
+            //设置邮件的主题正文格式
+            mail.Body = emailBody();
+            //创建发件人身份验证凭证
+            NetworkCredential cred = new NetworkCredential("1194778796@qq.com", "vjmyuabouewyghgc");
+            smtp.Credentials = cred;
+            //此服务器对象执行发送邮件功能
+            smtp.Send(mail);
+        }
 
-
+        private string emailBody()
+        {
+            string emailBody = "";
+            emailBody+= "<style>.alignleft{display:inline;float:left;}</style>\r\n" + "<div><img class=\"alignleft\" src=\"https://img01.yun300.cn/img/jcxlogo.png?tenantId=150725&viewType=1&k=1621414521000\" ></div><div><span style=\"color:#0f4c81\"><span style=\"font-family:微软雅黑\"><span style=\"line-height:1.2\"><span style=\"font-size:20px\">股票代码：603583<br>股票名称：捷昌驱动</span></span></span></span></div>"+"\r\n" +
+                "<hr />\r\n" + "<div><span style=\"font - size:20px\">尊敬的用户：<br>首先感谢您使用GemmyConfiguration，本条邮件是用于激活您所注册的账号，请点击以下链接来进行账号的激活<br><a href=\"https://www.baidu.com\" > ClickMe</a><br>如有打扰之处，请多谅解!</span></div>";
+            return emailBody;
+        }
     }
 }

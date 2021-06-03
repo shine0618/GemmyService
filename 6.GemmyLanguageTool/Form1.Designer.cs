@@ -45,7 +45,6 @@ namespace _6.GemmyLanguageTool
             this.insertlanguagetxt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.page_language = new System.Windows.Forms.TabPage();
             this.page_upload = new System.Windows.Forms.TabPage();
             this.lbx_Language = new System.Windows.Forms.ListBox();
             this.lbx_Lock = new System.Windows.Forms.ListBox();
@@ -58,15 +57,19 @@ namespace _6.GemmyLanguageTool
             this.toolbtn_clearAll = new System.Windows.Forms.ToolStripButton();
             this.toolbtn_importRow = new System.Windows.Forms.ToolStripButton();
             this.toolbtn_importAll = new System.Windows.Forms.ToolStripButton();
+            this.page_language = new System.Windows.Forms.TabPage();
+            this.page_emailTest = new System.Windows.Forms.TabPage();
+            this.btn_sendemail = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.jsondgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.jsonmaindgv)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.page_language.SuspendLayout();
             this.page_upload.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fileUpload)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.page_language.SuspendLayout();
+            this.page_emailTest.SuspendLayout();
             this.SuspendLayout();
             // 
             // jsondgv
@@ -236,25 +239,14 @@ namespace _6.GemmyLanguageTool
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.page_language);
             this.tabControl1.Controls.Add(this.page_upload);
+            this.tabControl1.Controls.Add(this.page_language);
+            this.tabControl1.Controls.Add(this.page_emailTest);
             this.tabControl1.Location = new System.Drawing.Point(1, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1094, 501);
             this.tabControl1.TabIndex = 9;
-            // 
-            // page_language
-            // 
-            this.page_language.Controls.Add(this.groupBox2);
-            this.page_language.Controls.Add(this.groupBox1);
-            this.page_language.Location = new System.Drawing.Point(4, 22);
-            this.page_language.Name = "page_language";
-            this.page_language.Padding = new System.Windows.Forms.Padding(3);
-            this.page_language.Size = new System.Drawing.Size(1086, 475);
-            this.page_language.TabIndex = 0;
-            this.page_language.Text = "语言管理";
-            this.page_language.UseVisualStyleBackColor = true;
             // 
             // page_upload
             // 
@@ -395,6 +387,38 @@ namespace _6.GemmyLanguageTool
             this.toolbtn_importAll.Size = new System.Drawing.Size(60, 22);
             this.toolbtn_importAll.Text = "导入全部";
             // 
+            // page_language
+            // 
+            this.page_language.Controls.Add(this.groupBox2);
+            this.page_language.Controls.Add(this.groupBox1);
+            this.page_language.Location = new System.Drawing.Point(4, 22);
+            this.page_language.Name = "page_language";
+            this.page_language.Padding = new System.Windows.Forms.Padding(3);
+            this.page_language.Size = new System.Drawing.Size(1086, 475);
+            this.page_language.TabIndex = 0;
+            this.page_language.Text = "语言管理";
+            this.page_language.UseVisualStyleBackColor = true;
+            // 
+            // page_emailTest
+            // 
+            this.page_emailTest.Controls.Add(this.btn_sendemail);
+            this.page_emailTest.Location = new System.Drawing.Point(4, 22);
+            this.page_emailTest.Name = "page_emailTest";
+            this.page_emailTest.Size = new System.Drawing.Size(1086, 475);
+            this.page_emailTest.TabIndex = 2;
+            this.page_emailTest.Text = "邮箱测试";
+            this.page_emailTest.UseVisualStyleBackColor = true;
+            // 
+            // btn_sendemail
+            // 
+            this.btn_sendemail.Location = new System.Drawing.Point(63, 57);
+            this.btn_sendemail.Name = "btn_sendemail";
+            this.btn_sendemail.Size = new System.Drawing.Size(75, 23);
+            this.btn_sendemail.TabIndex = 0;
+            this.btn_sendemail.Text = "button1";
+            this.btn_sendemail.UseVisualStyleBackColor = true;
+            this.btn_sendemail.Click += new System.EventHandler(this.btn_sendemail_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -412,12 +436,13 @@ namespace _6.GemmyLanguageTool
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.page_language.ResumeLayout(false);
             this.page_upload.ResumeLayout(false);
             this.page_upload.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fileUpload)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.page_language.ResumeLayout(false);
+            this.page_emailTest.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -452,6 +477,8 @@ namespace _6.GemmyLanguageTool
         private System.Windows.Forms.ListBox lbx_partType;
         private System.Windows.Forms.ListBox lbx_Language;
         private System.Windows.Forms.ListBox lbx_Lock;
+        private System.Windows.Forms.TabPage page_emailTest;
+        private System.Windows.Forms.Button btn_sendemail;
     }
 }
 
