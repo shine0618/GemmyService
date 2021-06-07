@@ -110,6 +110,10 @@
     <Compile Include="Migrations\202106030534040_init232323232323232.designer.cs">
       <DependentUpon>202106030534040_init232323232323232.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106070319426_init234232324.cs" />
+    <Compile Include="Migrations\202106070319426_init234232324.designer.cs">
+      <DependentUpon>202106070319426_init234232324.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\Color.cs" />
@@ -186,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106030534040_init232323232323232.resx">
       <DependentUpon>202106030534040_init232323232323232.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106070319426_init234232324.resx">
+      <DependentUpon>202106070319426_init234232324.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

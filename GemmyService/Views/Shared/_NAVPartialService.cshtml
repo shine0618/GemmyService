@@ -23,13 +23,13 @@
                    size="520px">
             <div class="container" style="padding:3rem">
                 <h4 class="drawerh5">登录</h4>
-                <el-form :model="ruleLoginForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                <el-form :model="ruleLoginForm" status-icon :rules="rules" ref="ruleLoginForm" label-width="100px" class="demo-ruleForm">
                     <el-form-item prop="username">
                         <span slot="label">
                             <span>账号</span>
                             <i class="el-icon-user"></i>
                         </span>
-                        <el-input typeof="text" v-model="ruleLoginForm.username"></el-input>
+                        <el-input type="text" v-model="ruleLoginForm.username"></el-input>
                     </el-form-item>
                     <el-form-item prop="pass">
                         <span slot="label">
@@ -48,7 +48,8 @@
 
 
                     <el-form-item>
-                        <button class="thm-btn orderbtn" style="width:100%"> 登录</button>
+                        <el-button v-on:click="login(ruleLoginForm.username,ruleLoginForm.pass)">登录</el-button>
+                        <button class="thm-btn orderbtn" style="width:100%" @@click="login(ruleLoginForm.username,ruleLoginForm.pass)"> 登录</button>
                     </el-form-item>
 
                     <el-form-item>
@@ -57,43 +58,54 @@
 
 
                 </el-form>
-
                 <h4 class="drawerh5">注册</h4>
                 <p class="explainText">通过 Jiecang 捷昌的 G-Configration 在线服务，我们随时随地为您提供支持。我们始终以您的日常工作为导向。帮助您减轻个别工作量，或陪伴您完成多个过程步骤。助您更轻松、更快地获得最佳结果。</p>
-                <el-form :model="ruleRegisterForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                    <el-form-item prop="username">
+                <el-form :model="ruleRegisterForm" status-icon :rules="rulesRegister" ref="ruleRegisterForm" label-width="100px" class="demo-ruleForm">
+                    <el-form-item prop="registerusername">
                         <span slot="label">
                             <span>账号</span>
                             <i class="el-icon-user"></i>
                         </span>
-                        <el-input typeof="text" v-model="ruleRegisterForm.username"></el-input>
+                        <el-input type="text" v-model="ruleRegisterForm.registerusername"></el-input>
                     </el-form-item>
-                    <el-form-item prop="retrieveUsername">
+                    <el-form-item prop="registercode">
                         <span slot="label">
                             <span>验证码</span>
                             <i class="el-icon-postcard"></i>
                         </span>
-                        <el-col :span="16"><el-input typeof="text" v-model="ruleRegisterForm.retrieveUsername"></el-input></el-col>
-
-                        <el-col :span="6" align="right"><el-button>发送邮件</el-button>
+                        <el-col :span="16"><el-input type="text" v-model="ruleRegisterForm.registercode"></el-input></el-col>
+                        <el-col :span="6" align="right"><el-button v-on:click="sendEmail(ruleRegisterForm.registerusername)">发送邮件</el-button>
                     </el-form-item>
-                    <el-form-item prop="pass">
+                    <el-form-item>
+                        <span slot="label">
+                            <span>名</span>
+                            <i class="el-icon-postcard"></i>
+                        </span>
+                        <el-col :span="9"><el-input type="text" v-model="ruleRegisterForm.registerfirstname"></el-input></el-col>
+                        <el-col :span="5" align="center">
+                            <span>姓</span>
+                            <i class="el-icon-postcard"></i>
+                        </el-col>
+                        <el-col :span="10"><el-input type="text" v-model="ruleRegisterForm.registerlastname"></el-input></el-col>
+                    </el-form-item>
+                    <el-form-item prop="registerpass">
                         <span slot="label">
                             <span>密码</span>
                             <i class="el-icon-lock"></i>
                         </span>
-                        <el-input type="password" v-model="ruleRegisterForm.pass" autocomplete="off"></el-input>
+                        <el-input type="password" v-model="ruleRegisterForm.registerpass" autocomplete="off"></el-input>
                     </el-form-item>
-                    <el-form-item prop="checkPass">
+                    <el-form-item prop="registercheckPass">
                         <span slot="label">
                             <span>确认密码</span>
                             <i class="el-icon-key"></i>
                         </span>
-                        <el-input type="password" v-model="ruleRegisterForm.checkPass" autocomplete="off"></el-input>
+                        <el-input type="password" v-model="ruleRegisterForm.registercheckPass" autocomplete="off"></el-input>
                     </el-form-item>
 
                     <el-form-item>
-                        <button class="thm-btn orderbtn" style="width:100%"> 注册</button>
+                        <el-button class="thm-btn orderbtn" v-on:click="register(ruleRegisterForm.registerusername,ruleRegisterForm.registerpass,ruleRegisterForm.registercode,ruleRegisterForm.registercheckPass,ruleRegisterForm.registerfirstname,ruleRegisterForm.registerlastname)">发送邮件</el-button>
+                        <button class="thm-btn orderbtn" style="width:100%" @@click="register(ruleRegisterForm.registerusername,ruleRegisterForm.registerpass,ruleRegisterForm.registercode,ruleRegisterForm.registercheckPass,ruleRegisterForm.registerfirstname,ruleRegisterForm.registerlastname)"> 注册</button>
                     </el-form-item>
                     <el-form-item>
                         <el-col :span="22" align="right"> <el-link type="primary" v-on:click="dialogVisible_use=true">注册须知</el-link></el-col>
@@ -112,34 +124,34 @@
                         <span>账号</span>
                         <i class="el-icon-postcard"></i>
                     </span>
-                    <el-col :span="18"><el-input typeof="text" v-model="ruleRetrieve.retrieveUsername"></el-input></el-col>
+                    <el-col :span="18"><el-input type="text" v-model="ruleRetrieve.retrieveUsername"></el-input></el-col>
 
-                    <el-col :span="6" align="right"><el-button>发送邮件</el-button>
+                    <el-col :span="6" align="right"><el-button v-on:click="sendResetEmail(ruleRetrieve.retrieveUsername)">发送邮件</el-button>
                 </el-form-item>
-                <el-form-item prop="newPassword">
+                <el-form-item prop="retrievePassword">
                     <span slot="label">
                         <span>新密码</span>
                         <i class="el-icon-lock"></i>
                     </span>
-                    <el-input type="password" v-model="ruleRetrieve.newPassword" autocomplete="off"></el-input>
+                    <el-input type="password" v-model="ruleRetrieve.retrievePassword" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item prop="checkNewPassword">
+                <el-form-item prop="retrievecheckPassword">
                     <span slot="label">
                         <span>确认密码</span>
                         <i class="el-icon-key"></i>
                     </span>
-                    <el-input type="password" v-model="ruleRetrieve.checkNewPassword" autocomplete="off"></el-input>
+                    <el-input type="password" v-model="ruleRetrieve.retrievecheckPassword" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item prop="code">
+                <el-form-item prop="retrievecode">
                     <span slot="label">
                         <span>验证码</span>
                         <i class="el-icon-message"></i>
                     </span>
-                    <el-input v-model="ruleRetrieve.code" autocomplete="off"></el-input>
+                    <el-input v-model="ruleRetrieve.retrievecode" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-col :span="12" align="center">
-                        <el-button type="primary" @@click="submitForm('ruleRetrieve')">重置</el-button>
+                        <el-button type="primary" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)">重置</el-button>
                     </el-col>
                     <el-col :span="11" align="left">
                         <el-button @@click="resetForm('ruleForm')">清空</el-button>

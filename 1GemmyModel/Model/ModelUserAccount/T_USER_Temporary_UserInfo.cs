@@ -36,5 +36,13 @@ namespace _1GemmyModel.Model
         /// 验证码
         /// </summary>
         public string Code { get; set; }
-   }
+        /// <summary>
+        /// 重置密码失效时间
+        /// </summary>
+        public DateTime ResetFailTime { get; set; }
+        /// <summary>
+        /// 重置密码验证码
+        /// </summary>
+        public string ResetCode { get; set; }
+    }
 }

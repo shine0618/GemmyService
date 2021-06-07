@@ -19,74 +19,129 @@ var nav_langu_box = new Vue({
     el: '#nav_langu_box',
     data() {
         var checkUsername = (rule, value, callback) => {
-            const mailReg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+            const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
             if (!value) {
-                return callback(new Error('邮箱不能为空'))
+                return callback(new Error('DL邮箱不能为空'))
             }
             setTimeout(() => {
                 if (mailReg.test(value)) {
                     callback()
                 } else {
-                    callback(new Error('请输入正确的邮箱格式'))
+                    callback(new Error('DL请输入正确的邮箱格式'))
                 }
             }, 100)
 
         };
         var validatePass = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请输入密码'));
+                callback(new Error('DL请输入密码'));
             } else {
-                if (this.ruleForm.checkPass !== '') {
-                    this.$refs.ruleForm.validateField('checkPass');
+                if (this.ruleLoginForm.checkPass !== '') {
+                    this.$refs.ruleLoginForm.validateField('checkPass');
                 }
                 callback();
             }
         };
         var validatePass2 = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请再次输入密码'));
-            } else if (value !== this.ruleForm.pass) {
-                callback(new Error('两次输入密码不一致!'));
+                callback(new Error('DL请再次输入密码'));
+            } else if (value !== this.ruleLoginForm.pass) {
+                callback(new Error('DL两次输入密码不一致!'));
             } else {
                 callback();
             }
         };
         var validretrieveUsername = (rule, value, callback) => {
-            const mailReg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+            const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
             if (!value) {
-                return callback(new Error('不能为空'))
+                return callback(new Error('CZ邮不能为空'))
             }
             setTimeout(() => {
                 if (mailReg.test(value)) {
                     callback();
                 } else {
-                    callback(new Error('请输入正确的邮箱格式'));
+                    callback(new Error('CZ请输入正确的邮箱格式'));
                 }
             }, 100)
 
         };
         var validnewPassword = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请输入密码'));
+                callback(new Error('CZ请输入密码'));
             } else {
-                if (this.ruleRetrieve.checkNewPassword !== '') {
-                    this.$refs.ruleRetrieve.validateField('checkNewPassword');
+                if (this.ruleRetrieve.retrievecheckPassword !== '') {
+                    this.$refs.ruleRetrieve.validateField('retrievecheckNewPassword');
                 }
                 callback();
             }
         };
         var validcheckNewPassword = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请再次输入密码'));
-            } else if (value !== this.ruleRetrieve.newPassword) {
-                callback(new Error('两次输入密码不一致!'));
+                callback(new Error('CZ请再次输入密码'));
+            } else if (value !== this.ruleRetrieve.retrievePassword) {
+                callback(new Error('CZ两次输入密码不一致!'));
             } else {
                 callback();
             }
         };
         var validcode = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('验证码为空!'));
+                callback(new Error('CZ验证码为空!'));
+            } else {
+                callback();
+            }
+        };
+        var registerUsername = (rule, value, callback) => {
+            const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+            if (!value) {
+                return callback(new Error('ZC不能为空'))
+            }
+            setTimeout(() => {
+                if (mailReg.test(value)) {
+                    callback();
+                } else {
+                    callback(new Error('ZC请输入正确的邮箱格式'));
+                }
+            }, 100)
+
+        };
+        var registerPassword = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC请输入密码'));
+            } else {
+                if (this.ruleRegisterForm.registercheckPass !== '') {
+                    this.$refs.ruleRegisterForm.validateField('registercheckPass');
+                }
+                callback();
+            }
+        };
+        var registercheckPassword = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC请再次输入密码'));
+            } else if (value !== this.ruleRegisterForm.registerpass) {
+                callback(new Error('ZC两次输入密码不一致!'));
+            } else {
+                callback();
+            }
+        };
+        var registercode = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC验证码为空!'));
+            } else {
+                iputregistercode = value;
+                callback();
+            }
+        };
+        var registerfirstname = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC名为空!'));
+            } else {
+                callback();
+            }
+        };
+        var registerlastname = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC姓为空!'));
             } else {
                 callback();
             }
@@ -98,22 +153,28 @@ var nav_langu_box = new Vue({
             drawer: false,
             dialogVisible_forget: false,
             dialogVisible_use: false,
+            iputregistercode: '',
+            isregister: false,
+            islogin: false,
+            isReset: false,
             ruleLoginForm: {
                 pass: '',
                 checkPass: '',
                 username: ''
             },
             ruleRegisterForm: {
-                pass: '',
-                retrieveUsername: '',
-                checkPass: '',
-                username: ''
+                registerpass: '',
+                registercode: '',
+                registercheckPass: '',
+                registerusername: '',
+                registerfirstname: '',
+                registerlastname:''
             },
             ruleRetrieve: {
 
-                code: '',
-                newPassword: '',
-                checkNewPassword: '',
+                retrievecode: '',
+                retrievePassword: '',
+                retrievecheckPassword: '',
                 retrieveUsername: '',
             },
             rules: {
@@ -128,17 +189,25 @@ var nav_langu_box = new Vue({
                     //{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'}
                 ]
             },
+            rulesRegister: {
+                registerpass: [{ validator: registerPassword,trigger:'blur'}],
+                registercode: [{ validator: registercode, trigger: 'blur' }],
+                registerusername: [{ validator: registerUsername, trigger: 'blur' }],
+                registercheckPass: [{ validator: registercheckPassword, trigger: 'blur' }],
+                registerfirstname: [{ validator: registerfirstname, trigger: 'blur' }],
+                registerlastname: [{ validator: registerlastname, trigger: 'blur' }]
+            },
             rulesRetrieve: {
                 retrieveUsername: [
                     { validator: validretrieveUsername, trigger: 'blur' },
                 ],
-                code: [
+                retrievecode: [
                     { validator: validcode, trigger: 'blur' },
                 ],
-                newPassword: [
+                retrievePassword: [
                     { validator: validnewPassword, trigger: 'blur' },
                 ],
-                checkNewPassword: [
+                retrievecheckPassword: [
                     { validator: validcheckNewPassword, trigger: 'blur' },
                 ]
             }
@@ -226,7 +295,94 @@ var nav_langu_box = new Vue({
         resetForm(formName) {
             this.$refs[formName].resetFields();
         },
-
+        register(username, pass, code, checkPass, firstname, lastname) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCAccount/Register",
+                    params: {
+                        email: username,
+                        password: pass,
+                        firstname: firstname,
+                        lastname: lastname,
+                        code: iputregistercode
+                    }
+                }).then(function (response) {  //接口返回数据
+                    //  console.log(response);
+                    this.issuccess = response.body;
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
+                })
+        },
+        login(email, password) {
+            this.$http({           //调用接口
+                method: 'GET',
+                url: "/JCAccount/Login",
+                params: {
+                    email: email,
+                    password: password,
+                }
+            }).then(function (response) {  //接口返回数据
+                //  console.log(response);
+                this.islogin = response.body;
+                console.log(response);
+            }, function (error) {
+                console.log(error);
+            })
+        },
+        sendEmail(emailaddress) {
+            if (emailaddress != '') {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCAccount/SendRegisterEmail",
+                    params: {
+                        emailaddress: emailaddress,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    //  console.log(response);
+                    this.registercode = response.body;
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
+                })
+            }
+        },
+        sendResetEmail(emailaddress) {
+            if (emailaddress != '') {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCAccount/SendResetEmail",
+                    params: {
+                        emailaddress: emailaddress,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    //  console.log(response);
+                    this.retrievecode = response.body;
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
+                })
+            }
+        },
+        reset(email, password, code) {
+            if (email != '') {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCAccount/Resetpassword",
+                    params: {
+                        email: email,
+                        newpassword: password,
+                        code: code
+                    }
+                }).then(function (response) {  //接口返回数据
+                    //  console.log(response);
+                    this.isReset = response.body;
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
+                })
+            }
+        }
     }
 });
 nav_langu_box.initNav();
