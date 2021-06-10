@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\BLLBase.cs" />
+    <Compile Include="BLL\BLLOfficeDesk\BLL_Office_Color.cs" />
     <Compile Include="BLL\BLLOfficeDesk\BLL_Office_desk.cs" />
     <Compile Include="BLL\BLLOfficeDesk\BLL_Office_File.cs" />
     <Compile Include="BLL\BLLOfficeDesk\BLL_Ofiice_Configuration.cs" />

@@ -16,6 +16,7 @@ namespace GemmyService.Controllers
         #region 字段
         private BLL_Office_desk bll_desk = new BLL_Office_desk();
         private BLL_Office_File bll_file = new BLL_Office_File();
+        private BLL_Office_Color bll_color = new BLL_Office_Color();
         #endregion
 
 
@@ -258,6 +259,15 @@ namespace GemmyService.Controllers
                 T_Product_office_desk = _T_Product_office_desk,
                 T_Product_office_desk_detail = _T_Product_office_desk_detail,
             };
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+        [HttpGet]
+        public JsonResult GetOfficeColor()
+        {
+            List<T_Office_Color> list = bll_color.GetColorList();
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;

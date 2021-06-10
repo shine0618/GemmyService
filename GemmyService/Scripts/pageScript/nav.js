@@ -12,8 +12,7 @@
         }
     },
 })
-
-
+const TIME_COUNT = 60;
 
 var nav_langu_box = new Vue({
     el: '#nav_langu_box',
@@ -36,21 +35,10 @@ var nav_langu_box = new Vue({
             if (value === '') {
                 callback(new Error('DL请输入密码'));
             } else {
-                if (this.ruleLoginForm.checkPass !== '') {
-                    this.$refs.ruleLoginForm.validateField('checkPass');
-                }
                 callback();
             }
         };
-        var validatePass2 = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('DL请再次输入密码'));
-            } else if (value !== this.ruleLoginForm.pass) {
-                callback(new Error('DL两次输入密码不一致!'));
-            } else {
-                callback();
-            }
-        };
+
         var validretrieveUsername = (rule, value, callback) => {
             const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
             if (!value) {
@@ -147,6 +135,16 @@ var nav_langu_box = new Vue({
             }
         };
         return {
+            beginClientX: 0,
+            /*距离屏幕左端距离*/
+            mouseMoveStata: false,
+            /*触发拖动状态 判断*/
+            maxwidth: 258,
+            /*拖动最大宽度，依据滑块宽度算出来的*/
+            confirmWords: '拖动滑块验证',
+            /*滑块文字*/
+            confirmSuccess: false, /*验证成功判断*/
+
             defaultLanguage: '',
             defaultLanguageCode: '',
             list: null,
@@ -157,9 +155,15 @@ var nav_langu_box = new Vue({
             isregister: false,
             islogin: false,
             isReset: false,
+            count: '',
+            show: true,
+            timer: null,
+            isLoginCheck: false,
+            logincode: '',
+            isSuccess: false,
             ruleLoginForm: {
                 pass: '',
-                checkPass: '',
+                code: '',
                 username: ''
             },
             ruleRegisterForm: {
@@ -168,7 +172,7 @@ var nav_langu_box = new Vue({
                 registercheckPass: '',
                 registerusername: '',
                 registerfirstname: '',
-                registerlastname:''
+                registerlastname: ''
             },
             ruleRetrieve: {
 
@@ -181,16 +185,14 @@ var nav_langu_box = new Vue({
                 pass: [
                     { validator: validatePass, trigger: 'blur' }
                 ],
-                checkPass: [
-                    { validator: validatePass2, trigger: 'blur' }
-                ],
+                code: [{ required: true }],
                 username: [
                     { validator: checkUsername, trigger: 'blur' },
                     //{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'}
                 ]
             },
             rulesRegister: {
-                registerpass: [{ validator: registerPassword,trigger:'blur'}],
+                registerpass: [{ validator: registerPassword, trigger: 'blur' }],
                 registercode: [{ validator: registercode, trigger: 'blur' }],
                 registerusername: [{ validator: registerUsername, trigger: 'blur' }],
                 registercheckPass: [{ validator: registercheckPassword, trigger: 'blur' }],
@@ -215,6 +217,38 @@ var nav_langu_box = new Vue({
 
 
     },
+    mounted() {
+        $('body').on('mousemove', (e) => {
+            //拖动，这里需要用箭头函数，不然this的指向不会是vue对象 
+            if (this.mouseMoveStata) {
+                var width = e.clientX - this.beginClientX;
+                if (width > 0 && width <= this.maxwidth) {
+                    $(".handler").css({
+                        'left': width
+                    });
+                    $(".drag_bg").css({
+                        'width': width
+                    });
+                } else if (width > this.maxwidth) {
+                    this.successFunction();
+                }
+            }
+        });
+        $('body').on('mouseup', (e) => {
+            //鼠标放开 
+            this.mouseMoveStata = false;
+            var width = e.clientX - this.beginClientX;
+            if (width < this.maxwidth) {
+                $(".handler").css({
+                    'left': 0
+                });
+                $(".drag_bg").css({
+                    'width': 0
+                });
+            }
+        })
+
+    },
     // 在 `methods` 对象中定义方法
     methods: {
         ChanggeLangu: function (langcode) {
@@ -230,11 +264,11 @@ var nav_langu_box = new Vue({
             })
         },
         initNav: function (event) {
-            
+
             //var CustomLang = '';
             ////如果客户语言
             //if (CustomLang == 'default') {
-               
+
             //    this.defaultLanguageCode = lang;
             //}
             //else {
@@ -256,7 +290,7 @@ var nav_langu_box = new Vue({
                 this.defaultLanguageCode = response.body.LanguageCode;
             }, function (error) {
 
-                    console.log(error);
+                console.log(error);
             })
 
 
@@ -264,7 +298,7 @@ var nav_langu_box = new Vue({
         },
 
         initlangubox: function (event) {
-          
+
             this.$http({           //调用接口
                 method: 'GET',
                 url: "/JCSelectionLanguage/GetLanguages",
@@ -272,10 +306,10 @@ var nav_langu_box = new Vue({
                     keys: '123',
                 }
             }).then(function (response) {  //接口返回数据
-              //  console.log(response);
+                //  console.log(response);
                 this.list = response.body;
             }, function (error) {
-                    console.log(error);
+                console.log(error);
             })
         },
 
@@ -296,6 +330,7 @@ var nav_langu_box = new Vue({
             this.$refs[formName].resetFields();
         },
         register(username, pass, code, checkPass, firstname, lastname) {
+            if (username != '' && pass != '' && code != '' && checkPass != '' && firstname != '' && lastname != '') {
                 this.$http({           //调用接口
                     method: 'GET',
                     url: "/JCAccount/Register",
@@ -313,22 +348,56 @@ var nav_langu_box = new Vue({
                 }, function (error) {
                     console.log(error);
                 })
+            }
+
         },
-        login(email, password) {
-            this.$http({           //调用接口
-                method: 'GET',
-                url: "/JCAccount/Login",
-                params: {
-                    email: email,
-                    password: password,
+        login(email, password, confirmSuccess, isLoginCheck) {
+            if (email != '' && password != '') {
+                if (isLoginCheck == false) {
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCAccount/Login",
+                        params: {
+                            email: email,
+                            password: password,
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        this.islogin = response.body;
+                        console.log(response);
+                        if (this.islogin == false) {
+                            isLoginCheck = true;
+                        }
+                        console.log(confirmSuccess);
+                        console.log(isLoginCheck);
+                    }, function (error) {
+                        console.log(error);
+                    })
                 }
-            }).then(function (response) {  //接口返回数据
-                //  console.log(response);
-                this.islogin = response.body;
-                console.log(response);
-            }, function (error) {
-                console.log(error);
-            })
+                else if (isLoginCheck == true && confirmSuccess == true) {
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCAccount/Login",
+                        params: {
+                            email: email,
+                            password: password,
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        this.islogin = response.body;
+                        console.log(response);
+                        if (this.islogin == false) {
+                            isLoginCheck = true;
+                        }
+                        console.log(confirmSuccess);
+                        console.log(isLoginCheck);
+                    }, function (error) {
+                        console.log(error);
+                    })
+                }
+                
+            }
+
         },
         sendEmail(emailaddress) {
             if (emailaddress != '') {
@@ -349,40 +418,84 @@ var nav_langu_box = new Vue({
         },
         sendResetEmail(emailaddress) {
             if (emailaddress != '') {
-                this.$http({           //调用接口
-                    method: 'GET',
-                    url: "/JCAccount/SendResetEmail",
-                    params: {
-                        emailaddress: emailaddress,
-                    }
-                }).then(function (response) {  //接口返回数据
-                    //  console.log(response);
-                    this.retrievecode = response.body;
-                    console.log(response);
-                }, function (error) {
-                    console.log(error);
-                })
+                if (!this.timer) {
+                    this.count = TIME_COUNT;
+                    this.show = false;
+                    this.timer = setInterval(() => {
+                        if (this.count > 0 && this.count <= TIME_COUNT) {
+                            this.count--;
+                        } else {
+                            this.show = true;
+                            clearInterval(this.timer);
+                            this.timer = null;
+                        }
+                    }, 1000)
+
+
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCAccount/SendResetEmail",
+                        params: {
+                            emailaddress: emailaddress,
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        this.retrievecode = response.body;
+                        console.log(response);
+                    }, function (error) {
+                        console.log(error);
+                    })
+                }
+
             }
         },
         reset(email, password, code) {
-            if (email != '') {
-                this.$http({           //调用接口
-                    method: 'GET',
-                    url: "/JCAccount/Resetpassword",
-                    params: {
-                        email: email,
-                        newpassword: password,
-                        code: code
-                    }
-                }).then(function (response) {  //接口返回数据
-                    //  console.log(response);
-                    this.isReset = response.body;
-                    console.log(response);
-                }, function (error) {
-                    console.log(error);
-                })
+            if (email != '' && password != '' && code != '') {
+                if (email != '') {
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCAccount/Resetpassword",
+                        params: {
+                            email: email,
+                            newpassword: password,
+                            code: code
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        this.isReset = response.body;
+                        console.log(response);
+                    }, function (error) {
+                        console.log(error);
+                    })
+                }
             }
-        }
+
+        },
+        mousedownFn: function (e) {
+            this.mouseMoveStata = true;
+            this.beginClientX = e.clientX;
+        }, //按下滑块函数 
+        successFunction() {
+            $(".handler").removeClass('handler_bg').addClass('handler_ok_bg');
+            this.confirmWords = '验证通过'
+            $(".drag").css({
+                'color': '#fff'
+            });
+            $(".drag").css({
+                'background-color': '#13CE66'
+            });
+            $(".handler").css({
+                'left': this.maxwidth
+            });
+            $(".drag_bg").css({
+                'width': this.maxwidth
+            });
+            $('body').unbind('mousemove');
+            $('body').unbind('mouseup');
+            this.confirmSuccess = true;
+
+        }, //验证成功函数
+        
     }
 });
 nav_langu_box.initNav();
