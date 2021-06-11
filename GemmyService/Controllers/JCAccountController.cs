@@ -59,7 +59,7 @@ namespace GemmyService.Controllers
                 "<hr />\r\n" + "<div><span style=\"font - size:20px\">尊敬的用户：<br>首先感谢您使用GemmyConfiguration，本条邮件是用于激活您所注册的账号，请通过以下验证码来进行账号的激活<br>" + code + "<br>如有打扰之处，请多谅解!</span></div>";
             return emailBody;
         }
-        [HttpGet]
+        [HttpPost]
         public JsonResult Register(string email, string password, string firstname, string lastname,string code)
         {
             bool isRegister = false;
@@ -91,7 +91,7 @@ namespace GemmyService.Controllers
             return jr;
         }
 
-        [HttpGet]
+        [HttpPost]
         public JsonResult Resetpassword(string email,string newpassword,string code)
         {
             bool isReset = false;

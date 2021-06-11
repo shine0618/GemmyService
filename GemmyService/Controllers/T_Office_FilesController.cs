@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using _1GemmyModel;
 using _1GemmyModel.Model.ModelProductOffice;
+using _2GemmyBusness.BLL.BLLOfficeDesk;
 
 namespace GemmyService.Controllers
 {
     public class T_Office_FilesController : Controller
     {
         private DBGemmyService2 db = new DBGemmyService2();
-
+        private BLL_Office_File bll_office_file = new BLL_Office_File();
         // GET: T_Office_Files
         public ActionResult Index()
         {
@@ -123,6 +124,16 @@ namespace GemmyService.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpGet]
+        public JsonResult GetAllFile()
+        {
+            List<T_Office_Files> t_Office_Files = bll_office_file.GetAllFiles();
+            
+            JsonResult jr = Json(t_Office_Files, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
         }
 
 

@@ -19,6 +19,16 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         public BLL_Office_desk bll_desk = null;
 
         /// <summary>
+        /// 获取全部文件
+        /// </summary>
+        /// <returns></returns>
+        public List<T_Office_Files> GetAllFiles()
+        {
+            var entity = read_db.T_Office_Files.ToList();
+            return entity;
+        }
+
+        /// <summary>
         /// 根据桌子查找所有的资料
         /// </summary>
         /// <param name="deskid"></param>

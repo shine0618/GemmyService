@@ -330,6 +330,7 @@
     <Content Include="assets\libs\pdfmake\vfs_fonts.js" />
     <Content Include="assets\libs\pdfmake\ZCOOLXiaoWei_fonts.js" />
     <Content Include="assets\libs\pdfmake\ZCOOLXiaoWei_OFL.txt" />
+    <Content Include="assets\moment.js" />
     <Content Include="assets\old\main.css" />
     <Content Include="assets\collect1.png" />
     <Content Include="assets\collect2.png" />

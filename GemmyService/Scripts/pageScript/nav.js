@@ -332,7 +332,7 @@ var nav_langu_box = new Vue({
         register(username, pass, code, checkPass, firstname, lastname) {
             if (username != '' && pass != '' && code != '' && checkPass != '' && firstname != '' && lastname != '') {
                 this.$http({           //调用接口
-                    method: 'GET',
+                    method: 'POST',
                     url: "/JCAccount/Register",
                     params: {
                         email: username,
@@ -453,7 +453,7 @@ var nav_langu_box = new Vue({
             if (email != '' && password != '' && code != '') {
                 if (email != '') {
                     this.$http({           //调用接口
-                        method: 'GET',
+                        method: 'POST',
                         url: "/JCAccount/Resetpassword",
                         params: {
                             email: email,

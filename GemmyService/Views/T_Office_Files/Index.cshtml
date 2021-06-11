@@ -5,169 +5,169 @@
 }
 
 
-<style>    @@import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css"); </style>
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
 
 
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.partType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FileName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.thumbnailImg)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Information)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Path)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Outdate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Permission)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Products)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Language)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.verificationCode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.deleteSign)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.deletePerson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatePerson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatePerson)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Remark)
-            </th>
-            <th></th>
-        </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.partType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FileName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.thumbnailImg)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nature)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Information)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Path)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Size)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Outdate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Permission)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Products)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Language)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.verificationCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.deleteSign)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.deletePerson)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatePerson)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UpdatePerson)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Remark)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
-        }
-    </table>
-</body>
-</html>
+<script src="/Scripts/vue.min.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+<link href="//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css" rel="stylesheet" />
+
+<style>
+    @@import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");
+    .el-table .warning-row {
+        background: oldlace;
+    }
+
+    .el-table .success-row {
+        background: #f0f9eb;
+    }
+</style>
 
 
+<div id="OfficeStandards">
+    <template>
+        <el-table :data="paramTableData.filter(data => !search || data.FileName.toLowerCase().includes(search.toLowerCase()))"
+                  :max-height="tableHeight"
+                 >
+            <el-table-column prop="partType"
+                             label="部件类型"
+                             width="100">
+            </el-table-column>
+            <el-table-column prop="Mode"
+                             label="型号"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="FileName"
+                             label="文件名"
+                             width="200">
+            </el-table-column>
+            <el-table-column prop="Nature"
+                             label="文件短介绍"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="Information"
+                             label="长介绍"
+                             width="300">
+            </el-table-column>
+            <el-table-column prop="Path"
+                             label="文件路径"
+                             width="200">
+            </el-table-column>
+            <el-table-column prop="Size"
+                             label="文件大小"
+                             width="100">
+            </el-table-column>
+            <el-table-column prop="Type"
+                             label="文件类型"
+                             width="100">
+            </el-table-column>
+            <el-table-column prop="Lock"
+                             label="锁定状态"
+                             width="100">
+            </el-table-column>
+            <el-table-column prop="Language"
+                             label="文件语言"
+                             width="100">
+            </el-table-column>
+            <el-table-column prop="UpdateTime"                            
+                             label="更新时间"
+                             width="180">
+            </el-table-column>
+            <el-table-column prop="thumbnailImg"
+                             label="文件缩略图"
+                             width="180">
+            </el-table-column>
+            <el-table-column align="right" width="180">
+                <template slot="header" slot-scope="scope">
+                    <el-input v-model="search"
+                              size="mini"
+                              placeholder="输入关键字搜索" />
+                </template>
+                <template slot-scope="scope">
+                    <el-button size="mini"
+                               @@click="handleEdit(scope.$index, scope.row)">编辑
+                    </el-button>
+                    <el-button size="mini"
+                               type="danger"
+                               @@click="handleDelete(scope.$index, scope.row)">删除
+                    </el-button>
+                </template>
+            </el-table-column>
+        </el-table>
+    </template>
+</div>
+
+<script>
+    var OfficeStandards = new Vue({
+        el: '#OfficeStandards',
+        data() {
+            return {
+                tableData: [],
+                search: '',
+                T_Office_Files: null,
+                paramTableData: [],
+                tableHeight: null,
+                strTime:''
+            }
+        },
+        methods: {
+            init: function (event) {
+                this.tableHeight = window.innerHeight - 20;
+            },
+            tableRowClassName({ row, rowIndex }) {
+                if (rowIndex === 1) {
+                    return 'warning-row';
+                } else if (rowIndex === 3) {
+                    return 'success-row';
+                }
+                return '';
+            },
+            handleEdit(index, row) {
+                console.log(index, row);
+            },
+            handleDelete(index, row) {
+                console.log(index, row);
+            },
+            getallFile: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/T_Office_Files/GetAllFile",
+                    params: {
+
+                    }
+                }).then(function (response) {
+                    this.T_Office_Files = response.body;
+                    console.log(response.body);
+                    console.log(this.T_Office_Files);
+                    if (this.T_Office_Files != null) {
+                        for (var i = 0; i < this.T_Office_Files.length; i++) { 
+                            var str = this.HandelTime(this.T_Office_Files[i].UpdateTime);
+                            var q = {
+                                partType: this.T_Office_Files[i].partType, Mode: this.T_Office_Files[i].Mode,
+                                FileName: this.T_Office_Files[i].FileName, Nature: this.T_Office_Files[i].Nature,
+                                Information: this.T_Office_Files[i].Information, Path: this.T_Office_Files[i].Path,
+                                Size: this.T_Office_Files[i].Size, Type: this.T_Office_Files[i].Type,
+                                Lock: this.T_Office_Files[i].Lock, Language: this.T_Office_Files[i].Language,
+                                UpdateTime: str , thumbnailImg: this.T_Office_Files[i].thumbnailImg
+                                };
+                            this.paramTableData.push(q);                           
+                        }
+                        console.log(this.paramTableData);
+                    }
+                }    
+                )
+            },
+            HandelTime(strTime) {
+                var obj = new Date(parseInt(strTime.replace("/Date(", "").replace(")/", ""), 10));
+                return obj.getFullYear() + "-" + obj.getMonth() + "-" + obj.getDate();
+            }
+        }        
+    })
+    OfficeStandards.init();
+    OfficeStandards.getallFile();
+    
+    
+
+</script>
