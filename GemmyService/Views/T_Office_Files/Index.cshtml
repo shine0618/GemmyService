@@ -28,9 +28,10 @@
 
 <div id="OfficeStandards">
     <template>
-        <el-table :data="paramTableData.filter(data => !search || data.FileName.toLowerCase().includes(search.toLowerCase()))"
+
+        <el-table :data="paramTableData.filter(data => !search || data.FileName.toLowerCase().includes(search.toLowerCase())).slice((currentPage-1)*pagesize,currentPage*pagesize)"
                   :max-height="tableHeight"
-                 >
+                  stripe>
             <el-table-column prop="partType"
                              label="部件类型"
                              width="100">
@@ -71,7 +72,7 @@
                              label="文件语言"
                              width="100">
             </el-table-column>
-            <el-table-column prop="UpdateTime"                            
+            <el-table-column prop="UpdateTime"
                              label="更新时间"
                              width="180">
             </el-table-column>
@@ -87,15 +88,79 @@
                 </template>
                 <template slot-scope="scope">
                     <el-button size="mini"
-                               @@click="handleEdit(scope.$index, scope.row)">编辑
+                               type="primary"
+                               @@click="handleEdit(scope.$index, scope.row)">
+                        编辑
                     </el-button>
                     <el-button size="mini"
                                type="danger"
-                               @@click="handleDelete(scope.$index, scope.row)">删除
+                               @@click="handleDelete(scope.$index, scope.row)">
+                        删除
                     </el-button>
                 </template>
             </el-table-column>
         </el-table>
+        <el-pagination @@size-change="handleSizeChange"
+                       @@current-change="handleCurrentChange"
+                       :current-page="currentPage"
+                       :page-sizes="[5,10,20,40]"
+                       :page-size="pagesize"
+                       layout="total,sizes,prev,pager,next,jumper"
+                       :total="paramTableData.length"
+                       align="center">
+        </el-pagination>
+
+        <el-dialog title="修改" :visible.sync="dialogFormEdit" top>
+            <el-form :model="Editform">
+                <el-form-item label="部件类型" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.partType" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="型号" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.Mode" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="文件名" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.FileName" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="文件短介绍" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.Nature" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="长介绍" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.Information" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="文件路径" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.Path" autocomplete="off" disabled></el-input>
+                </el-form-item>
+                <el-form-item label="文件大小" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.Size" autocomplete="off" disabled></el-input>
+                </el-form-item>
+                <el-form-item label="文件类型" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.Type" autocomplete="off" disabled></el-input>
+                </el-form-item>
+                <el-form-item label="锁定状态" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.Lock" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="文件语言" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.Language" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="更新时间" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.UpdateTime" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="文件缩略图" :label-width="formLabelWidth">
+                    <el-input v-model="Editform.thumbnailImg" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="型号" :label-width="formLabelWidth">
+                    <el-select v-model="Editform.Mode" placeholder="请选择活动区域">
+                        <el-option label="区域一" value="shanghai"></el-option>
+                        <el-option label="区域二" value="beijing"></el-option>
+                    </el-select>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @@click="dialogFormEdit = false">取 消</el-button>
+                <el-button type="primary" @@click="dialogFormEdit = false">确 定</el-button>
+            </div>
+        </el-dialog>
+
     </template>
 </div>
 
@@ -109,12 +174,31 @@
                 T_Office_Files: null,
                 paramTableData: [],
                 tableHeight: null,
-                strTime:''
+                strTime: '', 
+                currentPage: 1,   //默认页码为1
+                pagesize: 10,  //默认一页显示10条
+                dialogFormEdit: false,
+                Editform: {
+                    partType: '',
+                    Mode: '',
+                    FileName: '',
+                    Nature: '',
+                    Information: '',
+                    Path: '',
+                    Size: '',
+                    Type: '',
+                    Lock: '',
+                    Language: '',
+                    UpdateTime: '',
+                    thumbnailImg:''
+                },
+                formLabelWidth: '120px',
+                index:'',
             }
         },
         methods: {
             init: function (event) {
-                this.tableHeight = window.innerHeight - 20;
+                this.tableHeight = window.innerHeight - 50;
             },
             tableRowClassName({ row, rowIndex }) {
                 if (rowIndex === 1) {
@@ -125,6 +209,9 @@
                 return '';
             },
             handleEdit(index, row) {
+                this.dialogFormEdit = true;
+                this.Editform = Object.assign({}, row);
+                this.index = index;
                 console.log(index, row);
             },
             handleDelete(index, row) {
@@ -142,26 +229,32 @@
                     console.log(response.body);
                     console.log(this.T_Office_Files);
                     if (this.T_Office_Files != null) {
-                        for (var i = 0; i < this.T_Office_Files.length; i++) { 
-                            var str = this.HandelTime(this.T_Office_Files[i].UpdateTime);
+                        for (var i = 0; i < this.T_Office_Files.length; i++) {                            
                             var q = {
                                 partType: this.T_Office_Files[i].partType, Mode: this.T_Office_Files[i].Mode,
                                 FileName: this.T_Office_Files[i].FileName, Nature: this.T_Office_Files[i].Nature,
                                 Information: this.T_Office_Files[i].Information, Path: this.T_Office_Files[i].Path,
                                 Size: this.T_Office_Files[i].Size, Type: this.T_Office_Files[i].Type,
                                 Lock: this.T_Office_Files[i].Lock, Language: this.T_Office_Files[i].Language,
-                                UpdateTime: str , thumbnailImg: this.T_Office_Files[i].thumbnailImg
-                                };
-                            this.paramTableData.push(q);                           
+                                UpdateTime: this.T_Office_Files[i].UpdateTime, thumbnailImg: this.T_Office_Files[i].thumbnailImg
+                            };
+                            this.paramTableData.push(q);
                         }
                         console.log(this.paramTableData);
+                        console.log(this.T_Office_Files.length);
                     }
-                }    
-                )
+                }
+                );                
             },
             HandelTime(strTime) {
                 var obj = new Date(parseInt(strTime.replace("/Date(", "").replace(")/", ""), 10));
                 return obj.getFullYear() + "-" + obj.getMonth() + "-" + obj.getDate();
+            },
+            handleSizeChange: function (size) {   //一页显示多少条
+                this.pagesize = size;
+            },
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage = currentPage;
             }
         }        
     })
