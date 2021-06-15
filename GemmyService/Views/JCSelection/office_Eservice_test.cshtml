@@ -24,9 +24,6 @@
         overflow: auto;
         margin-top:10px;
     }
-    * {
-        font-family: 'Microsoft YaHei';
-    }
     .about-three
     {
         padding-top:0px;
@@ -59,6 +56,28 @@
     #searchCondition>div{
         float:left;
     }
+    .selectColor_span
+    {
+        display:block;
+        width:40px;
+        height:40px;
+        border-radius:20px;
+        margin:3px;
+    }
+    .selectColor_div {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        border:2px solid rgb(12 33 57 / 0.00);
+        text-align:center;
+        margin:0 auto;
+    }
+    .selectColorcss {
+        border: 2px solid var(--thm-base);
+    }
+    .selectColor_div:hover {
+        border: 2px solid var(--thm-base);
+    }
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -81,9 +100,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <!--<div class="block-title text-center">
-                <p></p>
-                <h3>产品配置列表</h3>
-            </div>-->
+                        <p></p>
+                        <h3>产品配置列表</h3>
+                    </div>-->
                     <!-- /.block-title -->
                     <div>
                         <template>
@@ -139,7 +158,7 @@
             <div class="row selectStep" v-if="selectStep=='s5'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    选择配件
+                    选择操作器
                 </div>
             </div>
             <div class="row selectStep" v-if="selectStep=='s6'">
@@ -201,26 +220,71 @@
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5'">
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s6'">
+
                     <div class="row">
-                        <div class="col-lg-6 col-md-6" v-for="item in list_Color">                            
-                                <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>                           
-                                <h6 style="text-align:center" v-text="item.HEXValue"></h6>
-                        </div>                       
+                        <div class="col-lg-4 col-md-4" v-for="item in list_Color" style="text-align:center;cursor:pointer" v-on:click="colorClick(item.Id,item.ColorName)">
+                            <div :class="{ 'selectColor_div': true,'selectColorcss':select_Color==item.Id}">
+                                <span :style="{ 'background-color':item.HEXValue }" class="selectColor_span"></span>
+
+                            </div>
+                            <h6 v-text="item.ColorName"></h6>
+                        </div>
                     </div>
+
+
+                    @*<div class="row">
+                            <div class="col-lg-6 col-md-6" v-for="item in list_Color">
+                                    <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
+                                    <h6 style="text-align:center" v-text="item.HEXValue"></h6>
+                            </div>
+                        </div>*@
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s7'">
-                    <h6 v-text="'立柱'+select_columnMode"></h6>
-                    <h6 v-text="'框架'+select_frameMode"></h6>
-                    <h6 v-text="'地脚'+select_footMode"></h6>
-                    <h6 v-text="'侧板'+select_SideBracketMode"></h6>
-                    <h6 v-text="'颜色'+select_ColorMode"></h6>
+                    <div>
+                        <label>选择框架宽度</label>
+                        <el-slider v-model="frameWidth"
+                                   :min="600"
+                                   :max="1400"
+                                   show-input>
+                        </el-slider>
+                    </div>
+                    <div>
+                        <label>选择升降高度</label>
+                        <el-slider v-model="frameHeight"
+                                   :min="600"
+                                   :max="1400"
+                                   show-input>
+                        </el-slider>
+                    </div>
+
+                    <h6 v-text="'立柱 '+select_columnMode"></h6>
+                    <h6 v-text="'框架 '+select_frameMode"></h6>
+                    <h6 v-text="'地脚 '+select_footMode"></h6>
+                    <h6 v-text="'侧板 '+select_SideBracketMode"></h6>
+                    <h6 v-text="'颜色 '+select_ColorMode"></h6>
+
+                    <h6 v-text="'框架宽度 '+frameWidth"></h6>
+                    <h6 v-text="'框架高度 '+frameHeight"></h6>
+
                 </div>
                 <div class="col-lg-8" id="asas">
                 </div><!-- /.col-lg-4 -->
             </div>
         </div>
     </section>
-    <button @@click="nextStep">下一步</button>
+    <section class="about-three" style="padding-top:20px; padding-bottom:10px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <button @@click="nextStep" class="orderbtn thm-btn">下一步</button>
+                    <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''">完成配置</button>
+                </div>
+               
+            </div>
+        </div>
+
+        </section>
+      
 </div>
 
 
@@ -252,6 +316,9 @@
             colorConfirm: '#FF0000',
             selectStep: 's1',//选择的步骤
 
+            frameWidth: 600,
+            frameHeight: 600,
+
             list_column: null,
             list_column_count: 0,
             select_column: "",
@@ -274,8 +341,8 @@
 
             list_Color: null,
             list_Color_count: 0,
-            select_Color: "",
-            select_ColorMode: "",
+            select_Color: "2",
+            select_ColorMode: "RAL9016",
 
 
             T_Product_office_desk: null,
@@ -346,6 +413,8 @@
                         break;
                     case "s5":
                         this.selectStep = "s6";
+                    case "s6":
+                        this.selectStep = "s7";
                         break;
                     //default:
                 }
@@ -468,6 +537,11 @@
                 this.select_SideBracket = id;
                 this.select_SideBracketMode = mode;
             },
+            colorClick: function (id, mode) {
+                this.select_Color = id;
+                this.select_ColorMode = mode;
+            },
+            
             orderBtnClick: function (ordervalue) {
                 this.OrderValue = ordervalue;
                 if (this.Order == 1) {
@@ -481,7 +555,7 @@
                 this.$set(this.$data, field, val);//vue 设定值
             },
             getThisDesk: function (event) {                
-                //获取桌子详细信息
+                //获取桌子详细信息 从另外一个标准配置跳转过来
                     this.$http({           //调用接口
                         method: 'GET',
                         url: "/JCSelection/GetOfficeDeskDetail2",
@@ -538,6 +612,11 @@
     //语言加载
     OfficeStandards.initPage();
     OfficeStandards.getAllColumn();
-    OfficeStandards.getThisDesk();
+
+    if (this.productGuid != undefined && this.productGuid != "") {
+        console.log(this.productGuid);
+        OfficeStandards.getThisDesk();
+    }
+  
     OfficeStandards.getAllColor();
 </script>

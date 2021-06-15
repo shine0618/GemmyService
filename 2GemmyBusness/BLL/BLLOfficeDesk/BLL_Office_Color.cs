@@ -12,7 +12,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
     {
         public List<T_Office_Color> GetColorList()
         {
-            var entity = read_db.T_Office_Color.ToList();
+            var entity = read_db.T_Office_Color.OrderBy(x=>x.HEXValue).ToList();
             return entity;
         }
     }
