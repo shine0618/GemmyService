@@ -12,138 +12,241 @@
         }
     },
 })
-
-
+const TIME_COUNT = 60;
 
 var nav_langu_box = new Vue({
     el: '#nav_langu_box',
     data() {
         var checkUsername = (rule, value, callback) => {
-            const mailReg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+            const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
             if (!value) {
-                return callback(new Error('邮箱不能为空'))
+                return callback(new Error('DL邮箱不能为空'))
             }
             setTimeout(() => {
                 if (mailReg.test(value)) {
                     callback()
                 } else {
-                    callback(new Error('请输入正确的邮箱格式'))
+                    callback(new Error('DL请输入正确的邮箱格式'))
                 }
             }, 100)
 
         };
         var validatePass = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请输入密码'));
-            } else {
-                if (this.ruleForm.checkPass !== '') {
-                    this.$refs.ruleForm.validateField('checkPass');
-                }
-                callback();
-            }
-        };
-        var validatePass2 = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请再次输入密码'));
-            } else if (value !== this.ruleForm.pass) {
-                callback(new Error('两次输入密码不一致!'));
+                callback(new Error('DL请输入密码'));
             } else {
                 callback();
             }
         };
+
         var validretrieveUsername = (rule, value, callback) => {
-            const mailReg = /^([a-zA-Z0-9_-])+@@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+            const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
             if (!value) {
-                return callback(new Error('不能为空'))
+                return callback(new Error('CZ邮不能为空'))
             }
             setTimeout(() => {
                 if (mailReg.test(value)) {
                     callback();
                 } else {
-                    callback(new Error('请输入正确的邮箱格式'));
+                    callback(new Error('CZ请输入正确的邮箱格式'));
                 }
             }, 100)
 
         };
         var validnewPassword = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请输入密码'));
+                callback(new Error('CZ请输入密码'));
             } else {
-                if (this.ruleRetrieve.checkNewPassword !== '') {
-                    this.$refs.ruleRetrieve.validateField('checkNewPassword');
+                if (this.ruleRetrieve.retrievecheckPassword !== '') {
+                    this.$refs.ruleRetrieve.validateField('retrievecheckNewPassword');
                 }
                 callback();
             }
         };
         var validcheckNewPassword = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请再次输入密码'));
-            } else if (value !== this.ruleRetrieve.newPassword) {
-                callback(new Error('两次输入密码不一致!'));
+                callback(new Error('CZ请再次输入密码'));
+            } else if (value !== this.ruleRetrieve.retrievePassword) {
+                callback(new Error('CZ两次输入密码不一致!'));
             } else {
                 callback();
             }
         };
         var validcode = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('验证码为空!'));
+                callback(new Error('CZ验证码为空!'));
+            } else {
+                callback();
+            }
+        };
+        var registerUsername = (rule, value, callback) => {
+            const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
+            if (!value) {
+                return callback(new Error('ZC不能为空'))
+            }
+            setTimeout(() => {
+                if (mailReg.test(value)) {
+                    callback();
+                } else {
+                    callback(new Error('ZC请输入正确的邮箱格式'));
+                }
+            }, 100)
+
+        };
+        var registerPassword = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC请输入密码'));
+            } else {
+                if (this.ruleRegisterForm.registercheckPass !== '') {
+                    this.$refs.ruleRegisterForm.validateField('registercheckPass');
+                }
+                callback();
+            }
+        };
+        var registercheckPassword = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC请再次输入密码'));
+            } else if (value !== this.ruleRegisterForm.registerpass) {
+                callback(new Error('ZC两次输入密码不一致!'));
+            } else {
+                callback();
+            }
+        };
+        var registercode = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC验证码为空!'));
+            } else {
+                iputregistercode = value;
+                callback();
+            }
+        };
+        var registerfirstname = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC名为空!'));
+            } else {
+                callback();
+            }
+        };
+        var registerlastname = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('ZC姓为空!'));
             } else {
                 callback();
             }
         };
         return {
+            beginClientX: 0,
+            /*距离屏幕左端距离*/
+            mouseMoveStata: false,
+            /*触发拖动状态 判断*/
+            maxwidth: 258,
+            /*拖动最大宽度，依据滑块宽度算出来的*/
+            confirmWords: '拖动滑块验证',
+            /*滑块文字*/
+            confirmSuccess: false, /*验证成功判断*/
+
             defaultLanguage: '',
             defaultLanguageCode: '',
             list: null,
             drawer: false,
             dialogVisible_forget: false,
             dialogVisible_use: false,
+            iputregistercode: '',
+            isregister: false,
+            islogin: false,
+            isReset: false,
+            count: '',
+            show: true,
+            timer: null,
+            isLoginCheck: false,
+            logincode: '',
+            isSuccess: false,
             ruleLoginForm: {
                 pass: '',
-                checkPass: '',
+                code: '',
                 username: ''
             },
             ruleRegisterForm: {
-                pass: '',
-                retrieveUsername: '',
-                checkPass: '',
-                username: ''
+                registerpass: '',
+                registercode: '',
+                registercheckPass: '',
+                registerusername: '',
+                registerfirstname: '',
+                registerlastname: ''
             },
             ruleRetrieve: {
 
-                code: '',
-                newPassword: '',
-                checkNewPassword: '',
+                retrievecode: '',
+                retrievePassword: '',
+                retrievecheckPassword: '',
                 retrieveUsername: '',
             },
             rules: {
                 pass: [
                     { validator: validatePass, trigger: 'blur' }
                 ],
-                checkPass: [
-                    { validator: validatePass2, trigger: 'blur' }
-                ],
+                code: [{ required: true }],
                 username: [
                     { validator: checkUsername, trigger: 'blur' },
                     //{ type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'}
                 ]
             },
+            rulesRegister: {
+                registerpass: [{ validator: registerPassword, trigger: 'blur' }],
+                registercode: [{ validator: registercode, trigger: 'blur' }],
+                registerusername: [{ validator: registerUsername, trigger: 'blur' }],
+                registercheckPass: [{ validator: registercheckPassword, trigger: 'blur' }],
+                registerfirstname: [{ validator: registerfirstname, trigger: 'blur' }],
+                registerlastname: [{ validator: registerlastname, trigger: 'blur' }]
+            },
             rulesRetrieve: {
                 retrieveUsername: [
                     { validator: validretrieveUsername, trigger: 'blur' },
                 ],
-                code: [
+                retrievecode: [
                     { validator: validcode, trigger: 'blur' },
                 ],
-                newPassword: [
+                retrievePassword: [
                     { validator: validnewPassword, trigger: 'blur' },
                 ],
-                checkNewPassword: [
+                retrievecheckPassword: [
                     { validator: validcheckNewPassword, trigger: 'blur' },
                 ]
             }
         }
 
+
+    },
+    mounted() {
+        $('body').on('mousemove', (e) => {
+            //拖动，这里需要用箭头函数，不然this的指向不会是vue对象 
+            if (this.mouseMoveStata) {
+                var width = e.clientX - this.beginClientX;
+                if (width > 0 && width <= this.maxwidth) {
+                    $(".handler").css({
+                        'left': width
+                    });
+                    $(".drag_bg").css({
+                        'width': width
+                    });
+                } else if (width > this.maxwidth) {
+                    this.successFunction();
+                }
+            }
+        });
+        $('body').on('mouseup', (e) => {
+            //鼠标放开 
+            this.mouseMoveStata = false;
+            var width = e.clientX - this.beginClientX;
+            if (width < this.maxwidth) {
+                $(".handler").css({
+                    'left': 0
+                });
+                $(".drag_bg").css({
+                    'width': 0
+                });
+            }
+        })
 
     },
     // 在 `methods` 对象中定义方法
@@ -161,11 +264,11 @@ var nav_langu_box = new Vue({
             })
         },
         initNav: function (event) {
-            
+
             //var CustomLang = '';
             ////如果客户语言
             //if (CustomLang == 'default') {
-               
+
             //    this.defaultLanguageCode = lang;
             //}
             //else {
@@ -187,7 +290,7 @@ var nav_langu_box = new Vue({
                 this.defaultLanguageCode = response.body.LanguageCode;
             }, function (error) {
 
-                    console.log(error);
+                console.log(error);
             })
 
 
@@ -195,7 +298,7 @@ var nav_langu_box = new Vue({
         },
 
         initlangubox: function (event) {
-          
+
             this.$http({           //调用接口
                 method: 'GET',
                 url: "/JCSelectionLanguage/GetLanguages",
@@ -203,10 +306,10 @@ var nav_langu_box = new Vue({
                     keys: '123',
                 }
             }).then(function (response) {  //接口返回数据
-              //  console.log(response);
+                //  console.log(response);
                 this.list = response.body;
             }, function (error) {
-                    console.log(error);
+                console.log(error);
             })
         },
 
@@ -226,7 +329,173 @@ var nav_langu_box = new Vue({
         resetForm(formName) {
             this.$refs[formName].resetFields();
         },
+        register(username, pass, code, checkPass, firstname, lastname) {
+            if (username != '' && pass != '' && code != '' && checkPass != '' && firstname != '' && lastname != '') {
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCAccount/Register",
+                    params: {
+                        email: username,
+                        password: pass,
+                        firstname: firstname,
+                        lastname: lastname,
+                        code: iputregistercode
+                    }
+                }).then(function (response) {  //接口返回数据
+                    //  console.log(response);
+                    this.issuccess = response.body;
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
+                })
+            }
 
+        },
+        login(email, password, confirmSuccess, isLoginCheck) {
+            if (email != '' && password != '') {
+                if (isLoginCheck == false) {
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCAccount/Login",
+                        params: {
+                            email: email,
+                            password: password,
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        this.islogin = response.body;
+                        console.log(response);
+                        if (this.islogin == false) {
+                            isLoginCheck = true;
+                        }
+                        console.log(confirmSuccess);
+                        console.log(isLoginCheck);
+                    }, function (error) {
+                        console.log(error);
+                    })
+                }
+                else if (isLoginCheck == true && confirmSuccess == true) {
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCAccount/Login",
+                        params: {
+                            email: email,
+                            password: password,
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        this.islogin = response.body;
+                        console.log(response);
+                        if (this.islogin == false) {
+                            isLoginCheck = true;
+                        }
+                        console.log(confirmSuccess);
+                        console.log(isLoginCheck);
+                    }, function (error) {
+                        console.log(error);
+                    })
+                }
+                
+            }
+
+        },
+        sendEmail(emailaddress) {
+            if (emailaddress != '') {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCAccount/SendRegisterEmail",
+                    params: {
+                        emailaddress: emailaddress,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    //  console.log(response);
+                    this.registercode = response.body;
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
+                })
+            }
+        },
+        sendResetEmail(emailaddress) {
+            if (emailaddress != '') {
+                if (!this.timer) {
+                    this.count = TIME_COUNT;
+                    this.show = false;
+                    this.timer = setInterval(() => {
+                        if (this.count > 0 && this.count <= TIME_COUNT) {
+                            this.count--;
+                        } else {
+                            this.show = true;
+                            clearInterval(this.timer);
+                            this.timer = null;
+                        }
+                    }, 1000)
+
+
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCAccount/SendResetEmail",
+                        params: {
+                            emailaddress: emailaddress,
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        this.retrievecode = response.body;
+                        console.log(response);
+                    }, function (error) {
+                        console.log(error);
+                    })
+                }
+
+            }
+        },
+        reset(email, password, code) {
+            if (email != '' && password != '' && code != '') {
+                if (email != '') {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCAccount/Resetpassword",
+                        params: {
+                            email: email,
+                            newpassword: password,
+                            code: code
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        this.isReset = response.body;
+                        console.log(response);
+                    }, function (error) {
+                        console.log(error);
+                    })
+                }
+            }
+
+        },
+        mousedownFn: function (e) {
+            this.mouseMoveStata = true;
+            this.beginClientX = e.clientX;
+        }, //按下滑块函数 
+        successFunction() {
+            $(".handler").removeClass('handler_bg').addClass('handler_ok_bg');
+            this.confirmWords = '验证通过'
+            $(".drag").css({
+                'color': '#fff'
+            });
+            $(".drag").css({
+                'background-color': '#13CE66'
+            });
+            $(".handler").css({
+                'left': this.maxwidth
+            });
+            $(".drag_bg").css({
+                'width': this.maxwidth
+            });
+            $('body').unbind('mousemove');
+            $('body').unbind('mouseup');
+            this.confirmSuccess = true;
+
+        }, //验证成功函数
+        
     }
 });
 nav_langu_box.initNav();

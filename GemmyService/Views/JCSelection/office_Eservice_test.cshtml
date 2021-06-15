@@ -93,7 +93,8 @@
                                 <el-tab-pane :label="text_customer_3" name="s3"></el-tab-pane>
                                 <el-tab-pane :label="text_customer_4" name="s4"></el-tab-pane>
                                 <el-tab-pane :label="text_customer_42" name="s5"></el-tab-pane>
-                                <el-tab-pane label="配置清单信息" name="s6"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_423" name="s6"></el-tab-pane>
+                                <el-tab-pane label="配置清单信息" name="s7"></el-tab-pane>
                             </el-tabs>
                         </template>
                     </div>
@@ -144,6 +145,12 @@
             <div class="row selectStep" v-if="selectStep=='s6'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
+                    颜色
+                </div>
+            </div>
+            <div class="row selectStep" v-if="selectStep=='s7'">
+                <div class="col-lg-12">
+                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
                     配置清单
                 </div>
             </div>
@@ -152,7 +159,6 @@
 
     <section class="about-three" style="padding-bottom:0px;">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s1'">
                     @*s1*@
@@ -193,28 +199,28 @@
                     </div>
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5'">
-
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s6'">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6" v-for="item in list_Color">                            
+                                <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>                           
+                                <h6 style="text-align:center" v-text="item.HEXValue"></h6>
+                        </div>                       
+                    </div>
+                </div>
+                <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s7'">
                     <h6 v-text="'立柱'+select_columnMode"></h6>
                     <h6 v-text="'框架'+select_frameMode"></h6>
                     <h6 v-text="'地脚'+select_footMode"></h6>
                     <h6 v-text="'侧板'+select_SideBracketMode"></h6>
+                    <h6 v-text="'颜色'+select_ColorMode"></h6>
                 </div>
-
-
                 <div class="col-lg-8" id="asas">
-                
                 </div><!-- /.col-lg-4 -->
             </div>
-
         </div>
-
-
     </section>
-
     <button @@click="nextStep">下一步</button>
-
 </div>
 
 
@@ -241,9 +247,9 @@
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
             configurationNo: "",*@
-
+            
             list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-
+            colorConfirm: '#FF0000',
             selectStep: 's1',//选择的步骤
 
             list_column: null,
@@ -264,7 +270,14 @@
             list_SideBracket: null,
             list_SideBracket_count: 0,
             select_SideBracket: "",
-            select_SideBracketMode:"",
+            select_SideBracketMode: "",
+
+            list_Color: null,
+            list_Color_count: 0,
+            select_Color: "",
+            select_ColorMode: "",
+
+
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
             productGuid:'@ViewBag.productGuid',
@@ -275,7 +288,8 @@
             text_customer_2: "",
             text_customer_3: "",
             text_customer_4: "",
-            text_customer_42 :"",
+            text_customer_42: "",
+            text_customer_423: "",
             text_customer_5: "",
             text_customer_6: "",
             text_customer_7: "",
@@ -330,7 +344,9 @@
                     case "s4":
                         this.selectStep = "s5";
                         break;
-
+                    case "s5":
+                        this.selectStep = "s6";
+                        break;
                     //default:
                 }
             },
@@ -374,7 +390,7 @@
                 }).then(function (response) {  //接口返回数据
                     this.list_column = response.body;
                     this.list_column_count = this.list_column.length;
-                  //  console.log(response.body);
+                    //console.log(response.body);
                 }, function (error) {
                         console.log(error);
                })
@@ -416,6 +432,20 @@
                 }).then(function (response) {  //接口返回数据
                     this.list_SideBracket = response.body;
                     this.list_SideBracket_count = this.list_foot.length;
+                }, function (error) {
+                    console.log(error);
+                })
+            },
+            getAllColor: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetOfficeColor",
+                    params: {
+                    }
+                }).then(function (response) {  //接口返回数据
+                    this.list_Color = response.body;
+                    this.list_Color_count = this.list_Color.length;
+                    console.log(response.body);
                 }, function (error) {
                     console.log(error);
                 })
@@ -509,4 +539,5 @@
     OfficeStandards.initPage();
     OfficeStandards.getAllColumn();
     OfficeStandards.getThisDesk();
+    OfficeStandards.getAllColor();
 </script>
