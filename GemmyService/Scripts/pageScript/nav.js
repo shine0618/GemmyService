@@ -158,7 +158,7 @@ var nav_langu_box = new Vue({
             count: '',
             show: true,
             timer: null,
-            isLoginCheck: false,
+            isLoginCheck: true,
             logincode: '',
             isSuccess: false,
             ruleLoginForm: {
@@ -364,12 +364,13 @@ var nav_langu_box = new Vue({
                     }).then(function (response) {  //接口返回数据
                         //  console.log(response);
                         this.islogin = response.body;
-                        console.log(response);
+                       
                         if (this.islogin == false) {
                             isLoginCheck = true;
                         }
-                        console.log(confirmSuccess);
-                        console.log(isLoginCheck);
+                        if (response.body.CanLogin == true) {
+                            location.reload();
+                        }
                     }, function (error) {
                         console.log(error);
                     })
@@ -384,13 +385,15 @@ var nav_langu_box = new Vue({
                         }
                     }).then(function (response) {  //接口返回数据
                         //  console.log(response);
-                        this.islogin = response.body;
-                        console.log(response);
+                       // this.islogin = response.body;
+
+                        if (response.body.CanLogin == true) {
+                            location.reload();
+                        }
+                     //   console.log(response);
                         if (this.islogin == false) {
                             isLoginCheck = true;
                         }
-                        console.log(confirmSuccess);
-                        console.log(isLoginCheck);
                     }, function (error) {
                         console.log(error);
                     })
@@ -398,6 +401,27 @@ var nav_langu_box = new Vue({
                 
             }
 
+        },
+        LoginOut() {
+            var emailaddress = '';
+            this.$http({           //退出登录
+                method: 'GET',
+                url: "/JCAccount/LoginOut",
+                params: {
+                    emailaddress: emailaddress ,
+                }
+            }).then(function (response) {  //接口返回数据
+                //  console.log(response);
+                //  this.registercode = response.body;
+                console.log(response);
+                if (response.body.LoginOut == true) {
+                    console.log('reload');
+                    location.reload();
+                }
+
+            }, function (error) {
+                console.log(error);
+            })
         },
         sendEmail(emailaddress) {
             if (emailaddress != '') {
@@ -409,7 +433,7 @@ var nav_langu_box = new Vue({
                     }
                 }).then(function (response) {  //接口返回数据
                     //  console.log(response);
-                    this.registercode = response.body;
+                  //  this.registercode = response.body;
                     console.log(response);
                 }, function (error) {
                     console.log(error);

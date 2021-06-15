@@ -32,22 +32,30 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
         }
 
 
-        public bool Login(string email, string password)
+        public T_USER_UserInfo Login(string email, string password)
         {
+
+            string pwd = MD5T.MD5Encrypt(password);
             using (DBGemmyService2 db = new DBGemmyService2())
             {
-                var entity = db.T_USER_UserInfo.FirstOrDefault(m => m.Email == email && m.Password == MD5T.MD5Encrypt(password));
+                var entity = db.T_USER_UserInfo.Where(m => m.Email == email && m.Password == pwd).FirstOrDefault();
 
                 if (entity.Id != 0)
                 {
-                    return true;
+
+
+                    //判断是否允许登录 
+                    entity.CanLogin = true;
+                    return entity;
 
                 }
                 else
                 {
-                    return false;
+                   
                 }
             }
+
+            return null;
 
         }
 
@@ -131,10 +139,10 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                 {
                     db.T_User_Temporary_UserInfo.Add(new T_USER_Temporary_UserInfo
                     {
-                        Email=email,
-                        FailTime=dt,
-                        Code=code
-                    });
+                        Email = email,                     
+                        FailTime = dt,
+                        Code = code
+                    }); ;
                     db.SaveChanges();
                 }
                 else

@@ -19,8 +19,47 @@ namespace GemmyService.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public JsonResult SendRegisterEmail(string emailaddress)
+
+        #region 发送邮件
+
+
+        public bool sendEmail(string emailaddress,string emailBodyText,string codestr)
+        {
+           
+            try
+            {
+                //设置要调用的发送邮件的服务器
+                SmtpClient smtp = new SmtpClient("smtphz.qiye.163.com ");
+                //创建发件人对象
+                MailAddress from = new MailAddress("tangwj@jiecang.com");
+                //创建收件人对象
+                MailAddress to = new MailAddress(emailaddress);
+                //要发送的邮件对象，包含四个内容要填充
+                MailMessage mail = new MailMessage(from, to);
+                //设置邮件的标题
+                mail.Subject = "Test";
+                mail.IsBodyHtml = true;
+                //设置邮件的主题正文格式
+                mail.Body = emailBodyText;
+                //创建发件人身份验证凭证
+                NetworkCredential cred = new NetworkCredential("tangwj@jiecang.com", "Jc#^35*.&Qtw");
+                smtp.Credentials = cred;
+                //此服务器对象执行发送邮件功能
+                smtp.Send(mail);
+               
+                return true;
+            }
+            catch(Exception ex )
+            {
+
+            }
+            return false;
+
+
+
+        }
+
+        public string CreateVerificationCode()
         {
             Random rd = new Random();
             string codestr = "";
@@ -29,29 +68,21 @@ namespace GemmyService.Controllers
                 int num = rd.Next(0, 9);
                 codestr += num;
             }
-            //设置要调用的发送邮件的服务器
-            SmtpClient smtp = new SmtpClient("smtp.qq.com");
-            //创建发件人对象
-            MailAddress from = new MailAddress("1194778796@qq.com");
-            //创建收件人对象
-            MailAddress to = new MailAddress(emailaddress);
-            //要发送的邮件对象，包含四个内容要填充
-            MailMessage mail = new MailMessage(from, to);
-            //设置邮件的标题
-            mail.Subject = "Test";
-            mail.IsBodyHtml = true;
-            //设置邮件的主题正文格式
-            mail.Body = emailBody(codestr);
-            //创建发件人身份验证凭证
-            NetworkCredential cred = new NetworkCredential("1194778796@qq.com", "vjmyuabouewyghgc");
-            smtp.Credentials = cred;
-            //此服务器对象执行发送邮件功能
-            smtp.Send(mail);
-            usermanager.addRegisterInfo(emailaddress,DateTime.UtcNow.AddMinutes(30),codestr);
+            return codestr;
+        }
+
+        [HttpGet]
+        public JsonResult SendRegisterEmail(string emailaddress)
+        {
+            string codestr = CreateVerificationCode();
+            sendEmail(emailaddress, emailBody(codestr), codestr);
+            usermanager.addRegisterInfo(emailaddress, DateTime.UtcNow.AddMinutes(30), codestr);
             JsonResult jr = Json(codestr, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
+
         private string emailBody(string code)
         {
             string emailBody = "";
@@ -59,6 +90,9 @@ namespace GemmyService.Controllers
                 "<hr />\r\n" + "<div><span style=\"font - size:20px\">尊敬的用户：<br>首先感谢您使用GemmyConfiguration，本条邮件是用于激活您所注册的账号，请通过以下验证码来进行账号的激活<br>" + code + "<br>如有打扰之处，请多谅解!</span></div>";
             return emailBody;
         }
+
+
+        #endregion
         [HttpPost]
         public JsonResult Register(string email, string password, string firstname, string lastname,string code)
         {
@@ -85,7 +119,14 @@ namespace GemmyService.Controllers
         [HttpGet]
         public JsonResult Login(string email,string password)
         {
-            bool isLogin = usermanager.Login(email, password);
+            T_USER_UserInfo isLogin = usermanager.Login(email, password);
+
+           
+            if(isLogin!=null&&isLogin.CanLogin==true)
+            {
+                Session["configurationPerson"] = isLogin.FirstName+" "+isLogin.LastName;
+                Session.Timeout = 9600;
+            }
             JsonResult jr = Json(isLogin, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
@@ -114,34 +155,15 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
+
+
         [HttpGet]
         public JsonResult SendResetEmail(string emailaddress)
         {
-            Random rd = new Random();
-            string codestr = "";
-            for (int i = 0; i < 5; i++)
-            {
-                int num = rd.Next(0, 9);
-                codestr += num;
-            }
-            //设置要调用的发送邮件的服务器
-            SmtpClient smtp = new SmtpClient("smtp.qq.com");
-            //创建发件人对象
-            MailAddress from = new MailAddress("1194778796@qq.com");
-            //创建收件人对象
-            MailAddress to = new MailAddress(emailaddress);
-            //要发送的邮件对象，包含四个内容要填充
-            MailMessage mail = new MailMessage(from, to);
-            //设置邮件的标题
-            mail.Subject = "Test";
-            mail.IsBodyHtml = true;
-            //设置邮件的主题正文格式
-            mail.Body = ResetemailBody(codestr);
-            //创建发件人身份验证凭证
-            NetworkCredential cred = new NetworkCredential("1194778796@qq.com", "vjmyuabouewyghgc");
-            smtp.Credentials = cred;
-            //此服务器对象执行发送邮件功能
-            smtp.Send(mail);
+            string codestr = CreateVerificationCode();
+            sendEmail(emailaddress, ResetemailBody(codestr), codestr);
+
             usermanager.addResetInfo(emailaddress, DateTime.UtcNow.AddMinutes(30), codestr);
             JsonResult jr = Json(codestr, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
@@ -153,6 +175,22 @@ namespace GemmyService.Controllers
             emailBody += "<style>.alignleft{display:inline;float:left;}</style>\r\n" + "<div><img class=\"alignleft\" src=\"https://img01.yun300.cn/img/jcxlogo.png?tenantId=150725&viewType=1&k=1621414521000\" ></div><div><span style=\"color:#0f4c81\"><span style=\"font-family:微软雅黑\"><span style=\"line-height:1.2\"><span style=\"font-size:20px\">股票代码：603583<br>股票名称：捷昌驱动</span></span></span></span></div>" + "\r\n" +
                 "<hr />\r\n" + "<div><span style=\"font - size:20px\">尊敬的用户：<br>首先感谢您使用GemmyConfiguration，本条邮件是用于重置密码，请通过以下验证码来进行密码的重置<br>" + code + "<br>如有打扰之处，请多谅解!</span></div>";
             return emailBody;
+        }
+
+
+
+
+        [HttpGet]
+        public JsonResult LoginOut(string emailaddress)
+        {
+            Session.Clear();
+            var param =
+            new {
+                LoginOut=true,
+            };
+            JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
         }
     }
 }

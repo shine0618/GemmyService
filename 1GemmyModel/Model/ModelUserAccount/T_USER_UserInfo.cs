@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,11 @@ namespace _1GemmyModel.Model
         /// 账号封禁
         /// </summary>
         public bool Lock { get; set; }
+
+
+
+        [NotMapped]
+        public bool CanLogin { get; set; }
 
 
 
