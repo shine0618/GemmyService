@@ -16,6 +16,8 @@ namespace _1GemmyModel.Model
         /// 电子邮箱
         /// </summary>
         public string Email { get; set; }
+
+       
         /// <summary>
         /// 名
         /// </summary>
@@ -32,5 +34,8 @@ namespace _1GemmyModel.Model
         /// 账号封禁
         /// </summary>
         public bool Lock { get; set; }
+
+
+
     }
 }

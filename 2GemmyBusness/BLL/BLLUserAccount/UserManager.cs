@@ -9,7 +9,7 @@ using _4GemmyTools;
 
 namespace _2GemmyBusness.BLL.BLLUserAccount
 {
-  public  class UserManager
+  public  class UserManager:BLLBase
     {
         //public void Register(string username, string password, string question, string answer, string email)
         //{
@@ -54,6 +54,8 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
 
 
 
+        
+
 
         /// <summary>
         /// 获取盐值
@@ -62,6 +64,29 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
         public string GetSalt()
         {
             return System.Guid.NewGuid().ToString("D");
+        }
+
+        public string GetSalt(string userName)
+        {
+            // var q = read_db.T_USER_UserInfo.Where(x => x.Email == userName).FirstOrDefault();
+
+
+            return "";
+
+        }
+        /// <summary>
+        /// 密码生成
+        /// </summary>
+        /// <param name=""></param>
+        /// <param name=""></param>
+        /// <param name=""></param>
+        public string  generateHashPassword(string pwd, string salt)
+        {
+            string str1 = MD5T.MD5Encrypt(pwd);
+
+            string str2 = MD5T.MD5Encrypt(salt + str1);
+
+            return str2;
         }
     }
 }
