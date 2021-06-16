@@ -11,8 +11,9 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
 {
   public  class UserManager:BLLBase
     {
-        public void Register(string email,string password, string firstname, string lastname)
+        public bool Register(string email,string password, string firstname, string lastname)
         {
+            bool issuccess = false;
             using (DBGemmyService2 db = new DBGemmyService2())
             {
                 var entity = db.T_USER_UserInfo.Where(m => m.Email ==email).ToList();
@@ -26,9 +27,11 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                         Email = email
                     });
                     db.SaveChanges();
-
+                    issuccess = true;
                 }
+                
             }
+            return issuccess;
         }
 
 
@@ -37,26 +40,28 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
 
             string pwd = MD5T.MD5Encrypt(password);
             using (DBGemmyService2 db = new DBGemmyService2())
-            {
-                var entity = db.T_USER_UserInfo.Where(m => m.Email == email && m.Password == pwd).FirstOrDefault();
-
-                if (entity.Id != 0)
+            {               
+                var entity = db.T_USER_UserInfo.Where(m => m.Email == email).FirstOrDefault();                
+                if (entity != null)
                 {
-
-
                     //判断是否允许登录 
-                    entity.CanLogin = true;
-                    return entity;
-
+                    
+                    if (entity.Password == pwd)
+                    {
+                        entity.CanLogin = true;
+                    }
+                    else
+                    {
+                        entity.NoPassword = true;
+                    }
+                    return entity;                   
                 }
                 else
                 {
-                   
+                    
                 }
             }
-
             return null;
-
         }
 
         public void Reset(string email, string password)

@@ -41,7 +41,11 @@ namespace _1GemmyModel.Model
         [NotMapped]
         public bool CanLogin { get; set; }
 
+        [NotMapped]
+        public bool NoUsername { get; set; }
 
+        [NotMapped]
+        public bool NoPassword { get; set; }
 
     }
 }

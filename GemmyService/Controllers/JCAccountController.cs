@@ -106,8 +106,8 @@ namespace GemmyService.Controllers
                     {
                         if (code == item.Code)
                         {
-                            usermanager.Register(email, password, firstname, lastname);
-                            isRegister = true;
+                           bool issuccess= usermanager.Register(email, password, firstname, lastname);
+                           isRegister = issuccess;
                         }
                     }
                 }
@@ -125,8 +125,10 @@ namespace GemmyService.Controllers
             if(isLogin!=null&&isLogin.CanLogin==true)
             {
                 Session["configurationPerson"] = isLogin.FirstName+" "+isLogin.LastName;
+                Session["picName"] = isLogin.FirstName.Substring(0,1)+ isLogin.LastName.Substring(0,1);
                 Session.Timeout = 9600;
             }
+
             JsonResult jr = Json(isLogin, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;

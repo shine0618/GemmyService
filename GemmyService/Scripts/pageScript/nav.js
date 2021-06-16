@@ -116,24 +116,18 @@ var nav_langu_box = new Vue({
             if (value === '') {
                 callback(new Error('ZC验证码为空!'));
             } else {
-                iputregistercode = value;
+                inputregistercode = value;
                 callback();
             }
         };
-        var registerfirstname = (rule, value, callback) => {
+        var registername = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('ZC名为空!'));
+                callback(new Error('ZC名或姓为空!'));
             } else {
                 callback();
             }
         };
-        var registerlastname = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('ZC姓为空!'));
-            } else {
-                callback();
-            }
-        };
+
         return {
             beginClientX: 0,
             /*距离屏幕左端距离*/
@@ -151,11 +145,12 @@ var nav_langu_box = new Vue({
             drawer: false,
             dialogVisible_forget: false,
             dialogVisible_use: false,
-            iputregistercode: '',
+            inputregistercode: '',
             isregister: false,
             islogin: false,
             isReset: false,
             count: '',
+            registershow: true,
             show: true,
             timer: null,
             isLoginCheck: true,
@@ -196,8 +191,8 @@ var nav_langu_box = new Vue({
                 registercode: [{ validator: registercode, trigger: 'blur' }],
                 registerusername: [{ validator: registerUsername, trigger: 'blur' }],
                 registercheckPass: [{ validator: registercheckPassword, trigger: 'blur' }],
-                registerfirstname: [{ validator: registerfirstname, trigger: 'blur' }],
-                registerlastname: [{ validator: registerlastname, trigger: 'blur' }]
+                registerfirstname: [{ validator: registername, trigger: 'blur' }],
+                registerlastname: [{ validator: registername, trigger: 'blur' }]
             },
             rulesRetrieve: {
                 retrieveUsername: [
@@ -212,10 +207,107 @@ var nav_langu_box = new Vue({
                 retrievecheckPassword: [
                     { validator: validcheckNewPassword, trigger: 'blur' },
                 ]
+            },
+            infoDataForm: [
+                {
+                    'id': 1,
+                    'menuName': '个人信息',                   
+                    'children': [
+                        {
+                            'id': 100,
+                            'menuName': '电子邮箱',
+                            'icon': 'el-icon-message',                           
+                        },
+                        {
+                            'id': 101,
+                            'menuName': '名称',
+                            'icon': 'el-icon-postcard',                            
+                        },
+                        {
+                            'id': 102,
+                            'menuName': '性别',
+                            'icon': 'el-icon-s-custom', 
+                        },
+                        {
+                            'id': 103,
+                            'menuName': '联系方式',
+                            'icon': 'el-icon-phone', 
+                        }
+                    ]
+                },
+                {
+                    'id': 2,
+                    'menuName': '公司信息',
+                    'children': [
+                        {
+                            'id': 200,
+                            'menuName': '公司名称',
+                            'icon': 'el-icon-office-building',
+                        },
+                        {
+                            'id': 201,
+                            'menuName': '公司地址（街道）',
+                            'icon': 'el-icon-location',
+                        },
+                        {
+                            'id': 202,
+                            'menuName': '公司邮编及详细地址',
+                            'icon': 'el-icon-location',
+                        },
+                        {
+                            'id': 203,
+                            'menuName': '公司地区',
+                            'icon': 'el-icon-map-location',
+                        },
+                        {
+                            'id': 204,
+                            'menuName': '公司官网',
+                            'icon': 'el-icon-link',
+                        },
+                    ]
+                },
+                {
+                    'id': 3,
+                    'menuName': '设置',
+                    'children': [
+                        {
+                            'id': 300,
+                            'menuName': '1',
+                            'icon': 'el-icon-s-tools',
+                        },
+                    ]
+                },
+                {
+                    'id': 4,
+                    'menuName': '修改密码',
+                    'children': [
+                        {
+                            'id': 400,
+                            'menuName': '旧密码',
+                            'icon': 'el-icon-lock',
+                        },
+                        {
+                            'id': 401,
+                            'menuName': '新密码',
+                            'icon': 'el-icon-key',
+                        },
+                        {
+                            'id': 402,
+                            'menuName': '确认密码',
+                            'icon': 'el-icon-key',
+                        },
+                        {
+                            'id': 403,
+                            'menuName': '修改',
+                        },
+                    ]
+                },
+            ],
+            defaultProps: {
+                children: 'children',
+                label: 'menuName'
             }
         }
-
-
     },
     mounted() {
         $('body').on('mousemove', (e) => {
@@ -339,12 +431,21 @@ var nav_langu_box = new Vue({
                         password: pass,
                         firstname: firstname,
                         lastname: lastname,
-                        code: iputregistercode
+                        code: inputregistercode
                     }
                 }).then(function (response) {  //接口返回数据
                     //  console.log(response);
                     this.issuccess = response.body;
-                    console.log(response);
+                    if (response.body.isRegister == true) {
+                        this.$notify({
+                            message: '注册成功',
+                            type: 'success'
+                        });
+                        this.resetForm(ruleRegisterForm);
+                    }
+                    else {
+                        this.$notify.error('注册失败');
+                    }
                 }, function (error) {
                     console.log(error);
                 })
@@ -362,15 +463,26 @@ var nav_langu_box = new Vue({
                             password: password,
                         }
                     }).then(function (response) {  //接口返回数据
-                        //  console.log(response);
-                        this.islogin = response.body;
-                       
-                        if (this.islogin == false) {
-                            isLoginCheck = true;
+                        console.log(response.body);
+                        if (response.body == null) {
+                            this.$notify.error('登录失败');
                         }
-                        if (response.body.CanLogin == true) {
-                            location.reload();
+                        else {
+                            this.islogin = response.body;
+
+                            if (this.islogin == false) {
+                                isLoginCheck = true;
+                            }
+                            if (response.body.CanLogin == true) {
+                                location.reload();
+                                this.$notify({
+                                    message: '登录成功',
+                                    type: 'success'
+                                });
+                            }
                         }
+                        
+                        
                     }, function (error) {
                         console.log(error);
                     })
@@ -384,16 +496,28 @@ var nav_langu_box = new Vue({
                             password: password,
                         }
                     }).then(function (response) {  //接口返回数据
-                        //  console.log(response);
+                        console.log(response.body);
                        // this.islogin = response.body;
 
                         if (response.body.CanLogin == true) {
                             location.reload();
+                            this.$notify({
+                                message: '登录成功',
+                                type: 'success'
+                            });
+                        }
+                        else if (response.body.NoPassword) {
+                            this.$notify.error('密码错误');
+                        }
+                        else {
+                            this.$notify.error('账号错误');
                         }
                      //   console.log(response);
                         if (this.islogin == false) {
                             isLoginCheck = true;
+                            
                         }
+
                     }, function (error) {
                         console.log(error);
                     })
@@ -417,6 +541,10 @@ var nav_langu_box = new Vue({
                 if (response.body.LoginOut == true) {
                     console.log('reload');
                     location.reload();
+                    this.$notify({
+                        message: '登出成功',
+                        type: 'success'
+                    });
                 }
 
             }, function (error) {
@@ -425,6 +553,20 @@ var nav_langu_box = new Vue({
         },
         sendEmail(emailaddress) {
             if (emailaddress != '') {
+                if (!this.timer) {
+                    this.count = TIME_COUNT;
+                    this.registershow = false;
+                    this.timer = setInterval(() => {
+                        if (this.count > 0 && this.count <= TIME_COUNT) {
+                            this.count--;
+                        } else {
+                            this.registershow = true;
+                            clearInterval(this.timer);
+                            this.timer = null;
+                        }
+                    }, 1000)
+                }
+
                 this.$http({           //调用接口
                     method: 'GET',
                     url: "/JCAccount/SendRegisterEmail",
@@ -433,11 +575,21 @@ var nav_langu_box = new Vue({
                     }
                 }).then(function (response) {  //接口返回数据
                     //  console.log(response);
-                  //  this.registercode = response.body;
+                    //  this.registercode = response.body;
+                    if (response.body != null) {
+                        this.$notify({
+                            message: '注册邮件发送成功',
+                            type: 'success'
+                        });
+                    }
+                    else {
+                        this.$notify.error('注册邮件发送失败');
+                    }
                     console.log(response);
                 }, function (error) {
                     console.log(error);
                 })
+
             }
         },
         sendResetEmail(emailaddress) {
@@ -465,6 +617,15 @@ var nav_langu_box = new Vue({
                     }).then(function (response) {  //接口返回数据
                         //  console.log(response);
                         this.retrievecode = response.body;
+                        if (response.body != null) {
+                            this.$notify({
+                                message: '重置密码邮件发送成功',
+                                type: 'success'
+                            });
+                        }
+                        else {
+                            this.$notify.error('重置密码邮件发送失败');
+                        }
                         console.log(response);
                     }, function (error) {
                         console.log(error);
@@ -487,6 +648,15 @@ var nav_langu_box = new Vue({
                     }).then(function (response) {  //接口返回数据
                         //  console.log(response);
                         this.isReset = response.body;
+                        if (response.body == true) {
+                            this.$notify({
+                                message: '密码已重置',
+                                type: 'success'
+                            });
+                        }
+                        else {
+                            this.$notify.error('密码未重置');
+                        }
                         console.log(response);
                     }, function (error) {
                         console.log(error);
@@ -519,7 +689,10 @@ var nav_langu_box = new Vue({
             this.confirmSuccess = true;
 
         }, //验证成功函数
-        
+        handleNodeClick(data) {
+            console.log(data);
+        },
+
     }
 });
 nav_langu_box.initNav();
