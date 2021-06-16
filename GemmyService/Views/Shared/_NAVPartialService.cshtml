@@ -71,6 +71,15 @@
         line-height:100px;
         font-size:54px;
     }
+    .Personal_span
+    {
+        font-size:16px;
+        padding:6px;
+    }
+    .contact_div
+    {
+        margin-top:25px;
+    }
 </style>
 
 
@@ -197,26 +206,71 @@
                     </el-row>
 
 
+                    
+
+                    <template>
+                        <el-collapse v-model="activeNames" style="font-size:17px;">
+                            <el-collapse-item title="个人信息" name="1" >
+                                <div v-for="item in infoDataForm1"  class="Personal_span">
+                                    <i :class="item.icon" style="font-size:20px;color: var(--thm-base)"></i>
+                                    <span>
+                                        {{ item.menuName }}
+                                        <br />
+                                    </span>
+                                </div>
+
+                            </el-collapse-item>
+                            <el-collapse-item title="公司信息" name="2">
+
+                                <div v-for="item in infoDataForm2" class="Personal_span">
+                                    <i :class="item.icon" style="font-size:20px;color: var(--thm-base)"></i>
+                                    <span>
+                                        {{ item.menuName }}
+                                        <br />
+                                    </span>
+                                </div>
 
 
-                    <el-tree style="width:100%"
-                             class="tree filter-tree"
-                             :indent="0"
-                             :data="infoDataForm"
-                             node-key="id"
-                             icon-class="el-icon-arrow-right"
-                             :props="defaultProps"
-                             @@node-click="handleNodeClick">
-                        <span class="custom-tree-node" slot-scope="{ data }">
+                                
+                            </el-collapse-item>
+                            <el-collapse-item title="设置 " name="3">
+                               
 
+                            </el-collapse-item>
+                            <el-collapse-item title="修改密码" name="4">
+                                
+
+
+                            </el-collapse-item>
+                        </el-collapse>
+                    </template>
+
+
+                    <br />
+                    <div class="contact_div">
+                        <h6>问题联系</h6>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-xs-4">
+                                <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                            </div>
+                            <div class="col-xs-8">
+                                <h3 style="margin-top:33px;">Gemmy</h3>
+                            </div>
+
+                        </div>
+                        
+                        
+
+                        <div v-for="item in infoDataForm_contact" class="Personal_span">
+                            <i :class="item.icon" style="font-size:20px;color: var(--thm-base)"></i>
                             <span>
-                                <i :class="data.icon" style="font-size: 20px; color: #008FD5;"></i>{{ data.menuName }}
+                                {{ item.menuName }}
+                                <br />
                             </span>
-                        </span>
-                    </el-tree>
-
-                    <h3 class="drawerh">问题联系</h3>
-                    <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                        </div>
+                    </div>
+                
 
                 }
 
