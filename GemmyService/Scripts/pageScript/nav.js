@@ -208,30 +208,94 @@ var nav_langu_box = new Vue({
                     { validator: validcheckNewPassword, trigger: 'blur' },
                 ]
             },
+            infoDataForm_contact: [
+
+                {
+                    'id': 100,
+                    'menuName': '电子邮箱：renc@jiecang.com',
+                    'icon': 'el-icon-message',
+                },
+                {
+                    'id': 103,
+                    'menuName': '联系方式  +86-0575-86287989',
+                    'icon': 'el-icon-phone',
+                }
+            ],
+            infoDataForm1: [
+                {
+                    'id': 100,
+                    'menuName': '电子邮箱',
+                    'icon': 'el-icon-message',
+                },
+                {
+                    'id': 101,
+                    'menuName': '名称',
+                    'icon': 'el-icon-postcard',
+                },
+                {
+                    'id': 102,
+                    'menuName': '性别',
+                    'icon': 'el-icon-s-custom',
+                },
+                {
+                    'id': 103,
+                    'menuName': '联系方式',
+                    'icon': 'el-icon-phone',
+                }
+            ],
+            infoDataForm2:
+                [{
+                    'id': 200,
+                    'menuName': '公司名称',
+                    'icon': 'el-icon-office-building',
+                },
+                {
+                    'id': 201,
+                    'menuName': '公司地址（街道）',
+                    'icon': 'el-icon-location',
+                },
+                {
+                    'id': 202,
+                    'menuName': '公司邮编及详细地址',
+                    'icon': 'el-icon-location',
+                },
+                {
+                    'id': 203,
+                    'menuName': '公司地区',
+                    'icon': 'el-icon-map-location',
+                },
+                {
+                    'id': 204,
+                    'menuName': '公司官网',
+                    'icon': 'el-icon-link',
+                },],
+
+
+
             infoDataForm: [
                 {
                     'id': 1,
-                    'menuName': '个人信息',                   
+                    'menuName': '个人信息',
                     'children': [
                         {
                             'id': 100,
                             'menuName': '电子邮箱',
-                            'icon': 'el-icon-message',                           
+                            'icon': 'el-icon-message',
                         },
                         {
                             'id': 101,
                             'menuName': '名称',
-                            'icon': 'el-icon-postcard',                            
+                            'icon': 'el-icon-postcard',
                         },
                         {
                             'id': 102,
                             'menuName': '性别',
-                            'icon': 'el-icon-s-custom', 
+                            'icon': 'el-icon-s-custom',
                         },
                         {
                             'id': 103,
                             'menuName': '联系方式',
-                            'icon': 'el-icon-phone', 
+                            'icon': 'el-icon-phone',
                         }
                     ]
                 },
@@ -306,7 +370,8 @@ var nav_langu_box = new Vue({
             defaultProps: {
                 children: 'children',
                 label: 'menuName'
-            }
+            },
+            activeNames: ['1'],
         }
     },
     mounted() {
