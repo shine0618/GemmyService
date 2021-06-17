@@ -217,7 +217,26 @@
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_SideBracket_count}}条结果</h6></div>
                     </div>
                 </div>
-                <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5'">
+                <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5'">@*操作器*@
+                
+                    <div class="row">                      
+                        <div class="col-lg-6 col-md-6" v-for="item in list_ControlBox">
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_ControlBox==item.Id}" v-on:click="ControlBoxClick(item.Id,item.Mode)" src="~/resourse/part_controlbox/JCB35M.png" />
+                            <h6 style="text-align:center" v-text="item.Mode"></h6>
+                        </div>
+                        <div class="col-lg-12" style="text-align:center"><h6>控制器:{{list_ControlBox_count}}条结果</h6></div>
+                    </div>
+                <hr />
+                 <div class="row">                      
+                        <div class="col-lg-6 col-md-6" v-for="item in list_HandSet">
+                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_HandSet==item.Id}" v-on:click="HandSetClick(item.Id,item.Mode)" src="~/resourse/part_handset/JCHT35K.png" />
+                            <h6 style="text-align:center" v-text="item.Mode"></h6>
+                        </div>
+                        <div class="col-lg-12" style="text-align:center"><h6>手控器:{{list_HandSet_count}}条结果</h6></div>
+                    </div>
+
+
+
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s6'">
 
@@ -257,14 +276,37 @@
                         </el-slider>
                     </div>
 
-                    <h6 v-text="'立柱 '+select_columnMode"></h6>
-                    <h6 v-text="'框架 '+select_frameMode"></h6>
-                    <h6 v-text="'地脚 '+select_footMode"></h6>
-                    <h6 v-text="'侧板 '+select_SideBracketMode"></h6>
-                    <h6 v-text="'颜色 '+select_ColorMode"></h6>
 
-                    <h6 v-text="'框架宽度 '+frameWidth"></h6>
-                    <h6 v-text="'框架高度 '+frameHeight"></h6>
+
+
+
+
+                   
+
+
+
+
+
+
+                    <h6 v-text="'CC	立柱代号 '+select_columnMode"></h6>
+                    <h6 v-text="' FC	框架代号 '+select_frameMode"></h6>
+                    <h6 v-text="' TFC	地脚代号 '+select_footMode"></h6>
+                    <h6 v-text="' SPC	侧板代号 '+select_SideBracketMode"></h6>
+                    <h6 v-text="' COLOUR	颜色 '+select_ColorMode"></h6>
+
+                    <h6 v-text="'CONTROLLER	控制器 '+select_ControlBoxMode"></h6>
+                    <h6 v-text="'HC	操作器 '+select_HandSetMode"></h6>
+
+                    <h6 v-text="' POS2	框架伸缩距离 '+frameWidth"></h6>
+                    <h6 v-text="'POS1	立柱升降距离 '+frameHeight"></h6>
+                    <h6>
+                        CAC	脚轮代号
+                    </h6>
+                    <h6> OF	可选功能</h6>
+                    <h6> CSF	立柱特殊功能</h6>
+
+
+
 
                 </div>
                 <div class="col-lg-8" id="asas">
@@ -339,6 +381,17 @@
             select_SideBracket: "",
             select_SideBracketMode: "",
 
+            list_ControlBox: null,
+            list_ControlBox_count: 0,
+            select_ControlBox: "",
+            select_ControlBoxMode: "",
+
+            list_HandSet: null,
+            list_HandSet_count: 0,
+            select_HandSet: "",
+            select_HandSetMode: "",
+
+
             list_Color: null,
             list_Color_count: 0,
             select_Color: "2",
@@ -389,7 +442,10 @@
                     case "s4":
                         this.getAllSideBracket();
                         break;
-
+                    case "s5":
+                        this.getAllControlBox();
+                        this.getAllHandSet();
+                        break;
                     //default:
                 }
             },
@@ -505,6 +561,33 @@
                     console.log(error);
                 })
             },
+            getAllControlBox: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetOfficeControlBox",
+                    params: {
+                    }
+                }).then(function (response) {  //接口返回数据
+                    this.list_ControlBox = response.body;
+                    this.list_ControlBox_count = this.list_ControlBox.length;
+                }, function (error) {
+                    console.log(error);
+                })
+            },
+            getAllHandSet: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetOfficeHandSet",
+                    params: {
+                    }
+                }).then(function (response) {  //接口返回数据
+                    this.list_HandSet = response.body;
+                    this.list_HandSet_count = this.list_HandSet.length;
+                }, function (error) {
+                    console.log(error);
+                })
+            },
+
             getAllColor: function (event) {
                 this.$http({           //调用接口
                     method: 'GET',
@@ -522,8 +605,6 @@
             columnClick: function (id,mode) {
                 this.select_column = id;
                 this.select_columnMode = mode;
-                console.log(this.select_column);
-                console.log(this.select_columnMode);
             },
             frameClick: function (id, mode) {
                 this.select_frame = id;
@@ -540,6 +621,28 @@
             colorClick: function (id, mode) {
                 this.select_Color = id;
                 this.select_ColorMode = mode;
+            },
+            ControlBoxClick: function (id, mode) {
+                if (this.select_ControlBox == id) {
+                    this.select_ControlBox = 0;
+                    this.select_ControlBoxMode = ""; 
+                }
+                else {
+                    this.select_ControlBox = id;
+                    this.select_ControlBoxMode = mode;
+                }
+             
+            },
+            HandSetClick: function (id, mode) {
+                if (this.select_HandSet == id) {
+                    this.select_HandSet = 0;
+                    this.select_HandSetMode = "";
+                }
+                else {
+                    this.select_HandSet = id;
+                    this.select_HandSetMode = mode;
+                }
+
             },
             
             orderBtnClick: function (ordervalue) {

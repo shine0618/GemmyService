@@ -234,6 +234,22 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             return query.ToList();
         }
+        public List<T_Part_office_ControlBox> GetT_Part_office_ControlBox()
+        {
+            var query = from x in read_db.T_Part_office_ControlBox
+                        select x;
+
+            return query.ToList();
+        }
+
+
+        public List<T_Part_office_HandSet> GetT_Part_office_HandSet()
+        {
+            var query = from x in read_db.T_Part_office_HandSet
+                        select x;
+
+            return query.ToList();
+        }
 
         #endregion
     }

@@ -248,6 +248,26 @@ namespace GemmyService.Controllers
             return jr;
         }
         [HttpGet]
+        public JsonResult GetOfficeControlBox()
+        {
+            List<T_Part_office_ControlBox> list = bll_desk.GetT_Part_office_ControlBox();
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+        [HttpGet]
+        public JsonResult GetOfficeHandSet()
+        {
+            List<T_Part_office_HandSet> list = bll_desk.GetT_Part_office_HandSet();
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+
+
+
+        [HttpGet]
         public ActionResult GetOfficeDeskDetail2(string productGuid, string lang)
         {
 
