@@ -118,17 +118,21 @@
     <Compile Include="Migrations\202106090721121_init43234234532.designer.cs">
       <DependentUpon>202106090721121_init43234234532.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106170557301_init232346789857.cs" />
+    <Compile Include="Migrations\202106170557301_init232346789857.designer.cs">
+      <DependentUpon>202106170557301_init232346789857.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\ModelProductOffice\T_Office_Color.cs" />
     <Compile Include="Model\ModelProductOffice\T_Office_Files.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_Column.cs" />
-    <Compile Include="Model\ControlBox.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Part_office_ControlBox.cs" />
     <Compile Include="Model\DownloadFile.cs" />
     <Compile Include="Model\File.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_Foot.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_Frame.cs" />
-    <Compile Include="Model\HandSet.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Part_office_HandSet.cs" />
     <Compile Include="Model\LanguageType.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_desk.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_desk_detail.cs" />
@@ -201,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106090721121_init43234234532.resx">
       <DependentUpon>202106090721121_init43234234532.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106170557301_init232346789857.resx">
+      <DependentUpon>202106170557301_init232346789857.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

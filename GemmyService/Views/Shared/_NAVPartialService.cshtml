@@ -199,7 +199,7 @@
                 else
                 {
                     <el-row>
-                        <el-col :span="8"><el-avatar>@Session["picName"] </el-avatar></el-col>
+                        <el-col :span="8"><el-avatar style="background:var(--thm-base)">@Session["picName"] </el-avatar></el-col>
                         <h3>@Session["configurationPerson"]</h3>
                         <button type="button" class="thm-btn orderbtn" style="width:50%" @@click="LoginOut"> 退出登录</button>
 
@@ -209,7 +209,7 @@
                     
 
                     <template>
-                        <el-collapse v-model="activeNames" style="font-size:17px;">
+                        <el-collapse v-model="activeNames" style="font-size:17px;" accordion>
                             <el-collapse-item title="个人信息" name="1" >
                                 <div v-for="item in infoDataForm1"  class="Personal_span">
                                     <i :class="item.icon" style="font-size:20px;color: var(--thm-base)"></i>
@@ -238,9 +238,32 @@
 
                             </el-collapse-item>
                             <el-collapse-item title="修改密码" name="4">
-                                
-
-
+                                <el-form :model="resetPasswordLogin" status-icon :rules="rulesresetPasswordLogin" ref="rulesresetPasswordLogin" label-width="100px" class="demo-ruleForm">
+                                    <el-form-item prop="oldPassword">
+                                        <span slot="label">
+                                            <span>原密码</span>
+                                            <i class="el-icon-lock" style="font-size:20px;color: var(--thm-base)"></i>
+                                        </span>
+                                        <el-input type="text" v-model="resetPasswordLogin.oldPassword" autocomplete="new-password"></el-input>
+                                    </el-form-item>
+                                    <el-form-item prop="oldPassword">
+                                        <span slot="label">
+                                            <span>新密码</span>
+                                            <i class="el-icon-lock" style="font-size:20px;color: var(--thm-base)"></i>
+                                        </span>
+                                        <el-input type="text" v-model="resetPasswordLogin.newPassword" autocomplete="new-password"></el-input>
+                                    </el-form-item>
+                                    <el-form-item prop="oldPassword">
+                                        <span slot="label">
+                                            <span>确认密码</span>
+                                            <i class="el-icon-lock" style="font-size:20px;color: var(--thm-base)"></i>
+                                        </span>
+                                        <el-input type="text" v-model="resetPasswordLogin.checkNewPassword" autocomplete="new-password"></el-input>
+                                    </el-form-item>
+                                    <el-form-item>
+                                        <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="resetLogin(@Session["emailName"],resetPasswordLogin.oldPassword,resetPasswordLogin.newPassword)"> 重置密码</button>
+                                    </el-form-item>
+                                </el-form>
                             </el-collapse-item>
                         </el-collapse>
                     </template>

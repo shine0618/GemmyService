@@ -8,72 +8,84 @@ using System.Threading.Tasks;
 
 namespace _1GemmyModel.Model
 {
-   public class ControlBox:T_Base
+   public class T_Part_office_HandSet : T_Base
     {
         /// <summary>
-        /// 控制器型号
+        /// 手控器型号
         /// </summary>
         public string Mode { get; set; }
         /// <summary>
-        /// 控制器控制立柱数量
+        /// 是否有显示屏
         /// </summary>
-        public int ControlColumnNo { get; set; }
+        public bool HaveScreen { get; set; }
         /// <summary>
-        /// 最大输出电压
+        /// 显示屏类型
         /// </summary>
-        public double? OutputVoltage { get; set; }
+        public string ScreenType { get; set; }
         /// <summary>
-        /// 最大输入电压
+        /// 是否是触摸
         /// </summary>
-        public double? InputVoltage { get; set; }
+        public bool Touch { get; set; }
         /// <summary>
-        /// 最小输入电压
+        /// 是否是按键
+        /// </summary>
+        public bool Button { get; set; }
+        /// <summary>
+        /// 是否带USB
+        /// </summary>
+        public bool HaveUsb { get; set; }
+        /// <summary>
+        /// 是否是嵌入式
+        /// </summary>
+        public bool Imbedding { get; set; }
+        /// <summary>
+        /// 是否遥控
+        /// </summary>
+        public bool Remote { get; set; }
+        /// <summary>
+        /// 是否带蓝牙
+        /// </summary>
+        public bool BlueTooth { get; set; }
+        /// <summary>
+        /// 记忆键数量
+        /// </summary>
+        public int MemoryKeys { get; set; }
+        /// <summary>
+        /// 输出电压
+        /// </summary>
+        public int? OutputVoltage { get; set; }
+        /// <summary>
+        /// 输入电压
+        /// </summary>
+        public int? InputVoltage { get; set; }
+        /// <summary>
+        /// 变压器功率
         /// </summary>
         public int? TransformerPower { get; set; }
+        /// <summary>
+        /// 额定电压
+        /// </summary>
+        public int? Voltage { get; set; }
         /// <summary>
         /// 电流
         /// </summary>
         public int? Current { get; set; }
         /// <summary>
-        /// 最大速度
-        /// </summary>
-        public int MaxSpeed { get; set; }
-        /// <summary>
-        /// 最大负载
-        /// </summary>
-        public int MaxLoad { get; set; }
-        /// <summary>
-        /// 电源插口
-        /// </summary>
-        public string PowerOutLet { get; set; }
-        /// <summary>
-        /// 立柱插口
-        /// </summary>
-        public string ColumnOutLet { get; set; }
-        /// <summary>
         /// 手控器插口
         /// </summary>
         public string HandSetOutLet { get; set; }
         /// <summary>
-        /// 程序插口
-        /// </summary>
-        public string ProgramOutLet { get; set; }
-        /// <summary>
-        /// 是否适用于双电机
+        /// 是否可配双电机
         /// </summary>
         public bool DoubleMotor { get; set; }
         /// <summary>
-        /// 是否适用于手摇
+        /// 是否可配手摇
         /// </summary>
         public bool HandCranking { get; set; }
         /// <summary>
-        /// 是否适用于气动桌
+        /// 是否可配气动
         /// </summary>
         public bool GasSpring { get; set; }
-        /// <summary>
-        /// 是否适用于单电机
-        /// </summary>
-        public bool SingleMotor { get; set; }
         /// <summary>
         /// 是否通过GS
         /// </summary>
@@ -121,7 +133,7 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 效果图号
         /// </summary>
-        public string PictureNum { get; set; }
+        public string  PictureNum { get; set; }
         /// <summary>
         /// 物料代码
         /// </summary>
@@ -141,17 +153,13 @@ namespace _1GemmyModel.Model
         [Column(TypeName = "ntext")]
         public string DescriptionEN { get; set; }
         /// <summary>
-        /// 控制器适配手控器
+        /// 手控器连接控制器
         /// </summary>
-        public string ControlBoxWithHandSet { get; set; }
+        public string HandsetWithControlBox { get; set; }
         /// <summary>
-        /// 控制器适配立柱
+        /// 手控器连接配件
         /// </summary>
-        public string ControlBoxWithColumn { get; set; }
-        /// <summary>
-        /// 控制器适配配件
-        /// </summary>
-        public string ControlBoxWithAccessory { get; set; }
+        public string HandsetWithAccessory { get; set; }
         /// <summary>
         /// 含税成本
         /// </summary>
@@ -167,13 +175,11 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 是否带插槽
         /// </summary>
-        public bool HaveRabbt { get; set; }
+        public bool HaveRabbet { get; set; }
         /// <summary>
         /// 定制客户
         /// </summary>
         public string Customization { get; set; }
-
-
         /// <summary>
         /// 中文特殊说明
         /// </summary>
@@ -184,6 +190,5 @@ namespace _1GemmyModel.Model
         /// </summary>
         [Column(TypeName = "ntext")]
         public string SpecialDescriptionEN { get; set; }
-
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using _4GemmyTools;
 
 namespace GemmyService.Controllers
 {
@@ -126,6 +127,7 @@ namespace GemmyService.Controllers
             {
                 Session["configurationPerson"] = isLogin.FirstName+" "+isLogin.LastName;
                 Session["picName"] = isLogin.FirstName.Substring(0,1)+ isLogin.LastName.Substring(0,1);
+                Session["emailName"] = isLogin.Email;
                 Session.Timeout = 9600;
             }
 
@@ -158,6 +160,21 @@ namespace GemmyService.Controllers
             return jr;
         }
 
+        public JsonResult ResetpasswordLogin(string email, string oldpassword, string newpassword)
+        {
+            bool isReset = false;
+            List<T_USER_UserInfo> t_user_reset = usermanager.getUserinfoLoginReset(email,oldpassword);
+            if (t_user_reset.Count != 0)
+            {
+                foreach (var item in t_user_reset)
+                {
+                    item.Password = MD5T.MD5Encrypt(newpassword);
+                }
+            }
+            JsonResult jr = Json(isReset, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
 
 
         [HttpGet]

@@ -134,6 +134,15 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                 return entity.ToList();
             }
         }
+        public List<T_USER_UserInfo> getUserinfoLoginReset(string email,string password)
+        {
+            string pwd= MD5T.MD5Encrypt(password);
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                var entity = db.T_USER_UserInfo.Where(m => m.Email == email&&m.Password== pwd);
+                return entity.ToList();
+            }
+        }
 
         public void addRegisterInfo(string email,DateTime dt,string code)
         {

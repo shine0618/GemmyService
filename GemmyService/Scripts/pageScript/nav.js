@@ -127,7 +127,32 @@ var nav_langu_box = new Vue({
                 callback();
             }
         };
-
+        var resetloginoldpsd = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('旧密码为空!'));
+            } else {               
+                callback();
+            }
+        };
+        var resetloginnewpsd = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入新密码'));
+            } else {
+                if (this.rulesresetPasswordLogin.newPassword !== '') {
+                    this.$refs.resetPasswordLogin.validateField('checkNewPassword');
+                }
+                callback();
+            }
+        };
+        var resetloginchecknewpsd = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请再次输入新密码'));
+            } else if (value !== this.resetPasswordLogin.newPassword) {
+                callback(new Error('两次输入密码不一致!'));
+            } else {
+                callback();
+            }
+        };
         return {
             beginClientX: 0,
             /*距离屏幕左端距离*/
@@ -138,7 +163,6 @@ var nav_langu_box = new Vue({
             confirmWords: '拖动滑块验证',
             /*滑块文字*/
             confirmSuccess: false, /*验证成功判断*/
-
             defaultLanguage: '',
             defaultLanguageCode: '',
             list: null,
@@ -170,11 +194,15 @@ var nav_langu_box = new Vue({
                 registerlastname: ''
             },
             ruleRetrieve: {
-
                 retrievecode: '',
                 retrievePassword: '',
                 retrievecheckPassword: '',
                 retrieveUsername: '',
+            },
+            resetPasswordLogin: {
+                oldPassword: '',
+                newPassword: '',
+                checkNewPassword: ''
             },
             rules: {
                 pass: [
@@ -207,6 +235,11 @@ var nav_langu_box = new Vue({
                 retrievecheckPassword: [
                     { validator: validcheckNewPassword, trigger: 'blur' },
                 ]
+            },
+            rulesresetPasswordLogin: {
+                oldPassword: [{ validator: resetloginoldpsd, trigger: 'blur' }],
+                newPassword: [{ validator: resetloginnewpsd, trigger: 'blur' }],
+                checkNewPassword: [{ validator: resetloginchecknewpsd, trigger: 'blur' }],
             },
             infoDataForm_contact: [
 
@@ -369,6 +402,7 @@ var nav_langu_box = new Vue({
                 label: 'menuName'
             },
             activeNames: ['1'],
+            
         }
     },
     mounted() {
@@ -706,6 +740,37 @@ var nav_langu_box = new Vue({
                             email: email,
                             newpassword: password,
                             code: code
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        this.isReset = response.body;
+                        if (response.body == true) {
+                            this.$notify({
+                                message: '密码已重置',
+                                type: 'success'
+                            });
+                        }
+                        else {
+                            this.$notify.error('密码未重置');
+                        }
+                        console.log(response);
+                    }, function (error) {
+                        console.log(error);
+                    })
+                }
+            }
+
+        },
+        resetLogin(email, oldpassword,newpassword) {
+            if (email != '' && oldpassword != '' && newpassword != '') {
+                if (email != '') {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCAccount/ResetpasswordLogin",
+                        params: {
+                            email: email,
+                            oldpassword: oldpassword,
+                            newpassword: newpassword
                         }
                     }).then(function (response) {  //接口返回数据
                         //  console.log(response);
