@@ -59,26 +59,27 @@
         -moz-user-select: none;
         -webkit-user-select: none;
         user-select: none;
-
         -ms-user-select: none;
     }
-    .el-col-24{
-        width:34px;
+
+    .el-col-24 {
+        width: 34px;
     }
-    .el-avatar{
-        width:100px;
-        height:100px;
-        line-height:100px;
-        font-size:54px;
+
+    .el-avatar {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        font-size: 54px;
     }
-    .Personal_span
-    {
-        font-size:16px;
-        padding:6px;
+
+    .Personal_span {
+        font-size: 16px;
+        padding: 6px;
     }
-    .contact_div
-    {
-        margin-top:25px;
+
+    .contact_div {
+        margin-top: 25px;
     }
 </style>
 
@@ -206,12 +207,12 @@
                     </el-row>
 
 
-                    
+
 
                     <template>
                         <el-collapse v-model="activeNames" style="font-size:17px;" accordion>
-                            <el-collapse-item title="个人信息" name="1" >
-                                <div v-for="item in infoDataForm1"  class="Personal_span">
+                            <el-collapse-item title="个人信息" name="1">
+                                <div v-for="item in infoDataForm1" class="Personal_span">
                                     <i :class="item.icon" style="font-size:20px;color: var(--thm-base)"></i>
                                     <span>
                                         {{ item.menuName }}
@@ -231,10 +232,10 @@
                                 </div>
 
 
-                                
+
                             </el-collapse-item>
                             <el-collapse-item title="设置 " name="3">
-                               
+
 
                             </el-collapse-item>
                             <el-collapse-item title="修改密码" name="4">
@@ -282,8 +283,8 @@
                             </div>
 
                         </div>
-                        
-                        
+
+
 
                         <div v-for="item in infoDataForm_contact" class="Personal_span">
                             <i :class="item.icon" style="font-size:20px;color: var(--thm-base)"></i>
@@ -293,7 +294,7 @@
                             </span>
                         </div>
                     </div>
-                
+
 
                 }
 
@@ -350,13 +351,13 @@
                     <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)"> 重置密码</button>
 
                     @*<el-col :span="12" align="center">
-                <el-button type="primary" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)">重置</el-button>
+                            <el-button type="primary" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)">重置</el-button>
 
 
-            </el-col>
-            <el-col :span="11" align="left">
-                <el-button @@click="resetForm('ruleForm')">清空</el-button>
-            </el-col>*@
+                        </el-col>
+                        <el-col :span="11" align="left">
+                            <el-button @@click="resetForm('ruleForm')">清空</el-button>
+                        </el-col>*@
                 </el-form-item>
             </el-form>
         </el-dialog>
@@ -466,6 +467,8 @@
         </div><!-- /.container -->
     </nav>
 </div>
+
+
 
 <script src="~/Scripts/pageScript/nav.js"></script>
 
