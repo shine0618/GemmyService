@@ -269,33 +269,30 @@ var nav_langu_box = new Vue({
                     'menuName': '公司官网',
                     'icon': 'el-icon-link',
                 },],
-
-
-
             infoDataForm: [
                 {
                     'id': 1,
-                    'menuName': '个人信息',
+                    'menuName': '个人信息',                   
                     'children': [
                         {
                             'id': 100,
                             'menuName': '电子邮箱',
-                            'icon': 'el-icon-message',
+                            'icon': 'el-icon-message',                           
                         },
                         {
                             'id': 101,
                             'menuName': '名称',
-                            'icon': 'el-icon-postcard',
+                            'icon': 'el-icon-postcard',                            
                         },
                         {
                             'id': 102,
                             'menuName': '性别',
-                            'icon': 'el-icon-s-custom',
+                            'icon': 'el-icon-s-custom', 
                         },
                         {
                             'id': 103,
                             'menuName': '联系方式',
-                            'icon': 'el-icon-phone',
+                            'icon': 'el-icon-phone', 
                         }
                     ]
                 },
