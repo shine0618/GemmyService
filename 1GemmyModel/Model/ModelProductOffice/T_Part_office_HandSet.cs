@@ -87,6 +87,10 @@ namespace _1GemmyModel.Model
         /// </summary>
         public bool GasSpring { get; set; }
         /// <summary>
+        /// 是否可配单电机
+        /// </summary>
+        public bool SingleMotor { get; set; }
+        /// <summary>
         /// 是否通过GS
         /// </summary>
         public bool GS { get; set; }
