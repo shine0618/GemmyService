@@ -4296,6 +4296,13 @@ h6 {
   background-color: var(--thm-black);
 }
 
+.service-one__image2 {
+    overflow: hidden;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: #808080;
+}
+
 .service-one__image > img {
   width: 100%;
   transition: transform 500ms ease, opacity 500ms ease;
@@ -4303,9 +4310,20 @@ h6 {
   transform: scale(1);
 }
 
+.service-one__image2 > img {
+    width: 100%;
+    transition: transform 500ms ease, opacity 500ms ease;
+    opacity: 1;
+    transform: scale(1);
+}
+
 .service-one__card:hover .service-one__image > img {
   transform: scale(1.05);
   opacity: 0.7;
+}
+.service-one__card2:hover .service-one__image > img {
+    transform: scale(1);
+    opacity: 0.7;
 }
 
 .service-one__content {

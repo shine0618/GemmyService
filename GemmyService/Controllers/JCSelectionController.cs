@@ -37,6 +37,10 @@ namespace GemmyService.Controllers
             {
                 Session["PageLanguage"] = "default";
             }
+            if(Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -52,6 +56,10 @@ namespace GemmyService.Controllers
             if (Session["PageLanguage"] == null)
             {
                 Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
             }
             Session.Timeout = 9600;
             return View();
@@ -71,6 +79,10 @@ namespace GemmyService.Controllers
             if (Session["PageLanguage"] == null)
             {
                 Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
             }
             Session.Timeout = 9600;
 
@@ -133,6 +145,10 @@ namespace GemmyService.Controllers
             {
                 Session["PageLanguage"] = "default";
             }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
             Session.Timeout = 9600;
 
             ViewBag.domain = domain;
@@ -190,6 +206,10 @@ namespace GemmyService.Controllers
             if (Session["PageLanguage"] == null)
             {
                 Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
             }
             Session.Timeout = 9600;
             ViewBag.productGuid = productGuid;            
@@ -307,6 +327,10 @@ namespace GemmyService.Controllers
             {
                 Session["PageLanguage"] = "default";
             }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -316,6 +340,10 @@ namespace GemmyService.Controllers
             if (Session["PageLanguage"] == null)
             {
                 Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
             }
             Session.Timeout = 9600;
             return View();
@@ -328,6 +356,10 @@ namespace GemmyService.Controllers
             {
                 Session["PageLanguage"] = "default";
             }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -337,6 +369,25 @@ namespace GemmyService.Controllers
             if (Session["PageLanguage"] == null)
             {
                 Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            Session.Timeout = 9600;
+
+            return View();
+
+        }
+        public ActionResult PersonInfo()
+        {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
             }
             Session.Timeout = 9600;
 

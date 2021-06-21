@@ -14,6 +14,7 @@
 })
 const TIME_COUNT = 60;
 
+
 var nav_langu_box = new Vue({
     el: '#nav_langu_box',
     data() {
@@ -138,7 +139,7 @@ var nav_langu_box = new Vue({
             if (value === '') {
                 callback(new Error('请输入新密码'));
             } else {
-                if (this.rulesresetPasswordLogin.newPassword !== '') {
+                if (this.resetPasswordLogin.newPassword !== '') {
                     this.$refs.resetPasswordLogin.validateField('checkNewPassword');
                 }
                 callback();
@@ -165,6 +166,7 @@ var nav_langu_box = new Vue({
             confirmSuccess: false, /*验证成功判断*/
             defaultLanguage: '',
             defaultLanguageCode: '',
+            loginEmail:'',
             list: null,
             drawer: false,
             dialogVisible_forget: false,
@@ -202,7 +204,7 @@ var nav_langu_box = new Vue({
             resetPasswordLogin: {
                 oldPassword: '',
                 newPassword: '',
-                checkNewPassword: ''
+                checkNewPassword: '',
             },
             rules: {
                 pass: [
@@ -451,8 +453,10 @@ var nav_langu_box = new Vue({
             }, function (error) {
             })
         },
-        initNav: function (event) {
-
+        initNav: function (event) {          
+            
+            this.loginEmail = GetLoginUsername();
+                      
             //var CustomLang = '';
             ////如果客户语言
             //if (CustomLang == 'default') {
@@ -570,6 +574,7 @@ var nav_langu_box = new Vue({
                                 isLoginCheck = true;
                             }
                             if (response.body.CanLogin == true) {
+                                
                                 location.reload();
                                 this.$notify({
                                     message: '登录成功',
@@ -597,8 +602,9 @@ var nav_langu_box = new Vue({
 
                         if (response.body.CanLogin == true) {
                             location.reload();
+                            
                             this.$notify({
-                                message: '登录成功',
+                                message: '登录成功' ,
                                 type: 'success'
                             });
                         }
@@ -776,6 +782,8 @@ var nav_langu_box = new Vue({
                         //  console.log(response);
                         this.isReset = response.body;
                         if (response.body == true) {
+                            this.LoginOut();
+
                             this.$notify({
                                 message: '密码已重置',
                                 type: 'success'
@@ -789,6 +797,9 @@ var nav_langu_box = new Vue({
                         console.log(error);
                     })
                 }
+            }
+            else {
+                console.log(email, oldpassword, newpassword);
             }
 
         },
@@ -819,7 +830,9 @@ var nav_langu_box = new Vue({
         handleNodeClick(data) {
             console.log(data);
         },
-
+        aaa: function (e) {
+            console.log(this.loginEmail);
+        }
     }
 });
 nav_langu_box.initNav();

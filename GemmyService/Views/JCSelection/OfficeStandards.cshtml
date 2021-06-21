@@ -51,7 +51,7 @@
 
                             <h2 style="margin:10px;" class="blog-sidebar__box-title">{{DeskConfigurationName}}</h2><!-- /.blog-sidebar__title -->
                             <ul class="list-unstyled service-sidebar__category-list">
-                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=all"><span v-if="recommend=='all'" class="changeFont">全部</span><span v-else>全部</span></a></li>
+                                <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=all"><span v-if="recommend=='all'" class="changeFont">{{deskAll}}</span><span v-else>{{deskAll}}</span></a></li>
                                 <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=newProduct"><span v-if="recommend=='newProduct'" class="changeFont">{{NewProductName}}</span><span v-else>{{NewProductName}}</span></a></li>
                                 <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=jiecangProduct"><span v-if="recommend=='jiecangProduct'"  class="changeFont">{{JCRecommendName}}</span><span v-else>{{JCRecommendName}}</span></a></li>
                                 <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=myCollect"><span v-if="recommend=='myCollect'"  class="changeFont">{{MyCollectName}}</span><span v-else>{{MyCollectName}}</span></a></li>
@@ -128,6 +128,7 @@
             searchText:"",
 
             DeskConfigurationName: "",
+            deskAll:"",
             NewProductName: "",
             JCRecommendName: "",
             MyCollectName: "",

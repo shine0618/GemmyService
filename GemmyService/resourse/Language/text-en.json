@@ -1,9 +1,9 @@
 {
-  "language": 
-  {
+  "language": {
     "SellCountOrderName": "SalesRanking",
     "OfficeTTDeskContent": "This is TT desk.",
     "OfficeBenchDeskContent": "This is Bench desk.",
+    "deskAll": "All",
     "MyCollectName": "MyCollection",
     "OfficeTFDesk": "OfficeTFDesk",
     "OfficeBenchDesk": "OfficeBenchDesk",
@@ -22,6 +22,14 @@
     "DeskConfigurationName": "Configuration",
     "OfficeTTDesk": "OfficeTTDesk",
     "CustomerName": "Customer",
-    "NewProductName": "NewProduct"
+    "NewProductName": "NewProduct",
+    "deskNewProductNumber": "NewSort",
+    "deskSalesVolume": "SalesSort",
+    "deskPrice": "PriceSort",
+    "deskStabilityLeave": "Stability",
+    "deskMaxLoad": "LoadSort",
+
+    "t_OfficeStandards_1": "Search",
+    "t_OfficeStandards_2": "Online Customization"
   }
 }

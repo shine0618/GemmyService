@@ -20,8 +20,8 @@
         <div class="container">
             <div class="row" >
                 <div class="col-lg-4 col-md-6 mb-60">
-                    <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TO'">
-                        <div class="service-one__image">
+                    <div class="service-one__card2" v-on:click="open1">
+                        <div class="service-one__image2">
                             <img src="~/resourse/page/singleLeg.png" alt="" />
 
                         </div><!-- /.service-one__image -->
@@ -45,8 +45,8 @@
                     </div><!-- /.service-one__card -->
                 </div><!-- /.col-lg-4 col-md-6 mb-60 -->
                 <div class="col-lg-4 col-md-6 mb-60">
-                    <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TT'">
-                        <div class="service-one__image">
+                    <div class="service-one__card2" v-on:click="open1">
+                        <div class="service-one__image2">
                             <img src="~/resourse/page/threelegs.png" />
                         </div><!-- /.service-one__image -->
                         <div class="service-one__content">
@@ -57,8 +57,8 @@
                     </div><!-- /.service-one__card -->
                 </div><!-- /.col-lg-4 col-md-6 mb-60 -->
                 <div class="col-lg-4 col-md-6 mb-60">
-                    <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=TF'">
-                        <div class="service-one__image">
+                    <div class="service-one__card2" v-on:click="open1">
+                        <div class="service-one__image2">
                             <img src="~/resourse/page/forelegs.png" />
                         </div><!-- /.service-one__image -->
                         <div class="service-one__content">
@@ -69,8 +69,8 @@
                     </div><!-- /.service-one__card -->
                 </div><!-- /.col-lg-4 col-md-6 mb-60 -->
                 <div class="col-lg-4 col-md-6 mb-60">
-                    <div class="service-one__card" v-on:click="window.location='/JCSelection/OfficeStandards?Type=Bench'">
-                        <div class="service-one__image">
+                    <div class="service-one__card2" v-on:click="open1">
+                        <div class="service-one__image2">
 
                             <img src="~/resourse/page/bench.png" />
                         </div><!-- /.service-one__image -->
@@ -147,7 +147,9 @@
 
             },
           
-            
+            open1() {
+                this.$message('尽请期待');
+            },
         }
     })
 
