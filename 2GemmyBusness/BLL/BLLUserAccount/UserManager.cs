@@ -82,6 +82,7 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
             }
         }
 
+
         #region MyRegion
         /// <summary>
         /// 临时数据的操作

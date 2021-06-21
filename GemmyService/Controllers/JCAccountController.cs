@@ -168,7 +168,8 @@ namespace GemmyService.Controllers
             {
                 foreach (var item in t_user_reset)
                 {
-                    item.Password = MD5T.MD5Encrypt(newpassword);
+                    usermanager.Reset(email, newpassword);
+                    isReset = true;
                 }
             }
             JsonResult jr = Json(isReset, JsonRequestBehavior.AllowGet);

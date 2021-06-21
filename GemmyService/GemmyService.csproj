@@ -678,6 +678,7 @@
     <Content Include="Views\T_Office_Files\Details.cshtml" />
     <Content Include="Views\T_Office_Files\Edit.cshtml" />
     <Content Include="Views\T_Office_Files\Index.cshtml" />
+    <Content Include="Views\JCSelection\PersonInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

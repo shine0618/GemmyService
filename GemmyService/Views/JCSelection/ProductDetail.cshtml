@@ -115,6 +115,8 @@
                         </div>
                         <div class="col-lg-3">
                             <img class="img-response" style="width:40px;" src="~/assets/collect1.png" />
+                            <i v-show="isCollect" class="el-icon-star-on" @@click="isCollect=!isCollect"></i>
+                            <i v-show="!isCollect" class="el-icon-star-off" @@click="isCollect=!isCollect"></i>
                             <div class="about-three__image">
 
                                 <div class="block-title text-left">
@@ -373,7 +375,7 @@
             introduction:"",
             //文件
             files_d1: [],
-
+            isCollect: false,
             //尺寸图
             files_d2_2D: [],
             files_d2_3D: [],
