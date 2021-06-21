@@ -130,6 +130,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\T_Office_FilesController.cs" />
+    <Compile Include="Controllers\T_Part_office_ColumnController.cs" />
+    <Compile Include="Controllers\T_Part_office_ControlBoxController.cs" />
+    <Compile Include="Controllers\T_Part_office_FrameController.cs" />
+    <Compile Include="Controllers\T_Part_office_HandSetController.cs" />
     <Compile Include="Controllers\T_SYS_LanguageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -183,6 +187,26 @@
     <Content Include="Views\T_Office_Files\Details.cshtml" />
     <Content Include="Views\T_Office_Files\Edit.cshtml" />
     <Content Include="Views\T_Office_Files\Index.cshtml" />
+    <Content Include="Views\T_Part_office_ControlBox\Create.cshtml" />
+    <Content Include="Views\T_Part_office_ControlBox\Delete.cshtml" />
+    <Content Include="Views\T_Part_office_ControlBox\Details.cshtml" />
+    <Content Include="Views\T_Part_office_ControlBox\Edit.cshtml" />
+    <Content Include="Views\T_Part_office_ControlBox\Index.cshtml" />
+    <Content Include="Views\T_Part_office_HandSet\Create.cshtml" />
+    <Content Include="Views\T_Part_office_HandSet\Delete.cshtml" />
+    <Content Include="Views\T_Part_office_HandSet\Details.cshtml" />
+    <Content Include="Views\T_Part_office_HandSet\Edit.cshtml" />
+    <Content Include="Views\T_Part_office_HandSet\Index.cshtml" />
+    <Content Include="Views\T_Part_office_Column\Create.cshtml" />
+    <Content Include="Views\T_Part_office_Column\Delete.cshtml" />
+    <Content Include="Views\T_Part_office_Column\Details.cshtml" />
+    <Content Include="Views\T_Part_office_Column\Edit.cshtml" />
+    <Content Include="Views\T_Part_office_Column\Index.cshtml" />
+    <Content Include="Views\T_Part_office_Frame\Create.cshtml" />
+    <Content Include="Views\T_Part_office_Frame\Delete.cshtml" />
+    <Content Include="Views\T_Part_office_Frame\Details.cshtml" />
+    <Content Include="Views\T_Part_office_Frame\Edit.cshtml" />
+    <Content Include="Views\T_Part_office_Frame\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

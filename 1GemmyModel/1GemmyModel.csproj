@@ -130,6 +130,7 @@
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\ModelProductOffice\T_Office_Color.cs" />
     <Compile Include="Model\ModelProductOffice\T_Office_Files.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Part_office_describe.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_Column.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_ControlBox.cs" />
     <Compile Include="Model\DownloadFile.cs" />
