@@ -157,7 +157,7 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                         Email = email,                     
                         FailTime = dt,
                         Code = code
-                    }); ;
+                    }); 
                     db.SaveChanges();
                 }
                 else

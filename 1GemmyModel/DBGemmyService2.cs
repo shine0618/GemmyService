@@ -1,6 +1,7 @@
 ﻿using _1GemmyModel.Model;
 using _1GemmyModel.Model.ModelProductOffice;
 using _1GemmyModel.Model.ModelSystem;
+using _1GemmyModel.Model.ModelUserAccount;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace _1GemmyModel
         public virtual DbSet<T_Office_Color> T_Office_Color { get; set; }
         public virtual DbSet<T_Part_office_ControlBox> T_Part_office_ControlBox { get; set; }
         public virtual DbSet<T_Part_office_HandSet> T_Part_office_HandSet { get; set; }
+        public virtual DbSet<T_USER_UserCompanyInfo> T_USER_UserCompanyInfo { get; set; }
 
         //为您要在模型中包含的每种实体类型都添加 DbSet。有关配置和使用 Code First  模型
         //的详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=390109。

@@ -113,7 +113,7 @@ namespace GemmyService.Controllers
                     }
                 }
             }
-            JsonResult jr = Json(isRegister, JsonRequestBehavior.AllowGet);
+            JsonResult jr = Json(t_temporary, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
@@ -212,5 +212,7 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
+
     }
 }

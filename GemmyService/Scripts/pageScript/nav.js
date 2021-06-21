@@ -521,7 +521,8 @@ var nav_langu_box = new Vue({
         resetForm(formName) {
             this.$refs[formName].resetFields();
         },
-        register(username, pass, code, checkPass, firstname, lastname) {
+        register(username, pass, code, checkPass, firstname, lastname) {   
+            
             if (username != '' && pass != '' && code != '' && checkPass != '' && firstname != '' && lastname != '') {
                 this.$http({           //调用接口
                     method: 'POST',
@@ -536,12 +537,14 @@ var nav_langu_box = new Vue({
                 }).then(function (response) {  //接口返回数据
                     //  console.log(response);
                     this.issuccess = response.body;
+                    console.log(response.body);
                     if (response.body.isRegister == true) {
                         this.$notify({
                             message: '注册成功',
                             type: 'success'
                         });
                         this.resetForm(ruleRegisterForm);
+                        window.location = "/JCSelection/PersonInfo?email=" + username + "&name=" + firstname + " " + lastname;
                     }
                     else {
                         this.$notify.error('注册失败');
@@ -550,7 +553,9 @@ var nav_langu_box = new Vue({
                     console.log(error);
                 })
             }
-
+            else {
+                this.$notify.error('信息未完善');
+            }
         },
         login(email, password, confirmSuccess, isLoginCheck) {
             if (email != '' && password != '') {
@@ -830,9 +835,7 @@ var nav_langu_box = new Vue({
         handleNodeClick(data) {
             console.log(data);
         },
-        aaa: function (e) {
-            console.log(this.loginEmail);
-        }
+
     }
 });
 nav_langu_box.initNav();

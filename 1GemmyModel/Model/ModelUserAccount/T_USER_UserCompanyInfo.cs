@@ -13,14 +13,6 @@ namespace _1GemmyModel.Model.ModelUserAccount
         /// </summary>
         public string Email { get; set; }
         /// <summary>
-        /// 名
-        /// </summary>
-        public string FirstName { get; set; }
-        /// <summary>
-        /// 姓
-        /// </summary>
-        public string LastName { get; set; }
-        /// <summary>
         /// 性别
         /// </summary>
         public string Sex { get; set; }

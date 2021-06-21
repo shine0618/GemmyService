@@ -379,7 +379,7 @@ namespace GemmyService.Controllers
             return View();
 
         }
-        public ActionResult PersonInfo()
+        public ActionResult PersonInfo(string email,string name)
         {
             if (Session["PageLanguage"] == null)
             {
@@ -390,7 +390,8 @@ namespace GemmyService.Controllers
                 Session["emailName"] = "";
             }
             Session.Timeout = 9600;
-
+            ViewBag.email = email;
+            ViewBag.name = name;
             return View();
 
         }
