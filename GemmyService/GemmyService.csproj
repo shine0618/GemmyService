@@ -344,6 +344,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="resourse\Img\detail_icon.png" />
     <Content Include="resourse\Img\newbg.82899ecd.jpg" />
     <Content Include="resourse\office\fileimg.png" />
     <Content Include="resourse\page\2jie.png" />
@@ -448,6 +449,7 @@
     <Content Include="resourse\part_xc\JCXC05.png" />
     <Content Include="resourse\part_xc\JCXC06.png" />
     <Content Include="resourse\style.css" />
+    <Content Include="resourse\Img\detail_icon2.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
