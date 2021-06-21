@@ -98,6 +98,7 @@ namespace GemmyService.Controllers
         public JsonResult Register(string email, string password, string firstname, string lastname,string code)
         {
             bool isRegister = false;
+            string msg = string.Empty;
             List<T_USER_Temporary_UserInfo> t_temporary = usermanager.getTempinfo(email);
             if (t_temporary.Count != 0)
             {
@@ -111,9 +112,26 @@ namespace GemmyService.Controllers
                            isRegister = issuccess;
                         }
                     }
+                    else
+                    {
+                        msg = "验证码已经失效,请重试";
+                    }
+
                 }
+                
             }
-            JsonResult jr = Json(t_temporary, JsonRequestBehavior.AllowGet);
+            else
+            {
+                msg = "请先发送邮件获取验证码";
+            }
+            
+            var param = new
+            {
+                isRegister = isRegister,
+                msg = msg
+            };
+
+            JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }

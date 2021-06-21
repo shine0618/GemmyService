@@ -19,15 +19,19 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                 var entity = db.T_USER_UserInfo.Where(m => m.Email ==email).ToList();
                 if (entity.Count == 0)
                 {
+                    password = MD5T.MD5Encrypt(password);
                     db.T_USER_UserInfo.Add(new T_USER_UserInfo()
                     {
                         FirstName=firstname,
-                        Password = MD5T.MD5Encrypt(password),
-                        LastName=lastname,
+                        Password = password,
+                        LastName =lastname,
                         Email = email
                     });
-                    db.SaveChanges();
-                    issuccess = true;
+                   int n =   db.SaveChanges();
+                    if(n>0)
+                    {
+                        issuccess = true;
+                    }
                 }
                 
             }

@@ -543,11 +543,11 @@ var nav_langu_box = new Vue({
                             message: '注册成功',
                             type: 'success'
                         });
-                        this.resetForm(ruleRegisterForm);
+                        this.resetForm("ruleRegisterForm");
                         window.location = "/JCSelection/PersonInfo?email=" + username + "&name=" + firstname + " " + lastname;
                     }
                     else {
-                        this.$notify.error('注册失败');
+                        this.$notify.error('注册失败' + response.body.msg);
                     }
                 }, function (error) {
                     console.log(error);

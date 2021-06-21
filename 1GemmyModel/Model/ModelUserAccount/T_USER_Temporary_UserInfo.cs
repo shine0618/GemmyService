@@ -31,7 +31,7 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 失效时间
         /// </summary>
-        public DateTime FailTime { get; set; }
+        public DateTime? FailTime { get; set; }
         /// <summary>
         /// 验证码
         /// </summary>
@@ -39,7 +39,7 @@ namespace _1GemmyModel.Model
         /// <summary>
         /// 重置密码失效时间
         /// </summary>
-        public DateTime ResetFailTime { get; set; }
+        public DateTime? ResetFailTime { get; set; }
         /// <summary>
         /// 重置密码验证码
         /// </summary>
