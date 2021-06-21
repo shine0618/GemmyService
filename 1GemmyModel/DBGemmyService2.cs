@@ -24,6 +24,10 @@ namespace _1GemmyModel
 
         public virtual DbSet<T_SYS_Language> T_SYS_Language { get; set; }
         public virtual DbSet<T_USER_UserInfo> T_USER_UserInfo { get; set; }
+
+        public virtual DbSet<T_USER_Salt> T_USER_Salt { get; set; }
+        
+
         public virtual DbSet<T_Product_office_desk> T_Product_office_desk { get; set; }
         public virtual DbSet<T_Product_office_desk_detail> T_Product_office_desk_detail { get; set; }
 
@@ -41,6 +45,12 @@ namespace _1GemmyModel
         public virtual DbSet<T_Part_office_ControlBox> T_Part_office_ControlBox { get; set; }
         public virtual DbSet<T_Part_office_HandSet> T_Part_office_HandSet { get; set; }
         public virtual DbSet<T_USER_UserCompanyInfo> T_USER_UserCompanyInfo { get; set; }
+
+        /// <summary>
+        /// 部件的描述
+        /// </summary>
+        public virtual DbSet<T_Part_office_describe> T_Part_office_describe { get; set; }
+
 
         //为您要在模型中包含的每种实体类型都添加 DbSet。有关配置和使用 Code First  模型
         //的详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=390109。
