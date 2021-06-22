@@ -689,11 +689,11 @@
     <Content Include="Views\T_Office_Files\Edit.cshtml" />
     <Content Include="Views\T_Office_Files\Index.cshtml" />
     <Content Include="Views\JCSelection\PersonInfo.cshtml" />
+    <Content Include="Views\JCAccount\reass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="resourse\part_foot\" />
-    <Folder Include="Views\JCAccount\" />
     <Folder Include="Views\JCSelectionLanguage\" />
   </ItemGroup>
   <ItemGroup>

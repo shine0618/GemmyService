@@ -239,5 +239,12 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
+
+
+        public ActionResult reass()
+        {
+            return View();
+        }
     }
 }

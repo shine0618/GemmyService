@@ -21,7 +21,7 @@
 
     .selectColumnPart {
         min-height: 500px;
-        height: calc(100vh - 300px);
+        height: calc(100vh - 308px);
         overflow: auto;
         margin-top: 10px;
     }
@@ -120,29 +120,33 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
-                    <img class="img-response" style="width:100%" src="~/resourse/part_controlbox/JCB35N1.png" />
+                    <img class="img-response" style="width:100%" :src="detailModel.imgurl" />
                 </div>
 
 
                 <div class="col-lg-6">
-                    <h4 class="drawerh5">JCB35N2</h4>
-                    <h6>
-                        1. 紧凑型大功率控制器
-                    </h6>
-                    <h6>
-                        2. 控制电机数：2
-                    </h6>
-                    <h6> 3. 颜色 : 黑</h6>
-                    <h6> 3. 颜色 : 黑</h6>
-                    <h6> 4. 外壳材质：阻燃ABS</h6>
-                    <h6> 5. 电流限制，过载保护</h6>
-                    <h6> 6. 过热保护</h6>
-                    <h6> 7. 短路保护</h6>
-                    <h6> 8. 遇阻回退功能</h6>
-                    <h6> 9. 软起软停功能</h6>
-                    <h6> 10. 超低待机功耗，符合环保标准(待机能耗仅0.1W)</h6>
-                    <h6> 11. 工作占空比：最大10%</h6>
-                    <h6> 12. 与所有捷昌办公系列升降柱兼容</h6>
+                    <h4 class="drawerh5" v-text="detailModel.mode"></h4>
+                    <h6 v-for="item in detailModel.des" v-text="item"></h6>
+
+
+
+                    @*<h6>
+            1. 紧凑型大功率控制器
+        </h6>
+        <h6>
+            2. 控制电机数：2
+        </h6>
+        <h6> 3. 颜色 : 黑</h6>
+        <h6> 3. 颜色 : 黑</h6>
+        <h6> 4. 外壳材质：阻燃ABS</h6>
+        <h6> 5. 电流限制，过载保护</h6>
+        <h6> 6. 过热保护</h6>
+        <h6> 7. 短路保护</h6>
+        <h6> 8. 遇阻回退功能</h6>
+        <h6> 9. 软起软停功能</h6>
+        <h6> 10. 超低待机功耗，符合环保标准(待机能耗仅0.1W)</h6>
+        <h6> 11. 工作占空比：最大10%</h6>
+        <h6> 12. 与所有捷昌办公系列升降柱兼容</h6>*@
 
 
 
@@ -288,7 +292,7 @@
                           
                             <div class="imgDiv" @@mouseenter="mouse_column = item.Id" @@mouseleave="mouse_column = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
-                                <img v-show="mouse_column == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('column',item.Id)" />
+                                <img v-show="mouse_column == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('column',item.Mode)" />
                             </div>
 
 
@@ -305,7 +309,7 @@
 
                             <div class="imgDiv" @@mouseenter="mouse_frame = item.Id" @@mouseleave="mouse_frame = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
-                                <img v-show="mouse_frame == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('frame',item.Id)" />
+                                <img v-show="mouse_frame == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('frame',item.Mode)" />
                             </div>
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
@@ -318,7 +322,7 @@
                             @*<img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
                             <div class="imgDiv" @@mouseenter="mouse_foot = item.Id" @@mouseleave="mouse_foot = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
-                                <img v-show="mouse_foot == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('foot',item.Id)" />
+                                <img v-show="mouse_foot == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('foot',item.Mode)" />
                             </div>
 
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
@@ -332,7 +336,7 @@
                            @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
                             <div class="imgDiv" @@mouseenter="mouse_SideBracket = item.Id" @@mouseleave="mouse_SideBracket = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
-                                <img v-show="mouse_SideBracket == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('SideBracket',item.Id)" />
+                                <img v-show="mouse_SideBracket == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('SideBracket',item.Mode)" />
                             </div>
 
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
@@ -347,11 +351,11 @@
                         <div class="col-lg-6 col-md-6" v-for="item in list_ControlBox">
                             <div class="imgDiv" @@mouseenter="mouse_ControlBox = item.Id" @@mouseleave="mouse_ControlBox = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_ControlBox==item.Id}" v-on:click="ControlBoxClick(item.Id,item.Mode)" :src="item.PictureName" />
-                                <img v-show="mouse_ControlBox == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('ControlBox',item.Id)" />
+                                <img v-show="mouse_ControlBox == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('ControlBox',item.Mode)" />
                             </div>
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>控制器:{{list_ControlBox_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_ControlBox_count}}条结果</h6></div>
                     </div>
 
                 </div>
@@ -362,13 +366,13 @@
 
                             <div class="imgDiv" @@mouseenter="mouse_HandSet = item.Id" @@mouseleave="mouse_HandSet = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_HandSet==item.Id}" v-on:click="HandSetClick(item.Id,item.Mode)" :src="item.PictureName" />
-                                <img v-show="mouse_HandSet == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('HandSet',item.Id)" />
+                                <img v-show="mouse_HandSet == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('HandSet',item.Mode)" />
                             </div>
 
 
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>手控器:{{list_HandSet_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_HandSet_count}}条结果</h6></div>
                     </div>
                 </div>
 
@@ -379,13 +383,13 @@
 
                             <div class="imgDiv" @@mouseenter="mouse_Powercable = item.Id" @@mouseleave="mouse_Powercable = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_Powercable==item.Id}" v-on:click="PowercableClick(item.Id,item.Mode)" :src="item.PictureName" />
-                                <img v-show="mouse_Powercable == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('Powercable',item.Id)" />
+                                <img v-show="mouse_Powercable == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('Powercable',item.Mode)" />
                             </div>
 
 
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>电源线:{{list_Powercable_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_Powercable_count}}条结果</h6></div>
                     </div>
 
 
@@ -447,6 +451,8 @@
                     <h6 v-text="'CONTROLLER	控制器 '+select_ControlBoxMode"></h6>
                     <h6 v-text="'HC	操作器 '+select_HandSetMode"></h6>
 
+                    <h6 v-text="'电源线 '+select_PowercableMode"></h6>
+
                     <h6 v-text="' POS2	框架伸缩距离 '+frameWidth"></h6>
                     <h6 v-text="'POS1	立柱升降距离 '+frameHeight"></h6>
                     <h6>
@@ -481,7 +487,13 @@
 </div>
 
 
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+    })
 
+   
+</script>
 
 
 
@@ -589,6 +601,11 @@
             MyCollectName: "",
 
 
+            detailModel: {
+                imgurl: "",
+                mode: "",
+                des :[],
+            },
 
             value:0,
         },
@@ -680,8 +697,25 @@
                 var i = '<iframe scrolling="no"  id="shjahs" style ="height:655px;width:800px"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
                 $('#asas').append(i);
             },
-            getpartDetail: function (partType,Id) {
+            getpartDetail: function (partType, Mode) {
+
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetPartDetail",
+                    params: {
+                        partType: partType,
+                        Mode: Mode
+                    }
+                }).then(function (response) {  //接口返回数据
+
+                    this.detailModel = response.body;
+                    console.log(response.body);
+                }, function (error) {
+                    console.log(error);
+                })
+
                 this.dialogVisible_partDetail = true
+
 
 
             },

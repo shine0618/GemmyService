@@ -21,8 +21,19 @@ namespace _1GemmyModel.Model.ModelProductOffice
         [NotMapped]
         public T_Part_office_SideBracket T_Part_office_SideBracket { get; set; }
 
-          
 
+        [NotMapped]
+        public T_Part_office_ControlBox T_Part_office_ControlBox { get; set; }
+
+
+        [NotMapped]
+        public T_Part_office_HandSet T_Part_office_HandSet { get; set; }
+
+
+        [NotMapped]
+        public T_Part_office_Powercable T_Part_office_Powercable { get; set; }
+
+        
 
 
         public string configurationNo { get; set; }
