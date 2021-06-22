@@ -8,6 +8,8 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using _4GemmyTools;
+using _1GemmyModel.Model.ModelUserAccount;
+using Newtonsoft.Json;
 
 namespace GemmyService.Controllers
 {
@@ -116,21 +118,17 @@ namespace GemmyService.Controllers
                     {
                         msg = "验证码已经失效,请重试";
                     }
-
-                }
-                
+                }               
             }
             else
             {
                 msg = "请先发送邮件获取验证码";
-            }
-            
+            }           
             var param = new
             {
                 isRegister = isRegister,
                 msg = msg
             };
-
             JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
@@ -231,6 +229,15 @@ namespace GemmyService.Controllers
             return jr;
         }
 
-
+        [HttpPost]
+        public JsonResult AddCompanyInfo(string forminfo)
+        {
+            bool isadd = false;
+            T_USER_UserCompanyInfo t_USER_UserCompanyInfos = JsonConvert.DeserializeObject<T_USER_UserCompanyInfo>(forminfo);
+            isadd=usermanager.addCompanyInfo(t_USER_UserCompanyInfos);
+            JsonResult jr = Json(isadd, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
     }
 }

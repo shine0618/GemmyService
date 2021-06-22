@@ -201,7 +201,7 @@
                 {
                     <el-row>
                         <el-col :span="8"><el-avatar style="background:var(--thm-base)">@Session["picName"] </el-avatar></el-col>
-                        <h3>@Session["configurationPerson"]<el-button icon="el-icon-s-tools" style="background-color:#ffffff;border:none;font-size:26px;outline:none"></el-button></h3>                        
+                        <h3>@Session["configurationPerson"]<a href="/JCSelection/PersonInfo?email=@Session["emailName"]&name=@Session["configurationPerson"]"><i class="el-icon-s-tools" style="background-color:#ffffff;border:none;font-size:26px;outline:none"></i></a></h3>                        
                         <button type="button" class="thm-btn orderbtn" style="width:50%" @@click="LoginOut"> 退出登录</button>
 
                     </el-row>

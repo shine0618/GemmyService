@@ -45,7 +45,7 @@ namespace _1GemmyModel
         public virtual DbSet<T_Part_office_ControlBox> T_Part_office_ControlBox { get; set; }
         public virtual DbSet<T_Part_office_HandSet> T_Part_office_HandSet { get; set; }
         public virtual DbSet<T_USER_UserCompanyInfo> T_USER_UserCompanyInfo { get; set; }
-
+        public virtual DbSet<T_Part_office_Powercable> T_Part_office_Powercable { get; set; }
         /// <summary>
         /// 部件的描述
         /// </summary>

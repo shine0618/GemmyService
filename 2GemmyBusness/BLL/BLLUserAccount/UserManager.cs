@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using _1GemmyModel;
 using _1GemmyModel.Model;
+using _1GemmyModel.Model.ModelUserAccount;
 using _4GemmyTools;
 
 namespace _2GemmyBusness.BLL.BLLUserAccount
@@ -214,6 +215,26 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
         public string GetSalt()
         {
             return System.Guid.NewGuid().ToString("D");
+        }
+
+        public bool addCompanyInfo(T_USER_UserCompanyInfo list)
+        {
+            bool issuccess = false;
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                if (db.T_USER_UserCompanyInfo.Any(m => m.Email == list.Email)) {
+                    return issuccess;
+                }
+                else
+                {
+                    T_USER_UserCompanyInfo t = new T_USER_UserCompanyInfo();
+                    t = list;
+                    db.T_USER_UserCompanyInfo.Add(t);
+                    db.SaveChanges();
+                    issuccess = true;
+                }
+            }
+            return issuccess;
         }
     }
 }

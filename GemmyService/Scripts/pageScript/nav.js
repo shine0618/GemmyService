@@ -521,8 +521,7 @@ var nav_langu_box = new Vue({
         resetForm(formName) {
             this.$refs[formName].resetFields();
         },
-        register(username, pass, code, checkPass, firstname, lastname) {   
-            
+        register(username, pass, code, checkPass, firstname, lastname) {               
             if (username != '' && pass != '' && code != '' && checkPass != '' && firstname != '' && lastname != '') {
                 this.$http({           //调用接口
                     method: 'POST',
@@ -544,7 +543,7 @@ var nav_langu_box = new Vue({
                             type: 'success'
                         });
                         this.resetForm("ruleRegisterForm");
-                        window.location = "/JCSelection/PersonInfo?email=" + username + "&name=" + firstname + " " + lastname;
+                        //window.location = "/JCSelection/PersonInfo?email=" + username + "&name=" + firstname + " " + lastname;
                     }
                     else {
                         this.$notify.error('注册失败' + response.body.msg);

@@ -19,39 +19,39 @@
         <h3  style="line-height:450%;text-align:center">完善个人信息</h3>
     </di>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
-        <el-form-item label="电子邮箱" prop="email" style="margin-left: 500px">
-            <el-input v-model="ruleForm.email" style="width:50%" :disabled="true"></el-input>
+        <el-form-item label="电子邮箱" prop="Email" style="margin-left: 500px">
+            <el-input v-model="ruleForm.Email" style="width:50%" :disabled="true"></el-input>
         </el-form-item>
-        <el-form-item label="名称" prop="name" style="margin-left: 500px">
-            <el-input v-model="ruleForm.name" style="width:50%" :disabled="true">
+        <el-form-item label="名称" prop="Name" style="margin-left: 500px">
+            <el-input v-model="ruleForm.Name" style="width:50%" :disabled="true">
             </el-input>
         </el-form-item>
-        <el-form-item label="性别" prop="sex" style="margin-left: 500px">
-            <el-input v-model="ruleForm.sex"  style="width:50%">
+        <el-form-item label="性别" prop="Sex" style="margin-left: 500px">
+            <el-input v-model="ruleForm.Sex"  style="width:50%">
             </el-input>
         </el-form-item>
-        <el-form-item label="联系方式" prop="telephone" style="margin-left: 500px">
-            <el-input v-model="ruleForm.telephone" style="width:50%">
+        <el-form-item label="联系方式" prop="Telephone" style="margin-left: 500px">
+            <el-input v-model="ruleForm.Telephone" style="width:50%">
             </el-input>
         </el-form-item>
-        <el-form-item label="公司名称" prop="companyname" style="margin-left: 500px">
-            <el-input v-model="ruleForm.companyname" style="width:50%">
+        <el-form-item label="公司名称" prop="CompanyName" style="margin-left: 500px">
+            <el-input v-model="ruleForm.CompanyName" style="width:50%">
             </el-input>
         </el-form-item>
-        <el-form-item label="公司地址（街道）" prop="companystreet" style="margin-left: 500px">
-            <el-input v-model="ruleForm.companystreet" style="width:50%">
+        <el-form-item label="公司地址（街道）" prop="CompanyStreet" style="margin-left: 500px">
+            <el-input v-model="ruleForm.CompanyStreet" style="width:50%">
             </el-input>
         </el-form-item>
-        <el-form-item label="公司详细地址" prop="companylocation" style="margin-left: 500px">
-            <el-input v-model="ruleForm.companylocation"  style="width:50%">
+        <el-form-item label="公司详细地址" prop="CompanyLocation" style="margin-left: 500px">
+            <el-input v-model="ruleForm.CompanyLocation"  style="width:50%">
             </el-input>
         </el-form-item>
-        <el-form-item label="公司地区" prop="companynation" style="margin-left: 500px">
-            <el-input v-model="ruleForm.companynation"  style="width:50%">
+        <el-form-item label="公司地区" prop="CompanyNation" style="margin-left: 500px">
+            <el-input v-model="ruleForm.CompanyNation"  style="width:50%">
             </el-input>
         </el-form-item>
-        <el-form-item label="公司官网" prop="companywebsite" style="margin-left: 500px">
-            <el-input v-model="ruleForm.companywebsite"  style="width:50%">
+        <el-form-item label="公司官网" prop="CompanyWebsite" style="margin-left: 500px">
+            <el-input v-model="ruleForm.CompanyWebsite"  style="width:50%">
             </el-input>
         </el-form-item>
         <el-form-item style="text-align:center">
@@ -66,43 +66,44 @@
         el: '#OfficeStandards',
         data() {
             return {
+                isadd: false,
                 ruleForm: {
-                    email: "@ViewBag.email",
-                    name: "@ViewBag.name",
-                    sex: '',
-                    telephone: '',
-                    companyname: '',
-                    companystreet: '',
-                    companylocation: '',
-                    companynation: '',
-                    companywebsite: ''
+                    Email: "@ViewBag.email",
+                    Name: "@ViewBag.name",
+                    Sex: '',
+                    Telephone: '',
+                    CompanyName: '',
+                    CompanyStreet: '',
+                    CompanyLocation: '',
+                    CompanyNation: '',
+                    CompanyWebsite: ''
                 },
                 rules: {
-                    email: [
+                    Email: [
                         {  message: '请输入活动名称', trigger: 'blur' }
                     ],
-                    name: [
+                    Name: [
                         {  message: '请选择活动区域', trigger: 'blur' }
                     ],
-                    sex: [
+                    Sex: [
                         { required: true, message: '请填写性别', trigger: 'blur' }
                     ],
-                    telephone: [
+                    Telephone: [
                         { required: true, message: '请填写联系方式', trigger: 'blur' }
                     ],
-                    companyname: [
+                    CompanyName: [
                         { required: true, message: '请填写公司名称', trigger: 'blur' }
                     ],
-                    companystreet: [
+                    CompanyStreet: [
                         { required: true, message: '请填写公司地址', trigger: 'blur' }
                     ],
-                    companylocation: [
+                    CompanyLocation: [
                         { required: true, message: '请填写公司详细地址', trigger: 'blur' }
                     ],
-                    companynation: [
+                    CompanyNation: [
                         { required: true, message: '请填写公司地区', trigger: 'blur' }
                     ],
-                    companywebsite: [
+                    CompanyWebsite: [
                         { required: true, message: '请填写公司官网', trigger: 'blur' }
                     ],
                 }
@@ -114,16 +115,25 @@
                     if (valid) {
                         this.$http({           //调用接口
                             method: 'POST',
-                            url: "/JCAccount/GetLanguages",
+                            url: "/JCAccount/AddCompanyInfo",
                             params: {
-                                keys: '123',
+                                forminfo: JSON.stringify(this.ruleForm),
                             }
-                        }).
-                        this.$notify({
-                            message: '提交成功',
-                            type: 'success'
-                        });
-                    } else {
+                        }).then(function (response) {
+                            this.isadd = response.body;
+                            console.log(this.ruleForm);
+                            console.log(JSON.stringify(this.ruleForm));
+                            console.log(response.body);                            
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                window.location = "/JCSelection/main";
+                            }                           
+                        })                        
+                    }
+                    else {
                         this.$notify.error('缺少内容');
                         return false;
                     }
@@ -138,5 +148,4 @@
         }
     }
     )
-    OfficeStandards.initPages();
 </script>

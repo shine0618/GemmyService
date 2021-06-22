@@ -138,6 +138,14 @@
     <Compile Include="Migrations\202106210902278_initsalt2.designer.cs">
       <DependentUpon>202106210902278_initsalt2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106220046591_init45637.cs" />
+    <Compile Include="Migrations\202106220046591_init45637.designer.cs">
+      <DependentUpon>202106220046591_init45637.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106220247017_init456456.cs" />
+    <Compile Include="Migrations\202106220247017_init456456.designer.cs">
+      <DependentUpon>202106220247017_init456456.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\ModelProductOffice\T_Office_Color.cs" />
@@ -151,6 +159,7 @@
     <Compile Include="Model\ModelProductOffice\T_Part_office_Frame.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_HandSet.cs" />
     <Compile Include="Model\LanguageType.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Part_office_Powercable.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_desk.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_desk_detail.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_text.cs" />
@@ -238,6 +247,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106210902278_initsalt2.resx">
       <DependentUpon>202106210902278_initsalt2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106220046591_init45637.resx">
+      <DependentUpon>202106220046591_init45637.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106220247017_init456456.resx">
+      <DependentUpon>202106220247017_init456456.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
