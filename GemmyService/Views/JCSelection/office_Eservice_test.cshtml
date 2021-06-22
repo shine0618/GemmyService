@@ -186,9 +186,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <!--<div class="block-title text-center">
-                        <p></p>
-                        <h3>产品配置列表</h3>
-                    </div>-->
+                <p></p>
+                <h3>产品配置列表</h3>
+            </div>-->
                     <!-- /.block-title -->
                     <div>
                         <template>
@@ -197,7 +197,9 @@
                                 <el-tab-pane :label="text_customer_2" name="s2"></el-tab-pane>
                                 <el-tab-pane :label="text_customer_3" name="s3"></el-tab-pane>
                                 <el-tab-pane :label="text_customer_4" name="s4"></el-tab-pane>
-                                <el-tab-pane :label="text_customer_42" name="s5"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_42_1" name="s5_1"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_42_2" name="s5_2"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_42_3" name="s5_3"></el-tab-pane>
                                 <el-tab-pane :label="text_customer_423" name="s6"></el-tab-pane>
                                 <el-tab-pane label="配置清单信息" name="s7"></el-tab-pane>
                             </el-tabs>
@@ -241,14 +243,24 @@
                     选择侧板
                 </div>
             </div>
-            <div class="row selectStep" v-if="selectStep=='s5'">
+            <div class="row selectStep" v-if="selectStep=='s5_1'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    选择操作器
+                    选择控制器
                 </div>
             </div>
-
-
+            <div class="row selectStep" v-if="selectStep=='s5_2'">
+                <div class="col-lg-12">
+                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
+                    选择手控器
+                </div>
+            </div>
+            <div class="row selectStep" v-if="selectStep=='s5_3'">
+                <div class="col-lg-12">
+                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
+                    选择电源线
+                </div>
+            </div>
 
             <div class="row selectStep" v-if="selectStep=='s6'">
                 <div class="col-lg-12">
@@ -272,7 +284,14 @@
                     @*s1*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_column">
-                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                           @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
+                          
+                            <div class="imgDiv" @@mouseenter="mouse_column = item.Id" @@mouseleave="mouse_column = ''">
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" :src="item.PictureName" />
+                                <img v-show="mouse_column == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('column',item.Id)" />
+                            </div>
+
+
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_column_count}}条结果</h6></div>
@@ -306,8 +325,8 @@
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_SideBracket_count}}条结果</h6></div>
                     </div>
                 </div>
-                <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5'">
-                    @*操作器*@
+                <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5_1'">
+                    @*控制器*@
 
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_ControlBox">
@@ -319,10 +338,13 @@
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>控制器:{{list_ControlBox_count}}条结果</h6></div>
                     </div>
-                    <hr />
+
+                </div>
+                <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5_2'">
+                    @*手控器*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_HandSet">
-                          
+
                             <div class="imgDiv" @@mouseenter="mouse_HandSet = item.Id" @@mouseleave="mouse_HandSet = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_HandSet==item.Id}" v-on:click="HandSetClick(item.Id,item.Mode)" :src="item.PictureName" />
                                 <img v-show="mouse_HandSet == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('HandSet',item.Id)" />
@@ -333,10 +355,17 @@
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>手控器:{{list_HandSet_count}}条结果</h6></div>
                     </div>
-
-
-
                 </div>
+
+                <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5_3'">
+                    @*电源线*@
+
+
+
+                 
+                </div>
+
+
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s6'">
 
                     <div class="row">
@@ -352,11 +381,11 @@
 
 
                     @*<div class="row">
-                            <div class="col-lg-6 col-md-6" v-for="item in list_Color">
-                                    <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
-                                    <h6 style="text-align:center" v-text="item.HEXValue"></h6>
-                            </div>
-                        </div>*@
+                <div class="col-lg-6 col-md-6" v-for="item in list_Color">
+                        <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
+                        <h6 style="text-align:center" v-text="item.HEXValue"></h6>
+                </div>
+            </div>*@
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s7'">
                     <div>
@@ -470,21 +499,25 @@
             list_column_count: 0,
             select_column: "",
             select_columnMode: "",
+            mouse_column: "",
 
             list_frame: null,
             list_frame_count: 0,
             select_frame: "",
-            select_frameMode:"",
+            select_frameMode: "",
+            mouse_frame: "",
 
             list_foot: null,
             list_foot_count: 0,
             select_foot: "",
-            select_footMode:"",
+            select_footMode: "",
+            mouse_foot: "",
 
             list_SideBracket: null,
             list_SideBracket_count: 0,
             select_SideBracket: "",
             select_SideBracketMode: "",
+            mouse_SideBracket: "",
 
             list_ControlBox: null,
             list_ControlBox_count: 0,
@@ -514,7 +547,9 @@
             text_customer_2: "",
             text_customer_3: "",
             text_customer_4: "",
-            text_customer_42: "",
+            text_customer_42_1: "",
+            text_customer_42_2: "",
+            text_customer_42_3: "",
             text_customer_423: "",
             text_customer_5: "",
             text_customer_6: "",
