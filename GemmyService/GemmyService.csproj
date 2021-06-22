@@ -347,6 +347,8 @@
     <Content Include="resourse\Img\detail_icon.png" />
     <Content Include="resourse\Img\newbg.82899ecd.jpg" />
     <Content Include="resourse\office\fileimg.png" />
+    <Content Include="resourse\other\collect1.png" />
+    <Content Include="resourse\other\collect0.png" />
     <Content Include="resourse\page\2jie.png" />
     <Content Include="resourse\page\2jieR.png" />
     <Content Include="resourse\page\2jies.png" />

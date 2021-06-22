@@ -17,6 +17,7 @@ namespace GemmyService.Controllers
         private BLL_Office_desk bll_desk = new BLL_Office_desk();
         private BLL_Office_File bll_file = new BLL_Office_File();
         private BLL_Office_Color bll_color = new BLL_Office_Color();
+        private BLL_Office_desk_collect bll_collect = new BLL_Office_desk_collect();
         #endregion
 
 
@@ -158,6 +159,61 @@ namespace GemmyService.Controllers
             ViewBag.productName = productName;
             return View();
         }
+
+
+
+        [HttpPost]
+        public JsonResult CollectDesk(int deskId)
+        {
+            int suc = 0;
+            if (Session["emailName"] != null && Session["emailName"].ToString() != "")
+            {
+                string pname = Session["emailName"].ToString();
+
+                suc = bll_collect.AddT_Office_desk_collect(deskId, pname);
+            }
+
+            JsonResult jr = Json(suc, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+
+
+        }
+
+        [HttpPost]
+        public JsonResult CancelCollectDesk(int deskId)
+        {
+            int suc = 0;
+            if (Session["emailName"] != null && Session["emailName"].ToString() != "")
+            {
+                string pname = Session["emailName"].ToString();
+                suc = bll_collect.deleteT_Office_desk_collect(deskId, pname);
+            }
+            JsonResult jr = Json(suc, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+
+
+        }
+        
+        [HttpGet]
+        public ActionResult GetCollect(int deskId)
+        {
+            //收藏
+            T_Office_desk_collect collect = new T_Office_desk_collect();
+            if (Session["emailName"] != null && Session["emailName"].ToString() != "")
+            {
+                string pname = Session["emailName"].ToString();
+                collect = bll_collect.GetT_Office_desk_collect(deskId, pname);
+            }
+            JsonResult jr = Json(collect, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+
+
+
         [HttpGet]
         public ActionResult GetOfficeDeskDetail(string productGuid,string lang)
         {
@@ -171,13 +227,22 @@ namespace GemmyService.Controllers
             List<T_Product_office_description> descriptions = bll_desk.GetT_Product_office_description(_T_Product_office_desk_detail.DescriptionIndex, lang);
 
             List<T_Office_Files> T_Office_Files = bll_file.GetT_Office_Files(_T_Product_office_desk.Id);
+            //收藏
+            T_Office_desk_collect collect = new T_Office_desk_collect();
+            if (Session["emailName"]!=null && Session["emailName"].ToString()!="")
+            {
+                string pname = Session["emailName"].ToString();
+             
+                 collect =  bll_collect.GetT_Office_desk_collect(_T_Product_office_desk.Id, pname);
+            }
 
             var list = new
             {
                 T_Product_office_desk = _T_Product_office_desk,
                 T_Product_office_desk_detail = _T_Product_office_desk_detail,
                 descriptions = descriptions,
-                T_Office_Files = T_Office_Files
+                T_Office_Files = T_Office_Files,
+                collect = collect,
             };
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
@@ -351,6 +416,10 @@ namespace GemmyService.Controllers
 
             T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
             T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id);
+
+
+
+
 
             var list = new
             {

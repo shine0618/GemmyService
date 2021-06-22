@@ -78,6 +78,11 @@
         width: 100%;
         max-width: 150px;
     }
+    .collect_icon
+    {
+      width:50px;
+    }
+
  
 </style>
 
@@ -114,10 +119,19 @@
 
                         </div>
                         <div class="col-lg-3">
-                            <img class="img-response" style="width:40px;" src="~/assets/collect1.png" />
-                            <i v-show="isCollect" class="el-icon-star-on" @@click="isCollect=!isCollect"></i>
-                            <i v-show="!isCollect" class="el-icon-star-off" @@click="isCollect=!isCollect"></i>
-                            <div class="about-three__image">
+                            @*<i v-show="isCollect" class="el-icon-star-on collect_icon" @@click="isCollect=!isCollect"></i>
+                            <i v-show="!isCollect" class="el-icon-star-off collect_icon" @@click="isCollect=!isCollect"></i>*@
+
+                            <div>
+                                <img src="~/resourse/other/collect1.png" v-if="isCollect==true" class="img-response collect_icon" @@click="CancelCollectDesk" />
+
+                                <img src="~/resourse/other/collect0.png" v-else class="img-response collect_icon" @@click="CollectDesk" />
+                            </div>
+                        
+                        
+                        
+                        
+                        <div class="about-three__image">
 
                                 <div class="block-title text-left">
                                     <p>{{text_detail_1}}</p>
@@ -417,6 +431,55 @@
 
             },
 
+            CollectDesk: function () {
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCSelection/CollectDesk",
+                    params: {
+                        deskId: this.T_Product_office_desk.Id,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    if (response.body > 0) {
+                        this.$notify({
+                            message: '收藏成功!',
+                            type: 'success'
+                        });
+                        this.isCollect = true;
+                    }
+                    else {
+                        this.$notify.error('收藏失败,请先登录');
+                        this.isCollect = false;
+                    }
+                }, function (error) {
+                    console.log(error);
+                })
+            },
+            CancelCollectDesk: function() {
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCSelection/CancelCollectDesk",
+                    params: {
+                        deskId: this.T_Product_office_desk.Id,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    if (response.body > 0) {
+                        this.$notify({
+                            message: '取消收藏成功!',
+                            type: 'success'
+                        });
+                        this.isCollect = false;
+                    }
+                    else {
+                        this.$notify.error('取消收藏失败');
+                        this.isCollect = true;
+                    }
+                }, function (error) {
+                    console.log(error);
+                })
+            },
+
+
+
             exportConfig: function (event) {
 
                 var doc = new jsPDF('p', 'pt');          // 初始化示例，更多配置项看官网api
@@ -429,8 +492,6 @@
                 doc.autoTable(res.columns, res.data, { startY: 60 });    // 渲染数据，列、数据、距离上边距离，更多配置项看官网api
 
                 doc.save('tableName.pdf');    // 导出名为tableName.pdf的文件
-
-
 
             },
             downloadfile: function (url,fname) {
@@ -485,6 +546,7 @@
                     params: {
                         lang: this.langCode,
                         productGuid: this.productGuid,
+                        
                     }
                 }).then(function (response) {  //接口返回数据
 
@@ -601,6 +663,12 @@
 
                     }
 
+                    //收藏的逻辑
+                    if (response.body.collect.Id > 0) {
+                        this.isCollect = true;
+                    }
+
+                   
                     console.log(response.body);
 
 
