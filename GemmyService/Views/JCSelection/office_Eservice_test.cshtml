@@ -47,12 +47,12 @@
         width: 100%
     }
         /*缩略图鼠标滑过*/
-        .part_img:hover {
+        /*.part_img:hover {
             background-color: rgb(12 33 57 / 0.4);
-        }
+        }*/
 
     .imgDiv:hover {
-        background-color: rgb(12 33 57 / 0.4);
+        background-color: rgb(12 33 57 / 0.3);
     }
     /*缩略图选中*/
     .selectBack {
@@ -61,7 +61,7 @@
 
     .part_detail_icon {
         width: 18%;
-        height: 18%;
+        height: 20%;
         position: absolute;
         top: 5px;
         right: 5px;
@@ -287,7 +287,7 @@
                            @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
                           
                             <div class="imgDiv" @@mouseenter="mouse_column = item.Id" @@mouseleave="mouse_column = ''">
-                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" :src="item.PictureName" />
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
                                 <img v-show="mouse_column == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('column',item.Id)" />
                             </div>
 
@@ -301,7 +301,12 @@
                     @*s2*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_frame">
-                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                            @*<img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
+
+                            <div class="imgDiv" @@mouseenter="mouse_frame = item.Id" @@mouseleave="mouse_frame = ''">
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                                <img v-show="mouse_frame == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('frame',item.Id)" />
+                            </div>
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_frame_count}}条结果</h6></div>
@@ -310,7 +315,12 @@
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s3'">
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_foot">
-                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                            @*<img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
+                            <div class="imgDiv" @@mouseenter="mouse_foot = item.Id" @@mouseleave="mouse_foot = ''">
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                                <img v-show="mouse_foot == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('foot',item.Id)" />
+                            </div>
+
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_foot_count}}条结果</h6></div>
@@ -319,7 +329,12 @@
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s4'">
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_SideBracket">
-                            <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                           @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
+                            <div class="imgDiv" @@mouseenter="mouse_SideBracket = item.Id" @@mouseleave="mouse_SideBracket = ''">
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                                <img v-show="mouse_SideBracket == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('SideBracket',item.Id)" />
+                            </div>
+
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
                         <div class="col-lg-12" style="text-align:center"><h6>{{list_SideBracket_count}}条结果</h6></div>
@@ -583,8 +598,10 @@
                     case "s4":
                         this.getAllSideBracket();
                         break;
-                    case "s5":
+                    case "s5_1":
                         this.getAllControlBox();
+                        break;
+                    case "s5_2":
                         this.getAllHandSet();
                         break;
                     //default:
