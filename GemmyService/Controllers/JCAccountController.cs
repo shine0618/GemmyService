@@ -239,5 +239,37 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
+        [HttpGet]
+        public JsonResult GetCompanyInfo(string email,string name)
+        {
+            T_USER_UserCompanyInfo t = usermanager.getCompanyInfo(email, name);
+            JsonResult jr = Json(t, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+        [HttpGet]
+        public JsonResult GetCompanyInfo2(string email)
+        {
+            T_USER_UserCompanyInfo t = usermanager.getCompanyInfo2(email);
+            var param = new
+            {
+                Email=t.Email,
+                Name=t.Name,
+                Sex=t.Sex,
+                Telephone=t.Telephone,
+                CompanyName=t.CompanyName,
+                CompanyStreet=t.CompanyStreet,
+                CompanyLocation=t.CompanyLocation,
+                CompanyNation=t.CompanyNation,
+                CompanyWebsite=t.CompanyWebsite
+            };
+            JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+
     }
 }

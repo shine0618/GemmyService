@@ -1,5 +1,7 @@
-﻿using _1GemmyModel.Model;
+﻿using _1GemmyModel;
+using _1GemmyModel.Model;
 using _1GemmyModel.Model.ModelProductOffice;
+using _1GemmyModel.Model.ModelUserAccount;
 using _2GemmyBusness.BLL.BLLOfficeDesk;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace GemmyService.Controllers
     {
 
         #region 字段
+        private DBGemmyService2 db = new DBGemmyService2();
         private BLL_Office_desk bll_desk = new BLL_Office_desk();
         private BLL_Office_File bll_file = new BLL_Office_File();
         private BLL_Office_Color bll_color = new BLL_Office_Color();
@@ -405,7 +408,6 @@ namespace GemmyService.Controllers
             ViewBag.email = email;
             ViewBag.name = name;
             return View();
-
         }
 
         #region 方法集

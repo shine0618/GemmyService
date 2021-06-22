@@ -1,4 +1,4 @@
-﻿
+﻿@model _1GemmyModel.Model.ModelUserAccount.T_USER_UserCompanyInfo
 @{
     ViewBag.Title = "PersonInfo";
 }
@@ -16,7 +16,7 @@
 
 <div id="OfficeStandards">
     <di>
-        <h3  style="line-height:450%;text-align:center">完善个人信息</h3>
+        <h3 style="line-height:450%;text-align:center">完善个人信息</h3>
     </di>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
         <el-form-item label="电子邮箱" prop="Email" style="margin-left: 500px">
@@ -27,7 +27,7 @@
             </el-input>
         </el-form-item>
         <el-form-item label="性别" prop="Sex" style="margin-left: 500px">
-            <el-input v-model="ruleForm.Sex"  style="width:50%">
+            <el-input v-model="ruleForm.Sex" style="width:50%">
             </el-input>
         </el-form-item>
         <el-form-item label="联系方式" prop="Telephone" style="margin-left: 500px">
@@ -43,19 +43,19 @@
             </el-input>
         </el-form-item>
         <el-form-item label="公司详细地址" prop="CompanyLocation" style="margin-left: 500px">
-            <el-input v-model="ruleForm.CompanyLocation"  style="width:50%">
+            <el-input v-model="ruleForm.CompanyLocation" style="width:50%">
             </el-input>
         </el-form-item>
         <el-form-item label="公司地区" prop="CompanyNation" style="margin-left: 500px">
-            <el-input v-model="ruleForm.CompanyNation"  style="width:50%">
+            <el-input v-model="ruleForm.CompanyNation" style="width:50%">
             </el-input>
         </el-form-item>
         <el-form-item label="公司官网" prop="CompanyWebsite" style="margin-left: 500px">
-            <el-input v-model="ruleForm.CompanyWebsite"  style="width:50%">
+            <el-input v-model="ruleForm.CompanyWebsite" style="width:50%">
             </el-input>
         </el-form-item>
         <el-form-item style="text-align:center">
-            <el-button type="primary"  @@click="submitForm('ruleForm')">立即完善</el-button>
+            <el-button type="primary" @@click="submitForm('ruleForm')">立即完善</el-button>
         </el-form-item>
     </el-form>
 </div>
@@ -123,15 +123,15 @@
                             this.isadd = response.body;
                             console.log(this.ruleForm);
                             console.log(JSON.stringify(this.ruleForm));
-                            console.log(response.body);                            
+                            console.log(response.body);
                             if (this.isadd == true) {
                                 this.$notify({
                                     message: '提交成功',
                                     type: 'success'
                                 });
                                 window.location = "/JCSelection/main";
-                            }                           
-                        })                        
+                            }
+                        })
                     }
                     else {
                         this.$notify.error('缺少内容');
@@ -143,9 +143,20 @@
                 this.$refs[formName].resetFields();
             },
             initPages: function (e) {
-
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCAccount/GetCompanyInfo",
+                    params: {
+                        email:"@ViewBag.email",
+                        name:"@ViewBag.name",
+                    }
+                }).then(function (response) {
+                    this.ruleForm = response.body;
+                    console.log(response.body);
+                })
             }
         }
     }
     )
+    OfficeStandards.initPages();
 </script>

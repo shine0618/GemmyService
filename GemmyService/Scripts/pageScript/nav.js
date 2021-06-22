@@ -166,7 +166,7 @@ var nav_langu_box = new Vue({
             confirmSuccess: false, /*验证成功判断*/
             defaultLanguage: '',
             defaultLanguageCode: '',
-            loginEmail:'',
+            loginEmail: '',
             list: null,
             drawer: false,
             dialogVisible_forget: false,
@@ -242,7 +242,16 @@ var nav_langu_box = new Vue({
                 oldPassword: [{ validator: resetloginoldpsd, trigger: 'blur' }],
                 newPassword: [{ validator: resetloginnewpsd, trigger: 'blur' }],
                 checkNewPassword: [{ validator: resetloginchecknewpsd, trigger: 'blur' }],
-            },
+            },            
+            Email: '',
+            Name: '',
+            Sex: '',
+            Telephone: '',
+            CompanyName: '',
+            CompanyStreet: '',
+            CompanyLocation: '',
+            CompanyNation: '',
+            CompanyWebsite: '',
             infoDataForm_contact: [
 
                 {
@@ -257,53 +266,55 @@ var nav_langu_box = new Vue({
                 }
             ],
             infoDataForm1: [
-                {
-                    'id': 100,
-                    'menuName': '电子邮箱',
-                    'icon': 'el-icon-message',
-                },
-                {
-                    'id': 101,
-                    'menuName': '名称',
-                    'icon': 'el-icon-postcard',
-                },
-                {
-                    'id': 102,
-                    'menuName': '性别',
-                    'icon': 'el-icon-s-custom',
-                },
-                {
-                    'id': 103,
-                    'menuName': '联系方式',
-                    'icon': 'el-icon-phone',
-                }
+                //{
+                //    'id': 100,
+                //    'menuName': this.Email,
+                //    'icon': 'el-icon-message',
+                //},
+                //{
+                //    'id': 101,
+                //    'menuName': '',
+                //    'icon': 'el-icon-postcard',
+                //},
+                //{
+                //    'id': 102,
+                //    'menuName': '',
+                //    'icon': 'el-icon-s-custom',
+                //},
+                //{
+                //    'id': 103,
+                //    'menuName': '',
+                //    'icon': 'el-icon-phone',
+                //}
             ],
             infoDataForm2:
-                [{
-                    'id': 200,
-                    'menuName': '公司名称',
-                    'icon': 'el-icon-office-building',
-                },
-                {
-                    'id': 201,
-                    'menuName': '公司地址（街道）',
-                    'icon': 'el-icon-location',
-                },
-                {
-                    'id': 202,
-                    'menuName': '公司邮编及详细地址',
-                    'icon': 'el-icon-location',
-                },
-                {
-                    'id': 203,
-                    'menuName': '公司地区',
-                    'icon': 'el-icon-map-location',
-                },
-                {
-                    'id': 204,
-                    'menuName': '公司官网',
-                    'icon': 'el-icon-link',
-                },],
+                [
+                //{
+                //    'id': 200,
+                //    'menuName': '',
+                //    'icon': 'el-icon-office-building',
+                //},
+                //{
+                //    'id': 201,
+                //    'menuName': '',
+                //    'icon': 'el-icon-location',
+                //},
+                //{
+                //    'id': 202,
+                //    'menuName': '',
+                //    'icon': 'el-icon-location',
+                //},
+                //{
+                //    'id': 203,
+                //    'menuName': '',
+                //    'icon': 'el-icon-map-location',
+                //},
+                //{
+                //    'id': 204,
+                //    'menuName': '',
+                //    'icon': 'el-icon-link',
+                //},
+            ],
             infoDataForm: [
                 {
                     'id': 1,
@@ -456,7 +467,9 @@ var nav_langu_box = new Vue({
         initNav: function (event) {          
             
             this.loginEmail = GetLoginUsername();
-                      
+            if (this.loginEmail != '') {
+                this.getpersoninfo(this.loginEmail);
+            }
             //var CustomLang = '';
             ////如果客户语言
             //if (CustomLang == 'default') {
@@ -655,6 +668,76 @@ var nav_langu_box = new Vue({
 
             }, function (error) {
                 console.log(error);
+            })
+        },
+        getpersoninfo(email,name) {
+            this.$http({           //调用接口
+                method: 'GET',
+                url: "/JCAccount/GetCompanyInfo2",
+                params: {
+                    email: email,
+                }
+            }).then(function (response) {
+                this.Email = response.body.Email;
+                this.Name = response.body.Name;
+                this.Sex = response.body.Sex;
+                this.Telephone = response.body.Telephone;
+                this.CompanyName = response.body.CompanyName;
+                this.CompanyStreet = response.body.CompanyStreet;
+                this.CompanyLocation = response.body.CompanyLocation;
+                this.CompanyNation = response.body.CompanyNation;
+                this.CompanyWebsite = response.body.CompanyWebsite;
+                var obj = {
+                    'id': 100,
+                    'menuName': this.Email,
+                    'icon': 'el-icon-message',
+                };
+                this.infoDataForm1.push({
+                    'id': 100,
+                    'menuName': this.Email,
+                    'icon': 'el-icon-message',
+                }, {
+                    'id': 101,
+                        'menuName': this.Name,
+                    'icon': 'el-icon-postcard',
+                },
+                    {
+                        'id': 102,
+                        'menuName': this.Sex,
+                        'icon': 'el-icon-s-custom',
+                    },
+                    {
+                        'id': 103,
+                        'menuName': this.Telephone,
+                        'icon': 'el-icon-phone',
+                    });
+                this.infoDataForm2.push({
+                    'id': 200,
+                    'menuName': this.CompanyName,
+                    'icon': 'el-icon-office-building',
+                },
+                    {
+                        'id': 201,
+                        'menuName': this.CompanyStreet,
+                        'icon': 'el-icon-location',
+                    },
+                    {
+                        'id': 202,
+                        'menuName': this.CompanyLocation,
+                        'icon': 'el-icon-location',
+                    },
+                    {
+                        'id': 203,
+                        'menuName': this.CompanyNation,
+                        'icon': 'el-icon-map-location',
+                    },
+                    {
+                        'id': 204,
+                        'menuName': this.CompanyWebsite,
+                        'icon': 'el-icon-link',
+                    });
+                console.log(response.body);
+                console.log(this.Email);
             })
         },
         sendEmail(emailaddress) {
