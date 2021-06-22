@@ -427,6 +427,16 @@
     <Content Include="resourse\part_handset\JCHT35M5.png" />
     <Content Include="resourse\part_handset\JCHT35M6.png" />
     <Content Include="resourse\part_handset\JCHT35M9.png" />
+    <Content Include="resourse\part_powercable\AUS 2-Pin.png" />
+    <Content Include="resourse\part_powercable\AUS 3-Pin.png" />
+    <Content Include="resourse\part_powercable\European 2-Pin.png" />
+    <Content Include="resourse\part_powercable\European 3-Pin.png" />
+    <Content Include="resourse\part_powercable\IND 3-Pin.png" />
+    <Content Include="resourse\part_powercable\JPN 2-Pin.png" />
+    <Content Include="resourse\part_powercable\KR 2-Pin.png" />
+    <Content Include="resourse\part_powercable\UK 3-Pin.png" />
+    <Content Include="resourse\part_powercable\US 2-Pin.png" />
+    <Content Include="resourse\part_powercable\US 3-Pin.png" />
     <Content Include="resourse\part_sidebracket\1.png" />
     <Content Include="resourse\part_sidebracket\10.png" />
     <Content Include="resourse\part_sidebracket\12.png" />
