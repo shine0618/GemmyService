@@ -12,6 +12,6 @@ namespace _1GemmyModel.Model.ModelProductOffice
         public double? PowercableLength { get; set; }
         public int HeadPlug { get; set; }
         public string TailPlug { get; set; }
-        public string PicName { get; set; }
+        public string PictureName { get; set; }
     }
 }

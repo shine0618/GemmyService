@@ -250,6 +250,15 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             return query.ToList();
         }
+        public List<T_Part_office_Powercable> GetT_Part_office_Powercable()
+        {
+            var query = from x in read_db.T_Part_office_Powercable
+                        select x;
+
+            return query.ToList();
+        }
+
+        
 
         #endregion
     }

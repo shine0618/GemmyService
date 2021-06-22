@@ -284,7 +284,15 @@ namespace GemmyService.Controllers
             return jr;
         }
 
-
+        [HttpGet]
+        public JsonResult GetOfficePowercable()
+        {
+            List<T_Part_office_Powercable> list = bll_desk.GetT_Part_office_Powercable();
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+        
 
 
         [HttpGet]
@@ -303,6 +311,10 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
+
+
+
 
         [HttpGet]
         public JsonResult GetOfficeColor()
