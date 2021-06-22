@@ -146,13 +146,14 @@
     <Compile Include="Migrations\202106220247017_init456456.designer.cs">
       <DependentUpon>202106220247017_init456456.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202106220324071_init64758475.cs" />
-    <Compile Include="Migrations\202106220324071_init64758475.designer.cs">
-      <DependentUpon>202106220324071_init64758475.cs</DependentUpon>
+    <Compile Include="Migrations\202106220731238_initcollect.cs" />
+    <Compile Include="Migrations\202106220731238_initcollect.designer.cs">
+      <DependentUpon>202106220731238_initcollect.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\ModelProductOffice\T_Office_Color.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Office_desk_collect.cs" />
     <Compile Include="Model\ModelProductOffice\T_Office_Files.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_describe.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_Column.cs" />
@@ -258,8 +259,8 @@
     <EmbeddedResource Include="Migrations\202106220247017_init456456.resx">
       <DependentUpon>202106220247017_init456456.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106220324071_init64758475.resx">
-      <DependentUpon>202106220324071_init64758475.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202106220731238_initcollect.resx">
+      <DependentUpon>202106220731238_initcollect.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

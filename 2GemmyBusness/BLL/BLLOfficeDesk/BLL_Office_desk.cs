@@ -106,17 +106,17 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 {
                     model.T_Part_office_Column = GetT_Part_office_Column(model.ColumnType);
                 }
-                //立柱
+                //框架
                 if (model.FrameType != null && model.FrameType != "")
                 {
                     model.T_Part_office_Frame = GetT_Part_office_Frame(model.FrameType);
                 }
-                //立柱
+                //地脚
                 if (model.FootType != null && model.FootType != "")
                 {
                     model.T_Part_office_Foot = GetT_Part_office_Foot(model.FootType);
                 }
-                //立柱
+                //侧板
                 if (model.SideBracketType != null && model.SideBracketType != "")
                 {
                     model.T_Part_office_SideBracket = GetT_Part_office_SideBracket(model.SideBracketType);
@@ -200,11 +200,35 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         }
 
 
+        public T_Part_office_ControlBox GetT_Part_office_ControlBox(string mode)
+        {
+            var query = from x in read_db.T_Part_office_ControlBox
+                        where x.Mode == mode
+                        select x;
+
+            return query.FirstOrDefault();
+        }
+        public T_Part_office_HandSet GetT_Part_office_HandSet(string mode)
+        {
+            var query = from x in read_db.T_Part_office_HandSet
+                        where x.Mode == mode
+                        select x;
+
+            return query.FirstOrDefault();
+        }
+        public T_Part_office_Powercable GetT_Part_office_Powercable(string mode)
+        {
+            var query = from x in read_db.T_Part_office_Powercable
+                        where x.Mode == mode
+                        select x;
+
+            return query.FirstOrDefault();
+        }
+       
         /// <summary>
         /// 获取所有的
         /// </summary>
         /// <returns></returns>
-
         public List<T_Part_office_Column> GetT_Part_office_Column()
         {
             var query = from x in read_db.T_Part_office_Column

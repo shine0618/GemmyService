@@ -219,6 +219,56 @@ namespace GemmyService.Controllers
             return View();
         }
         #region 3D选配界面
+
+        [HttpGet]
+        public JsonResult GetPartDetail(string partType, string Mode)
+        {
+
+            string imgurl = string.Empty;
+            string mode = string.Empty;
+            List<string> des = new List<string>();
+
+            switch (partType)
+            {
+                case "ControlBox":
+                    T_Part_office_ControlBox q = bll_desk.GetT_Part_office_ControlBox(Mode);
+                    imgurl = q.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                        break;
+
+                case "HandSet":
+                    T_Part_office_HandSet q2 = bll_desk.GetT_Part_office_HandSet(Mode);
+                    imgurl = q2.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+
+                case "Powercable":
+                    T_Part_office_Powercable q3 = bll_desk.GetT_Part_office_Powercable(Mode);
+                    imgurl = q3.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+
+                default:
+                    break;
+            }
+
+            var param = new
+            {
+                imgurl = imgurl,
+                mode = mode,
+                des = des
+
+
+            };
+
+            JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
         [HttpGet]
         public JsonResult GetOfficeColumn()
         {

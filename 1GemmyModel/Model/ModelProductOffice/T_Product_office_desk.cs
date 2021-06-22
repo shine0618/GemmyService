@@ -13,6 +13,9 @@ namespace _1GemmyModel.Model.ModelProductOffice
             deskTag = "";
             deskGuid = System.Guid.NewGuid().ToString("N");
         }
+
+
+        
         public string deskGuid { get; set; }
 
         /// <summary>
@@ -83,6 +86,11 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 当前账户定制的产品
         /// </summary>
         public string deskCreateByUser { get; set; }
+
+        /// <summary>
+        /// true 代表是客户自己定义的桌子
+        /// </summary>
+        public bool deskCustmoer { get; set; }
 
 
     }
