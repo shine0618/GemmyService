@@ -132,8 +132,11 @@
     <Compile Include="Controllers\T_Office_FilesController.cs" />
     <Compile Include="Controllers\T_Part_office_ColumnController.cs" />
     <Compile Include="Controllers\T_Part_office_ControlBoxController.cs" />
+    <Compile Include="Controllers\T_Part_office_describeController.cs" />
     <Compile Include="Controllers\T_Part_office_FrameController.cs" />
     <Compile Include="Controllers\T_Part_office_HandSetController.cs" />
+    <Compile Include="Controllers\T_Product_office_descriptionController.cs" />
+    <Compile Include="Controllers\T_Product_office_textController.cs" />
     <Compile Include="Controllers\T_SYS_LanguageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,6 +210,21 @@
     <Content Include="Views\T_Part_office_Frame\Details.cshtml" />
     <Content Include="Views\T_Part_office_Frame\Edit.cshtml" />
     <Content Include="Views\T_Part_office_Frame\Index.cshtml" />
+    <Content Include="Views\T_Product_office_description\Create.cshtml" />
+    <Content Include="Views\T_Product_office_description\Delete.cshtml" />
+    <Content Include="Views\T_Product_office_description\Details.cshtml" />
+    <Content Include="Views\T_Product_office_description\Edit.cshtml" />
+    <Content Include="Views\T_Product_office_description\Index.cshtml" />
+    <Content Include="Views\T_Part_office_describe\Create.cshtml" />
+    <Content Include="Views\T_Part_office_describe\Delete.cshtml" />
+    <Content Include="Views\T_Part_office_describe\Details.cshtml" />
+    <Content Include="Views\T_Part_office_describe\Edit.cshtml" />
+    <Content Include="Views\T_Part_office_describe\Index.cshtml" />
+    <Content Include="Views\T_Product_office_text\Create.cshtml" />
+    <Content Include="Views\T_Product_office_text\Delete.cshtml" />
+    <Content Include="Views\T_Product_office_text\Details.cshtml" />
+    <Content Include="Views\T_Product_office_text\Edit.cshtml" />
+    <Content Include="Views\T_Product_office_text\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -229,6 +247,10 @@
     <ProjectReference Include="..\1GemmyModel\1GemmyModel.csproj">
       <Project>{e085ba24-721a-4bb6-b507-9301d7690d77}</Project>
       <Name>1GemmyModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\2GemmyBusness\2GemmyBusness.csproj">
+      <Project>{e60af72c-93b9-4e46-be42-d443c4b43d99}</Project>
+      <Name>2GemmyBusness</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

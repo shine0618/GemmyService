@@ -1,0 +1,130 @@
+﻿@model IEnumerable<_1GemmyModel.Model.ModelProductOffice.T_Product_office_text>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<form action="/T_Product_office_text/index">
+    <label>输入产品Mode</label>
+    <input style="width:400px;" name="Mode" value="@ViewBag.Mode" />
+
+    <label>输入KEY</label>
+    <input style="width:100px;" type="number" name="Key" value="@ViewBag.Key" />
+
+    <label>输入语言代码</label>
+    <input style="width: 100px;" name="langCode" value="@ViewBag.langCode" />
+
+    <button type="submit">确认</button>
+</form>
+
+
+@if (ViewBag.desk != null)
+{
+    <table class="table">
+        <tr>
+            <th>桌子型号</th>
+            <th>新品标签key</th>
+            <th>明细文本key</th>
+
+            <th>物料长描述key</th>
+            <th>关键参数key</th>
+        </tr>
+        <tr>
+
+
+
+            <td>@ViewBag.desk.deskSerialName</td>
+            <td>@ViewBag.desk.deskTagKey</td>
+            <td>@ViewBag.desk.deskShortDescriptionKey</td>
+            <td>@ViewBag.deskdetail.DescriptionIndex</td>
+            <td>@ViewBag.deskdetail.introductionIndex</td>
+        </tr>
+    </table>
+}
+
+<p>
+    <a href="/T_Product_office_text/Create" target="_blank">新增新品标签、明细文本</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.textKay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.langCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.textValue)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (ViewBag.T_Product_office_texts != null)
+    {
+        foreach (_1GemmyModel.Model.ModelProductOffice.T_Product_office_text item in (List<_1GemmyModel.Model.ModelProductOffice.T_Product_office_text>)ViewBag.T_Product_office_texts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.textKay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.langCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.textValue)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+
+</table>
+
+
+
+<p>
+    <a href="/T_Product_office_text/Create" target="_blank">新增桌子长描述、关键参数文本</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.textKay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.langCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.textValue)
+        </th>
+        <th></th>
+    </tr>
+    @if (ViewBag.T_Product_office_descriptions != null)
+    {
+        foreach (_1GemmyModel.Model.T_Product_office_description item in (List<_1GemmyModel.Model.T_Product_office_description>)ViewBag.T_Product_office_descriptions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.textKay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.langCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.textValue)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>
