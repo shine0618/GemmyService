@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _1GemmyModel.Model.ModelProductOffice;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -194,5 +195,14 @@ namespace _1GemmyModel.Model
         /// </summary>
         [Column(TypeName = "ntext")]
         public string SpecialDescriptionEN { get; set; }
+
+        /// <summary>
+        /// 参数的描述  对应表T_Part_office_describe的Id
+        /// </summary>
+        public int parametricTextIndex { get; set; }
+
+
+        [NotMapped]
+        public List<T_Part_office_describe> T_Part_office_describes { get; set; }
     }
 }

@@ -1,0 +1,42 @@
+﻿@model _1GemmyModel.Model.ModelProductOffice.T_Part_office_describe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>T_Part_office_describe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.textKay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.textKay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.langCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.langCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.textValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.textValue)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

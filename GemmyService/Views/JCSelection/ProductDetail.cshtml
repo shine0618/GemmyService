@@ -263,7 +263,7 @@
                     <div id="app">
                         <template>
                             <el-tabs v-model="activeName" @@tab-click="handleClick" stretch>
-                                <el-tab-pane :label="text_detail_4" name="d1"></el-tab-pane>
+                                @*<el-tab-pane :label="text_detail_4" name="d1"></el-tab-pane>*@
                                 <el-tab-pane :label="text_detail_5" name="d2"></el-tab-pane>
                                 <el-tab-pane :label="text_detail_6" name="d3"></el-tab-pane>
                                 <el-tab-pane :label="text_detail_7" name="d4"></el-tab-pane>
@@ -378,7 +378,7 @@
             recommend: "@ViewBag.recommend",
             langCode:"",
             deskList: null,
-            activeName: 'd1',
+            activeName: 'd2',
             productName: '@ViewBag.productName',
             productGuid: '@ViewBag.productGuid',
             deskSerialName:'',
