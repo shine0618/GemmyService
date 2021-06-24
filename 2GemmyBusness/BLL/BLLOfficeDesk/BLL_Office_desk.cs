@@ -225,15 +225,15 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 case "HandSet":
                     T_Part_office_HandSet q2 = GetT_Part_office_HandSet(Mode, langCode);
                     imgurl = q2.PictureName;
-                    parametricTextIndex = q.parametricTextIndex;
-                    des = q.T_Part_office_describes;
+                    parametricTextIndex = q2.parametricTextIndex;
+                    des = q2.T_Part_office_describes;
                     break;
 
                 case "Powercable":
                     T_Part_office_Powercable q3 = GetT_Part_office_Powercable(Mode, langCode);
                     imgurl = q3.PictureName;
-                    parametricTextIndex = q.parametricTextIndex;
-                    des = q.T_Part_office_describes;
+                    parametricTextIndex = q3.parametricTextIndex;
+                    des = q3.T_Part_office_describes;
                     break;
 
                 default:
