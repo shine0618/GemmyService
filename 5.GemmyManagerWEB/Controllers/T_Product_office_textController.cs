@@ -33,7 +33,7 @@ namespace _5.GemmyManagerWEB.Controllers
                 try
                 {
                     T_Product_office_desk desk = db.T_Product_office_desk.Where(x => x.deskSerialName == Mode).FirstOrDefault();
-                    T_Product_office_desk_detail deskdetail = bll.GetT_Product_office_desk_detail(desk.Id);
+                    T_Product_office_desk_detail deskdetail = bll.GetT_Product_office_desk_detail(desk.Id,"");
 
                     ViewBag.desk = desk;
                     ViewBag.deskdetail = deskdetail;

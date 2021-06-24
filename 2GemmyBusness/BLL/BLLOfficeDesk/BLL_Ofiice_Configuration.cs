@@ -19,7 +19,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             DateTime dt = getTime();
             string strdate = dt.ToString("yyyyMMdd");
             T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(guid);
-            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id);
+            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id,"");
             code += "JCP" + strdate + standard + username + Type + _T_Product_office_desk_detail.Type.Substring(0, 1) + _T_Product_office_desk_detail.Type.Substring(3, 1);
             return code;
         }

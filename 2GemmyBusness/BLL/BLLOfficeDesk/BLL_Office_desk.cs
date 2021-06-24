@@ -96,7 +96,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         }
 
 
-        public T_Product_office_desk_detail GetT_Product_office_desk_detail(int desk_id)
+        public T_Product_office_desk_detail GetT_Product_office_desk_detail(int desk_id,string langCode)
         {
             T_Product_office_desk_detail model =  read_db.T_Product_office_desk_detail.Where(x => x.T_Product_office_desk_Id == desk_id).FirstOrDefault();
             if(model!=null)
@@ -104,30 +104,30 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 //立柱
                 if(model.ColumnType!=null&&model.ColumnType!="")
                 {
-                    model.T_Part_office_Column = GetT_Part_office_Column(model.ColumnType);
+                    model.T_Part_office_Column = GetT_Part_office_Column(model.ColumnType,langCode);
                 }
                 //框架
                 if (model.FrameType != null && model.FrameType != "")
                 {
-                    model.T_Part_office_Frame = GetT_Part_office_Frame(model.FrameType);
+                    model.T_Part_office_Frame = GetT_Part_office_Frame(model.FrameType, langCode);
                 }
                 //地脚
                 if (model.FootType != null && model.FootType != "")
                 {
-                    model.T_Part_office_Foot = GetT_Part_office_Foot(model.FootType);
+                    model.T_Part_office_Foot = GetT_Part_office_Foot(model.FootType, langCode);
                 }
                 //侧板
                 if (model.SideBracketType != null && model.SideBracketType != "")
                 {
-                    model.T_Part_office_SideBracket = GetT_Part_office_SideBracket(model.SideBracketType);
+                    model.T_Part_office_SideBracket = GetT_Part_office_SideBracket(model.SideBracketType, langCode);
                 }
                 if (model.ControlboxType != null && model.ControlboxType != "")
                 {
-                    model.T_Part_office_ControlBox = GetT_Part_office_ControlBox(model.ControlboxType);
+                    model.T_Part_office_ControlBox = GetT_Part_office_ControlBox(model.ControlboxType, langCode);
                 }
                 if (model.HandsetType != null && model.HandsetType != "")
                 {
-                    model.T_Part_office_HandSet = GetT_Part_office_HandSet(model.HandsetType);
+                    model.T_Part_office_HandSet = GetT_Part_office_HandSet(model.HandsetType, langCode);
                 }
                 return model;
             }
@@ -209,11 +209,32 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             switch (partType)
             {
 
+                case "column":
+                    T_Part_office_Column q4 = GetT_Part_office_Column(Mode, langCode);
+                    imgurl = q4.PictureName;
+                    parametricTextIndex = q4.parametricTextIndex;
+                    des = q4.T_Part_office_describes;
+                    break;
+                case "frame":
+                    T_Part_office_Frame q5 = GetT_Part_office_Frame(Mode, langCode);
+                    imgurl = q5.PictureName;
+                    parametricTextIndex = q5.parametricTextIndex;
+                    des = q5.T_Part_office_describes;
+                    break;
 
+                case "foot":
+                    T_Part_office_Foot q6 = GetT_Part_office_Foot(Mode, langCode);
+                    imgurl = q6.PictureName;
+                    parametricTextIndex = q6.parametricTextIndex;
+                    des = q6.T_Part_office_describes;
+                    break;
 
-
-
-
+                case "SideBracket":
+                    T_Part_office_SideBracket q7 = GetT_Part_office_SideBracket(Mode, langCode);
+                    imgurl = q7.PictureName;
+                    parametricTextIndex = q7.parametricTextIndex;
+                    des = q7.T_Part_office_describes;
+                    break;
 
                 case "ControlBox":
                     T_Part_office_ControlBox q = GetT_Part_office_ControlBox(Mode, langCode);
@@ -262,38 +283,69 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         /// <param name="mode"></param>
         /// <returns></returns>
 
-        public T_Part_office_Column GetT_Part_office_Column(string mode)
+        public T_Part_office_Column GetT_Part_office_Column(string mode,string langCode)
         {
             var query = from x in read_db.T_Part_office_Column
                         where x.Mode== mode
                         select x;
 
-            return query.FirstOrDefault();
+
+            T_Part_office_Column model = query.FirstOrDefault();
+
+            if (model != null && model.Id > 0)
+            {
+                model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+            }
+
+            return model;
+
+
         }
 
-        public T_Part_office_Frame GetT_Part_office_Frame(string mode)
+        public T_Part_office_Frame GetT_Part_office_Frame(string mode, string langCode)
         {
             var query = from x in read_db.T_Part_office_Frame
                         where x.Mode == mode
                         select x;
 
-            return query.FirstOrDefault();
+            T_Part_office_Frame model = query.FirstOrDefault();
+
+            if (model != null && model.Id > 0)
+            {
+                model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+            }
+
+            return model;
         }
-        public T_Part_office_Foot GetT_Part_office_Foot(string mode)
+        public T_Part_office_Foot GetT_Part_office_Foot(string mode, string langCode)
         {
             var query = from x in read_db.T_Part_office_Foot
                         where x.Mode == mode
                         select x;
 
-            return query.FirstOrDefault();
+            T_Part_office_Foot model = query.FirstOrDefault();
+
+            if (model != null && model.Id > 0)
+            {
+                model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+            }
+
+            return model;
         }
-        public T_Part_office_SideBracket GetT_Part_office_SideBracket(string mode)
+        public T_Part_office_SideBracket GetT_Part_office_SideBracket(string mode, string langCode)
         {
             var query = from x in read_db.T_Part_office_SideBracket
                         where x.Mode == mode
                         select x;
 
-            return query.FirstOrDefault();
+            T_Part_office_SideBracket model = query.FirstOrDefault();
+
+            if (model != null && model.Id > 0)
+            {
+                model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+            }
+
+            return model;
         }
 
 

@@ -124,24 +124,27 @@
 
                             <div>
                                 <img src="~/resourse/other/collect1.png" v-if="isCollect==true" class="img-response collect_icon" @@click="CancelCollectDesk" />
-
                                 <img src="~/resourse/other/collect0.png" v-else class="img-response collect_icon" @@click="CollectDesk" />
                             </div>
                         
                         
                         
                         
-                        <div class="about-three__image">
+                            <div class="about-three__image">
 
-                                <div class="block-title text-left">
-                                    <p>{{text_detail_1}}</p>
-                                    <h6 v-text="deskSerialName"></h6>
-                                </div><!-- /.block-title -->
+                                <h4 class="drawerh5" v-text="deskSerialName"></h4>
+                            <br />
+                                <h6 v-text="introduction"></h6>
+                                <!--<div class="block-title text-left">
+        <p>{{text_detail_1}}</p>
+        <h6 v-text="deskSerialName"></h6>
+    </div>-->
+                                <!-- /.block-title -->
+                                <!--<div class="block-title text-left">
+        <p>产品介绍</p>
 
-                                <div class="block-title text-left">
-                                    <p>产品介绍</p>
-                                    <h6 v-text="introduction"></h6>
-                                </div><!-- /.block-title -->
+    </div>-->
+                                <!-- /.block-title -->
                                 <div class="block-title text-left">
                                     <p>{{text_detail_2}}</p>
                                     <h6 v-for="item in descriptions" v-text="item.textValue"></h6>

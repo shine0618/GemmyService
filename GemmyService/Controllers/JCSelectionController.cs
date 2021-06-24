@@ -222,7 +222,7 @@ namespace GemmyService.Controllers
         {
 
             T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
-            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id);
+            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id, lang);
 
             T_Product_office_description m = bll_desk.GetT_Product_office_description_first(_T_Product_office_desk_detail.introductionIndex, lang);
             _T_Product_office_desk_detail.introduction = m == null ? "" : m.textValue;//产品介绍
@@ -290,69 +290,10 @@ namespace GemmyService.Controllers
         {
 
             string imgurl = string.Empty;
-            string mode = string.Empty;
-            List<string> des = new List<string>();
-
-            switch (partType)
-            {
-                case "ControlBox":
-                    T_Part_office_ControlBox q = bll_desk.GetT_Part_office_ControlBox(Mode);
-                    imgurl = q.PictureName;
-                    mode = Mode;
-                    des.Add("介绍");
-                        break;
-
-                case "HandSet":
-                    T_Part_office_HandSet q2 = bll_desk.GetT_Part_office_HandSet(Mode);
-                    imgurl = q2.PictureName;
-                    mode = Mode;
-                    des.Add("介绍");
-                    break;
-
-                case "Powercable":
-                    T_Part_office_Powercable q3 = bll_desk.GetT_Part_office_Powercable(Mode);
-                    imgurl = q3.PictureName;
-                    mode = Mode;
-                    des.Add("介绍");
-                    break;
-                case "SideBracket":
-                    T_Part_office_SideBracket q4 = bll_desk.GetT_Part_office_SideBracket(Mode);
-                    imgurl = q4.PictureName;
-                    mode = Mode;
-                    des.Add("介绍");
-                    break;
-                case "foot":
-                    T_Part_office_Foot q5 = bll_desk.GetT_Part_office_Foot(Mode);
-                    imgurl = q5.PictureName;
-                    mode = Mode;
-                    des.Add("介绍");
-                    break;
-                case "frame":
-                    T_Part_office_Frame q6 = bll_desk.GetT_Part_office_Frame(Mode);
-                    imgurl = q6.PictureName;
-                    mode = Mode;
-                    des.Add("介绍");
-                    break;
-                case "column":
-                    T_Part_office_Column q7 = bll_desk.GetT_Part_office_Column(Mode);
-                    imgurl = q7.PictureName;
-                    mode = Mode;
-                    des.Add("介绍");
-                    break;
-
-                default:
-                    break;
-            }
-
-            var param = new
-            {
-                imgurl = imgurl,
-                mode = mode,
-                des = des
+            string mode = Mode;
 
 
-            };
-
+            var param = bll_desk.GetPartDetail(partType, mode, langCode);
             JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
@@ -442,7 +383,7 @@ namespace GemmyService.Controllers
         {
 
             T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
-            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id);
+            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id, lang);
 
 
 
