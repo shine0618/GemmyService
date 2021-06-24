@@ -1,5 +1,7 @@
-﻿using _1GemmyModel.Model;
+﻿using _1GemmyModel;
+using _1GemmyModel.Model;
 using _1GemmyModel.Model.ModelProductOffice;
+using _1GemmyModel.Model.ModelUserAccount;
 using _2GemmyBusness.BLL.BLLOfficeDesk;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace GemmyService.Controllers
     {
 
         #region 字段
+        private DBGemmyService2 db = new DBGemmyService2();
         private BLL_Office_desk bll_desk = new BLL_Office_desk();
         private BLL_Office_File bll_file = new BLL_Office_File();
         private BLL_Office_Color bll_color = new BLL_Office_Color();
@@ -286,7 +289,69 @@ namespace GemmyService.Controllers
         public JsonResult GetPartDetail(string partType, string Mode,string langCode)
         {
 
-            var param = bll_desk.GetPartDetail(partType, Mode, langCode);
+            string imgurl = string.Empty;
+            string mode = string.Empty;
+            List<string> des = new List<string>();
+
+            switch (partType)
+            {
+                case "ControlBox":
+                    T_Part_office_ControlBox q = bll_desk.GetT_Part_office_ControlBox(Mode);
+                    imgurl = q.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                        break;
+
+                case "HandSet":
+                    T_Part_office_HandSet q2 = bll_desk.GetT_Part_office_HandSet(Mode);
+                    imgurl = q2.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+
+                case "Powercable":
+                    T_Part_office_Powercable q3 = bll_desk.GetT_Part_office_Powercable(Mode);
+                    imgurl = q3.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+                case "SideBracket":
+                    T_Part_office_SideBracket q4 = bll_desk.GetT_Part_office_SideBracket(Mode);
+                    imgurl = q4.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+                case "foot":
+                    T_Part_office_Foot q5 = bll_desk.GetT_Part_office_Foot(Mode);
+                    imgurl = q5.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+                case "frame":
+                    T_Part_office_Frame q6 = bll_desk.GetT_Part_office_Frame(Mode);
+                    imgurl = q6.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+                case "column":
+                    T_Part_office_Column q7 = bll_desk.GetT_Part_office_Column(Mode);
+                    imgurl = q7.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+
+                default:
+                    break;
+            }
+
+            var param = new
+            {
+                imgurl = imgurl,
+                mode = mode,
+                des = des
+
+
+            };
 
             JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
@@ -486,7 +551,6 @@ namespace GemmyService.Controllers
             ViewBag.email = email;
             ViewBag.name = name;
             return View();
-
         }
 
         #region 方法集

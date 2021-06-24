@@ -414,6 +414,8 @@
             text_detail_12: "",
             text_detail_13: "",
             text_detail_14: "",
+            text_detail_15: "",
+            text_detail_16:"",
 
             MyCollectName: "",
             paramTableData: [],
@@ -592,7 +594,7 @@
                         }
 
 
-                        var q = { part: this.text_detail_11, model: this.T_Product_office_desk_detail.T_Part_office_Column.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList};
+                        var q = { part: this.text_detail_11, model: this.T_Product_office_desk_detail.T_Part_office_Column.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Column.PictureName, paramList: paramList };
                         this.paramTableData.push(q);
                     }
                     //添加到产品配置列表
@@ -607,7 +609,7 @@
                             paramList.push("最小长度：" + it.MinLength);
                         }
 
-                        var q = { part: this.text_detail_12, model: this.T_Product_office_desk_detail.T_Part_office_Foot.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList };
+                        var q = { part: this.text_detail_12, model: this.T_Product_office_desk_detail.T_Part_office_Foot.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Foot.PictureName, paramList:paramList };
                         this.paramTableData.push(q);
                     }
                     //添加到产品配置列表
@@ -622,7 +624,7 @@
                             paramList.push("最小长度：" + it.MinLength);
                         }
 
-                        var q = { part: this.text_detail_13, model: this.T_Product_office_desk_detail.T_Part_office_Frame.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList };
+                        var q = { part: this.text_detail_13, model: this.T_Product_office_desk_detail.T_Part_office_Frame.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Frame.PictureName, paramList:paramList };
                         this.paramTableData.push(q);
                     }
                     //添加到产品配置列表
@@ -637,7 +639,25 @@
                         }
 
 
-                        var q = { part: this.text_detail_14, model: this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode, name: '', tag: "/resourse/page/JC35TF-DC2R.png", paramList:paramList};
+                        var q = { part: this.text_detail_14, model: this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_SideBracket.PictureName, paramList:paramList};
+                        this.paramTableData.push(q);
+                    }
+                    if (this.T_Product_office_desk_detail.T_Part_office_ControlBox != null) {
+                        var it = this.T_Product_office_desk_detail.T_Part_office_ControlBox;
+                        var paramList = new Array();
+                        
+
+
+                        var q = { part: this.text_detail_15, model: this.T_Product_office_desk_detail.T_Part_office_ControlBox.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_ControlBox.PictureName, paramList: paramList };
+                        this.paramTableData.push(q);
+                    }
+                    if (this.T_Product_office_desk_detail.T_Part_office_HandSet != null) {
+                        var it = this.T_Product_office_desk_detail.T_Part_office_HandSet;
+                        var paramList = new Array();
+
+
+
+                        var q = { part: this.text_detail_16, model: this.T_Product_office_desk_detail.T_Part_office_HandSet.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_HandSet.PictureName, paramList: paramList };
                         this.paramTableData.push(q);
                     }
 

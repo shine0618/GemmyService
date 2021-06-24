@@ -253,7 +253,7 @@
                            @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
                           
                             <div class="imgDiv" @@mouseenter="mouse_column = item.Id" @@mouseleave="mouse_column = ''">
-                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" :src="item.PictureName" />
                                 <img v-show="mouse_column == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('column',item.Mode)" />
                             </div>
 
@@ -270,7 +270,7 @@
                             @*<img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
 
                             <div class="imgDiv" @@mouseenter="mouse_frame = item.Id" @@mouseleave="mouse_frame = ''">
-                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_frame==item.Id}" v-on:click="frameClick(item.Id,item.Mode)" :src="item.PictureName" />
                                 <img v-show="mouse_frame == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('frame',item.Mode)" />
                             </div>
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
@@ -283,7 +283,7 @@
                         <div class="col-lg-6 col-md-6" v-for="item in list_foot">
                             @*<img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
                             <div class="imgDiv" @@mouseenter="mouse_foot = item.Id" @@mouseleave="mouse_foot = ''">
-                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_foot==item.Id}" v-on:click="footClick(item.Id,item.Mode)" :src="item.PictureName" />
                                 <img v-show="mouse_foot == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('foot',item.Mode)" />
                             </div>
 
@@ -297,7 +297,7 @@
                         <div class="col-lg-6 col-md-6" v-for="item in list_SideBracket">
                            @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
                             <div class="imgDiv" @@mouseenter="mouse_SideBracket = item.Id" @@mouseleave="mouse_SideBracket = ''">
-                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" :src="item.PictureName" />
                                 <img v-show="mouse_SideBracket == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('SideBracket',item.Mode)" />
                             </div>
 

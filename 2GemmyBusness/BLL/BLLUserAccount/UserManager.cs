@@ -223,6 +223,9 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
             using (DBGemmyService2 db = new DBGemmyService2())
             {
                 if (db.T_USER_UserCompanyInfo.Any(m => m.Email == list.Email)) {
+
+                    Update<T_USER_UserCompanyInfo>(list);
+                    issuccess = true;
                     return issuccess;
                 }
                 else
@@ -235,6 +238,48 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                 }
             }
             return issuccess;
+        }
+
+        public T_USER_UserCompanyInfo getCompanyInfo(string email,string name)
+        {
+
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                T_USER_UserCompanyInfo t= db.T_USER_UserCompanyInfo.FirstOrDefault(m=>m.Email==email);
+                if (t == null)
+                {
+                    return new T_USER_UserCompanyInfo()
+                    {
+                        Email = email,
+                        Name = name
+                    };
+                }
+                else
+                {
+                    return t;
+                }
+            }
+        }
+
+
+        public T_USER_UserCompanyInfo getCompanyInfo2(string email)
+        {
+
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                T_USER_UserCompanyInfo t = db.T_USER_UserCompanyInfo.FirstOrDefault(m => m.Email == email);
+                if (t == null)
+                {
+                    return new T_USER_UserCompanyInfo()
+                    {
+                        Email = email,
+                    };
+                }
+                else
+                {
+                    return t;
+                }
+            }
         }
     }
 }

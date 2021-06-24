@@ -121,6 +121,14 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 {
                     model.T_Part_office_SideBracket = GetT_Part_office_SideBracket(model.SideBracketType);
                 }
+                if (model.ControlboxType != null && model.ControlboxType != "")
+                {
+                    model.T_Part_office_ControlBox = GetT_Part_office_ControlBox(model.ControlboxType);
+                }
+                if (model.HandsetType != null && model.HandsetType != "")
+                {
+                    model.T_Part_office_HandSet = GetT_Part_office_HandSet(model.HandsetType);
+                }
                 return model;
             }
             else

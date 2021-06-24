@@ -201,7 +201,7 @@
                 {
                     <el-row>
                         <el-col :span="8"><el-avatar style="background:var(--thm-base)">@Session["picName"] </el-avatar></el-col>
-                        <h3>@Session["configurationPerson"]<a href="/JCSelection/PersonInfo?email=@Session["emailName"]&name=@Session["configurationPerson"]"><i class="el-icon-s-tools" style="background-color:#ffffff;border:none;font-size:26px;outline:none"></i></a></h3>                        
+                        <h3>@Session["configurationPerson"]</h3>                        
                         <button type="button" class="thm-btn orderbtn" style="width:50%" @@click="LoginOut"> 退出登录</button>
 
                     </el-row>
@@ -234,7 +234,7 @@
 
                             </el-collapse-item>
                             <el-collapse-item title="设置 " name="3">
-
+                                <a href="/JCSelection/PersonInfo?email=@Session["emailName"]&name=@Session["configurationPerson"]" class="Personal_span"><i class="el-icon-s-tools" style="font-size:20px;color: var(--thm-base)"></i><span style="color:#303133">个人设置</span></a>
 
                             </el-collapse-item>
                             <el-collapse-item title="修改密码" name="4">
