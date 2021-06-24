@@ -286,7 +286,7 @@ namespace GemmyService.Controllers
         #region 3D选配界面
 
         [HttpGet]
-        public JsonResult GetPartDetail(string partType, string Mode)
+        public JsonResult GetPartDetail(string partType, string Mode,string langCode)
         {
 
             string imgurl = string.Empty;

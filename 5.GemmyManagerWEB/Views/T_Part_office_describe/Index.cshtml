@@ -4,7 +4,56 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<br />
+<form action="/T_Part_office_describe/index">
+
+
+    <select name="type" id="type">
+        <option value="column">立柱</option>
+        <option value="frame">框架</option>
+        <option value="foot">地脚</option>
+        <option value="SideBracket">侧板</option>
+        <option value="ControlBox">控制器</option>
+        <option value="HandSet">手控器</option>
+        <option value="Powercable">电源线</option>
+        
+    </select>
+    <label>输入产品Mode</label>
+    <input style="width:400px;" name="Mode" value="@ViewBag.Mode" />
+
+    <label>输入KEY</label>
+    <input style="width:100px;" type="number" name="Key" value="@ViewBag.Key" />
+
+    <label>输入语言代码</label>
+    <input style="width: 100px;" name="langCode" value="@ViewBag.langCode" />
+
+    <button type="submit">确认</button>
+    <script>
+        $(function () {
+               $("#type option[value='@ViewBag.type']").prop("selected", true);
+        })
+
+    </script>
+</form>
+
+
+
+@if (ViewBag.Mode != null)
+{
+    <table class="table">
+        <tr>
+            <th>部件型号</th>
+            <th>参数描述key</th>
+        </tr>
+        <tr>
+            <td>@ViewBag.Mode</td>
+            <td>@ViewBag.textIndex</td>
+
+
+        </tr>
+    </table>
+}
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -23,23 +72,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.textKay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.langCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.textValue)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.textKay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.langCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.textValue)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
 
 </table>

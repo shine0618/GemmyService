@@ -8,18 +8,44 @@ using System.Web;
 using System.Web.Mvc;
 using _1GemmyModel;
 using _1GemmyModel.Model.ModelProductOffice;
+using _2GemmyBusness.BLL.BLLOfficeDesk;
 
 namespace _5.GemmyManagerWEB.Controllers
 {
     public class T_Part_office_describeController : Controller
     {
         private DBGemmyService2 db = new DBGemmyService2();
-
+        private BLL_Office_desk bll = new BLL_Office_desk();
         // GET: T_Part_office_describe
-        public ActionResult Index()
+        public ActionResult Index(string type,string Mode, string Key, string langCode)
         {
-            return View(db.T_Part_office_describe.ToList());
+            ViewBag.type = type;
+            ViewBag.Mode = Mode;
+            ViewBag.Key = Key;
+            ViewBag.langCode = langCode;
+
+
+
+         
+            
+            try
+            {
+                var obj = bll.GetPartDetail(type, Mode, langCode);
+                var text =  obj.GetType().GetProperty("parametricTextIndex").GetValue(obj);
+                ViewBag.textIndex = text;
+                var vvvv  = obj.GetType().GetProperty("des").GetValue(obj);              
+                List < T_Part_office_describe > list = (List<T_Part_office_describe>)vvvv;
+                return View(list);
+            }
+
+            catch (Exception ex)
+            {
+
+            }
+            return View();
         }
+
+    
 
         // GET: T_Part_office_describe/Details/5
         public ActionResult Details(int? id)

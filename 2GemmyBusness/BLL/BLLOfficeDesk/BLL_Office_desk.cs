@@ -168,6 +168,95 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         #region 部件表操作
 
         /// <summary>
+        /// 获取部件的关键参数
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="lang">空代表全部</param>
+        /// <returns></returns>
+        public List<T_Part_office_describe> GetT_Part_office_describe(int index,string lang)
+        {
+            if(lang.Trim()=="")
+            {
+                var q = from x in read_db.T_Part_office_describe
+                        where x.textKay == index
+                        select x;
+
+                return q.ToList();
+            }
+            else
+            {
+                var q = from x in read_db.T_Part_office_describe
+                        where x.textKay == index
+                        where x.langCode == lang
+                        select x;
+
+                return q.ToList();
+            }
+            
+         
+
+        }
+
+        #region 获取部件详情
+
+        public object GetPartDetail(string partType,string Mode,string langCode)
+        {
+
+            string imgurl = string.Empty;
+            int parametricTextIndex = 0;
+            List<T_Part_office_describe> des = new List<T_Part_office_describe>();
+
+            switch (partType)
+            {
+
+
+
+
+
+
+
+                case "ControlBox":
+                    T_Part_office_ControlBox q = GetT_Part_office_ControlBox(Mode, langCode);
+                    imgurl = q.PictureName;
+                    parametricTextIndex = q.parametricTextIndex;
+                    des = q.T_Part_office_describes;
+                    break;
+
+                case "HandSet":
+                    T_Part_office_HandSet q2 = GetT_Part_office_HandSet(Mode, langCode);
+                    imgurl = q2.PictureName;
+                    parametricTextIndex = q.parametricTextIndex;
+                    des = q.T_Part_office_describes;
+                    break;
+
+                case "Powercable":
+                    T_Part_office_Powercable q3 = GetT_Part_office_Powercable(Mode, langCode);
+                    imgurl = q3.PictureName;
+                    parametricTextIndex = q.parametricTextIndex;
+                    des = q.T_Part_office_describes;
+                    break;
+
+                default:
+                    break;
+            }
+
+            var param = new
+            {
+                imgurl = imgurl,
+                mode = Mode,
+                des = des,
+                parametricTextIndex = parametricTextIndex
+
+            };
+
+            return param;
+        }
+
+
+
+        #endregion
+
+        /// <summary>
         /// 根据mode获取
         /// </summary>
         /// <param name="mode"></param>
@@ -208,29 +297,48 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         }
 
 
-        public T_Part_office_ControlBox GetT_Part_office_ControlBox(string mode)
+        public T_Part_office_ControlBox GetT_Part_office_ControlBox(string mode,string langCode)
         {
             var query = from x in read_db.T_Part_office_ControlBox
                         where x.Mode == mode
                         select x;
 
-            return query.FirstOrDefault();
+            T_Part_office_ControlBox model = query.FirstOrDefault();
+
+            if(model!=null&&model.Id>0)
+            {
+                model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+            }
+
+            return model;
         }
-        public T_Part_office_HandSet GetT_Part_office_HandSet(string mode)
+        public T_Part_office_HandSet GetT_Part_office_HandSet(string mode,string langCode)
         {
             var query = from x in read_db.T_Part_office_HandSet
                         where x.Mode == mode
                         select x;
+            T_Part_office_HandSet model = query.FirstOrDefault();
+            if (model != null && model.Id > 0)
+            {
+                model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+            }
 
-            return query.FirstOrDefault();
+            return model ;
         }
-        public T_Part_office_Powercable GetT_Part_office_Powercable(string mode)
+        public T_Part_office_Powercable GetT_Part_office_Powercable(string mode,string langCode)
         {
             var query = from x in read_db.T_Part_office_Powercable
                         where x.Mode == mode
                         select x;
 
-            return query.FirstOrDefault();
+            T_Part_office_Powercable model = query.FirstOrDefault();
+
+            if (model != null && model.Id > 0)
+            {
+                model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+            }
+
+            return model;
         }
        
         /// <summary>
