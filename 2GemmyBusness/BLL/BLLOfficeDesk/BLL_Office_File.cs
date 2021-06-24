@@ -36,7 +36,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         public List<T_Office_Files> GetT_Office_Files(int deskid)
         {
             //先获取桌子
-            T_Product_office_desk_detail desk = bll_desk.GetT_Product_office_desk_detail(deskid);
+            T_Product_office_desk_detail desk = bll_desk.GetT_Product_office_desk_detail(deskid,"");
 
             //再获取这个桌子的所有文件
             var query = from x in read_db.T_Office_Files
