@@ -2160,9 +2160,10 @@ h6 {
 
 .main-slider .swiper-slide .thm-btn {
   opacity: 0;
-  transform: translateY(100px);
+ /* transform: translateY(100px);
   transition-delay: 2500ms;
-  transition: transform 2000ms ease, opacity 2000ms ease, color 500ms ease, background 500ms ease;
+  transition: transform 2000ms ease, opacity 2000ms ease, color 500ms ease, background 500ms ease;*/
+
 }
 
 .main-slider .swiper-slide-active .image-layer {
@@ -4310,16 +4311,11 @@ h6 {
   transform: scale(1);
 }
 
-.service-one__image2 > img {
-    width: 100%;
-    transition: transform 500ms ease, opacity 500ms ease;
-    opacity: 1;
-    transform: scale(1);
-}
+
 
 .service-one__card:hover .service-one__image > img {
-  transform: scale(1.05);
-  opacity: 0.7;
+    transform: scale(1.05);
+    opacity: 0.7;
 }
 .service-one__card2:hover .service-one__image > img {
     transform: scale(1);

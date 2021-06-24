@@ -315,6 +315,30 @@ namespace GemmyService.Controllers
                     mode = Mode;
                     des.Add("介绍");
                     break;
+                case "SideBracket":
+                    T_Part_office_SideBracket q4 = bll_desk.GetT_Part_office_SideBracket(Mode);
+                    imgurl = q4.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+                case "foot":
+                    T_Part_office_Foot q5 = bll_desk.GetT_Part_office_Foot(Mode);
+                    imgurl = q5.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+                case "frame":
+                    T_Part_office_Frame q6 = bll_desk.GetT_Part_office_Frame(Mode);
+                    imgurl = q6.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
+                case "column":
+                    T_Part_office_Column q7 = bll_desk.GetT_Part_office_Column(Mode);
+                    imgurl = q7.PictureName;
+                    mode = Mode;
+                    des.Add("介绍");
+                    break;
 
                 default:
                     break;

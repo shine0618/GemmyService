@@ -21,7 +21,7 @@
     "OfficeTFDeskContent": "这是捷昌的四腿桌",
     "DeskConfigurationName": "配置",
     "OfficeTTDesk": "办公三腿桌",
-    "CustomerName": "自定义",
+    "CustomerName": "我的定制",
     "NewProductName": "新品推荐",
     "deskNewProductNumber": "新品排序",
     "deskSalesVolume": "销量排序",
@@ -31,7 +31,7 @@
 
 
     "t_OfficeStandards_1": "搜索",
-    "t_OfficeStandards_2": "在线定制",
+    "t_OfficeStandards_2": "立即定制",
 
 
     "text_detail_1": "产品信息",
@@ -50,6 +50,8 @@
     "text_detail_12": "地脚",
     "text_detail_13": "框架",
     "text_detail_14": "侧板",
+    "text_detail_15": "控制器",
+    "text_detail_16": "手控器",
 
 
     "text_customer_1": "1.选择立柱",
