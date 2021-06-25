@@ -39,7 +39,9 @@
         cursor: pointer;
         padding:5px;
     }
-
+        .navimg:hover {
+            background-color: rgb(12 33 57 / 0.3);
+        }
     .selectStep {
         height: 70px;
     }
@@ -442,6 +444,7 @@
                 <div class="col-lg-12">
                     <button @@click="nextStep" class="orderbtn thm-btn">下一步</button>
                     <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''">完成配置</button>
+                    <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''" @@click="saveConfigurations()">保存配置</button>
                 </div>
 
             </div>
@@ -547,7 +550,7 @@
 
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
-            productGuid:'@ViewBag.productGuid',
+            productGuid:'',
 
             //text
 
@@ -585,10 +588,7 @@
 
                         break;
                     case "s2":
-                        if (this.select_frame == "") {
-                            this.getAllFrame();
-                        }
-
+                        this.getAllFrame();
                         break;
                     case "s3":
                         this.getAllFoot();
@@ -611,6 +611,39 @@
 
         },
         methods: {
+            saveConfigurations: function (event) {
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCSelection/saveConfigurations",
+                    params: {
+
+                        select_columnMode: this.select_columnMode,
+                        select_frameMode: this.select_frameMode,
+                        select_footMode: this.select_footMode,
+                        select_SideBracketMode: this.select_SideBracketMode,
+                        select_ColorMode: this.select_ColorMode,
+                        select_ControlBoxMode: this.select_ControlBoxMode,
+                        select_HandSetMode: this.select_HandSetMode,
+                        select_PowercableMode: this.select_PowercableMode,
+                        frameWidth: this.frameWidth,
+                        frameHeight: this.frameHeight,
+                     
+
+                        langCode: this.langCode,
+                    }
+                }).then(function (response) {  //接口返回数据
+
+                    if (response.body == "true") {
+                        //成功
+                    }
+                    else {
+                        //失败
+                    }
+                }, function (error) {
+                    console.log(error);
+                })
+
+            },
             nextStep: function(event) {
                // console.log(this.selectStep);
                 switch (this.selectStep) {
@@ -696,7 +729,7 @@
                 }).then(function (response) {  //接口返回数据
 
                     this.detailModel = response.body;
-                    console.log(response.body);
+                   // console.log(response.body);
                 }, function (error) {
                     console.log(error);
                 })
@@ -730,7 +763,6 @@
                 }).then(function (response) {  //接口返回数据
                     this.list_frame = response.body;
                     this.list_frame_count = this.list_frame.length;
-                    console.log(response.body);
                 }, function (error) {
                     console.log(error);
                })
@@ -812,7 +844,6 @@
                 }).then(function (response) {  //接口返回数据
                     this.list_Color = response.body;
                     this.list_Color_count = this.list_Color.length;
-                    console.log(response.body);
                 }, function (error) {
                     console.log(error);
                 })
@@ -883,55 +914,56 @@
             setData: function (field, val) {
                 this.$set(this.$data, field, val);//vue 设定值
             },
-            getThisDesk: function (event) {
+            getThisDesk: function (productGuid) {
                 //获取桌子详细信息 从另外一个标准配置跳转过来
                     this.$http({           //调用接口
                         method: 'GET',
                         url: "/JCSelection/GetOfficeDeskDetail2",
                         params: {
                             lang: this.langCode,
-                            productGuid: this.productGuid,
+                            productGuid: productGuid,
                         }
                     }).then(function (response) {  //接口返回数据
-                        // this.deskList = response.body;
+                        console.log(response.body);
                         this.T_Product_office_desk = response.body.T_Product_office_desk;
                         this.T_Product_office_desk_detail = response.body.T_Product_office_desk_detail;
                         //添加到产品配置列表 立柱
                         if (this.T_Product_office_desk_detail.T_Part_office_Column != null) {
                             var it = this.T_Product_office_desk_detail.T_Part_office_Column;
-                            if (it.Mode != '') {
-                                select_column = it.Id;
-                                select_columnMode = it.Mode;
-                                this.$options.methods.columnClick(select_column, select_columnMode);
-                                console.log(select_column);
-                                console.log(select_columnMode);
-                            }
+                            this.select_column = it.Id;
+                            this.select_columnMode = it.Mode;
                         }
                         //添加到产品配置列表
                         if (this.T_Product_office_desk_detail.T_Part_office_Foot != null) {
                             var it = this.T_Product_office_desk_detail.T_Part_office_Foot;
-                            select_foot = it.Id;
-                            select_footMode = it.Mode;
-                            console.log(select_foot);
-                            console.log(select_footMode);
+                            this.select_foot = it.Id;
+                            this.select_footMode = it.Mode;
                         }
                         //添加到产品配置列表
                         if (this.T_Product_office_desk_detail.T_Part_office_Frame != null) {
                             var it = this.T_Product_office_desk_detail.T_Part_office_Frame;
-                            select_frame = it.Id;
-                            select_frameMode = it.Mode;
-                            console.log(select_frame);
-                            console.log(select_frameMode);
+                            this.select_frame = it.Id;
+                            this.select_frameMode = it.Mode;
                         }
                         //添加到产品配置列表
                         if (this.T_Product_office_desk_detail.T_Part_office_SideBracket != null) {
                             var it = this.T_Product_office_desk_detail.T_Part_office_SideBracket;
-                            select_SideBracket = it.Id;
-                            select_SideBracketMode = it.Mode;
-                            console.log(select_SideBracket);
-                            console.log(select_SideBracketMode);
+                            this.select_SideBracket = it.Id;
+                            this.select_SideBracketMode = it.Mode;
                         }
-                        console.log(response.body);
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_ControlBox != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_ControlBox;
+                            this.select_ControlBox = it.Id;
+                            this.select_ControlBoxMode = it.Mode;
+                        }
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_HandSet != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_HandSet;
+                            this.select_HandSet = it.Id;
+                            this.select_HandSetMode = it.Mode;
+                        }
+                       
                     }, function (error) {
                         console.log(error);
                     })
@@ -942,9 +974,9 @@
     OfficeStandards.initPage();
     OfficeStandards.getAllColumn();
 
+    this.productGuid = '@ViewBag.productGuid'; 
     if (this.productGuid != undefined && this.productGuid != "") {
-        console.log(this.productGuid);
-        OfficeStandards.getThisDesk();
+        OfficeStandards.getThisDesk(this.productGuid);
     }
 
     OfficeStandards.getAllColor();

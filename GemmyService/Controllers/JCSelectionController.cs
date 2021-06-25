@@ -24,6 +24,8 @@ namespace GemmyService.Controllers
         #endregion
 
 
+
+
         // GET: JCSelection
         public ActionResult Index()
         {
@@ -274,7 +276,7 @@ namespace GemmyService.Controllers
         /// </summary>
         /// <param name="productGuid"></param>
         /// <returns></returns>
-        public ActionResult office_Eservice_test(string productGuid)
+        public ActionResult office_Eservice_test(string productName,string productGuid)
         { //如果语言是默认的话
             if (Session["PageLanguage"] == null)
             {
@@ -420,7 +422,45 @@ namespace GemmyService.Controllers
         }
 
 
+        /// <summary>
+        /// 新增配置
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult saveConfigurations(string select_columnMode, string select_frameMode, string select_footMode, string select_SideBracketMode, string select_ColorMode, string select_ControlBoxMode, string select_HandSetMode, 
+            string select_PowercableMode, string frameWidth, string frameHeight, string langCode)
+        {
+            //登录权限验证
+            if (Session["emailName"] != null && Session["emailName"].ToString() != "")
+            {
 
+                //数据有效性验证
+                string pname = Session["emailName"].ToString();
+                T_Product_office_desk_detail dd = new T_Product_office_desk_detail();
+                dd.ColumnType = select_columnMode;
+                dd.FrameType = select_frameMode;
+                dd.FootType = select_footMode;
+                dd.SideBracketType = select_SideBracketMode;
+          //      dd.col = select_ColorMode; //颜色
+                dd.ControlboxInfo = select_ControlBoxMode;
+                dd.HandsetType = select_HandSetMode;
+            //    dd.po = select_PowercableMode; //电源线
+              //  dd.fr = frameWidth; //宽度
+              //  dd.ColumnType = frameHeight; //高度
+
+
+                T_Product_office_desk de = new T_Product_office_desk();
+
+                bll_desk.AddT_Product_office_desk_detail(de, dd);
+
+
+            }
+
+
+            JsonResult jr = Json("", JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
 
 
         [HttpGet]

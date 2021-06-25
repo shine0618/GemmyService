@@ -490,7 +490,6 @@ var nav_langu_box = new Vue({
                     pagecode: lang,
                 }
             }).then(function (response) {  //接口返回数据
-                console.log(response);
                 this.defaultLanguage = response.body.LanguageShortDesript;
                 this.defaultLanguageCode = response.body.LanguageCode;
             }, function (error) {
@@ -614,7 +613,6 @@ var nav_langu_box = new Vue({
                             password: password,
                         }
                     }).then(function (response) {  //接口返回数据
-                        console.log(response.body);
                        // this.islogin = response.body;
 
                         if (response.body.CanLogin == true) {
@@ -658,7 +656,6 @@ var nav_langu_box = new Vue({
                 //  this.registercode = response.body;
                 console.log(response);
                 if (response.body.LoginOut == true) {
-                    console.log('reload');
                     location.reload();
                     this.$notify({
                         message: '登出成功',
@@ -736,8 +733,6 @@ var nav_langu_box = new Vue({
                         'menuName': this.CompanyWebsite,
                         'icon': 'el-icon-link',
                     });
-                console.log(response.body);
-                console.log(this.Email);
             })
         },
         sendEmail(emailaddress) {
@@ -774,7 +769,6 @@ var nav_langu_box = new Vue({
                     else {
                         this.$notify.error('注册邮件发送失败');
                     }
-                    console.log(response);
                 }, function (error) {
                     console.log(error);
                 })
@@ -815,7 +809,6 @@ var nav_langu_box = new Vue({
                         else {
                             this.$notify.error('重置密码邮件发送失败');
                         }
-                        console.log(response);
                     }, function (error) {
                         console.log(error);
                     })
@@ -846,7 +839,6 @@ var nav_langu_box = new Vue({
                         else {
                             this.$notify.error('密码未重置');
                         }
-                        console.log(response);
                     }, function (error) {
                         console.log(error);
                     })
@@ -879,7 +871,6 @@ var nav_langu_box = new Vue({
                         else {
                             this.$notify.error('密码未重置');
                         }
-                        console.log(response);
                     }, function (error) {
                         console.log(error);
                     })
@@ -915,7 +906,7 @@ var nav_langu_box = new Vue({
 
         }, //验证成功函数
         handleNodeClick(data) {
-            console.log(data);
+            //console.log(data);
         },
 
     }
