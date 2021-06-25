@@ -15,7 +15,11 @@
         /*background-color: #F2F3F4;*/
         /*min-height: 500px;
         height: calc(100vh - 300px);*/
-
+        border: 0;
+        margin: 0;
+        padding: 0;
+        height: 620px;
+        width: 830px;
         border: 0;
     }
 
@@ -115,7 +119,7 @@
     <el-dialog title="部件详情"
                 :visible.sync="dialogVisible_partDetail"
 
-               width="62%"
+               width="80%"
                center>
         <div class="container">
             <div class="row">
@@ -250,8 +254,8 @@
                     @*s1*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_column">
-                           @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
-                          
+                            @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
+
                             <div class="imgDiv" @@mouseenter="mouse_column = item.Id" @@mouseleave="mouse_column = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" :src="item.PictureName" />
                                 <img v-show="mouse_column == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('column',item.Mode)" />
@@ -295,7 +299,7 @@
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s4'">
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_SideBracket">
-                           @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
+                            @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
                             <div class="imgDiv" @@mouseenter="mouse_SideBracket = item.Id" @@mouseleave="mouse_SideBracket = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" :src="item.PictureName" />
                                 <img v-show="mouse_SideBracket == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('SideBracket',item.Mode)" />
@@ -428,7 +432,7 @@
 
                 </div>
                 <div class="col-lg-8" id="asas">
-                </div><!-- /.col-lg-4 -->
+                </div><!-- 3D图形 -->
             </div>
         </div>
     </section>
@@ -656,7 +660,7 @@
                         this.setData(key, value);;
                     }
                 }
-                var i = '<iframe scrolling="no"  id="shjahs" style ="height:655px;width:800px"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+                var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
                 $('#asas').append(i);
             },
             getpartDetail: function (partType, Mode) {
