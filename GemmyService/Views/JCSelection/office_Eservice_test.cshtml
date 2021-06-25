@@ -20,7 +20,6 @@
         padding: 0;
         height: 620px;
         width: 830px;
-        border: 0;
     }
 
     .selectColumnPart {
@@ -36,8 +35,9 @@
     }
 
     .navimg {
-        height: 70px;
+        height: 65px;
         cursor: pointer;
+        padding:5px;
     }
 
     .selectStep {
@@ -187,10 +187,10 @@
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
                     <div class="service-details__image">
                         <div class="block-title text-left">
-                            <img class="img-response navimg" :title="text_customer_5" src="~/resourse/page/2jie.png" />
-                            <img class="img-response navimg" :title="text_customer_6" src="~/resourse/page/2jieR.png" />
-                            <img class="img-response navimg" :title="text_customer_7" src="~/resourse/page/3jie.png" />
-                            <img class="img-response navimg" :title="text_customer_8" src="~/resourse/page/3jieR.png" />
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_s'}"  :title="text_customer_5" @@click="colomnSearch('column_2_s')" src="/resourse/page/2jie.png" />  @*column_2_s*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_r'}"  :title="text_customer_6"  @@click="colomnSearch('column_2_r')" src="/resourse/page/2jieR.png" /> @*column_2_r*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_s'}"  :title="text_customer_7" @@click="colomnSearch('column_3_s')" src="/resourse/page/3jie.png" /> @*column_3_s*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_r'}"  :title="text_customer_8" @@click="colomnSearch('column_3_r')" src="/resourse/page/3jieR.png" /> @*column_3_r*@
                         </div><!-- /.block-title -->
                     </div>
                 </div>
@@ -491,6 +491,8 @@
             colorConfirm: '#FF0000',
             selectStep: 's1',//选择的步骤
 
+            search1_column: '',//筛选的正装
+
             frameWidth: 600,
             frameHeight: 600,
 
@@ -622,10 +624,17 @@
                         this.selectStep = "s4";
                         break;
                     case "s4":
-                        this.selectStep = "s5";
+                        this.selectStep = "s5_1";
                         break;
-                    case "s5":
+                    case "s5_1":
+                        this.selectStep = "s5_2";
+                        break;
+                    case "s5_2":
+                        this.selectStep = "s5_3";
+                        break;
+                    case "s5_3":
                         this.selectStep = "s6";
+                        break;
                     case "s6":
                         this.selectStep = "s7";
                         break;
@@ -662,6 +671,17 @@
                 }
                 var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
                 $('#asas').append(i);
+            },
+
+            //正装3节的筛选
+            colomnSearch: function (text) {
+                if (this.search1_column == text) {
+                    this.search1_column = '';
+                }
+                else {
+
+                    this.search1_column = text;
+                }
             },
             getpartDetail: function (partType, Mode) {
 

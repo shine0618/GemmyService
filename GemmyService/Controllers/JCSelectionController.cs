@@ -269,6 +269,11 @@ namespace GemmyService.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 3D选配界面
+        /// </summary>
+        /// <param name="productGuid"></param>
+        /// <returns></returns>
         public ActionResult office_Eservice_test(string productGuid)
         { //如果语言是默认的话
             if (Session["PageLanguage"] == null)
@@ -281,6 +286,21 @@ namespace GemmyService.Controllers
             }
             Session.Timeout = 9600;
             ViewBag.productGuid = productGuid;            
+            return View();
+        }
+
+
+
+        public ActionResult office_Eservice3D()
+        {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
             return View();
         }
         #region 3D选配界面

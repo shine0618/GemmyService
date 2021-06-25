@@ -22,12 +22,7 @@ namespace _5.GemmyManagerWEB.Controllers
             ViewBag.type = type;
             ViewBag.Mode = Mode;
             ViewBag.Key = Key;
-            ViewBag.langCode = langCode;
-
-
-
-         
-            
+            ViewBag.langCode = langCode;        
             try
             {
                 var obj = bll.GetPartDetail(type, Mode, langCode);
