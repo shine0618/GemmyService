@@ -7,20 +7,27 @@
     <script src="~/assets/layui-v2.6.6/layui/layui.js"></script>*@
 
 <style>
+
+
+
     #shjahs {
         width: 100%;
         border: 0;
-        padding-left: 5px;
-        padding-right: 5px;
-        background-color: #F2F3F4;
-
-        min-height:550px;
-        height: calc(100vh - 280px);
+        margin: 0;
+        padding: 0;
+        height: 620px;
+        width: 830px;
+        /*      min-height:550px;
+        height: calc(100vh - 280px);*/
     }
-
+    #asas
+    {
+        margin:0;
+        padding:0;
+    }
     .about-three {
         padding-top: 20px;
-        padding-bottom: 40px;
+        padding-bottom: 0px;
     }
 
     * {
@@ -115,10 +122,10 @@
 
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-9" id="asas">
+                        <div class="col-lg-9 col-md-12 col-xs-12" id="asas">
 
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-md-9 col-xs-9">
                             @*<i v-show="isCollect" class="el-icon-star-on collect_icon" @@click="isCollect=!isCollect"></i>
                             <i v-show="!isCollect" class="el-icon-star-off collect_icon" @@click="isCollect=!isCollect"></i>*@
 
@@ -126,15 +133,13 @@
                                 <img src="~/resourse/other/collect1.png" v-if="isCollect==true" class="img-response collect_icon" @@click="CancelCollectDesk" />
                                 <img src="~/resourse/other/collect0.png" v-else class="img-response collect_icon" @@click="CollectDesk" />
                             </div>
-                        
-                        
-                        
-                        
+                                                        
                             <div class="about-three__image">
 
                                 <h4 class="drawerh5" v-text="deskSerialName"></h4>
-                            <br />
-                                <h6 v-text="introduction"></h6>
+                                <br />
+                                <h5 v-text="introduction"></h5>
+                                <br />
                                 <!--<div class="block-title text-left">
         <p>{{text_detail_1}}</p>
         <h6 v-text="deskSerialName"></h6>
@@ -144,12 +149,14 @@
         <p>产品介绍</p>
 
     </div>-->
-                                <!-- /.block-title -->
-                                <div class="block-title text-left">
-                                    <p>{{text_detail_2}}</p>
-                                    <h6 v-for="item in descriptions" v-text="item.textValue"></h6>
 
-                                </div><!-- /.block-title -->
+                                <h6 v-for="item in descriptions" v-text="item.textValue"></h6>
+                                <!-- /.block-title 关键参数 -->
+                                <!--<div class="block-title text-left">
+        <p>{{text_detail_2}}</p>
+
+    </div>-->
+                                <!-- /.block-title -->
 
 
                                 <div class="block-title text-left">
@@ -211,7 +218,8 @@
 
                         <el-table-column prop="part"
                                          :label="text_detail_8"
-                                         align="center">
+                                         align="center"
+                                         width="100">
                         </el-table-column>
 
 
@@ -534,7 +542,7 @@
                         this.setData(key, value);;
                     }
                 }
-                var i = '<iframe scrolling="no"  id="shjahs" class="img-fluid" alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+                var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
                 $('#asas').append(i);
 
             },
@@ -596,6 +604,9 @@
                             paramList.push("额定速度：" + it.Speed);
                         }
 
+                        for (i in this.T_Product_office_desk_detail.T_Part_office_Column.T_Part_office_describes) {
+                            paramList.push(this.T_Product_office_desk_detail.T_Part_office_Column.T_Part_office_describes[i].textValue);
+                        }
 
                         var q = { part: this.text_detail_11, model: this.T_Product_office_desk_detail.T_Part_office_Column.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Column.PictureName, paramList: paramList };
                         this.paramTableData.push(q);
@@ -612,6 +623,10 @@
                             paramList.push("最小长度：" + it.MinLength);
                         }
 
+                        for (i in this.T_Product_office_desk_detail.T_Part_office_Foot.T_Part_office_describes) {
+                            paramList.push(this.T_Product_office_desk_detail.T_Part_office_Foot.T_Part_office_describes[i].textValue);
+                        }
+
                         var q = { part: this.text_detail_12, model: this.T_Product_office_desk_detail.T_Part_office_Foot.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Foot.PictureName, paramList:paramList };
                         this.paramTableData.push(q);
                     }
@@ -625,6 +640,9 @@
                         }
                         if (it.MinLength != '') {
                             paramList.push("最小长度：" + it.MinLength);
+                        }
+                        for (i in this.T_Product_office_desk_detail.T_Part_office_Frame.T_Part_office_describes) {
+                            paramList.push(this.T_Product_office_desk_detail.T_Part_office_Frame.T_Part_office_describes[i].textValue);
                         }
 
                         var q = { part: this.text_detail_13, model: this.T_Product_office_desk_detail.T_Part_office_Frame.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Frame.PictureName, paramList:paramList };
@@ -640,7 +658,9 @@
                         if (it.MinLength != '') {
                             paramList.push("最小长度：" + it.MinLength);
                         }
-
+                        for (i in this.T_Product_office_desk_detail.T_Part_office_SideBracket.T_Part_office_describes) {
+                            paramList.push(this.T_Product_office_desk_detail.T_Part_office_SideBracket.T_Part_office_describes[i].textValue);
+                        }
 
                         var q = { part: this.text_detail_14, model: this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_SideBracket.PictureName, paramList:paramList};
                         this.paramTableData.push(q);
@@ -649,7 +669,9 @@
                         var it = this.T_Product_office_desk_detail.T_Part_office_ControlBox;
                         var paramList = new Array();
                         
-
+                        for (i in this.T_Product_office_desk_detail.T_Part_office_ControlBox.T_Part_office_describes) {
+                            paramList.push(this.T_Product_office_desk_detail.T_Part_office_ControlBox.T_Part_office_describes[i].textValue);
+                        }
 
                         var q = { part: this.text_detail_15, model: this.T_Product_office_desk_detail.T_Part_office_ControlBox.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_ControlBox.PictureName, paramList: paramList };
                         this.paramTableData.push(q);
@@ -658,7 +680,9 @@
                         var it = this.T_Product_office_desk_detail.T_Part_office_HandSet;
                         var paramList = new Array();
 
-
+                        for (i in this.T_Product_office_desk_detail.T_Part_office_HandSet.T_Part_office_describes) {
+                            paramList.push(this.T_Product_office_desk_detail.T_Part_office_HandSet.T_Part_office_describes[i].textValue);
+                        }
 
                         var q = { part: this.text_detail_16, model: this.T_Product_office_desk_detail.T_Part_office_HandSet.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_HandSet.PictureName, paramList: paramList };
                         this.paramTableData.push(q);

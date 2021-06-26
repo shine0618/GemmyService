@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "office_Eservice3D";
+}
+
+
+<style>
+    #asas {
+        height: calc(100vh - 100px);
+       min-width:1230px;
+    }
+
+    #shjahs {
+        width: 99%;
+        height: 99%;
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<section class="page-header" style="height:53px;">
+
+    @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
+    <!-- /.page-header__bg -->
+    <div class="container" style="padding:10px 10px ">
+        <a class="navigation_a" href="/JCSelection/main">主页</a>/
+        <a class="navigation_a">自定义配置</a>
+    </div><!-- /.container -->
+</section><!-- /.page-header -->
+
+
+<section>
+    <div class="container">
+        <div class="col-lg-12">
+
+            <div id="asas">
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+
+
+        var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+        $('#asas').append(i);
+    })
+
+
+</script>

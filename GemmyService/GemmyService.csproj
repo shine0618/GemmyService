@@ -772,6 +772,7 @@
     <Content Include="Views\T_Office_Files\Index.cshtml" />
     <Content Include="Views\JCSelection\PersonInfo.cshtml" />
     <Content Include="Views\JCAccount\reass.cshtml" />
+    <Content Include="Views\JCSelection\office_Eservice3D.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

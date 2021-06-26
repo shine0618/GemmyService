@@ -15,8 +15,11 @@
         /*background-color: #F2F3F4;*/
         /*min-height: 500px;
         height: calc(100vh - 300px);*/
-
         border: 0;
+        margin: 0;
+        padding: 0;
+        height: 620px;
+        width: 830px;
     }
 
     .selectColumnPart {
@@ -32,10 +35,13 @@
     }
 
     .navimg {
-        height: 70px;
+        height: 65px;
         cursor: pointer;
+        padding:5px;
     }
-
+        .navimg:hover {
+            background-color: rgb(12 33 57 / 0.3);
+        }
     .selectStep {
         height: 70px;
     }
@@ -115,7 +121,7 @@
     <el-dialog title="部件详情"
                 :visible.sync="dialogVisible_partDetail"
 
-               width="62%"
+               width="80%"
                center>
         <div class="container">
             <div class="row">
@@ -183,10 +189,10 @@
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
                     <div class="service-details__image">
                         <div class="block-title text-left">
-                            <img class="img-response navimg" :title="text_customer_5" src="~/resourse/page/2jie.png" />
-                            <img class="img-response navimg" :title="text_customer_6" src="~/resourse/page/2jieR.png" />
-                            <img class="img-response navimg" :title="text_customer_7" src="~/resourse/page/3jie.png" />
-                            <img class="img-response navimg" :title="text_customer_8" src="~/resourse/page/3jieR.png" />
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_s'}"  :title="text_customer_5" @@click="colomnSearch('column_2_s')" src="/resourse/page/2jie.png" />  @*column_2_s*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_r'}"  :title="text_customer_6"  @@click="colomnSearch('column_2_r')" src="/resourse/page/2jieR.png" /> @*column_2_r*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_s'}"  :title="text_customer_7" @@click="colomnSearch('column_3_s')" src="/resourse/page/3jie.png" /> @*column_3_s*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_r'}"  :title="text_customer_8" @@click="colomnSearch('column_3_r')" src="/resourse/page/3jieR.png" /> @*column_3_r*@
                         </div><!-- /.block-title -->
                     </div>
                 </div>
@@ -250,8 +256,8 @@
                     @*s1*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_column">
-                           @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
-                          
+                            @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
+
                             <div class="imgDiv" @@mouseenter="mouse_column = item.Id" @@mouseleave="mouse_column = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" :src="item.PictureName" />
                                 <img v-show="mouse_column == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('column',item.Mode)" />
@@ -295,7 +301,7 @@
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s4'">
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_SideBracket">
-                           @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
+                            @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
                             <div class="imgDiv" @@mouseenter="mouse_SideBracket = item.Id" @@mouseleave="mouse_SideBracket = ''">
                                 <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_SideBracket==item.Id}" v-on:click="SideBracketClick(item.Id,item.Mode)" :src="item.PictureName" />
                                 <img v-show="mouse_SideBracket == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('SideBracket',item.Mode)" />
@@ -428,7 +434,7 @@
 
                 </div>
                 <div class="col-lg-8" id="asas">
-                </div><!-- /.col-lg-4 -->
+                </div><!-- 3D图形 -->
             </div>
         </div>
     </section>
@@ -438,6 +444,7 @@
                 <div class="col-lg-12">
                     <button @@click="nextStep" class="orderbtn thm-btn">下一步</button>
                     <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''">完成配置</button>
+                    <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''" @@click="saveConfigurations()">保存配置</button>
                 </div>
 
             </div>
@@ -486,6 +493,8 @@
             list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             colorConfirm: '#FF0000',
             selectStep: 's1',//选择的步骤
+
+            search1_column: '',//筛选的正装
 
             frameWidth: 600,
             frameHeight: 600,
@@ -541,7 +550,7 @@
 
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
-            productGuid:'@ViewBag.productGuid',
+            productGuid:'',
 
             //text
 
@@ -579,10 +588,7 @@
 
                         break;
                     case "s2":
-                        if (this.select_frame == "") {
-                            this.getAllFrame();
-                        }
-
+                        this.getAllFrame();
                         break;
                     case "s3":
                         this.getAllFoot();
@@ -605,6 +611,39 @@
 
         },
         methods: {
+            saveConfigurations: function (event) {
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCSelection/saveConfigurations",
+                    params: {
+
+                        select_columnMode: this.select_columnMode,
+                        select_frameMode: this.select_frameMode,
+                        select_footMode: this.select_footMode,
+                        select_SideBracketMode: this.select_SideBracketMode,
+                        select_ColorMode: this.select_ColorMode,
+                        select_ControlBoxMode: this.select_ControlBoxMode,
+                        select_HandSetMode: this.select_HandSetMode,
+                        select_PowercableMode: this.select_PowercableMode,
+                        frameWidth: this.frameWidth,
+                        frameHeight: this.frameHeight,
+                     
+
+                        langCode: this.langCode,
+                    }
+                }).then(function (response) {  //接口返回数据
+
+                    if (response.body == "true") {
+                        //成功
+                    }
+                    else {
+                        //失败
+                    }
+                }, function (error) {
+                    console.log(error);
+                })
+
+            },
             nextStep: function(event) {
                // console.log(this.selectStep);
                 switch (this.selectStep) {
@@ -618,10 +657,17 @@
                         this.selectStep = "s4";
                         break;
                     case "s4":
-                        this.selectStep = "s5";
+                        this.selectStep = "s5_1";
                         break;
-                    case "s5":
+                    case "s5_1":
+                        this.selectStep = "s5_2";
+                        break;
+                    case "s5_2":
+                        this.selectStep = "s5_3";
+                        break;
+                    case "s5_3":
                         this.selectStep = "s6";
+                        break;
                     case "s6":
                         this.selectStep = "s7";
                         break;
@@ -656,8 +702,19 @@
                         this.setData(key, value);;
                     }
                 }
-                var i = '<iframe scrolling="no"  id="shjahs" style ="height:655px;width:800px"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+                var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
                 $('#asas').append(i);
+            },
+
+            //正装3节的筛选
+            colomnSearch: function (text) {
+                if (this.search1_column == text) {
+                    this.search1_column = '';
+                }
+                else {
+
+                    this.search1_column = text;
+                }
             },
             getpartDetail: function (partType, Mode) {
 
@@ -672,7 +729,7 @@
                 }).then(function (response) {  //接口返回数据
 
                     this.detailModel = response.body;
-                    console.log(response.body);
+                   // console.log(response.body);
                 }, function (error) {
                     console.log(error);
                 })
@@ -706,7 +763,6 @@
                 }).then(function (response) {  //接口返回数据
                     this.list_frame = response.body;
                     this.list_frame_count = this.list_frame.length;
-                    console.log(response.body);
                 }, function (error) {
                     console.log(error);
                })
@@ -788,7 +844,6 @@
                 }).then(function (response) {  //接口返回数据
                     this.list_Color = response.body;
                     this.list_Color_count = this.list_Color.length;
-                    console.log(response.body);
                 }, function (error) {
                     console.log(error);
                 })
@@ -859,55 +914,56 @@
             setData: function (field, val) {
                 this.$set(this.$data, field, val);//vue 设定值
             },
-            getThisDesk: function (event) {
+            getThisDesk: function (productGuid) {
                 //获取桌子详细信息 从另外一个标准配置跳转过来
                     this.$http({           //调用接口
                         method: 'GET',
                         url: "/JCSelection/GetOfficeDeskDetail2",
                         params: {
                             lang: this.langCode,
-                            productGuid: this.productGuid,
+                            productGuid: productGuid,
                         }
                     }).then(function (response) {  //接口返回数据
-                        // this.deskList = response.body;
+                        console.log(response.body);
                         this.T_Product_office_desk = response.body.T_Product_office_desk;
                         this.T_Product_office_desk_detail = response.body.T_Product_office_desk_detail;
                         //添加到产品配置列表 立柱
                         if (this.T_Product_office_desk_detail.T_Part_office_Column != null) {
                             var it = this.T_Product_office_desk_detail.T_Part_office_Column;
-                            if (it.Mode != '') {
-                                select_column = it.Id;
-                                select_columnMode = it.Mode;
-                                this.$options.methods.columnClick(select_column, select_columnMode);
-                                console.log(select_column);
-                                console.log(select_columnMode);
-                            }
+                            this.select_column = it.Id;
+                            this.select_columnMode = it.Mode;
                         }
                         //添加到产品配置列表
                         if (this.T_Product_office_desk_detail.T_Part_office_Foot != null) {
                             var it = this.T_Product_office_desk_detail.T_Part_office_Foot;
-                            select_foot = it.Id;
-                            select_footMode = it.Mode;
-                            console.log(select_foot);
-                            console.log(select_footMode);
+                            this.select_foot = it.Id;
+                            this.select_footMode = it.Mode;
                         }
                         //添加到产品配置列表
                         if (this.T_Product_office_desk_detail.T_Part_office_Frame != null) {
                             var it = this.T_Product_office_desk_detail.T_Part_office_Frame;
-                            select_frame = it.Id;
-                            select_frameMode = it.Mode;
-                            console.log(select_frame);
-                            console.log(select_frameMode);
+                            this.select_frame = it.Id;
+                            this.select_frameMode = it.Mode;
                         }
                         //添加到产品配置列表
                         if (this.T_Product_office_desk_detail.T_Part_office_SideBracket != null) {
                             var it = this.T_Product_office_desk_detail.T_Part_office_SideBracket;
-                            select_SideBracket = it.Id;
-                            select_SideBracketMode = it.Mode;
-                            console.log(select_SideBracket);
-                            console.log(select_SideBracketMode);
+                            this.select_SideBracket = it.Id;
+                            this.select_SideBracketMode = it.Mode;
                         }
-                        console.log(response.body);
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_ControlBox != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_ControlBox;
+                            this.select_ControlBox = it.Id;
+                            this.select_ControlBoxMode = it.Mode;
+                        }
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_HandSet != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_HandSet;
+                            this.select_HandSet = it.Id;
+                            this.select_HandSetMode = it.Mode;
+                        }
+                       
                     }, function (error) {
                         console.log(error);
                     })
@@ -918,9 +974,9 @@
     OfficeStandards.initPage();
     OfficeStandards.getAllColumn();
 
+    this.productGuid = '@ViewBag.productGuid'; 
     if (this.productGuid != undefined && this.productGuid != "") {
-        console.log(this.productGuid);
-        OfficeStandards.getThisDesk();
+        OfficeStandards.getThisDesk(this.productGuid);
     }
 
     OfficeStandards.getAllColor();

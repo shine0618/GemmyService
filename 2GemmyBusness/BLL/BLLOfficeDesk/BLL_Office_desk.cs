@@ -14,6 +14,22 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
   public  class BLL_Office_desk:BLLBase
     {
 
+        #region Add desk
+
+        public int AddT_Product_office_desk_detail(T_Product_office_desk desk, T_Product_office_desk_detail detail)
+        {
+            int i = base.AddEntities<T_Product_office_desk_detail>(detail);
+
+            return base.AddEntities<T_Product_office_desk>(desk);
+
+
+
+
+        }
+
+        #endregion
+
+
         public T_Product_office_desk GetT_Product_office_desk(string Guid)
         {
            return  read_db.T_Product_office_desk.Where(x => x.deskGuid == Guid).FirstOrDefault();
