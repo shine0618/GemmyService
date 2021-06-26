@@ -154,6 +154,10 @@
     <Compile Include="Migrations\202106230611187_initdes.designer.cs">
       <DependentUpon>202106230611187_initdes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106260523363_init6574856.cs" />
+    <Compile Include="Migrations\202106260523363_init6574856.designer.cs">
+      <DependentUpon>202106260523363_init6574856.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\ModelProductOffice\T_Office_Color.cs" />
@@ -271,6 +275,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106230611187_initdes.resx">
       <DependentUpon>202106230611187_initdes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106260523363_init6574856.resx">
+      <DependentUpon>202106260523363_init6574856.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

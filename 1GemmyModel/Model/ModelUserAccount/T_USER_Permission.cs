@@ -9,7 +9,7 @@ namespace _1GemmyModel.Model.ModelUserAccount
     /// <summary>
     /// 用户权限
     /// </summary>
-   public class T_USER_Permission
+   public class T_USER_Permission:T_Base
     {
 
         public string userName { get; set; }

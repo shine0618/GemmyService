@@ -10,8 +10,8 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
    public class BLL_Ofiice_Configuration:BLLBase
     {
         #region 配置号的生成
-        private BLL_Office_desk bll_desk = new BLL_Office_desk();
-        public string CreateConfigurationCode(string guid, bool isStandard, string username, string Type)
+        private static BLL_Office_desk bll_desk = new BLL_Office_desk();
+        public static string CreateConfigurationCode(string guid, bool isStandard, string username, string Type)
         {
             string standard = "";
             standard = isStandard == true ? (standard = "S") : (standard = "C");
@@ -29,7 +29,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         /// 得到日期的字符串
         /// </summary>
         /// <returns></returns>
-        public DateTime getTime()
+        public static DateTime getTime()
         {
             DateTime utcNow = DateTime.Now.ToUniversalTime();
 
