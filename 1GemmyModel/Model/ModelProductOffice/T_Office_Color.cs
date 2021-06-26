@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _1GemmyModel.Model.ModelProductOffice;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -66,5 +67,10 @@ namespace _1GemmyModel.Model
         /// Lab的B值
         /// </summary>
         public decimal BValueLab { get; set; }
+
+        public int parametricTextIndex { get; set; }
+
+        [NotMapped]
+        public List<T_Part_office_describe> T_Part_office_describes { get; set; }
     }
 }

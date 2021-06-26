@@ -33,7 +33,8 @@ namespace _1GemmyModel.Model.ModelProductOffice
         [NotMapped]
         public T_Part_office_Powercable T_Part_office_Powercable { get; set; }
 
-        
+        [NotMapped]
+        public T_Office_Color T_Office_Color { get; set; }
 
 
         public string configurationNo { get; set; }

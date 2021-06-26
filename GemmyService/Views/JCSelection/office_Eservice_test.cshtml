@@ -156,6 +156,7 @@
 
     <section class="about-three">
         <div class="container">
+            <h2>{{frameHeight}}</h2>
             <div class="row">
                 <div class="col-lg-12">
                     <!--<div class="block-title text-center">
@@ -998,6 +999,31 @@
                             this.select_HandSetMode = it.Mode;
                         }
 
+                        //电源线
+                        if (this.T_Product_office_desk_detail.T_Part_office_Powercable != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_Powercable;
+                            this.select_Powercable = it.Id;
+                            this.select_PowercableMode = it.Mode;
+
+                        }
+
+                        if (this.T_Product_office_desk_detail.T_Office_Color != null) {
+                            var it = this.T_Product_office_desk_detail.T_Office_Color;
+                            this.select_Color = it.Id;
+                            this.select_ColorMode = it.ColorName;
+
+                        }
+
+                        if (this.T_Product_office_desk_detail.frameWidth != "") {
+                            
+                            this.frameWidth = this.T_Product_office_desk_detail.frameWidth;
+                            console.log(this.frameWidth);
+                        }
+                        if (this.T_Product_office_desk_detail.frameHeight != "") {
+                            this.frameHeight = this.T_Product_office_desk_detail.frameHeight;
+                        }
+                        
+
                     }, function (error) {
                         console.log(error);
                     })
@@ -1007,11 +1033,12 @@
     //语言加载
     OfficeStandards.initPage();
     OfficeStandards.getAllColumn();
+    OfficeStandards.getAllColor();
 
     this.productGuid = '@ViewBag.productGuid';
     if (this.productGuid != undefined && this.productGuid != "") {
         OfficeStandards.getThisDesk(this.productGuid);
     }
 
-    OfficeStandards.getAllColor();
+   
 </script>

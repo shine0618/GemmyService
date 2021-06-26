@@ -158,13 +158,27 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 {
                     model.T_Part_office_SideBracket = GetT_Part_office_SideBracket(model.SideBracketType, langCode);
                 }
+                //控制器
                 if (model.ControlboxType != null && model.ControlboxType != "")
                 {
                     model.T_Part_office_ControlBox = GetT_Part_office_ControlBox(model.ControlboxType, langCode);
                 }
+                //手控器
                 if (model.HandsetType != null && model.HandsetType != "")
                 {
                     model.T_Part_office_HandSet = GetT_Part_office_HandSet(model.HandsetType, langCode);
+                }
+
+                //电源线
+                if (model.select_PowercableMode != null && model.select_PowercableMode != "")
+                {
+                    model.T_Part_office_Powercable = GetT_Part_office_Powercable(model.select_PowercableMode, langCode);
+                }
+
+                //颜色
+                if (model.select_ColorMode != null && model.select_ColorMode != "")
+                {
+                    model.T_Office_Color = GetT_Office_Color(model.select_ColorMode, langCode);
                 }
                 return model;
             }
@@ -429,7 +443,23 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             return model;
         }
-       
+
+        public T_Office_Color GetT_Office_Color(string mode, string langCode)
+        {
+            var query = from x in read_db.T_Office_Color
+                        where x.ColorName == mode
+                        select x;
+
+            T_Office_Color model = query.FirstOrDefault();
+
+            if (model != null && model.Id > 0)
+            {
+                model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+            }
+
+            return model;
+        }
+
         /// <summary>
         /// 获取所有的
         /// </summary>
