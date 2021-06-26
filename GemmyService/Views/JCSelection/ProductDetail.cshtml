@@ -292,7 +292,7 @@
                 
                 <div class="row filerow" v-for="item in files_d1">
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-                        <img class="img-response filethumbnail" :src="item.thumbnailImg" />
+                        <img class="img-response filethumbnail" :src="GetfileName(item.thumbnailImg,item.Type)" />
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <h5 v-text="item.FileName"></h5>
@@ -339,7 +339,7 @@
             <div v-if="activeName=='d3'">
                 <div class="row filerow" v-for="item in files_d3">
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-                        <img class="img-response filethumbnail" :src="item.thumbnailImg" />
+                        <img class="img-response filethumbnail" :src="GetfileName(item.thumbnailImg,item.Type)" />
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <h5 v-text="item.FileName"></h5>
@@ -357,7 +357,7 @@
             <div v-if="activeName=='d4'">
                 <div class="row filerow" v-for="item in files_d4">
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
-                        <img class="img-response filethumbnail" :src="item.thumbnailImg" />
+                        <img class="img-response filethumbnail" :src="GetfileName(item.thumbnailImg,item.Type)" />
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <h5 v-text="item.FileName"></h5>
@@ -443,7 +443,18 @@
             handleClick(tab, event) {
 
             },
-
+            GetfileName: function (fname, type) {
+                if (fname == "") {
+                    if (type.indexOf("doc") !=-1) {
+                        return "/resourse/Img/word_icon.png";
+                    }
+                    if (type.indexof("xls") != -1) {
+                        return "/resourse/Img/excel_icon.png";
+                    }
+                     return "/resourse/Img/pdf_icon.png";
+                }
+                return fname;
+            },
             CollectDesk: function () {
                 this.$http({           //调用接口
                     method: 'POST',

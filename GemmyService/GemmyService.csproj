@@ -345,7 +345,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="resourse\Img\detail_icon.png" />
+    <Content Include="resourse\Img\excel_icon.png" />
     <Content Include="resourse\Img\newbg.82899ecd.jpg" />
+    <Content Include="resourse\Img\pdf_icon.png" />
+    <Content Include="resourse\Img\word_icon.png" />
     <Content Include="resourse\office\fileimg.png" />
     <Content Include="resourse\other\collect1.png" />
     <Content Include="resourse\other\collect0.png" />
