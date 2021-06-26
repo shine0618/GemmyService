@@ -344,8 +344,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="resourse\Img\2D_icon.png" />
-    <Content Include="resourse\Img\3D_icon.png" />
     <Content Include="resourse\Img\detail_icon.png" />
     <Content Include="resourse\Img\excel_icon.png" />
     <Content Include="resourse\Img\newbg.82899ecd.jpg" />
@@ -398,7 +396,7 @@
     <Content Include="resourse\part_controlbox\JCB35N2C.png" />
     <Content Include="resourse\part_controlbox\JCB35N3.png" />
     <Content Include="resourse\part_controlbox\JCB35N4.png" />
-    <Content Include="resourse\part_controlbox\JCB35NH3.png" />
+    <Content Include="resourse\part_controlbox\JCB36MH3.png" />
     <Content Include="resourse\part_controlbox\JCB35NS1.png" />
     <Content Include="resourse\part_controlbox\JCB35NS2.png" />
     <Content Include="resourse\part_column\1.png" />
