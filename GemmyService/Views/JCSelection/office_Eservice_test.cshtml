@@ -391,6 +391,12 @@
             </div>*@
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s7'">
+
+                    <div>
+                        <label>请输入您的方案名称</label>
+                        <input type="text" class="form-control searchInput" v-model="custmerName"  />
+                    </div>
+
                     <div>
                         <label>选择框架宽度</label>
                         <el-slider v-model="frameWidth"
@@ -543,7 +549,7 @@
             select_Powercable: "",
             select_PowercableMode: "",
             mouse_Powercable: "",
-            
+
 
             list_Color: null,
             list_Color_count: 0,
@@ -572,8 +578,9 @@
             text_customer_9: "",
 
 
-            MyCollectName: "",
 
+            MyCollectName: "", 
+            custmerName: "",//客户命名方案
             ControlBox_c1:"",//控制器筛选
 
             detailModel: {
@@ -616,6 +623,22 @@
         },
         methods: {
             saveConfigurations: function (event) {
+
+                
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    return;
+                });
+
+
                 this.$http({           //调用接口
                     method: 'POST',
                     url: "/JCSelection/saveConfigurations",
@@ -633,7 +656,7 @@
                         frameHeight: this.frameHeight,
                         langCode: this.langCode,
                         Type:"TS",
-                        custmerName:'',//客户命名方案
+                        custmerName: this.custmerName,//客户命名方案
                     }
                 }).then(function (response) {  //接口返回数据
 
@@ -904,7 +927,7 @@
                 }
             },
 
-            
+
 
             orderBtnClick: function (ordervalue) {
                 this.OrderValue = ordervalue;
@@ -967,7 +990,7 @@
                             this.select_HandSet = it.Id;
                             this.select_HandSetMode = it.Mode;
                         }
-                       
+
                     }, function (error) {
                         console.log(error);
                     })
@@ -978,7 +1001,7 @@
     OfficeStandards.initPage();
     OfficeStandards.getAllColumn();
 
-    this.productGuid = '@ViewBag.productGuid'; 
+    this.productGuid = '@ViewBag.productGuid';
     if (this.productGuid != undefined && this.productGuid != "") {
         OfficeStandards.getThisDesk(this.productGuid);
     }
