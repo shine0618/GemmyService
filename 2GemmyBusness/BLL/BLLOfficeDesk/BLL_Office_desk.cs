@@ -56,20 +56,23 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
            return  read_db.T_Product_office_desk.Where(x => x.deskGuid == Guid).FirstOrDefault();
         }
 
-        public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string langCode,string recommend,string searchText)
+        public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string langCode,string recommend,string searchText,string userName)
         {
 
 
            var query= from x in read_db.T_Product_office_desk
-                        join Tag in read_db.T_Product_office_text on x.deskTagKey equals Tag.textKay
-                        join ShortDes in read_db.T_Product_office_text on x.deskShortDescriptionKey equals ShortDes.textKay 
-                        where Tag.langCode==langCode
-                        where ShortDes.langCode ==langCode
+                        join Tag in read_db.T_Product_office_text  on x.deskTagKey equals Tag.textKay into dc
+                        from dci  in dc.DefaultIfEmpty()
+                        join ShortDes in read_db.T_Product_office_text on x.deskShortDescriptionKey equals ShortDes.textKay  into dd
+                        from ddi in dd.DefaultIfEmpty()
+                        
+                        where dci.langCode==langCode
+                        where ddi.langCode ==langCode
                         where x.deskType == Type
                         where x.deleteSign != 1
                         select new 
                         {
-                            //---t_base
+                            //---t_base //查找原因后发现是UpdateTime和JSON转换的原因
                             Id = x.Id,
                             verificationCode = x.verificationCode,
                             UpdateTime = x.UpdateTime,
@@ -94,8 +97,9 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                             deskJCRecommend = x.deskJCRecommend,
                             deskCreateByUser = x.deskCreateByUser,
 
-                            deskTag = Tag.textValue,
-                            deskShortDescription = ShortDes.textValue
+                            deskTag = dci.textValue,
+                            deskShortDescription = ddi.textValue,
+                            deskCustmoer = x.deskCustmoer,
 
                         };
 
@@ -104,10 +108,11 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             {
                 case "newProduct":query = query.Where(x => x.deskNewProduct == true);break;
                 case "jiecangProduct": query = query.Where(x => x.deskJCRecommend == true); break;
-
+                case "customer": query = query.Where(x => x.deskCustmoer == true && x.deskCreateByUser == userName);break;
 
                 //补充我的定制
                 default:
+                    query = null;
                     break;
             }
 
@@ -122,7 +127,19 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             foreach (var  model in query)
             {
                 string str = JsonConvert.SerializeObject(model);
-                list.Add(JsonToObject<T_Product_office_desk>(str));
+                //    T_Product_office_desk mmm = JsonToObject<T_Product_office_desk>(str);
+
+                T_Product_office_desk mmm = JsonConvert.DeserializeObject<T_Product_office_desk>(str);
+
+                if (mmm.deskTag==null)
+                {
+                    mmm.deskTag = "";
+                }
+                if(mmm.deskShortDescription==null)
+                {
+                    mmm.deskShortDescription = "";
+                }
+                list.Add(mmm);
             }
 
             return list;
@@ -133,7 +150,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         }
 
 
-        public T_Product_office_desk_detail GetT_Product_office_desk_detail(int desk_id,string langCode)
+    public T_Product_office_desk_detail GetT_Product_office_desk_detail(int desk_id,string langCode)
         {
             T_Product_office_desk_detail model =  read_db.T_Product_office_desk_detail.Where(x => x.T_Product_office_desk_Id == desk_id).FirstOrDefault();
             if(model!=null)
