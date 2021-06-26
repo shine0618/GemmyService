@@ -43,6 +43,26 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                         where x.Mode == desk.Mode || x.Mode == desk.ColumnType || x.Mode == desk.FootType || x.Mode == desk.SideBracketType || x.Mode == desk.FrameType
                         select x;
 
+            List<T_Office_Files> flist = new List<T_Office_Files>();
+            foreach(T_Office_Files f in query)
+            {
+                if(string.IsNullOrEmpty( f.thumbnailImg))
+                {
+                    if(f.Type.Contains("doc"))
+                    {
+                        f.thumbnailImg = "/resourse/Img/word_icon.png";
+                    }
+                    if(f.Type.Contains("excel"))
+                    {
+                        f.thumbnailImg = "/resourse/Img/excel_icon.png";
+                    }
+
+                    f.thumbnailImg = "/resourse/Img/pdf_icon.png";
+
+                }
+
+                flist.Add(f);
+            }
 
 
             return query.ToList();

@@ -310,8 +310,8 @@
 
             <div v-if="activeName=='d2'" class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2">
-                    @*<img class="img-response" style="width:80%;max-width:300px" src="~/resourse/office/fileimg.png" />*@
-                    2D
+                    <img class="img-response" style="width:80%;max-width:300px" src="/resourse/Img/2D_icon.png" />
+                    
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div style="margin-bottom:15px;" v-for="item in files_d2_2D">
@@ -322,8 +322,7 @@
 
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-2">
-                    @*<img class="img-response" style="width:80%;max-width:300px" src="~/resourse/office/fileimg.png" />*@
-                    3D
+                    <img class="img-response" style="width:80%;max-width:300px" src="/resourse/Img/3D_icon.png" />
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div style="margin-bottom:15px;" v-for="item in files_d2_3D">
@@ -444,15 +443,21 @@
 
             },
             GetfileName: function (fname, type) {
-                if (fname == "") {
-                    if (type.indexOf("doc") !=-1) {
-                        return "/resourse/Img/word_icon.png";
-                    }
-                    if (type.indexof("xls") != -1) {
-                        return "/resourse/Img/excel_icon.png";
-                    }
-                     return "/resourse/Img/pdf_icon.png";
-                }
+                //if (fname == "") {
+
+                //    var str = type;
+                //    if (str.indexOf("doc") != '-1');
+                //    {
+                //        return "/resourse/Img/word_icon.png";
+                //    }
+                //    if (str.indexOf("xls") != '-1');
+                //    {
+                //        return "/resourse/Img/excel_icon.png";
+                //    }
+                //     return "/resourse/Img/pdf_icon.png";
+                //}
+
+                console.log(fname);
                 return fname;
             },
             CollectDesk: function () {
