@@ -630,45 +630,52 @@
                     cancelButtonText: '取消',
                     
                 }).then(() => {
-                    this.$message({
-                        type: 'success',
-                        message: '删除成功!'
-                    });
+
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCSelection/saveConfigurations",
+                        params: {
+
+                            select_columnMode: this.select_columnMode,
+                            select_frameMode: this.select_frameMode,
+                            select_footMode: this.select_footMode,
+                            select_SideBracketMode: this.select_SideBracketMode,
+                            select_ColorMode: this.select_ColorMode,
+                            select_ControlBoxMode: this.select_ControlBoxMode,
+                            select_HandSetMode: this.select_HandSetMode,
+                            select_PowercableMode: this.select_PowercableMode,
+                            frameWidth: this.frameWidth,
+                            frameHeight: this.frameHeight,
+                            langCode: this.langCode,
+                            Type: "TS",
+                            custmerName: this.custmerName,//客户命名方案
+                        }
+                    }).then(function (response) {  //接口返回数据
+
+                        if (response.body.msgType == "true") {
+                            this.$message({
+                                type: 'success',
+                                message: '添加成功!'
+                            });
+                        }
+                        else {
+                            //失败
+                            this.$message({
+                                type: 'error',
+                                message: response.body.msg
+                            });
+                        }
+                    }, function (error) {
+                        console.log(error);
+                    })
+
+                    
                 }).catch(() => {
                     return;
                 });
 
 
-                this.$http({           //调用接口
-                    method: 'POST',
-                    url: "/JCSelection/saveConfigurations",
-                    params: {
-
-                        select_columnMode: this.select_columnMode,
-                        select_frameMode: this.select_frameMode,
-                        select_footMode: this.select_footMode,
-                        select_SideBracketMode: this.select_SideBracketMode,
-                        select_ColorMode: this.select_ColorMode,
-                        select_ControlBoxMode: this.select_ControlBoxMode,
-                        select_HandSetMode: this.select_HandSetMode,
-                        select_PowercableMode: this.select_PowercableMode,
-                        frameWidth: this.frameWidth,
-                        frameHeight: this.frameHeight,
-                        langCode: this.langCode,
-                        Type:"TS",
-                        custmerName: this.custmerName,//客户命名方案
-                    }
-                }).then(function (response) {  //接口返回数据
-
-                    if (response.body == "true") {
-                        //成功
-                    }
-                    else {
-                        //失败
-                    }
-                }, function (error) {
-                    console.log(error);
-                })
+                
 
             },
             nextStep: function(event) {

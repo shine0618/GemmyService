@@ -428,10 +428,11 @@ namespace GemmyService.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult saveConfigurations(string select_columnMode, string select_frameMode, string select_footMode, string select_SideBracketMode, string select_ColorMode, string select_ControlBoxMode, string select_HandSetMode, 
-            string select_PowercableMode, string frameWidth, string frameHeight, string langCode,string Type,string custmerName)
+        public JsonResult saveConfigurations(string select_columnMode, string select_frameMode, string select_footMode, string select_SideBracketMode, string select_ColorMode, string select_ControlBoxMode, string select_HandSetMode,
+            string select_PowercableMode, string frameWidth, string frameHeight, string langCode, string Type, string custmerName)
         {
-            
+            string msgType = string.Empty;
+            string msg = string.Empty;
             //登录权限验证
             if (Session["emailName"] != null && Session["emailName"].ToString() != "")
             {
@@ -441,104 +442,124 @@ namespace GemmyService.Controllers
                 string pname = Session["emailName"].ToString();
                 T_Product_office_desk de = new T_Product_office_desk();
                 string mode = select_columnMode.Replace("-", "");
-                mode = mode.Substring(mode.Length - 4, mode.Length);
+                mode = mode.Substring(mode.Length - 4, 4);
                 de.deskCustmoer = true;
                 de.deskCreateByUser = pname;
-                de.deskSerialName = string.Format("{0}", "JC35"+Type+"-"+mode+"-"+select_footMode.Substring(select_footMode.Length-3,select_footMode.Length)+"-"+
-                    select_frameMode.Substring(select_frameMode.Length-5,select_frameMode.Length)+"-"+select_SideBracketMode.Substring(select_SideBracketMode.Length-4,select_SideBracketMode.Length));
+                de.deskSerialName = string.Format("{0}", "JC35" + Type + "-" + mode + "-" + select_footMode.Substring(select_footMode.Length - 3, select_footMode.Length - 3) + "-" +
+                    select_frameMode.Substring(select_frameMode.Length - 5, select_frameMode.Length - 5) + "-" + select_SideBracketMode.Replace("SIDE", ""));
                 de.deskImgUrl = "/resourse/desk_TS_picture/effectImg1.png";
-                de.deskMaxLoad = Convert.ToDouble( column.MaxLoad);
+                de.deskMaxLoad = Convert.ToDouble(column.MaxLoad);
                 de.deskNewProduct = false;
                 de.deskJCRecommend = false;
-                de.verificationCode = BLL_Ofiice_Configuration.CreateConfigurationCode(de.deskGuid,false,pname,Type);
-                
+                de.verificationCode = BLL_Ofiice_Configuration.CreateConfigurationCode(de.deskGuid, false, pname, Type, mode);
+
                 int deskid = bll_desk.AddT_Product_office_desk(de);
-                if(deskid<1)
+                if (deskid < 1)
                 {
                     //失败
+                    msgType = "false";
+                    msg = "添加桌子失败";
                 }
 
-                T_Product_office_desk_detail dd = new T_Product_office_desk_detail();
-                dd.T_Product_office_desk_Id = deskid;
-                dd.deskGuid = de.deskGuid;
-                dd.ColumnType = select_columnMode;
-                dd.FrameType = select_frameMode;
-                dd.FootType = select_footMode;
-                dd.SideBracketType = select_SideBracketMode;
-                dd.select_ColorMode = select_ColorMode; //颜色
-                dd.ControlboxInfo = select_ControlBoxMode;
-                dd.HandsetType = select_HandSetMode;
-                dd.select_PowercableMode = select_PowercableMode; //电源线
-                dd.frameWidth = frameWidth; //宽度
-                dd.frameHeight = frameHeight; //高度
-                dd.Mode = "JC35" + Type + "-" + mode;
-                dd.Type = mode;
-                dd.Level =int.Parse( mode.Substring(mode.Length - 2, 1));
-                string form = "";
-                switch (mode.Substring(0,1))
+                else
                 {
-                    case "s":  
-                        form = "square";
-                                break;
-                    case "c":
-                        form = "round";
-                        break;
-                    case "r":
-                        form = "rectangle";
-                        break;
-                    case "e":
-                        form = "ellipse";
-                        break;
+                    T_Product_office_desk_detail dd = new T_Product_office_desk_detail();
+                    dd.T_Product_office_desk_Id = deskid;
+                    dd.deskGuid = de.deskGuid;
+                    dd.ColumnType = select_columnMode;
+                    dd.FrameType = select_frameMode;
+                    dd.FootType = select_footMode;
+                    dd.SideBracketType = select_SideBracketMode;
+                    dd.select_ColorMode = select_ColorMode; //颜色
+                    dd.ControlboxType = select_ControlBoxMode;
+                    dd.HandsetType = select_HandSetMode;
+                    dd.select_PowercableMode = select_PowercableMode; //电源线
+                    dd.frameWidth = frameWidth; //宽度
+                    dd.frameHeight = frameHeight; //高度
+                    dd.Mode = "JC35" + Type + "-" + mode;
+                    dd.Type = mode;
+                    dd.Level = int.Parse(mode.Substring(mode.Length - 2, 1));
+                    string form = "";
+                    switch (mode.Substring(0, 1))
+                    {
+                        case "s":
+                            form = "square";
+                            break;
+                        case "c":
+                            form = "round";
+                            break;
+                        case "r":
+                            form = "rectangle";
+                            break;
+                        case "e":
+                            form = "ellipse";
+                            break;
 
+                    }
+                    dd.Form = form;
+                    dd.Size_Out = column.Size_Out;
+                    dd.Size_Middle = column.Size_Middle;
+                    dd.Size_Inside = column.Size_Inside;
+                    dd.StrokeLength = column.StrokeLength;
+                    dd.LowestPosition = column.LowestPosition;
+                    dd.HighestPosition = column.HighestPosition;
+                    dd.MaxLoad = column.MaxLoad;
+                    dd.LoadCapacity = column.LoadCapacity;
+                    dd.Speed = column.Speed;
+                    string powertype = "";
+                    switch (Type)
+                    {
+                        case "TO":
+                            powertype = "SingleMotor";
+                            break;
+                        case "TS":
+                            powertype = "DoubleMotor";
+                            break;
+                        case "TT":
+                            powertype = "ThreeMotor";
+                            break;
+                        case "TF":
+                            powertype = "FourMotor";
+                            break;
+                    }
+                    dd.PowerType = powertype;
+                    dd.configurationNo = de.verificationCode;
+                    dd.DescriptionIndex = dd.T_Product_office_desk_Id + 100;
+                    dd.introductionIndex = dd.T_Product_office_desk_Id + 200;
+
+
+                    int suc = bll_desk.AddT_Product_office_desk_detail(dd);
+
+
+
+                    T_Product_office_desk_customer cus = new T_Product_office_desk_customer();
+                    cus.deskGuid = de.deskGuid;
+                    cus.langCode = langCode;
+                    cus.configurationName = custmerName;
+                    cus.customerUserName = pname;
+
+                    int suc_cus = bll_customer.AddT_Product_office_desk_customer(cus);
+
+                    //成功
+                    msgType = "true";
                 }
-                dd.Form = form;
-                dd.Size_Out = column.Size_Out;
-                dd.Size_Middle = column.Size_Middle;
-                dd.Size_Inside = column.Size_Inside;
-                dd.StrokeLength = column.StrokeLength;
-                dd.LowestPosition = column.LowestPosition;
-                dd.HighestPosition = column.HighestPosition;
-                dd.MaxLoad = column.MaxLoad;
-                dd.LoadCapacity = column.LoadCapacity;
-                dd.Speed = column.Speed;
-                string powertype = "";
-                switch (Type)
-                {
-                    case "TO":powertype = "SingleMotor";
-                        break;
-                    case "TS":
-                        powertype = "DoubleMotor";
-                        break;
-                    case "TT":
-                        powertype = "ThreeMotor";
-                        break;
-                    case "TF":
-                        powertype = "FourMotor";
-                        break;
-                }
-                dd.PowerType = powertype;
-                dd.configurationNo= BLL_Ofiice_Configuration.CreateConfigurationCode(de.deskGuid, false, pname, Type);
-                dd.DescriptionIndex = dd.T_Product_office_desk_Id + 100;
-                dd.introductionIndex = dd.T_Product_office_desk_Id + 200;
 
-
-                int suc =   bll_desk.AddT_Product_office_desk_detail(dd);
-
-
-
-                T_Product_office_desk_customer cus = new T_Product_office_desk_customer();
-                cus.deskGuid = de.deskGuid;
-                cus.langCode = langCode;
-                cus.configurationName = custmerName;
-                cus.customerUserName = pname;
-
-              int suc_cus = bll_customer.AddT_Product_office_desk_customer(cus);
 
 
             }
-
-
-            JsonResult jr = Json("", JsonRequestBehavior.AllowGet);
+            else
+            {
+                //失败 权限检查
+                msgType = "false";
+                msg = "请先登录";
+            }
+            var param =
+           new
+           {
+               type = msgType,
+               msg = msg,
+           };
+            JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }

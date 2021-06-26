@@ -11,19 +11,35 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
     {
         #region 配置号的生成
         private static BLL_Office_desk bll_desk = new BLL_Office_desk();
-        public static string CreateConfigurationCode(string guid, bool isStandard, string username, string Type)
+        public static string CreateConfigurationCode(string guid, bool isStandard, string username,string Type, string Mode)
         {
             string standard = "";
             standard = isStandard == true ? (standard = "S") : (standard = "C");
             string code = null;
             DateTime dt = getTime();
             string strdate = dt.ToString("yyyyMMdd");
-            T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(guid);
-            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id,"");
-            code += "JCP" + strdate + standard + username + Type + _T_Product_office_desk_detail.Type.Substring(0, 1) + _T_Product_office_desk_detail.Type.Substring(3, 1);
+         //   T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(guid);
+          //  T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id,"");
+
+
+
+            string ser = 
+            code += "JCP" + strdate + standard + GetSerialNo() + Type + Mode.Substring(0, 1) + Mode.Substring(3, 1);
+
+
+
             return code;
         }
 
+        public static long GetSerialNo()
+        {
+             byte[] buffer = Guid.NewGuid().ToByteArray();
+
+            return BitConverter.ToInt64(buffer, 0);
+
+        }
+
+       
         #region 时间转化成东八区
         /// <summary>
         /// 得到日期的字符串
