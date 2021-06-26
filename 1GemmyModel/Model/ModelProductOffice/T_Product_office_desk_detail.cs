@@ -237,6 +237,29 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 侧板信息
         /// </summary>
         public string SideBracketInfo { get; set; }
+
+        /// <summary>
+        /// 选择的颜色
+        /// </summary>
+        public string select_ColorMode { get; set; }
+
+        /// <summary>
+        /// 电源线
+        /// </summary>
+        public string select_PowercableMode { get; set; }
+
+        /// <summary>
+        /// 宽度
+        /// </summary>
+        public string  frameWidth { get; set; }
+        /// <summary>
+        /// 高度
+        /// </summary>
+        public string frameHeight { get; set; }
+
+
+
+
         /// <summary>
         /// 含税成本
         /// </summary>
@@ -329,6 +352,14 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// 添加方案的用户名
         /// </summary>
         public string AddUserName { get; set; }
+
+
+        /// <summary>
+        /// 客户命名的桌子名称
+        /// </summary>
+        public string configurationName { get; set; }
+
+        public string deskGuid { get; set; }
 
         public int T_Product_office_desk_Id { get; set; }
     }

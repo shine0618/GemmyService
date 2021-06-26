@@ -21,6 +21,7 @@ namespace GemmyService.Controllers
         private BLL_Office_File bll_file = new BLL_Office_File();
         private BLL_Office_Color bll_color = new BLL_Office_Color();
         private BLL_Office_desk_collect bll_collect = new BLL_Office_desk_collect();
+        private BLL_Office_desk_customer bll_customer = new BLL_Office_desk_customer();
         #endregion
 
 
@@ -423,35 +424,62 @@ namespace GemmyService.Controllers
 
 
         /// <summary>
-        /// 新增配置
+        /// 新增配置 让客户为这个桌子命名
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         public JsonResult saveConfigurations(string select_columnMode, string select_frameMode, string select_footMode, string select_SideBracketMode, string select_ColorMode, string select_ControlBoxMode, string select_HandSetMode, 
-            string select_PowercableMode, string frameWidth, string frameHeight, string langCode)
+            string select_PowercableMode, string frameWidth, string frameHeight, string langCode,string Type,string custmerName)
         {
+            
             //登录权限验证
             if (Session["emailName"] != null && Session["emailName"].ToString() != "")
             {
+                T_Part_office_Column column = bll_desk.GetT_Part_office_Column(select_columnMode, langCode);
 
                 //数据有效性验证
                 string pname = Session["emailName"].ToString();
+                T_Product_office_desk de = new T_Product_office_desk();
+                de.deskCustmoer = true;
+                de.deskCreateByUser = pname;
+                de.deskSerialName = string.Format("{0}", "JC35TS");
+                de.deskImgUrl = "/resourse/desk_TS_picture/effectImg1.png";
+                de.deskMaxLoad = Convert.ToDouble( column.MaxLoad);
+          
+                int deskid = bll_desk.AddT_Product_office_desk(de);
+                if(deskid<1)
+                {
+                    //失败
+                }
+
                 T_Product_office_desk_detail dd = new T_Product_office_desk_detail();
+                dd.T_Product_office_desk_Id = deskid;
+                dd.deskGuid = de.deskGuid;
                 dd.ColumnType = select_columnMode;
                 dd.FrameType = select_frameMode;
                 dd.FootType = select_footMode;
                 dd.SideBracketType = select_SideBracketMode;
-          //      dd.col = select_ColorMode; //颜色
+                dd.select_ColorMode = select_ColorMode; //颜色
                 dd.ControlboxInfo = select_ControlBoxMode;
                 dd.HandsetType = select_HandSetMode;
-            //    dd.po = select_PowercableMode; //电源线
-              //  dd.fr = frameWidth; //宽度
-              //  dd.ColumnType = frameHeight; //高度
+                dd.select_PowercableMode = select_PowercableMode; //电源线
+                dd.frameWidth = frameWidth; //宽度
+                dd.frameHeight = frameHeight; //高度
+
+              
 
 
-                T_Product_office_desk de = new T_Product_office_desk();
+              int suc =   bll_desk.AddT_Product_office_desk_detail(dd);
 
-                bll_desk.AddT_Product_office_desk_detail(de, dd);
+
+
+                T_Product_office_desk_customer cus = new T_Product_office_desk_customer();
+                cus.deskGuid = de.deskGuid;
+                cus.langCode = langCode;
+                cus.configurationName = custmerName;
+                cus.customerUserName = pname;
+
+              int suc_cus = bll_customer.AddT_Product_office_desk_customer(cus);
 
 
             }

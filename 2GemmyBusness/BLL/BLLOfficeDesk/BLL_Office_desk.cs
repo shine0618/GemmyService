@@ -16,17 +16,38 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
         #region Add desk
 
-        public int AddT_Product_office_desk_detail(T_Product_office_desk desk, T_Product_office_desk_detail detail)
+        public int AddT_Product_office_desk_detail(T_Product_office_desk_detail detail)
         {
             int i = base.AddEntities<T_Product_office_desk_detail>(detail);
 
-            return base.AddEntities<T_Product_office_desk>(desk);
 
-
-
+            return i;
 
         }
 
+        /// <summary>
+        /// 添加桌子并返回桌子的ID
+        /// </summary>
+        /// <param name="desk"></param>
+        /// <returns></returns>
+        public int AddT_Product_office_desk(T_Product_office_desk desk)
+        {
+            string guid = desk.deskGuid;
+            if (string.IsNullOrEmpty(guid))
+            {
+                return -2;
+            }
+            int suc = base.AddEntities<T_Product_office_desk>(desk);
+            if(suc>0)
+            {
+                var q = read_db.T_Product_office_desk.Where(x => x.deskGuid == guid).FirstOrDefault();
+                return q.Id;
+
+                    
+            }
+            return 0;
+
+        }
         #endregion
 
 
@@ -416,6 +437,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         public List<T_Part_office_Column> GetT_Part_office_Column()
         {
             var query = from x in read_db.T_Part_office_Column
+                        where x.deleteSign != 1
                         select x;
 
             return query.ToList();
@@ -424,6 +446,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         public List<T_Part_office_Frame> GetT_Part_office_Frame()
         {
             var query = from x in read_db.T_Part_office_Frame
+                        where x.deleteSign!=1
                         select x;
 
             return query.ToList();
@@ -431,6 +454,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         public List<T_Part_office_Foot> GetT_Part_office_Foot()
         {
             var query = from x in read_db.T_Part_office_Foot
+                        where x.deleteSign != 1
                         select x;
 
             return query.ToList();
@@ -438,6 +462,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         public List<T_Part_office_SideBracket> GetT_Part_office_SideBracket()
         {
             var query = from x in read_db.T_Part_office_SideBracket
+                        where x.deleteSign != 1
                         select x;
 
             return query.ToList();
@@ -445,6 +470,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         public List<T_Part_office_ControlBox> GetT_Part_office_ControlBox()
         {
             var query = from x in read_db.T_Part_office_ControlBox
+                        where x.deleteSign != 1
                         select x;
 
             return query.ToList();
@@ -454,6 +480,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         public List<T_Part_office_HandSet> GetT_Part_office_HandSet()
         {
             var query = from x in read_db.T_Part_office_HandSet
+                        where x.deleteSign != 1
                         select x;
 
             return query.ToList();
@@ -461,6 +488,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         public List<T_Part_office_Powercable> GetT_Part_office_Powercable()
         {
             var query = from x in read_db.T_Part_office_Powercable
+                        where x.deleteSign != 1
                         select x;
 
             return query.ToList();

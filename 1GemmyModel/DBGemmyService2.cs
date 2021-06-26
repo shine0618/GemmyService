@@ -26,10 +26,15 @@ namespace _1GemmyModel
         public virtual DbSet<T_USER_UserInfo> T_USER_UserInfo { get; set; }
 
         public virtual DbSet<T_USER_Salt> T_USER_Salt { get; set; }
-        
+        public virtual DbSet<T_USER_Permission> T_USER_Permission { get; set; }
+        public virtual DbSet<T_USER_Permission_menus> T_USER_Permission_menus { get; set; }
+
+        public virtual DbSet<T_USER_UserCompanyInfo> T_USER_UserCompanyInfo { get; set; }
 
         public virtual DbSet<T_Product_office_desk> T_Product_office_desk { get; set; }
         public virtual DbSet<T_Product_office_desk_detail> T_Product_office_desk_detail { get; set; }
+
+        public virtual DbSet<T_Product_office_desk_customer> T_Product_office_desk_customer { get; set; }
 
         public virtual DbSet<T_Product_office_text> T_Product_office_text { get; set; }
         public virtual DbSet<T_Part_office_Column> T_Part_office_Column { get; set; }
@@ -44,8 +49,12 @@ namespace _1GemmyModel
         public virtual DbSet<T_Office_Color> T_Office_Color { get; set; }
         public virtual DbSet<T_Part_office_ControlBox> T_Part_office_ControlBox { get; set; }
         public virtual DbSet<T_Part_office_HandSet> T_Part_office_HandSet { get; set; }
-        public virtual DbSet<T_USER_UserCompanyInfo> T_USER_UserCompanyInfo { get; set; }
+
         public virtual DbSet<T_Part_office_Powercable> T_Part_office_Powercable { get; set; }
+
+
+        
+
         /// <summary>
         /// 部件的描述
         /// </summary>

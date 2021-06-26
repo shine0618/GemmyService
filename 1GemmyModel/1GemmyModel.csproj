@@ -170,6 +170,7 @@
     <Compile Include="Model\LanguageType.cs" />
     <Compile Include="Model\ModelProductOffice\T_Part_office_Powercable.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_desk.cs" />
+    <Compile Include="Model\ModelProductOffice\T_Product_office_desk_customer.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_desk_detail.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_text.cs" />
     <Compile Include="Model\ModelSystem\T_SYS_Language.cs" />
