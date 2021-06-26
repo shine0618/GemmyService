@@ -440,12 +440,18 @@ namespace GemmyService.Controllers
                 //数据有效性验证
                 string pname = Session["emailName"].ToString();
                 T_Product_office_desk de = new T_Product_office_desk();
+                string mode = select_columnMode.Replace("-", "");
+                mode = mode.Substring(mode.Length - 4, mode.Length);
                 de.deskCustmoer = true;
                 de.deskCreateByUser = pname;
-                de.deskSerialName = string.Format("{0}", "JC35TS");
+                de.deskSerialName = string.Format("{0}", "JC35"+Type+"-"+mode+"-"+select_footMode.Substring(select_footMode.Length-3,select_footMode.Length)+"-"+
+                    select_frameMode.Substring(select_frameMode.Length-5,select_frameMode.Length)+"-"+select_SideBracketMode.Substring(select_SideBracketMode.Length-4,select_SideBracketMode.Length));
                 de.deskImgUrl = "/resourse/desk_TS_picture/effectImg1.png";
                 de.deskMaxLoad = Convert.ToDouble( column.MaxLoad);
-          
+                de.deskNewProduct = false;
+                de.deskJCRecommend = false;
+                de.verificationCode = BLL_Ofiice_Configuration.CreateConfigurationCode(de.deskGuid,false,pname,Type);
+                
                 int deskid = bll_desk.AddT_Product_office_desk(de);
                 if(deskid<1)
                 {
@@ -465,11 +471,58 @@ namespace GemmyService.Controllers
                 dd.select_PowercableMode = select_PowercableMode; //电源线
                 dd.frameWidth = frameWidth; //宽度
                 dd.frameHeight = frameHeight; //高度
+                dd.Mode = "JC35" + Type + "-" + mode;
+                dd.Type = mode;
+                dd.Level =int.Parse( mode.Substring(mode.Length - 2, 1));
+                string form = "";
+                switch (mode.Substring(0,1))
+                {
+                    case "s":  
+                        form = "square";
+                                break;
+                    case "c":
+                        form = "round";
+                        break;
+                    case "r":
+                        form = "rectangle";
+                        break;
+                    case "e":
+                        form = "ellipse";
+                        break;
 
-              
+                }
+                dd.Form = form;
+                dd.Size_Out = column.Size_Out;
+                dd.Size_Middle = column.Size_Middle;
+                dd.Size_Inside = column.Size_Inside;
+                dd.StrokeLength = column.StrokeLength;
+                dd.LowestPosition = column.LowestPosition;
+                dd.HighestPosition = column.HighestPosition;
+                dd.MaxLoad = column.MaxLoad;
+                dd.LoadCapacity = column.LoadCapacity;
+                dd.Speed = column.Speed;
+                string powertype = "";
+                switch (Type)
+                {
+                    case "TO":powertype = "SingleMotor";
+                        break;
+                    case "TS":
+                        powertype = "DoubleMotor";
+                        break;
+                    case "TT":
+                        powertype = "ThreeMotor";
+                        break;
+                    case "TF":
+                        powertype = "FourMotor";
+                        break;
+                }
+                dd.PowerType = powertype;
+                dd.configurationNo= BLL_Ofiice_Configuration.CreateConfigurationCode(de.deskGuid, false, pname, Type);
+                dd.DescriptionIndex = dd.T_Product_office_desk_Id + 100;
+                dd.introductionIndex = dd.T_Product_office_desk_Id + 200;
 
 
-              int suc =   bll_desk.AddT_Product_office_desk_detail(dd);
+                int suc =   bll_desk.AddT_Product_office_desk_detail(dd);
 
 
 
