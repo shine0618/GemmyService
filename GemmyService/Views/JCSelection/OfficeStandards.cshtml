@@ -6,25 +6,25 @@
 <style>
     #selectTypeBox {
         min-height: 580px;
-        height: calc(100vh - 210px);
+        height: calc(100vh - 205px);
         overflow: auto;
     }
-    #OfficeStandards_box
-    {
-        padding:0;
+
+    #OfficeStandards_box {
+        padding: 0;
     }
-    .service-sidebar__category
-    {
-        padding:20px 20px; 
+
+    .service-sidebar__category {
+        padding: 20px 20px;
     }
-   /* .service-sidebar__category-list li a {
+    /* .service-sidebar__category-list li a {
         font-weight:800;
     }*/
-   
-   .changeFont{
-       color:#000000;
-       font-weight:900;
-   }
+
+    .changeFont {
+        color: #000000;
+        font-weight: 900;
+    }
 </style>
 <div id="OfficeStandards">
 
@@ -39,7 +39,7 @@
         </div><!-- /.container -->
     </section><!-- /.page-header -->
 
-    <section class="blog-page pt-20 pb-40">
+    <section class="blog-page pt-20 pb-20">
         <div class="container">
             <div class="row" id="OfficeStandards_box">
 
@@ -56,7 +56,7 @@
                                 <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=jiecangProduct"><span v-if="recommend=='jiecangProduct'" class="changeFont">{{JCRecommendName}}</span><span v-else>{{JCRecommendName}}</span></a></li>
                                 <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=myCollect"><span v-if="recommend=='myCollect'" class="changeFont">{{MyCollectName}}</span><span v-else>{{MyCollectName}}</span></a></li>
                                 <li><a href="OfficeStandards?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=customer"><span v-if="recommend=='customer'" class="changeFont">{{CustomerName}}</span><span v-else>{{CustomerName}}</span></a></li>
-                             @*   <li><a href="/JCSelection/office_Eservice_test">{{t_OfficeStandards_2}}</a></li>*@
+                                @*   <li><a href="/JCSelection/office_Eservice_test">{{t_OfficeStandards_2}}</a></li>*@
                             </ul><!-- /.list-unstyled -->
                         </div><!-- /.blog-sidebar__box -->
 
@@ -68,16 +68,16 @@
                             </ul><!-- /.list-unstyled -->
                         </div><!-- /.blog-sidebar__box -->
                     </div><!-- /.blog-sidebar -->
-
                     <!--<div class="blog-sidebar">
                         <div class="blog-sidebar__box blog-sidebar__category service-sidebar__category">
-                           
-                        </div>--><!-- /.blog-sidebar__box -->
+
+                        </div>-->
+                    <!-- /.blog-sidebar__box -->
                     <!--</div>--><!-- /.blog-sidebar -->
 
 
                 </div><!-- /.col-lg-4 -->
-                <div class="col-lg-9 col-md-9" >
+                <div class="col-lg-9 col-md-9">
                     <div class="row">
                         <div class="col-lg-12" style="margin-bottom:10px;">
                             <button class="orderbtn thm-btn" v-on:click="orderBtnClick('deskNewProductNumber')">{{deskNewProductNumber}}<span style="margin-left:8px" v-if="OrderValue=='deskNewProductNumber'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='deskNewProductNumber'&&Order==2">↓</span></button>
@@ -87,7 +87,7 @@
                             <button class="orderbtn thm-btn" v-on:click="orderBtnClick('deskMaxLoad')">{{deskMaxLoad}}<span style="margin-left:8px" v-if="OrderValue=='deskMaxLoad'&&Order==1">↑</span><span style="margin-left:8px" v-if="OrderValue=='deskMaxLoad'&&Order==2">↓</span></button>
                         </div>
                     </div>
-                    <div class="row" id="selectTypeBox">                                        
+                    <div class="row" id="selectTypeBox">
                         <div class="col-lg-4 col-md-6 mb-20" v-for="item in deskList">
                             <div class="blog-card" v-on:click="window.location='/JCSelection/ProductDetail?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productName='+item.deskSerialName+'&productGuid='+item.deskGuid">
                                 <div class="blog-card__image">
@@ -120,6 +120,11 @@
     </section><!-- /.blog-page -->
 </div>
 
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+    })
+</script>
 
 <script>
 
@@ -207,7 +212,7 @@
                 })
             },
             orderBtnClick: function (ordervalue) {
-             
+
                 this.OrderValue = ordervalue;
                 if (this.Order == 1) {
                     this.Order = 2;
