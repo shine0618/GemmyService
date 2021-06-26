@@ -92,7 +92,7 @@
                             <div class="blog-card" v-on:click="window.location='/JCSelection/ProductDetail?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productName='+item.deskSerialName+'&productGuid='+item.deskGuid">
                                 <div class="blog-card__image">
                                     <span v-if="item.deskTag!=''">{{item.deskTag}}</span>
-                                    <img class=".img-responsive" style="height: 240px;" src="~/resourse/page/JC35TS-R13SF.png" />
+                                    <img class=".img-responsive" style="height: 240px;" :src="item.deskImgUrl" />
                                 </div><!-- /.blog-card__image -->
                                 <div class="blog-card__content">
                                     <div class="blog-card__meta">
