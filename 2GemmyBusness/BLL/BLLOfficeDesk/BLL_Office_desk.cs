@@ -122,6 +122,20 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 case "newProduct":query = query.Where(x => x.deskNewProduct == true);break;
                 case "jiecangProduct": query = query.Where(x => x.deskJCRecommend == true); break;
                 case "customer": query = query.Where(x => x.deskCustmoer == true && x.deskCreateByUser == userName);break;
+                case "myCollect":
+                    //去看收藏表
+
+                    List<T_Office_desk_collect> list_collect = bll_collect.GetT_Office_desk_collect(userName);
+                    List<int> str_collect = new List<int>();
+                    foreach(T_Office_desk_collect item in list_collect)
+                    {
+                        str_collect.Add(item.DeskId);
+                    }
+                   
+                    query = query.Where(x => str_collect.Contains(x.Id));
+
+
+
 
                     break;
                 case "all": break;
