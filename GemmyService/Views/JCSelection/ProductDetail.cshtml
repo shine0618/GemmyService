@@ -524,9 +524,11 @@
             },
             downloadfile: function (url,fname,type) {
 
-                if (type == ".dwg") {
+                if (type == ".dwg" || type ==".stp") {
                     fname = fname + type;
                 }
+
+
                 console.log(url);
                 //window.open(url);   //该方法只能下载比如xls等不能直接打开的文件，对于png之类的文件会直接打开而非下载
 
