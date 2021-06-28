@@ -490,6 +490,7 @@ var nav_langu_box = new Vue({
                     pagecode: lang,
                 }
             }).then(function (response) {  //接口返回数据
+                //console.log(response);
                 this.defaultLanguage = response.body.LanguageShortDesript;
                 this.defaultLanguageCode = response.body.LanguageCode;
             }, function (error) {
@@ -510,7 +511,7 @@ var nav_langu_box = new Vue({
                     keys: '123',
                 }
             }).then(function (response) {  //接口返回数据
-                //  console.log(response);
+                  //console.log(response);
                 this.list = response.body;
             }, function (error) {
                 console.log(error);
