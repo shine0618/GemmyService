@@ -296,7 +296,9 @@ namespace GemmyService.Controllers
                 Session["emailName"] = "";
             }
             Session.Timeout = 9600;
-            ViewBag.productGuid = productGuid;            
+            ViewBag.productGuid = productGuid;   
+            
+
             return View();
         }
 
@@ -358,25 +360,27 @@ namespace GemmyService.Controllers
 
         }
         [HttpGet]
-        public JsonResult GetOfficeFrame()
+        public JsonResult GetOfficeFrame(string select_columnMode)
         {
-            List<T_Part_office_Frame> list = bll_desk.GetT_Part_office_Frame();
+            List<T_Part_office_Frame> list = bll_desk.GetT_Part_office_Frame(select_columnMode);
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
         [HttpGet]
-        public JsonResult GetOfficeFoot()
+        public JsonResult GetOfficeFoot(string select_columnMode)
         {
-            List<T_Part_office_Foot> list = bll_desk.GetT_Part_office_Foot();
+            List<T_Part_office_Foot> list = bll_desk.GetT_Part_office_Foot( select_columnMode);
+
+
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
         [HttpGet]
-        public JsonResult GetOfficeSideBracket()
+        public JsonResult GetOfficeSideBracket(string select_frame)
         {
-            List<T_Part_office_SideBracket> list = bll_desk.GetT_Part_office_SideBracket();
+            List<T_Part_office_SideBracket> list = bll_desk.GetT_Part_office_SideBracket(select_frame);
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
