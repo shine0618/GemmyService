@@ -454,8 +454,8 @@ namespace GemmyService.Controllers
                 de.deskType = Type;
                 de.deskCustmoer = true;
                 de.deskCreateByUser = pname;
-                de.deskSerialName = string.Format("{0}", "JC35" + Type + "-" + mode + "-" + select_footMode.Substring(select_footMode.Length - 3, select_footMode.Length - 3) + "-" +
-                    select_frameMode.Substring(select_frameMode.Length - 5, select_frameMode.Length - 5) + "-" + select_SideBracketMode.Replace("SIDE", ""));
+                de.deskSerialName = string.Format("{0}", "JC35" + Type + "-" + mode + "-" + select_footMode.Replace("JCF", "") + "-" +
+                    select_frameMode.Replace("FRAME", "") + "-" + select_SideBracketMode.Replace("SIDE", ""));
                 de.deskImgUrl = "/resourse/desk_TS_picture/effectImg1.png";
                 de.deskMaxLoad = Convert.ToDouble(column.MaxLoad);
                 de.deskNewProduct = false;

@@ -109,6 +109,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 case "newProduct":query = query.Where(x => x.deskNewProduct == true);break;
                 case "jiecangProduct": query = query.Where(x => x.deskJCRecommend == true); break;
                 case "customer": query = query.Where(x => x.deskCustmoer == true && x.deskCreateByUser == userName);break;
+                case "all":query = query.Where(x => x.deskCustmoer == false);break;
 
                 //补充我的定制
                 default:

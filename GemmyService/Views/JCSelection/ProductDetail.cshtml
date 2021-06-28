@@ -45,7 +45,14 @@
         width: 120px;
         height: 120px;
     }
-
+    .selectColor_span {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        margin: 3px;
+        margin-left:150px;
+    }
     #FilesBox {
     }
     .filerow
@@ -230,7 +237,8 @@
                                          :label="text_detail_8"
                                          align="center">
                             <template #default="scope">
-                                <img v-if="scope.row.name!='1'" class="paramDatatableIMG img-response" :src="scope.row.tag" />                                
+                                <img v-if="scope.row.name!='1'" class="paramDatatableIMG img-response" :src="scope.row.tag" />
+                                <span v-if="scope.row.name=='1'" :style="{ 'background-color':scope.row.tag}" class="selectColor_span"></span>
                             </template>
                         </el-table-column>
 
