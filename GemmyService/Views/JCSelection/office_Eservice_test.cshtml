@@ -156,7 +156,6 @@
 
     <section class="about-three">
         <div class="container">
-            <h2>{{frameHeight}}</h2>
             <div class="row">
                 <div class="col-lg-12">
                     <!--<div class="block-title text-center">
@@ -454,8 +453,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <button @@click="nextStep" class="orderbtn thm-btn">下一步</button>
-                    <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''">完成配置</button>
-                    <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''" @@click="saveConfigurations()">保存配置</button>
+                   @* <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''">完成配置</button>*@
+                    <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''" @@click="saveConfigurations()">保存配置</button>
                 </div>
 
             </div>
@@ -506,6 +505,8 @@
 
             search1_column: '',//筛选的正装
 
+            defaultWidth: 0,
+            defaultHeight: 0,
             frameWidth: 600,
             frameHeight: 600,
 
@@ -616,6 +617,14 @@
                         break;
                     case "s5_3":
                         this.getAllPowercable();
+                        break;
+                    case "s7":
+                        if (this.defaultHeight != 0) {
+                            this.frameHeight = this.defaultHeight;
+                        }
+                        if (this.defaultWidth != 0) {
+                            this.frameWidth = this.defaultWidth;
+                        }
                         break;
                     //default:
                 }
@@ -1016,11 +1025,10 @@
 
                         if (this.T_Product_office_desk_detail.frameWidth != "") {
                             
-                            this.frameWidth = this.T_Product_office_desk_detail.frameWidth;
-                            console.log(this.frameWidth);
+                            this.defaultWidth = this.T_Product_office_desk_detail.frameWidth;
                         }
                         if (this.T_Product_office_desk_detail.frameHeight != "") {
-                            this.frameHeight = this.T_Product_office_desk_detail.frameHeight;
+                            this.defaultHeight = this.T_Product_office_desk_detail.frameHeight;
                         }
                         
 

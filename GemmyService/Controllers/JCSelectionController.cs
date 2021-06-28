@@ -112,22 +112,30 @@ namespace GemmyService.Controllers
         public JsonResult GetOfficeStards(string domain,string Type, string recommend, string Order,string OrderValue, string langCode,string searchText)
         {
 
-
-            List<T_Product_office_desk> list = bll_desk.GetT_Product_office_desk(Type, langCode,recommend,searchText);
-          
-            if(OrderValue!=null&&OrderValue!="")
+            List<T_Product_office_desk> list = new List<T_Product_office_desk>();
+            if (recommend=="customer"&&Session["emailName"]==null)
             {
-                if (Order == "2")//倒序
-                {
-                    list = list.OrderByDescending(DynamicLambda<T_Product_office_desk, double>(OrderValue)).ToList();
-                    
-                }
-                else
-                {
-                    list = list.OrderBy(DynamicLambda<T_Product_office_desk, double>(OrderValue)).ToList();
-                }
+                
             }
-          
+            else
+            {
+                list = bll_desk.GetT_Product_office_desk(Type, langCode, recommend, searchText, Session["emailName"].ToString());
+
+                if (OrderValue != null && OrderValue != "")
+                {
+                    if (Order == "2")//倒序
+                    {
+                        list = list.OrderByDescending(DynamicLambda<T_Product_office_desk, double>(OrderValue)).ToList();
+
+                    }
+                    else
+                    {
+                        list = list.OrderBy(DynamicLambda<T_Product_office_desk, double>(OrderValue)).ToList();
+                    }
+                }
+
+            }
+
 
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
@@ -443,6 +451,7 @@ namespace GemmyService.Controllers
                 T_Product_office_desk de = new T_Product_office_desk();
                 string mode = select_columnMode.Replace("-", "");
                 mode = mode.Substring(mode.Length - 4, 4);
+                de.deskType = Type;
                 de.deskCustmoer = true;
                 de.deskCreateByUser = pname;
                 de.deskSerialName = string.Format("{0}", "JC35" + Type + "-" + mode + "-" + select_footMode.Substring(select_footMode.Length - 3, select_footMode.Length - 3) + "-" +
