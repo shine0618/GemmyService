@@ -489,7 +489,8 @@ namespace GemmyService.Controllers
                     dd.select_PowercableMode = select_PowercableMode; //电源线
                     dd.frameWidth = frameWidth; //宽度
                     dd.frameHeight = frameHeight; //高度
-                    dd.Mode = "JC35" + Type + "-" + mode;
+                                                  // dd.Mode = "JC35" + Type + "-" + mode;
+                    dd.Mode = de.deskSerialName;
                     dd.Type = mode;
                     dd.Level = int.Parse(mode.Substring(mode.Length - 2, 1));
                     string form = "";

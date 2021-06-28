@@ -786,6 +786,7 @@
     <Content Include="Views\T_Product_office_desk_customer\Details.cshtml" />
     <Content Include="Views\T_Product_office_desk_customer\Edit.cshtml" />
     <Content Include="Views\T_Product_office_desk_customer\Index.cshtml" />
+    <Content Include="Upload\office\20210526\JS36DS1-3-S.dwg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
