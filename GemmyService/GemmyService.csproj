@@ -646,6 +646,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pageScript\LayoutJS.js" />
     <Content Include="Scripts\pageScript\nav.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -721,6 +722,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
+    <Content Include="Scripts\vue_resource.js" />
     <Content Include="Upload\office\20210526\suoluetu.png" />
     <Content Include="Upload\office\frame19.png" />
     <Content Include="Web.config" />

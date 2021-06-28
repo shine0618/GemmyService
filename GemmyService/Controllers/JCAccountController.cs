@@ -23,6 +23,19 @@ namespace GemmyService.Controllers
             return View();
         }
 
+        [HttpGet]
+        public string GetUserNameName(string keys)
+        {
+            if (Session["emailName"] == null || Session["emailName"].ToString() == "")
+            {
+                return "";
+            }
+            else
+            {
+               return Session["emailName"].ToString();
+            }
+        }
+
         #region 发送邮件
 
 
