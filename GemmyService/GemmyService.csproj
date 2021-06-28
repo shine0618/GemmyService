@@ -134,6 +134,7 @@
     <Compile Include="Controllers\JCSelectionController.cs" />
     <Compile Include="Controllers\JCSelectionLanguageController.cs" />
     <Compile Include="Controllers\T_Office_FilesController.cs" />
+    <Compile Include="Controllers\T_Product_office_desk_customerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -778,6 +779,11 @@
     <Content Include="Views\JCSelection\PersonInfo.cshtml" />
     <Content Include="Views\JCAccount\reass.cshtml" />
     <Content Include="Views\JCSelection\office_Eservice3D.cshtml" />
+    <Content Include="Views\T_Product_office_desk_customer\Create.cshtml" />
+    <Content Include="Views\T_Product_office_desk_customer\Delete.cshtml" />
+    <Content Include="Views\T_Product_office_desk_customer\Details.cshtml" />
+    <Content Include="Views\T_Product_office_desk_customer\Edit.cshtml" />
+    <Content Include="Views\T_Product_office_desk_customer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

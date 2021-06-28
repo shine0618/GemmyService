@@ -1,0 +1,99 @@
+﻿@model IEnumerable<_1GemmyModel.Model.ModelProductOffice.T_Product_office_desk_customer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.deskGuid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.langCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.configurationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customerUserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.verificationCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deleteSign)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deletePerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatePerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatePerson)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Remark)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.deskGuid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.langCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.configurationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customerUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.verificationCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deleteSign)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deletePerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatePerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatePerson)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remark)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
