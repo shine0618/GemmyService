@@ -38,11 +38,13 @@
     .navimg {
         height: 65px;
         cursor: pointer;
-        padding:5px;
+        padding: 5px;
     }
+
         .navimg:hover {
             background-color: rgb(12 33 57 / 0.3);
         }
+
     .selectStep {
         height: 70px;
     }
@@ -53,8 +55,8 @@
         max-height: 100%;
         width: 100%
     }
-        /*缩略图鼠标滑过*/
-        /*.part_img:hover {
+    /*缩略图鼠标滑过*/
+    /*.part_img:hover {
             background-color: rgb(12 33 57 / 0.4);
         }*/
 
@@ -116,12 +118,11 @@
 </style>
 
 @*<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-<script src="//unpkg.com/element-ui@2.15.1/lib/index.js"></script>*@
+    <script src="//unpkg.com/element-ui@2.15.1/lib/index.js"></script>*@
 
 <div id="OfficeStandards">
     <el-dialog title="部件详情"
-                :visible.sync="dialogVisible_partDetail"
-
+               :visible.sync="dialogVisible_partDetail"
                width="80%"
                center>
         <div class="container">
@@ -133,12 +134,16 @@
                     <h4 class="drawerh5" v-text="detailModel.mode"></h4>
                     <br />
                     <h6 v-for="item in detailModel.des" v-text="item.textValue"></h6>
+
+                    <p style="color: var(--thm-base)" v-show="detailModel.ColumnWithFoot!=''" v-text="'ColumnWithFoot '+ detailModel.ColumnWithFoot"></p>
+                    <p style="color: var(--thm-base)" v-show="detailModel.ColumnWithFrame!=''" v-text="'ColumnWithFrame '+ detailModel.ColumnWithFrame"></p>
+                    <p style="color: var(--thm-base)" v-show="detailModel.FrameWithSideBracket!=''" v-text="'FrameWithSideBracket ' +detailModel.FrameWithSideBracket"></p>
                 </div>
             </div>
         </div>
         <template #footer>
             <span class="dialog-footer">
-              
+
             </span>
         </template>
     </el-dialog>
@@ -159,9 +164,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <!--<div class="block-title text-center">
-                <p></p>
-                <h3>产品配置列表</h3>
-            </div>-->
+                        <p></p>
+                        <h3>产品配置列表</h3>
+                    </div>-->
                     <!-- /.block-title -->
                     <div>
                         <template>
@@ -190,10 +195,10 @@
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
                     <div class="service-details__image">
                         <div class="block-title text-left">
-                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_s'}"  :title="text_customer_5" @@click="colomnSearch('column_2_s')" src="/resourse/page/2jie.png" />  @*column_2_s*@
-                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_r'}"  :title="text_customer_6"  @@click="colomnSearch('column_2_r')" src="/resourse/page/2jieR.png" /> @*column_2_r*@
-                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_s'}"  :title="text_customer_7" @@click="colomnSearch('column_3_s')" src="/resourse/page/3jie.png" /> @*column_3_s*@
-                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_r'}"  :title="text_customer_8" @@click="colomnSearch('column_3_r')" src="/resourse/page/3jieR.png" /> @*column_3_r*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_s'}" :title="text_customer_5" @@click="colomnSearch('column_2_s')" src="/resourse/page/2jie.png" />  @*column_2_s*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_r'}" :title="text_customer_6" @@click="colomnSearch('column_2_r')" src="/resourse/page/2jieR.png" /> @*column_2_r*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_s'}" :title="text_customer_7" @@click="colomnSearch('column_3_s')" src="/resourse/page/3jie.png" /> @*column_3_s*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_r'}" :title="text_customer_8" @@click="colomnSearch('column_3_r')" src="/resourse/page/3jieR.png" /> @*column_3_r*@
                         </div><!-- /.block-title -->
                     </div>
                 </div>
@@ -384,17 +389,17 @@
 
 
                     @*<div class="row">
-                <div class="col-lg-6 col-md-6" v-for="item in list_Color">
-                        <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
-                        <h6 style="text-align:center" v-text="item.HEXValue"></h6>
-                </div>
-            </div>*@
+                            <div class="col-lg-6 col-md-6" v-for="item in list_Color">
+                                    <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
+                                    <h6 style="text-align:center" v-text="item.HEXValue"></h6>
+                            </div>
+                        </div>*@
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s7'">
 
                     <div>
                         <label>请输入您的方案名称</label>
-                        <input type="text" class="form-control searchInput" v-model="custmerName"  />
+                        <input type="text" class="form-control searchInput" v-model="custmerName" />
                     </div>
 
                     <div>
@@ -453,7 +458,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <button @@click="nextStep" class="orderbtn thm-btn">下一步</button>
-                   @* <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''">完成配置</button>*@
+                    @* <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''">完成配置</button>*@
                     <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''" @@click="saveConfigurations()">保存配置</button>
                 </div>
 
@@ -469,7 +474,7 @@
 <script>
     $(function () {
         $('.bottom-footer').hide();
-        
+
     })
 </script>
 
@@ -581,14 +586,18 @@
 
 
 
-            MyCollectName: "", 
+            MyCollectName: "",
             custmerName: "",//客户命名方案
             ControlBox_c1:"",//控制器筛选
 
             detailModel: {
                 imgurl: "",
                 mode: "",
-                des :[],
+                des: [],
+                ColumnWithFoot: "",
+                ColumnWithFrame: "",
+                FrameWithSideBracket: "",
+
             },
 
             value:0,
@@ -601,6 +610,18 @@
 
                         break;
                     case "s2":
+                        if (this.select_columnMode == "") {
+                            this.selectStep = "s1";
+                            this.$notify({
+                                message: '请先选择立柱!',
+                                type: 'info'
+                            });
+                            //var is = setTimeout(function () {
+                            //    console.log('111');
+                            //}, 1000);
+
+                            return;
+                        }
                         this.getAllFrame();
                         break;
                     case "s3":
@@ -632,13 +653,14 @@
 
         },
         methods: {
+            //保存配置
             saveConfigurations: function (event) {
 
-                
+
                 this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
-                    
+
                 }).then(() => {
 
                     this.$http({           //调用接口
@@ -679,13 +701,13 @@
                         console.log(error);
                     })
 
-                    
+
                 }).catch(() => {
                     return;
                 });
 
 
-                
+
 
             },
             nextStep: function(event) {
@@ -773,7 +795,7 @@
                 }).then(function (response) {  //接口返回数据
 
                     this.detailModel = response.body;
-                   // console.log(response.body);
+                    console.log(response.body);
                 }, function (error) {
                     console.log(error);
                 })
@@ -802,7 +824,7 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeFrame",
                     params: {
-
+                        select_columnMode: this.select_columnMode,
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_frame = response.body;
@@ -816,6 +838,7 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeFoot",
                     params: {
+                        select_columnMode:  this.select_columnMode,
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_foot = response.body;
@@ -829,6 +852,7 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeSideBracket",
                     params: {
+                        select_frame : this.select_frame,
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_SideBracket = response.body;
@@ -1024,13 +1048,13 @@
                         }
 
                         if (this.T_Product_office_desk_detail.frameWidth != "") {
-                            
+
                             this.defaultWidth = this.T_Product_office_desk_detail.frameWidth;
                         }
                         if (this.T_Product_office_desk_detail.frameHeight != "") {
                             this.defaultHeight = this.T_Product_office_desk_detail.frameHeight;
                         }
-                        
+
 
                     }, function (error) {
                         console.log(error);
@@ -1048,5 +1072,5 @@
         OfficeStandards.getThisDesk(this.productGuid);
     }
 
-   
+
 </script>

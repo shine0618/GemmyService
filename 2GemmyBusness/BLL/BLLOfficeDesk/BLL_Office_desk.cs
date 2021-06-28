@@ -272,6 +272,9 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             string imgurl = string.Empty;
             int parametricTextIndex = 0;
+            string ColumnWithFoot = "";
+            string ColumnWithFrame = "";
+            string FrameWithSideBracket = "";
             List<T_Part_office_describe> des = new List<T_Part_office_describe>();
 
             switch (partType)
@@ -280,6 +283,9 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 case "column":
                     T_Part_office_Column q4 = GetT_Part_office_Column(Mode, langCode);
                     imgurl = q4.PictureName;
+                    ColumnWithFoot = q4.ColumnWithFoot;
+                    ColumnWithFrame = q4.ColumnWithFrame;
+
                     parametricTextIndex = q4.parametricTextIndex;
                     des = q4.T_Part_office_describes;
                     break;
@@ -287,6 +293,8 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                     T_Part_office_Frame q5 = GetT_Part_office_Frame(Mode, langCode);
                     imgurl = q5.PictureName;
                     parametricTextIndex = q5.parametricTextIndex;
+                    ColumnWithFrame = q5.FrameWithColumn;
+                    FrameWithSideBracket = q5.FrameWithSideBracket;
                     des = q5.T_Part_office_describes;
                     break;
 
@@ -294,6 +302,8 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                     T_Part_office_Foot q6 = GetT_Part_office_Foot(Mode, langCode);
                     imgurl = q6.PictureName;
                     parametricTextIndex = q6.parametricTextIndex;
+                    ColumnWithFoot = q6.FootWithColumn;
+
                     des = q6.T_Part_office_describes;
                     break;
 
@@ -301,6 +311,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                     T_Part_office_SideBracket q7 = GetT_Part_office_SideBracket(Mode, langCode);
                     imgurl = q7.PictureName;
                     parametricTextIndex = q7.parametricTextIndex;
+                    FrameWithSideBracket = q7.SideBracketWithFrame;
                     des = q7.T_Part_office_describes;
                     break;
 
@@ -334,7 +345,10 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 imgurl = imgurl,
                 mode = Mode,
                 des = des,
-                parametricTextIndex = parametricTextIndex
+                parametricTextIndex = parametricTextIndex,
+                ColumnWithFoot = ColumnWithFoot,
+                ColumnWithFrame = ColumnWithFrame,
+                FrameWithSideBracket = FrameWithSideBracket,
 
             };
 
@@ -360,7 +374,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             T_Part_office_Column model = query.FirstOrDefault();
 
-            if (model != null && model.Id > 0)
+            if (model != null && model.Id > 0&&langCode!="")
             {
                 model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
             }
@@ -378,7 +392,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             T_Part_office_Frame model = query.FirstOrDefault();
 
-            if (model != null && model.Id > 0)
+            if (model != null && model.Id > 0&&langCode!="")
             {
                 model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
             }
@@ -490,29 +504,63 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             return query.ToList();
         }
 
-        public List<T_Part_office_Frame> GetT_Part_office_Frame()
+        public List<T_Part_office_Frame> GetT_Part_office_Frame(string select_columnMode)
         {
             var query = from x in read_db.T_Part_office_Frame
                         where x.deleteSign!=1
                         select x;
 
-            return query.ToList();
+            List<T_Part_office_Frame> list = query.ToList();
+            if (select_columnMode != null && select_columnMode != "")
+            {
+                //检查FOOT和Column的适配性
+                //1.孔位
+                T_Part_office_Column column = GetT_Part_office_Column(select_columnMode, "");
+                if (column != null)
+                {
+                    list = list.Where(x => x.FrameWithColumn == column.ColumnWithFrame).ToList();
+                }
+            }
+            return list;
         }
-        public List<T_Part_office_Foot> GetT_Part_office_Foot()
+        public List<T_Part_office_Foot> GetT_Part_office_Foot(string select_columnMode)
         {
             var query = from x in read_db.T_Part_office_Foot
                         where x.deleteSign != 1
                         select x;
 
-            return query.ToList();
+
+            List<T_Part_office_Foot> list =  query.ToList();
+            if(select_columnMode!=null && select_columnMode!="")
+            {
+                //检查FOOT和Column的适配性
+                //1.孔位
+                T_Part_office_Column column = GetT_Part_office_Column(select_columnMode, "");
+                if(column!=null)
+                {
+                    list = list.Where(x => x.FootWithColumn == column.ColumnWithFoot).ToList();
+                }
+            }
+            return list;
         }
-        public List<T_Part_office_SideBracket> GetT_Part_office_SideBracket()
+        public List<T_Part_office_SideBracket> GetT_Part_office_SideBracket(string select_frame)
         {
             var query = from x in read_db.T_Part_office_SideBracket
                         where x.deleteSign != 1
                         select x;
 
-            return query.ToList();
+            List<T_Part_office_SideBracket> list = query.ToList();
+            if (select_frame != null && select_frame != "")
+            {
+                //检查FOOT和Column的适配性
+                //1.孔位
+                T_Part_office_Frame column = GetT_Part_office_Frame(select_frame, "");
+                if (column != null)
+                {
+                    list = list.Where(x => x.SideBracketWithFrame == column.FrameWithSideBracket).ToList();
+                }
+            }
+            return list;
         }
         public List<T_Part_office_ControlBox> GetT_Part_office_ControlBox()
         {
