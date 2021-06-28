@@ -205,7 +205,10 @@
                         </tr>
                         <tr v-for="item in paramTableData">
                             <td v-text="item.part"></td>
-                            <td><img class="paramDatatableIMG img-response" :src="item.tag" /></td>
+                            <td>
+                                <img class="paramDatatableIMG img-response" :src="item.tag" /> 
+                                
+                            </td>
                             <td v-text="item.model"></td>
                             <td>
                                 <li style="text-align:left" v-for="itemt in item.paramList" v-text="itemt"></li>
@@ -227,7 +230,7 @@
                                          :label="text_detail_8"
                                          align="center">
                             <template #default="scope">
-                                <img class="paramDatatableIMG img-response" :src="scope.row.tag" />
+                                <img v-if="scope.row.name!='1'" class="paramDatatableIMG img-response" :src="scope.row.tag" />                                
                             </template>
                         </el-table-column>
 
@@ -426,7 +429,8 @@
             text_detail_14: "",
             text_detail_15: "",
             text_detail_16:"",
-
+            text_detail_17: "",
+            text_detail_18:"",
             MyCollectName: "",
             paramTableData: [],
         },
@@ -701,6 +705,27 @@
                         }
 
                         var q = { part: this.text_detail_16, model: this.T_Product_office_desk_detail.T_Part_office_HandSet.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_HandSet.PictureName, paramList: paramList };
+                        this.paramTableData.push(q);
+                    }
+                    if (this.T_Product_office_desk_detail.T_Part_office_Powercable != null) {
+                        var it = this.T_Product_office_desk_detail.T_Part_office_Powercable;
+                        var paramList = new Array();
+
+                        for (i in this.T_Product_office_desk_detail.T_Part_office_Powercable.T_Part_office_describes) {
+                            paramList.push(this.T_Product_office_desk_detail.T_Part_office_Powercable.T_Part_office_describes[i].textValue);
+                        }
+                        console.log(this.T_Product_office_desk_detail.T_Part_office_Powercable);
+                        var q = { part: this.text_detail_17, model: this.T_Product_office_desk_detail.T_Part_office_Powercable.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Powercable.PictureName, paramList: paramList };
+                        this.paramTableData.push(q);
+                    }
+                    if (this.T_Product_office_desk_detail.T_Office_Color != null) {
+                        var it = this.T_Product_office_desk_detail.T_Office_Color;
+                        var paramList = new Array();
+
+                        for (i in this.T_Product_office_desk_detail.T_Office_Color.T_Part_office_describes) {
+                            paramList.push(this.T_Product_office_desk_detail.T_Office_Color.T_Part_office_describes[i].textValue);
+                        }
+                        var q = { part: this.text_detail_18, model: this.T_Product_office_desk_detail.T_Office_Color.ColorName, name: '1', tag: this.T_Product_office_desk_detail.T_Office_Color.HEXValue, paramList: paramList };
                         this.paramTableData.push(q);
                     }
 
