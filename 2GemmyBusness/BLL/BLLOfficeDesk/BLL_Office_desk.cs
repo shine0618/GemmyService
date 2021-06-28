@@ -13,6 +13,15 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 {
   public  class BLL_Office_desk:BLLBase
     {
+        #region 
+
+        BLL_Office_desk_collect bll_collect = null;
+
+        public BLL_Office_desk()
+        {
+            bll_collect = new BLL_Office_desk_collect();
+        }
+        #endregion
 
         #region Add desk
 
@@ -56,6 +65,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
            return  read_db.T_Product_office_desk.Where(x => x.deskGuid == Guid).FirstOrDefault();
         }
 
+
         public List<T_Product_office_desk> GetT_Product_office_desk(string Type,string langCode,string recommend,string searchText,string userName)
         {
 
@@ -70,7 +80,8 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                         where ddi.langCode ==langCode
                         where x.deskType == Type
                         where x.deleteSign != 1
-                        select new 
+                        where (x.deskCustmoer ==true && x.deskCreateByUser ==userName ) || (x.deskCustmoer == false)
+                      select new 
                         {
                             //---t_base //查找原因后发现是UpdateTime和JSON转换的原因
                             Id = x.Id,
@@ -104,12 +115,30 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                         };
 
 
+
+
             switch (recommend)
             {
                 case "newProduct":query = query.Where(x => x.deskNewProduct == true);break;
                 case "jiecangProduct": query = query.Where(x => x.deskJCRecommend == true); break;
                 case "customer": query = query.Where(x => x.deskCustmoer == true && x.deskCreateByUser == userName);break;
+                case "myCollect":
+                    //去看收藏表
 
+                    List<T_Office_desk_collect> list_collect = bll_collect.GetT_Office_desk_collect(userName);
+                    List<int> str_collect = new List<int>();
+                    foreach(T_Office_desk_collect item in list_collect)
+                    {
+                        str_collect.Add(item.DeskId);
+                    }
+                   
+                    query = query.Where(x => str_collect.Contains(x.Id));
+
+
+
+
+                    break;
+                case "all": break;
                 //补充我的定制
                 default:
                     query = null;

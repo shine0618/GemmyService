@@ -10,6 +10,15 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
    public class BLL_Office_desk_collect:BLLBase
     {
 
+        public List<T_Office_desk_collect> GetT_Office_desk_collect(string pname)
+        {
+            var q = from x in read_db.T_Office_desk_collect
+                    where x.deleteSign != 1
+                    where x.collectUser == pname
+                    select x;
+
+            return q.ToList();
+        }
         public T_Office_desk_collect GetT_Office_desk_collect(int deskId,string pname)
         {
 
