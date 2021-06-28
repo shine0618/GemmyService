@@ -115,8 +115,7 @@
         <div class="container" style="padding:10px 10px ">
             <a class="navigation_a" href="/JCSelection/main">主页</a>/
             <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>/
-            <a class="navigation_a" href="/JCSelection/OfficeStandards?domain=office&Type=@ViewBag.Type&recommend=@ViewBag.recommend">@ViewBag.Type</a>/
-
+            <a class="navigation_a" href="/JCSelection/OfficeStandards?domain=office&Type=@ViewBag.Type&recommend=@ViewBag.recommend">@ViewBag.Type</a>/          
             <a class="navigation_a">产品明细</a>
         </div><!-- /.container -->
     </section><!-- /.page-header -->
@@ -310,7 +309,7 @@
                         <p style="font-size:14px" v-text="item.Information"></p>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
                     </div>
                 </div>
 
@@ -327,7 +326,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div style="margin-bottom:15px;" v-for="item in files_d2_2D">
                         <h5 v-text="item.FileName"></h5>
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
                     </div>
 
 
@@ -338,7 +337,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div style="margin-bottom:15px;" v-for="item in files_d2_3D">
                         <h5 v-text="item.FileName"></h5>
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
                     </div>
 
 
@@ -356,7 +355,7 @@
                         <p style="font-size:14px" v-text="item.Information"></p>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
                     </div>
                 </div>
 
@@ -374,7 +373,7 @@
                         <p style="font-size:14px" v-text="item.Information"></p>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
                     </div>
                 </div>
 
@@ -535,9 +534,16 @@
                 doc.save('tableName.pdf');    // 导出名为tableName.pdf的文件
 
             },
-            downloadfile: function (url,fname) {
+            downloadfile: function (url,fname,type) {
 
+                if (type == ".dwg" || type ==".stp") {
+                    fname = fname + type;
+                }
+
+
+                console.log(url);
                 //window.open(url);   //该方法只能下载比如xls等不能直接打开的文件，对于png之类的文件会直接打开而非下载
+
                 const link = document.createElement('a');
                 link.style.display = 'none';
                 link.href = url;
