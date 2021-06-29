@@ -24,6 +24,10 @@ namespace _2GemmyBusness.BLL.BLLSystem
 
         public static string GetTextByKey(string langCode,string key)
         {
+            if(langCode==null||langCode=="")
+            {
+                return "";
+            }
             
             string fname = LangPath.Replace("yourLangCode", langCode);
             string jsondata = GetJSONTextFromFile(fname);
@@ -36,6 +40,10 @@ namespace _2GemmyBusness.BLL.BLLSystem
         }
         public static JToken ReadJSON(string jsonStr)
         {
+            if(jsonStr=="")
+            {
+                return null;
+            }
             JObject jobj = JObject.Parse(jsonStr);
             JToken result = jobj as JToken;
             return result;
