@@ -48,27 +48,30 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             {
                 if(string.IsNullOrEmpty( f.thumbnailImg))
                 {
-                    if(f.Type.Contains("doc"))
+                    if(f.Type.Replace(".","").ToLower().Contains("doc"))
                     {
                         f.thumbnailImg = "/resourse/Img/word_icon.png";
                     }
-                    if(f.Type.Contains("excel"))
+                    if(f.Type.Replace(".", "").ToLower().Contains("excel"))
                     {
                         f.thumbnailImg = "/resourse/Img/excel_icon.png";
                     }
-                    if (f.Type.Contains("png"))
+                    if (f.Type.Replace(".", "").ToLower().Contains("png"))
                     {
                         f.thumbnailImg = "/resourse/Img/png_icon.png";
                     }
-                    if(f.Type.Contains("pdf"))
+                    if(f.Type.Replace(".", "").ToLower().Contains("pdf"))
                     {
                         f.thumbnailImg = "/resourse/Img/pdf_icon.png";
                     }
-                    if (f.Type.Contains("mp4"))
+                    if (f.Type.Replace(".", "").ToLower().Contains("mp4"))
                     {
                         f.thumbnailImg = "/resourse/Img/mp4_icon.png";
                     }
-
+                    if (f.Type.Replace(".", "").ToLower().Contains("jpg"))
+                    {
+                        f.thumbnailImg = "/resourse/Img/jpg_icon.png";
+                    }
                 }
 
                 flist.Add(f);
