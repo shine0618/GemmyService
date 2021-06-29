@@ -56,8 +56,18 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                     {
                         f.thumbnailImg = "/resourse/Img/excel_icon.png";
                     }
-
-                    f.thumbnailImg = "/resourse/Img/pdf_icon.png";
+                    if (f.Type.Contains("png"))
+                    {
+                        f.thumbnailImg = "/resourse/Img/png_icon.png";
+                    }
+                    if(f.Type.Contains("pdf"))
+                    {
+                        f.thumbnailImg = "/resourse/Img/pdf_icon.png";
+                    }
+                    if (f.Type.Contains("mp4"))
+                    {
+                        f.thumbnailImg = "/resourse/Img/mp4_icon.png";
+                    }
 
                 }
 
