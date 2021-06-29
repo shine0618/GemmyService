@@ -1,66 +1,48 @@
-﻿using _1GemmyModel.Model.ModelSystem;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace _2GemmyBusness.BLL.BLLSystem
+namespace _7.ConsoleAppTest
 {
-   public class BLL_SYS_language:BLLBase
+    class Program
     {
-
-        public List<T_SYS_Language> GetT_SYS_Language()
+        static void Main(string[] args)
         {
-            var q = read_db.T_SYS_Language.Where(x => x.deleteSign != 0);
-            return q.ToList();
+            string jsonStr = @"{ 'ROOT': {
+    'TOKEN': 'aa',
+    'SERVICE': 'bb',
+    'DATAPARAM': 'cc'
+  }
+}";
+
+            int i = 0;
+            Console.WriteLine(DateTime.Now);
+           while(i<10000)
+            {
+                i++;
+                //解析
+                var json = ReadJSON(jsonStr);
+                //获取值
+                string Token = JSON_SeleteNode(json, "TOKEN");
+            }
+
+            Console.WriteLine(DateTime.Now);
+          
+            Console.ReadLine();
         }
 
-        public static string LangPath { get; set; }
 
-        public static string GetTextByKey(string langCode,string key)
-        {
-            
-            string fname = LangPath.Replace("yourLangCode", langCode);
-            string jsondata = GetJSONTextFromFile(fname);
-            //解析
-            var json = ReadJSON(jsondata);
-            //获取值
-            string value = JSON_SeleteNode(json, key);
-
-            return value;
-        }
         public static JToken ReadJSON(string jsonStr)
         {
             JObject jobj = JObject.Parse(jsonStr);
             JToken result = jobj as JToken;
             return result;
         }
-
-        public static string GetJSONTextFromFile(string FILE_NAME)
-        {
-              try
-            {
-                using (StreamReader sr = File.OpenText(FILE_NAME))
-                {
-                    string json = sr.ReadToEnd();
-
-                    return json;
-                }
-            }
-            catch(Exception ex )
-            {
-                return "";
-            }
-        
-         
-
-        }
-
 
         /// <summary>
         /// 遍历所以节点，替换其中某个节点的值 
@@ -127,7 +109,5 @@ namespace _2GemmyBusness.BLL.BLLSystem
                 return "";
             }
         }
-
-
     }
 }

@@ -10,6 +10,15 @@ namespace _1GemmyModel.Model.ModelProductOffice
 {
   public  class T_Part_office_describe
     {
+        public T_Part_office_describe()
+        {
+
+        }
+        public T_Part_office_describe(string lang,string text)
+        {
+            langCode = lang;
+            textValue = text;
+        }
         [Key]
         public int Id { get; set; }
 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using _1GemmyModel.Model;
+using _2GemmyBusness.BLL.BLLSystem;
 
 namespace _2GemmyBusness.BLL.BLLOfficeDesk
 {
@@ -334,6 +335,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                     ColumnWithFoot = q6.FootWithColumn;
 
                     des = q6.T_Part_office_describes;
+
                     break;
 
                 case "SideBracket":
@@ -424,6 +426,17 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             if (model != null && model.Id > 0&&langCode!="")
             {
                 model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+
+                if (model.MinLength != 0)
+                {
+                    string t = BLL_SYS_language.GetTextByKey(langCode, "text_part_description_1");//最小长度
+                    model.T_Part_office_describes.Add(new T_Part_office_describe(langCode, t + ":" + model.MinLength.ToString()));
+                }
+                if (model.MaxLength != 0)
+                {
+                    string t = BLL_SYS_language.GetTextByKey(langCode, "text_part_description_2");//最小长度
+                    model.T_Part_office_describes.Add(new T_Part_office_describe(langCode, t + ":" + model.MaxLength.ToString()));
+                }
             }
 
             return model;
@@ -438,7 +451,20 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             if (model != null && model.Id > 0)
             {
+             
                 model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+                
+                   
+                if (model.MinLength != 0)
+                {
+                    string t = BLL_SYS_language.GetTextByKey(langCode, "text_part_description_1");//最小长度
+                    model.T_Part_office_describes.Add( new T_Part_office_describe(langCode,t+":"+ model.MinLength.ToString()));
+                }
+                if (model.MaxLength != 0)
+                {
+                    string t = BLL_SYS_language.GetTextByKey(langCode, "text_part_description_2");//最小长度
+                    model.T_Part_office_describes.Add(new T_Part_office_describe(langCode, t + ":" + model.MaxLength.ToString()));
+                }
             }
 
             return model;
@@ -454,6 +480,18 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             if (model != null && model.Id > 0)
             {
                 model.T_Part_office_describes = GetT_Part_office_describe(model.parametricTextIndex, langCode);
+
+
+                if (model.MinLength != 0)
+                {
+                    string t = BLL_SYS_language.GetTextByKey(langCode, "text_part_description_1");//最小长度
+                    model.T_Part_office_describes.Add(new T_Part_office_describe(langCode, t + ":" + model.MinLength.ToString()));
+                }
+                if (model.MaxLength != 0)
+                {
+                    string t = BLL_SYS_language.GetTextByKey(langCode, "text_part_description_2");//最小长度
+                    model.T_Part_office_describes.Add(new T_Part_office_describe(langCode, t + ":" + model.MaxLength.ToString()));
+                }
             }
 
             return model;
