@@ -16,6 +16,7 @@ namespace GemmyService
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            T_webdata.GetFileSrc("/resourse/Language/text-yourLangCode.json");
         }
     }
 }
