@@ -650,12 +650,12 @@
 
                         var it = this.T_Product_office_desk_detail.T_Part_office_Foot;
                         var paramList = new Array();
-                        if (it.MaxLength != '') {
-                            paramList.push("最大长度：" + it.MaxLength);
-                        }
-                        if (it.MinLength != '') {
-                            paramList.push("最小长度：" + it.MinLength);
-                        }
+                        //if (it.MaxLength != '') {
+                        //    paramList.push("最大长度：" + it.MaxLength);
+                        //}
+                        //if (it.MinLength != '') {
+                        //    paramList.push("最小长度：" + it.MinLength);
+                        //}
 
                         for (i in this.T_Product_office_desk_detail.T_Part_office_Foot.T_Part_office_describes) {
                             paramList.push(this.T_Product_office_desk_detail.T_Part_office_Foot.T_Part_office_describes[i].textValue);
@@ -669,12 +669,7 @@
 
                         var it = this.T_Product_office_desk_detail.T_Part_office_Frame;
                         var paramList = new Array();
-                        if (it.MaxLength != '') {
-                            paramList.push("最大长度：" + it.MaxLength);
-                        }
-                        if (it.MinLength != '') {
-                            paramList.push("最小长度：" + it.MinLength);
-                        }
+                      
                         for (i in this.T_Product_office_desk_detail.T_Part_office_Frame.T_Part_office_describes) {
                             paramList.push(this.T_Product_office_desk_detail.T_Part_office_Frame.T_Part_office_describes[i].textValue);
                         }
@@ -686,12 +681,7 @@
                     if (this.T_Product_office_desk_detail.T_Part_office_SideBracket != null) {
                         var it = this.T_Product_office_desk_detail.T_Part_office_SideBracket;
                         var paramList = new Array();
-                        if (it.MaxLength != '') {
-                            paramList.push("最大长度：" + it.MaxLength);
-                        }
-                        if (it.MinLength != '') {
-                            paramList.push("最小长度：" + it.MinLength);
-                        }
+                       
                         for (i in this.T_Product_office_desk_detail.T_Part_office_SideBracket.T_Part_office_describes) {
                             paramList.push(this.T_Product_office_desk_detail.T_Part_office_SideBracket.T_Part_office_describes[i].textValue);
                         }
