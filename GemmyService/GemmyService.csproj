@@ -357,8 +357,11 @@
     <Content Include="resourse\desk_TS_picture\JC35TS-S13S.png" />
     <Content Include="resourse\Img\detail_icon.png" />
     <Content Include="resourse\Img\excel_icon.png" />
+    <Content Include="resourse\Img\mp4_icon.png" />
     <Content Include="resourse\Img\newbg.82899ecd.jpg" />
     <Content Include="resourse\Img\pdf_icon.png" />
+    <Content Include="resourse\Img\pdf_icon1.png" />
+    <Content Include="resourse\Img\png_icon.png" />
     <Content Include="resourse\Img\word_icon.png" />
     <Content Include="resourse\office\fileimg.png" />
     <Content Include="resourse\office\TS\effectImg.png" />
@@ -648,7 +651,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\pageScript\LayoutJS.js" />
     <Content Include="Scripts\pageScript\nav.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -724,7 +726,6 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
-    <Content Include="Scripts\vue_resource.js" />
     <Content Include="Upload\office\20210526\suoluetu.png" />
     <Content Include="Upload\office\frame19.png" />
     <Content Include="Web.config" />
