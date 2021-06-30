@@ -2104,14 +2104,14 @@ h6 {
 }
 
 .main-slider .swiper-slide p {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
-  opacity: 0;
-  transform: translateY(-120px);
-  transition-delay: 0;
-  transition: transform 2000ms ease, opacity 2000ms ease;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 400;
+    color: rgba(0,143,213, 0.6);
+    opacity: 0;
+    transform: translateY(-120px);
+    transition-delay: 0;
+    transition: transform 2000ms ease, opacity 2000ms ease;
 }
 
 @media (max-width: 375px) {
@@ -2121,18 +2121,18 @@ h6 {
 }
 
 .main-slider .swiper-slide h2 {
-  margin: 0;
-  color: #fff;
-  font-size: 90px;
-  margin-top: 15px;
-  margin-bottom: 40px;
-  line-height: 1;
-  font-weight: 400;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(90px);
-  transition-delay: 1000ms;
-  transition: transform 2000ms ease, opacity 2000ms ease;
+    margin: 0;
+    color: #008fd5;
+    font-size: 90px;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    line-height: 1;
+    font-weight: 400;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(90px);
+    transition-delay: 1000ms;
+    transition: transform 2000ms ease, opacity 2000ms ease;
 }
 
 @media (max-width: 1199px) {

@@ -3,6 +3,7 @@ using _1GemmyModel.Model;
 using _1GemmyModel.Model.ModelProductOffice;
 using _1GemmyModel.Model.ModelUserAccount;
 using _2GemmyBusness.BLL.BLLOfficeDesk;
+using _2GemmyBusness.BLL.BLLSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -471,7 +472,7 @@ namespace GemmyService.Controllers
                 {
                     //失败
                     msgType = "false";
-                    msg = "添加桌子失败";
+                    msg = BLL_SYS_language.GetTextByKey(langCode, "CustomAddFailNotice");;
                 }
 
                 else
@@ -565,7 +566,7 @@ namespace GemmyService.Controllers
             {
                 //失败 权限检查
                 msgType = "false";
-                msg = "请先登录";
+                msg = BLL_SYS_language.GetTextByKey(langCode, "CustomAddFailNotice");
             }
             var param =
            new

@@ -233,6 +233,9 @@
     <Content Include="assets\images\loader.png" />
     <Content Include="assets\images\logo-dark.png" />
     <Content Include="assets\images\logo-light.png" />
+    <Content Include="assets\images\main-slider\bg.png" />
+    <Content Include="assets\images\main-slider\bgpc.png" />
+    <Content Include="assets\images\main-slider\bgzr.jpg" />
     <Content Include="assets\images\main-slider\main-slider-1-1.jpg" />
     <Content Include="assets\images\main-slider\main-slider-1-2.jpg" />
     <Content Include="assets\images\main-slider\main-slider-2-1.jpg" />
