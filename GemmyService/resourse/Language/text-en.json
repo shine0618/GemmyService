@@ -154,7 +154,7 @@
     "CustomAddConfirmButton": "Ok",
     "CustomAddCancelButton": "Cancel",
     "CustomAddSuccessNotice": "Add success!",
-
+    "CustomAddFailNotice": "Add fail!",
     "text_detail_1": "Product information",
     "text_detail_2": "Parameter",
     "text_detail_3": "ConfigNo",
