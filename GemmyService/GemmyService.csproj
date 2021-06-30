@@ -230,6 +230,8 @@
     <Content Include="assets\images\credit-card\credit-card-1-5.png" />
     <Content Include="assets\images\credit-card\credit-card-1-6.png" />
     <Content Include="assets\images\credit-card\credit-card-d-1-1.png" />
+    <Content Include="assets\images\favicons\favicon-16x16.png" />
+    <Content Include="assets\images\favicons\favicon-32x32.png" />
     <Content Include="assets\images\loader.png" />
     <Content Include="assets\images\logo-dark.png" />
     <Content Include="assets\images\logo-light.png" />

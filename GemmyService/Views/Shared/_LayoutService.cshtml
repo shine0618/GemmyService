@@ -41,11 +41,10 @@
 
     <link href="//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css" rel="stylesheet" />
 
-    <!-- 二维码vue js -->
-    <script type="text/javascript" src="//static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+
     <!-- table 导出 js -->
-    <script type="text/javascript" src="/assets/libs/jsPDF/jspdf.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="/assets/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+    @*<script type="text/javascript" src="/assets/libs/jsPDF/jspdf.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/assets/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>*@
     @*<script src="~/assets/libs/jsPDF/msyh-normal.js"></script>*@
 
     @*自定义的*@
@@ -119,17 +118,6 @@
         }
 
 
-        //构造二维码
-        function initQRCode(divid, qrvalue) {
-            var qrcode = new QRCode(document.getElementById(divid), {
-                text: qrvalue,
-                width: 128,
-                height: 128,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-                correctLevel: 0 // 二维码结构复杂性 0~3
-            });
-        }
 </script>
 
 </head>

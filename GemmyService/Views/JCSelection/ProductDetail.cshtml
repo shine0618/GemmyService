@@ -3,13 +3,7 @@
     ViewBag.Title = "ProductDetail";
 }
 
-@*<link href="~/assets/layui-v2.6.6/layui/css/layui.css" rel="stylesheet" />
-    <script src="~/assets/layui-v2.6.6/layui/layui.js"></script>*@
-
 <style>
-
-
-
     #shjahs {
         width: 100%;
         border: 0;
@@ -20,11 +14,12 @@
         /*      min-height:550px;
         height: calc(100vh - 280px);*/
     }
-    #asas
-    {
-        margin:0;
-        padding:0;
+
+    #asas {
+        margin: 0;
+        padding: 0;
     }
+
     .about-three {
         padding-top: 20px;
         padding-bottom: 0px;
@@ -45,21 +40,22 @@
         width: 120px;
         height: 120px;
     }
+
     .selectColor_span {
         display: block;
         width: 40px;
         height: 40px;
         border-radius: 20px;
         margin: 3px;
-        margin-left:150px;
+        margin-left: 150px;
     }
+
     #FilesBox {
     }
-    .filerow
-    {
-        margin-bottom:5px;
+
+    .filerow {
+        margin-bottom: 5px;
     }
-    @@import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");
     /*.el-tabs__nav-wrap {
         width: 720px;
 
@@ -92,19 +88,18 @@
         width: 100%;
         max-width: 150px;
     }
-    .collect_icon
-    {
-      width:50px;
-    }
 
- 
+    .collect_icon {
+        width: 50px;
+    }
+    .titleh5
+    {
+        margin-top:25px;
+        margin-bottom:15px;
+    }
 </style>
 
 <!-- /.js  加载ele组件 -->
-
-<link href="~/assets/eleindex.css" rel="stylesheet" />
-<script src="~/assets/eleindex.js"></script>
-
 <div id="OfficeStandards">
 
 
@@ -115,7 +110,7 @@
         <div class="container" style="padding:10px 10px ">
             <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
             <a class="navigation_a" href="/JCSelection/office">{{NAVOfficePage}}</a>/
-            <a class="navigation_a" href="/JCSelection/OfficeStandards?domain=office&Type=@ViewBag.Type&recommend=@ViewBag.recommend">@ViewBag.Type</a>/          
+            <a class="navigation_a" href="/JCSelection/OfficeStandards?domain=office&Type=@ViewBag.Type&recommend=@ViewBag.recommend">@ViewBag.Type</a>/
             <a class="navigation_a">{{NAVProductDetailPage}}</a>
         </div><!-- /.container -->
     </section><!-- /.page-header -->
@@ -133,19 +128,19 @@
                         </div>
                         <div class="col-lg-3 col-md-9 col-xs-9">
                             @*<i v-show="isCollect" class="el-icon-star-on collect_icon" @@click="isCollect=!isCollect"></i>
-                            <i v-show="!isCollect" class="el-icon-star-off collect_icon" @@click="isCollect=!isCollect"></i>*@
+                                <i v-show="!isCollect" class="el-icon-star-off collect_icon" @@click="isCollect=!isCollect"></i>*@
 
                             <div>
                                 <img src="~/resourse/other/collect1.png" v-if="isCollect==true" class="img-response collect_icon" @@click="CancelCollectDesk" />
                                 <img src="~/resourse/other/collect0.png" v-else class="img-response collect_icon" @@click="CollectDesk" />
                             </div>
-                                                        
+
                             <div class="about-three__image">
 
                                 <h4 class="drawerh5" v-text="deskSerialName"></h4>
                                 <br />
-                                <h5 v-text="introduction"></h5>
-                                <br />
+                                <h5 v-text="introduction" class="titleh5"></h5>
+                              
                                 <!--<div class="block-title text-left">
         <p>{{text_detail_1}}</p>
         <h6 v-text="deskSerialName"></h6>
@@ -164,11 +159,11 @@
     </div>-->
                                 <!-- /.block-title -->
 
+                               
+                                <h5 v-text="text_detail_3" class="titleh5"></h5>
+                              
+                                <h6 v-text="configurationNo"></h6>
 
-                                <div class="block-title text-left">
-                                    <p>{{text_detail_3}}</p>
-                                    <h6 v-text="configurationNo"></h6>
-                                </div><!-- /.block-title -->
                                 <!--<div class="block-title text-left">
         <img src="~/resourse/page/testqrcode.png" class="fa-qrcode" />
 
@@ -200,8 +195,8 @@
                         <button class="orderbtn thm-btn" @@click="exportConfig" style="float:right;margin-bottom:5px;">{{ProductExportConfigurationButton}}</button>
                     </div>
                 </div>
-                
-                <div class="col-lg-12" >
+
+                <div class="col-lg-12">
                     <table id="paramTB" border="1" style="display:none">
                         <tr>
                             <th v-text="text_detail_8"></th>
@@ -212,8 +207,8 @@
                         <tr v-for="item in paramTableData">
                             <td v-text="item.part"></td>
                             <td>
-                                <img class="paramDatatableIMG img-response" :src="item.tag" /> 
-                                
+                                <img class="paramDatatableIMG img-response" :src="item.tag" />
+
                             </td>
                             <td v-text="item.model"></td>
                             <td>
@@ -296,10 +291,10 @@
 
 
             </div>
-           
+
 
             <div v-if="activeName=='d1'">
-                
+
                 <div class="row filerow" v-for="item in files_d1">
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
                         <img class="img-response filethumbnail" :src="GetfileName(item.thumbnailImg,item.Type)" />
@@ -321,7 +316,7 @@
             <div v-if="activeName=='d2'" class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2">
                     <img class="img-response" style="width:80%;max-width:300px" src="/resourse/Img/2D_icon.png" />
-                    
+
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div style="margin-bottom:15px;" v-for="item in files_d2_2D">
@@ -384,7 +379,21 @@
     </section>
 </div>
 
-
+<!-- 二维码vue js -->
+<script type="text/javascript" src="//static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+<script>
+    //构造二维码
+    function initQRCode(divid, qrvalue) {
+        var qrcode = new QRCode(document.getElementById(divid), {
+            text: qrvalue,
+            width: 128,
+            height: 128,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: 0 // 二维码结构复杂性 0~3
+        });
+    }
+</script>
 
 <script>
 
@@ -608,7 +617,7 @@
                     params: {
                         lang: this.langCode,
                         productGuid: this.productGuid,
-                        
+
                     }
                 }).then(function (response) {  //接口返回数据
 
@@ -685,7 +694,7 @@
 
                         var it = this.T_Product_office_desk_detail.T_Part_office_Frame;
                         var paramList = new Array();
-                      
+
                         for (i in this.T_Product_office_desk_detail.T_Part_office_Frame.T_Part_office_describes) {
                             paramList.push(this.T_Product_office_desk_detail.T_Part_office_Frame.T_Part_office_describes[i].textValue);
                         }
@@ -697,7 +706,7 @@
                     if (this.T_Product_office_desk_detail.T_Part_office_SideBracket != null) {
                         var it = this.T_Product_office_desk_detail.T_Part_office_SideBracket;
                         var paramList = new Array();
-                       
+
                         for (i in this.T_Product_office_desk_detail.T_Part_office_SideBracket.T_Part_office_describes) {
                             paramList.push(this.T_Product_office_desk_detail.T_Part_office_SideBracket.T_Part_office_describes[i].textValue);
                         }
@@ -708,7 +717,7 @@
                     if (this.T_Product_office_desk_detail.T_Part_office_ControlBox != null) {
                         var it = this.T_Product_office_desk_detail.T_Part_office_ControlBox;
                         var paramList = new Array();
-                        
+
                         for (i in this.T_Product_office_desk_detail.T_Part_office_ControlBox.T_Part_office_describes) {
                             paramList.push(this.T_Product_office_desk_detail.T_Part_office_ControlBox.T_Part_office_describes[i].textValue);
                         }
@@ -776,7 +785,7 @@
                         this.isCollect = true;
                     }
 
-                   
+
                     console.log(response.body);
 
 
