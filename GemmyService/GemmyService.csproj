@@ -352,6 +352,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="resourse\desk_TS_picture\effectImg1.png" />
+    <Content Include="resourse\desk_TS_picture\JC35TS-R13S-196-101-84-0-06-0.png" />
     <Content Include="resourse\desk_TS_picture\JC35TS-C12S.png" />
     <Content Include="resourse\desk_TS_picture\JC35TS-C13S.png" />
     <Content Include="resourse\desk_TS_picture\JC35TS-E13S.png" />
