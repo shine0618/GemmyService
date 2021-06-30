@@ -361,6 +361,8 @@
     <Content Include="resourse\desk_TS_picture\JC35TS-R13R.png" />
     <Content Include="resourse\desk_TS_picture\JC35TS-R13S.png" />
     <Content Include="resourse\desk_TS_picture\JC35TS-S13S.png" />
+    <Content Include="resourse\Img\2D_icon.png" />
+    <Content Include="resourse\Img\3D_icon.png" />
     <Content Include="resourse\Img\detail_icon.png" />
     <Content Include="resourse\Img\excel_icon.png" />
     <Content Include="resourse\Img\jpg_icon.png" />
@@ -741,6 +743,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
+    <Content Include="Scripts\vueAjax.js" />
     <Content Include="Upload\office\20210526\suoluetu.png" />
     <Content Include="Upload\office\frame19.png" />
     <Content Include="Web.config" />

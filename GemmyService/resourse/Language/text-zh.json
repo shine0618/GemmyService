@@ -156,6 +156,7 @@
     "text_detail_2": "关键参数",
     "text_detail_3": "配置编号",
 
+
     "text_detail_4": "产品介绍",
     "text_detail_5": "尺寸图",
     "text_detail_6": "认证",
@@ -195,7 +196,9 @@
 
 
     "text_part_description_1": "最小长度",
-    "text_part_description_2": "最大长度"
+    "text_part_description_2": "最大长度",
+
+    "text_customer_text1": "部件详情"
 
 
 

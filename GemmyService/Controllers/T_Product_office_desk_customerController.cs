@@ -18,6 +18,14 @@ namespace GemmyService.Controllers
         // GET: T_Product_office_desk_customer
         public ActionResult Index()
         {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
             return View(db.T_Product_office_desk_customer.ToList());
         }
 

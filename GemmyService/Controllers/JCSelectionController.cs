@@ -466,6 +466,7 @@ namespace GemmyService.Controllers
                 de.deskNewProduct = false;
                 de.deskJCRecommend = false;
                 de.verificationCode = BLL_Ofiice_Configuration.CreateConfigurationCode(de.deskGuid, false, pname, Type, mode);
+                de.deskCustomerName = custmerName;
 
                 int deskid = bll_desk.AddT_Product_office_desk(de);
                 if (deskid < 1)
