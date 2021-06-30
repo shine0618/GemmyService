@@ -95,25 +95,25 @@
 
                 @if (@Session["configurationPerson"] == null)
                 {
-                    <h4 class="drawerh5">登录</h4>
+                <h4 class="drawerh5">{{NAVLogin}}</h4>
                     <el-form :model="ruleLoginForm" status-icon :rules="rules" ref="ruleLoginForm" label-width="100px" class="demo-ruleForm">
                         <el-form-item prop="username">
                             <span slot="label">
-                                <span>账号</span>
+                                <span>{{NAVLoginAccount}}</span>
                                 <i class="el-icon-user"></i>
                             </span>
                             <el-input type="text" v-model="ruleLoginForm.username"></el-input>
                         </el-form-item>
                         <el-form-item prop="pass">
                             <span slot="label">
-                                <span>密码</span>
+                                <span>{{NAVLoginPassword}}</span>
                                 <i class="el-icon-lock"></i>
                             </span>
                             <el-input type="password" v-model="ruleLoginForm.pass" autocomplete="off"></el-input>
                         </el-form-item>
                         <el-form-item v-show="isLoginCheck">
                             <span slot="label">
-                                <span>验证码</span>
+                                <span>{{NAVLoginCode}}</span>
                                 <i class="el-icon-message"></i>
                             </span>
                             <el-col :span="18">
@@ -130,59 +130,59 @@
 
                         <el-form-item>
                             @*<el-button v-on:click="login(ruleLoginForm.username,ruleLoginForm.pass,confirmSuccess,isLoginCheck)">登录</el-button>*@
-                            <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="login(ruleLoginForm.username,ruleLoginForm.pass,confirmSuccess,isLoginCheck)"> 登录</button>
+                            <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="login(ruleLoginForm.username,ruleLoginForm.pass,confirmSuccess,isLoginCheck)"> {{NAVLoginButton}}</button>
                         </el-form-item>
 
                         <el-form-item>
-                            <el-col :span="22" align="right"> <el-link type="primary" v-on:click="dialogVisible_forget=true">忘记密码?</el-link></el-col>
+                            <el-col :span="22" align="right"> <el-link type="primary" v-on:click="dialogVisible_forget=true">{{NAVLoginForgetLink}}</el-link></el-col>
                         </el-form-item>
 
 
                     </el-form>
-                    <h4 class="drawerh5">注册</h4>
-                    <p class="explainText">通过 Jiecang 捷昌的 G-Configration 在线服务，我们随时随地为您提供支持。我们始终以您的日常工作为导向。帮助您减轻个别工作量，或陪伴您完成多个过程步骤。助您更轻松、更快地获得最佳结果。</p>
+                    <h4 class="drawerh5">{{NAVRegister}}</h4>
+                    <p class="explainText">{{NAVRegisterDesc}}</p>
                     <el-form :model="ruleRegisterForm" status-icon :rules="rulesRegister" ref="ruleRegisterForm" label-width="100px" class="demo-ruleForm">
                         <el-form-item prop="registerusername">
                             <span slot="label">
-                                <span>账号</span>
+                                <span>{{NAVRegisterAccount}}</span>
                                 <i class="el-icon-user"></i>
                             </span>
                             <el-input type="text" v-model="ruleRegisterForm.registerusername" autocomplete="off"></el-input>
                         </el-form-item>
                         <el-form-item prop="registercode">
                             <span slot="label">
-                                <span>验证码</span>
+                                <span>{{NAVRegisterCode}}</span>
                                 <i class="el-icon-postcard"></i>
                             </span>
                             <el-col :span="16"><el-input type="text" v-model="ruleRegisterForm.registercode" autocomplete="new-password"></el-input></el-col>
                             <el-col :span="6" align="right">
                                 <el-button v-on:click="sendEmail(ruleRegisterForm.registerusername)">
-                                    <span v-show="registershow">发送邮件</span>
+                                    <span v-show="registershow">{{NAVRegisterSendEmail}}</span>
                                     <span v-show="!registershow">   {{count}} s</span>
                                 </el-button>
                         </el-form-item>
                         <el-form-item prop="registername">
                             <span slot="label">
-                                <span>名</span>
+                                <span>{{NAVRegisterFirstName}}</span>
                                 <i class="el-icon-postcard"></i>
                             </span>
                             <el-col :span="9"><el-input type="text" v-model="ruleRegisterForm.registerfirstname" autocomplete="off"></el-input></el-col>
                             <el-col :span="5" align="center">
-                                <span>姓</span>
+                                <span>{{NAVRegisterLastName}}</span>
                                 <i class="el-icon-postcard"></i>
                             </el-col>
                             <el-col :span="10"><el-input type="text" v-model="ruleRegisterForm.registerlastname" autocomplete="off"></el-input></el-col>
                         </el-form-item>
                         <el-form-item prop="registerpass">
                             <span slot="label">
-                                <span>密码</span>
+                                <span>{{NAVRegisterPassword}}</span>
                                 <i class="el-icon-lock"></i>
                             </span>
                             <el-input type="password" v-model="ruleRegisterForm.registerpass" autocomplete="off"></el-input>
                         </el-form-item>
                         <el-form-item prop="registercheckPass">
                             <span slot="label">
-                                <span>确认密码</span>
+                                <span>{{NAVRegisterConfirmPassword}}</span>
                                 <i class="el-icon-key"></i>
                             </span>
                             <el-input type="password" v-model="ruleRegisterForm.registercheckPass" autocomplete="off"></el-input>
@@ -190,10 +190,10 @@
 
                         <el-form-item>
                             @*    <el-button class="thm-btn orderbtn" v-on:click="register(ruleRegisterForm.registerusername,ruleRegisterForm.registerpass,ruleRegisterForm.registercode,ruleRegisterForm.registercheckPass,ruleRegisterForm.registerfirstname,ruleRegisterForm.registerlastname)">发送邮件</el-button>*@
-                            <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="register(ruleRegisterForm.registerusername,ruleRegisterForm.registerpass,ruleRegisterForm.registercode,ruleRegisterForm.registercheckPass,ruleRegisterForm.registerfirstname,ruleRegisterForm.registerlastname)"> 注册</button>
+                            <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="register(ruleRegisterForm.registerusername,ruleRegisterForm.registerpass,ruleRegisterForm.registercode,ruleRegisterForm.registercheckPass,ruleRegisterForm.registerfirstname,ruleRegisterForm.registerlastname)"> {{NAVRegisterButton}}</button>
                         </el-form-item>
                         <el-form-item>
-                            <el-col :span="22" align="right"> <el-link type="primary" v-on:click="dialogVisible_use=true">注册须知</el-link></el-col>
+                            <el-col :span="22" align="right"> <el-link type="primary" v-on:click="dialogVisible_use=true">{{NAVRegisterNotice}}</el-link></el-col>
                         </el-form-item>
                     </el-form>
                 }
@@ -202,7 +202,7 @@
                     <el-row>
                         <el-col :span="8"><el-avatar style="background:var(--thm-base)">@Session["picName"] </el-avatar></el-col>
                         <h3>@Session["configurationPerson"]</h3>                        
-                        <button type="button" class="thm-btn orderbtn" style="width:50%" @@click="LoginOut"> 退出登录</button>
+                        <button type="button" class="thm-btn orderbtn" style="width:50%" @@click="LoginOut"> {{NAVLoginQuit}}</button>
 
                     </el-row>
 
@@ -210,7 +210,7 @@
 
                     <template>
                         <el-collapse v-model="activeNames" style="font-size:17px;" accordion>
-                            <el-collapse-item title="个人信息" name="1">
+                            <el-collapse-item :title="NAVLoginPersonInfo" name="1">
                                 <div v-for="item in infoDataForm1" class="Personal_span">
                                     <i :class="item.icon" style="font-size:20px;color: var(--thm-base)"></i>
                                     <span>
@@ -220,7 +220,7 @@
                                 </div>
 
                             </el-collapse-item>
-                            <el-collapse-item title="公司信息" name="2">
+                            <el-collapse-item :title="NAVLoginCompanyInfo" name="2">
 
                                 <div v-for="item in infoDataForm2" class="Personal_span">
                                     <i :class="item.icon" style="font-size:20px;color: var(--thm-base)"></i>
@@ -233,35 +233,35 @@
 
 
                             </el-collapse-item>
-                            <el-collapse-item title="设置 " name="3">
-                                <a href="/JCSelection/PersonInfo?email=@Session["emailName"]&name=@Session["configurationPerson"]" class="Personal_span"><i class="el-icon-s-tools" style="font-size:20px;color: var(--thm-base)"></i><span style="color:#303133">个人设置</span></a>
+                            <el-collapse-item :title="NAVLoginSetting"  name="3">
+                                <a href="/JCSelection/PersonInfo?email=@Session["emailName"]&name=@Session["configurationPerson"]" class="Personal_span"><i class="el-icon-s-tools" style="font-size:20px;color: var(--thm-base)"></i><span style="color:#303133">{{NAVLoginPersonSetting}}</span></a>
 
                             </el-collapse-item>
-                            <el-collapse-item title="修改密码" name="4">
+                            <el-collapse-item :title="NAVLoginResetPassword" name="4">
                                 <el-form :model="resetPasswordLogin" status-icon :rules="rulesresetPasswordLogin" ref="resetPasswordLogin" label-width="100px" class="demo-ruleForm">
                                     <el-form-item prop="oldPassword">
                                         <span slot="label">
-                                            <span>原密码</span>
+                                            <span>{{NAVLoginResetOldPassword}}</span>
                                             <i class="el-icon-lock" style="font-size:20px;color: var(--thm-base)"></i>
                                         </span>
                                         <el-input type="password" v-model="resetPasswordLogin.oldPassword" autocomplete="new-password"></el-input>
                                     </el-form-item>
                                     <el-form-item prop="newPassword">
                                         <span slot="label">
-                                            <span>新密码</span>
+                                            <span>{{NAVLoginResetNewPassword}}</span>
                                             <i class="el-icon-lock" style="font-size:20px;color: var(--thm-base)"></i>
                                         </span>
                                         <el-input type="password" v-model="resetPasswordLogin.newPassword" autocomplete="new-password"></el-input>
                                     </el-form-item>
                                     <el-form-item prop="checkNewPassword">
                                         <span slot="label">
-                                            <span>确认密码</span>
+                                            <span>{{NAVLoginResetConfirmPassword}}</span>
                                             <i class="el-icon-lock" style="font-size:20px;color: var(--thm-base)"></i>
                                         </span>
                                         <el-input type="password" v-model="resetPasswordLogin.checkNewPassword" autocomplete="new-password"></el-input>
                                     </el-form-item>
                                     <el-form-item>
-                                        <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="resetLogin(loginEmail,resetPasswordLogin.oldPassword,resetPasswordLogin.newPassword)"> 重置密码</button>
+                                        <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="resetLogin(loginEmail,resetPasswordLogin.oldPassword,resetPasswordLogin.newPassword)"> {{NAVLoginResetButton}}</button>
                                     </el-form-item>
                                 </el-form>
                             </el-collapse-item>
@@ -271,7 +271,7 @@
 
                     <br />
                     <div class="contact_div">
-                        <h6>问题联系</h6>
+                        <h6>{{NAVLoginQuestionContact}}</h6>
 
                         <div class="row">
                             <div class="col-lg-4 col-xs-4">
@@ -304,20 +304,20 @@
 
 
         </el-drawer>
-        <el-dialog title="忘记密码"
+        <el-dialog :title="NAVForgetTitle"
                    :visible.sync="dialogVisible_forget"
                    width="600px">
             <el-form :model="ruleRetrieve" status-icon :rules="rulesRetrieve" ref="ruleRetrieve" label-width="100px" class="demo-ruleForm">
                 <el-form-item prop="retrieveUsername">
                     <span slot="label">
-                        <span>账号</span>
+                        <span>{{NAVForgetAccount}}</span>
                         <i class="el-icon-postcard"></i>
                     </span>
                     <el-col :span="18"><el-input type="text" v-model="ruleRetrieve.retrieveUsername" autocomplete="new-password"></el-input></el-col>
 
                     <el-col :span="6" align="right">
                         <el-button v-on:click="sendResetEmail(ruleRetrieve.retrieveUsername)">
-                            <span v-show="show">发送邮件</span>
+                            <span v-show="show">{{NAVForgetSendEmail}}</span>
                             <span v-show="!show">   {{count}} s</span>
                         </el-button>
                     </el-col>
@@ -325,21 +325,21 @@
 
                 <el-form-item prop="retrievecode">
                     <span slot="label">
-                        <span>验证码</span>
+                        <span>{{NAVForgetCode}}</span>
                         <i class="el-icon-message"></i>
                     </span>
                     <el-input v-model="ruleRetrieve.retrievecode" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item prop="retrievePassword">
                     <span slot="label">
-                        <span>新密码</span>
+                        <span>{{NAVForgetNewPassword}}</span>
                         <i class="el-icon-lock"></i>
                     </span>
                     <el-input type="password" v-model="ruleRetrieve.retrievePassword" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item prop="retrievecheckPassword">
                     <span slot="label">
-                        <span>确认密码</span>
+                        <span>{{NAVForgetConfirmPassword}}</span>
                         <i class="el-icon-key"></i>
                     </span>
                     <el-input type="password" v-model="ruleRetrieve.retrievecheckPassword" autocomplete="off"></el-input>
@@ -347,7 +347,7 @@
 
 
                 <el-form-item>
-                    <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)"> 重置密码</button>
+                    <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)"> {{NAVForgetResetButton}}</button>
 
                     @*<el-col :span="12" align="center">
                             <el-button type="primary" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)">重置</el-button>
@@ -361,28 +361,11 @@
             </el-form>
         </el-dialog>
 
-        <el-dialog title="使用须知"
+        <el-dialog :title="NAVRegisterUseNotice"
                    :visible.sync="dialogVisible_use"
                    width="600px">
             <p class="explainText">
-                使用个人数据的同意声明
-
-                1. Julius Blum GmbH（Industriestraße 1，6973 Höchst，奥地利）的网站 www.blum.com 将通过“E-SERVICES 登记表”处理您的以下个人信息：<br>
-
-                - 姓名，称呼，
-                - 公司，行业，职务，
-                - 街道，邮编/城市，国家，地区，
-                - 电子邮件地址，网址，
-                - （移动）电话号码，传真号码，
-                - 您在 E-SERVICES 电子化服务中的使用行为,
-                - 关于所使用的 CAD 软件的信息，
-                - 上传的文件及其内容，
-                - 自动确认的通讯语言。<br>
-
-                2. 这些数据用于通过 E-SERVICES 进行营销以及改进我们的产品和服务。除了电子邮件、新闻邮件、电话、传真和信件，我们还会通过社交媒体 (Facebook、Twitter、Pinterest、LinkedIn、Houzz、Xing) 以及搜索引擎 Google、Yandex 或百度的通信渠道与您联系，前提是您在这些地方进行了注册或提供了有效的电子邮件地址。这些数据的保存时间为 3（三）年。<br>
-
-                3. 因第 2 项所描述之目的，这些数据将供我公司内部以及销售伙伴使用。Julius Blum GmbH 拥有以下子公司：
-
+                {{NAVRegisterUseContent}}
             </p>
         </el-dialog>
     </div>
@@ -427,7 +410,7 @@
                             @if (@Session["configurationPerson"] == null)
                             {
 
-                                <a>请登录</a>
+                        <a>{{NAVLoginState}}</a>
                             }
                             else
                             {

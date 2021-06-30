@@ -20,8 +20,8 @@
         @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
         <!-- /.page-header__bg -->
         <div class="container" style="padding:10px 10px ">
-            <a class="navigation_a" href="/JCSelection/main">主页</a>/
-            <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a" href="/JCSelection/office">{{NAVOfficePage}}</a>
         </div><!-- /.container -->
 
     </section><!-- /.page-header -->
@@ -116,7 +116,10 @@
             OfficeTFDeskContent: "",
             OfficeBenchDesk: "",
             OfficeTSDesk: "",
-            name: 'Vue.js'
+            name: 'Vue.js',
+            OfficeUnopenNotice: "",
+            NAVMainPage: "",
+            NAVOfficePage:"",
         },
         // 在 `methods` 对象中定义方法
         methods: {
@@ -158,7 +161,7 @@
             },
           
             open1() {
-                this.$message('尽请期待');
+                this.$message(this.OfficeUnopenNotice);
             },
         }
     })

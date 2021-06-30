@@ -135,9 +135,7 @@
                     <br />
                     <h6 v-for="item in detailModel.des" v-text="item.textValue"></h6>
 
-                    <p style="color: var(--thm-base)" v-show="detailModel.ColumnWithFoot!=''" v-text="'ColumnWithFoot '+ detailModel.ColumnWithFoot"></p>
-                    <p style="color: var(--thm-base)" v-show="detailModel.ColumnWithFrame!=''" v-text="'ColumnWithFrame '+ detailModel.ColumnWithFrame"></p>
-                    <p style="color: var(--thm-base)" v-show="detailModel.FrameWithSideBracket!=''" v-text="'FrameWithSideBracket ' +detailModel.FrameWithSideBracket"></p>
+                    
                 </div>
             </div>
         </div>
@@ -153,8 +151,8 @@
         @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
         <!-- /.page-header__bg -->
         <div class="container" style="padding:10px 10px ">
-            <a class="navigation_a" href="/JCSelection/main">主页</a>/
-            <a class="navigation_a">自定义配置</a>
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a">{{CustomPage}}</a>
         </div><!-- /.container -->
     </section><!-- /.page-header -->
 
@@ -179,7 +177,7 @@
                                 <el-tab-pane :label="text_customer_42_2" name="s5_2"></el-tab-pane>
                                 <el-tab-pane :label="text_customer_42_3" name="s5_3"></el-tab-pane>
                                 <el-tab-pane :label="text_customer_423" name="s6"></el-tab-pane>
-                                <el-tab-pane label="配置清单信息" name="s7"></el-tab-pane>
+                                <el-tab-pane :label="CustomConfigurationListInfo" name="s7"></el-tab-pane>
                             </el-tabs>
                         </template>
                     </div>
@@ -206,25 +204,25 @@
             <div class="row selectStep" v-if="selectStep=='s2'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    选择框架
+                    {{CustomSelectFrame}}
                 </div>
             </div>
             <div class="row selectStep" v-if="selectStep=='s3'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    选择地脚
+                    {{CustomSelectFoot}}
                 </div>
             </div>
             <div class="row selectStep" v-if="selectStep=='s4'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    选择侧板
+                    {{CustomSelectSideBracket}}
                 </div>
             </div>
             <div class="row selectStep" v-if="selectStep=='s5_1'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    选择控制器
+                    {{CustomSelectControlbox}}
 
                     <el-checkbox v-model="ControlBox_c1" label="UL"></el-checkbox>
 
@@ -233,26 +231,26 @@
             <div class="row selectStep" v-if="selectStep=='s5_2'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    选择手控器
+                    {{CustomSelectHandSet}}
                 </div>
             </div>
             <div class="row selectStep" v-if="selectStep=='s5_3'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    选择电源线
+                    {{CustomSelectPowerCable}}
                 </div>
             </div>
 
             <div class="row selectStep" v-if="selectStep=='s6'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    颜色
+                    {{CustomSelectColor}}
                 </div>
             </div>
             <div class="row selectStep" v-if="selectStep=='s7'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    配置清单
+                    {{CustomConfiguration}}
                 </div>
             </div>
         </div>
@@ -275,7 +273,7 @@
 
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>{{list_column_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_column_count}}{{CustomResultCount}}</h6></div>
                     </div>
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s2'">
@@ -290,7 +288,7 @@
                             </div>
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>{{list_frame_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_frame_count}}{{CustomResultCount}}</h6></div>
                     </div>
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s3'">
@@ -304,7 +302,7 @@
 
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>{{list_foot_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_foot_count}}{{CustomResultCount}}</h6></div>
                     </div>
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s4'">
@@ -318,7 +316,7 @@
 
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>{{list_SideBracket_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_SideBracket_count}}{{CustomResultCount}}</h6></div>
                     </div>
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s5_1'">
@@ -332,7 +330,7 @@
                             </div>
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>{{list_ControlBox_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_ControlBox_count}}{{CustomResultCount}}</h6></div>
                     </div>
 
                 </div>
@@ -349,7 +347,7 @@
 
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>{{list_HandSet_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_HandSet_count}}{{CustomResultCount}}</h6></div>
                     </div>
                 </div>
 
@@ -366,7 +364,7 @@
 
                             <h6 style="text-align:center" v-text="item.Mode"></h6>
                         </div>
-                        <div class="col-lg-12" style="text-align:center"><h6>{{list_Powercable_count}}条结果</h6></div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_Powercable_count}}{{CustomResultCount}}</h6></div>
                     </div>
 
 
@@ -398,12 +396,12 @@
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s7'">
 
                     <div>
-                        <label>请输入您的方案名称</label>
+                        <label>{{CustomInputName}}</label>
                         <input type="text" class="form-control searchInput" v-model="custmerName" />
                     </div>
 
                     <div>
-                        <label>选择框架宽度</label>
+                        <label>{{CustomWidthLength}}</label>
                         <el-slider v-model="frameWidth"
                                    :min="600"
                                    :max="1400"
@@ -411,7 +409,7 @@
                         </el-slider>
                     </div>
                     <div>
-                        <label>选择升降高度</label>
+                        <label>{{CustomHeightLength}}</label>
                         <el-slider v-model="frameHeight"
                                    :min="600"
                                    :max="1400"
@@ -425,25 +423,25 @@
 
 
 
-                    <h6 v-text="'CC	立柱代号 '+select_columnMode"></h6>
-                    <h6 v-text="' FC	框架代号 '+select_frameMode"></h6>
-                    <h6 v-text="' TFC	地脚代号 '+select_footMode"></h6>
-                    <h6 v-text="' SPC	侧板代号 '+select_SideBracketMode"></h6>
-                    <h6 v-text="' COLOUR	颜色 '+select_ColorMode"></h6>
+                    <h6 v-text="'CC	'+CustomColumnNum+' '+select_columnMode"></h6>
+                    <h6 v-text="' FC	'+CustomFrameNum+' '+select_frameMode"></h6>
+                    <h6 v-text="' TFC	'+CustomFootNum+' '+select_footMode"></h6>
+                    <h6 v-text="' SPC	'+CustomSidebracketNum+' '+select_SideBracketMode"></h6>
+                    <h6 v-text="' COLOUR	'+CustomColorNum+' '+select_ColorMode"></h6>
 
-                    <h6 v-text="'CONTROLLER	控制器 '+select_ControlBoxMode"></h6>
-                    <h6 v-text="'HC	操作器 '+select_HandSetMode"></h6>
+                    <h6 v-text="'CONTROLLER	'+CustomControlboxNum+' '+select_ControlBoxMode"></h6>
+                    <h6 v-text="'HC	'+CustomHandsetNum+' '+select_HandSetMode"></h6>
 
-                    <h6 v-text="'电源线 '+select_PowercableMode"></h6>
+                    <h6 v-text="CustomPowerCableNum+' '+select_PowercableMode"></h6>
 
-                    <h6 v-text="' POS2	框架伸缩距离 '+frameWidth"></h6>
-                    <h6 v-text="'POS1	立柱升降距离 '+frameHeight"></h6>
-                    <h6>
-                        CAC	脚轮代号
-                    </h6>
-                    <h6> OF	可选功能</h6>
-                    <h6> CSF	立柱特殊功能</h6>
-
+                    <h6 v-text="' POS2	'+CustomWidthLength+' '+frameWidth"></h6>
+                    <h6 v-text="'POS1	'+CustomHeightLength+' '+frameHeight"></h6>
+                    
+                    <el-switch v-model="value"
+                               active-color="#13ce66"
+                               inactive-color="#ff4949">
+                        
+                    </el-switch><h6>{{CustomShowBoard}}</h6>
 
 
 
@@ -457,9 +455,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <button @@click="nextStep" class="orderbtn thm-btn">下一步</button>
+                    <button @@click="nextStep" class="orderbtn thm-btn">{{CustomNextButton}}</button>
                     @* <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''&& select_SideBracket!=''">完成配置</button>*@
-                    <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''" @@click="saveConfigurations()">保存配置</button>
+                <button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''" @@click="saveConfigurations()">{{CustomSaveConfigurationButton}}</button>
                 </div>
 
             </div>
@@ -507,7 +505,7 @@
             list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             colorConfirm: '#FF0000',
             selectStep: 's1',//选择的步骤
-
+            value: true,//显示桌面板
             search1_column: '',//筛选的正装
 
             defaultWidth: 0,
@@ -583,8 +581,40 @@
             text_customer_7: "",
             text_customer_8: "",
             text_customer_9: "",
-
-
+            NAVMainPage:"",
+            CustomPage:"",
+            CustomConfigurationListInfo: "",
+            CustomSelectFrame: "",
+            CustomSelectFoot: "",
+            CustomSelectSideBracket: "",
+            CustomSelectControlbox: "",
+            CustomSelectHandSet: "",
+            CustomSelectPowerCable: "",
+            CustomSelectColor: "",
+            CustomConfiguration: "",
+            CustomResultCount: "",
+            CustomInputName: "",
+            CustomSelectFrameWidth: "",
+            CustomSelectColumnHeight: "",
+            CustomColumnNum: "",
+            CustomFrameNum: "",
+            CustomFootNum: "",
+            CustomSidebracketNum: "",
+            CustomColorNum: "",
+            CustomControlboxNum: "",
+            CustomHandsetNum: "",
+            CustomPowerCableNum: "",
+            CustomWidthLength: "",
+            CustomHeightLength: "",
+            CustomShowBoard: "",
+            CustomNextButton: "",
+            CustomSaveConfigurationButton: "",
+            CustomSelectColumnNotice: "",
+            CustomAddConfirm: "",
+            CustomAddNotice: "",
+            CustomAddConfirmButton: "",
+            CustomAddCancelButton: "",
+            CustomAddSuccessNotice: "",
 
             MyCollectName: "",
             custmerName: "",//客户命名方案
@@ -613,7 +643,7 @@
                         if (this.select_columnMode == "") {
                             this.selectStep = "s1";
                             this.$notify({
-                                message: '请先选择立柱!',
+                                message: this.CustomSelectColumnNotice,
                                 type: 'info'
                             });
                             //var is = setTimeout(function () {
@@ -657,9 +687,9 @@
             saveConfigurations: function (event) {
 
 
-                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
-                    confirmButtonText: '确定',
-                    cancelButtonText: '取消',
+                this.$confirm(this.CustomAddConfirm, this.CustomAddNotice, {
+                    confirmButtonText: this.CustomAddConfirmButton,
+                    cancelButtonText: this.CustomAddCancelButton,
 
                 }).then(() => {
 
@@ -687,7 +717,7 @@
                         if (response.body.msgType == "true") {
                             this.$message({
                                 type: 'success',
-                                message: '添加成功!'
+                                message: this.CustomAddSuccessNotice
                             });
                         }
                         else {

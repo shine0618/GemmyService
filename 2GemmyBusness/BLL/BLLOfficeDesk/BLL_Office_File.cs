@@ -40,7 +40,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
 
             //再获取这个桌子的所有文件
             var query = from x in read_db.T_Office_Files
-                        where x.Mode == desk.Mode || x.Mode == desk.ColumnType || x.Mode == desk.FootType || x.Mode == desk.SideBracketType || x.Mode == desk.FrameType
+                        where x.Mode == desk.Mode || x.Mode == desk.ColumnType || x.Mode == desk.FootType || x.Mode == desk.SideBracketType || x.Mode == desk.FrameType ||x.Mode==desk.HandsetType ||x.Mode==desk.ControlboxType
                         select x;
 
             List<T_Office_Files> flist = new List<T_Office_Files>();

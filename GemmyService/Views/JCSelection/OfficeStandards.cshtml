@@ -35,8 +35,8 @@
         @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
         <!-- /.page-header__bg -->
         <div class="container" style="padding:10px 10px ">
-            <a class="navigation_a" href="/JCSelection/main">主页</a>/
-            <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>/
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a" href="/JCSelection/office">{{NAVOfficePage}}</a>/
             <a class="navigation_a">@ViewBag.Type</a>
         </div><!-- /.container -->
     </section><!-- /.page-header -->
@@ -71,7 +71,7 @@
                         @if (Session["emailName"] != null && Session["emailName"].ToString() != "")
                         {
                             <div class="blog-sidebar__box blog-sidebar__category service-sidebar__category">
-                                <h2 style="margin:10px;" class="blog-sidebar__box-title">定制配置</h2><!-- /.blog-sidebar__title -->
+                                <h2 style="margin:10px;" class="blog-sidebar__box-title">{{OfficeStandardsCustomzed}}</h2><!-- /.blog-sidebar__title -->
                                 <ul class="list-unstyled service-sidebar__category-list">
                                     <li><a href="/JCSelection/office_Eservice_test">{{t_OfficeStandards_2}}</a></li>
                                 </ul><!-- /.list-unstyled -->
@@ -160,11 +160,16 @@
             t_OfficeStandards_1: "",
             t_OfficeStandards_2: "",
 
+            //------文本----
             deskNewProductNumber: "",
             deskSalesVolume: "",
             deskPrice: "",
             deskStabilityLeave: "",
             deskMaxLoad: "",
+            NAVMainPage: "",
+            NAVOfficePage: "",
+            OfficeStandardsCustomzed: ""
+            //------文本 end ----
         },
         watch: {
             OrderValue: function (val) {

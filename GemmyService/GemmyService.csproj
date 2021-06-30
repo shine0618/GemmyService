@@ -484,9 +484,17 @@
     <Content Include="resourse\part_frame\17.png" />
     <Content Include="resourse\part_frame\19.png" />
     <Content Include="resourse\part_frame\23.png" />
+    <Content Include="resourse\part_frame\25.png" />
+    <Content Include="resourse\part_frame\27.png" />
     <Content Include="resourse\part_frame\29.png" />
+    <Content Include="resourse\part_frame\30.png" />
     <Content Include="resourse\part_frame\36.png" />
+    <Content Include="resourse\part_frame\37.png" />
     <Content Include="resourse\part_frame\39.png" />
+    <Content Include="resourse\part_frame\40.png" />
+    <Content Include="resourse\part_frame\43.png" />
+    <Content Include="resourse\part_frame\90.png" />
+    <Content Include="resourse\part_frame\98.png" />
     <Content Include="resourse\part_frame\frame19.png" />
     <Content Include="resourse\part_handset\JCHT35J.png" />
     <Content Include="resourse\part_handset\JCHT35K.png" />

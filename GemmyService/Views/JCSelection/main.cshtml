@@ -35,7 +35,7 @@
                         <div class="col-xl-6 col-lg-6">
                             <p>产品选型 & 定制化</p>
                             <h2>
-                                Customizing
+                                Customized
                                 All Your
                                 Needs
                             </h2>
@@ -53,7 +53,7 @@
                         <div class="col-xl-6 col-lg-6">
                             <p>Simple & Secure Payment Process</p>
                             <h2>
-                                Customizing
+                                Customized
                                 All Your
                                 Needs
                             </h2>
@@ -117,13 +117,13 @@
     <!--</div>--><!-- /.feature-two -->
 </section><!-- /.main-slider -->
 
-
+<div id="office_selectbox">
 <section class="feature-one">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="block-title text-center">
-                    <p>Configuration 配置工具</p>
+                    <p>{{MainConfigurationTool}}</p>
                     <h2></h2>
                 </div><!-- /.block-title -->
             </div><!-- /.col-lg-6 -->
@@ -133,7 +133,7 @@
                 <div class="feature-one__box">
                     <i class="pylon-icon-assets"></i>
                     <p>
-                        产品配置工具
+                        {{MainProductConfigurationTool}}
                     </p>
                 </div><!-- /.feature-one__box -->
             </div><!-- /.col-lg-4 -->
@@ -141,7 +141,7 @@
                 <div class="feature-one__box">
                     <i class="pylon-icon-verification"></i>
                     <p>
-                        产品资料
+                        {{MainProductFiles}}
                     </p>
                 </div><!-- /.feature-one__box -->
             </div><!-- /.col-lg-4 -->
@@ -149,10 +149,65 @@
                 <div class="feature-one__box">
                     <i class="pylon-icon-finance"></i>
                     <p>
-                        我的订货清单
+                        {{MainMyOrder}}
                     </p>
                 </div><!-- /.feature-one__box -->
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
     </div><!-- /.container -->
 </section><!-- /.feature-one -->
+</div>
+
+<script>
+    var office_selectbox = new Vue({
+        el: '#office_selectbox',
+        data: {
+            MainConfigurationTool: "",
+            MainProductConfigurationTool: "",
+            MainProductFiles: "",
+            MainMyOrder: "",
+        },
+        // 在 `methods` 对象中定义方法
+        methods: {
+            initPage: function (event) {
+                var code = GetLanguCode();
+                $.ajaxSettings.async = false;
+
+                var languText;
+                $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
+                    languText = result.language;
+                });
+                $.ajaxSettings.async = true;
+
+                var obj = languText;
+                for (var p in obj) {
+                    // 方法
+                    if (typeof (obj[p]) == "function") {
+                        obj[p]();
+                    } else {
+                        // p 为属性名称，obj[p]为对应属性的值
+                        var key = p;
+                        var value = obj[p];
+                        this.setData(key, value);;
+                    }
+                }
+
+            },
+            setData: function (field, val) {
+                this.$set(this.$data, field, val);
+                ////如果需要提交请求,下面这样是不行的,提交的是field字符串
+                //$.post('url', { field: val }, function () { });
+                ////需要这样
+                //var json = {};
+                //json[field] = value
+                //$.post('url', json, function () { });
+
+            },
+
+
+            
+        }
+    })
+
+    office_selectbox.initPage();
+</script>

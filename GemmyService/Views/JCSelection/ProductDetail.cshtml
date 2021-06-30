@@ -113,10 +113,10 @@
         @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
         <!-- /.page-header__bg -->
         <div class="container" style="padding:10px 10px ">
-            <a class="navigation_a" href="/JCSelection/main">主页</a>/
-            <a class="navigation_a" href="/JCSelection/office">办公标准配置</a>/
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a" href="/JCSelection/office">{{NAVOfficePage}}</a>/
             <a class="navigation_a" href="/JCSelection/OfficeStandards?domain=office&Type=@ViewBag.Type&recommend=@ViewBag.recommend">@ViewBag.Type</a>/          
-            <a class="navigation_a">产品明细</a>
+            <a class="navigation_a">{{NAVProductDetailPage}}</a>
         </div><!-- /.container -->
     </section><!-- /.page-header -->
 
@@ -156,7 +156,7 @@
 
     </div>-->
 
-                                <h6 v-for="item in descriptions" v-text="item.textValue"></h6>
+                                <h6 v-for="item in descriptions" v-text="item"></h6>
                                 <!-- /.block-title 关键参数 -->
                                 <!--<div class="block-title text-left">
         <p>{{text_detail_2}}</p>
@@ -193,11 +193,11 @@
                 <div class="col-lg-12">
                     <div class="block-title text-center">
                         <p></p>
-                        <h3>产品配置列表</h3>
+                        <h3>{{ProductConfigurationList}}</h3>
                     </div><!-- /.block-title -->
                     <div>
-                        <button class="orderbtn thm-btn" @@click="gotoCustmer" style="float:right;margin-bottom:5px;margin-left:5px">配置定制</button>
-                        <button class="orderbtn thm-btn" @@click="exportConfig" style="float:right;margin-bottom:5px;">导出配置</button>
+                        <button class="orderbtn thm-btn" @@click="gotoCustmer" style="float:right;margin-bottom:5px;margin-left:5px">{{ProductConfigurationCustomButton}}</button>
+                        <button class="orderbtn thm-btn" @@click="exportConfig" style="float:right;margin-bottom:5px;">{{ProductExportConfigurationButton}}</button>
                     </div>
                 </div>
                 
@@ -275,7 +275,7 @@
                 <div class="col-lg-12">
                     <div class="block-title text-center">
                         <p></p>
-                        <h3>产品资料与介绍</h3>
+                        <h3>{{ProductFilesAndDesc}}</h3>
                     </div><!-- /.block-title -->
                 </div>
 
@@ -309,7 +309,7 @@
                         <p style="font-size:14px" v-text="item.Information"></p>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">{{ProductDownloadButton}}</button>
                     </div>
                 </div>
 
@@ -326,7 +326,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div style="margin-bottom:15px;" v-for="item in files_d2_2D">
                         <h5 v-text="item.FileName"></h5>
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">{{ProductDownloadButton}}</button>
                     </div>
 
 
@@ -337,7 +337,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4">
                     <div style="margin-bottom:15px;" v-for="item in files_d2_3D">
                         <h5 v-text="item.FileName"></h5>
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">{{ProductDownloadButton}}</button>
                     </div>
 
 
@@ -355,7 +355,7 @@
                         <p style="font-size:14px" v-text="item.Information"></p>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">{{ProductDownloadButton}}</button>
                     </div>
                 </div>
 
@@ -373,7 +373,7 @@
                         <p style="font-size:14px" v-text="item.Information"></p>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">下载</button>
+                        <button class="orderbtn thm-btn" @@click="downloadfile(item.Path,item.FileName,item.Type)">{{ProductDownloadButton}}</button>
                     </div>
                 </div>
 
@@ -440,6 +440,21 @@
             text_detail_18:"",
             MyCollectName: "",
             paramTableData: [],
+            NAVMainPage: "",
+            NAVOfficePage: "",
+            NAVProductDetailPage: "",
+            ProductConfigurationList: "",
+            ProductConfigurationCustomButton: "",
+            ProductExportConfigurationButton: "",
+            ProductFilesAndDesc: "",
+            ProductDownloadButton: "",
+            ProductCollectSuccess: "",
+            ProductCollectFail: "",
+            ProductCollectCancelSuccess: "",
+            ProductCollectCancelFail: "",
+            ProductDetailLength: "",
+            ProductDetailLoad: "",
+            ProductDetailSpeed: "",
         },
         //watch: {
         //    OrderValue: function (val) {
@@ -481,13 +496,13 @@
                 }).then(function (response) {  //接口返回数据
                     if (response.body > 0) {
                         this.$notify({
-                            message: '收藏成功!',
+                            message: this.ProductCollectSuccess,
                             type: 'success'
                         });
                         this.isCollect = true;
                     }
                     else {
-                        this.$notify.error('收藏失败,请先登录');
+                        this.$notify.error(this.ProductCollectFail);
                         this.isCollect = false;
                     }
                 }, function (error) {
@@ -504,13 +519,13 @@
                 }).then(function (response) {  //接口返回数据
                     if (response.body > 0) {
                         this.$notify({
-                            message: '取消收藏成功!',
+                            message: this.ProductCollectCancelSuccess,
                             type: 'success'
                         });
                         this.isCollect = false;
                     }
                     else {
-                        this.$notify.error('取消收藏失败');
+                        this.$notify.error(this.ProductCollectCancelFail);
                         this.isCollect = true;
                     }
                 }, function (error) {
@@ -600,11 +615,11 @@
                    // this.deskList = response.body;
                     this.T_Product_office_desk = response.body.T_Product_office_desk;
                     this.T_Product_office_desk_detail = response.body.T_Product_office_desk_detail;
-                    this.descriptions = response.body.descriptions;
+                    //this.descriptions = response.body.descriptions;
 
                     this.deskSerialName = this.T_Product_office_desk.deskSerialName;
                     this.configurationNo = this.T_Product_office_desk_detail.configurationNo;
-                    this.introduction = this.T_Product_office_desk_detail.introduction;
+                    //this.introduction = this.T_Product_office_desk_detail.introduction;
 
                     //添加到产品配置列表 立柱
                     if (this.T_Product_office_desk_detail.T_Part_office_Column != null) {
@@ -612,32 +627,33 @@
                         //立柱的参数表
                         var it = this.T_Product_office_desk_detail.T_Part_office_Column;
                         var paramList = new Array();
-                        if (it.Type != '') {
-                            paramList.push("安装方向：" + it.Type);
-                        }
-                        if (it.Level != '') {
-                            paramList.push("节数：" + it.Level);
-                        }
-                        if (it.Form != '') {
-                            paramList.push("管形形状：" + it.Form);
-                        }
+                        var statelist = new Array();
+                        //if (it.Type != '') {
+                        //    statelist.push("安装方向：" + it.Type);
+                        //}
+                        //if (it.Level != '') {
+                        //    statelist.push("节数：" + it.Level);
+                        //}
+                        //if (it.Form != '') {
+                        //    statelist.push("管形形状：" + it.Form);
+                        //}
 
                         if (it.StrokeLength != '') {
-                            paramList.push("行程：" + it.StrokeLength);
+                            statelist.push(this.ProductDetailLength+"：" + it.StrokeLength);
                         }
-                        if (it.MaxStroke != '') {
-                            paramList.push("最大行程：" + it.MaxStroke);
-                        }
+                        //if (it.MaxStroke != '') {
+                        //    statelist.push("最大行程：" + it.MaxStroke);
+                        //}
                         if (it.LoadCapacity != '') {
-                            paramList.push("额定负载：" + it.LoadCapacity);
+                            statelist.push(this.ProductDetailLoad+"：" + it.LoadCapacity);
                         }
-                        if (it.MaxLoad != '') {
-                            paramList.push("最大负载：" + it.MaxLoad);
-                        }
+                        //if (it.MaxLoad != '') {
+                        //    statelist.push("最大负载：" + it.MaxLoad);
+                        //}
                         if (it.Speed != '') {
-                            paramList.push("额定速度：" + it.Speed);
+                            statelist.push(this.ProductDetailSpeed+"：" + it.Speed);
                         }
-
+                        this.descriptions = statelist;
                         for (i in this.T_Product_office_desk_detail.T_Part_office_Column.T_Part_office_describes) {
                             paramList.push(this.T_Product_office_desk_detail.T_Part_office_Column.T_Part_office_describes[i].textValue);
                         }

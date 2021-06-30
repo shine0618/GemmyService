@@ -21,20 +21,20 @@ var nav_langu_box = new Vue({
         var checkUsername = (rule, value, callback) => {
             const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
             if (!value) {
-                return callback(new Error('DL邮箱不能为空'))
+                return callback(new Error(this.NAVEmailEmpty))
             }
             setTimeout(() => {
                 if (mailReg.test(value)) {
                     callback()
                 } else {
-                    callback(new Error('DL请输入正确的邮箱格式'))
+                    callback(new Error(this.NAVEmailFormatError))
                 }
             }, 100)
 
         };
         var validatePass = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('DL请输入密码'));
+                callback(new Error(this.NAVInputPassword));
             } else {
                 callback();
             }
@@ -43,20 +43,20 @@ var nav_langu_box = new Vue({
         var validretrieveUsername = (rule, value, callback) => {
             const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
             if (!value) {
-                return callback(new Error('CZ邮不能为空'))
+                return callback(new Error(this.NAVEmailEmpty))
             }
             setTimeout(() => {
                 if (mailReg.test(value)) {
                     callback();
                 } else {
-                    callback(new Error('CZ请输入正确的邮箱格式'));
+                    callback(new Error(this.NAVEmailFormatError));
                 }
             }, 100)
 
         };
         var validnewPassword = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('CZ请输入密码'));
+                callback(new Error(this.NAVInputPassword));
             } else {
                 if (this.ruleRetrieve.retrievecheckPassword !== '') {
                     this.$refs.ruleRetrieve.validateField('retrievecheckNewPassword');
@@ -66,16 +66,16 @@ var nav_langu_box = new Vue({
         };
         var validcheckNewPassword = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('CZ请再次输入密码'));
+                callback(new Error(this.NAVInputConfirmPassword));
             } else if (value !== this.ruleRetrieve.retrievePassword) {
-                callback(new Error('CZ两次输入密码不一致!'));
+                callback(new Error(this.NAVInputComparePassword));
             } else {
                 callback();
             }
         };
         var validcode = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('CZ验证码为空!'));
+                callback(new Error(this.NAVInputCodeEmpty));
             } else {
                 callback();
             }
@@ -83,20 +83,20 @@ var nav_langu_box = new Vue({
         var registerUsername = (rule, value, callback) => {
             const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
             if (!value) {
-                return callback(new Error('ZC不能为空'))
+                return callback(new Error(this.NAVEmailEmpty))
             }
             setTimeout(() => {
                 if (mailReg.test(value)) {
                     callback();
                 } else {
-                    callback(new Error('ZC请输入正确的邮箱格式'));
+                    callback(new Error(this.NAVEmailFormatError));
                 }
             }, 100)
 
         };
         var registerPassword = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('ZC请输入密码'));
+                callback(new Error(this.NAVInputPassword));
             } else {
                 if (this.ruleRegisterForm.registercheckPass !== '') {
                     this.$refs.ruleRegisterForm.validateField('registercheckPass');
@@ -106,16 +106,16 @@ var nav_langu_box = new Vue({
         };
         var registercheckPassword = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('ZC请再次输入密码'));
+                callback(new Error(this.NAVInputConfirmPassword));
             } else if (value !== this.ruleRegisterForm.registerpass) {
-                callback(new Error('ZC两次输入密码不一致!'));
+                callback(new Error(this.NAVInputComparePassword));
             } else {
                 callback();
             }
         };
         var registercode = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('ZC验证码为空!'));
+                callback(new Error(this.NAVInputCodeEmpty));
             } else {
                 inputregistercode = value;
                 callback();
@@ -123,21 +123,21 @@ var nav_langu_box = new Vue({
         };
         var registername = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('ZC名或姓为空!'));
+                callback(new Error(this.NAVInputNameEmpty));
             } else {
                 callback();
             }
         };
         var resetloginoldpsd = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('旧密码为空!'));
+                callback(new Error(this.NAVInputOldPasswordEmpty));
             } else {               
                 callback();
             }
         };
         var resetloginnewpsd = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请输入新密码'));
+                callback(new Error(this.NAVInputNewPasswordEmpty));
             } else {
                 if (this.resetPasswordLogin.newPassword !== '') {
                     this.$refs.resetPasswordLogin.validateField('checkNewPassword');
@@ -147,9 +147,9 @@ var nav_langu_box = new Vue({
         };
         var resetloginchecknewpsd = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请再次输入新密码'));
+                callback(new Error(this.NAVInputConfirmNewPasswordEmpty));
             } else if (value !== this.resetPasswordLogin.newPassword) {
-                callback(new Error('两次输入密码不一致!'));
+                callback(new Error(this.NAVInputComparePassword));
             } else {
                 callback();
             }
@@ -161,7 +161,7 @@ var nav_langu_box = new Vue({
             /*触发拖动状态 判断*/
             maxwidth: 258,
             /*拖动最大宽度，依据滑块宽度算出来的*/
-            confirmWords: '拖动滑块验证',
+            confirmWords: '',
             /*滑块文字*/
             confirmSuccess: false, /*验证成功判断*/
             defaultLanguage: '',
@@ -182,6 +182,72 @@ var nav_langu_box = new Vue({
             isLoginCheck: true,
             logincode: '',
             isSuccess: false,
+            NAVLogin: "",
+            NAVLoginAccount: "",
+            NAVLoginPassword: "",
+            NAVLoginCode: "",
+            NAVLoginButton: "",
+            NAVLoginForgetLink: "",
+            NAVRegister: "",
+            NAVRegisterDesc: "",
+            NAVRegisterAccount: "",
+            NAVRegisterCode: "",
+            NAVRegisterSendEmail: "",
+            NAVRegisterFirstName: "",
+            NAVRegisterLastName: "",
+            NAVRegisterPassword: "",
+            NAVRegisterConfirmPassword: "",
+            NAVRegisterNotice: "",
+            NAVLoginQuit: "",
+            NAVLoginPersonInfo: "",
+            NAVLoginCompanyInfo: "",
+            NAVLoginSetting: "",
+            NAVLoginResetPassword: "",
+            NAVLoginResetOldPassword: "",
+            NAVLoginResetNewPassword: "",
+            NAVLoginResetConfirmPassword: "",
+            NAVLoginResetButton: "",
+            NAVLoginQuestionContact: "",
+            NAVForgetTitle: "",
+            NAVForgetAccount: "",
+            NAVForgetSendEmail: "",
+            NAVForgetCode: "",
+            NAVForgetNewPassword: "",
+            NAVForgetConfirmPassword: "",
+            NAVForgetResetButton: "",
+            NAVRegisterUseNotice: "",
+            NAVRegisterUseContent: "",
+            NAVLoginState: "",
+            NAVRegisterButton: "",
+            NAVLoginPersonSetting: "",
+            NAVEmailEmpty: "",
+            NAVEmailFormatError: "",
+            NAVInputPassword: "",
+            NAVInputConfirmPassword: "",
+            NAVInputComparePassword: "",
+            NAVInputCodeEmpty: "",
+            NAVInputNameEmpty: "",
+            NAVInputOldPasswordEmpty: "",
+            NAVInputNewPasswordEmpty: "",
+            NAVInputConfirmNewPasswordEmpty: "",
+            NAVLoginConfirmWords: "",
+            NAVLoginQuestionContactEmail: "",
+            NAVLoginQuestionContactTelephone: "",
+            NAVRegisterSuccessNotice: "",
+            NAVRegisterFailNotice: "",
+            NAVRegisterInfoEmptyNotice: "",
+            NAVLoginFailNotice: "",
+            NAVLoginSuccessNotice: "",
+            NAVLoginFailPasswordNotice: "",
+            NAVLoginFailEmailNotice: "",
+            NAVLoginQuitSuccess: "",
+            NAVRegisterSendEmailSuccessNotice: "",
+            NAVRegisterSendEmailFailNotice: "",
+            NAVResetSendEmailSuccessNotice: "",
+            NAVResetSendEmailFailNotice: "",
+            NAVResetPasswordSuccessNotice: "",
+            NAVResetPasswordFailNotice: "",
+            NAVLoginCodeSuccessNotice: "",
             ruleLoginForm: {
                 pass: '',
                 code: '',
@@ -254,16 +320,16 @@ var nav_langu_box = new Vue({
             CompanyWebsite: '',
             infoDataForm_contact: [
 
-                {
-                    'id': 100,
-                    'menuName': '电子邮箱：renc@jiecang.com',
-                    'icon': 'el-icon-message',
-                },
-                {
-                    'id': 103,
-                    'menuName': '联系方式  +86-0575-86287989',
-                    'icon': 'el-icon-phone',
-                }
+                //{
+                //    'id': 100,
+                //    'menuName': '电子邮箱：renc@jiecang.com',
+                //    'icon': 'el-icon-message',
+                //},
+                //{
+                //    'id': 103,
+                //    'menuName': '联系方式  +86-0575-86287989',
+                //    'icon': 'el-icon-phone',
+                //}
             ],
             infoDataForm1: [
                 //{
@@ -551,21 +617,21 @@ var nav_langu_box = new Vue({
                     console.log(response.body);
                     if (response.body.isRegister == true) {
                         this.$notify({
-                            message: '注册成功',
+                            message: this.NAVRegisterSuccessNotice,
                             type: 'success'
                         });
                         this.resetForm("ruleRegisterForm");
                         //window.location = "/JCSelection/PersonInfo?email=" + username + "&name=" + firstname + " " + lastname;
                     }
                     else {
-                        this.$notify.error('注册失败' + response.body.msg);
+                        this.$notify.error(this.NAVRegisterFailNotice+ response.body.msg);
                     }
                 }, function (error) {
                     console.log(error);
                 })
             }
             else {
-                this.$notify.error('信息未完善');
+                this.$notify.error(this.NAVRegisterInfoEmptyNotice);
             }
         },
         login(email, password, confirmSuccess, isLoginCheck) {
@@ -581,7 +647,7 @@ var nav_langu_box = new Vue({
                     }).then(function (response) {  //接口返回数据
                         console.log(response.body);
                         if (response.body == null) {
-                            this.$notify.error('登录失败');
+                            this.$notify.error(this.NAVLoginFailNotice);
                         }
                         else {
                             this.islogin = response.body;
@@ -593,7 +659,7 @@ var nav_langu_box = new Vue({
                                 
                                 location.reload();
                                 this.$notify({
-                                    message: '登录成功',
+                                    message: this.NAVLoginSuccessNotice,
                                     type: 'success'
                                 });
                             }
@@ -619,15 +685,15 @@ var nav_langu_box = new Vue({
                             location.reload();
                             
                             this.$notify({
-                                message: '登录成功' ,
+                                message: this.NAVLoginSuccessNotice ,
                                 type: 'success'
                             });
                         }
                         else if (response.body.NoPassword) {
-                            this.$notify.error('密码错误');
+                            this.$notify.error(this.NAVLoginFailPasswordNotice);
                         }
                         else {
-                            this.$notify.error('账号错误');
+                            this.$notify.error(this.NAVLoginFailEmailNotice);
                         }
                      //   console.log(response);
                         if (this.islogin == false) {
@@ -658,7 +724,7 @@ var nav_langu_box = new Vue({
                 if (response.body.LoginOut == true) {
                     location.reload();
                     this.$notify({
-                        message: '登出成功',
+                        message: this.NAVLoginQuitSuccess,
                         type: 'success'
                     });
                 }
@@ -733,6 +799,17 @@ var nav_langu_box = new Vue({
                         'menuName': this.CompanyWebsite,
                         'icon': 'el-icon-link',
                     });
+                this.infoDataForm_contact.push(
+                    {
+                        'id': 100,
+                        'menuName': this.NAVLoginQuestionContactEmail+ 'renc@jiecang.com',
+                        'icon': 'el-icon-message',
+                    },
+                    {
+                        'id': 103,
+                        'menuName': this.NAVLoginQuestionContactTelephone+'  +86-0575-86287989',
+                        'icon': 'el-icon-phone',
+                    })
             })
         },
         sendEmail(emailaddress) {
@@ -762,12 +839,12 @@ var nav_langu_box = new Vue({
                     //  this.registercode = response.body;
                     if (response.body != null) {
                         this.$notify({
-                            message: '注册邮件发送成功',
+                            message: this.NAVRegisterSendEmailSuccessNotice,
                             type: 'success'
                         });
                     }
                     else {
-                        this.$notify.error('注册邮件发送失败');
+                        this.$notify.error(this.NAVRegisterSendEmailFailNotice);
                     }
                 }, function (error) {
                     console.log(error);
@@ -802,12 +879,12 @@ var nav_langu_box = new Vue({
                         this.retrievecode = response.body;
                         if (response.body != null) {
                             this.$notify({
-                                message: '重置密码邮件发送成功',
+                                message: this.NAVResetSendEmailSuccessNotice,
                                 type: 'success'
                             });
                         }
                         else {
-                            this.$notify.error('重置密码邮件发送失败');
+                            this.$notify.error(this.NAVResetSendEmailFailNotice);
                         }
                     }, function (error) {
                         console.log(error);
@@ -832,12 +909,12 @@ var nav_langu_box = new Vue({
                         this.isReset = response.body;
                         if (response.body == true) {
                             this.$notify({
-                                message: '密码已重置',
+                                message: this.NAVResetPasswordSuccessNotice,
                                 type: 'success'
                             });
                         }
                         else {
-                            this.$notify.error('密码未重置');
+                            this.$notify.error(this.NAVResetPasswordFailNotice);
                         }
                     }, function (error) {
                         console.log(error);
@@ -864,12 +941,12 @@ var nav_langu_box = new Vue({
                             this.LoginOut();
 
                             this.$notify({
-                                message: '密码已重置',
+                                message: this.NAVResetPasswordSuccessNotice,
                                 type: 'success'
                             });
                         }
                         else {
-                            this.$notify.error('密码未重置');
+                            this.$notify.error(this.NAVResetPasswordFailNotice);
                         }
                     }, function (error) {
                         console.log(error);
@@ -887,7 +964,7 @@ var nav_langu_box = new Vue({
         }, //按下滑块函数 
         successFunction() {
             $(".handler").removeClass('handler_bg').addClass('handler_ok_bg');
-            this.confirmWords = '验证通过'
+            this.confirmWords = this.NAVLoginCodeSuccessNotice
             $(".drag").css({
                 'color': '#fff'
             });
@@ -908,8 +985,44 @@ var nav_langu_box = new Vue({
         handleNodeClick(data) {
             //console.log(data);
         },
+        initPage: function (event) {
+            var code = GetLanguCode();
+            $.ajaxSettings.async = false;
 
+            var languText;
+            $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
+                languText = result.language;
+            });
+            $.ajaxSettings.async = true;
+
+            var obj = languText;
+            for (var p in obj) {
+                // 方法
+                if (typeof (obj[p]) == "function") {
+                    obj[p]();
+                } else {
+                    // p 为属性名称，obj[p]为对应属性的值
+                    var key = p;
+                    var value = obj[p];
+                    this.setData(key, value);;
+                }
+            }
+
+        },
+
+
+        setData: function (field, val) {
+            this.$set(this.$data, field, val);
+            ////如果需要提交请求,下面这样是不行的,提交的是field字符串
+            //$.post('url', { field: val }, function () { });
+            ////需要这样
+            //var json = {};
+            //json[field] = value
+            //$.post('url', json, function () { });
+
+        },
     }
 });
 nav_langu_box.initNav();
 nav_langu_box.initlangubox();
+nav_langu_box.initPage();
