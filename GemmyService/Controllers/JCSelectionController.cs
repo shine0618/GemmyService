@@ -556,9 +556,7 @@ namespace GemmyService.Controllers
 
                     int suc_cus = bll_customer.AddT_Product_office_desk_customer(cus);
 
-                    T_Product_office_text text = new T_Product_office_text();
-                    text.langCode = langCode;
-                    text.textValue = custmerName;
+                    
 
                     
                     //成功
