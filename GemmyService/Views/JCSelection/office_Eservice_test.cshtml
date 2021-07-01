@@ -713,8 +713,7 @@
                             custmerName: this.custmerName,//客户命名方案
                         }
                     }).then(function (response) {  //接口返回数据
-
-                        if (response.body.msgType == "true") {
+                        if (response.body.type == "true") {
                             this.$message({
                                 type: 'success',
                                 message: this.CustomAddSuccessNotice

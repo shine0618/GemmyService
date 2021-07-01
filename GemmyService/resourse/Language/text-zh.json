@@ -152,6 +152,7 @@
     "CustomAddCancelButton": "取消",
     "CustomAddSuccessNotice": "添加成功!",
     "CustomAddFailNotice": "添加失败",
+    "CustomAddLoginFirst": "请先登录!",
     "text_detail_1": "产品信息",
     "text_detail_2": "关键参数",
     "text_detail_3": "配置编号",

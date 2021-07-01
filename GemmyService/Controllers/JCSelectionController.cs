@@ -464,7 +464,7 @@ namespace GemmyService.Controllers
                 de.deskImgUrl = "/resourse/desk_TS_picture/effectImg1.png";
                 de.deskMaxLoad = Convert.ToDouble(column.MaxLoad);
                 de.deskNewProduct = false;
-                de.deskJCRecommend = false;
+                de.deskJCRecommend = false;                
                 de.verificationCode = BLL_Ofiice_Configuration.CreateConfigurationCode(de.deskGuid, false, pname, Type, mode);
 
                 int deskid = bll_desk.AddT_Product_office_desk(de);
@@ -472,7 +472,7 @@ namespace GemmyService.Controllers
                 {
                     //失败
                     msgType = "false";
-                    msg = BLL_SYS_language.GetTextByKey(langCode, "CustomAddFailNotice");;
+                    msg = BLL_SYS_language.GetTextByKey(langCode, "CustomAddFailNotice");
                 }
 
                 else
@@ -555,8 +555,14 @@ namespace GemmyService.Controllers
 
                     int suc_cus = bll_customer.AddT_Product_office_desk_customer(cus);
 
+                    T_Product_office_text text = new T_Product_office_text();
+                    text.langCode = langCode;
+                    text.textValue = custmerName;
+
+                    
                     //成功
                     msgType = "true";
+                    msg= BLL_SYS_language.GetTextByKey(langCode, "CustomAddSuccessNotice");
                 }
 
 
@@ -566,7 +572,7 @@ namespace GemmyService.Controllers
             {
                 //失败 权限检查
                 msgType = "false";
-                msg = BLL_SYS_language.GetTextByKey(langCode, "CustomAddFailNotice");
+                msg = BLL_SYS_language.GetTextByKey(langCode, "CustomAddLoginFirst");
             }
             var param =
            new
