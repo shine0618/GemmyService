@@ -18,5 +18,11 @@ namespace GemmyService
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             T_webdata.GetFileSrc("/resourse/Language/text-yourLangCode.json");
         }
+
+        protected void Application_BeginRequest(object sender, EventArgs e)
+        {
+            if (Context.Request.FilePath == "/")
+                HttpContext.Current.Response.Redirect("/JCSelection/main");
+        }
     }
 }

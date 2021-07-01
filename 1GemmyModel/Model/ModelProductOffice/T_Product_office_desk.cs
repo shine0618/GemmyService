@@ -92,6 +92,11 @@ namespace _1GemmyModel.Model.ModelProductOffice
         /// </summary>
         public bool deskCustmoer { get; set; }
 
+        /// <summary>
+        /// 客户定制方案名称
+        /// </summary>
+        public  string deskCustomerName { get; set; }
+
 
     }
 }

@@ -243,7 +243,8 @@
 
                         <el-table-column prop="model"
                                          :label="text_detail_9"
-                                         align="center">
+                                         align="center"
+                                          width="180">
                         </el-table-column>
                         <el-table-column prop="name"
                                          :label="text_detail_10"
@@ -495,7 +496,7 @@
                 //     return "/resourse/Img/pdf_icon.png";
                 //}
 
-                console.log(fname);
+              //  console.log(fname);
                 return fname;
             },
             CollectDesk: function () {
@@ -555,7 +556,7 @@
                 doc.setFont('msyh');
                 doc.text("JIECANG Office Configuration", 40, 50);           // 表title、距离左边距离、距离上边距离
                 var res = doc.autoTableHtmlToJson(document.getElementById("paramTB"));
-                console.log(res);
+               // console.log(res);
                 doc.autoTable(res.columns, res.data, { startY: 60 });    // 渲染数据，列、数据、距离上边距离，更多配置项看官网api
 
                 doc.save('tableName.pdf');    // 导出名为tableName.pdf的文件
@@ -746,7 +747,7 @@
                         for (i in this.T_Product_office_desk_detail.T_Part_office_Powercable.T_Part_office_describes) {
                             paramList.push(this.T_Product_office_desk_detail.T_Part_office_Powercable.T_Part_office_describes[i].textValue);
                         }
-                        console.log(this.T_Product_office_desk_detail.T_Part_office_Powercable);
+                        //console.log(this.T_Product_office_desk_detail.T_Part_office_Powercable);
                         var q = { part: this.text_detail_17, model: this.T_Product_office_desk_detail.T_Part_office_Powercable.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Powercable.PictureName, paramList: paramList };
                         this.paramTableData.push(q);
                     }
@@ -784,12 +785,12 @@
                     }
 
                     //收藏的逻辑
-                    if (response.body.collect.Id > 0) {
+                    if (response.body.collect!=null&&response.body.collect.Id > 0) {
                         this.isCollect = true;
                     }
 
 
-                    console.log(response.body);
+                    //console.log(response.body);
 
 
                 }, function (error) {

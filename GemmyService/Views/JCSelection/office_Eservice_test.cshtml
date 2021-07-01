@@ -121,7 +121,7 @@
     <script src="//unpkg.com/element-ui@2.15.1/lib/index.js"></script>*@
 
 <div id="OfficeStandards">
-    <el-dialog title="部件详情"
+    <el-dialog :title="text_customer_text1"
                :visible.sync="dialogVisible_partDetail"
                width="80%"
                center>
@@ -436,12 +436,14 @@
 
                     <h6 v-text="' POS2	'+CustomWidthLength+' '+frameWidth"></h6>
                     <h6 v-text="'POS1	'+CustomHeightLength+' '+frameHeight"></h6>
-                    
+
+                    <!-- 是否显示桌面板 -->
+                    <label>{{CustomShowBoard}}</label>
                     <el-switch v-model="value"
                                active-color="#008fd5"
-                               inactive-color="#ff4949">
-                        
-                    </el-switch><h6>{{CustomShowBoard}}</h6>
+                               inactive-color="GRAY">
+
+                    </el-switch>
 
 
 
@@ -615,6 +617,7 @@
             CustomAddConfirmButton: "",
             CustomAddCancelButton: "",
             CustomAddSuccessNotice: "",
+            text_customer_text1:"",
 
             MyCollectName: "",
             custmerName: "",//客户命名方案

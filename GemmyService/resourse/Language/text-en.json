@@ -199,7 +199,8 @@
 
 
     "text_part_description_1": "MinLength",
-    "text_part_description_2": "MaxLength"
+    "text_part_description_2": "MaxLength",
+    "text_customer_text1": "details"
 
   }
 }

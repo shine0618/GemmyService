@@ -169,6 +169,10 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 {
                     mmm.deskShortDescription = "";
                 }
+                if(mmm.deskCustmoer)
+                {
+                    mmm.deskShortDescription = mmm.deskCustomerName;
+                }
                 list.Add(mmm);
             }
 
