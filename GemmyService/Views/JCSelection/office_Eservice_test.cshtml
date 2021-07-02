@@ -870,6 +870,15 @@
             //保存配置
             saveConfigurations: function (event) {
 
+                if (this.custmerName == "") {
+                    this.selectStep = "s7";
+                    this.$message({
+                        type: 'info',
+                        message: '请输入您的方案名称'
+                    });
+                    return;
+                }
+
 
                 this.$confirm(this.CustomAddConfirm, this.CustomAddNotice, {
                     confirmButtonText: this.CustomAddConfirmButton,
@@ -898,10 +907,21 @@
                         }
                     }).then(function (response) {  //接口返回数据
                         if (response.body.type == "true") {
-                            this.$message({
-                                type: 'success',
-                                message: this.CustomAddSuccessNotice
+                            //this.$message({
+                            //    type: 'success',
+                            //    message: this.CustomAddSuccessNotice
+                            //});
+                            this.$confirm('是否跳转查看', this.CustomAddSuccessNotice, {
+                                confirmButtonText: this.CustomAddConfirmButton,
+                                cancelButtonText: this.CustomAddCancelButton,
+
+                            }).then(() => {
+                                window.location = "/JCSelection_Customer/personal";                           
+                            }).catch(() => {
+                                return;
                             });
+
+
                         }
                         else {
                             //失败

@@ -48,8 +48,21 @@
 
     @*自定义的*@
     <script>
+        function dFormat(i) {
+            return i < 10 ? "0" + i.toString() : i;
+        }
+        function GetSystemDate(formatDate) {
+            if (formatDate == "") {
+                return "";
+            }
+            var date = formatDate;
+            var d = eval('new ' + date.substr(1, date.length - 2));
 
+            var ar_date = [d.getFullYear(), d.getMonth() + 1, d.getDate()];
 
+            for (var i = 0; i < ar_date.length; i++) ar_date[i] = dFormat(ar_date[i]);
+            return ar_date.join('-');
+        }
 
         function setCookie(cname, cvalue, exdays) {
             var d = new Date();

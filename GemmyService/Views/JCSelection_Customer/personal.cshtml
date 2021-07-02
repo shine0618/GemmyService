@@ -42,10 +42,10 @@
                                 </template>
                                 <template #default="scope">
                                     <el-button size="mini"
-                                               @@click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                                               @@click="handleGotoDetail(scope.$index, scope.row)">查看</el-button>
                                     <el-button size="mini"
                                                type="danger"
-                                               @@click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+                                               @@click="handleGotoConfig(scope.$index, scope.row)">修改</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -85,11 +85,13 @@
         },
       
         methods: {
-            handleEdit(index, row) {
-                console.log(index, row);
+            handleGotoDetail(index, row) {
+                var url = "/JCSelection/ProductDetail?domain=&Type=TS&recommend=customer&productName=JC35TS_customer&productGuid=" + row.deskGuid;
+                window.location = url;    
             },
-            handleDelete(index, row) {
-                console.log(index, row);
+            handleGotoConfig(index, row) {
+                var url = "/JCSelection/office_Eservice_test?domain=&Type=TS&recommend=customer&productName=JC35TS_customer&productGuid=" + row.deskGuid;
+                window.location = url;    
             },
             getList: function () {
 
@@ -102,7 +104,13 @@
                         token:"",
                     }
                 }).then(function (response) {  //接口返回数据
-                    this.tableData = response.body;
+                    var i = 0;
+                    this.tableData   = [];
+                    for (i in response.body) {
+                        var data = response.body[i];
+                        data.UpdateTime = GetSystemDate(data.UpdateTime);
+                        this.tableData.push(data);
+                    }
      
                 }, function (error) {
                     console.log(error);
