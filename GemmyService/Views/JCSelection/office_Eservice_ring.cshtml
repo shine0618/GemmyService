@@ -1,8 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "office_Eservice_test";
+    ViewBag.Title = "office_Eservice_ring";
 }
-
 
 <style>
     #shjahs {
@@ -18,16 +17,13 @@
         border: 0;
         margin: 0;
         padding: 0;
-        height: 642px;
-        width: 871px;
+        height: 636px;
+        width: 850px;
     }
-    #iDisplayBox
-    {
-        margin-top:20px;
-    }
+
     .selectColumnPart {
         min-height: 500px;
-        height: calc(100vh - 241px);
+        height: calc(100vh - 308px);
         min-height: 650px;
         overflow: auto;
         margin-top: 10px;
@@ -50,7 +46,6 @@
 
     .selectStep {
         height: 70px;
-        display:none;
     }
 
     .part_img {
@@ -121,83 +116,8 @@
     }
 </style>
 
-<style>
-    .carNewRightNavTop {
-        width: 100%;
-        padding:0;
-        margin:0;
-    }
-
-    .carNewRightTop {
-        border-bottom: 1px solid rgba(0,0,0,.1);
-        padding: 0;
-        margin: 0;
-    }
-
-    .borderblack {
-        border-bottom: 2px solid #000;
-    }
-
-    .bigWords {
-        font-weight: 500;
-        color: #A8A8A8;
-        text-align: center;
-        margin-top: 8px;
-        margin-bottom: 0;
-        font-size: 17px;
-        padding: 0;
-        margin: 0;
-    }
-
-    .wordActive {
-        color: #202733;
-        font-weight: 600;
-        /*color: var(--thm-base);*/
-    }
-
-    .smallWords {
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        word-break: break-all;
-        margin-bottom: 0;
-        margin-top:-2px;
-        padding:0;
-    }
-
-        .smallWords p {
-            margin: 0;
-        }
-
-    .itemStyle {
-        max-width: 150px;
-        min-width: 90px;
-        overflow: hidden;
-        text-align: center;
-        font-weight: 500;
-        cursor: pointer;
-    }
-
-    .carNewRightTop {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        height: 100%;
-        margin-top:5px;
-        padding:0;
-        -webkit-box-pack: start;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-        border-bottom: 1px solid rgba(0,0,0,.1);
-        font-size: 12px;
-    }
-
-    #OfficeStandards {
-        background-image: url('/assets/images/backgrounds/newbg.82899ecd.jpg')
-    }
-</style>
+@*<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="//unpkg.com/element-ui@2.15.1/lib/index.js"></script>*@
 
 <div id="OfficeStandards">
     <el-dialog :title="text_customer_text1"
@@ -226,111 +146,39 @@
     </el-dialog>
 
     <section class="page-header" style="height:53px;">
-    <div class="container" style="padding:10px 10px ">
-        <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
-        <a class="navigation_a">{{CustomPage}}</a>
-    </div>
-    </section>
+
+        @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
+        <!-- /.page-header__bg -->
+        <div class="container" style="padding:10px 10px ">
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a">{{CustomPage}}</a>
+        </div><!-- /.container -->
+    </section><!-- /.page-header -->
+
+
     <section class="about-three">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    @*<div>
-                            <template>
-                                <el-tabs v-model="selectStep" @@tab-click="handleClick">
-                                    <el-tab-pane :label="text_customer_1" name="s1"></el-tab-pane>
-                                    <el-tab-pane :label="text_customer_2" name="s2"></el-tab-pane>
-                                    <el-tab-pane :label="text_customer_3" name="s3"></el-tab-pane>
-                                    <el-tab-pane :label="text_customer_4" name="s4"></el-tab-pane>
-                                    <el-tab-pane :label="text_customer_42_1" name="s5_1"></el-tab-pane>
-                                    <el-tab-pane :label="text_customer_42_2" name="s5_2"></el-tab-pane>
-                                    <el-tab-pane :label="text_customer_42_3" name="s5_3"></el-tab-pane>
-                                    <el-tab-pane :label="text_customer_423" name="s6"></el-tab-pane>
-                                    <el-tab-pane :label="CustomConfigurationListInfo" name="s7"></el-tab-pane>
-                                </el-tabs>
-                            </template>
-                        </div>*@
-
-
-                    <div class="carNewRightNavTop" style="height:60px">
-                        <ul class="carNewRightTop">
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s1' }" @@click="selectStep='s1'">
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':select_column!=''||selectStep=='s1' }">{{text_customer_1}}</p>
-                                    <div class="smallWords">
-                                        <p v-text="select_columnMode==''?select_text:select_columnMode"></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s2' }" @@click="selectStep='s2'">
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':select_frame!=''||selectStep=='s2' }">{{text_customer_2}}</p>
-                                    <div class="smallWords">
-                                        <p v-text="select_frameMode"></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s3' }" @@click="selectStep='s3'">
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':select_foot!=''||selectStep=='s3' }">{{text_customer_3}}</p>
-                                    <div class="smallWords">
-                                        <p v-text="select_footMode"></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s4' }" @@click="selectStep='s4'">
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':select_SideBracket!=''||selectStep=='s4' }">{{text_customer_4}}</p>
-                                    <div class="smallWords">
-                                        <p v-text="select_SideBracketMode"></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s5_1' }" @@click="selectStep='s5_1'">
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':select_ControlBox!=''||selectStep=='s5_1' }">{{text_customer_42_1}}</p>
-                                    <div class="smallWords">
-                                        <p v-text="select_ControlBoxMode"></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s5_2' }" @@click="selectStep='s5_2'">
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':select_HandSet!=''||selectStep=='s5_2' }">{{text_customer_42_2}}</p>
-                                    <div class="smallWords">
-                                        <p v-text="select_HandSetMode"></p>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s5_3' }" @@click="selectStep='s5_3'">
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':select_Powercable!=''||selectStep=='s5_3' }">{{text_customer_42_3}}</p>
-                                    <div class="smallWords">
-                                        <p v-text="select_PowercableMode"></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s6' }" @@click="selectStep='s6'">
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':select_Color!=''||selectStep=='s6' }">{{text_customer_423}}</p>
-                                    <div class="smallWords">
-                                        <p v-text="select_ColorMode"></p>
-                                    </div>
-                                </a>
-                            </li>
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s7' }" @@click="selectStep='s7'" >
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':true }" style="color: var(--thm-base) ">{{CustomConfigurationListInfo}}</p>
-                                    <div class="smallWords">
-                                        <p></p>
-                                    </div>
-                                </a>
-                            </li>
-
-
-
-                        </ul>
+                    <!--<div class="block-title text-center">
+                        <p></p>
+                        <h3>产品配置列表</h3>
+                    </div>-->
+                    <!-- /.block-title -->
+                    <div>
+                        <template>
+                            <el-tabs v-model="selectStep" @@tab-click="handleClick">
+                                <el-tab-pane :label="text_customer_1" name="s1"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_2" name="s2"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_3" name="s3"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_4" name="s4"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_42_1" name="s5_1"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_42_2" name="s5_2"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_42_3" name="s5_3"></el-tab-pane>
+                                <el-tab-pane :label="text_customer_423" name="s6"></el-tab-pane>
+                                <el-tab-pane :label="CustomConfigurationListInfo" name="s7"></el-tab-pane>
+                            </el-tabs>
+                        </template>
                     </div>
 
 
@@ -342,11 +190,17 @@
             <div class="row selectStep" v-if="selectStep=='s1'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
- 选择立柱
+                    <div class="service-details__image">
+                        <div class="block-title text-left">
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_s'}" :title="text_customer_5" @@click="colomnSearch('column_2_s')" src="/resourse/page/2jie.png" />  @*column_2_s*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_r'}" :title="text_customer_6" @@click="colomnSearch('column_2_r')" src="/resourse/page/2jieR.png" /> @*column_2_r*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_s'}" :title="text_customer_7" @@click="colomnSearch('column_3_s')" src="/resourse/page/3jie.png" /> @*column_3_s*@
+                            <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_r'}" :title="text_customer_8" @@click="colomnSearch('column_3_r')" src="/resourse/page/3jieR.png" /> @*column_3_r*@
+                        </div><!-- /.block-title -->
+                    </div>
                 </div>
             </div>
             <div class="row selectStep" v-if="selectStep=='s2'">
-               
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
                     {{CustomSelectFrame}}
@@ -401,21 +255,11 @@
         </div>
     </section>
 
-    <section class="about-three" style="padding-top:0px; padding-bottom:0px;">
+    <section class="about-three" style="padding-bottom:0px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s1'">
-                    <div style="height:70px;">
-                        <div class="service-details__image">
-                            <div class="block-title text-left">
-                                <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_s'}" :title="text_customer_5" @@click="colomnSearch('column_2_s')" src="/resourse/page/2jie.png" />  @*column_2_s*@
-                                <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_2_r'}" :title="text_customer_6" @@click="colomnSearch('column_2_r')" src="/resourse/page/2jieR.png" /> @*column_2_r*@
-                                <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_s'}" :title="text_customer_7" @@click="colomnSearch('column_3_s')" src="/resourse/page/3jie.png" /> @*column_3_s*@
-                                <img :class="{ 'img-response': true, 'navimg': true ,'selectBack':search1_column=='column_3_r'}" :title="text_customer_8" @@click="colomnSearch('column_3_r')" src="/resourse/page/3jieR.png" /> @*column_3_r*@
-                            </div><!-- /.block-title -->
-                        </div>
-
-                    </div>
+                    @*s1*@
                     <div class="row">
                         <div class="col-lg-6 col-md-6" v-for="item in list_column">
                             @* <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_column==item.Id}" v-on:click="columnClick(item.Id,item.Mode)" src="~/resourse/part_column/testcolumn.png" />*@
@@ -542,11 +386,11 @@
 
 
                     @*<div class="row">
-                <div class="col-lg-6 col-md-6" v-for="item in list_Color">
-                        <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
-                        <h6 style="text-align:center" v-text="item.HEXValue"></h6>
-                </div>
-            </div>*@
+                            <div class="col-lg-6 col-md-6" v-for="item in list_Color">
+                                    <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
+                                    <h6 style="text-align:center" v-text="item.HEXValue"></h6>
+                            </div>
+                        </div>*@
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s7'">
 
@@ -606,16 +450,12 @@
 
 
                 </div>
-                <!-- 3D图形 -->
-                <div class="col-lg-8" >
-                    
-                    <div id="iDisplayBox"></div>
-
-                </div>
+                <div class="col-lg-8" id="asas">
+                </div><!-- 3D图形 -->
             </div>
         </div>
     </section>
-    <section class="about-three" style="padding-top:10px; padding-bottom:10px;">
+    <section class="about-three" style="padding-top:20px; padding-bottom:10px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -719,11 +559,11 @@
             select_Powercable: "",
             select_PowercableMode: "",
             mouse_Powercable: "",
-           
+
             list_Color: null,
             list_Color_count: 0,
-            select_Color: "",
-            select_ColorMode: "",
+            select_Color: "2",
+            select_ColorMode: "RAL9016",
             colour_color: "",
             of_deskboard: "",
             pos1_value: "",
@@ -732,9 +572,9 @@
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
             productGuid:'',
-            
+
             //text
-            select_text: "",//请选择
+
             text_customer_1: "",
             text_customer_2: "",
             text_customer_3: "",
@@ -783,7 +623,7 @@
             CustomAddCancelButton: "",
             CustomAddSuccessNotice: "",
             text_customer_text1:"",
-            CustomSelectFootNotice :"",
+
             MyCollectName: "",
             custmerName: "",//客户命名方案
             ControlBox_c1:"",//控制器筛选
@@ -811,31 +651,21 @@
                         if (this.select_columnMode == "") {
                             this.selectStep = "s1";
                             this.$notify({
-                                message: this.CustomSelectColumnNotice
+                                message: this.CustomSelectColumnNotice,
+                                type: 'info'
                             });
+                            //var is = setTimeout(function () {
+                            //    console.log('111');
+                            //}, 1000);
+
                             return;
                         }
                         this.getAllFrame();
                         break;
                     case "s3":
-                        if (this.select_columnMode == "") {
-                            this.selectStep = "s1";
-                            this.$notify({
-                                message: this.CustomSelectColumnNotice
-                            });
-                            return;
-                        }
                         this.getAllFoot();
                         break;
                     case "s4":
-                        if (this.select_frame == "") {
-                            this.selectStep = "s2";
-                            this.$notify({
-                                message: this.CustomSelectFootNotice
-                            });
-                            return;
-                        }
-
                         this.getAllSideBracket();
                         break;
                     case "s5_1":
@@ -847,12 +677,6 @@
                     case "s5_3":
                         this.getAllPowercable();
                         break;
-
-                    case "s6":
-                        if (this.select_ColorMode == "") {
-                            this.select_ColorMode = "RAL9016";
-                            this.select_Color = "2";
-                        }
                     case "s7":
                         if (this.defaultHeight != 0) {
                             this.frameHeight = this.defaultHeight;
@@ -982,7 +806,7 @@
                     }
                 }
                 var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
-                $('#iDisplayBox').append(i);
+                $('#asas').append(i);
             },
 
             //正装3节的筛选
@@ -1130,26 +954,21 @@
                 })
             },
             columnClick: function (id,mode) {
-                if (this.select_column == id) {
-                    return;
-                }
                 this.select_column = id;
                 this.select_columnMode = mode;
                 var cc = mode.replace('-', '').replace('-', '').replace('JS36D', '');
                 this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc+ "}";
+                console.log(this.url_text);
                 $("#shjahs").attr({
                     "src": this.url_text
                 });
-                this.cc_column = cc;  
+                this.cc_column = cc;
             },
             frameClick: function (id, mode) {
-                if (this.select_frame == id) {
-                    return;
-                }
                 this.select_frame = id;
                 this.select_frameMode = mode;
                 var fc = mode.replace('FRAME', '');
-                
+
                 this.url_text = checkModelUrl(this.url_text, "FC", this.fc_frame, fc);
                 console.log(this.url_text);
                 console.log(fc);
@@ -1160,9 +979,6 @@
                 this.fc_frame = fc;
             },
             footClick: function (id, mode) {
-                if (this.select_foot == id) {
-                    return;
-                }
                 this.select_foot = id;
                 this.select_footMode = mode;
                 var tfc = mode.replace('JCF', '');
@@ -1173,9 +989,6 @@
                 this.tfc_foot = tfc;
             },
             SideBracketClick: function (id, mode) {
-                if (this.select_SideBracket == id) {
-                    return;
-                }
                 this.select_SideBracket = id;
                 this.select_SideBracketMode = mode;
                 var spc = mode.replace('SIDE', '');
@@ -1185,10 +998,7 @@
                 });
                 this.spc_SideBracket = spc;
             },
-            colorClick: function (id, mode, number) {
-                if (this.select_Color == id) {
-                    return;
-                }
+            colorClick: function (id, mode,number) {
                 this.select_Color = id;
                 this.select_ColorMode = mode;
                 this.url_text = checkModelUrl(this.url_text, "COLOUR", this.colour_color, number);
@@ -1201,9 +1011,6 @@
                 this.colour_color = number;
             },
             ControlBoxClick: function (id, mode) {
-                if (this.select_ControlBox == id) {
-                    return;
-                }
                 if (this.select_ControlBox == id) {
                     this.select_ControlBox = 0;
                     this.select_ControlBoxMode = "";
@@ -1221,9 +1028,6 @@
             },
             HandSetClick: function (id, mode) {
                 if (this.select_HandSet == id) {
-                    return;
-                }
-                if (this.select_HandSet == id) {
                     this.select_HandSet = 0;
                     this.select_HandSetMode = "";
                 }
@@ -1239,9 +1043,6 @@
             },
             PowercableClick: function (id, mode) {
                 if (this.select_Powercable == id) {
-                    return;
-                }
-                if (this.select_Powercable == id) {
                     this.select_Powercable = 0;
                     this.select_PowercableMode = "";
                 }
@@ -1255,10 +1056,10 @@
                 $("#shjahs").attr({
                     "src": this.url_text
                 });
-                this.pos1_value = val;                
+                this.pos1_value = val;
             },
             changeWidth(val) {
-                this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val);             
+                this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val);
                 $("#shjahs").attr({
                     "src": this.url_text
                 });
@@ -1272,7 +1073,7 @@
                     });
                 }
                 else {
-                    this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");     
+                    this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");
                     $("#shjahs").attr({
                         "src": this.url_text
                     });
