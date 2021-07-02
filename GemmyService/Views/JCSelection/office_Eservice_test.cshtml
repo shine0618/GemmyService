@@ -375,7 +375,7 @@
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s6'">
 
                     <div class="row">
-                        <div class="col-lg-4 col-md-4" v-for="item in list_Color" style="text-align:center;cursor:pointer" v-on:click="colorClick(item.Id,item.ColorName)">
+                        <div class="col-lg-4 col-md-4" v-for="item in list_Color" style="text-align:center;cursor:pointer" v-on:click="colorClick(item.Id,item.ColorName,item.ColorNumber)">
                             <div :class="{ 'selectColor_div': true,'selectColorcss':select_Color==item.Id}">
                                 <span :style="{ 'background-color':item.HEXValue }" class="selectColor_span"></span>
 
@@ -568,7 +568,8 @@
             colour_color: "",
             of_deskboard: "",
             pos1_value: "",
-            pos2_value:"",
+            pos2_value: "",
+            url_text:"",
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
             productGuid:'',
@@ -957,43 +958,58 @@
                 this.select_column = id;
                 this.select_columnMode = mode;
                 var cc = mode.replace('-', '').replace('-', '').replace('JS36D', '');
-                this.cc_column = cc;
-                console.log(cc);
+                this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc+ "}";
+                console.log(this.url_text);
                 $("#shjahs").attr({
-                    "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "}"
+                    "src": this.url_text
                 });
+                this.cc_column = cc;  
             },
             frameClick: function (id, mode) {
                 this.select_frame = id;
                 this.select_frameMode = mode;
                 var fc = mode.replace('FRAME', '');
-                this.fc_frame = fc;
+                
+                this.url_text = checkModelUrl(this.url_text, "FC", this.fc_frame, fc);
+                console.log(this.url_text);
+                console.log(fc);
+                console.log(this.fc_frame);
                 $("#shjahs").attr({
-                    "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "},{FC=" + this.fc_frame+"}"
+                    "src": this.url_text
                 });
+                this.fc_frame = fc;
             },
             footClick: function (id, mode) {
                 this.select_foot = id;
                 this.select_footMode = mode;
                 var tfc = mode.replace('JCF', '');
-                this.tfc_foot = tfc;
+                this.url_text = checkModelUrl(this.url_text, "TFC", this.tfc_foot, tfc);
                 $("#shjahs").attr({
-                    "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "},{FC=" + this.fc_frame + "},{TFC=" + this.tfc_foot+"}"
+                    "src": this.url_text
                 });
+                this.tfc_foot = tfc;
             },
             SideBracketClick: function (id, mode) {
                 this.select_SideBracket = id;
                 this.select_SideBracketMode = mode;
                 var spc = mode.replace('SIDE', '');
-                this.spc_SideBracket = spc;
+                this.url_text = checkModelUrl(this.url_text, "SPC", this.spc_SideBracket, spc);
                 $("#shjahs").attr({
-                    "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "},{FC=" + this.fc_frame + "},{TFC=" + this.tfc_foot + "},{SPC=" + this.spc_SideBracket+"}"
+                    "src": this.url_text
                 });
+                this.spc_SideBracket = spc;
             },
-            colorClick: function (id, mode) {
+            colorClick: function (id, mode,number) {
                 this.select_Color = id;
                 this.select_ColorMode = mode;
-
+                this.url_text = checkModelUrl(this.url_text, "COLOUR", this.colour_color, number);
+                $("#shjahs").attr({
+                    "src": this.url_text
+                });
+                console.log(this.url_text);
+                console.log(number);
+                console.log(this.colour_color);
+                this.colour_color = number;
             },
             ControlBoxClick: function (id, mode) {
                 if (this.select_ControlBox == id) {
@@ -1003,10 +1019,11 @@
                 else {
                     this.select_ControlBox = id;
                     this.select_ControlBoxMode = mode;
-                    this.controller_ControlBox = mode;
+                    this.url_text = checkModelUrl(this.url_text, "CONTROLLER", this.controller_ControlBox, mode);
                     $("#shjahs").attr({
-                        "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "},{FC=" + this.fc_frame + "},{TFC=" + this.tfc_foot + "},{SPC=" + this.spc_SideBracket + "},{CONTROLLER=" + this.controller_ControlBox+"}"
+                        "src": this.url_text
                     });
+                    this.controller_ControlBox = mode;
                 }
 
             },
@@ -1018,10 +1035,11 @@
                 else {
                     this.select_HandSet = id;
                     this.select_HandSetMode = mode;
-                    this.hc_HandSet = mode;
+                    this.url_text = checkModelUrl(this.url_text, "HC", this.hc_HandSet, mode);
                     $("#shjahs").attr({
-                        "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "},{FC=" + this.fc_frame + "},{TFC=" + this.tfc_foot + "},{SPC=" + this.spc_SideBracket + "},{CONTROLLER=" + this.controller_ControlBox + "},{HC=" + this.hc_HandSet+"}"
+                        "src": this.url_text
                     });
+                    this.hc_HandSet = mode;
                 }
             },
             PowercableClick: function (id, mode) {
@@ -1035,30 +1053,34 @@
                 }
             },
             changeHeight(val) {
-                this.pos1_value = val;
-                console.log(this.pos1_value);
+                this.url_text = checkModelUrl(this.url_text, "POS1", this.pos1_value, val);
                 $("#shjahs").attr({
-                    "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "},{FC=" + this.fc_frame + "},{TFC=" + this.tfc_foot + "},{SPC=" + this.spc_SideBracket + "},{CONTROLLER=" + this.controller_ControlBox + "},{HC=" + this.hc_HandSet + "},{POS1=" + this.pos1_value + "}"
+                    "src": this.url_text
                 });
+                this.pos1_value = val;                
             },
             changeWidth(val) {
-                this.pos2_value = val;
-                console.log(this.pos2_value);
+                this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val);             
                 $("#shjahs").attr({
-                    "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "},{FC=" + this.fc_frame + "},{TFC=" + this.tfc_foot + "},{SPC=" + this.spc_SideBracket + "},{CONTROLLER=" + this.controller_ControlBox + "},{HC=" + this.hc_HandSet + "},{POS1=" + this.pos1_value + "},{POS2=" + this.pos2_value + "}"
+                    "src": this.url_text
                 });
+                this.pos2_value = val;
             },
             changeStatus: function (callback) {
                 if (callback == true) {
+                    this.url_text = checkModelUrl(this.url_text, "OF", "", "-02");
                     $("#shjahs").attr({
-                        "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "},{FC=" + this.fc_frame + "},{TFC=" + this.tfc_foot + "},{SPC=" + this.spc_SideBracket + "},{CONTROLLER=" + this.controller_ControlBox + "},{HC=" + this.hc_HandSet + "},{POS1=" + this.pos1_value + "},{POS2=" + this.pos2_value + "}"
+                        "src": this.url_text
                     });
                 }
                 else {
+                    this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");     
                     $("#shjahs").attr({
-                        "src": "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + this.cc_column + "},{FC=" + this.fc_frame + "},{TFC=" + this.tfc_foot + "},{SPC=" + this.spc_SideBracket + "},{CONTROLLER=" + this.controller_ControlBox + "},{HC=" + this.hc_HandSet + "},{POS1=" + this.pos1_value + "},{POS2=" + this.pos2_value + "},{OF=-02}"
+                        "src": this.url_text
                     });
                 }
+                console.log(callback);
+                console.log(this.url_text);
             },
 
             orderBtnClick: function (ordervalue) {
