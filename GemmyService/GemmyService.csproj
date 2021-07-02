@@ -205,6 +205,7 @@
     <Content Include="assets\images\backgrounds\call-to-action-bg-1-1.jpg" />
     <Content Include="assets\images\backgrounds\footer-bg-1-1.jpg" />
     <Content Include="assets\images\backgrounds\funfact-bg-1-1.jpg" />
+    <Content Include="assets\images\backgrounds\newbg.82899ecd.jpg" />
     <Content Include="assets\images\backgrounds\page-header-bg-1-1.jpg" />
     <Content Include="assets\images\backgrounds\team-bg-1-1.jpg" />
     <Content Include="assets\images\backgrounds\video-bg-1-1.jpg" />
@@ -812,6 +813,7 @@
     <Content Include="Views\T_Product_office_desk_customer\Index.cshtml" />
     <Content Include="Upload\office\20210526\JS36DS1-3-S.dwg" />
     <Content Include="Views\JCSelection_Customer\personal.cshtml" />
+    <Content Include="Views\JCSelection_Customer\testpage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

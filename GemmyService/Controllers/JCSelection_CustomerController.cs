@@ -39,5 +39,21 @@ namespace GemmyService.Views
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
+
+        public ActionResult testpage()
+        {
+            //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            return View();
+
+        }
     }
 }
