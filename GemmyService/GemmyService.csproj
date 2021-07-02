@@ -814,6 +814,7 @@
     <Content Include="Upload\office\20210526\JS36DS1-3-S.dwg" />
     <Content Include="Views\JCSelection_Customer\personal.cshtml" />
     <Content Include="Views\JCSelection_Customer\testpage.cshtml" />
+    <Content Include="Views\JCSelection\office_Eservice_ring.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

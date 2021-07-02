@@ -6132,8 +6132,6 @@ h6 {
         font-size: 15px;
     }
 
-@import url("//unpkg.com/element-ui@2.15.1/lib/theme-chalk/index.css");
-
 /* 排序的按钮 */
 .orderbtn {
     width: 160px;
@@ -6161,4 +6159,9 @@ h6 {
     font-size: 14px;
     width: 100%;
 }
+
+
+/*选择框START*/
+
+/*选择框end*/
 

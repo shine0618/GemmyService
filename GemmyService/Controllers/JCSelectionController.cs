@@ -304,6 +304,25 @@ namespace GemmyService.Controllers
         }
 
 
+        public ActionResult office_Eservice_ring(string productName, string productGuid)
+        {
+            //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            Session.Timeout = 9600;
+            ViewBag.productGuid = productGuid;
+
+
+            return View();
+        }
+
+
 
         public ActionResult office_Eservice3D()
         {
