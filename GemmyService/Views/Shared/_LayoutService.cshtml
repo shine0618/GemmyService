@@ -117,6 +117,33 @@
         }
 
 
+        function checkModelUrl(url, modeType, Oldmodelid, Newmodelid) {
+            var a = modeType + "=" + Oldmodelid;
+            if (url.indexOf(a) >= 0) {
+                if (modeType != "OF") {
+                   url= url.replace( modeType + "=" +Oldmodelid , modeType + "=" + Newmodelid );
+                }
+                else {
+                    if (Newmodelid != "-02") {
+                       url= url.replace(",{OF=-02}", "");
+                    }
+                    
+                }
+            }
+            else {
+                if (modeType != "OF") {
+                    url = url + ",{" + modeType + "=" + Newmodelid + "}";
+                }
+                else {
+                    if (Newmodelid == "-02") {
+                        url = url + ",{OF=-02}";
+                    }
+                    
+                }
+            }
+            return url;
+        }
+
     </script>
 
 </head>

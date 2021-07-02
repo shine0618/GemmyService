@@ -435,6 +435,44 @@ namespace GemmyService.Controllers
             return jr;
         }
 
+        [HttpGet]
+        public JsonResult GetModelUrl(string url,string modeType,string oldModelid,string newModelid)
+        {
+            var a = modeType + "=" + oldModelid;
+            if (url.Contains(a)==true)
+            {
+                if (modeType != "OF")
+                {
+                    url=url.Replace(modeType + "=" + oldModelid, modeType + "=" + newModelid);
+                }
+                else
+                {
+                    if (newModelid != "-02")
+                    {
+                        url=url.Replace(",{OF=-02}", "");
+                    }
+
+                }
+            }
+            else
+            {
+                if (modeType != "OF")
+                {
+                    url = url + ",{" + modeType + "=" + newModelid + "}";
+                }
+                else
+                {
+                    if (newModelid == "-02")
+                    {
+                        url = url + ",{OF=-02}";
+                    }
+
+                }
+            }
+            JsonResult jr = Json(url, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
 
         /// <summary>
         /// 新增配置 让客户为这个桌子命名
