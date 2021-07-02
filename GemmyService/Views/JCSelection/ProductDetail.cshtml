@@ -604,8 +604,7 @@
                         this.setData(key, value);;
                     }
                 }
-                var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
-                $('#asas').append(i);
+                
 
             },
             getThisDesk: function (event) {
@@ -788,8 +787,16 @@
                     if (response.body.collect!=null&&response.body.collect.Id > 0) {
                         this.isCollect = true;
                     }
-
-
+                    var url = checkProductDetailUrl(this.T_Product_office_desk_detail.T_Part_office_Column.Mode,
+                        this.T_Product_office_desk_detail.T_Part_office_Frame.Mode,
+                        this.T_Product_office_desk_detail.T_Part_office_Foot.Mode,
+                        this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode,
+                        this.T_Product_office_desk_detail.T_Part_office_ControlBox.Mode,
+                        this.T_Product_office_desk_detail.T_Part_office_HandSet.Mode,
+                        this.T_Product_office_desk_detail.T_Office_Color.ColorNumber);
+                    console.log(url);
+                    var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "' + url+'"/>';
+                    $('#asas').append(i);
                     //console.log(response.body);
 
 

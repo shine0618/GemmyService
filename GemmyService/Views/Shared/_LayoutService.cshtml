@@ -144,6 +144,41 @@
             return url;
         }
 
+        function checkProductDetailUrl(column,frame,foot,side,control,handset,color) {
+            var url = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation";
+            if (column != null || column != "") {
+                column = column.replace('-', '').replace('-', '').replace('JS36D', '');
+                url = url + "&varset={CC=" + column + "}";
+            }
+            if (frame != null || frame != "") {
+                frame = frame.replace('FRAME', '');
+                url = url + ",{FC=" + frame + "}";
+            }
+            if (foot != null || foot != "") {
+                foot = foot.replace('JCF', '');
+                url = url + ",{TFC=" + foot + "}";
+            }
+            if (side != null || side != "") {
+                side = side.replace('SIDE', '');
+                url = url + ",{SPC=" + side + "}";
+            }
+            if (control != null || control != "") {
+
+                url = url + ",{CONTROLLER=" + control + "}";
+            }
+            if (handset != null || handset != "") {
+
+                url = url + ",{HC=" + handset + "}";
+            }
+            if (color != null || color != "") {
+                url = url + ",{COLOUR=" + color + "}";
+            }
+            else {
+                url = url + ",{COLOUR=H}" ;
+            }
+            return url;
+        }
+
     </script>
 
 </head>
