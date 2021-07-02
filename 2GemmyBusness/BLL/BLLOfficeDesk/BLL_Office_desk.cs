@@ -110,7 +110,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                             deskNewProduct = x.deskNewProduct,
                             deskJCRecommend = x.deskJCRecommend,
                             deskCreateByUser = x.deskCreateByUser,
-
+                           deskCustomerName = x.deskCustomerName,
                             deskTag = dci.textValue,
                             deskShortDescription = ddi.textValue,
                             deskCustmoer = x.deskCustmoer,
