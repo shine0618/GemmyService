@@ -624,6 +624,13 @@
                     }
                 }).then(function (response) {  //接口返回数据
 
+                    var column = "";
+                    var frame = "";
+                    var foot = "";
+                    var control = "";
+                    var handset = "";
+                    var side = "";
+                    var color = "";
                    // this.deskList = response.body;
                     this.T_Product_office_desk = response.body.T_Product_office_desk;
                     this.T_Product_office_desk_detail = response.body.T_Product_office_desk_detail;
@@ -672,6 +679,7 @@
 
                         var q = { part: this.text_detail_11, model: this.T_Product_office_desk_detail.T_Part_office_Column.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Column.PictureName, paramList: paramList };
                         this.paramTableData.push(q);
+                        column = it.Mode;
                     }
                     //添加到产品配置列表
                     if (this.T_Product_office_desk_detail.T_Part_office_Foot != null) {
@@ -691,6 +699,7 @@
 
                         var q = { part: this.text_detail_12, model: this.T_Product_office_desk_detail.T_Part_office_Foot.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Foot.PictureName, paramList:paramList };
                         this.paramTableData.push(q);
+                        foot = it.Mode;
                     }
                     //添加到产品配置列表
                     if (this.T_Product_office_desk_detail.T_Part_office_Frame != null) {
@@ -704,6 +713,7 @@
 
                         var q = { part: this.text_detail_13, model: this.T_Product_office_desk_detail.T_Part_office_Frame.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_Frame.PictureName, paramList:paramList };
                         this.paramTableData.push(q);
+                        frame = it.Mode;
                     }
                     //添加到产品配置列表
                     if (this.T_Product_office_desk_detail.T_Part_office_SideBracket != null) {
@@ -716,6 +726,7 @@
 
                         var q = { part: this.text_detail_14, model: this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_SideBracket.PictureName, paramList:paramList};
                         this.paramTableData.push(q);
+                        side = it.Mode;
                     }
                     if (this.T_Product_office_desk_detail.T_Part_office_ControlBox != null) {
                         var it = this.T_Product_office_desk_detail.T_Part_office_ControlBox;
@@ -727,6 +738,7 @@
 
                         var q = { part: this.text_detail_15, model: this.T_Product_office_desk_detail.T_Part_office_ControlBox.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_ControlBox.PictureName, paramList: paramList };
                         this.paramTableData.push(q);
+                        control = it.Mode;
                     }
                     if (this.T_Product_office_desk_detail.T_Part_office_HandSet != null) {
                         var it = this.T_Product_office_desk_detail.T_Part_office_HandSet;
@@ -738,6 +750,7 @@
 
                         var q = { part: this.text_detail_16, model: this.T_Product_office_desk_detail.T_Part_office_HandSet.Mode, name: '', tag: this.T_Product_office_desk_detail.T_Part_office_HandSet.PictureName, paramList: paramList };
                         this.paramTableData.push(q);
+                        handset = it.Mode;
                     }
                     if (this.T_Product_office_desk_detail.T_Part_office_Powercable != null) {
                         var it = this.T_Product_office_desk_detail.T_Part_office_Powercable;
@@ -759,6 +772,7 @@
                         }
                         var q = { part: this.text_detail_18, model: this.T_Product_office_desk_detail.T_Office_Color.ColorName, name: '1', tag: this.T_Product_office_desk_detail.T_Office_Color.HEXValue, paramList: paramList };
                         this.paramTableData.push(q);
+                        color = it.ColorNumber;
                     }
 
                     initQRCode('qrcodebox', this.configurationNo);
@@ -787,13 +801,7 @@
                     if (response.body.collect!=null&&response.body.collect.Id > 0) {
                         this.isCollect = true;
                     }
-                    var url = checkProductDetailUrl(this.T_Product_office_desk_detail.T_Part_office_Column.Mode,
-                        this.T_Product_office_desk_detail.T_Part_office_Frame.Mode,
-                        this.T_Product_office_desk_detail.T_Part_office_Foot.Mode,
-                        this.T_Product_office_desk_detail.T_Part_office_SideBracket.Mode,
-                        this.T_Product_office_desk_detail.T_Part_office_ControlBox.Mode,
-                        this.T_Product_office_desk_detail.T_Part_office_HandSet.Mode,
-                        this.T_Product_office_desk_detail.T_Office_Color.ColorNumber);
+                    var url = checkProductDetailUrl(column,frame,foot,side,control, handset, color);
                     console.log(url);
                     var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "' + url+'"/>';
                     $('#asas').append(i);
