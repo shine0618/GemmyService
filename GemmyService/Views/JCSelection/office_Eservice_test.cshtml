@@ -559,8 +559,8 @@
                     <div>
                         <label>{{CustomHeightLength}}</label>
                         <el-slider v-model="frameHeight"
-                                   :min="600"
-                                   :max="1400"
+                                   :min="framesmallHeight"
+                                   :max="framebigHeight"
                                    show-input
                                    @@change="changeHeight($event)">
                         </el-slider>
@@ -568,8 +568,8 @@
                     <div>
                         <label>{{CustomWidthLength}}</label>
                         <el-slider v-model="frameWidth"
-                                   :min="600"
-                                   :max="1400"
+                                   :min="framesmallWidth"
+                                   :max="framesbigWidth"
                                    show-input
                                    @@change="changeWidth($event)">
                         </el-slider>
@@ -674,8 +674,12 @@
 
             defaultWidth: 0,
             defaultHeight: 0,
-            frameWidth: 600,
-            frameHeight: 600,
+            frameWidth: 0,
+            frameHeight: 0,
+            framesmallHeight: 0,
+            framebigHeight: 650,
+            framesmallWidth: 1080,
+            framesbigWidth: 1800,
 
             list_column: null,
             list_column_count: 0,
@@ -1001,8 +1005,14 @@
                         this.setData(key, value);;
                     }
                 }
+                var url = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&languageIso=" + this.langCode;
+                console.log(this.langCode);
                 var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
+                
                 $('#iDisplayBox').append(i);
+                $("#shjahs").attr({
+                    "src": url + "&languageIso=" + this.langCode
+                });
             },
 
             //正装3节的筛选
@@ -1155,10 +1165,16 @@
                 }
                 this.select_column = id;
                 this.select_columnMode = mode;
+                for (var i = 0; i < this.list_column.length; i++) {
+                    if (mode == this.list_column[i].Mode) {
+                        this.framesmallHeight = this.list_column[i].LowestPosition;
+                        this.framebigHeight = this.list_column[i].HighestPosition;
+                    }
+                };
                 var cc = mode.replace('-', '').replace('-', '').replace('JS36D', '');
                 this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc+ "}";
                 $("#shjahs").attr({
-                    "src": this.url_text
+                    "src": this.url_text + "&languageIso=" + this.langCode
                 });
                 this.cc_column = cc;  
             },
@@ -1168,6 +1184,12 @@
                 }
                 this.select_frame = id;
                 this.select_frameMode = mode;
+                for (var i = 0; i < this.list_frame.length; i++) {
+                    if (mode == this.list_frame[i].Mode) {
+                        this.framesmallWidth = this.list_frame[i].MinLength;
+                        this.framesbigWidth = this.list_frame[i].MaxLength;
+                    }
+                };
                 var fc = mode.replace('FRAME', '');
                 
                 this.url_text = checkModelUrl(this.url_text, "FC", this.fc_frame, fc);
@@ -1175,7 +1197,7 @@
                 console.log(fc);
                 console.log(this.fc_frame);
                 $("#shjahs").attr({
-                    "src": this.url_text
+                    "src": this.url_text + "&languageIso=" + this.langCode
                 });
                 this.fc_frame = fc;
             },
@@ -1188,7 +1210,7 @@
                 var tfc = mode.replace('JCF', '');
                 this.url_text = checkModelUrl(this.url_text, "TFC", this.tfc_foot, tfc);
                 $("#shjahs").attr({
-                    "src": this.url_text
+                    "src": this.url_text + "&languageIso=" + this.langCode
                 });
                 this.tfc_foot = tfc;
             },
@@ -1201,7 +1223,7 @@
                 var spc = mode.replace('SIDE', '');
                 this.url_text = checkModelUrl(this.url_text, "SPC", this.spc_SideBracket, spc);
                 $("#shjahs").attr({
-                    "src": this.url_text
+                    "src": this.url_text + "&languageIso=" + this.langCode
                 });
                 this.spc_SideBracket = spc;
             },
@@ -1213,7 +1235,7 @@
                 this.select_ColorMode = mode;
                 this.url_text = checkModelUrl(this.url_text, "COLOUR", this.colour_color, number);
                 $("#shjahs").attr({
-                    "src": this.url_text
+                    "src": this.url_text + "&languageIso=" + this.langCode
                 });
                 console.log(this.url_text);
                 console.log(number);
@@ -1233,7 +1255,7 @@
                     this.select_ControlBoxMode = mode;
                     this.url_text = checkModelUrl(this.url_text, "CONTROLLER", this.controller_ControlBox, mode);
                     $("#shjahs").attr({
-                        "src": this.url_text
+                        "src": this.url_text + "&languageIso=" + this.langCode
                     });
                     this.controller_ControlBox = mode;
                 }
@@ -1252,7 +1274,7 @@
                     this.select_HandSetMode = mode;
                     this.url_text = checkModelUrl(this.url_text, "HC", this.hc_HandSet, mode);
                     $("#shjahs").attr({
-                        "src": this.url_text
+                        "src": this.url_text + "&languageIso=" + this.langCode
                     });
                     this.hc_HandSet = mode;
                 }
@@ -1271,30 +1293,31 @@
                 }
             },
             changeHeight(val) {
-                this.url_text = checkModelUrl(this.url_text, "POS1", this.pos1_value, val);
+                this.url_text = checkModelUrl(this.url_text, "POS1", this.pos1_value, val - this.framesmallHeight);
                 $("#shjahs").attr({
-                    "src": this.url_text
+                    "src": this.url_text + "&languageIso=" + this.langCode
                 });
-                this.pos1_value = val;                
+                console.log(val);
+                this.pos1_value = val - this.framesmallHeight;                
             },
             changeWidth(val) {
-                this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val);             
+                this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val - this.framesmallWidth);             
                 $("#shjahs").attr({
-                    "src": this.url_text
+                    "src": this.url_text + "&languageIso=" + this.langCode
                 });
-                this.pos2_value = val;
+                this.pos2_value = val - this.framesmallWidth;
             },
             changeStatus: function (callback) {
                 if (callback == true) {
                     this.url_text = checkModelUrl(this.url_text, "OF", "", "-02");
                     $("#shjahs").attr({
-                        "src": this.url_text
+                        "src": this.url_text + "&languageIso=" + this.langCode
                     });
                 }
                 else {
                     this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");     
                     $("#shjahs").attr({
-                        "src": this.url_text
+                        "src": this.url_text + "&languageIso=" + this.langCode
                     });
                 }
                 console.log(callback);
