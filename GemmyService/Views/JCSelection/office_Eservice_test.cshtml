@@ -148,12 +148,22 @@
         padding: 0;
         margin: 0;
     }
-
-    .wordActive {
-        color: #202733;
-        font-weight: 600;
-        /*color: var(--thm-base);*/
+    .bigWords2 {
+        font-weight: 500;
+        color: #A8A8A8;
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 0;
+        font-size: 15px;
+        padding: 0;
+        margin: 0;
     }
+
+        .wordActive {
+            color: #202733;
+            font-weight: 600;
+            /*color: var(--thm-base);*/
+        }
 
     .smallWords {
         white-space: nowrap;
@@ -170,8 +180,9 @@
         }
 
     .itemStyle {
+        width:110px;
         max-width: 150px;
-        min-width: 90px;
+        min-width: 100px;
         overflow: hidden;
         text-align: center;
         font-weight: 500;
@@ -194,9 +205,6 @@
         font-size: 12px;
     }
 
-    #OfficeStandards {
-        background-image: url('/assets/images/backgrounds/newbg.82899ecd.jpg')
-    }
 </style>
 
 <div id="OfficeStandards">
@@ -262,19 +270,20 @@
                                     </div>
                                 </a>
                             </li>
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s2' }" @@click="selectStep='s2'">
-                                <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':select_frame!=''||selectStep=='s2' }">{{text_customer_2}}</p>
-                                    <div class="smallWords">
-                                        <p v-text="select_frameMode"></p>
-                                    </div>
-                                </a>
-                            </li>
+
                             <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s3' }" @@click="selectStep='s3'">
                                 <a>
                                     <p :class="{ 'bigWords': true,'wordActive':select_foot!=''||selectStep=='s3' }">{{text_customer_3}}</p>
                                     <div class="smallWords">
                                         <p v-text="select_footMode"></p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s2' }" @@click="selectStep='s2'">
+                                <a>
+                                    <p :class="{ 'bigWords': true,'wordActive':select_frame!=''||selectStep=='s2' }">{{text_customer_2}}</p>
+                                    <div class="smallWords">
+                                        <p v-text="select_frameMode"></p>
                                     </div>
                                 </a>
                             </li>
@@ -319,9 +328,9 @@
                                     </div>
                                 </a>
                             </li>
-                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s7' }" @@click="selectStep='s7'" >
+                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s7' }" @@click="selectStep='s7'">
                                 <a>
-                                    <p :class="{ 'bigWords': true,'wordActive':true }" style="color: var(--thm-base) ">{{CustomConfigurationListInfo}}</p>
+                                    <p :class="{ 'bigWords2': true,'wordActive':true }" style="color: var(--thm-base) ">{{CustomConfigurationListInfo}}</p>
                                     <div class="smallWords">
                                         <p></p>
                                     </div>
@@ -686,44 +695,44 @@
             select_column: "",
             select_columnMode: "",
             mouse_column: "",
-            cc_column:"",
+            cc_column: "",
 
             list_frame: null,
             list_frame_count: 0,
             select_frame: "",
             select_frameMode: "",
             mouse_frame: "",
-            fc_frame:"",
+            fc_frame: "",
             list_foot: null,
             list_foot_count: 0,
             select_foot: "",
             select_footMode: "",
             mouse_foot: "",
-            tfc_foot:"",
+            tfc_foot: "",
             list_SideBracket: null,
             list_SideBracket_count: 0,
             select_SideBracket: "",
             select_SideBracketMode: "",
             mouse_SideBracket: "",
-            spc_SideBracket:"",
+            spc_SideBracket: "",
             list_ControlBox: null,
             list_ControlBox_count: 0,
             select_ControlBox: "",
             select_ControlBoxMode: "",
             mouse_ControlBox: "",
-            controller_ControlBox:"",
+            controller_ControlBox: "",
             list_HandSet: null,
             list_HandSet_count: 0,
             select_HandSet: "",
             select_HandSetMode: "",
             mouse_HandSet: "",
-            hc_HandSet:"",
+            hc_HandSet: "",
             list_Powercable: null,
             list_Powercable_count: 0,
             select_Powercable: "",
             select_PowercableMode: "",
             mouse_Powercable: "",
-           
+
             list_Color: null,
             list_Color_count: 0,
             select_Color: "",
@@ -732,11 +741,11 @@
             of_deskboard: "",
             pos1_value: "",
             pos2_value: "",
-            url_text:"",
+            url_text: "",
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
-            productGuid:'',
-            
+            productGuid: '',
+
             //text
             select_text: "",//请选择
             text_customer_1: "",
@@ -752,8 +761,8 @@
             text_customer_7: "",
             text_customer_8: "",
             text_customer_9: "",
-            NAVMainPage:"",
-            CustomPage:"",
+            NAVMainPage: "",
+            CustomPage: "",
             CustomConfigurationListInfo: "",
             CustomSelectFrame: "",
             CustomSelectFoot: "",
@@ -786,11 +795,11 @@
             CustomAddConfirmButton: "",
             CustomAddCancelButton: "",
             CustomAddSuccessNotice: "",
-            text_customer_text1:"",
-            CustomSelectFootNotice :"",
+            text_customer_text1: "",
+            CustomSelectFootNotice: "",
             MyCollectName: "",
             custmerName: "",//客户命名方案
-            ControlBox_c1:"",//控制器筛选
+            ControlBox_c1: "",//控制器筛选
 
             detailModel: {
                 imgurl: "",
@@ -802,14 +811,36 @@
 
             },
 
-            value:0,
+            value: 0,
         },
         watch: {
+            select_column: function (val) {
+                this.select_foot = "";
+                this.select_frame = "";
+                this.select_footMode = "";
+                this.select_frameMode = "";
+            },
+            select_frame: function (val) {
+                this.select_SideBracket = "";
+                this.select_SideBracketMode = "";
+                //置空侧板的选择 3D
+                var spc = '';
+                this.url_text = checkModelUrl(this.url_text, "SPC", this.spc_SideBracket, spc);
+                $("#shjahs").attr({
+                    "src": this.url_text + "&languageIso=" + this.langCode
+                });
+                this.spc_SideBracket = spc;
+            },
+
             selectStep: function (val) {
 
                 switch (this.selectStep) {
                     case "s1":
-
+                        if (this.select_foot != "" || this.select_frame != "") {
+                            this.$notify({
+                                message: '您已经选了其他部件,重新选择立柱会撤销这些选择!',
+                            });
+                        }
                         break;
                     case "s2":
                         if (this.select_columnMode == "") {
@@ -920,7 +951,7 @@
                                 cancelButtonText: this.CustomAddCancelButton,
 
                             }).then(() => {
-                                window.location = "/JCSelection_Customer/personal";                           
+                                window.location = "/JCSelection_Customer/personal";
                             }).catch(() => {
                                 return;
                             });
@@ -947,16 +978,16 @@
 
 
             },
-            nextStep: function(event) {
-               // console.log(this.selectStep);
+            nextStep: function (event) {
+                // console.log(this.selectStep);
                 switch (this.selectStep) {
                     case "s1":
-                        this.selectStep = "s2";
-                        break;
-                    case "s2":
                         this.selectStep = "s3";
                         break;
                     case "s3":
+                        this.selectStep = "s2";
+                        break;
+                    case "s2":
                         this.selectStep = "s4";
                         break;
                     case "s4":
@@ -979,7 +1010,7 @@
             },
 
             handleClick(tab, event) {
-               // console.log(tab);
+                // console.log(tab);
 
 
             },
@@ -1001,18 +1032,17 @@
                         // p 为属性名称，obj[p]为对应属性的值
                         var key = p;
                         var value = obj[p];
-                       // console.log('key:' + key + "  value:" + value);
+                        // console.log('key:' + key + "  value:" + value);
                         this.setData(key, value);;
                     }
                 }
                 var url = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&languageIso=" + this.langCode;
-                console.log(this.langCode);
-                var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
-                
+                var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = ""/>';
+
                 $('#iDisplayBox').append(i);
-                $("#shjahs").attr({
-                    "src": url + "&languageIso=" + this.langCode
-                });
+                //$("#shjahs").attr({
+                //    "src": url + "&languageIso=" + this.langCode
+                //});
             },
 
             //正装3节的筛选
@@ -1059,8 +1089,8 @@
                     this.list_column_count = this.list_column.length;
                     //console.log(response.body);
                 }, function (error) {
-                        console.log(error);
-               })
+                    console.log(error);
+                })
             },
             getAllFrame: function (event) {
                 this.$http({           //调用接口
@@ -1074,14 +1104,14 @@
                     this.list_frame_count = this.list_frame.length;
                 }, function (error) {
                     console.log(error);
-               })
+                })
             },
             getAllFoot: function (event) {
                 this.$http({           //调用接口
                     method: 'GET',
                     url: "/JCSelection/GetOfficeFoot",
                     params: {
-                        select_columnMode:  this.select_columnMode,
+                        select_columnMode: this.select_columnMode,
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_foot = response.body;
@@ -1095,7 +1125,7 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeSideBracket",
                     params: {
-                        select_frame : this.select_frame,
+                        select_frame: this.select_frame,
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_SideBracket = response.body;
@@ -1159,10 +1189,37 @@
                     console.log(error);
                 })
             },
-            columnClick: function (id,mode) {
+            columnClick: function (id, mode) {
                 if (this.select_column == id) {
                     return;
                 }
+                var update = true;
+                //如果重新选择立柱的话更新
+                if (this.select_foot != "" || this.select_frame != "") {
+                    update = false;
+                    this.$confirm('您已经选了其他部件,继续选择的话会撤销这些选择', this.CustomAddNotice, {
+                        confirmButtonText: this.CustomAddConfirmButton,
+                        cancelButtonText: this.CustomAddCancelButton,
+
+                    }).then(() => {
+                        this.columnClickConfirm(id, mode);
+                    }).catch(() => {
+                        update = false;
+                        return;
+                    });
+                }
+
+
+                if (update) {
+                    this.columnClickConfirm(id, mode);
+                }
+
+              
+
+
+
+            },
+            columnClickConfirm(id, mode) {
                 this.select_column = id;
                 this.select_columnMode = mode;
                 for (var i = 0; i < this.list_column.length; i++) {
@@ -1172,7 +1229,7 @@
                     }
                 };
                 var cc = mode.replace('-', '').replace('-', '').replace('JS36D', '');
-                this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc+ "}";
+                this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc + "}";
                 $("#shjahs").attr({
                     "src": this.url_text + "&languageIso=" + this.langCode
                 });
@@ -1182,6 +1239,29 @@
                 if (this.select_frame == id) {
                     return;
                 }
+                var update = true;
+                //如果重新选择立柱的话更新
+                if (this.select_SideBracket != "") {
+                    update = false;
+                    this.$confirm('您已经选了其他部件,继续选择的话会撤销这些选择', this.CustomAddNotice, {
+                        confirmButtonText: this.CustomAddConfirmButton,
+                        cancelButtonText: this.CustomAddCancelButton,
+
+                    }).then(() => {
+                        this.frameClickConfirm(id, mode);
+                    }).catch(() => {
+                        update = false;
+                        return;
+                    });
+                }
+
+
+                if (update) {
+                    this.frameClickConfirm(id, mode);
+                }
+
+            },
+            frameClickConfirm: function (id, mode) {
                 this.select_frame = id;
                 this.select_frameMode = mode;
                 for (var i = 0; i < this.list_frame.length; i++) {
@@ -1191,7 +1271,7 @@
                     }
                 };
                 var fc = mode.replace('FRAME', '');
-                
+
                 this.url_text = checkModelUrl(this.url_text, "FC", this.fc_frame, fc);
                 console.log(this.url_text);
                 console.log(fc);
@@ -1201,6 +1281,8 @@
                 });
                 this.fc_frame = fc;
             },
+            
+
             footClick: function (id, mode) {
                 if (this.select_foot == id) {
                     return;

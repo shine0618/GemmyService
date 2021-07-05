@@ -122,7 +122,7 @@
     "t_OfficeStandards_2": "Online Customization",
     "introduction": "Parameter",
     "CustomPage": "Custom",
-    "CustomConfigurationListInfo": "Configuration List",
+    "CustomConfigurationListInfo": "Configuration",
     "CustomSelectFrame": "Frame",
     "CustomSelectFoot": "Foot",
     "CustomSelectSideBracket": "SideBracket",
@@ -177,14 +177,14 @@
     "text_detail_17": "PowerCable",
     "text_detail_18": "Color",
 
-    "text_customer_1": "1.Column",
-    "text_customer_2": "2.Frame",
-    "text_customer_3": "3.Foot",
-    "text_customer_4": "4.Sidebracket",
-    "text_customer_42_1": "5.ControlBox",
-    "text_customer_42_2": "6.HandSet",
-    "text_customer_42_3": "7.PowerCable",
-    "text_customer_423": "8.Color",
+    "text_customer_1": "Column",
+    "text_customer_2": "Frame",
+    "text_customer_3": "Foot",
+    "text_customer_4": "Sidebracket",
+    "text_customer_42_1": "ControlBox",
+    "text_customer_42_2": "HandSet",
+    "text_customer_42_3": "PowerCable",
+    "text_customer_423": "Color",
 
 
 
