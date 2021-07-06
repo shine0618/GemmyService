@@ -816,6 +816,7 @@
     <Content Include="Views\JCSelection_Customer\testpage.cshtml" />
     <Content Include="Views\JCSelection\office_Eservice_ring.cshtml" />
     <Content Include="Views\JCSelection\serviceTWJ.cshtml" />
+    <Content Include="Views\JCAccount\reass_english.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
