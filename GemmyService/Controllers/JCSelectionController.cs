@@ -286,7 +286,7 @@ namespace GemmyService.Controllers
         /// </summary>
         /// <param name="productGuid"></param>
         /// <returns></returns>
-        public ActionResult office_Eservice_test(string productName,string productGuid)
+        public ActionResult office_Eservice_test(string productName,string productGuid, string Type)
         { //如果语言是默认的话
             if (Session["PageLanguage"] == null)
             {
@@ -297,8 +297,8 @@ namespace GemmyService.Controllers
                 Session["emailName"] = "";
             }
             Session.Timeout = 9600;
-            ViewBag.productGuid = productGuid;   
-            
+            ViewBag.productGuid = productGuid;
+            ViewBag.Type = Type;
 
             return View();
         }
@@ -359,11 +359,11 @@ namespace GemmyService.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetOfficeColumn(string columnType)
+        public JsonResult GetOfficeColumn(string columnType,string deskType)
         {
 
 
-            List<T_Part_office_Column> list = bll_desk.GetT_Part_office_Column(columnType);
+            List<T_Part_office_Column> list = bll_desk.GetT_Part_office_ColumnWithType(columnType,deskType);
 
             //if (OrderValue != null && OrderValue != "")
             //{
@@ -386,17 +386,17 @@ namespace GemmyService.Controllers
 
         }
         [HttpGet]
-        public JsonResult GetOfficeFrame(string select_columnMode)
+        public JsonResult GetOfficeFrame(string select_columnMode, string deskType)
         {
-            List<T_Part_office_Frame> list = bll_desk.GetT_Part_office_Frame(select_columnMode);
+            List<T_Part_office_Frame> list = bll_desk.GetT_Part_office_FrameWithType(select_columnMode, deskType);
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
         [HttpGet]
-        public JsonResult GetOfficeFoot(string select_columnMode)
+        public JsonResult GetOfficeFoot(string select_columnMode, string deskType)
         {
-            List<T_Part_office_Foot> list = bll_desk.GetT_Part_office_Foot( select_columnMode);
+            List<T_Part_office_Foot> list = bll_desk.GetT_Part_office_FootWithType( select_columnMode, deskType);
 
 
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
@@ -404,25 +404,25 @@ namespace GemmyService.Controllers
             return jr;
         }
         [HttpGet]
-        public JsonResult GetOfficeSideBracket(string select_frame)
+        public JsonResult GetOfficeSideBracket(string select_frame, string deskType)
         {
-            List<T_Part_office_SideBracket> list = bll_desk.GetT_Part_office_SideBracket(select_frame);
+            List<T_Part_office_SideBracket> list = bll_desk.GetT_Part_office_SideBracketWithType(select_frame, deskType);
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
         [HttpGet]
-        public JsonResult GetOfficeControlBox()
+        public JsonResult GetOfficeControlBox(string deskType)
         {
-            List<T_Part_office_ControlBox> list = bll_desk.GetT_Part_office_ControlBox();
+            List<T_Part_office_ControlBox> list = bll_desk.GetT_Part_office_ControlBoxWithType(deskType);
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
         [HttpGet]
-        public JsonResult GetOfficeHandSet()
+        public JsonResult GetOfficeHandSet(string deskType)
         {
-            List<T_Part_office_HandSet> list = bll_desk.GetT_Part_office_HandSet();
+            List<T_Part_office_HandSet> list = bll_desk.GetT_Part_office_HandSetWithType(deskType);
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;

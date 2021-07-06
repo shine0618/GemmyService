@@ -568,7 +568,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         /// 获取所有的
         /// </summary>
         /// <returns></returns>
-        public List<T_Part_office_Column> GetT_Part_office_Column(string columnType)
+        public List<T_Part_office_Column> GetT_Part_office_ColumnWithType(string columnType,string deskType)
         {
             var query = from x in read_db.T_Part_office_Column
                         where x.deleteSign != 1
@@ -592,17 +592,53 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 default:
                     break;
             }
+            switch (deskType)
+            {
+                case "TS":
+                    query = query.Where(x => x.UseTS == true);
+                    break;
+                case "TO":
+                    query = query.Where(x => x.UseTO == true);
+                    break;
+                case "TT":
+                    query = query.Where(x => x.UseTT == true);
+                    break;
+                case "TF":
+                    query = query.Where(x => x.UseTF == true);
+                    break;
+                case "Bench":
+                    query = query.Where(x => x.UseBench == true);
+                    break;
+            }
 
             return query.ToList();
         }
 
-        public List<T_Part_office_Frame> GetT_Part_office_Frame(string select_columnMode)
+        public List<T_Part_office_Frame> GetT_Part_office_FrameWithType(string select_columnMode, string deskType)
         {
             var query = from x in read_db.T_Part_office_Frame
                         where x.deleteSign!=1
                         select x;
-
+            switch (deskType)
+            {
+                case "TS":
+                    query = query.Where(x => x.UseTS == true);
+                    break;
+                case "TO":
+                    query = query.Where(x => x.UseTO == true);
+                    break;
+                case "TT":
+                    query = query.Where(x => x.UseTT == true);
+                    break;
+                case "TF":
+                    query = query.Where(x => x.UseTF == true);
+                    break;
+                case "Bench":
+                    query = query.Where(x => x.UseBench == true);
+                    break;
+            }
             List<T_Part_office_Frame> list = query.ToList();
+            
             if (select_columnMode != null && select_columnMode != "")
             {
                 //检查FOOT和Column的适配性
@@ -613,15 +649,33 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                     list = list.Where(x => x.FrameWithColumn == column.ColumnWithFrame).ToList();
                 }
             }
+            
             return list;
         }
-        public List<T_Part_office_Foot> GetT_Part_office_Foot(string select_columnMode)
+        public List<T_Part_office_Foot> GetT_Part_office_FootWithType(string select_columnMode, string deskType)
         {
             var query = from x in read_db.T_Part_office_Foot
                         where x.deleteSign != 1
                         select x;
 
-
+            switch (deskType)
+            {
+                case "TS":
+                    query = query.Where(x => x.UseTS == true);
+                    break;
+                case "TO":
+                    query = query.Where(x => x.UseTO == true);
+                    break;
+                case "TT":
+                    query = query.Where(x => x.UseTT == true);
+                    break;
+                case "TF":
+                    query = query.Where(x => x.UseTF == true);
+                    break;
+                case "Bench":
+                    query = query.Where(x => x.UseBench == true);
+                    break;
+            }
             List<T_Part_office_Foot> list =  query.ToList();
             if(select_columnMode!=null && select_columnMode!="")
             {
@@ -633,14 +687,32 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                     list = list.Where(x => x.FootWithColumn == column.ColumnWithFoot).ToList();
                 }
             }
+            
             return list;
         }
-        public List<T_Part_office_SideBracket> GetT_Part_office_SideBracket(string select_frame)
+        public List<T_Part_office_SideBracket> GetT_Part_office_SideBracketWithType(string select_frame, string deskType)
         {
             var query = from x in read_db.T_Part_office_SideBracket
                         where x.deleteSign != 1
                         select x;
-
+            switch (deskType)
+            {
+                case "TS":
+                    query = query.Where(x => x.UseTS == true);
+                    break;
+                case "TO":
+                    query = query.Where(x => x.UseTO == true);
+                    break;
+                case "TT":
+                    query = query.Where(x => x.UseTT == true);
+                    break;
+                case "TF":
+                    query = query.Where(x => x.UseTF == true);
+                    break;
+                case "Bench":
+                    query = query.Where(x => x.UseBench == true);
+                    break;
+            }
             List<T_Part_office_SideBracket> list = query.ToList();
             if (select_frame != null && select_frame != "")
             {
@@ -652,24 +724,59 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                     list = list.Where(x => x.SideBracketWithFrame == column.FrameWithSideBracket).ToList();
                 }
             }
+            
             return list;
         }
-        public List<T_Part_office_ControlBox> GetT_Part_office_ControlBox()
+        public List<T_Part_office_ControlBox> GetT_Part_office_ControlBoxWithType(string deskType)
         {
             var query = from x in read_db.T_Part_office_ControlBox
                         where x.deleteSign != 1
                         select x;
-
+            switch (deskType)
+            {
+                case "TS":
+                    query = query.Where(x => x.UseTS == true);
+                    break;
+                case "TO":
+                    query = query.Where(x => x.UseTO == true);
+                    break;
+                case "TT":
+                    query = query.Where(x => x.UseTT == true);
+                    break;
+                case "TF":
+                    query = query.Where(x => x.UseTF == true);
+                    break;
+                case "Bench":
+                    query = query.Where(x => x.UseBench == true);
+                    break;
+            }
             return query.ToList();
         }
 
 
-        public List<T_Part_office_HandSet> GetT_Part_office_HandSet()
+        public List<T_Part_office_HandSet> GetT_Part_office_HandSetWithType(string deskType)
         {
             var query = from x in read_db.T_Part_office_HandSet
                         where x.deleteSign != 1
                         select x;
-
+            switch (deskType)
+            {
+                case "TS":
+                    query = query.Where(x => x.UseTS == true);
+                    break;
+                case "TO":
+                    query = query.Where(x => x.UseTO == true);
+                    break;
+                case "TT":
+                    query = query.Where(x => x.UseTT == true);
+                    break;
+                case "TF":
+                    query = query.Where(x => x.UseTF == true);
+                    break;
+                case "Bench":
+                    query = query.Where(x => x.UseBench == true);
+                    break;
+            }
             return query.ToList();
         }
         public List<T_Part_office_Powercable> GetT_Part_office_Powercable()

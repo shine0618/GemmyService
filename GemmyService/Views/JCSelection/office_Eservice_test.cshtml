@@ -678,7 +678,7 @@
             list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             colorConfirm: '#FF0000',
             selectStep: 's1',//选择的步骤
-
+            deskType:"@ViewBag.Type",
             IsShowDesktop: false,
             search1_column: '',//筛选的正装
 
@@ -798,6 +798,10 @@
             CustomAddSuccessNotice: "",
             text_customer_text1: "",
             CustomSelectFootNotice: "",
+            CustomAddConfigNameNotice: "",
+            CustomAddConfigRedirectNotice: "",
+            CustomAddConfigChangeColumnNotice: "",
+            CustomAddConfigChangePartsNotice:"",
             MyCollectName: "",
             custmerName: "",//客户命名方案
             ControlBox_c1: "",//控制器筛选
@@ -816,10 +820,10 @@
         },
         watch: {
             select_column: function (val) {
-              
+
             },
             select_frame: function (val) {
-             
+
             },
 
             selectStep: function (val) {
@@ -899,7 +903,7 @@
                     this.selectStep = "s7";
                     this.$message({
                         type: 'info',
-                        message: '请输入您的方案名称'
+                        message: this.CustomAddConfigNameNotice
                     });
                     return;
                 }
@@ -936,7 +940,7 @@
                             //    type: 'success',
                             //    message: this.CustomAddSuccessNotice
                             //});
-                            this.$confirm('是否跳转查看', this.CustomAddSuccessNotice, {
+                            this.$confirm(this.CustomAddConfigRedirectNotice, this.CustomAddSuccessNotice, {
                                 confirmButtonText: this.CustomAddConfirmButton,
                                 cancelButtonText: this.CustomAddCancelButton,
 
@@ -1037,7 +1041,7 @@
 
             //正装3节的筛选
             colomnSearch: function (text) {
-                
+
 
                 if (this.search1_column == text) {
                     this.search1_column = '';
@@ -1078,7 +1082,8 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeColumn",
                     params: {
-                        columnType: this.search1_column
+                        columnType: this.search1_column,
+                        deskType: this.deskType
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_column = response.body;
@@ -1094,6 +1099,7 @@
                     url: "/JCSelection/GetOfficeFrame",
                     params: {
                         select_columnMode: this.select_columnMode,
+                        deskType: this.deskType
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_frame = response.body;
@@ -1108,6 +1114,7 @@
                     url: "/JCSelection/GetOfficeFoot",
                     params: {
                         select_columnMode: this.select_columnMode,
+                        deskType: this.deskType
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_foot = response.body;
@@ -1117,11 +1124,13 @@
                 })
             },
             getAllSideBracket: function (event) {
+                console.log(this.select_frame);
                 this.$http({           //调用接口
                     method: 'GET',
                     url: "/JCSelection/GetOfficeSideBracket",
                     params: {
-                        select_frame: this.select_frame,
+                        select_frame: this.select_frameMode,
+                        deskType: this.deskType
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_SideBracket = response.body;
@@ -1135,6 +1144,7 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeControlBox",
                     params: {
+                        deskType: this.deskType
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_ControlBox = response.body;
@@ -1150,6 +1160,7 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeHandSet",
                     params: {
+                        deskType: this.deskType
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_HandSet = response.body;
@@ -1193,7 +1204,7 @@
                 //如果重新选择立柱的话更新
                 if (this.select_foot != "" || this.select_frame != "") {
                     update = false;
-                    this.$confirm('您已经选了其他部件,继续选择的话会撤销这些选择', this.CustomAddNotice, {
+                    this.$confirm(this.CustomAddConfigChangeColumnNotice, this.CustomAddNotice, {
                         confirmButtonText: this.CustomAddConfirmButton,
                         cancelButtonText: this.CustomAddCancelButton,
 
@@ -1209,14 +1220,14 @@
                 if (update) {
                     this.columnClickConfirm(id, mode);
                 }
-              
+
 
 
 
             },
             columnClickConfirm(id, mode) {
                    //置空侧板
-                if (this.select_frame != "") {                 
+                if (this.select_frame != "") {
                     this.select_SideBracket = "";
                     this.select_SideBracketMode = "";
                 }
@@ -1226,7 +1237,7 @@
                 this.select_footMode = "";
                 this.select_frameMode = "";
 
-              
+
 
                 this.select_column = id;
                 this.select_columnMode = mode;
@@ -1239,8 +1250,8 @@
 
                 this.SetFrame();
                 //var cc = mode.replace('-', '').replace('-', '').replace('JS36D', '');
-                //this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc + "}";           
-                //this.cc_column = cc;  
+                //this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc + "}";
+                //this.cc_column = cc;
             },
             frameClick: function (id, mode) {
                 if (this.select_frame == id) {
@@ -1250,12 +1261,12 @@
                 //如果重新选择立柱的话更新
                 if (this.select_SideBracket != "") {
                     update = false;
-                    this.$confirm('您已经选了其他部件,继续选择的话会撤销这些选择', this.CustomAddNotice, {
+                    this.$confirm(this.CustomAddConfigChangePartsNotice, this.CustomAddNotice, {
                         confirmButtonText: this.CustomAddConfirmButton,
                         cancelButtonText: this.CustomAddCancelButton,
 
                     }).then(() => {
-                       
+
                         this.frameClickConfirm(id, mode);
                     }).catch(() => {
                         update = false;
@@ -1263,7 +1274,7 @@
                     });
                 }
 
-                
+
                 if (update) {
                     this.frameClickConfirm(id, mode);
                 }
@@ -1289,7 +1300,7 @@
 
                 this.SetFrame();
             },
-            
+
 
             footClick: function (id, mode) {
                 if (this.select_foot == id) {
@@ -1366,11 +1377,11 @@
                 //    "src": this.url_text + "&languageIso=" + this.langCode
                 //});
                 //console.log(val);
-                this.pos1_value = val - this.framesmallHeight;    
+                this.pos1_value = val - this.framesmallHeight;
                 this.SetFrame();
             },
             changeWidth(val) {
-                //this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val - this.framesmallWidth);             
+                //this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val - this.framesmallWidth);
                 //$("#shjahs").attr({
                 //    "src": this.url_text + "&languageIso=" + this.langCode
                 //});
@@ -1385,7 +1396,7 @@
                 //    });
                 //}
                 //else {
-                //    this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");     
+                //    this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");
                 //    $("#shjahs").attr({
                 //        "src": this.url_text + "&languageIso=" + this.langCode
                 //    });

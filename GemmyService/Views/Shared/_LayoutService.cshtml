@@ -131,7 +131,7 @@
 
 
         function checkModelUrl(url, modeType, Oldmodelid, Newmodelid) {
-            var a = modeType + "=" + Oldmodelid;
+            var a = "{"+modeType + "=" + Oldmodelid+"}";
             if (url.indexOf(a) >= 0) {
                 if (modeType != "OF") {
                    url= url.replace( modeType + "=" +Oldmodelid , modeType + "=" + Newmodelid );

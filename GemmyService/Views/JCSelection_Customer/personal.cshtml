@@ -17,7 +17,7 @@
         <div class="container" style="padding:10px 10px ">
             <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
             <a class="navigation_a" href="/JCSelection/office_Eservice_test">{{CustomPage}}</a>/
-            <a class="navigation_a">列表</a>
+            <a class="navigation_a">{{PersonalTitle}}</a>
         </div><!-- /.container -->
     </section><!-- /.page-header -->
 
@@ -28,24 +28,24 @@
                     <template>
                         <el-table :data="tableData"
                                   :height="tableHeight">
-                            <el-table-column label="日期"
+                            <el-table-column :label="PersonalDate"
                                              prop="UpdateTime">
                             </el-table-column>
-                            <el-table-column label="配置名称"
+                            <el-table-column :label="PersonalConfigName"
                                              prop="configurationName">
                             </el-table-column>
                             <el-table-column align="right">
                                 <template #header>
                                     <el-input v-model="search"
                                               size="mini"
-                                              placeholder="请输入搜索条件" />
+                                              :placeholder="PersonalSearch" />
                                 </template>
                                 <template #default="scope">
                                     <el-button size="mini"
-                                               @@click="handleGotoDetail(scope.$index, scope.row)">查看</el-button>
+                                               @@click="handleGotoDetail(scope.$index, scope.row)">{{PersonalLookover}}</el-button>
                                     <el-button size="mini"
                                                type="danger"
-                                               @@click="handleGotoConfig(scope.$index, scope.row)">修改</el-button>
+                                               @@click="handleGotoConfig(scope.$index, scope.row)">{{PersonalModify}}</el-button>
                                 </template>
                             </el-table-column>
                         </el-table>
@@ -80,7 +80,13 @@
             tableHeight: "",
             tableData: [],
             search: '',
-            LoginUsername:'',
+            LoginUsername: '',
+            PersonalTitle: "",
+            PersonalDate: "",
+            PersonalConfigName: "",
+            PersonalSearch: "",
+            PersonalLookover: "",
+            PersonalModify: "",
             value:0,
         },
       
