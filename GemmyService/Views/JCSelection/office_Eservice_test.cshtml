@@ -851,7 +851,7 @@
                     this.selectStep = "s7";
                     this.$message({
                         type: 'info',
-                        message: '请输入您的方案名称'
+                        message: this.CustomAddConfigNameNotice
                     });
                     return;
                 }
@@ -888,7 +888,7 @@
                             //    type: 'success',
                             //    message: this.CustomAddSuccessNotice
                             //});
-                            this.$confirm('是否跳转查看', this.CustomAddSuccessNotice, {
+                            this.$confirm(this.CustomAddConfigRedirectNotice, this.CustomAddSuccessNotice, {
                                 confirmButtonText: this.CustomAddConfirmButton,
                                 cancelButtonText: this.CustomAddCancelButton,
 
@@ -1152,7 +1152,7 @@
                 //如果重新选择立柱的话更新
                 if (this.select_foot != "" || this.select_frame != "") {
                     update = false;
-                    this.$confirm('您已经选了其他部件,继续选择的话会撤销这些选择', this.CustomAddNotice, {
+                    this.$confirm(this.CustomAddConfigChangeColumnNotice, this.CustomAddNotice, {
                         confirmButtonText: this.CustomAddConfirmButton,
                         cancelButtonText: this.CustomAddCancelButton,
 
@@ -1209,7 +1209,7 @@
                 //如果重新选择立柱的话更新
                 if (this.select_SideBracket != "") {
                     update = false;
-                    this.$confirm('您已经选了其他部件,继续选择的话会撤销这些选择', this.CustomAddNotice, {
+                    this.$confirm(this.CustomAddConfigChangePartsNotice, this.CustomAddNotice, {
                         confirmButtonText: this.CustomAddConfirmButton,
                         cancelButtonText: this.CustomAddCancelButton,
 

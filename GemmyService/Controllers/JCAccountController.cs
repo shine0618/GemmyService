@@ -83,10 +83,10 @@ namespace GemmyService.Controllers
         }
 
         [HttpGet]
-        public JsonResult SendRegisterEmail(string emailaddress)
+        public JsonResult SendRegisterEmail(string emailaddress,string langcode)
         {
             string codestr = CreateVerificationCode();
-            sendEmail(emailaddress, emailBody(codestr), codestr);
+            sendEmail(emailaddress, registerBody(codestr,langcode), codestr);
             usermanager.addRegisterInfo(emailaddress, DateTime.UtcNow.AddMinutes(30), codestr);
             JsonResult jr = Json(codestr, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
@@ -102,6 +102,19 @@ namespace GemmyService.Controllers
             return emailBody;
         }
 
+        private string registerBody(string code,string langcode)
+        {
+            string emailBody = "";
+            if (langcode == "zh")
+            {
+                emailBody += "<style>*{font - family: 'Microsoft YaHei';color: #2d2c2c;}.body{background-color:#EFF2F6;}.div_emain{ padding:2rem;width:700px;margin:0 auto;}.footText{color: #0F4680;text - align:center;}</style>\r\n" + "<div class=\"div_emain\"> <div><img src=\"https://img201.yun300.cn/img/jcxlogo.png?tenantId=150725&viewType=1&k=1621414521000\"/></div><div><h2>用户注册</h2><p>您的账号正在进行用户注册，以下是您的验证码：</p><h3>" + code + "</h3><p>如果您看过上述信息，请忽略此电子邮件。</p><br/><h4>用户注册须知</h4><p>捷昌产品选型系统,本系统提供的网络服务中包含的任何文本、图片、图形、音频和/或视频资料均受版权、商标和/或其它财产所有权法律的保护。</p><p>除法律另有强制性规定外，未经相关权利人同意，任何单位或个人不得以任何方式非法地全部或部分复制、转载、引用、链接、抓取或以其他方式使用本站的信息内容；否则，本系统所有者有权追究其法律责任。</p><br /><h4>此致</h4><p>捷昌 Configration 团队</p><h4 class=\"footText\"></h4></div></div>";
+            }
+            else if (langcode == "en")
+            {
+                emailBody += "<style>*{font - family: 'Microsoft YaHei';color: #2d2c2c;}.body{background-color:#EFF2F6;}.div_emain{ padding:2rem;width:700px;margin:0 auto;}.footText{color: #0F4680;text - align:center;}</style>\r\n" + "<div class=\"div_emain\"> <div><img src=\"https://img201.yun300.cn/img/jcxlogo.png?tenantId=150725&viewType=1&k=1621414521000\"/></div><div><h2>User register</h2><p>Your account is being registered as a user,Here's your verification:</p><h3>"+code+"</h3><p>If you have seen the above information,please ignore this email.</p><br/><h4>User register notice</h4><p>Jiecang configuration system,Any text,pictures,graphics,audio and\\/or video materials contained in the network services provided by the system are protected by copyright,trademark and\\/or other property ownership laws.</p><p>Unless otherwise mandatory by law,without the consent of the relevant right holder,no unit or individual shall in any way illegally copy,reprint, quote,link,grab or otherwise use the information content of this site in whole or in part;Otherwise,the owner of the system has the right to pursue its legal responsibility.</p><br/><h4>Best Regards:</h4><p>Jiecang Configration team</p><h4 class=\"footText\"></h4></div></div>";
+            }
+            return emailBody;
+        }
 
         #endregion
         [HttpPost]
@@ -203,25 +216,37 @@ namespace GemmyService.Controllers
 
 
         [HttpGet]
-        public JsonResult SendResetEmail(string emailaddress)
+        public JsonResult SendResetEmail(string emailaddress,string langcode)
         {
             string codestr = CreateVerificationCode();
-            sendEmail(emailaddress, ResetemailBody(codestr), codestr);
+            sendEmail(emailaddress, ResetemailBody(codestr,langcode), codestr);
 
             usermanager.addResetInfo(emailaddress, DateTime.UtcNow.AddMinutes(30), codestr);
             JsonResult jr = Json(codestr, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
-        private string ResetemailBody(string code)
+        //private string ResetemailBody(string code)
+        //{
+        //    string emailBody = "";
+        //    emailBody += "<style>.alignleft{display:inline;float:left;}</style>\r\n" + "<div><img class=\"alignleft\" src=\"https://img01.yun300.cn/img/jcxlogo.png?tenantId=150725&viewType=1&k=1621414521000\" ></div><div><span style=\"color:#0f4c81\"><span style=\"font-family:微软雅黑\"><span style=\"line-height:1.2\"><span style=\"font-size:20px\">股票代码：603583<br>股票名称：捷昌驱动</span></span></span></span></div>" + "\r\n" +
+        //        "<hr />\r\n" + "<div><span style=\"font - size:20px\">尊敬的用户：<br>首先感谢您使用GemmyConfiguration，本条邮件是用于重置密码，请通过以下验证码来进行密码的重置<br>" + code + "<br>如有打扰之处，请多谅解!</span></div>";
+        //    return emailBody;
+        //}
+
+        private string ResetemailBody(string code, string langcode)
         {
             string emailBody = "";
-            emailBody += "<style>.alignleft{display:inline;float:left;}</style>\r\n" + "<div><img class=\"alignleft\" src=\"https://img01.yun300.cn/img/jcxlogo.png?tenantId=150725&viewType=1&k=1621414521000\" ></div><div><span style=\"color:#0f4c81\"><span style=\"font-family:微软雅黑\"><span style=\"line-height:1.2\"><span style=\"font-size:20px\">股票代码：603583<br>股票名称：捷昌驱动</span></span></span></span></div>" + "\r\n" +
-                "<hr />\r\n" + "<div><span style=\"font - size:20px\">尊敬的用户：<br>首先感谢您使用GemmyConfiguration，本条邮件是用于重置密码，请通过以下验证码来进行密码的重置<br>" + code + "<br>如有打扰之处，请多谅解!</span></div>";
+            if (langcode == "zh")
+            {
+                emailBody += "<style>*{font - family: 'Microsoft YaHei';color: #2d2c2c;}.body{background-color:#EFF2F6;}.div_emain{ padding:2rem;width:700px;margin:0 auto;}.footText{color: #0F4680;text - align:center;}</style>\r\n" + "<div class=\"div_emain\"> <div><img src=\"https://img201.yun300.cn/img/jcxlogo.png?tenantId=150725&viewType=1&k=1621414521000\"/></div><div><h2>重置密码</h2><p>您的账号正在进行密码重置，以下是您的验证码：</p><h3>" + code + "</h3><p>如果您看过上述信息，请忽略此电子邮件。</p><br/><h4>用户注册须知</h4><p>捷昌产品选型系统,本系统提供的网络服务中包含的任何文本、图片、图形、音频和/或视频资料均受版权、商标和/或其它财产所有权法律的保护。</p><p>除法律另有强制性规定外，未经相关权利人同意，任何单位或个人不得以任何方式非法地全部或部分复制、转载、引用、链接、抓取或以其他方式使用本站的信息内容；否则，本系统所有者有权追究其法律责任。</p><br /><h4>此致</h4><p>捷昌 Configration 团队</p><h4 class=\"footText\"></h4></div></div>";
+            }
+            else if (langcode == "en")
+            {
+                emailBody += "<style>*{font - family: 'Microsoft YaHei';color: #2d2c2c;}.body{background-color:#EFF2F6;}.div_emain{ padding:2rem;width:700px;margin:0 auto;}.footText{color: #0F4680;text - align:center;}</style>\r\n" + "<div class=\"div_emain\"> <div><img src=\"https://img201.yun300.cn/img/jcxlogo.png?tenantId=150725&viewType=1&k=1621414521000\"/></div><div><h2>User resetpassword</h2><p>Your account is in the process of password reset,Here's your verification:</p><h3>" + code + "</h3><p>If you have seen the above information,please ignore this email.</p><br/><h4>User register notice</h4><p>Jiecang configuration system,Any text,pictures,graphics,audio and\\/or video materials contained in the network services provided by the system are protected by copyright,trademark and\\/or other property ownership laws.</p><p>Unless otherwise mandatory by law,without the consent of the relevant right holder,no unit or individual shall in any way illegally copy,reprint, quote,link,grab or otherwise use the information content of this site in whole or in part;Otherwise,the owner of the system has the right to pursue its legal responsibility.</p><br/><h4>Best Regards:</h4><p>Jiecang Configration team</p><h4 class=\"footText\"></h4></div></div>";
+            }
             return emailBody;
         }
-
-
 
 
         [HttpGet]

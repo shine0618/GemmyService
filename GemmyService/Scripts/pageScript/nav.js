@@ -842,6 +842,7 @@ var nav_langu_box = new Vue({
                     url: "/JCAccount/SendRegisterEmail",
                     params: {
                         emailaddress: emailaddress,
+                        langcode: this.defaultLanguageCode
                     }
                 }).then(function (response) {  //接口返回数据
                     //  console.log(response);
@@ -882,6 +883,7 @@ var nav_langu_box = new Vue({
                         url: "/JCAccount/SendResetEmail",
                         params: {
                             emailaddress: emailaddress,
+                            langcode: this.defaultLanguageCode
                         }
                     }).then(function (response) {  //接口返回数据
                         //  console.log(response);
