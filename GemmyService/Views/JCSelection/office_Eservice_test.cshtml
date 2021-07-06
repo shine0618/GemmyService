@@ -605,7 +605,7 @@
 
                     <!-- 是否显示桌面板 -->
                     <label>{{CustomShowBoard}}</label>
-                    <el-switch v-model="value"
+                    <el-switch v-model="IsShowDesktop"
                                active-color="#008fd5"
                                inactive-color="GRAY"
                                @@change="changeStatus">
@@ -678,7 +678,8 @@
             list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             colorConfirm: '#FF0000',
             selectStep: 's1',//选择的步骤
-            value: true,//显示桌面板
+
+            IsShowDesktop: false,
             search1_column: '',//筛选的正装
 
             defaultWidth: 0,
@@ -1208,19 +1209,24 @@
                 if (update) {
                     this.columnClickConfirm(id, mode);
                 }
-
               
 
 
 
             },
             columnClickConfirm(id, mode) {
-
+                   //置空侧板
+                if (this.select_frame != "") {                 
+                    this.select_SideBracket = "";
+                    this.select_SideBracketMode = "";
+                }
                 //置空
                 this.select_foot = "";
                 this.select_frame = "";
                 this.select_footMode = "";
                 this.select_frameMode = "";
+
+              
 
                 this.select_column = id;
                 this.select_columnMode = mode;
@@ -1230,12 +1236,11 @@
                         this.framebigHeight = this.list_column[i].HighestPosition;
                     }
                 };
-                var cc = mode.replace('-', '').replace('-', '').replace('JS36D', '');
-                this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc + "}";
-                $("#shjahs").attr({
-                    "src": this.url_text + "&languageIso=" + this.langCode
-                });
-                this.cc_column = cc;  
+
+                this.SetFrame();
+                //var cc = mode.replace('-', '').replace('-', '').replace('JS36D', '');
+                //this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc + "}";           
+                //this.cc_column = cc;  
             },
             frameClick: function (id, mode) {
                 if (this.select_frame == id) {
@@ -1250,6 +1255,7 @@
                         cancelButtonText: this.CustomAddCancelButton,
 
                     }).then(() => {
+                       
                         this.frameClickConfirm(id, mode);
                     }).catch(() => {
                         update = false;
@@ -1257,7 +1263,7 @@
                     });
                 }
 
-
+                
                 if (update) {
                     this.frameClickConfirm(id, mode);
                 }
@@ -1280,16 +1286,8 @@
                         this.framesbigWidth = this.list_frame[i].MaxLength;
                     }
                 };
-                var fc = mode.replace('FRAME', '');
 
-                this.url_text = checkModelUrl(this.url_text, "FC", this.fc_frame, fc);
-                console.log(this.url_text);
-                console.log(fc);
-                console.log(this.fc_frame);
-                $("#shjahs").attr({
-                    "src": this.url_text + "&languageIso=" + this.langCode
-                });
-                this.fc_frame = fc;
+                this.SetFrame();
             },
             
 
@@ -1299,12 +1297,8 @@
                 }
                 this.select_foot = id;
                 this.select_footMode = mode;
-                var tfc = mode.replace('JCF', '');
-                this.url_text = checkModelUrl(this.url_text, "TFC", this.tfc_foot, tfc);
-                $("#shjahs").attr({
-                    "src": this.url_text + "&languageIso=" + this.langCode
-                });
-                this.tfc_foot = tfc;
+
+                this.SetFrame();
             },
             SideBracketClick: function (id, mode) {
                 if (this.select_SideBracket == id) {
@@ -1312,12 +1306,8 @@
                 }
                 this.select_SideBracket = id;
                 this.select_SideBracketMode = mode;
-                var spc = mode.replace('SIDE', '');
-                this.url_text = checkModelUrl(this.url_text, "SPC", this.spc_SideBracket, spc);
-                $("#shjahs").attr({
-                    "src": this.url_text + "&languageIso=" + this.langCode
-                });
-                this.spc_SideBracket = spc;
+
+                this.SetFrame();
             },
             colorClick: function (id, mode, number) {
                 if (this.select_Color == id) {
@@ -1325,14 +1315,8 @@
                 }
                 this.select_Color = id;
                 this.select_ColorMode = mode;
-                this.url_text = checkModelUrl(this.url_text, "COLOUR", this.colour_color, number);
-                $("#shjahs").attr({
-                    "src": this.url_text + "&languageIso=" + this.langCode
-                });
-                console.log(this.url_text);
-                console.log(number);
-                console.log(this.colour_color);
                 this.colour_color = number;
+                this.SetFrame();
             },
             ControlBoxClick: function (id, mode) {
                 if (this.select_ControlBox == id) {
@@ -1345,12 +1329,8 @@
                 else {
                     this.select_ControlBox = id;
                     this.select_ControlBoxMode = mode;
-                    this.url_text = checkModelUrl(this.url_text, "CONTROLLER", this.controller_ControlBox, mode);
-                    $("#shjahs").attr({
-                        "src": this.url_text + "&languageIso=" + this.langCode
-                    });
-                    this.controller_ControlBox = mode;
                 }
+                this.SetFrame();
 
             },
             HandSetClick: function (id, mode) {
@@ -1364,12 +1344,8 @@
                 else {
                     this.select_HandSet = id;
                     this.select_HandSetMode = mode;
-                    this.url_text = checkModelUrl(this.url_text, "HC", this.hc_HandSet, mode);
-                    $("#shjahs").attr({
-                        "src": this.url_text + "&languageIso=" + this.langCode
-                    });
-                    this.hc_HandSet = mode;
                 }
+                this.SetFrame();
             },
             PowercableClick: function (id, mode) {
                 if (this.select_Powercable == id) {
@@ -1385,37 +1361,105 @@
                 }
             },
             changeHeight(val) {
-                this.url_text = checkModelUrl(this.url_text, "POS1", this.pos1_value, val - this.framesmallHeight);
-                $("#shjahs").attr({
-                    "src": this.url_text + "&languageIso=" + this.langCode
-                });
-                console.log(val);
+                //this.url_text = checkModelUrl(this.url_text, "POS1", this.pos1_value, val - this.framesmallHeight);
+                //$("#shjahs").attr({
+                //    "src": this.url_text + "&languageIso=" + this.langCode
+                //});
+                //console.log(val);
                 this.pos1_value = val - this.framesmallHeight;                
             },
             changeWidth(val) {
-                this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val - this.framesmallWidth);             
-                $("#shjahs").attr({
-                    "src": this.url_text + "&languageIso=" + this.langCode
-                });
+                //this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val - this.framesmallWidth);             
+                //$("#shjahs").attr({
+                //    "src": this.url_text + "&languageIso=" + this.langCode
+                //});
                 this.pos2_value = val - this.framesmallWidth;
             },
             changeStatus: function (callback) {
-                if (callback == true) {
-                    this.url_text = checkModelUrl(this.url_text, "OF", "", "-02");
-                    $("#shjahs").attr({
-                        "src": this.url_text + "&languageIso=" + this.langCode
-                    });
-                }
-                else {
-                    this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");     
-                    $("#shjahs").attr({
-                        "src": this.url_text + "&languageIso=" + this.langCode
-                    });
-                }
-                console.log(callback);
-                console.log(this.url_text);
+                //if (callback == true) {
+                //    this.url_text = checkModelUrl(this.url_text, "OF", "", "-02");
+                //    $("#shjahs").attr({
+                //        "src": this.url_text + "&languageIso=" + this.langCode
+                //    });
+                //}
+                //else {
+                //    this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");     
+                //    $("#shjahs").attr({
+                //        "src": this.url_text + "&languageIso=" + this.langCode
+                //    });
+                //}
+                //console.log(callback);
+                //console.log(this.url_text);
+                this.SetFrame();
             },
 
+            SetFrame: function () {
+                var base = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation";
+
+                if (this.select_columnMode != "") {
+
+
+                    var column = this.select_columnMode.replace('-', '').replace('-', '').replace('JS36D', '');
+                    base += "&varset={CC=" + column+"}";
+
+                    if (this.select_frameMode != "") {
+                        var frame = this.select_frameMode.replace('FRAME', '');
+                        base +=  ",{FC=" + frame + "}";
+                    }
+                    if (this.select_footMode != "") {
+                        var foot = this.select_footMode.replace('JCF', '');
+                        base +=  ",{TFC=" + foot + "}";
+                    }
+                    if (this.select_SideBracketMode != "") {
+                        var side = this.select_SideBracketMode.replace('SIDE', '');
+                        base = base + ",{SPC=" + side + "}";
+                    }
+                    if (this.select_ControlBoxMode != "") {
+
+                        base = base + ",{CONTROLLER=" + this.select_ControlBoxMode + "}";
+                    }
+                    if (this.select_HandSetMode  != "") {
+
+                        base = base + ",{HC=" + this.select_HandSetMode  + "}";
+                    }
+                    if (this.colour_color != "") {
+                        base = base + ",{COLOUR=" + this.colour_color + "}";
+                    }
+                    else {
+                        base = base + ",{COLOUR=H}";
+                    }
+
+
+                    base += ",{POS1 = " + this.pos1_value + "}";
+                    base += ",{POS2 = " + this.pos2_value + "}";
+
+                    //if (this.IsShowDesktop) {
+                    //    var desktop = "-02";
+                    //    base += ",{OF = " + desktop + "}";
+                    //}
+
+                    var src = base + "&languageIso=" + this.langCode;
+
+                //    alert(src);
+
+                    $("#shjahs").attr({
+                        "src": src
+                    });
+
+                }
+                else {
+                    $("#shjahs").attr({
+                        "src": ""
+                    });
+                }
+
+                console.log(base);
+
+
+
+
+
+            },
             orderBtnClick: function (ordervalue) {
                 this.OrderValue = ordervalue;
                 if (this.Order == 1) {
@@ -1504,6 +1548,7 @@
                             this.select_Color = it.Id;
                             this.select_ColorMode = it.ColorName;
                             color = it.ColorNumber;
+                            this.colour_color = it.ColorNumber;
                         }
 
                         if (this.T_Product_office_desk_detail.frameWidth != "") {
@@ -1513,11 +1558,13 @@
                         if (this.T_Product_office_desk_detail.frameHeight != "") {
                             this.defaultHeight = this.T_Product_office_desk_detail.frameHeight;
                         }
-                        var url = checkProductDetailUrl(column, frame, foot, side, control, handset, color);
-                        $("#shjahs").attr({
-                            "src": url
-                        });
-                        this.url_text = url;
+                        //this.url_text  = checkProductDetailUrl(column, frame, foot, side, control, handset, color);
+                        //$("#shjahs").attr({
+                        //    "src": this.url_text + "&languageIso=" + this.langCode
+                        //});
+
+                        this.SetFrame();
+
                         this.cc_column = column;
                         this.fc_frame = frame;
                         this.tfc_foot = foot;

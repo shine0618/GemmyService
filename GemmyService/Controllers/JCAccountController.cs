@@ -22,7 +22,10 @@ namespace GemmyService.Controllers
         {
             return View();
         }
-
+        public ActionResult reass()
+        {
+            return View();
+        }
         #region 发送邮件
 
 
