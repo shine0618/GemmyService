@@ -71,6 +71,14 @@
     "NAVResetPasswordFailNotice": "密码未重置",
     "NAVLoginCodeSuccessNotice": "验证通过",
     "NAVMainPage": "主页",
+    "NAVMainPage_0": "定制系统",
+    "NAVMainPage_1": "办公",
+    "NAVMainPage_2": "我的收藏",
+    "NAVMainPage_3": "我的",
+    "NAVMainPage_4": "我的定制",
+    "NAVMainPage_5": "我的订货清单",
+
+
     "NAVOfficePage": "办公标准配置",
     "NAVProductDetailPage": "产品明细",
     "OfficeUnopenNotice": "尽请期待",
@@ -192,9 +200,11 @@
     "text_customer_7": "正装三节",
     "text_customer_8": "倒装三节",
     "text_customer_9": "选择立柱类型",
-    "text_customer_10": "",
-    "text_customer_11": "",
-
+    "text_customer_10": "请输入您的配置方案名称",
+    "text_customer_11": "是否跳转查看",
+    "text_customer_12": "您已经选了其他部件,继续选择的话会撤销这些选择",
+    "text_customer_13": "",
+    "text_customer_14": "",
 
 
     "text_part_description_1": "最小长度",
