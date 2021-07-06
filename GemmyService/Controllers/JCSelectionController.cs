@@ -338,6 +338,12 @@ namespace GemmyService.Controllers
         }
         #region 3D选配界面
 
+        public ActionResult serviceTWJ()
+        {
+            //2021.7.6  临时代码
+            return View();
+                
+        }
         [HttpGet]
         public JsonResult GetPartDetail(string partType, string Mode,string langCode)
         {

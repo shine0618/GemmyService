@@ -1,7 +1,5 @@
 ﻿
-@{
-    ViewBag.Title = "office_Eservice_test";
-}
+@{ ViewBag.Title = "office_Eservice_test"; }
 
 
 <style>
@@ -21,10 +19,11 @@
         height: 642px;
         width: 871px;
     }
-    #iDisplayBox
-    {
-        margin-top:20px;
+
+    #iDisplayBox {
+        margin-top: 20px;
     }
+
     .selectColumnPart {
         min-height: 500px;
         height: calc(100vh - 241px);
@@ -50,7 +49,7 @@
 
     .selectStep {
         height: 70px;
-        display:none;
+        display: none;
     }
 
     .part_img {
@@ -124,8 +123,8 @@
 <style>
     .carNewRightNavTop {
         width: 100%;
-        padding:0;
-        margin:0;
+        padding: 0;
+        margin: 0;
     }
 
     .carNewRightTop {
@@ -148,6 +147,7 @@
         padding: 0;
         margin: 0;
     }
+
     .bigWords2 {
         font-weight: 500;
         color: #A8A8A8;
@@ -159,11 +159,11 @@
         margin: 0;
     }
 
-        .wordActive {
-            color: #202733;
-            font-weight: 600;
-            /*color: var(--thm-base);*/
-        }
+    .wordActive {
+        color: #202733;
+        font-weight: 600;
+        /*color: var(--thm-base);*/
+    }
 
     .smallWords {
         white-space: nowrap;
@@ -171,8 +171,8 @@
         overflow: hidden;
         word-break: break-all;
         margin-bottom: 0;
-        margin-top:-2px;
-        padding:0;
+        margin-top: -2px;
+        padding: 0;
     }
 
         .smallWords p {
@@ -180,7 +180,7 @@
         }
 
     .itemStyle {
-        width:110px;
+        width: 110px;
         max-width: 150px;
         min-width: 100px;
         overflow: hidden;
@@ -195,8 +195,8 @@
         display: -ms-flexbox;
         display: flex;
         height: 100%;
-        margin-top:5px;
-        padding:0;
+        margin-top: 5px;
+        padding: 0;
         -webkit-box-pack: start;
         -webkit-justify-content: flex-start;
         -ms-flex-pack: start;
@@ -204,7 +204,6 @@
         border-bottom: 1px solid rgba(0,0,0,.1);
         font-size: 12px;
     }
-
 </style>
 
 <div id="OfficeStandards">
@@ -234,10 +233,10 @@
     </el-dialog>
 
     <section class="page-header" style="height:53px;">
-    <div class="container" style="padding:10px 10px ">
-        <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
-        <a class="navigation_a">{{CustomPage}}</a>
-    </div>
+        <div class="container" style="padding:10px 10px ">
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a">{{CustomPage}}</a>
+        </div>
     </section>
     <section class="about-three">
         <div class="container">
@@ -351,11 +350,11 @@
             <div class="row selectStep" v-if="selectStep=='s1'">
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
- 选择立柱
+                    选择立柱
                 </div>
             </div>
             <div class="row selectStep" v-if="selectStep=='s2'">
-               
+
                 <div class="col-lg-12">
                     @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
                     {{CustomSelectFrame}}
@@ -551,11 +550,11 @@
 
 
                     @*<div class="row">
-                <div class="col-lg-6 col-md-6" v-for="item in list_Color">
-                        <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
-                        <h6 style="text-align:center" v-text="item.HEXValue"></h6>
-                </div>
-            </div>*@
+                            <div class="col-lg-6 col-md-6" v-for="item in list_Color">
+                                    <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
+                                    <h6 style="text-align:center" v-text="item.HEXValue"></h6>
+                            </div>
+                        </div>*@
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s7'">
 
@@ -616,8 +615,8 @@
 
                 </div>
                 <!-- 3D图形 -->
-                <div class="col-lg-8" >
-                    
+                <div class="col-lg-8">
+
                     <div id="iDisplayBox"></div>
 
                 </div>
@@ -642,12 +641,10 @@
 </div>
 
 
-<script>
-    $(function () {
+<script>$(function () {
         $('.bottom-footer').hide();
 
-    })
-</script>
+    })</script>
 
 
 
@@ -816,10 +813,10 @@
         },
         watch: {
             select_column: function (val) {
-              
+
             },
             select_frame: function (val) {
-             
+
             },
 
             selectStep: function (val) {
@@ -1037,7 +1034,7 @@
 
             //正装3节的筛选
             colomnSearch: function (text) {
-                
+
 
                 if (this.search1_column == text) {
                     this.search1_column = '';
@@ -1209,14 +1206,14 @@
                 if (update) {
                     this.columnClickConfirm(id, mode);
                 }
-              
+
 
 
 
             },
             columnClickConfirm(id, mode) {
                    //置空侧板
-                if (this.select_frame != "") {                 
+                if (this.select_frame != "") {
                     this.select_SideBracket = "";
                     this.select_SideBracketMode = "";
                 }
@@ -1226,7 +1223,7 @@
                 this.select_footMode = "";
                 this.select_frameMode = "";
 
-              
+
 
                 this.select_column = id;
                 this.select_columnMode = mode;
@@ -1239,8 +1236,8 @@
 
                 this.SetFrame();
                 //var cc = mode.replace('-', '').replace('-', '').replace('JS36D', '');
-                //this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc + "}";           
-                //this.cc_column = cc;  
+                //this.url_text = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&varset={CC=" + cc + "}";
+                //this.cc_column = cc;
             },
             frameClick: function (id, mode) {
                 if (this.select_frame == id) {
@@ -1255,7 +1252,7 @@
                         cancelButtonText: this.CustomAddCancelButton,
 
                     }).then(() => {
-                       
+
                         this.frameClickConfirm(id, mode);
                     }).catch(() => {
                         update = false;
@@ -1263,7 +1260,7 @@
                     });
                 }
 
-                
+
                 if (update) {
                     this.frameClickConfirm(id, mode);
                 }
@@ -1289,7 +1286,7 @@
 
                 this.SetFrame();
             },
-            
+
 
             footClick: function (id, mode) {
                 if (this.select_foot == id) {
@@ -1366,11 +1363,11 @@
                 //    "src": this.url_text + "&languageIso=" + this.langCode
                 //});
                 //console.log(val);
-                this.pos1_value = val - this.framesmallHeight;    
+                this.pos1_value = val - this.framesmallHeight;
                 this.SetFrame();
             },
             changeWidth(val) {
-                //this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val - this.framesmallWidth);             
+                //this.url_text = checkModelUrl(this.url_text, "POS2", this.pos2_value, val - this.framesmallWidth);
                 //$("#shjahs").attr({
                 //    "src": this.url_text + "&languageIso=" + this.langCode
                 //});
@@ -1385,7 +1382,7 @@
                 //    });
                 //}
                 //else {
-                //    this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");     
+                //    this.url_text = checkModelUrl(this.url_text, "OF", "-02", "");
                 //    $("#shjahs").attr({
                 //        "src": this.url_text + "&languageIso=" + this.langCode
                 //    });
