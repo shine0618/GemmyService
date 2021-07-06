@@ -245,5 +245,27 @@ namespace _1GemmyModel.Model
 
         [NotMapped]
         public List<T_Part_office_describe> T_Part_office_describes { get; set; }
+
+
+        /// <summary>
+        /// 是否适用TO
+        /// </summary>
+        public bool UseTO { get; set; }
+        /// <summary>
+        /// 是否适用TS
+        /// </summary>
+        public bool UseTS { get; set; }
+        /// <summary>
+        /// 是否适用TT
+        /// </summary>
+        public bool UseTT { get; set; }
+        /// <summary>
+        /// 是否适用TF
+        /// </summary>
+        public bool UseTF { get; set; }
+        /// <summary>
+        /// 是否适用Bench
+        /// </summary>
+        public bool UseBench { get; set; }
     }
 }
