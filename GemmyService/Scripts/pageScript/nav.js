@@ -248,6 +248,15 @@ var nav_langu_box = new Vue({
             NAVResetPasswordSuccessNotice: "",
             NAVResetPasswordFailNotice: "",
             NAVLoginCodeSuccessNotice: "",
+            NAVMainPage: "",
+            NAVMainPage_0 :"",
+            NAVMainPage_1: "",
+            NAVMainPage_2: "",
+            NAVMainPage_3: "",
+            NAVMainPage_4: "",
+            NAVMainPage_5: "",
+
+
             ruleLoginForm: {
                 pass: '',
                 code: '',

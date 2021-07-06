@@ -348,65 +348,7 @@
             </div>
 
 
-            <div class="row selectStep" v-if="selectStep=='s1'">
-                <div class="col-lg-12">
-                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
- 选择立柱
-                </div>
-            </div>
-            <div class="row selectStep" v-if="selectStep=='s2'">
-               
-                <div class="col-lg-12">
-                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    {{CustomSelectFrame}}
-                </div>
-            </div>
-            <div class="row selectStep" v-if="selectStep=='s3'">
-                <div class="col-lg-12">
-                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    {{CustomSelectFoot}}
-                </div>
-            </div>
-            <div class="row selectStep" v-if="selectStep=='s4'">
-                <div class="col-lg-12">
-                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    {{CustomSelectSideBracket}}
-                </div>
-            </div>
-            <div class="row selectStep" v-if="selectStep=='s5_1'">
-                <div class="col-lg-12">
-                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    {{CustomSelectControlbox}}
-
-                    <el-checkbox v-model="ControlBox_c1" label="UL"></el-checkbox>
-
-                </div>
-            </div>
-            <div class="row selectStep" v-if="selectStep=='s5_2'">
-                <div class="col-lg-12">
-                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    {{CustomSelectHandSet}}
-                </div>
-            </div>
-            <div class="row selectStep" v-if="selectStep=='s5_3'">
-                <div class="col-lg-12">
-                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    {{CustomSelectPowerCable}}
-                </div>
-            </div>
-
-            <div class="row selectStep" v-if="selectStep=='s6'">
-                <div class="col-lg-12">
-                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    {{CustomSelectColor}}
-                </div>
-            </div>
-            <div class="row selectStep" v-if="selectStep=='s7'">
-                <div class="col-lg-12">
-                    @*<h6 class="selectText" v-text="text_customer_9"></h6>*@
-                    {{CustomConfiguration}}
-                </div>
-            </div>
+          
         </div>
     </section>
 
@@ -652,8 +594,6 @@
 
 
 <script>
-
-
     var OfficeStandards = new Vue({
         el: '#OfficeStandards',
         data: {
@@ -762,6 +702,14 @@
             text_customer_7: "",
             text_customer_8: "",
             text_customer_9: "",
+            text_customer_10: "",
+            text_customer_11: "",
+            text_customer_12: "",
+            text_customer_13: "",
+            text_customer_14: "",
+            
+
+
             NAVMainPage: "",
             CustomPage: "",
             CustomConfigurationListInfo: "",
@@ -903,7 +851,7 @@
                     this.selectStep = "s7";
                     this.$message({
                         type: 'info',
-                        message: this.CustomAddConfigNameNotice
+                        message: '请输入您的方案名称'
                     });
                     return;
                 }
@@ -940,7 +888,7 @@
                             //    type: 'success',
                             //    message: this.CustomAddSuccessNotice
                             //});
-                            this.$confirm(this.CustomAddConfigRedirectNotice, this.CustomAddSuccessNotice, {
+                            this.$confirm('是否跳转查看', this.CustomAddSuccessNotice, {
                                 confirmButtonText: this.CustomAddConfirmButton,
                                 cancelButtonText: this.CustomAddCancelButton,
 
@@ -1204,7 +1152,7 @@
                 //如果重新选择立柱的话更新
                 if (this.select_foot != "" || this.select_frame != "") {
                     update = false;
-                    this.$confirm(this.CustomAddConfigChangeColumnNotice, this.CustomAddNotice, {
+                    this.$confirm('您已经选了其他部件,继续选择的话会撤销这些选择', this.CustomAddNotice, {
                         confirmButtonText: this.CustomAddConfirmButton,
                         cancelButtonText: this.CustomAddCancelButton,
 
@@ -1261,7 +1209,7 @@
                 //如果重新选择立柱的话更新
                 if (this.select_SideBracket != "") {
                     update = false;
-                    this.$confirm(this.CustomAddConfigChangePartsNotice, this.CustomAddNotice, {
+                    this.$confirm('您已经选了其他部件,继续选择的话会撤销这些选择', this.CustomAddNotice, {
                         confirmButtonText: this.CustomAddConfirmButton,
                         cancelButtonText: this.CustomAddCancelButton,
 

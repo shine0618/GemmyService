@@ -74,6 +74,15 @@
     "NAVResetPasswordFailNotice": "Password not reset",
     "NAVLoginCodeSuccessNotice": "Verified",
     "NAVMainPage": "Main",
+
+    "NAVMainPage_0": "Configuration",
+    "NAVMainPage_1": "Office",
+    "NAVMainPage_2": "My Collection",
+    "NAVMainPage_3": "My",
+    "NAVMainPage_4": "My custom",
+    "NAVMainPage_5": "My Order",
+
+
     "NAVOfficePage": "Office Standard",
     "NAVProductDetailPage": "Product details",
     "OfficeUnopenNotice": "Do please look forward to",
@@ -203,14 +212,18 @@
     "text_customer_7": "Standard & 3 Level",
     "text_customer_8": "Reverse & 3 Level",
     "text_customer_9": "Select column type",
-    "text_customer_10": "",
-    "text_customer_11": "",
+    "text_customer_10": "Please enter your configuration name",
+    "text_customer_11": "Do you want to skip to view?",
+    "text_customer_12": "You have selected the other parts, and continuing to select them will clear them.",
+    "text_customer_13": "",
+    "text_customer_14": "",
 
 
 
     "text_part_description_1": "MinLength",
     "text_part_description_2": "MaxLength",
-    "text_customer_text1": "details"
 
+    "text_customer_text1": "details",
+    "select_text": "please select "
   }
 }
