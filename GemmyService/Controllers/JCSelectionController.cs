@@ -353,11 +353,11 @@ namespace GemmyService.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetOfficeColumn()
+        public JsonResult GetOfficeColumn(string columnType)
         {
 
 
-            List<T_Part_office_Column> list = bll_desk.GetT_Part_office_Column();
+            List<T_Part_office_Column> list = bll_desk.GetT_Part_office_Column(columnType);
 
             //if (OrderValue != null && OrderValue != "")
             //{

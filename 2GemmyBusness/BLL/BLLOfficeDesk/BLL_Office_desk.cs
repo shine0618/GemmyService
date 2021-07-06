@@ -568,11 +568,30 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         /// 获取所有的
         /// </summary>
         /// <returns></returns>
-        public List<T_Part_office_Column> GetT_Part_office_Column()
+        public List<T_Part_office_Column> GetT_Part_office_Column(string columnType)
         {
             var query = from x in read_db.T_Part_office_Column
                         where x.deleteSign != 1
                         select x;
+
+
+            switch (columnType)
+            {
+                case "column_2_s":
+                    query = query.Where(x => x.Type == "S" && x.Level == "2");
+                    break;
+                case "column_2_r":
+                    query = query.Where(x => x.Type == "R" && x.Level == "2");
+                    break;
+                case "column_3_s":
+                    query = query.Where(x => x.Type == "S" && x.Level == "3");
+                    break;
+                case "column_3_r":
+                    query = query.Where(x => x.Type == "R" && x.Level == "3");
+                    break;
+                default:
+                    break;
+            }
 
             return query.ToList();
         }

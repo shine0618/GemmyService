@@ -815,21 +815,10 @@
         },
         watch: {
             select_column: function (val) {
-                this.select_foot = "";
-                this.select_frame = "";
-                this.select_footMode = "";
-                this.select_frameMode = "";
+              
             },
             select_frame: function (val) {
-                this.select_SideBracket = "";
-                this.select_SideBracketMode = "";
-                //置空侧板的选择 3D
-                var spc = '';
-                this.url_text = checkModelUrl(this.url_text, "SPC", this.spc_SideBracket, spc);
-                $("#shjahs").attr({
-                    "src": this.url_text + "&languageIso=" + this.langCode
-                });
-                this.spc_SideBracket = spc;
+             
             },
 
             selectStep: function (val) {
@@ -837,9 +826,9 @@
                 switch (this.selectStep) {
                     case "s1":
                         if (this.select_foot != "" || this.select_frame != "") {
-                            this.$notify({
-                                message: '您已经选了其他部件,重新选择立柱会撤销这些选择!',
-                            });
+                            //this.$notify({
+                            //    message: '您已经选了其他部件,重新选择立柱会撤销这些选择!',
+                            //});
                         }
                         break;
                     case "s2":
@@ -1047,13 +1036,18 @@
 
             //正装3节的筛选
             colomnSearch: function (text) {
+                
+
                 if (this.search1_column == text) {
                     this.search1_column = '';
                 }
                 else {
-
                     this.search1_column = text;
                 }
+                this.getAllColumn();
+
+
+
             },
             getpartDetail: function (partType, Mode) {
 
@@ -1083,6 +1077,7 @@
                     method: 'GET',
                     url: "/JCSelection/GetOfficeColumn",
                     params: {
+                        columnType: this.search1_column
                     }
                 }).then(function (response) {  //接口返回数据
                     this.list_column = response.body;
@@ -1220,6 +1215,13 @@
 
             },
             columnClickConfirm(id, mode) {
+
+                //置空
+                this.select_foot = "";
+                this.select_frame = "";
+                this.select_footMode = "";
+                this.select_frameMode = "";
+
                 this.select_column = id;
                 this.select_columnMode = mode;
                 for (var i = 0; i < this.list_column.length; i++) {
@@ -1262,6 +1264,14 @@
 
             },
             frameClickConfirm: function (id, mode) {
+                //置空
+                this.select_SideBracket = "";
+                this.select_SideBracketMode = "";
+                //置空侧板的选择 3D
+                var spc = '';
+                this.url_text = checkModelUrl(this.url_text, "SPC", this.spc_SideBracket, spc);
+                this.spc_SideBracket = spc;
+
                 this.select_frame = id;
                 this.select_frameMode = mode;
                 for (var i = 0; i < this.list_frame.length; i++) {
@@ -1473,7 +1483,7 @@
                             this.select_ControlBoxMode = it.Mode;
                             control = it.Mode;
                         }
-                        //添加到产品配置列表
+                        //手控器
                         if (this.T_Product_office_desk_detail.T_Part_office_HandSet != null) {
                             var it = this.T_Product_office_desk_detail.T_Part_office_HandSet;
                             this.select_HandSet = it.Id;
