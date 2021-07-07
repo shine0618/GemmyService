@@ -176,9 +176,11 @@ var nav_langu_box = new Vue({
             islogin: false,
             isReset: false,
             count: '',
+            count2:'',
             registershow: true,
             show: true,
             timer: null,
+            timer2: null,
             isLoginCheck: true,
             logincode: '',
             isSuccess: false,
@@ -823,43 +825,43 @@ var nav_langu_box = new Vue({
         },
         sendEmail(emailaddress) {
             if (emailaddress != '') {
-                if (!this.timer) {
-                    this.count = TIME_COUNT;
+                if (!this.timer2) {
+                    this.count2 = TIME_COUNT;
                     this.registershow = false;
-                    this.timer = setInterval(() => {
-                        if (this.count > 0 && this.count <= TIME_COUNT) {
-                            this.count--;
+                    this.timer2 = setInterval(() => {
+                        if (this.count2 > 0 && this.count2 <= TIME_COUNT) {
+                            this.count2--;
                         } else {
                             this.registershow = true;
-                            clearInterval(this.timer);
-                            this.timer = null;
+                            clearInterval(this.timer2);
+                            this.timer2 = null;
                         }
                     }, 1000)
+
+
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCAccount/SendRegisterEmail",
+                        params: {
+                            emailaddress: emailaddress,
+                            langcode: this.defaultLanguageCode
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        //  this.registercode = response.body;
+                        if (response.body != null) {
+                            this.$notify({
+                                message: this.NAVRegisterSendEmailSuccessNotice,
+                                type: 'success'
+                            });
+                        }
+                        else {
+                            this.$notify.error(this.NAVRegisterSendEmailFailNotice);
+                        }
+                    }, function (error) {
+                        console.log(error);
+                    })
                 }
-
-                this.$http({           //调用接口
-                    method: 'GET',
-                    url: "/JCAccount/SendRegisterEmail",
-                    params: {
-                        emailaddress: emailaddress,
-                        langcode: this.defaultLanguageCode
-                    }
-                }).then(function (response) {  //接口返回数据
-                    //  console.log(response);
-                    //  this.registercode = response.body;
-                    if (response.body != null) {
-                        this.$notify({
-                            message: this.NAVRegisterSendEmailSuccessNotice,
-                            type: 'success'
-                        });
-                    }
-                    else {
-                        this.$notify.error(this.NAVRegisterSendEmailFailNotice);
-                    }
-                }, function (error) {
-                    console.log(error);
-                })
-
             }
         },
         sendResetEmail(emailaddress) {
