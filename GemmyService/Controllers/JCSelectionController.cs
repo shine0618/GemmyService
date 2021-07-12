@@ -499,6 +499,7 @@ namespace GemmyService.Controllers
             return jr;
         }
 
+
         /// <summary>
         /// 新增配置 让客户为这个桌子命名
         /// </summary>
@@ -659,7 +660,15 @@ namespace GemmyService.Controllers
 
         #endregion
 
-
+        [HttpGet]
+        public JsonResult DeleteCustomer(int id)
+        {
+            
+            bool issuccess = bll_desk.DeleteCustome(id);
+            JsonResult jr = Json(issuccess, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
 
         /// <summary>
         /// 动态加载语言测试界面
@@ -738,6 +747,8 @@ namespace GemmyService.Controllers
             ViewBag.name = name;
             return View();
         }
+
+        
 
         #region 方法集
 

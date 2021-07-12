@@ -224,6 +224,22 @@
     "text_part_description_2": "MaxLength",
 
     "text_customer_text1": "details",
-    "select_text": "please select "
+    "select_text": "please select ",
+    "NAVOpinionCollectTitle": "Opinion collection",
+    "NAVOpinionSubmit": "Submit comments",
+    "NAVOpinionLook": "View opinions",
+    "NAVOpinionCollectTableTitle": "Opinion Collection Form",
+    "NAVOpinionCollectTableName": "Name(*)",
+    "NAVOpinionCollectTableButton": "Submit",
+    "NAVOpinionLookTableTitle": "Opinion View Form",
+    "NAVOpinionLookTableDate": "Date",
+    "NAVOpinionLookTableName": "Name",
+    "NAVOpinionLookTableContent": "Content",
+    "NAVOpinionLookTableSearchTitle": "Find content",
+    "NAVOpinionSubmitSuccessNotice": "Add successful",
+    "NAVOpinionSubmitFailNotice": "Add fail",
+    "NAVOpinionLoginNotice": "Log in first",
+    "OfficeStandardsDeleteplansuccessfulnotice": "Delete success",
+    "OfficeStandardsDeleteplanfailnotice": "Delete fail"
   }
 }

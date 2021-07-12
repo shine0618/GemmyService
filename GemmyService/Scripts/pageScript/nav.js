@@ -184,6 +184,15 @@ var nav_langu_box = new Vue({
             isLoginCheck: true,
             logincode: '',
             isSuccess: false,
+            opinioncontent: '',
+            opinionname:'',
+            dialogVisible_opinion: false,
+            dialogVisible_opinionsearch: false,
+            table_opinionsearch:'',
+            opiniontableData: [],
+
+            NAVOpinionSearchTitle:'',
+            NAVOpinionTitle:'',
             NAVLogin: "",
             NAVLoginAccount: "",
             NAVLoginPassword: "",
@@ -257,6 +266,21 @@ var nav_langu_box = new Vue({
             NAVMainPage_3: "",
             NAVMainPage_4: "",
             NAVMainPage_5: "",
+            NAVOpinionCollectTitle: "",
+            NAVOpinionSubmit: "",
+            NAVOpinionLook: "",
+            NAVOpinionCollectTableTitle: "",
+            NAVOpinionCollectTableName: "",
+            NAVOpinionCollectTableButton: "",
+            NAVOpinionLookTableTitle: "",
+            NAVOpinionLookTableDate: "",
+            NAVOpinionLookTableName: "",
+            NAVOpinionLookTableContent: "",
+            NAVOpinionLookTableSearchTitle: "",
+            NAVOpinionSubmitSuccessNotice: "",
+            NAVOpinionSubmitFailNotice: "",
+            NAVOpinionLoginNotice:"",
+
 
 
             ruleLoginForm: {
@@ -524,8 +548,39 @@ var nav_langu_box = new Vue({
                     'width': 0
                 });
             }
-        })
-
+        });
+    },
+    watch: {
+        dialogVisible_opinionsearch() {
+            if (this.dialogVisible_opinionsearch == true) {
+                console.log('1');
+                if (this.Email != '') {
+                    this.opiniontableData.length = 0;
+                   this.$http({           //调用接口
+                       method: 'GET',
+                       url: "/JCAccount/getOpinion",
+                       params: {
+                       }
+                   }).then(function (response) {  //接口返回数据
+                       //  console.log(response);
+                       if (response.body != null) {
+                           
+                           for (var i = 0; i < response.body.length; i++) {
+                               var q = {                                   
+                                   CreateTime: convertTime(response.body[i].CreateTime, "yyyy-MM-dd"),
+                                   Name: response.body[i].Name,
+                                   Content: response.body[i].Content
+                               };
+                               this.opiniontableData.push(q);
+                           }
+                           
+                       }
+                   }, function (error) {
+                       console.log(error);
+                   })               
+                }
+            }
+        }
     },
     // 在 `methods` 对象中定义方法
     methods: {
@@ -1022,7 +1077,38 @@ var nav_langu_box = new Vue({
             }
 
         },
+        submitOpinion(content, name) {
+            if (this.Email != '') {
+                if (content != '') {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCAccount/submitOpinion",
+                        params: {
+                            emailname: this.Email,
+                            content: content,
+                            name: name
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //  console.log(response);
+                        if (response.body == true) {
 
+                            this.$notify({
+                                message: this.NAVOpinionSubmitSuccessNotice,
+                                type: 'success'
+                            });
+                        }
+                        else {
+                            this.$notify.error(this.NAVOpinionSubmitFailNotice);
+                        }
+                    }, function (error) {
+                        console.log(error);
+                    })
+                }
+            }
+            else {
+                this.$notify.error(this.NAVOpinionLoginNotice);
+            }
+        },
 
         setData: function (field, val) {
             this.$set(this.$data, field, val);

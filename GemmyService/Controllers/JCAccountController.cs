@@ -304,5 +304,31 @@ namespace GemmyService.Controllers
         }
 
 
+        [HttpPost]
+        public JsonResult submitOpinion(string emailname, string content, string name)
+        {
+            bool issuccess = usermanager.addOpinion(emailname, content, name);
+            JsonResult jr = Json(issuccess, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+        [HttpGet]
+        public JsonResult getOpinion()
+        {
+            List<T_USER_Opinion> opinion = usermanager.getOpinion();
+            JsonResult jr = Json(opinion, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+        [HttpGet]
+        public JsonResult GetAllUserInfo()
+        {
+            var t = usermanager.getAllUserInfo();
+            JsonResult jr = Json(t, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
     }
 }

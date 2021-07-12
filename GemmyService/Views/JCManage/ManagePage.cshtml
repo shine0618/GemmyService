@@ -1,0 +1,375 @@
+﻿
+@{
+    ViewBag.Title = "MangerPage";
+}
+
+<style>
+    #shjahs {
+        width: 1600px;
+        height: 800px;
+    }
+
+    .menuleft {
+        left: 200px;
+    }
+
+    .el-header {
+        background-color: #B3C0D1;
+        color: #333;
+        line-height: 30px;
+    }
+
+    .el-aside {
+        color: #333;
+    }
+
+    .el-submenu .el-menu-item {
+        min-width: 190px;
+    }
+
+    .el-breadcrumb__separator {
+        color: #fff
+    }
+</style>
+
+<div id="ManageTool">
+    <section class="page-header" style="height:53px;">
+        @*<div class="page-header__bg" style="background-image: url(/assets/images/backgrounds/page-header-bg-1-1.jpg);"></div>*@
+        <!-- /.page-header__bg -->
+        <div class="container" style="padding:10px 10px ">
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a" href="/JCSelection/office_Eservice_test">{{CustomPage}}</a>/
+            <a class="navigation_a">管理者</a>
+        </div><!-- /.container -->
+    </section><!-- /.page-header -->
+    <section>
+        <el-container style="height: 860px">
+            <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+                <el-menu class="el-menu-vertical-demo"
+                         @@open="handleOpen"
+                         @@close="handleClose"
+                         background-color="#324254"
+                         text-color="#fff"
+                         active-text-color="#ffd04b">
+                    <el-submenu index="1">
+                        <template slot="title">
+                            <i class="el-icon-user"></i>用户中心
+                        </template>
+                        <el-submenu index="11">
+                            <template slot="title">
+                                用户信息
+                            </template>
+                            <el-menu-item index="1-1"><router-link to="/userRegister">注册情况</router-link></el-menu-item>
+                            <el-menu-item index="1-2" @@click="goTo('/test2')">用户信息</el-menu-item>
+                            <el-menu-item index="/test1" @@click="goTo('/test1')">用户权限</el-menu-item>
+                        </el-submenu>
+                    </el-submenu>
+                    <el-submenu index="2">
+                        <template slot="title">
+                            <i class="el-icon-menu"></i>产品中心
+                        </template>
+                        <el-submenu index="21">
+                            <template slot="title">
+                                部件信息
+                            </template>
+                            <el-menu-item index="2-1">立柱</el-menu-item>
+                            <el-menu-item index="2-2">地脚</el-menu-item>
+                            <el-menu-item index="2-2">框架</el-menu-item>
+                            <el-menu-item index="2-2">侧板</el-menu-item>
+                            <el-menu-item index="2-2">控制器</el-menu-item>
+                            <el-menu-item index="2-2">手控器</el-menu-item>
+                        </el-submenu>
+                        <el-submenu index="22">
+                            <template slot="title">
+                                整桌信息
+                            </template>
+                            <el-menu-item index="2-1">整桌方案</el-menu-item>
+                            <el-menu-item index="2-2">添加方案</el-menu-item>
+                        </el-submenu>
+                        <el-submenu index="23">
+                            <template slot="title">
+                                配件及颜色
+                            </template>
+                            <el-menu-item index="2-1">电源线</el-menu-item>
+                            <el-menu-item index="2-2">颜色</el-menu-item>
+                        </el-submenu>
+                    </el-submenu>
+                    <el-submenu index="3">
+                        <template slot="title">
+                            <i class="el-icon-document"></i>文件系统
+                        </template>
+                        <el-submenu index="31">
+                            <template slot="title">
+                                文件信息
+                            </template>
+                            <el-menu-item index="3-1">文件信息</el-menu-item>
+                        </el-submenu>
+                    </el-submenu>
+                </el-menu>
+            </el-aside>
+
+            <el-container>
+                <el-header style="text-align: right; font-size: 14px;">
+                    <el-breadcrumb separator-class="el-icon-arrow-right" style="font-size:20px;line-height:3">
+                        <el-breadcrumb-item>首页</el-breadcrumb-item>
+                        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+                        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+                        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+                    </el-breadcrumb>
+                </el-header>
+
+                <el-main><router-view></router-view></el-main>
+
+                @*<div id="iDisplayBox"></div>*@
+                @*<el-main>
+                        <el-table :data="tableData">
+                            <el-table-column prop="date" label="日期" width="140">
+                            </el-table-column>
+                            <el-table-column prop="name" label="姓名" width="120">
+                            </el-table-column>
+                            <el-table-column prop="address" label="地址">
+                            </el-table-column>
+                        </el-table>
+                    </el-main>*@
+            </el-container>
+        </el-container>
+
+    </section>
+
+
+</div>
+
+
+<template id="test1">
+    <div>
+        <h1>a</h1>
+    </div>
+</template>
+
+<template id="test2">
+    <div>
+        <h1>b</h1>
+    </div>
+</template>
+
+
+<template id="userRegister">
+    <div>
+        <h1 style="text-align:center">用户注册情况</h1>
+        <el-table :table="tableData"
+                  :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+                  :data="tableData.filter(data => !table_emailsearch || data.Email.toLowerCase().includes(table_emailsearch.toLowerCase()))">
+            <el-table-column prop="UpdateTime" label="更新时间" sortable>
+            </el-table-column>
+            <el-table-column prop="Email" label="电子邮箱">
+            </el-table-column>
+            <el-table-column prop="FirstName" label="名">
+            </el-table-column>
+            <el-table-column prop="LastName" label="姓">
+            </el-table-column>
+            <el-table-column prop="Lock" label="是否锁定">
+            </el-table-column>
+            <el-table-column align="right">               
+                <template slot="header" slot-scope="scope">
+                    <el-row>
+                        <el-input v-model="table_emailsearch"
+                                  size="mini" width="100px" placeholder="请输入电子邮箱查找" />
+                    </el-row>                   
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+</template>
+
+
+
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+
+    })
+</script>
+<script>
+    const tableData=[]
+    const test1 = { template: '#test1' }
+    const test2 = { template: '#test2' }
+    const userRegister = {
+        template: '#userRegister', props: ['inputemail', 'tableData', 'table_emailsearch', 'search'], watch: {            
+            tableData: function (val) {
+                console.log(val);
+            }
+        },}
+    const routes = [
+        { path: "/test1", component: test1 },
+        { path: '/test2', component: test2 },
+        {
+            path: '/userRegister', component: userRegister, props: { inputemail: '', tableData: tableData, table_emailsearch: '', search: '' },
+            watch: {              
+                //$routes: {
+                //    handler: function () {
+                //        this.$http({           //调用接口
+                //            method: 'GET',
+                //            url: "/JCAccount/GetAllUserInfo",
+                //            params: {
+                //            }
+                //        }).then(function (response) {  //接口返回数据
+                //            console.log(response.body);
+                //            if (response.body != null) {
+
+                //                for (var i = 0; i < response.body; i++) {
+                //                    var q = {
+                //                        UpdateTime: convertTime(response.body[i].UpdateTime, "yyyy-MM-dd"),
+                //                        Email: response.body[i].Email,
+                //                        FirstName: response.body[i].FirstName,
+                //                        LastName: response.body[i].LastName,
+                //                        Lock: response.body[i].Lock
+                //                    };
+                //                    this.tableData.push(q);
+                //                }
+                //                this.$notify({
+                //                    message: 添加成功,
+                //                    type: 'success'
+                //                });
+                //            }
+                //            else {
+                //                this.$notify.error('添加失败');
+                //            }
+                //        }, function (error) {
+                //            console.log(error);
+                //        })
+
+                //    },
+                //    setData: function (field, val) {
+                //        this.$set(this.$data, field, val);//vue 设定值
+                //    },
+                //}
+                tableData: function (val) {
+                    console.log(val);
+                }
+            },
+        }
+    ]
+    const router = new VueRouter({
+        routes: routes // (缩写) 相当于 routes: routes
+    })
+    var OfficeStandards = new Vue({
+        el: '#ManageTool',
+        router: router,
+        data() {
+
+            return {
+                langCode: "",
+                NAVMainPage: "",
+                CustomPage: "",
+                tableHeight: "",
+                tableData: [],
+                search: '',
+                LoginUsername: '',
+                PersonalTitle: "",
+                PersonalDate: "",
+                PersonalConfigName: "",
+                PersonalSearch: "",
+                PersonalLookover: "",
+                PersonalModify: "",
+                value: 0,
+                emailsearch: '',
+                table_emailsearch:'',
+            }
+        },
+        computed: {
+            username() {
+                // 我们很快就会看到 `params` 是什么
+                return this.$route.params.username
+            }
+        },
+        watch: {
+            $route(to, from) {
+                console.log(to.path);
+                if (to.path == '/userRegister') {
+                    this.tableData = [];
+                    tableData.length = 0;
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCAccount/GetAllUserInfo",
+                        params: {
+                        }
+                    }).then(function (response) {  //接口返回数据
+
+                        if (response.body != null) {
+                            for (var i = 0; i < response.body.length; i++) {
+                                var q = {
+                                    UpdateTime: convertTime(response.body[i].UpdateTime, "yyyy-MM-dd"),
+                                    Email: response.body[i].Email,
+                                    FirstName: response.body[i].FirstName,
+                                    LastName: response.body[i].LastName,
+                                    Lock: response.body[i].Lock
+                                };
+                                this.tableData.push(q);
+                                tableData.push(q);
+                            }
+                            this.$notify({
+                                message: '添加成功',
+                                type: 'success'
+                            });
+                            console.log(tableData);
+                        }
+                        else {
+                            this.$notify.error('添加失败');
+                        }
+                    }, function (error) {
+                        console.log(error);
+                    });
+                }
+                
+            }
+        },
+        methods: {
+            initPage: function (event) {
+                var height = window.innerHeight - 50;
+                this.tableHeight = height;
+
+                var code = GetLanguCode();
+                this.langCode = code;
+                this.LoginUsername = GetLoginUsername();
+                $.ajaxSettings.async = false;
+                var languText;
+                $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
+                    languText = result.language;
+                });
+                $.ajaxSettings.async = true;
+                var obj = languText;
+                for (var p in obj) {
+                    // 方法
+                    if (typeof (obj[p]) == "function") {
+                        obj[p]();
+                    } else {
+                        // p 为属性名称，obj[p]为对应属性的值
+                        var key = p;
+                        var value = obj[p];
+                        // console.log('key:' + key + "  value:" + value);
+                        this.setData(key, value);;
+                    }
+                }
+                var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = ""/>';
+
+                $('#iDisplayBox').append(i);
+            },
+            setData: function (field, val) {
+                this.$set(this.$data, field, val);//vue 设定值
+            },
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            goTo(path) {
+                this.$router.replace(path);
+            },
+        }
+    })
+    //语言加载
+    OfficeStandards.initPage();
+</script>
+

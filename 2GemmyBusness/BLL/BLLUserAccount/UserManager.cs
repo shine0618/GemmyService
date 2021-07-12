@@ -281,5 +281,71 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                 }
             }
         }
+
+        public List<T_USER_UserInfo> getAllUserInfo()
+        {
+
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                var t = from x in db.T_USER_UserInfo
+                                    select x;
+                if (t != null)
+                {
+                    return t.ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public bool addOpinion(string email, string content, string name)
+        {
+            bool issuccess = false;
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+
+                T_USER_Opinion t = db.T_USER_Opinion.FirstOrDefault(m => m.Email == email&&m.Content==content);
+                if (t == null)
+                {
+                    T_USER_Opinion t1 = new T_USER_Opinion()
+                    {
+                        Email = email,
+                        Content = content,
+                        Name = name,
+                        CreateTime = DateTime.Now
+                    };
+                    db.T_USER_Opinion.Add(t1);
+                    db.SaveChanges();
+                    issuccess = true;
+                }
+                else
+                {
+
+                }
+            }
+            return issuccess;
+        }
+
+
+        public List<T_USER_Opinion> getOpinion()
+        {
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+
+                var t = from x in read_db.T_USER_Opinion
+                        select x;
+
+                if (t != null)
+                {
+                    return t.ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "test1";
+    Layout = null;
+}
+
+<h2>test1</h2>
+
+<template id="userRegister">
+    <div>
+        <h1 style="text-align:center">用户注册情况</h1>
+    </div>
+    <div style="line-height:20px;font-size:14px;">
+        <el-row>
+            <span>电子邮箱</span>
+            <el-input v-model="emailsearch"></el-input>
+        </el-row>
+    </div>
+    <div>
+        <el-row style="text-align:right">
+            <el-button icon="el-icon-search" circle></el-button>
+        </el-row>
+    </div>
+</template>
+<script>
+    var Register = new Vue({
+        el: '#userRegister',
+        router: router,
+        data() {
+            const item = {
+                date: '2016-05-02',
+                name: '王小虎',
+                address: '上海市普陀区金沙江路 1518 弄'
+            };
+            return {
+                emailsearch:'',
+            }
+        },
+        computed: {
+            username() {
+                // 我们很快就会看到 `params` 是什么
+                return this.$route.params.username
+            }
+        },
+        methods: {
+            
+        }
+    })
+</script>

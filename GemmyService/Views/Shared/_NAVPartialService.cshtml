@@ -95,7 +95,7 @@
 
                 @if (@Session["configurationPerson"] == null)
                 {
-                <h4 class="drawerh5">{{NAVLogin}}</h4>
+                    <h4 class="drawerh5">{{NAVLogin}}</h4>
                     <el-form :model="ruleLoginForm" status-icon :rules="rules" ref="ruleLoginForm" label-width="100px" class="demo-ruleForm">
                         <el-form-item prop="username">
                             <span slot="label">
@@ -201,7 +201,7 @@
                 {
                     <el-row>
                         <el-col :span="8"><el-avatar style="background:var(--thm-base)">@Session["picName"] </el-avatar></el-col>
-                        <h3>@Session["configurationPerson"]</h3>                        
+                        <h3>@Session["configurationPerson"]</h3>
                         <button type="button" class="thm-btn orderbtn" style="width:50%" @@click="LoginOut"> {{NAVLoginQuit}}</button>
 
                     </el-row>
@@ -233,7 +233,7 @@
 
 
                             </el-collapse-item>
-                            <el-collapse-item :title="NAVLoginSetting"  name="3">
+                            <el-collapse-item :title="NAVLoginSetting" name="3">
                                 <a href="/JCSelection/PersonInfo?email=@Session["emailName"]&name=@Session["configurationPerson"]" class="Personal_span"><i class="el-icon-s-tools" style="font-size:20px;color: var(--thm-base)"></i><span style="color:#303133">{{NAVLoginPersonSetting}}</span></a>
 
                             </el-collapse-item>
@@ -350,13 +350,13 @@
                     <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)"> {{NAVForgetResetButton}}</button>
 
                     @*<el-col :span="12" align="center">
-                            <el-button type="primary" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)">重置</el-button>
+                        <el-button type="primary" @@click="reset(ruleRetrieve.retrieveUsername,ruleRetrieve.retrievePassword,ruleRetrieve.retrievecode)">重置</el-button>
 
 
-                        </el-col>
-                        <el-col :span="11" align="left">
-                            <el-button @@click="resetForm('ruleForm')">清空</el-button>
-                        </el-col>*@
+                    </el-col>
+                    <el-col :span="11" align="left">
+                        <el-button @@click="resetForm('ruleForm')">清空</el-button>
+                    </el-col>*@
                 </el-form-item>
             </el-form>
         </el-dialog>
@@ -368,6 +368,63 @@
                 {{NAVRegisterUseContent}}
             </p>
         </el-dialog>
+        <el-dialog :title="NAVOpinionTitle"
+                   :visible.sync="dialogVisible_opinion"
+                   width="600px">
+            <div style="text-align:center;font-size:20px;">
+                <span>{{NAVOpinionCollectTableTitle}}</span>
+            </div>
+            <div style="margin-top:20px;">
+                <el-input type="textarea"
+                          :autosize="{ minRows: 2, maxRows: 20}"
+                          v-model="opinioncontent">
+                </el-input>
+            </div>
+            <div style="margin-top:20px;">
+                
+                <span>{{NAVOpinionCollectTableName}}</span>
+                    <el-input style="width:450px;left:20px;" v-model="opinionname"></el-input>
+               
+            </div>
+            <div style="margin-top:20px;">
+                <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="submitOpinion(opinioncontent,opinionname)"> {{NAVOpinionCollectTableButton}}</button>
+            </div>
+        </el-dialog>
+        <el-dialog :title="NAVOpinionSearchTitle"
+                   :visible.sync="dialogVisible_opinionsearch"
+                   width="1200px">
+            <div style="text-align:center;font-size:20px;">
+                <span>{{NAVOpinionLookTableTitle}}</span>
+            </div>
+            <div style="margin-top:20px;">
+                <el-table :data="opiniontableData.filter(data => !table_opinionsearch || data.Content.toLowerCase().includes(table_opinionsearch.toLowerCase()))"
+                          style="width: 100%"
+                          :default-sort = "{prop: 'CreateTime', order: 'descending'}"
+                          stripe>
+                    <el-table-column :label="NAVOpinionLookTableDate"
+                                     prop="CreateTime"
+                                     sortable>
+                    </el-table-column>
+                    <el-table-column :label="NAVOpinionLookTableName"
+                                     prop="Name">
+                    </el-table-column>
+                    <el-table-column :label="NAVOpinionLookTableContent"
+                                     prop="Content">
+                    </el-table-column>
+                    <el-table-column align="right">
+                        <template slot="header" slot-scope="scope">
+
+                            
+                            <el-input v-model="table_opinionsearch"
+                                      size="mini" 
+                                      :placeholder="NAVOpinionLookTableSearchTitle"/>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </div>
+
+            
+        </el-dialog>
     </div>
     <nav class="main-menu">
         <div class="container">
@@ -376,6 +433,17 @@
                 <span class="fa fa-bars mobile-nav__toggler"></span>
             </div><!-- /.logo-box -->
             <ul class="main-menu__list">
+                <li class="dropdown">
+                    <a href="#">{{NAVOpinionCollectTitle}}</a>
+                    <ul>
+                        <li>
+                            <a v-on:click="dialogVisible_opinion=true">{{NAVOpinionSubmit}}</a>
+                        </li>
+                        <li>
+                            <a v-on:click="dialogVisible_opinionsearch=true">{{NAVOpinionLook}}</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#">{{NAVMainPage_0}}</a>
                     <ul>

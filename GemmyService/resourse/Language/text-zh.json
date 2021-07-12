@@ -221,11 +221,22 @@
     "text_part_description_2": "最大长度",
 
     "text_customer_text1": "部件详情",
-    "select_text": "请选择"
-
-
-
-
-
+    "select_text": "请选择",
+    "NAVOpinionCollectTitle": "意见收集",
+    "NAVOpinionSubmit": "提交意见",
+    "NAVOpinionLook": "查看意见",
+    "NAVOpinionCollectTableTitle": "意见收集表",
+    "NAVOpinionCollectTableName": "姓名(可不填)",
+    "NAVOpinionCollectTableButton": "提交意见",
+    "NAVOpinionLookTableTitle": "意见查看表",
+    "NAVOpinionLookTableDate": "日期",
+    "NAVOpinionLookTableName": "姓名",
+    "NAVOpinionLookTableContent": "内容",
+    "NAVOpinionLookTableSearchTitle": "查找内容",
+    "NAVOpinionSubmitSuccessNotice": "添加成功",
+    "NAVOpinionSubmitFailNotice": "添加失败",
+    "NAVOpinionLoginNotice": "请先登录",
+    "OfficeStandardsDeleteplansuccessfulnotice": "删除成功",
+    "OfficeStandardsDeleteplanfailnotice": "删除失败"
   }
 }

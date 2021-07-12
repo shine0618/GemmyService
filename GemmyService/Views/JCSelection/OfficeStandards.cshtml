@@ -25,8 +25,23 @@
         color: #000000;
         font-weight: 900;
     }
+    .part_detail_icon {
+        width: 18% !important;
+        height: 20%;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer
+    }
 
-   
+    .imgDiv {
+        display: inline-block;
+        position: relative;
+    }
+
+    .imgDiv:hover {
+        background-color: rgb(12 33 57 / 0.3);
+    }
 </style>
 <div id="OfficeStandards">
 
@@ -100,19 +115,22 @@
                     </div>
                     <div class="row" id="selectTypeBox">
                         <div class="col-lg-4 col-md-6 mb-20" v-for="item in deskList">
-                            <div class="blog-card" v-on:click="window.location='/JCSelection/ProductDetail?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productName='+item.deskSerialName+'&productGuid='+item.deskGuid">
+                            <div class="blog-card" >
                                 <div class="blog-card__image">
                                     <span v-if="item.deskTag!=''">{{item.deskTag}}</span>
-                                    <img class=".img-responsive" style="height: 240px;" :src="item.deskImgUrl" />
-                                </div><!-- /.blog-card__image -->
-                                <div class="blog-card__content">
-                                    <div class="blog-card__meta">
-                                        <i></i>
-                                        <a><i class="fa fa-comments"></i>{{item.deskShortDescription}}</a>
-                                    </div><!-- /.blog-card__meta -->
-                                    <h6><a>{{item.deskSerialName}}</a></h6>
-                                </div><!-- /.blog-card__content -->
-                            </div><!-- /.blog-card -->
+                                    <div  @@mouseenter="mouse_plan = item.Id" @@mouseleave="mouse_column = ''">
+                                        <img class=".img-responsive" style="height: 240px;" :src="item.deskImgUrl"  v-on:click="window.location='/JCSelection/ProductDetail?domain=@ViewBag.domain&Type=@ViewBag.Type&recommend=@ViewBag.recommend&productName='+item.deskSerialName+'&productGuid='+item.deskGuid"/>
+                                        <img v-if="recommend=='customer'" v-show="mouse_plan == item.Id" src="~/resourse/Img/delete_icon.png" class="part_detail_icon" v-on:click="Deleteplan(item.Id)" />  
+                                    </div>
+                                    </div><!-- /.blog-card__image -->
+                                    <div class="blog-card__content">
+                                        <div class="blog-card__meta">
+                                            <i></i>
+                                            <a><i class="fa fa-comments"></i>{{item.deskShortDescription}}</a>
+                                        </div><!-- /.blog-card__meta -->
+                                        <h6><a>{{item.deskSerialName}}</a></h6>
+                                    </div><!-- /.blog-card__content -->
+                                </div><!-- /.blog-card -->
                         </div><!-- /.col-lg-4 col-md-6 -->
 
                     </div><!-- /.row -->
@@ -150,7 +168,7 @@
             langCode:"",
             deskList: null,
             searchText:"",
-
+            mouse_plan:'',
             DeskConfigurationName: "",
             deskAll:"",
             NewProductName: "",
@@ -168,7 +186,9 @@
             deskMaxLoad: "",
             NAVMainPage: "",
             NAVOfficePage: "",
-            OfficeStandardsCustomzed: ""
+            OfficeStandardsCustomzed: "",
+            OfficeStandardsDeleteplansuccessfulnotice: "",
+            OfficeStandardsDeleteplanfailnotice: ""
             //------文本 end ----
         },
         watch: {
@@ -237,7 +257,30 @@
                     this.Order = 1;
                 }
             },
+            Deleteplan: function (id) {
+                console.log(id);
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/DeleteCustomer",
+                    params: {
+                        id:id,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    console.log(response.body);
+                    if (response.body == true) {
+                        this.$notify({
+                            message: this.OfficeStandardsDeleteplansuccessfulnotice,
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
 
+                    else {
+                        this.$notify.error(this.OfficeStandardsDeleteplanfailnotice);
+                    }
+                }, function (error) {
+                })
+            },
             setData: function (field, val) {
                 this.$set(this.$data, field, val);//vue 设定值
             },

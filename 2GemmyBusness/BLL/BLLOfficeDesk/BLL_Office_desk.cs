@@ -788,7 +788,22 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             return query.ToList();
         }
 
-        
+        public bool DeleteCustome(int id)
+        {
+            bool issuccess = false;
+            T_Product_office_desk t = read_db.T_Product_office_desk.FirstOrDefault(m => m.Id == id);
+            if (t != null)
+            {
+
+                t.deleteSign = 1;
+                t.deskCustmoer = false;
+                read_db.Configuration.ValidateOnSaveEnabled = false;
+                read_db.SaveChanges();
+                read_db.Configuration.ValidateOnSaveEnabled = true;
+                issuccess = true;
+            }
+            return issuccess;
+        }
 
         #endregion
     }

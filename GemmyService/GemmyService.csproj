@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JCAccountController.cs" />
+    <Compile Include="Controllers\JCManageController.cs" />
     <Compile Include="Controllers\JCOfficeManagerController.cs" />
     <Compile Include="Controllers\JCSelectionController.cs" />
     <Compile Include="Controllers\JCSelectionLanguageController.cs" />
@@ -365,6 +366,7 @@
     <Content Include="resourse\desk_TS_picture\JC35TS-S13S.png" />
     <Content Include="resourse\Img\2D_icon.png" />
     <Content Include="resourse\Img\3D_icon.png" />
+    <Content Include="resourse\Img\delete_icon.png" />
     <Content Include="resourse\Img\detail_icon.png" />
     <Content Include="resourse\Img\excel_icon.png" />
     <Content Include="resourse\Img\jpg_icon.png" />
@@ -680,6 +682,8 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\qrcode.js" />
+    <Content Include="Scripts\router\router.js" />
+    <Content Include="Scripts\router\vue-router.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -818,6 +822,8 @@
     <Content Include="Views\JCSelection\office_Eservice_ring.cshtml" />
     <Content Include="Views\JCSelection\serviceTWJ.cshtml" />
     <Content Include="Views\JCAccount\reass_english.cshtml" />
+    <Content Include="Views\JCManage\ManagePage.cshtml" />
+    <Content Include="Views\JCManage\test1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
