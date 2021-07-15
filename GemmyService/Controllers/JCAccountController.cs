@@ -322,13 +322,6 @@ namespace GemmyService.Controllers
             return jr;
         }
 
-        [HttpGet]
-        public JsonResult GetAllUserInfo()
-        {
-            var t = usermanager.getAllUserInfo();
-            JsonResult jr = Json(t, JsonRequestBehavior.AllowGet);
-            jr.MaxJsonLength = int.MaxValue;
-            return jr;
-        }
+
     }
 }

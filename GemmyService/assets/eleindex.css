@@ -2711,6 +2711,11 @@
     background-color: #FFF
 }
 
+.el-table__border th.gutter:last-of-type {
+    display: block !important;
+    width: 17px !important;
+}
+
 .el-select .el-tag__close.el-icon-close::before {
     display: block;
     -webkit-transform: translate(0,.5px);
@@ -2852,10 +2857,11 @@
     }
 
     .el-table td.gutter, .el-table th.gutter {
-        width: 15px;
-        border-right-width: 0;
+        display: table-cell !important;
+        width: 10px !important;
+        /*        border-right-width: 0;
         border-bottom-width: 0;
-        padding: 0
+        padding: 0;*/
     }
 
 .el-table--medium td, .el-table--medium th {
@@ -12312,7 +12318,7 @@
 
     .el-input::-webkit-scrollbar {
         z-index: 11;
-        width: 6px
+        width: 6px;
     }
 
         .el-input::-webkit-scrollbar:horizontal {

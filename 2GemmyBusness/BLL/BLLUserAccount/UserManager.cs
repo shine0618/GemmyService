@@ -347,5 +347,24 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                 }
             }
         }
+
+        public List<T_USER_UserCompanyInfo> getAllUserCompanyInfo()
+        {
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                var t = from x in db.T_USER_UserCompanyInfo
+                        select x;
+                if (t != null)
+                {
+                    return t.ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        
     }
 }

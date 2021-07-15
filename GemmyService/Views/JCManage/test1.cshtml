@@ -1,49 +1,126 @@
 ﻿
 @{
     ViewBag.Title = "test1";
-    Layout = null;
+
 }
+<script src="/Scripts/vue.min.js"></script>
+<script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+<link href="//unpkg.com/element-ui@2.15.2/lib/theme-chalk/index.css" rel="stylesheet" />
 
-<h2>test1</h2>
+<template id="partColumn">
+    <div>
+        <h1 style="text-align:center">立柱信息</h1>
+        <span>立柱型号</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+        <el-table :table="partcolumntableData"
+                  :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+                  :data="partcolumntableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase()))"
+                  stripe>
+            @*<el-table-column prop="UpdateTime" label="更新时间" sortable>
+                </el-table-column>*@
+            <el-table-column prop="Mode" label="型号" fixed width="200px">
+            </el-table-column>
+            <el-table-column prop="Type" label="安装方式">
+            </el-table-column>
+            <el-table-column prop="Level" label="节数">
+            </el-table-column>
+            <el-table-column prop="Form" label="形状" width="100px">
+            </el-table-column>
+            <el-table-column prop="Size_Out" label="外管">
+            </el-table-column>
+            <el-table-column prop="Size_Middle" label="中管">
+            </el-table-column>
+            <el-table-column prop="Size_Inside" label="内管">
+            </el-table-column>
+            <el-table-column prop="StrokeLength" label="行程">
+            </el-table-column>
+            <el-table-column prop="MaxStroke" label="最大行程">
+            </el-table-column>
+            <el-table-column prop="LowestPosition" label="安装距">
+            </el-table-column>
+            <el-table-column prop="HighestPosition" label="最高高度">
+            </el-table-column>
+            <el-table-column prop="LoadCapacity" label="负载">
+            </el-table-column>
+            <el-table-column prop="MaxLoad" label="最大负载">
+            </el-table-column>
+            <el-table-column prop="Speed" label="速度">
+            </el-table-column>
+            <el-table-column prop="MaxSpeed" label="最大速度">
+            </el-table-column>
+            <el-table-column prop="Power" label="功率">
+            </el-table-column>
+            <el-table-column prop="StabilityLeave" label="稳定性">
+            </el-table-column>
+            <el-table-column prop="MotorCode" label="电机代码">
+            </el-table-column>
+            <el-table-column prop="HaveMotor" label="是否有电机">
+            </el-table-column>
+            <el-table-column prop="Inline" label="是否用于直筒">
+            </el-table-column>
+            <el-table-column prop="InsideSlider" label="是否内磨">
+            </el-table-column>
+            <el-table-column prop="SingleMotor" label="是否适用单电机">
+            </el-table-column>
+            <el-table-column prop="HandCranking" label="是否适用手摇">
+            </el-table-column>
+            <el-table-column prop="GasSpring" label="是否适用气动">
+            </el-table-column>
+            <el-table-column prop="CanEZ" label="可否易安装">
+            </el-table-column>
+            <el-table-column prop="CanFold" label="可否折叠桌">
+            </el-table-column>
+            <el-table-column prop="CanTurn" label="可否翻转桌">
+            </el-table-column>
+            <el-table-column prop="GS" label="GS">
+            </el-table-column>
+            <el-table-column prop="EN527" label="EN527">
+            </el-table-column>
+            <el-table-column prop="CE" label="CE">
+            </el-table-column>
+            <el-table-column prop="EMC" label="EMC">
+            </el-table-column>
+            <el-table-column prop="BIFMA" label="BIFMA">
+            </el-table-column>
+            <el-table-column prop="UL962" label="UL962">
+            </el-table-column>
+            <el-table-column prop="ColumnWithFoot" label="和地脚连接" width="200px">
+            </el-table-column>
+            <el-table-column prop="ColumnWithFrame" label="和框架连接" width="200px">
+            </el-table-column>
+            <el-table-column prop="UseTO" label="可否用于TO">
+            </el-table-column>
+            <el-table-column prop="UseTS" label="可否用于TS">
+            </el-table-column>
+            <el-table-column prop="UseTT" label="可否用于TT">
+            </el-table-column>
+            <el-table-column prop="UseTF" label="可否用于TF">
+            </el-table-column>
+            <el-table-column prop="UseBench" label="可否用于组合桌">
+            </el-table-column>
 
-<template id="userRegister">
-    <div>
-        <h1 style="text-align:center">用户注册情况</h1>
-    </div>
-    <div style="line-height:20px;font-size:14px;">
-        <el-row>
-            <span>电子邮箱</span>
-            <el-input v-model="emailsearch"></el-input>
-        </el-row>
-    </div>
-    <div>
-        <el-row style="text-align:right">
-            <el-button icon="el-icon-search" circle></el-button>
-        </el-row>
+        </el-table>
+        <el-pagination layout="total"
+                       :total="partcolumntableData.length"
+                       align="center">
+        </el-pagination>
+
     </div>
 </template>
 <script>
     var Register = new Vue({
-        el: '#userRegister',
-        router: router,
+        el: '#partColumn',
         data() {
-            const item = {
-                date: '2016-05-02',
-                name: '王小虎',
-                address: '上海市普陀区金沙江路 1518 弄'
-            };
+
             return {
-                emailsearch:'',
-            }
-        },
-        computed: {
-            username() {
-                // 我们很快就会看到 `params` 是什么
-                return this.$route.params.username
+                table_emailsearch: '',
+                partcolumntableData: [],
             }
         },
         methods: {
-            
+
         }
     })
 </script>

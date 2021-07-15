@@ -61,6 +61,9 @@
     <Compile Include="BLL\BLLOfficeDesk\BLL_Office_desk_customer.cs" />
     <Compile Include="BLL\BLLOfficeDesk\BLL_Office_File.cs" />
     <Compile Include="BLL\BLLOfficeDesk\BLL_Ofiice_Configuration.cs" />
+    <Compile Include="BLL\BLLOfficePartManage\BLL_Office_Part_Column.cs" />
+    <Compile Include="BLL\BLLOfficePartManage\BLL_Office_Part_Foot.cs" />
+    <Compile Include="BLL\BLLOfficePartManage\BLL_Office_Part_Frame.cs" />
     <Compile Include="BLL\BLLSystem\BLL_SYS_Helper.cs" />
     <Compile Include="BLL\BLLSystem\BLL_SYS_language.cs" />
     <Compile Include="BLL\BLLUserAccount\UserManager.cs" />

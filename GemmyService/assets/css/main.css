@@ -6148,6 +6148,7 @@ h6 {
 ::-webkit-scrollbar {
     width: 6px;
     background-color: #F5F5F5;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
