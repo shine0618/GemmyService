@@ -277,8 +277,8 @@
     });
   }
 
-  if ($(".mobile-nav__toggler").length) {
-    $(".mobile-nav__toggler").on("click", function (e) {
+  if ($(".mobile-nav__toggler2").length) {
+    $(".mobile-nav__toggler2").on("click", function (e) {
       e.preventDefault();
       $(".mobile-nav__wrapper").toggleClass("expanded");
     });
