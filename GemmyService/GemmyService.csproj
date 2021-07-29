@@ -823,7 +823,23 @@
     <Content Include="Views\JCSelection\serviceTWJ.cshtml" />
     <Content Include="Views\JCAccount\reass_english.cshtml" />
     <Content Include="Views\JCManage\ManagePage.cshtml" />
-    <Content Include="Views\JCManage\test1.cshtml" />
+    <Content Include="Views\JCManage\partColumn.cshtml" />
+    <Content Include="Views\JCManage\partFrame.cshtml" />
+    <Content Include="Views\JCManage\partFoot.cshtml" />
+    <Content Include="Views\JCManage\partHandset.cshtml" />
+    <Content Include="Views\JCManage\partControlbox.cshtml" />
+    <Content Include="Views\JCManage\partSidebracket.cshtml" />
+    <Content Include="Views\JCManage\userRegisterInfo.cshtml" />
+    <Content Include="Views\JCManage\userCompanyInfo.cshtml" />
+    <Content Include="Views\JCManage\partPowerCable.cshtml" />
+    <Content Include="Views\JCManage\productcolor.cshtml" />
+    <Content Include="Views\JCManage\productByJiecang.cshtml" />
+    <Content Include="Views\JCManage\productByUser.cshtml" />
+    <Content Include="Views\JCManage\productDeskDetail.cshtml" />
+    <Content Include="Views\JCManage\productDescDetail.cshtml" />
+    <Content Include="Views\JCManage\filesDetail.cshtml" />
+    <Content Include="Views\JCSelection\FileSearch.cshtml" />
+    <Content Include="Views\JCSelection\FileTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

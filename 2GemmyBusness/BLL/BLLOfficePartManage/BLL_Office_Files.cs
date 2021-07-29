@@ -1,5 +1,5 @@
 ﻿using _1GemmyModel;
-using _1GemmyModel.Model;
+using _1GemmyModel.Model.ModelProductOffice;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace _2GemmyBusness.BLL.BLLOfficePartManage
 {
-  public  class BLL_Office_Part_Frame:BLLBase
+   public class BLL_Office_Files:BLLBase
     {
-        public List<T_Part_office_Frame> getFrameInfo()
+        public List<T_Office_Files> getFileInfo(string mode)
         {
-            var t = from x in read_db.T_Part_office_Frame
+            var t = from x in read_db.T_Office_Files
+                    where x.Mode == mode
                     select x;
             if (t != null)
             {
@@ -23,46 +24,49 @@ namespace _2GemmyBusness.BLL.BLLOfficePartManage
                 return null;
             }
         }
-        public bool UpdateFrameInfo(T_Part_office_Frame t)
+        public bool UpdateFileInfo(T_Office_Files t)
         {
             bool issuccess = false;
             if (t != null)
             {
-                Update<T_Part_office_Frame>(t);
+                Update<T_Office_Files>(t);
                 issuccess = true;
             }
             return issuccess;
         }
 
-        public bool AddFrameInfo(T_Part_office_Frame t)
+        public bool AddFileInfo(T_Office_Files t)
         {
             bool issuccess = false;
             using (DBGemmyService2 db = new DBGemmyService2())
             {
                 if (t != null)
                 {
-                    var entity = db.T_Part_office_Frame.Any(m => m.Mode == t.Mode);
+                    var entity = db.T_Office_Files.Any(m => m.Mode==t.Mode&&m.FileName==t.FileName&&m.Type==t.Type);
                     if (entity != true)
                     {
-                        db.T_Part_office_Frame.Add(t);
+                        db.T_Office_Files.Add(t);
                         db.SaveChanges();
                         issuccess = true;
                     }
+                    //db.T_Part_office_describe.Add(t);
+                    //db.SaveChanges();
+                    //issuccess = true;
                 }
 
             }
             return issuccess;
         }
 
-        public bool DeleteFrameInfo(T_Part_office_Frame t)
+        public bool DeleteFileInfo(T_Office_Files t)
         {
             bool issuccess = false;
             using (DBGemmyService2 db = new DBGemmyService2())
             {
-                var entity = db.T_Part_office_Frame.Any(m => m.Mode == t.Mode);
+                var entity = db.T_Office_Files.Any(m => m.Mode == t.Mode && m.FileName == t.FileName && m.Type == t.Type);
                 if (entity == true)
                 {
-                    DeleteEntityByid<T_Part_office_Frame>(t.Id);
+                    DeleteEntityByid<T_Office_Files>(t.Id);
                     issuccess = true;
                 }
 

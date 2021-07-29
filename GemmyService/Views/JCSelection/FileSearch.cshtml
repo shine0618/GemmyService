@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "FileSearch";
+}
+
+<style>
+    .el-divider--horizontal{
+        width:100%;
+    }
+    #shjahs {
+        /*width: 100%;
+
+        padding-top: 10px;
+        padding-bottom: 14px;
+        padding-left: 5px;
+        padding-right: 5px;*/
+        /*background-color: #F2F3F4;*/
+        /*min-height: 500px;
+        height: calc(100vh - 300px);*/
+        border: 0;
+        margin: 0;
+        padding: 0;
+        height: 618px;
+        width: 100%;
+    }
+
+    #asas {
+        height: 100%;
+        margin-top:30px;
+    }
+
+</style>
+<div id="filesearch">
+    <div class="page-header" style="height:53px;">
+        <div class="container" style="padding:10px 10px ">
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a">文档搜索</a>
+        </div>
+    </div>
+    <div class="container" style="margin-top:20px;margin-bottom:20px;">
+        
+        <div align="center">
+            <el-divider></el-divider>
+        </div>
+        <div>
+            <span>选择类型</span>
+            <el-select v-model="partType">
+                <el-option label="立柱" value="column"></el-option>
+                <el-option label="手控器" value="HandSet"></el-option>
+                <el-option label="控制器" value="ControlBox"></el-option>
+                <el-option label="地脚" value="foot"></el-option>
+                <el-option label="侧板" value="SideBracket"></el-option>
+                <el-option label="框架" value="frame"></el-option>
+                <el-option label="电源线" value="Powercable"></el-option>
+                <el-option label="配件" value="accessory"></el-option>
+                <el-option label="整桌" value="desk"></el-option>
+            </el-select>
+            <span></span>
+            <span>选择文件类型</span>
+            <el-select v-model="Nature" multiple collapse-tags>
+                <el-option label="产品介绍" value="产品介绍"></el-option>
+                <el-option label="产品图2D" value="产品图2D"></el-option>
+                <el-option label="产品图3D" value="产品图3D"></el-option>
+                <el-option label="认证" value="认证"></el-option>
+                <el-option label="文件资料" value="文件资料"></el-option>
+            </el-select>
+            <span>搜索型号</span>
+            <el-input v-model="Mode" style="width:30%"></el-input>
+            <el-button @@click="searchclick" icon="el-icon-search" style="background-color:#008fd5;color:#fff">搜索</el-button>
+        </div>
+        <div id="asas"></div>
+    </div>
+    
+</div>
+
+<script>
+    var filesearch = new Vue({
+        el: "#filesearch",
+        data: {
+            NAVMainPage: '',
+            CustomPage: '',
+            partType: '',
+            Nature: '',
+            Mode:'',
+        },
+        methods: {
+            initPage: function (event) {
+                var code = GetLanguCode();
+                this.langCode = code;
+                $.ajaxSettings.async = false;
+                var languText;
+                $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
+                    languText = result.language;
+                });
+                $.ajaxSettings.async = true;
+                var obj = languText;
+                for (var p in obj) {
+                    // 方法
+                    if (typeof (obj[p]) == "function") {
+                        obj[p]();
+                    } else {
+                        // p 为属性名称，obj[p]为对应属性的值
+                        var key = p;
+                        var value = obj[p];
+                        // console.log('key:' + key + "  value:" + value);
+                        this.setData(key, value);
+                    }
+                }
+                var url = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&languageIso=" + this.langCode;
+                var i = '<iframe scrolling="yes"  id="shjahs"  alt=""  src = ""/>';
+
+                $('#asas').append(i);
+            },
+            setData: function (field, val) {
+                this.$set(this.$data, field, val);//vue 设定值
+            },
+            searchclick: function (event) {
+                var src = "/JCSelection/FileTree?parttype=" + this.partType + "&nature=" + this.Nature + "&mode=" + this.Mode;
+                console.log(src);
+                $("#shjahs").attr({
+                    "src": src
+                });
+            }
+        },
+    })
+    filesearch.initPage();
+</script>
+

@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "FileTree";
+}
+<style>
+    .page-wrapper{
+        width:80%;
+
+    }
+    .el-tree-node__content{
+        font-size:30px;
+        height:36px;
+    }
+    .el-tree-node__label{
+        font-size:20px;
+    }
+    .el-checkbox__inner {
+        height: 20px;
+        width: 20px;
+    }
+    .el-tree-node__content > .el-tree-node__expand-icon{
+        padding:10px;
+    }
+    .el-tree-node__expand-icon{
+        font-size:25px;
+    }
+    .el-checkbox__inner::after{
+        height:13px;
+        left:7px;
+    }
+</style>
+<div id="filedetail">
+    <div class="custom-tree-container">
+        <div align="right">
+            <el-button @@click="handleCheckChange" style="background-color:#008fd5;color:#fff">下载选中的文件</el-button>
+        </div>
+        <div class="block">
+
+            <el-tree :data="data"
+                     show-checkbox
+                     node-key="id"
+                     ref="tree"
+                     highlight-current>
+            </el-tree>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var filedetail = new Vue({
+        el: '#filedetail',
+        data() {           
+            return {
+                data: [],
+                parttype: '@ViewBag.parttype',
+                nature: '@ViewBag.nature',
+                mode: '@ViewBag.mode',
+                filelist: [],
+            }
+        },
+        methods: {
+            getfile() {
+                var m = [{
+                    id: 1,
+                    label: '产品介绍',
+                    children:[],
+                },
+                {
+                    id: 2,
+                    label: '产品图2D',
+                    children: [],
+                },
+                {
+                    id: 3,
+                    label: '产品图3D',
+                    children: [],
+                },
+                {
+                    id: 4,
+                    label: '认证',
+                    children: [],
+                },
+                {
+                    id: 5,
+                    label: '文件资料',
+                    children: [],
+                    }];              
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/getFileByDetail",
+                    params: {
+                        parttype: this.parttype,
+                        nature: this.nature,
+                        mode: this.mode,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    this.filelist = response.body;
+                    for (var i = 0; i < response.body.length; i++) {
+                        switch (response.body[i].Nature) {
+                            case "文件资料": const a = { id: i + 6, label: response.body[i].FileName + response.body[i].Type };
+                                if (!m[4].children) {
+                                    this.$set(m[4], 'children', []);
+                                }
+                                m[4].children.push(a);
+                                break;
+                            case "认证": const b = { id: i + 6, label: response.body[i].FileName + response.body[i].Type };
+                                if (!m[3].children) {
+                                    this.$set(m[3], 'children', []);
+                                }
+                                m[3].children.push(b);
+                                break;
+                            case "产品图3D": const c = { id: i + 6, label: response.body[i].FileName + response.body[i].Type };
+                                if (!m[2].children) {
+                                    this.$set(m[2], 'children', []);
+                                }
+                                m[2].children.push(c);
+                                break;
+                            case "产品图2D": const d = { id: i + 6, label: response.body[i].FileName + response.body[i].Type };
+                                if (!m[1].children) {
+                                    this.$set(m[1], 'children', []);
+                                }
+                                m[1].children.push(d);
+                                break;
+                            case "产品介绍": const e = { id: i + 6, label: response.body[i].FileName + response.body[i].Type };
+                                if (!m[0].children) {
+                                    this.$set(m[0], 'children', []);
+                                }
+                                m[0].children.push(e);
+                                break;
+                        }
+                    }
+                    console.log(this.filelist);
+                }, function (error) {
+                    console.log(error);
+                })
+                this.data = m;
+            },
+            append(data) {
+                const newChild = { id: id++, label: 'testtest', children: [] };
+                if (!data.children) {
+                    this.$set(data, 'children', []);
+                }
+                data.children.push(newChild);
+            },
+
+            remove(node, data) {
+                const parent = node.parent;
+                const children = parent.data.children || parent.data;
+                const index = children.findIndex(d => d.id === data.id);
+                children.splice(index, 1);
+            },
+            handleCheckChange() {
+                let res = this.$refs.tree.getCheckedNodes()
+                let arr = []
+                res.forEach((item) => {
+                    if (item.id > 5) {
+                        arr.push(item.id)
+                    }
+                    
+                })
+                console.log(arr);
+                for (var i = 0; i < arr.length; i++) {
+                    var fname = this.filelist[arr[i] - 6].FileName ;
+                    if (this.filelist[arr[i] - 6].Type == ".dwg" || this.filelist[arr[i] - 6].Type == ".stp") {
+                        fname = this.filelist[arr[i] - 6].FileName + this.filelist[arr[i]- 6].Type;
+                    }
+                    const link = document.createElement('a');
+                    link.style.display = 'none';
+                    link.href = this.filelist[arr[i] - 6].Path;
+                    link.setAttribute('download', fname);
+                    document.body.appendChild(link);
+                    link.click();
+                }
+            },
+        },
+    })
+    filedetail.getfile();
+</script>
+

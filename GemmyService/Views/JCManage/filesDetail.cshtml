@@ -1,0 +1,413 @@
+﻿
+@{
+    ViewBag.Title = "filesDetail";
+}
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+<script src="/Scripts/vueAjax.js"></script>
+<style>
+    .el-dialog {
+        margin-top: 0vh !important;
+    }
+
+    .size-icon {
+        font-size: 30px;
+    }
+</style>
+<div id="officedesk">
+    <h1 style="text-align:center">文档信息</h1>
+    <el-row>
+        <span>部件型号</span>
+        <el-input v-model="search" style="width:400px;"></el-input>
+        <el-button @@click="jump" icon="el-icon-search" align="right">搜索</el-button>
+        <el-button @@click="addformshow" icon="el-icon-circle-plus-outline" align="right">新增</el-button>
+    </el-row>
+    <el-table :table="partpowercabletableData"
+              :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+              :data="partpowercabletableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+              stripe
+              height="700"
+              style="width:100%">
+        <el-table-column prop="UpdateTime" label="更新时间" sortable width="100px;">
+        </el-table-column>
+        <el-table-column prop="partType" label="关联的类型"  width="100px;">
+        </el-table-column>
+        <el-table-column prop="Mode" label="关联部件型号" fixed width="200px">
+        </el-table-column>
+        <el-table-column prop="FileName" label="文件名" width="200px">
+        </el-table-column>
+        <el-table-column prop="Nature" label="文件种类" width="200px">
+        </el-table-column>
+        <el-table-column prop="Path" label="文件路径" width="400px">
+        </el-table-column>
+        <el-table-column prop="Size" label="文件大小" width="200px">
+        </el-table-column>
+        <el-table-column prop="Type" label="文件后缀名" width="200px">
+        </el-table-column>
+        <el-table-column prop="Lock" label="是否被锁定" width="200px">
+        </el-table-column>
+        <el-table-column prop="Language" label="语言版本" width="200px">
+        </el-table-column>        
+        <el-table-column label="操作" width="160px">
+            <template slot-scope="scope">
+                <el-button size="mini"
+                           @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <el-button size="mini"
+                           type="danger"
+                           @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page="currentPage4"
+                   :page-size="pagesize"
+                   layout="total, prev, pager, next, jumper"
+                   :total="partpowercabletableData.length"
+                   align="center">
+    </el-pagination>
+    <el-dialog title="文档信息"
+               :visible.sync="dialogVisible"
+               width="40%">
+        <el-form ref="form" :model="form" label-width="150px">
+            <el-form-item label="关联的类型">
+                <el-select v-model="form.partType">
+                    <el-option label="立柱" value="column"></el-option>
+                    <el-option label="手控器" value="HandSet"></el-option>
+                    <el-option label="控制器" value="ControlBox"></el-option>
+                    <el-option label="地脚" value="foot"></el-option>
+                    <el-option label="侧板" value="SideBracket"></el-option>
+                    <el-option label="框架" value="frame"></el-option>
+                    <el-option label="电源线" value="Powercable"></el-option>
+                    <el-option label="配件" value="accessory"></el-option>
+                    <el-option label="整桌" value="desk"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="关联部件型号">
+                <el-input v-model="form.Mode" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="文件名">
+                <el-input v-model="form.FileName" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="文件种类">
+                <el-select v-model="form.Nature">
+                    <el-option label="产品介绍" value="产品介绍"></el-option>
+                    <el-option label="产品图2D" value="产品图2D"></el-option>
+                    <el-option label="产品图3D" value="产品图3D"></el-option>
+                    <el-option label="认证" value="认证"></el-option>
+                    <el-option label="文件资料" value="文件资料"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="文件路径">
+                <el-input v-model="form.Path" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否被锁定">
+                <span>False</span>
+                <el-switch v-model="form.Lock"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="语言版本">
+                <el-select v-model="form.Language">
+                    <el-option label="中文" value="zh"></el-option>
+                    <el-option label="英文" value="en"></el-option>
+                </el-select>
+            </el-form-item>            
+            <el-button @@click="onSubmit">更新</el-button>
+        </el-form>
+    </el-dialog>
+
+    <el-dialog title="捷昌推荐整桌信息"
+               :visible.sync="adddialogVisible"
+               width="40%">
+        <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
+            <el-form-item label="关联的类型">
+                <el-select v-model="addform.partType">
+                    <el-option label="立柱" value="column"></el-option>
+                    <el-option label="手控器" value="HandSet"></el-option>
+                    <el-option label="控制器" value="ControlBox"></el-option>
+                    <el-option label="地脚" value="foot"></el-option>
+                    <el-option label="侧板" value="SideBracket"></el-option>
+                    <el-option label="框架" value="frame"></el-option>
+                    <el-option label="电源线" value="Powercable"></el-option>
+                    <el-option label="配件" value="accessory"></el-option>
+                    <el-option label="整桌" value="desk"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="关联部件型号">
+                <el-input v-model="addform.Mode" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="文件名">
+                <el-input v-model="addform.FileName" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="文件种类">
+                <el-select v-model="addform.Nature">
+                    <el-option label="产品介绍" value="产品介绍"></el-option>
+                    <el-option label="产品图2D" value="产品图2D"></el-option>
+                    <el-option label="产品图3D" value="产品图3D"></el-option>
+                    <el-option label="认证" value="认证"></el-option>
+                    <el-option label="文件资料" value="文件资料"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="文件路径">
+                <el-input v-model="addform.Path" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否被锁定">
+                <span>False</span>
+                <el-switch v-model="addform.Lock"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="语言版本">
+                <el-select v-model="addform.Language">
+                    <el-option label="中文" value="zh"></el-option>
+                    <el-option label="英文" value="en"></el-option>
+                </el-select>
+            </el-form-item>
+        </el-form>
+        <el-button @@click="addonSubmit('addform')">新增</el-button>
+    </el-dialog>
+</div>
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var table = new Array();
+    var partpowercableboxtable = new Array();
+    function GetdeskInfo() {
+        //用 ajax 写
+        partpowercableboxtable.length = 0;
+        $.ajax(
+            {
+                url: "/JCManage/GetFilesInfo",
+                method: 'get',
+                data: {mode: '@ViewBag.mode'},
+                success: function (data) {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+                            UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            partType: data[i].partType,
+                            Mode: data[i].Mode,
+                            FileName: data[i].FileName,
+                            Nature: data[i].Nature,
+                            Path: data[i].Path,
+                            Size: data[i].Size,
+                            Type: data[i].Type,
+                            Lock: data[i].Lock == true?"True":"False",
+                            Language: data[i].Language,
+
+                        };
+                        //this.tableData.push(q);
+                        partpowercableboxtable.push(q);
+
+                    }
+                    table = data;
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+    };
+    GetdeskInfo();
+    var Register = new Vue({
+        el: '#officedesk',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                partpowercabletableData: partpowercableboxtable,
+                currentPage4: 1,
+                pagesize: 9,
+                dialogVisible: false,
+                dialogdata: [],
+                certinfokey: false,
+                adddialogVisible: false,
+                addindexdialogVisible: false,
+                search:'@ViewBag.mode',
+                form: {
+                    UpdateTime: '',
+                    partType: '',
+                    Mode:'',
+                    FileName: '',
+                    thumbnailImg: '',
+                    Nature: '',
+                    Information:'',
+                    Path: '',
+                    Size: '',
+                    Outdate: '',
+                    Type: '',
+                    Permission: '',
+                    Products: '',
+                    Lock: '',
+                    Language: '',
+                },
+                addform: {
+                    partType: null,
+                    Mode: '@ViewBag.mode',
+                    FileName: null,
+                    thumbnailImg: null,
+                    Nature: null,
+                    Information: null,
+                    Path: null,
+                    Size: 0,
+                    Outdate: null,
+                    Type: null,
+                    Permission: null,
+                    Products: null,
+                    Lock: false,
+                    Language: null,
+                },
+                rules: {
+                    deskSerialName: [
+                        { required: true }
+                    ],
+                    deskType: [
+                        { required: true }
+                    ],
+                    deskCustomerName: [
+                        { required: true }
+                    ],
+
+                }
+            }
+        },
+        methods: {
+            jump: function (event) {
+                window.location.href = "filesDetail?mode=" + this.search;
+            },
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+            handleEdit(index, row) {
+                console.log(this.currentPage4);
+                console.log(this.pagesize);
+                var a = 0;
+                for (var i = 0; i < table.length; i++) {
+                    if (table[i].deskGuid ==row.deskGuid) {
+                        a = i;
+                    }
+                }
+                this.dialogdata = table[a];
+                console.log(this.dialogdata);
+                this.certinfokey = !this.certinfokey;
+                this.dialogVisible = true;
+            },
+            handleDelete(index, row) {
+                var a = 0;
+                for (var i = 0; i < table.length; i++) {
+                    if (table[i].deskGuid == row.deskGuid) {
+                        a = i;
+                    }
+                }
+                this.dialogdata = table[a];
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCManage/DeleteFilesInfo",
+                        params: {
+                            forminfo: JSON.stringify(this.form),
+                        }
+                    }).then(function (response) {
+                        this.isadd = response.body;
+                        if (this.isadd == true) {
+
+                            location.reload();
+                        }
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+                console.log(this.dialogdata);
+            },
+            onSubmit() {
+
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/UpdateFilesInfo",
+                    params: {
+                        forminfo: JSON.stringify(this.form),
+                    }
+                }).then(function (response) {
+                    this.isadd = response.body;
+                    console.log(this.form);
+                    console.log(JSON.stringify(this.form));
+                    console.log(response.body);
+                    if (this.isadd == true) {
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
+                })
+
+
+            },
+            addonSubmit(formname) {
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.$http({           //调用接口
+                            method: 'POST',
+                            url: "/JCManage/addFilesInfo",
+                            params: {
+                                forminfo: JSON.stringify(this.addform),
+                            }
+                        }).then(function (response) {
+                            this.isadd = response.body;
+                            console.log(this.addform);
+                            console.log(JSON.stringify(this.addform));
+                            console.log(response.body);
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                location.reload();
+                            }
+                        })
+                        console.log(this.addform);
+
+
+
+                    }
+                    else {
+                        this.$notify.error('缺少内容');
+
+                    }
+                })
+            },
+            addformshow() {
+                this.adddialogVisible = true;
+            },
+            addindexdialogshow() {
+                this.addindexdialogVisible = true;
+            }
+        },
+        watch: {
+            dialogdata() {
+                Object.assign(this.form, this.dialogdata);
+            },
+
+        }
+    })
+
+</script>
+

@@ -1,0 +1,351 @@
+﻿
+@{
+    ViewBag.Title = "productDeskDetail";
+}
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+<script src="/Scripts/vueAjax.js"></script>
+<style>
+    .el-dialog {
+        margin-top: 0vh !important;
+    }
+
+    .size-icon {
+        font-size: 30px;
+    }
+</style>
+<div id="officedeskDeatil">
+    <h1 style="text-align:center">整桌详细信息</h1>
+    <el-row>
+        <span>Guid</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+    </el-row>
+    <el-table :table="desktableData"
+              :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+              :data="desktableData.filter(data => !table_emailsearch || data.deskGuid.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+              stripe
+              height="700">
+        <el-table-column prop="UpdateTime" label="更新时间" sortable width="100px;">
+        </el-table-column>
+        <el-table-column prop="Mode" label="桌型号" fixed width="200px">
+        </el-table-column>
+        <el-table-column prop="Type" label="立柱名称">
+        </el-table-column>
+        <el-table-column prop="Level" label="立柱节数" width="300px;">
+        </el-table-column>
+        <el-table-column prop="Size_Out" label="外管尺寸" width="100px">
+        </el-table-column>
+        <el-table-column prop="Size_Middle" label="中管尺寸">
+        </el-table-column>
+        <el-table-column prop="Size_Inside" label="内管尺寸">
+        </el-table-column>
+        <el-table-column prop="StrokeLength" label="安装距">
+        </el-table-column>
+        <el-table-column prop="LowestPosition" label="最低点">
+        </el-table-column>
+        <el-table-column prop="HighestPosition" label="最高点">
+        </el-table-column>
+        <el-table-column prop="LoadCapacity" label="额定负载">
+        </el-table-column>
+        <el-table-column prop="MaxLoad" label="额定速度" width="300px;">
+        </el-table-column>
+        <el-table-column prop="Speed" label="隐藏">
+        </el-table-column>
+        <el-table-column prop="PowerType" label="驱动类型" width="200px">
+        </el-table-column>
+        <el-table-column prop="ColumnType" label="立柱型号">
+        </el-table-column>
+        <el-table-column prop="FootType" label="地脚型号">
+        </el-table-column>
+        <el-table-column prop="FrameType" label="框架类型" width="200px;">
+        </el-table-column>
+        <el-table-column prop="HandsetType" label="手控器类型" width="200px;">
+        </el-table-column>
+        <el-table-column prop="ControlboxType" label="控制器类型" width="200px;">
+        </el-table-column>
+        <el-table-column prop="Accessorys" label="配件类型" width="200px;">
+        </el-table-column>
+        <el-table-column prop="SideBracketType" label="侧板类型" width="200px;">
+        </el-table-column>
+        <el-table-column prop="T_Product_office_desk_Id" label="整桌表ID" width="200px;">
+        </el-table-column>
+        <el-table-column prop="deleteSign" label="禁用" width="200px;">
+        </el-table-column>
+        <el-table-column prop="select_ColorMode" label="选择的颜色" width="200px;">
+        </el-table-column>
+        <el-table-column prop="select_PowercableMode" label="电源线" width="200px;">
+        </el-table-column>
+        <el-table-column prop="frameWidth" label="框架保存宽度" width="200px;">
+        </el-table-column>
+        <el-table-column prop="frameHeight" label="框架保存高度" width="200px;">
+        </el-table-column>
+        <el-table-column prop="deskGuid" label="Guid" width="200px;">
+        </el-table-column>               
+    </el-table>
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page="currentPage4"
+                   :page-size="pagesize"
+                   layout="total, prev, pager, next, jumper"
+                   :total="desktableData.length"
+                   align="center">
+    </el-pagination>
+
+</div>
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var table = new Array();
+    var deskData = new Array();
+    function GetdeskInfo() {
+        //用 ajax 写
+        deskData.length = 0;
+        $.ajax(
+            {
+                url: "/JCManage/GetAllDeskDetailInfo",
+                method: 'get',
+                success: function (data) {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+                            UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            Mode: data[i].Mode,
+                            Type: data[i].Type,
+                            Level: data[i].Level,
+                            Size_Out: data[i].Size_Out,
+                            Size_Middle: data[i].Size_Middle ,
+                            Size_Inside: data[i].Size_Inside ,
+                            StrokeLength: data[i].StrokeLength ,
+                            LowestPosition: data[i].LowestPosition,
+                            HighestPosition: data[i].HighestPosition ,
+                            LoadCapacity: data[i].LoadCapacity ,
+                            MaxLoad: data[i].MaxLoad ,
+                            Speed: data[i].Speed ,
+                            PowerType: data[i].PowerType ,
+                            ColumnType: data[i].ColumnType ,
+                            FootType: data[i].FootType,
+                            FrameType: data[i].FrameType,
+                            HandsetType: data[i].HandsetType,
+                            ControlboxType: data[i].ControlboxType,
+                            Accessorys: data[i].Accessorys,
+                            SideBracketType: data[i].SideBracketType,
+                            T_Product_office_desk_Id: data[i].T_Product_office_desk_Id,
+                            deleteSign: data[i].deleteSign,
+                            select_ColorMode: data[i].select_ColorMode,
+                            select_PowercableMode: data[i].select_PowercableMode,
+                            frameWidth: data[i].frameWidth,
+                            frameHeight: data[i].frameHeight,
+                            deskGuid: data[i].deskGuid,
+                        };
+                        //this.tableData.push(q);
+                        deskData.push(q);
+
+                    }
+                    table = data;
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+    };
+    GetdeskInfo();
+    var Register = new Vue({
+        el: '#officedeskDeatil',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                desktableData: deskData,
+                currentPage4: 1,
+                pagesize: 9,
+                dialogVisible: false,
+                dialogdata: [],
+                certinfokey: false,
+                adddialogVisible: false,
+                addindexdialogVisible: false,
+                form: {
+                    UpdateTime: '',
+                    deskSerialName: '',
+                    deskType:'',
+                    deskImgUrl: '',
+                    deskSalesVolume: '',
+                    deskPrice: '',
+                    deskStabilityLeave:'',
+                    deskMaxLoad: '',
+                    deskNewProduct: '',
+                    deskJCRecommend: '',
+                    deskCreateByUser: '',
+                    verificationCode: '',
+                    deleteSign: '',
+                    deskGuid: '',
+                    deskTagKey: '',
+                    deskCustmoer: '',
+                    deskCustomerName: '',
+                },
+                addform: {
+                    deskSerialName: null,
+                    deskType: null,
+                    deskImgUrl: null,
+                    deskSalesVolume:0,
+                    deskPrice: 0,
+                    deskStabilityLeave: 0,
+                    deskMaxLoad: 0,
+                    deskNewProduct:false,
+                    deskJCRecommend: false,
+                    deskCreateByUser: null,
+                    deleteSign: 0,
+                    deskTagKey: 0,
+                    deskCustomerName: null,
+                    deskCustmoer: false,
+                    deskShortDescriptionKey: 0,
+                    deskNewProductNumber: 0,
+                    deskTag: "",
+                    deskShortDescription: null,
+                },
+                rules: {
+                    deskSerialName: [
+                        { required: true }
+                    ],
+                    deskType: [
+                        { required: true }
+                    ],
+                    deskCustomerName: [
+                        { required: true }
+                    ],
+
+                }
+            }
+        },
+        methods: {
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+            handleEdit(index, row) {
+                console.log(this.currentPage4);
+                console.log(this.pagesize);
+                var a = 0;
+                for (var i = 0; i < table.length; i++) {
+                    if (table[i].deskGuid ==row.deskGuid) {
+                        a = i;
+                    }
+                }
+                this.dialogdata = table[a];
+                console.log(this.dialogdata);
+                this.certinfokey = !this.certinfokey;
+                this.dialogVisible = true;
+            },
+            handleDelete(index, row) {
+                var a = 0;
+                for (var i = 0; i < table.length; i++) {
+                    if (table[i].deskGuid == row.deskGuid) {
+                        a = i;
+                    }
+                }
+                this.dialogdata = table[a];
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCManage/DeleteDeskInfo",
+                        params: {
+                            forminfo: JSON.stringify(this.form),
+                        }
+                    }).then(function (response) {
+                        this.isadd = response.body;
+                        if (this.isadd == true) {
+
+                            location.reload();
+                        }
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+                console.log(this.dialogdata);
+            },
+            onSubmit() {
+
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/UpdateDeskInfo",
+                    params: {
+                        forminfo: JSON.stringify(this.form),
+                    }
+                }).then(function (response) {
+                    this.isadd = response.body;
+                    console.log(this.form);
+                    console.log(JSON.stringify(this.form));
+                    console.log(response.body);
+                    if (this.isadd == true) {
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
+                })
+
+
+            },
+            addonSubmit(formname) {
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.$http({           //调用接口
+                            method: 'POST',
+                            url: "/JCManage/addDeskInfo",
+                            params: {
+                                forminfo: JSON.stringify(this.addform),
+                            }
+                        }).then(function (response) {
+                            this.isadd = response.body;
+                            console.log(this.addform);
+                            console.log(JSON.stringify(this.addform));
+                            console.log(response.body);
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                location.reload();
+                            }
+                        })
+                        console.log(this.addform);
+
+
+
+                    }
+                    else {
+                        this.$notify.error('缺少内容');
+
+                    }
+                })
+            },
+            addformshow() {
+                this.adddialogVisible = true;
+            },
+            addindexdialogshow() {
+                this.addindexdialogVisible = true;
+            }
+        },
+        watch: {
+            dialogdata() {
+                Object.assign(this.form, this.dialogdata);
+            },
+
+        }
+    })
+
+</script>
+

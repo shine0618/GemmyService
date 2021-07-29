@@ -605,7 +605,7 @@
                         this.setData(key, value);;
                     }
                 }
-                
+
 
             },
             getThisDesk: function (event) {
@@ -847,7 +847,7 @@
                 var context = canvas.getContext("2d");
                 context.scale(2, 2);
                 context.translate(-offsetLeft - abs, -offsetTop);
-                // 这里默认横向没有滚动条的情况，因为offset.left(),有无滚动条的时候存在差值，因此        
+                // 这里默认横向没有滚动条的情况，因为offset.left(),有无滚动条的时候存在差值，因此
                 // translate的时候，要把这个差值去掉
                 html2canvas(element, {background:'#FFF'}).then(function (canvas) {
                     var contentWidth = canvas.width;
@@ -881,7 +881,11 @@
                             }
                         }
                     }
-                    pdf.save('111.pdf');
+                    var d = new Date();
+                    var y = d.getFullYear();
+                    var m = d.getMonth();
+                    var day = d.getDay();
+                    pdf.save(y.toString() + m.toString() + day.toString() + '@ViewBag.productName');
                 })
             }
         }

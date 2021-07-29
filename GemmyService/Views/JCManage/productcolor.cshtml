@@ -1,0 +1,459 @@
+﻿
+@{
+    ViewBag.Title = "productcolor";
+}
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+
+<script src="/Scripts/vueAjax.js"></script>
+<style>
+    .el-dialog {
+        margin-top: 0vh !important;
+    }
+
+    .size-icon {
+        font-size: 30px;
+    }
+</style>
+<div id="productcolor">
+    <h1 style="text-align:center">颜色信息</h1>
+    <el-row>
+        <span>颜色名称</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+        <el-button @@click="addformshow" icon="el-icon-circle-plus-outline" align="right">新增</el-button>
+    </el-row>
+    <el-table :table="partcolortableData"
+              :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+              :data="partcolortableData.filter(data => !table_emailsearch || data.ColorName.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+              stripe
+              height="700"
+              style="width:100%">
+        @*<el-table-column prop="UpdateTime" label="更新时间" sortable>
+            </el-table-column>*@
+        <el-table-column prop="ColorName" label="颜色名称" fixed width="200px">
+        </el-table-column>
+        <el-table-column prop="ColorStandard" label="颜色标准">
+        </el-table-column>
+        <el-table-column prop="JCStandard" label="是否JC标准">
+        </el-table-column>
+        <el-table-column prop="RALStandard" label="是否RAL标准">
+        </el-table-column>
+        <el-table-column prop="Customization" label="是否定制">
+        </el-table-column>
+        <el-table-column prop="ColorNumber" label="颜色简称">
+        </el-table-column>
+        <el-table-column prop="Customers" label="定制者名称">
+        </el-table-column>
+        <el-table-column prop="RValueRGB" label="RGB的R值">
+        </el-table-column>
+        <el-table-column prop="GValueRGB" label="RGB的G值">
+        </el-table-column>
+        <el-table-column prop="BValueRGB" label="RGB的B值">
+        </el-table-column>
+        <el-table-column prop="HEXValue" label="十六进制数值">
+        </el-table-column>
+        <el-table-column prop="LValueLab" label="Lab的L值">
+        </el-table-column>
+        <el-table-column prop="AValueLab" label="Lab的A值">
+        </el-table-column>
+        <el-table-column prop="BValueLab" label="Lab的B值">
+        </el-table-column>
+        <el-table-column label="操作" width="160px">
+            <template slot-scope="scope">
+                <el-button size="mini"
+                           @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <el-button size="mini"
+                           type="danger"
+                           @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page="currentPage4"
+                   :page-size="pagesize"
+                   layout="total, prev, pager, next, jumper"
+                   :total="partcolortableData.length"
+                   align="center">
+    </el-pagination>
+    <el-dialog title="颜色信息"
+               :visible.sync="dialogVisible"
+               width="40%">
+        <el-form ref="form" :model="form" label-width="150px">
+            <el-form-item label="颜色名称">
+                <el-input v-model="form.ColorName" disabled style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="颜色标准">
+                <el-select v-model="form.ColorStandard">
+                    <el-option label="JC" value="JC"></el-option>
+                    <el-option label="RAL" value="RAL"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="是否JC标准">
+                <span>False</span>
+                <el-switch v-model="form.JCStandard"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否RAL标准">
+                <span>False</span>
+                <el-switch v-model="form.RALStandard"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否定制">
+                <span>False</span>
+                <el-switch v-model="form.Customization"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="颜色简称">
+                <el-input v-model="form.ColorNumber" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="定制者名称">
+                <el-input v-model="form.Customers" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="RGB的R值">
+                <el-input v-model="form.RValueRGB" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="RGB的G值">
+                <el-input v-model="form.GValueRGB" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="RGB的B值">
+                <el-input v-model="form.BValueRGB" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="十六进制数值">
+                <el-input v-model="form.HEXValue"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="Lab的L值">
+                <el-input v-model="form.LValueLab" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="Lab的A值">
+                <el-input v-model="form.AValueLab" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="Lab的B值">
+                <el-input v-model="form.BValueLab" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参数描述">
+                <el-input v-model="form.parametricTextIndex" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-button @@click="onSubmit">更新</el-button>
+        </el-form>
+    </el-dialog>
+    <el-dialog title="颜色信息"
+               :visible.sync="adddialogVisible"
+               width="40%">
+        <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
+            <el-form-item label="颜色名称" prop="ColorName">
+            <el-input v-model="addform.ColorName" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="颜色标准">
+                <el-select v-model="addform.ColorStandard">
+                    <el-option label="JC" value="JC"></el-option>
+                    <el-option label="RAL" value="RAL"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="是否JC标准">
+                <span>False</span>
+                <el-switch v-model="addform.JCStandard"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否RAL标准">
+                <span>False</span>
+                <el-switch v-model="addform.RALStandard"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否定制">
+                <span>False</span>
+                <el-switch v-model="addform.Customization"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="颜色简称">
+                <el-input v-model="addform.ColorNumber" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="定制者名称">
+                <el-input v-model="addform.Customers" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="RGB的R值" prop="RValueRGB">
+                <el-input v-model="addform.RValueRGB" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="RGB的G值" prop="GValueRGB">
+                <el-input v-model="addform.GValueRGB" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="RGB的B值" prop="BValueRGB"> 
+                <el-input v-model="addform.BValueRGB" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="十六进制数值">
+                <el-input v-model="addform.HEXValue" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="Lab的L值" prop="LValueLab">
+                <el-input v-model="addform.LValueLab" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="Lab的A值" prop="AValueLab">
+                <el-input v-model="addform.AValueLab" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="Lab的B值" prop="BValueLab">
+                <el-input v-model="addform.BValueLab" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参数描述" prop="parametricTextIndex">
+                <el-input v-model="addform.parametricTextIndex" style="width:60%;"></el-input>
+            </el-form-item>
+        </el-form> 
+        <el-button @@click="addonSubmit('addform')">新增</el-button>
+    </el-dialog>
+</div>
+
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var table = new Array();
+    var partcolortable = new Array();
+    function GetPartcolorInfo() {
+        //用 ajax 写
+        partcolortable.length = 0;
+        $.ajax(
+            {
+                url: "/JCManage/GetAllPartColorInfo",
+                method: 'get',
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+                            //UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            ColorName: data[i].ColorName,
+                            ColorStandard: data[i].ColorStandard,
+                            JCStandard: data[i].JCStandard == true ? "True" : "False",
+                            RALStandard: data[i].RALStandard == true ? "True" : "False",
+                            Customization: data[i].Customization == true ? "True" : "False",
+                            ColorNumber: data[i].ColorNumber,
+                            Customers: data[i].Customers,
+                            RValueRGB: data[i].RValueRGB,
+                            GValueRGB: data[i].GValueRGB,
+                            BValueRGB: data[i].BValueRGB,
+                            HEXValue: data[i].HEXValue,
+                            LValueLab: data[i].LValueLab,
+                            AValueLab: data[i].AValueLab,
+                            BValueLab: data[i].BValueLab,
+                        };
+                        //this.tableData.push(q);
+                        partcolortable.push(q);
+                    }
+                    table = data;
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+    };
+    GetPartcolorInfo();
+    var Register = new Vue({
+        el: '#productcolor',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                partcolortableData: partcolortable,
+                currentPage4: 1,
+                pagesize: 12,
+                dialogVisible: false,
+                dialogdata: [],
+                certinfokey: false,
+                adddialogVisible: false,
+                addindexdialogVisible: false,
+                form: {
+                    ColorName: '',
+                    ColorStandard: '',
+                    JCStandard: '',
+                    RALStandard: '',
+                    Customization: '',
+                    ColorNumber: '',
+                    Customers: '',
+                    RValueRGB: '',
+                    GValueRGB: '',
+                    BValueRGB: '',
+                    HEXValue: '',
+                    LValueLab: '',
+                    AValueLab: '',
+                    BValueLab: '',
+                    parametricTextIndex: '',                   
+                },
+                addform: {
+                    ColorName: null,
+                    ColorStandard: null,
+                    JCStandard: false,
+                    RALStandard: false,
+                    Customization: false,
+                    ColorNumber: null,
+                    Customers: null,
+                    RValueRGB: null,
+                    GValueRGB: null,
+                    BValueRGB: null,
+                    HEXValue: null,
+                    LValueLab: null,
+                    AValueLab: null,
+                    BValueLab: null,
+                    parametricTextIndex: null,     
+                },
+                rules: {
+                    ColorName: [
+                        { required: true }
+                    ],
+                    RValueRGB: [
+                        { required: true }
+                    ],
+                    GValueRGB: [
+                        { required: true }
+                    ],
+                    BValueRGB: [
+                        { required: true }
+                    ],
+                    LValueLab: [
+                        { required: true }
+                    ],
+                    AValueLab: [
+                        { required: true }
+                    ],
+                    BValueLab: [
+                        { required: true }
+                    ],
+                    parametricTextIndex: [
+                        { required: true }
+                    ],
+                }
+            }
+        },
+        methods: {
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+            handleEdit(index, row) {
+                console.log(this.currentPage4);
+                console.log(this.pagesize);
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+                console.log(this.dialogdata);
+                this.certinfokey = !this.certinfokey;
+                this.dialogVisible = true;
+            },
+            handleDelete(index, row) {
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCManage/DeleteColorInfo",
+                        params: {
+                            forminfo: JSON.stringify(this.form),
+                        }
+                    }).then(function (response) {
+                        this.isadd = response.body;
+                        if (this.isadd == true) {
+
+                            location.reload();
+                        }
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+                console.log(this.dialogdata);
+            },
+            onSubmit() {
+
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/UpdateColorInfo",
+                    params: {
+                        forminfo: JSON.stringify(this.form),
+                    }
+                }).then(function (response) {
+                    this.isadd = response.body;
+                    console.log(this.form);
+                    console.log(JSON.stringify(this.form));
+                    console.log(response.body);
+                    if (this.isadd == true) {
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
+                })
+
+
+            },
+            addonSubmit(formname) {
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.$http({           //调用接口
+                            method: 'POST',
+                            url: "/JCManage/addColorInfo",
+                            params: {
+                                forminfo: JSON.stringify(this.addform),
+                            }
+                        }).then(function (response) {
+                            this.isadd = response.body;
+                            console.log(this.addform);
+                            console.log(JSON.stringify(this.addform));
+                            console.log(response.body);
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                location.reload();
+                            }
+                        })
+                        console.log(this.addform);
+
+
+
+                    }
+                    else {
+                        this.$notify.error('缺少内容');
+
+                    }
+                })
+            },
+            addformshow() {
+                this.adddialogVisible = true;
+            },
+            addindexdialogshow() {
+                this.addindexdialogVisible = true;
+            }
+        },
+        watch: {
+            dialogdata() {
+                Object.assign(this.form, this.dialogdata);
+            },
+
+        }
+    })
+
+</script>

@@ -66,7 +66,7 @@ namespace _1GemmyModel.Model.ModelProductOffice
         public double deskStabilityLeave { get; set; }
 
         /// <summary>
-        /// 负责指数
+        /// 负载指数
         /// </summary>
         public double deskMaxLoad { get; set; }
 

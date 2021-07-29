@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "userCompanyInfo";
+}
+
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+
+<template id="userCompany">
+    <div>
+        <h1 style="text-align:center">用户个人&公司信息</h1>
+        <span>电子邮箱</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+        <el-table :table="companytableData"
+                  :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+                  :data="companytableData.filter(data => !table_emailsearch || data.Email.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+                  height="624">
+            <el-table-column prop="UpdateTime" label="更新时间" sortable>
+            </el-table-column>
+            <el-table-column prop="Email" label="电子邮箱">
+            </el-table-column>
+            <el-table-column prop="Name" label="姓名">
+            </el-table-column>
+            <el-table-column prop="Sex" label="性别">
+            </el-table-column>
+            <el-table-column prop="Telephone" label="电话">
+            </el-table-column>
+            <el-table-column prop="CompanyName" label="公司名称">
+            </el-table-column>
+            <el-table-column prop="CompanyStreet" label="公司街道">
+            </el-table-column>
+            <el-table-column prop="CompanyLocation" label="公司地址">
+            </el-table-column>
+            <el-table-column prop="CompanyNation" label="公司国家(地区)">
+            </el-table-column>
+            <el-table-column prop="CompanyWebsite" label="公司官网">
+            </el-table-column>
+        </el-table>
+        <el-pagination @@current-change="handleCurrentChange"
+                       :current-page="currentPage4"
+                       :page-size="pagesize"
+                       layout="total, prev, pager, next, jumper"
+                       :total="companytableData.length"
+                       align="center">
+        </el-pagination>
+    </div>
+</template>
+
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var companytable = new Array();
+    function GetUserCompanyInfo() {
+        //用 ajax 写
+
+        $.ajax(
+            {
+                url: "/JCManage/GetAllUserCompanyInfo",
+                method: 'get',
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+
+                            UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            Email: data[i].Email,
+                            Name: data[i].Name,
+                            Sex: data[i].Sex,
+                            Telephone: data[i].Telephone,
+                            CompanyName: data[i].CompanyName,
+                            CompanyStreet: data[i].CompanyStreet,
+                            CompanyLocation: data[i].CompanyLocation,
+                            CompanyNation: data[i].CompanyNation,
+                            CompanyWebsite: data[i].CompanyWebsite,
+                        };
+                        //this.tableData.push(q);
+                        companytable.push(q);
+                    }
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+    };
+    GetUserCompanyInfo();
+    var Register = new Vue({
+        el: '#userCompany',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                companytableData: companytable,
+                currentPage4: 1,
+                pagesize: 13
+            }
+        },
+        methods: {
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+        }
+    })
+
+</script>

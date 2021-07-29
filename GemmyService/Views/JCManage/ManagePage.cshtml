@@ -4,9 +4,12 @@
 }
 
 <style>
+    #asas {
+        height: 860px;
+    }
     #shjahs {
-        width: 1600px;
-        height: 800px;
+        width: 100%;
+        height: 860px;
     }
 
     .menuleft {
@@ -31,8 +34,12 @@
         color: #fff
     }
 
-
-
+    .el-main{
+        padding:0px;
+    }
+    .el-menu {
+        border-right: solid 0px #e6e6e6;
+    }
 </style>
 
 <div id="ManageTool">
@@ -62,9 +69,9 @@
                             <template slot="title">
                                 用户信息
                             </template>
-                            <router-link to="/userRegister"> <el-menu-item index="1-1">注册情况</el-menu-item></router-link>
-                            <router-link to="/userCompany"><el-menu-item index="1-2">用户信息</el-menu-item></router-link>
-                            <el-menu-item index="/test1" @@click="goTo('/test1')">用户权限</el-menu-item>
+                             <el-menu-item index="1-1" @@click="goTo('../JCManage/userRegisterInfo')">注册情况</el-menu-item>
+                            <el-menu-item index="1-2" @@click="goTo('../JCManage/userCompanyInfo')">用户信息</el-menu-item>
+                            <el-menu-item index="/test1" @@click="goTo('../JCManage/partColumn')">用户权限</el-menu-item>
                         </el-submenu>
                     </el-submenu>
                     <el-submenu index="2">
@@ -75,26 +82,28 @@
                             <template slot="title">
                                 部件信息
                             </template>
-                            <router-link to="/partColumn"><el-menu-item index="2-1-1">立柱</el-menu-item></router-link>
-                            <router-link to="/partFoot"><el-menu-item index="2-1-2">地脚</el-menu-item></router-link>
-                            <router-link to="/partFrame"><el-menu-item index="2-1-3">框架</el-menu-item></router-link>
-                            <el-menu-item index="2-1-4">侧板</el-menu-item>
-                            <el-menu-item index="2-1-5">控制器</el-menu-item>
-                            <el-menu-item index="2-1-6">手控器</el-menu-item>
+                            <el-menu-item index="2-1-1" @@click="goTo('../JCManage/partColumn')">立柱</el-menu-item>
+                            <el-menu-item index="2-1-2" @@click="goTo('../JCManage/partFoot')">地脚</el-menu-item>
+                            <el-menu-item index="2-1-3" @@click="goTo('../JCManage/partFrame')">框架</el-menu-item>
+                            <el-menu-item index="2-1-4" @@click="goTo('../JCManage/partSidebracket')">侧板</el-menu-item>
+                            <el-menu-item index="2-1-5" @@click="goTo('../JCManage/partControlbox')">控制器</el-menu-item>
+                            <el-menu-item index="2-1-6" @@click="goTo('../JCManage/partHandset')">手控器</el-menu-item>
+                            <el-menu-item index="2-1-7" @@click="goTo('../JCManage/productDescDetail?textkey=0')">部件描述</el-menu-item>
                         </el-submenu>
                         <el-submenu index="22">
                             <template slot="title">
                                 整桌信息
                             </template>
-                            <el-menu-item index="2-2-1">整桌方案</el-menu-item>
-                            <el-menu-item index="3-2-2">添加方案</el-menu-item>
+                            <el-menu-item index="2-2-1" @@click="goTo('../JCManage/productByJiecang')">整桌方案</el-menu-item>
+                            <el-menu-item index="2-2-2" @@click="goTo('../JCManage/productByUser')">自定义方案</el-menu-item>
+                            <el-menu-item index="2-2-3" @@click="goTo('../JCManage/productDeskDetail')">方案详情</el-menu-item>
                         </el-submenu>
                         <el-submenu index="23">
                             <template slot="title">
                                 配件及颜色
                             </template>
-                            <el-menu-item index="2-3-1">电源线</el-menu-item>
-                            <el-menu-item index="2-3-2">颜色</el-menu-item>
+                            <el-menu-item index="2-3-1" @@click="goTo('../JCManage/partPowerCable')">电源线</el-menu-item>
+                            <el-menu-item index="2-3-2" @@click="goTo('../JCManage/productcolor')">颜色</el-menu-item>
                         </el-submenu>
                     </el-submenu>
                     <el-submenu index="3">
@@ -105,701 +114,33 @@
                             <template slot="title">
                                 文件信息
                             </template>
-                            <el-menu-item index="3-1">文件信息</el-menu-item>
+                            <el-menu-item index="3-1" @@click="goTo('../JCManage/filesDetail')">文件信息</el-menu-item>
+                            <el-menu-item index="3-2" @@click="goTo('../JCOfficeManager/Index')">文件上传</el-menu-item>
                         </el-submenu>
                     </el-submenu>
                 </el-menu>
             </el-aside>
-
             <el-container>
-                <el-header style="text-align: right; font-size: 14px;">
-                    <el-breadcrumb separator-class="el-icon-arrow-right" style="font-size:20px;line-height:3">
-                        <el-breadcrumb-item>首页</el-breadcrumb-item>
-                        <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-                        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-                        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
-                    </el-breadcrumb>
-                </el-header>
-
-                <el-main><router-view></router-view></el-main>
-
-                @*<div id="iDisplayBox"></div>*@
-                @*<el-main>
-                        <el-table :data="tableData">
-                            <el-table-column prop="date" label="日期" width="140">
-                            </el-table-column>
-                            <el-table-column prop="name" label="姓名" width="120">
-                            </el-table-column>
-                            <el-table-column prop="address" label="地址">
-                            </el-table-column>
-                        </el-table>
-                    </el-main>*@
+                <el-main>
+                <div id="asas">
+                </div>
+                </el-main>
             </el-container>
         </el-container>
-
     </section>
-
-
 </div>
-
-
-
-<template id="userRegister">
-    <div>
-        <h1 style="text-align:center">用户注册情况</h1>
-        <el-table :table="tableData"
-                  :default-sort="{prop: 'UpdateTime', order: 'descending'}"
-                  :data="tableData.filter(data => !table_emailsearch || data.Email.toLowerCase().includes(table_emailsearch.toLowerCase()))"
-                  height="624">
-            <el-table-column prop="UpdateTime" label="更新时间" sortable>
-            </el-table-column>
-            <el-table-column prop="Email" label="电子邮箱">
-            </el-table-column>
-            <el-table-column prop="FirstName" label="名">
-            </el-table-column>
-            <el-table-column prop="LastName" label="姓">
-            </el-table-column>
-            <el-table-column prop="Lock" label="是否锁定">
-            </el-table-column>
-            <el-table-column align="right">
-                <template slot="header" slot-scope="scope">
-                    <el-row>
-                        <el-input v-model="table_emailsearch"
-                                  size="mini" width="100px" placeholder="请输入电子邮箱查找" />
-                    </el-row>
-                </template>
-            </el-table-column>
-        </el-table>
-    </div>
-</template>
-
-
-
-
-<template id="userCompany">
-    <div>
-        <h1 style="text-align:center">用户个人&公司信息</h1>
-        <span>电子邮箱</span>
-        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
-        <el-table :table="companytableData"
-                  :default-sort="{prop: 'UpdateTime', order: 'descending'}"
-                  :data="companytableData.filter(data => !table_emailsearch || data.Email.toLowerCase().includes(table_emailsearch.toLowerCase()))"
-                  height="624">
-            <el-table-column prop="UpdateTime" label="更新时间" sortable>
-            </el-table-column>
-            <el-table-column prop="Email" label="电子邮箱">
-            </el-table-column>
-            <el-table-column prop="Name" label="姓名">
-            </el-table-column>
-            <el-table-column prop="Sex" label="性别">
-            </el-table-column>
-            <el-table-column prop="Telephone" label="电话">
-            </el-table-column>
-            <el-table-column prop="CompanyName" label="公司名称">
-            </el-table-column>
-            <el-table-column prop="CompanyStreet" label="公司街道">
-            </el-table-column>
-            <el-table-column prop="CompanyLocation" label="公司地址">
-            </el-table-column>
-            <el-table-column prop="CompanyNation" label="公司国家(地区)">
-            </el-table-column>
-            <el-table-column prop="CompanyWebsite" label="公司官网">
-            </el-table-column>
-        </el-table>
-    </div>
-</template>
-
-
-
-<template id="partColumn">
-    <div>
-        <h1 style="text-align:center">立柱信息</h1>
-        <span>立柱型号</span>
-        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
-        <el-table :table="partcolumntableData"
-                  :default-sort="{prop: 'UpdateTime', order: 'descending'}"
-                  :data="partcolumntableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase()))"
-                  stripe
-                  height="624">
-            @*<el-table-column prop="UpdateTime" label="更新时间" sortable>
-        </el-table-column>*@
-            <el-table-column prop="Mode" label="型号" fixed width="200px">
-            </el-table-column>
-            <el-table-column prop="Type" label="安装方式">
-            </el-table-column>
-            <el-table-column prop="Level" label="节数">
-            </el-table-column>
-            <el-table-column prop="Form" label="形状" width="100px">
-            </el-table-column>
-            <el-table-column prop="Size_Out" label="外管">
-            </el-table-column>
-            <el-table-column prop="Size_Middle" label="中管">
-            </el-table-column>
-            <el-table-column prop="Size_Inside" label="内管">
-            </el-table-column>
-            <el-table-column prop="StrokeLength" label="行程">
-            </el-table-column>
-            <el-table-column prop="MaxStroke" label="最大行程">
-            </el-table-column>
-            <el-table-column prop="LowestPosition" label="安装距">
-            </el-table-column>
-            <el-table-column prop="HighestPosition" label="最高高度">
-            </el-table-column>
-            <el-table-column prop="LoadCapacity" label="负载">
-            </el-table-column>
-            <el-table-column prop="MaxLoad" label="最大负载">
-            </el-table-column>
-            <el-table-column prop="Speed" label="速度">
-            </el-table-column>
-            <el-table-column prop="MaxSpeed" label="最大速度">
-            </el-table-column>
-            <el-table-column prop="Power" label="功率">
-            </el-table-column>
-            <el-table-column prop="StabilityLeave" label="稳定性">
-            </el-table-column>
-            <el-table-column prop="MotorCode" label="电机代码">
-            </el-table-column>
-            <el-table-column prop="HaveMotor" label="是否有电机">
-            </el-table-column>
-            <el-table-column prop="Inline" label="是否用于直筒">
-            </el-table-column>
-            <el-table-column prop="InsideSlider" label="是否内磨">
-            </el-table-column>
-            <el-table-column prop="SingleMotor" label="是否适用单电机">
-            </el-table-column>
-            <el-table-column prop="HandCranking" label="是否适用手摇">
-            </el-table-column>
-            <el-table-column prop="GasSpring" label="是否适用气动">
-            </el-table-column>
-            <el-table-column prop="CanEZ" label="可否易安装">
-            </el-table-column>
-            <el-table-column prop="CanFold" label="可否折叠桌">
-            </el-table-column>
-            <el-table-column prop="CanTurn" label="可否翻转桌">
-            </el-table-column>
-            <el-table-column prop="GS" label="GS">
-            </el-table-column>
-            <el-table-column prop="EN527" label="EN527">
-            </el-table-column>
-            <el-table-column prop="CE" label="CE">
-            </el-table-column>
-            <el-table-column prop="EMC" label="EMC">
-            </el-table-column>
-            <el-table-column prop="BIFMA" label="BIFMA">
-            </el-table-column>
-            <el-table-column prop="UL962" label="UL962">
-            </el-table-column>
-            <el-table-column prop="ColumnWithFoot" label="和地脚连接" width="200px">
-            </el-table-column>
-            <el-table-column prop="ColumnWithFrame" label="和框架连接" width="200px">
-            </el-table-column>
-            <el-table-column prop="UseTO" label="可否用于TO">
-            </el-table-column>
-            <el-table-column prop="UseTS" label="可否用于TS">
-            </el-table-column>
-            <el-table-column prop="UseTT" label="可否用于TT">
-            </el-table-column>
-            <el-table-column prop="UseTF" label="可否用于TF">
-            </el-table-column>
-            <el-table-column prop="UseBench" label="可否用于组合桌">
-            </el-table-column>
-            <el-table-column label="操作" width="160px">
-                <template slot-scope="scope">
-                    <el-button size="mini"
-                               @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button size="mini"
-                               type="danger"
-                               @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <el-pagination 
-                       layout="total"
-                       :total="partcolumntableData.length"
-                       align="center">
-        </el-pagination>
-
-    </div>
-</template>
-
-
-<template id="partFoot">
-    <div>
-        <h1 style="text-align:center">地脚信息</h1>
-        <span>地脚型号</span>
-        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
-        <el-table :table="partfoottableData"
-                  :default-sort="{prop: 'UpdateTime', order: 'descending'}"
-                  :data="partfoottableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase()))"
-                  stripe
-                   height="624"
-                  style="width:100%">
-            @*<el-table-column prop="UpdateTime" label="更新时间" sortable>
-                </el-table-column>*@
-            <el-table-column prop="Mode" label="型号" fixed width="200px">
-            </el-table-column>
-            <el-table-column prop="MaxLength" label="最大长度">
-            </el-table-column>
-            <el-table-column prop="MinLength" label="最小长度">
-            </el-table-column>
-            <el-table-column prop="StabilityLeave" label="稳定性" width="100px">
-            </el-table-column>
-            <el-table-column prop="CanEZ" label="是否能易安装">
-            </el-table-column>
-            <el-table-column prop="CanFold" label="是否能折叠">
-            </el-table-column>
-            <el-table-column prop="CanTurn" label="是否能翻转">
-            </el-table-column>
-            <el-table-column prop="Inline" label="是否适配直筒">
-            </el-table-column>
-            <el-table-column prop="InsideSlider" label="是否内磨">
-            </el-table-column>
-            <el-table-column prop="DoubleMotor" label="可否用于双电机">
-            </el-table-column>
-            <el-table-column prop="HandCranking" label="可否用于手摇">
-            </el-table-column>
-            <el-table-column prop="GasSpring" label="可否用于气动">
-            </el-table-column>
-            <el-table-column prop="SingleMotor" label="可否用于单电机">
-            </el-table-column>
-            <el-table-column prop="PartCode" label="物料代码">
-            </el-table-column>
-            <el-table-column prop="Weight" label="重量">
-            </el-table-column>            
-            <el-table-column prop="GS" label="GS">
-            </el-table-column>
-            <el-table-column prop="EN527" label="EN527">
-            </el-table-column>
-            <el-table-column prop="CE" label="CE">
-            </el-table-column>
-            <el-table-column prop="EMC" label="EMC">
-            </el-table-column>
-            <el-table-column prop="BIFMA" label="BIFMA">
-            </el-table-column>
-            <el-table-column prop="UL962" label="UL962">
-            </el-table-column>
-            <el-table-column prop="FootWithColumn" label="和立柱连接" width="200px">
-            </el-table-column>
-            <el-table-column prop="UseTO" label="可否用于TO">
-            </el-table-column>
-            <el-table-column prop="UseTS" label="可否用于TS">
-            </el-table-column>
-            <el-table-column prop="UseTT" label="可否用于TT">
-            </el-table-column>
-            <el-table-column prop="UseTF" label="可否用于TF">
-            </el-table-column>
-            <el-table-column prop="UseBench" label="可否用于组合桌">
-            </el-table-column>
-            <el-table-column label="操作" width="160px">
-                <template slot-scope="scope">
-                    <el-button size="mini"
-                               @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button size="mini"
-                               type="danger"
-                               @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <el-pagination layout="total"
-                       :total="partfoottableData.length"
-                       align="center">
-        </el-pagination>
-
-    </div>
-</template>
-
-<template id="partFrame">
-    <div>
-        <h1 style="text-align:center">框架信息</h1>
-        <span>框架型号</span>
-        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
-        <el-table :table="partframetableData"
-                  :default-sort="{prop: 'UpdateTime', order: 'descending'}"
-                  :data="partframetableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase()))"
-                  stripe
-                  height="624"
-                  style="width:100%">
-            @*<el-table-column prop="UpdateTime" label="更新时间" sortable>
-        </el-table-column>*@
-            <el-table-column prop="Mode" label="型号" fixed width="200px">
-            </el-table-column>
-            <el-table-column prop="MaxLength" label="最大长度">
-            </el-table-column>
-            <el-table-column prop="MinLength" label="最小长度">
-            </el-table-column>
-            <el-table-column prop="StabilityLeave" label="稳定性" width="100px">
-            </el-table-column>
-            <el-table-column prop="CanEZ" label="是否能易安装">
-            </el-table-column>
-            <el-table-column prop="CanFold" label="是否能折叠">
-            </el-table-column>
-            <el-table-column prop="CanTurn" label="是否能翻转">
-            </el-table-column>
-            <el-table-column prop="Inline" label="是否适配直筒">
-            </el-table-column>
-            <el-table-column prop="InsideSlider" label="是否内磨">
-            </el-table-column>
-            <el-table-column prop="DoubleMotor" label="可否用于双电机">
-            </el-table-column>
-            <el-table-column prop="HandCranking" label="可否用于手摇">
-            </el-table-column>
-            <el-table-column prop="GasSpring" label="可否用于气动">
-            </el-table-column>
-            <el-table-column prop="SingleMotor" label="可否用于单电机">
-            </el-table-column>
-            <el-table-column prop="PartCode" label="物料代码">
-            </el-table-column>
-            <el-table-column prop="Weight" label="重量">
-            </el-table-column>
-            <el-table-column prop="GS" label="GS">
-            </el-table-column>
-            <el-table-column prop="EN527" label="EN527">
-            </el-table-column>
-            <el-table-column prop="CE" label="CE">
-            </el-table-column>
-            <el-table-column prop="EMC" label="EMC">
-            </el-table-column>
-            <el-table-column prop="BIFMA" label="BIFMA">
-            </el-table-column>
-            <el-table-column prop="UL962" label="UL962">
-            </el-table-column>
-            <el-table-column prop="FrameWithColumn" label="和立柱连接" width="200px">
-            </el-table-column>
-            <el-table-column prop="FrameWithSideBracket" label="和立柱连接" width="200px">
-            </el-table-column>
-            <el-table-column prop="UseTO" label="可否用于TO">
-            </el-table-column>
-            <el-table-column prop="UseTS" label="可否用于TS">
-            </el-table-column>
-            <el-table-column prop="UseTT" label="可否用于TT">
-            </el-table-column>
-            <el-table-column prop="UseTF" label="可否用于TF">
-            </el-table-column>
-            <el-table-column prop="UseBench" label="可否用于组合桌">
-            </el-table-column>
-            <el-table-column label="操作" width="160px">
-                <template slot-scope="scope">
-                    <el-button size="mini"
-                               @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button size="mini"
-                               type="danger"
-                               @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <el-pagination layout="total"
-                       :total="partframetableData.length"
-                       align="center">
-        </el-pagination>
-
-    </div>
-</template>
-
 
 
 
 <script>
     $(function () {
         $('.bottom-footer').hide();
-
     })
 </script>
 <script>
-    var UserData = new Array();
-    function GetUserInfo() {
-        //用 ajax 写
-        UserData.length = 0;
-        $.ajax(
-            {
-                url: "/JCManage/GetAllUserInfo",
-                method: 'get',
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var q = {
-                            UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
-                            Email: data[i].Email,
-                            FirstName: data[i].FirstName,
-                            LastName: data[i].LastName,
-                            Lock: data[i].Lock == true ? "True" : "False"
-                        };
-                        //this.tableData.push(q);
-                        UserData.push(q);
-                    }
-                },
-                error: function (err) {
-                    alert(err);
-                }
-
-            });
-    };
-    var companytable = new Array();
-    function GetUserCompanyInfo() {
-        //用 ajax 写
-        UserData.length = 0;
-        $.ajax(
-            {
-                url: "/JCManage/GetAllUserCompanyInfo",
-                method: 'get',
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var q = {
-
-                            UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
-                            Email: data[i].Email,
-                            Name: data[i].Name,
-                            Sex: data[i].Sex,
-                            Telephone: data[i].Telephone,
-                            CompanyName: data[i].CompanyName,
-                            CompanyStreet: data[i].CompanyStreet,
-                            CompanyLocation: data[i].CompanyLocation,
-                            CompanyNation: data[i].CompanyNation,
-                            CompanyWebsite: data[i].CompanyWebsite,
-                        };
-                        //this.tableData.push(q);
-                        companytable.push(q);
-                    }
-                },
-                error: function (err) {
-                    alert(err);
-                }
-            });
-    };
-    var partcolumntable = new Array();
-    function GetPartColumnInfo() {
-        //用 ajax 写
-        partcolumntable.length = 0;
-        $.ajax(
-            {
-                url: "/JCManage/GetAllPartColumnInfo",
-                method: 'get',
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var q = {
-                            //UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
-                            Mode: data[i].Mode,                          
-                            Type: data[i].Type,                           
-                            Level: data[i].Level,                            
-                            Form: data[i].Form,
-                            Size_Out: data[i].Size_Out,                         
-                            Size_Middle: data[i].Size_Middle,                          
-                            Size_Inside: data[i].Size_Inside,                            
-                            StrokeLength: data[i].StrokeLength,                           
-                            MaxStroke: data[i].MaxStroke,                           
-                            LowestPosition: data[i].LowestPosition,                           
-                            HighestPosition: data[i].HighestPosition,                           
-                            LoadCapacity: data[i].LoadCapacity,                           
-                            MaxLoad: data[i].MaxLoad,                           
-                            Speed: data[i].Speed,                           
-                            MaxSpeed: data[i].MaxSpeed,                           
-                            Power: data[i].Power,                           
-                            StabilityLeave: data[i].StabilityLeave,                           
-                            MotorCode: data[i].MotorCode,                           
-                            HaveMotor: data[i].HaveMotor,
-                            Inline: data[i].Inline == true?"True":"False",                           
-                            InsideSlider: data[i].InsideSlider == true ? "True" : "False",                            
-                            SingleMotor: data[i].SingleMotor == true ? "True" : "False",                           
-                            HandCranking: data[i].HandCranking == true ? "True" : "False",                          
-                            GasSpring: data[i].GasSpring == true ? "True" : "False",                           
-                            CanEZ: data[i].CanEZ == true ? "True" : "False",                          
-                            CanFold: data[i].CanFold == true ? "True" : "False",                           
-                            CanTurn: data[i].CanTurn == true ? "True" : "False",                   
-                            GS: data[i].GS == true ? "True" : "False",                         
-                            EN527: data[i].EN527 == true ? "True" : "False",                          
-                            CE: data[i].CE == true ? "True" : "False",                            
-                            EMC: data[i].EMC == true ? "True" : "False",                           
-                            BIFMA: data[i].BIFMA == true ? "True" : "False",                            
-                            UL962: data[i].UL962 == true ? "True" : "False",                           
-                            ColumnWithFoot: data[i].ColumnWithFoot,                            
-                            ColumnWithFrame: data[i].ColumnWithFrame,                            
-                            UseTO: data[i].UseTO == true ? "True" : "False",                            
-                            UseTS: data[i].UseTS == true ? "True" : "False",
-                            UseTT: data[i].UseTT == true ? "True" : "False", 
-                            UseTF: data[i].UseTF == true ? "True" : "False",                           
-                            UseBench: data[i].UseBench == true ? "True" : "False",
-                        };
-                        //this.tableData.push(q);
-                        partcolumntable.push(q);
-                    }
-                },
-                error: function (err) {
-                    alert(err);
-                }
-            });
-    };
-    var partfoottable = new Array();
-    function GetPartFootInfo() {
-        //用 ajax 写
-        partfoottable.length = 0;
-        $.ajax(
-            {
-                url: "/JCManage/GetAllPartFootInfo",
-                method: 'get',
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var q = {
-                            //UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
-                            Mode: data[i].Mode,
-                            MaxLength: data[i].MaxLength,
-                            MinLength: data[i].MinLength,                            
-                            StabilityLeave: data[i].StabilityLeave,
-                            Inline: data[i].Inline == true ? "True" : "False",
-                            InsideSlider: data[i].InsideSlider == true ? "True" : "False",
-                            DoubleMotor: data[i].DoubleMotor == true ? "True" : "False",
-                            SingleMotor: data[i].SingleMotor == true ? "True" : "False",
-                            HandCranking: data[i].HandCranking == true ? "True" : "False",
-                            GasSpring: data[i].GasSpring == true ? "True" : "False",
-                            CanEZ: data[i].CanEZ == true ? "True" : "False",
-                            CanFold: data[i].CanFold == true ? "True" : "False",
-                            CanTurn: data[i].CanTurn == true ? "True" : "False",
-                            GS: data[i].GS == true ? "True" : "False",
-                            EN527: data[i].EN527 == true ? "True" : "False",
-                            CE: data[i].CE == true ? "True" : "False",
-                            EMC: data[i].EMC == true ? "True" : "False",
-                            BIFMA: data[i].BIFMA == true ? "True" : "False",
-                            UL962: data[i].UL962 == true ? "True" : "False",
-                            FootWithColumn: data[i].FootWithColumn,
-                            UseTO: data[i].UseTO == true ? "True" : "False",
-                            UseTS: data[i].UseTS == true ? "True" : "False",
-                            UseTT: data[i].UseTT == true ? "True" : "False",
-                            UseTF: data[i].UseTF == true ? "True" : "False",
-                            UseBench: data[i].UseBench == true ? "True" : "False",
-                            PartCode: data[i].PartCode,
-                            Weight: data[i].Weight,
-
-                        };
-                        //this.tableData.push(q);
-                        partfoottable.push(q);
-                    }
-                },
-                error: function (err) {
-                    alert(err);
-                }
-            });
-    };
-    var partframetable = new Array();
-    function GetPartFrameInfo() {
-        //用 ajax 写
-        partframetable.length = 0;
-        $.ajax(
-            {
-                url: "/JCManage/GetAllPartFrameInfo",
-                method: 'get',
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var q = {
-                            //UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
-                            Mode: data[i].Mode,
-                            MaxLength: data[i].MaxLength,
-                            MinLength: data[i].MinLength,
-                            StabilityLeave: data[i].StabilityLeave,
-                            Inline: data[i].Inline == true ? "True" : "False",
-                            InsideSlider: data[i].InsideSlider == true ? "True" : "False",
-                            DoubleMotor: data[i].DoubleMotor == true ? "True" : "False",
-                            SingleMotor: data[i].SingleMotor == true ? "True" : "False",
-                            HandCranking: data[i].HandCranking == true ? "True" : "False",
-                            GasSpring: data[i].GasSpring == true ? "True" : "False",
-                            CanEZ: data[i].CanEZ == true ? "True" : "False",
-                            CanFold: data[i].CanFold == true ? "True" : "False",
-                            CanTurn: data[i].CanTurn == true ? "True" : "False",
-                            GS: data[i].GS == true ? "True" : "False",
-                            EN527: data[i].EN527 == true ? "True" : "False",
-                            CE: data[i].CE == true ? "True" : "False",
-                            EMC: data[i].EMC == true ? "True" : "False",
-                            BIFMA: data[i].BIFMA == true ? "True" : "False",
-                            UL962: data[i].UL962 == true ? "True" : "False",
-                            FrameWithColumn: data[i].FrameWithColumn,
-                            FrameWithSideBracket: data[i].FrameWithSideBracket,
-                            UseTO: data[i].UseTO == true ? "True" : "False",
-                            UseTS: data[i].UseTS == true ? "True" : "False",
-                            UseTT: data[i].UseTT == true ? "True" : "False",
-                            UseTF: data[i].UseTF == true ? "True" : "False",
-                            UseBench: data[i].UseBench == true ? "True" : "False",
-                            PartCode: data[i].PartCode,
-                            Weight: data[i].Weight,
-
-                        };
-                        //this.tableData.push(q);
-                        partframetable.push(q);
-                    }
-                },
-                error: function (err) {
-                    alert(err);
-                }
-            });
-    };
-    GetUserInfo();
-    GetUserCompanyInfo();
-    GetPartColumnInfo();
-    GetPartFootInfo();
-    GetPartFrameInfo();
-    const partColumn = {
-        template: '#partColumn', props: ['partcolumntableData', 'table_emailsearch', 'currentPage4','pagesize'], methods: {
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange: function (currentPage) {  //页码更改方法
-                this.currentPage4 = currentPage;
-            },
-
-        }
-    }
-    const partFoot = {
-        template: '#partFoot', props: ['partfoottableData', 'table_emailsearch', 'currentPage4', 'pagesize'], methods: {
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange: function (currentPage) {  //页码更改方法
-                this.currentPage4 = currentPage;
-            },
-
-        }
-    }
-    const partFrame = {
-        template: '#partFrame', props: ['partframetableData', 'table_emailsearch', 'currentPage4', 'pagesize'], methods: {
-            handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
-            },
-            handleCurrentChange: function (currentPage) {  //页码更改方法
-                this.currentPage4 = currentPage;
-            },
-
-        }
-    }
-    const userCompany = { template: '#userCompany', props: ['companytableData','table_emailsearch']}
-    const userRegister = {
-        template: '#userRegister', props: ['inputemail', 'tableData', 'table_emailsearch'],
-        //beforeRouteEnter(to, from, next) {
-        //    GetUserInfo();
-        //    next();
-        //}
-    }
-    
-    const routes = [
-        {
-            path: "/partColumn", component: partColumn, props: { partcolumntableData: partcolumntable, table_emailsearch: '', currentPage4: 1, pagesize: 8 }
-        },
-        {
-            path: '/userCompany', component: userCompany, props: { companytableData: companytable, table_emailsearch: '' }
-        },
-        {
-            path: '/userRegister', component: userRegister, props: { inputemail: '', tableData: UserData, table_emailsearch: '' },
-        },
-        {
-            path: '/partFoot', component: partFoot, props: { partfoottableData: partfoottable, table_emailsearch: '', currentPage4: 1, pagesize: 8 },
-        },
-        {
-            path: '/partFrame', component: partFrame, props: { partframetableData: partframetable, table_emailsearch: '', currentPage4: 1, pagesize: 8 },
-        },
-    ]
-    const router = new VueRouter({
-        routes: routes // (缩写) 相当于 routes: routes
-    })
-
     var OfficeStandards = new Vue({
         el: '#ManageTool',
-        router: router,
         data() {
-
             return {
                 langCode: "",
                 NAVMainPage: "",
@@ -828,7 +169,6 @@
             initPage: function (event) {
                 var height = window.innerHeight - 50;
                 this.tableHeight = height;
-
                 var code = GetLanguCode();
                 this.langCode = code;
                 this.LoginUsername = GetLoginUsername();
@@ -852,8 +192,7 @@
                     }
                 }
                 var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = ""/>';
-
-                $('#iDisplayBox').append(i);
+                $('#asas').append(i);
             },
             setData: function (field, val) {
                 this.$set(this.$data, field, val);//vue 设定值
@@ -865,7 +204,9 @@
                 console.log(key, keyPath);
             },
             goTo(path) {
-                this.$router.replace(path);
+                $("#shjahs").attr({
+                    "src": path
+                });
             },
             
         },

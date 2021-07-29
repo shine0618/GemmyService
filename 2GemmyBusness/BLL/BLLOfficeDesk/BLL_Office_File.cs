@@ -82,6 +82,35 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
         }
 
 
+  
+
+        public List<T_Office_Files> GetAllFilesByDetail(string parttype,string nature,string mode)
+        {
+            if (string.IsNullOrEmpty(parttype) && string.IsNullOrEmpty(nature) && string.IsNullOrEmpty(mode))
+            {
+                return null;
+            }
+            else
+            {
+                var query = from x in read_db.T_Office_Files                            
+                            select x;
+                if (!string.IsNullOrEmpty(parttype))
+                {
+                    query = query.Where(m => m.partType == parttype);
+                }
+                if (!string.IsNullOrEmpty(nature))
+                {
+                    query = query.Where(m => m.Nature == nature);
+                }
+                if (!string.IsNullOrEmpty(mode))
+                {
+                    query = query.Where(m => m.Mode == mode);
+                }
+                return query.ToList();
+            }
+            
+        }
+
         #region ADD
 
         public int AddT_Office_Files(T_Office_Files model)

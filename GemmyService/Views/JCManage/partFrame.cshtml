@@ -1,0 +1,872 @@
+﻿
+@{
+    ViewBag.Title = "partFrame";
+}
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+<script src="/Scripts/vueAjax.js"></script>
+<style>
+    .el-dialog {
+        margin-top: 0vh !important;
+    }
+
+    .size-icon {
+        font-size: 30px;
+    }
+</style>
+
+<div id="partFrame">
+
+    <h1 style="text-align:center">框架信息</h1>
+    <el-row>
+        <span>框架型号</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+        <el-button @@click="addformshow" icon="el-icon-circle-plus-outline" align="right">新增</el-button>
+    </el-row>
+    <el-table :table="partframetableData"
+              :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+              :data="partframetableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+              stripe
+              height="700">
+        @*<el-table-column prop="UpdateTime" label="更新时间" sortable>
+            </el-table-column>*@
+        <el-table-column prop="Mode" label="型号" fixed width="200px">
+        </el-table-column>
+        <el-table-column prop="MaxLength" label="最大长度">
+        </el-table-column>
+        <el-table-column prop="MinLength" label="最小长度">
+        </el-table-column>
+        <el-table-column prop="StabilityLeave" label="稳定性" width="100px">
+        </el-table-column>
+        <el-table-column prop="CanEZ" label="是否能易安装">
+        </el-table-column>
+        <el-table-column prop="CanFold" label="是否能折叠">
+        </el-table-column>
+        <el-table-column prop="CanTurn" label="是否能翻转">
+        </el-table-column>
+        <el-table-column prop="Inline" label="是否适配直筒">
+        </el-table-column>
+        <el-table-column prop="InsideSlider" label="是否内磨">
+        </el-table-column>
+        <el-table-column prop="DoubleMotor" label="可否用于双电机">
+        </el-table-column>
+        <el-table-column prop="HandCranking" label="可否用于手摇">
+        </el-table-column>
+        <el-table-column prop="GasSpring" label="可否用于气动">
+        </el-table-column>
+        <el-table-column prop="SingleMotor" label="可否用于单电机">
+        </el-table-column>
+        <el-table-column prop="PartCode" label="物料代码">
+        </el-table-column>
+        <el-table-column prop="Weight" label="重量">
+        </el-table-column>
+        <el-table-column prop="GS" label="GS">
+        </el-table-column>
+        <el-table-column prop="EN527" label="EN527">
+        </el-table-column>
+        <el-table-column prop="CE" label="CE">
+        </el-table-column>
+        <el-table-column prop="EMC" label="EMC">
+        </el-table-column>
+        <el-table-column prop="BIFMA" label="BIFMA">
+        </el-table-column>
+        <el-table-column prop="UL962" label="UL962">
+        </el-table-column>
+        <el-table-column prop="FrameWithColumn" label="和立柱连接" width="200px">
+        </el-table-column>
+        <el-table-column prop="FrameWithSideBracket" label="和立柱连接" width="200px">
+        </el-table-column>
+        <el-table-column prop="UseTO" label="可否用于TO">
+        </el-table-column>
+        <el-table-column prop="UseTS" label="可否用于TS">
+        </el-table-column>
+        <el-table-column prop="UseTT" label="可否用于TT">
+        </el-table-column>
+        <el-table-column prop="UseTF" label="可否用于TF">
+        </el-table-column>
+        <el-table-column prop="UseBench" label="可否用于组合桌">
+        </el-table-column>
+        <el-table-column label="操作" width="160px">
+            <template slot-scope="scope">
+                <el-button size="mini"
+                           @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <el-button size="mini"
+                           type="danger"
+                           @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page="currentPage4"
+                   :page-size="pagesize"
+                   layout="total, prev, pager, next, jumper"
+                   :total="partframetableData.length"
+                   align="center">
+    </el-pagination>
+    <el-dialog title="框架信息"
+               :visible.sync="dialogVisible"
+               width="40%">
+        <el-form ref="form" :model="form" label-width="150px">
+            <el-form-item label="框架型号">
+                <el-input v-model="form.Mode" disabled style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="最大长度">
+                <el-input v-model="form.MaxLength" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="最小长度">
+                <el-input v-model="form.MinLength" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="稳定性等级">
+                <el-input v-model="form.StabilityLeave" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否易安装">
+                <span>False</span>
+                <el-switch v-model="form.CanEZ"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否折叠桌">
+                <span>False</span>
+                <el-switch v-model="form.CanFold"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否翻转桌">
+                <span>False</span>
+                <el-switch v-model="form.CanTurn"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否直筒立柱">
+                <span>False</span>
+                <el-switch v-model="form.Inline"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否内磨立柱">
+                <span>False</span>
+                <el-switch v-model="form.InsideSlider"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用于双电机">
+                <span>False</span>
+                <el-switch v-model="form.DoubleMotor"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用于手摇">
+                <span>False</span>
+                <el-switch v-model="form.HandCranking"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用于气动">
+                <span>False</span>
+                <el-switch v-model="form.GasSpring"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用于单电机">
+                <span>False</span>
+                <el-switch v-model="form.SingleMotor"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过GS">
+                <span>False</span>
+                <el-switch v-model="form.GS"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过EN527">
+                <span>False</span>
+                <el-switch v-model="form.EN527"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过CE">
+                <span>False</span>
+                <el-switch v-model="form.CE"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过EMC">
+                <span>False</span>
+                <el-switch v-model="form.EMC"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过BIFMA">
+                <span>False</span>
+                <el-switch v-model="form.BIFMA"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过UL962">
+                <span>False</span>
+                <el-switch v-model="form.UL962"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="2D图号">
+                <el-input v-model="form.DrawingNum2D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="3D图号">
+                <el-input v-model="form.DrawingNum3D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="3D图名">
+                <el-input v-model="form.DrawingName3D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="2D图名">
+                <el-input v-model="form.DrawingName2D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图名">
+                <el-input v-model="form.PictureName" disabled style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图号">
+                <el-input v-model="form.PictureNum" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="物料代码">
+                <el-input v-model="form.PartCode" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="重量">
+                <el-input v-model="form.Weight" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="框架连接立柱">
+                <el-input v-model="form.FrameWithColumn" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="框架连接侧板">
+                <el-input v-model="form.FrameWithSideBracket" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="框架连接配件">
+                <el-input v-model="form.FrameWithAccessory" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="框架连接控制器">
+                <el-input v-model="form.FrameWithControlBox" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="含税成本">
+                <el-input v-model="form.TaxCost" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="转让成本">
+                <el-input v-model="form.TransferPrice" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参考价格">
+                <el-input v-model="form.ReferencePrice" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="定制客户">
+                <el-input v-model="form.Customization" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参数的描述">
+                <el-input v-model="form.parametricTextIndex" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否适用TO">
+                <span>False</span>
+                <el-switch v-model="form.UseTO"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TS">
+                <span>False</span>
+                <el-switch v-model="form.UseTS"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TT">
+                <span>False</span>
+                <el-switch v-model="form.UseTT"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TF">
+                <span>False</span>
+                <el-switch v-model="form.UseTF"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用Bench">
+                <span>False</span>
+                <el-switch v-model="form.UseBench"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-button @@click="onSubmit">更新</el-button>
+        </el-form>
+    </el-dialog>
+
+    <el-dialog title="框架信息"
+               :visible.sync="adddialogVisible"
+               width="40%">
+        <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
+            <el-form-item label="框架型号" prop="Mode">
+                <el-input v-model="addform.Mode"   style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="最大长度" prop="MaxLength">
+                <el-input v-model="addform.MaxLength" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="最小长度" prop="MinLength">
+                <el-input v-model="addform.MinLength" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="稳定性等级">
+                <el-input v-model="addform.StabilityLeave" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否易安装">
+                <span>False</span>
+                <el-switch v-model="addform.CanEZ"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否折叠桌">
+                <span>False</span>
+                <el-switch v-model="addform.CanFold"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否翻转桌">
+                <span>False</span>
+                <el-switch v-model="addform.CanTurn"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否直筒立柱">
+                <span>False</span>
+                <el-switch v-model="addform.Inline"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否内磨立柱">
+                <span>False</span>
+                <el-switch v-model="addform.InsideSlider"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用于双电机">
+                <span>False</span>
+                <el-switch v-model="addform.DoubleMotor"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用于手摇">
+                <span>False</span>
+                <el-switch v-model="addform.HandCranking"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用于气动">
+                <span>False</span>
+                <el-switch v-model="addform.GasSpring"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用于单电机">
+                <span>False</span>
+                <el-switch v-model="addform.SingleMotor"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过GS">
+                <span>False</span>
+                <el-switch v-model="addform.GS"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过EN527">
+                <span>False</span>
+                <el-switch v-model="addform.EN527"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过CE">
+                <span>False</span>
+                <el-switch v-model="addform.CE"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过EMC">
+                <span>False</span>
+                <el-switch v-model="addform.EMC"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过BIFMA">
+                <span>False</span>
+                <el-switch v-model="addform.BIFMA"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过UL962">
+                <span>False</span>
+                <el-switch v-model="addform.UL962"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="2D图号">
+                <el-input v-model="addform.DrawingNum2D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="3D图号">
+                <el-input v-model="addform.DrawingNum3D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="3D图名">
+                <el-input v-model="addform.DrawingName3D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="2D图名">
+                <el-input v-model="addform.DrawingName2D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图名">
+                <el-input v-model="addform.PictureName" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图号">
+                <el-input v-model="addform.PictureNum" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="物料代码">
+                <el-input v-model="addform.PartCode" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="重量">
+                <el-input v-model="addform.Weight" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="框架连接立柱">
+                <el-input v-model="addform.FrameWithColumn" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="框架连接侧板">
+                <el-input v-model="addform.FrameWithSideBracket" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="框架连接配件">
+                <el-input v-model="addform.FrameWithAccessory" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="框架连接控制器">
+                <el-input v-model="addform.FrameWithControlBox" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="含税成本">
+                <el-input v-model="addform.TaxCost" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="转让成本">
+                <el-input v-model="addform.TransferPrice" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参考价格">
+                <el-input v-model="addform.ReferencePrice" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="定制客户">
+                <el-input v-model="addform.Customization" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参数的描述" prop="parametricTextIndex">
+                <el-input v-model="addform.parametricTextIndex" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否适用TO">
+                <span>False</span>
+                <el-switch v-model="addform.UseTO"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TS">
+                <span>False</span>
+                <el-switch v-model="addform.UseTS"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TT">
+                <span>False</span>
+                <el-switch v-model="addform.UseTT"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TF">
+                <span>False</span>
+                <el-switch v-model="addform.UseTF"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用Bench">
+                <span>False</span>
+                <el-switch v-model="addform.UseBench"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+        </el-form>
+        <el-button @@click="addonSubmit('addform')">新增</el-button>
+    </el-dialog>
+</div>
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var table = new Array();
+    var partframetable = new Array();
+    function GetPartFrameInfo() {
+        //用 ajax 写
+        partframetable.length = 0;
+        $.ajax(
+            {
+                url: "/JCManage/GetAllPartFrameInfo",
+                method: 'get',
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+                            //UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            Mode: data[i].Mode,
+                            MaxLength: data[i].MaxLength,
+                            MinLength: data[i].MinLength,
+                            StabilityLeave: data[i].StabilityLeave,
+                            Inline: data[i].Inline == true ? "True" : "False",
+                            InsideSlider: data[i].InsideSlider == true ? "True" : "False",
+                            DoubleMotor: data[i].DoubleMotor == true ? "True" : "False",
+                            SingleMotor: data[i].SingleMotor == true ? "True" : "False",
+                            HandCranking: data[i].HandCranking == true ? "True" : "False",
+                            GasSpring: data[i].GasSpring == true ? "True" : "False",
+                            CanEZ: data[i].CanEZ == true ? "True" : "False",
+                            CanFold: data[i].CanFold == true ? "True" : "False",
+                            CanTurn: data[i].CanTurn == true ? "True" : "False",
+                            GS: data[i].GS == true ? "True" : "False",
+                            EN527: data[i].EN527 == true ? "True" : "False",
+                            CE: data[i].CE == true ? "True" : "False",
+                            EMC: data[i].EMC == true ? "True" : "False",
+                            BIFMA: data[i].BIFMA == true ? "True" : "False",
+                            UL962: data[i].UL962 == true ? "True" : "False",
+                            FrameWithColumn: data[i].FrameWithColumn,
+                            FrameWithSideBracket: data[i].FrameWithSideBracket,
+                            UseTO: data[i].UseTO == true ? "True" : "False",
+                            UseTS: data[i].UseTS == true ? "True" : "False",
+                            UseTT: data[i].UseTT == true ? "True" : "False",
+                            UseTF: data[i].UseTF == true ? "True" : "False",
+                            UseBench: data[i].UseBench == true ? "True" : "False",
+                            PartCode: data[i].PartCode,
+                            Weight: data[i].Weight,
+
+                        };
+                        //this.tableData.push(q);
+                        partframetable.push(q);
+                    }
+                    table = data;
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+    };
+    GetPartFrameInfo();
+    var Register = new Vue({
+        el: '#partFrame',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                partframetableData: partframetable,
+                currentPage4: 1,
+                pagesize: 12,
+                dialogVisible: false,
+                dialogdata: [],
+                certinfokey: false,
+                adddialogVisible: false,
+                addindexdialogVisible: false,
+                form: {
+                    Mode: '',
+                    MaxLength: '',
+                    MinLength: '',
+                    StabilityLeave: '',
+                    CanEZ: '',
+                    CanFold: '',
+                    CanTurn: '',
+                    Inline: '',
+                    InsideSlider: '',
+                    DoubleMotor: '',
+                    HandCranking: '',
+                    GasSpring: '',
+                    SingleMotor: '',
+                    GS: '',
+                    EN527: '',
+                    CE: '',
+                    EMC: '',
+                    BIFMA: '',
+                    UL962: '',
+                    DrawingNum2D: '',
+                    DrawingNum3D: '',
+                    DrawingName3D: '',
+                    DrawingName2D: '',
+                    PictureName: '',
+                    PictureNum: '',
+                    PartCode: '',
+                    Weight: '',
+                    DescriptionZH: '',
+                    DescriptionEN: '',
+                    FrameWithColumn: '',
+                    FrameWithSideBracket: '',
+                    FrameWithAccessory: '',
+                    FrameWithControlBox: '',
+                    TaxCost: '',
+                    TransferPrice: '',
+                    ReferencePrice: '',
+                    Customization: '',
+                    SpecialDescriptionZH: '',
+                    SpecialDescriptionEN: '',
+                    parametricTextIndex: '',
+                    UseTO: '',
+                    UseTS: '',
+                    UseTT: '',
+                    UseTF: '',
+                    UseBench: '',
+                },
+                addform: {
+                    Mode: null,
+                    MaxLength: null,
+                    MinLength: null,
+                    StabilityLeave: null,
+                    CanEZ: false,
+                    CanFold: false,
+                    CanTurn: false,
+                    Inline: false,
+                    InsideSlider: false,
+                    DoubleMotor: false,
+                    HandCranking: false,
+                    GasSpring: false,
+                    SingleMotor: false,
+                    GS: false,
+                    EN527: false,
+                    CE: false,
+                    EMC: false,
+                    BIFMA: false,
+                    UL962: false,
+                    DrawingNum2D: null,
+                    DrawingNum3D: null,
+                    DrawingName3D: null,
+                    DrawingName2D: null,
+                    PictureName: null,
+                    PictureNum: null,
+                    PartCode: null,
+                    Weight: null,
+                    DescriptionZH: null,
+                    DescriptionEN: null,
+                    FrameWithColumn: null,
+                    FrameWithSideBracket: null,
+                    FrameWithAccessory: null,
+                    FrameWithControlBox: null,
+                    TaxCost: null,
+                    TransferPrice: null,
+                    ReferencePrice: null,
+                    Customization: null,
+                    SpecialDescriptionZH: null,
+                    SpecialDescriptionEN: null,
+                    parametricTextIndex: null,
+                    UseTO: false,
+                    UseTS: false,
+                    UseTT: false,
+                    UseTF: false,
+                    UseBench: false,
+                },
+                rules: {
+                    Mode: [
+                        { required: true }
+                    ],
+                    MaxLength: [
+                        { required: true }
+                    ],
+                    MinLength: [
+                        { required: true }
+                    ],
+                    parametricTextIndex: [
+                        { required: true }
+                    ],
+                    
+                }
+            }
+        },
+        methods: {
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+            handleEdit(index, row) {
+                console.log(this.currentPage4);
+                console.log(this.pagesize);
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+                console.log(this.dialogdata);
+                this.certinfokey = !this.certinfokey;
+                this.dialogVisible = true;
+            },
+            handleDelete(index, row) {
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCManage/DeleteFrameInfo",
+                        params: {
+                            forminfo: JSON.stringify(this.form),
+                        }
+                    }).then(function (response) {
+                        this.isadd = response.body;
+                        if (this.isadd == true) {
+
+                            location.reload();
+                        }
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+                console.log(this.dialogdata);
+            },
+            onSubmit() {
+
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/UpdateFrameInfo",
+                    params: {
+                        forminfo: JSON.stringify(this.form),
+                    }
+                }).then(function (response) {
+                    this.isadd = response.body;
+                    console.log(this.form);
+                    console.log(JSON.stringify(this.form));
+                    console.log(response.body);
+                    if (this.isadd == true) {
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
+                })
+
+
+            },
+            addonSubmit(formname) {
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.$http({           //调用接口
+                            method: 'POST',
+                            url: "/JCManage/addFrameInfo",
+                            params: {
+                                forminfo: JSON.stringify(this.addform),
+                            }
+                        }).then(function (response) {
+                            this.isadd = response.body;
+                            console.log(this.addform);
+                            console.log(JSON.stringify(this.addform));
+                            console.log(response.body);
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                location.reload();
+                            }
+                        })
+                        console.log(this.addform);
+
+
+
+                    }
+                    else {
+                        this.$notify.error('缺少内容');
+
+                    }
+                })
+            },
+            addformshow() {
+                this.adddialogVisible = true;
+            },
+            addindexdialogshow() {
+                this.addindexdialogVisible = true;
+            }
+        },
+        watch: {
+            dialogdata() {
+                Object.assign(this.form, this.dialogdata);
+            },
+
+        }
+    })
+
+</script>
+

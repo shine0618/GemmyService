@@ -748,7 +748,45 @@ namespace GemmyService.Controllers
             return View();
         }
 
-        
+        public ActionResult FileSearch()
+        {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            return View();
+        }
+
+        public ActionResult FileTree(string parttype,string nature,string mode)
+        {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            ViewBag.parttype = parttype;
+            ViewBag.nature = nature;
+            ViewBag.mode = mode;
+            return View();
+        }
+
+
+
+        [HttpGet]
+        public JsonResult getFileByDetail(string parttype,string nature,string mode)
+        {
+            List<T_Office_Files> list = bll_file.GetAllFilesByDetail(parttype, nature, mode);
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
 
         #region 方法集
 

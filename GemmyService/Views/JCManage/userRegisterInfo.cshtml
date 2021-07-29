@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "userRegisterInfo";
+}
+
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+
+<template id="userRegister">
+    <div>
+        <h1 style="text-align:center">用户注册情况</h1>
+        <span>电子邮箱</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+        <el-table :table="tableData"
+                  :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+                  :data="tableData.filter(data => !table_emailsearch || data.Email.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+                  height="680">
+            <el-table-column prop="UpdateTime" label="更新时间" sortable>
+            </el-table-column>
+            <el-table-column prop="Email" label="电子邮箱">
+            </el-table-column>
+            <el-table-column prop="FirstName" label="名">
+            </el-table-column>
+            <el-table-column prop="LastName" label="姓">
+            </el-table-column>
+            <el-table-column prop="Lock" label="是否锁定">
+            </el-table-column>
+        </el-table>
+        <el-pagination @@current-change="handleCurrentChange"
+                       :current-page="currentPage4"
+                       :page-size="pagesize"
+                       layout="total, prev, pager, next, jumper"
+                       :total="tableData.length"
+                       align="center">
+        </el-pagination>
+    </div>
+</template>
+
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var UserData = new Array();
+    function GetUserInfo() {
+        //用 ajax 写
+        UserData.length = 0;
+        $.ajax(
+            {
+                url: "/JCManage/GetAllUserInfo",
+                method: 'get',
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+                            UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            Email: data[i].Email,
+                            FirstName: data[i].FirstName,
+                            LastName: data[i].LastName,
+                            Lock: data[i].Lock == true ? "True" : "False"
+                        };
+                        //this.tableData.push(q);
+                        UserData.push(q);
+                    }
+                },
+                error: function (err) {
+                    alert(err);
+                }
+
+            });
+    };
+    GetUserInfo();
+    var Register = new Vue({
+        el: '#userRegister',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                tableData: UserData,
+                currentPage4: 1,
+                pagesize: 13
+            }
+        },
+        methods: {
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+        }
+    })
+
+</script>

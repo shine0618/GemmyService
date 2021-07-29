@@ -1,0 +1,459 @@
+﻿
+@{
+    ViewBag.Title = "productByJiecang";
+}
+
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+<script src="/Scripts/vueAjax.js"></script>
+<style>
+    .el-dialog {
+        margin-top: 0vh !important;
+    }
+
+    .size-icon {
+        font-size: 30px;
+    }
+</style>
+<div id="officedesk">
+    <h1 style="text-align:center">捷昌推荐整桌信息</h1>
+    <el-row>
+        <span>整桌型号</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+        <el-button @@click="addformshow" icon="el-icon-circle-plus-outline" align="right">新增</el-button>
+    </el-row>
+    <el-table :table="desktableData"
+              :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+              :data="desktableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+              stripe
+              height="700">
+        <el-table-column prop="UpdateTime" label="更新时间" sortable width="100px;">
+        </el-table-column>
+        <el-table-column prop="deskSerialName" label="桌子系列名称" fixed width="200px">
+        </el-table-column>
+        <el-table-column prop="deskType" label="桌子类型">
+        </el-table-column>
+        <el-table-column prop="deskImgUrl" label="图片地址" width="300px;">
+        </el-table-column>
+        <el-table-column prop="deskSalesVolume" label="销量指数" width="100px">
+        </el-table-column>
+        <el-table-column prop="deskPrice" label="价格指数">
+        </el-table-column>
+        <el-table-column prop="deskStabilityLeave" label="稳定性指数">
+        </el-table-column>
+        <el-table-column prop="deskMaxLoad" label="负载指数">
+        </el-table-column>
+        <el-table-column prop="deskNewProduct" label="是否为新品推荐">
+        </el-table-column>
+        <el-table-column prop="deskJCRecommend" label="是否为捷昌推荐">
+        </el-table-column>
+        <el-table-column prop="deskCreateByUser" label="账户定制的产品">
+        </el-table-column>
+        <el-table-column prop="verificationCode" label="标识码" width="300px;">
+        </el-table-column>
+        <el-table-column prop="deleteSign" label="隐藏">
+        </el-table-column>
+        <el-table-column prop="deskGuid" label="Guid" width="200px">
+        </el-table-column>
+        <el-table-column prop="deskTagKey" label="描述标签">
+        </el-table-column>
+        <el-table-column prop="deskCustmoer" label="是否客制">
+        </el-table-column>
+        <el-table-column prop="deskCustomerName" label="自定义方案名称" width="200px;">
+        </el-table-column>
+        <el-table-column label="操作" width="160px">
+            <template slot-scope="scope">
+                <el-button size="mini"
+                           @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <el-button size="mini"
+                           type="danger"
+                           @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page="currentPage4"
+                   :page-size="pagesize"
+                   layout="total, prev, pager, next, jumper"
+                   :total="desktableData.length"
+                   align="center">
+    </el-pagination>
+    <el-dialog title="捷昌推荐整桌信息"
+               :visible.sync="dialogVisible"
+               width="40%">
+        <el-form ref="form" :model="form" label-width="150px">
+            <el-form-item label="应用类型">
+                <el-select v-model="form.deskType">
+                    <el-option label="TO" value="TO"></el-option>
+                    <el-option label="TS" value="TS"></el-option>
+                    <el-option label="TT" value="TT"></el-option>
+                    <el-option label="TF" value="TF"></el-option>
+                    <el-option label="Bench" value="Bench"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="桌子系列名称">
+                <el-input v-model="form.deskSerialName"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="图片地址">
+                <el-input v-model="form.deskImgUrl"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="销量指数">
+                <el-input v-model="form.deskSalesVolume"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="价格指数">
+                <el-input v-model="form.deskPrice"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="稳定性指数">
+                <el-input v-model="form.deskStabilityLeave"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="负载指数">
+                <el-input v-model="form.deskMaxLoad"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否为新品推荐">
+                <span>False</span>
+                <el-switch v-model="form.deskNewProduct"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否为捷昌推荐">
+                <span>False</span>
+                <el-switch v-model="form.deskJCRecommend"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="禁用">
+                <el-select v-model="form.deleteSign">
+                    <el-option label="启用" value="0"></el-option>
+                    <el-option label="禁用" value="1"></el-option>                   
+                </el-select>
+            </el-form-item>
+            <el-form-item label="是否客制">
+                <span>False</span>
+                <el-switch v-model="form.deskCustmoer"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-button @@click="onSubmit">更新</el-button>
+        </el-form>
+    </el-dialog>
+
+    <el-dialog title="捷昌推荐整桌信息"
+               :visible.sync="adddialogVisible"
+               width="40%">
+        <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
+            <el-form-item label="应用类型" prop="deskType">
+                <el-select v-model="addform.deskType" >
+                    <el-option label="TO" value="TO"></el-option>
+                    <el-option label="TS" value="TS"></el-option>
+                    <el-option label="TT" value="TT"></el-option>
+                    <el-option label="TF" value="TF"></el-option>
+                    <el-option label="Bench" value="Bench"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="桌子系列名称" prop="deskSerialName">
+                <el-input v-model="addform.deskSerialName" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="图片地址">
+                <el-input v-model="addform.deskImgUrl" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="销量指数">
+                <el-input v-model="addform.deskSalesVolume" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="价格指数">
+                <el-input v-model="addform.deskPrice" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="稳定性指数">
+                <el-input v-model="addform.deskStabilityLeave" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="负载指数">
+                <el-input v-model="addform.deskMaxLoad" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否为新品推荐">
+                <span>False</span>
+                <el-switch v-model="addform.deskNewProduct"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否为捷昌推荐">
+                <span>False</span>
+                <el-switch v-model="addform.deskJCRecommend"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="禁用">
+                <el-select v-model="addform.deleteSign">
+                    <el-option label="启用" value="0"></el-option>
+                    <el-option label="禁用" value="1"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="是否客制">
+                <span>False</span>
+                <el-switch v-model="addform.deskCustmoer"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="展示名称" prop="deskCustomerName">
+                <el-input v-model="addform.deskCustomerName" style="width:60%;"></el-input>
+            </el-form-item>
+        </el-form>
+        <el-button @@click="addonSubmit('addform')">新增</el-button>
+    </el-dialog>
+</div>
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var table = new Array();
+    var deskData = new Array();
+    function GetdeskInfo() {
+        //用 ajax 写
+        deskData.length = 0;
+        $.ajax(
+            {
+                url: "/JCManage/GetAllDeskInfo",
+                method: 'get',
+                success: function (data) {
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+                            UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            deskSerialName: data[i].deskSerialName,
+                            deskType: data[i].deskType,
+                            deskImgUrl: data[i].deskImgUrl,
+                            deskSalesVolume: data[i].deskSalesVolume,
+                            deskPrice: data[i].deskPrice ,
+                            deskStabilityLeave: data[i].deskStabilityLeave ,
+                            deskMaxLoad: data[i].deskMaxLoad ,
+                            deskNewProduct: data[i].deskNewProduct == true ? "True" : "False",
+                            deskJCRecommend: data[i].deskJCRecommend == true ? "True" : "False",
+                            deskCreateByUser: data[i].deskCreateByUser ,
+                            verificationCode: data[i].verificationCode ,
+                            deleteSign: data[i].deleteSign == 1 ? "True" : "False",
+                            deskGuid: data[i].deskGuid ,
+                            deskTagKey: data[i].deskTagKey ,
+                            deskCustmoer: data[i].deskCustmoer == true ? "True" : "False",
+                            deskCustomerName: data[i].deskCustomerName ,                           
+                        };
+                        //this.tableData.push(q);
+                        deskData.push(q);
+                        
+                    }
+                    table = data;
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+    };
+    GetdeskInfo();
+    var Register = new Vue({
+        el: '#officedesk',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                desktableData: deskData,
+                currentPage4: 1,
+                pagesize: 9,
+                dialogVisible: false,
+                dialogdata: [],
+                certinfokey: false,
+                adddialogVisible: false,
+                addindexdialogVisible: false,
+                form: {
+                    UpdateTime: '',
+                    deskSerialName: '',
+                    deskType:'',
+                    deskImgUrl: '',
+                    deskSalesVolume: '',
+                    deskPrice: '',
+                    deskStabilityLeave:'',
+                    deskMaxLoad: '',
+                    deskNewProduct: '',
+                    deskJCRecommend: '',
+                    deskCreateByUser: '',
+                    verificationCode: '',
+                    deleteSign: '',
+                    deskGuid: '',
+                    deskTagKey: '',
+                    deskCustmoer: '',
+                    deskCustomerName: '',
+                },
+                addform: {
+                    deskSerialName: null,
+                    deskType: null,
+                    deskImgUrl: null,
+                    deskSalesVolume:0,
+                    deskPrice: 0,
+                    deskStabilityLeave: 0,
+                    deskMaxLoad: 0,
+                    deskNewProduct:false,
+                    deskJCRecommend: false,
+                    deskCreateByUser: null,
+                    deleteSign: 0,
+                    deskTagKey: 0,
+                    deskCustomerName: null,
+                    deskCustmoer: false,
+                    deskShortDescriptionKey: 0,
+                    deskNewProductNumber: 0,
+                    deskTag: "",
+                    deskShortDescription: null,
+                },
+                rules: {
+                    deskSerialName: [
+                        { required: true }
+                    ],
+                    deskType: [
+                        { required: true }
+                    ],
+                    deskCustomerName: [
+                        { required: true }
+                    ],
+
+                }
+            }
+        },
+        methods: {
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+            handleEdit(index, row) {
+                console.log(this.currentPage4);
+                console.log(this.pagesize);
+                var a = 0;
+                for (var i = 0; i < table.length; i++) {
+                    if (table[i].deskGuid ==row.deskGuid) {
+                        a = i;
+                    }
+                }
+                this.dialogdata = table[a];
+                console.log(this.dialogdata);
+                this.certinfokey = !this.certinfokey;
+                this.dialogVisible = true;
+            },
+            handleDelete(index, row) {
+                var a = 0;
+                for (var i = 0; i < table.length; i++) {
+                    if (table[i].deskGuid == row.deskGuid) {
+                        a = i;
+                    }
+                }
+                this.dialogdata = table[a];
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCManage/DeleteDeskInfo",
+                        params: {
+                            forminfo: JSON.stringify(this.form),
+                        }
+                    }).then(function (response) {
+                        this.isadd = response.body;
+                        if (this.isadd == true) {
+
+                            location.reload();
+                        }
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+                console.log(this.dialogdata);
+            },
+            onSubmit() {
+
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/UpdateDeskInfo",
+                    params: {
+                        forminfo: JSON.stringify(this.form),
+                    }
+                }).then(function (response) {
+                    this.isadd = response.body;
+                    console.log(this.form);
+                    console.log(JSON.stringify(this.form));
+                    console.log(response.body);
+                    if (this.isadd == true) {
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
+                })
+
+
+            },
+            addonSubmit(formname) {
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.$http({           //调用接口
+                            method: 'POST',
+                            url: "/JCManage/addDeskInfo",
+                            params: {
+                                forminfo: JSON.stringify(this.addform),
+                            }
+                        }).then(function (response) {
+                            this.isadd = response.body;
+                            console.log(this.addform);
+                            console.log(JSON.stringify(this.addform));
+                            console.log(response.body);
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                location.reload();
+                            }
+                        })
+                        console.log(this.addform);
+
+
+
+                    }
+                    else {
+                        this.$notify.error('缺少内容');
+
+                    }
+                })
+            },
+            addformshow() {
+                this.adddialogVisible = true;
+            },
+            addindexdialogshow() {
+                this.addindexdialogVisible = true;
+            }
+        },
+        watch: {
+            dialogdata() {
+                Object.assign(this.form, this.dialogdata);
+            },
+
+        }
+    })
+
+</script>

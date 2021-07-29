@@ -1,0 +1,314 @@
+﻿
+@{
+    ViewBag.Title = "partPowerCable";
+}
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+<script src="/Scripts/vueAjax.js"></script>
+<style>
+    .el-dialog {
+        margin-top: 0vh !important;
+    }
+
+    .size-icon {
+        font-size: 30px;
+    }
+</style>
+
+<div id="partPowerCable">
+    <h1 style="text-align:center">电源线信息</h1>
+    <el-row>
+        <span>电源线型号</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+        <el-button @@click="addformshow" icon="el-icon-circle-plus-outline" align="right">新增</el-button>
+    </el-row>
+    <el-table :table="partpowercabletableData"
+              :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+              :data="partpowercabletableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+              stripe
+              height="700"
+              style="width:100%">
+        <el-table-column prop="UpdateTime" label="更新时间" sortable>
+        </el-table-column>
+        <el-table-column prop="Mode" label="型号" fixed>
+        </el-table-column>
+        <el-table-column prop="PowercableLength" label="电源线长度">
+        </el-table-column>
+        <el-table-column prop="HeadPlug" label="头插Pin数">
+        </el-table-column>
+        <el-table-column prop="TailPlug" label="尾插类型">
+        </el-table-column>
+
+        <el-table-column label="操作" width="160px">
+            <template slot-scope="scope">
+                <el-button size="mini"
+                           @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <el-button size="mini"
+                           type="danger"
+                           @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page="currentPage4"
+                   :page-size="pagesize"
+                   layout="total, prev, pager, next, jumper"
+                   :total="partpowercabletableData.length"
+                   align="center">
+    </el-pagination>
+    <el-dialog title="电源线信息"
+               :visible.sync="dialogVisible"
+               width="40%">
+        <el-form ref="form" :model="form" label-width="150px">
+            <el-form-item label="电源线型号">
+                <el-input v-model="form.Mode" disabled style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="电源线长度">
+                <el-input-number v-model="form.PowercableLength" :min="0" :precision="2" style="width:60%;"></el-input-number>
+            </el-form-item>
+            <el-form-item label="头插Pin数">
+                <el-input-number v-model="form.HeadPlug" :min="0" :precision="0" style="width:60%;"></el-input-number>
+            </el-form-item>
+            <el-form-item label="尾插类型">
+                <el-input v-model="form.TailPlug" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图名">
+                <el-input v-model="form.PictureName" disabled style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参数的描述">
+                <el-input-number v-model="form.parametricTextIndex" :min="0" :precision="0" style="width:60%;"></el-input-number>
+            </el-form-item>
+            <el-button @@click="onSubmit">更新</el-button>
+        </el-form>
+    </el-dialog>
+
+    <el-dialog title="电源线信息"
+               :visible.sync="adddialogVisible"
+               width="40%">
+        <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
+            <el-form-item label="电源线型号" prop="Mode">
+                <el-input v-model="addform.Mode"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="电源线长度" prop="PowercableLength"> 
+                <el-input-number v-model="addform.PowercableLength" :min="0" :precision="2" style="width:60%;"></el-input-number>
+            </el-form-item>
+            <el-form-item label="头插Pin数">
+                <el-input-number v-model="addform.HeadPlug" :min="0" :precision="0" style="width:60%;"></el-input-number>
+            </el-form-item>
+            <el-form-item label="尾插类型">
+                <el-input v-model="addform.TailPlug" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图名">
+                <el-input v-model="addform.PictureName" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参数的描述" prop="parametricTextIndex">
+                <el-input-number v-model="addform.parametricTextIndex" :min="0" :precision="0" style="width:60%;"></el-input-number>
+            </el-form-item>
+        </el-form>
+        <el-button @@click="addonSubmit('addform')">新增</el-button>
+    </el-dialog>
+</div>
+
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var table = new Array();
+    var partpowercableboxtable = new Array();
+    function GetPartpowercableInfo() {
+        //用 ajax 写
+        partpowercableboxtable.length = 0;
+        $.ajax(
+            {
+                url: "/JCManage/GetAllPartPowercableInfo",
+                method: 'get',
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+                            //UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            Mode: data[i].Mode,
+                            PowercableLength: data[i].PowercableLength,
+                            HeadPlug: data[i].HeadPlug,
+                            TailPlug: data[i].TailPlug,
+
+                        };
+                        //this.tableData.push(q);
+                        partpowercableboxtable.push(q);
+                    }
+                    table = data;
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+        //partpowercableboxtable.length = 0;
+
+    };
+    
+    GetPartpowercableInfo();
+    var Register = new Vue({
+        el: '#partPowerCable',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                partpowercabletableData: partpowercableboxtable,
+                currentPage4: 1,
+                pagesize: 12,
+                dialogVisible: false,
+                dialogdata: [],
+                certinfokey: false,
+                adddialogVisible: false,
+                addindexdialogVisible: false,
+                form: {
+                    Mode: '',
+                    PowercableLength: '',
+                    HeadPlug: '',
+                    TailPlug: '',
+                    PictureName: '',
+                    parametricTextIndex: '',
+                },
+                addform: {
+                    Mode:null,
+                    PowercableLength: null,
+                    HeadPlug: null,
+                    TailPlug: null,
+                    PictureName: null,
+                    parametricTextIndex: null,
+                },
+                rules: {
+                    Mode: [
+                        { required: true }
+                    ],
+                    HeadPlug: [
+                        { required: true }
+                    ],
+                    parametricTextIndex: [
+                        { required: true }
+                    ]
+                }
+            }
+        },
+        methods: {
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+            handleEdit(index, row) {
+                console.log(this.currentPage4);
+                console.log(this.pagesize);
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+                console.log(this.dialogdata);
+                this.certinfokey = !this.certinfokey;
+                this.dialogVisible = true;
+            },
+            handleDelete(index, row) {
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCManage/DeletePowercableInfo",
+                        params: {
+                            forminfo: JSON.stringify(this.form),
+                        }
+                    }).then(function (response) {
+                        this.isadd = response.body;
+                        if (this.isadd == true) {
+
+                            location.reload();
+                        }
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+                console.log(this.dialogdata);
+            },
+            onSubmit() {
+
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/UpdatePowercableInfo",
+                    params: {
+                        forminfo: JSON.stringify(this.form),
+                    }
+                }).then(function (response) {
+                    this.isadd = response.body;
+                    console.log(this.form);
+                    console.log(JSON.stringify(this.form));
+                    console.log(response.body);
+                    if (this.isadd == true) {
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
+                })
+
+
+            },
+            addonSubmit(formname) {
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.$http({           //调用接口
+                            method: 'POST',
+                            url: "/JCManage/addPowercableInfo",
+                            params: {
+                                forminfo: JSON.stringify(this.addform),
+                            }
+                        }).then(function (response) {
+                            this.isadd = response.body;
+                            console.log(this.addform);
+                            console.log(JSON.stringify(this.addform));
+                            console.log(response.body);
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                location.reload();
+                            }
+                        })
+                        console.log(this.addform);
+
+
+
+                    }
+                    else {
+                        this.$notify.error('缺少内容');
+
+                    }
+                })
+            },
+            addformshow() {
+                this.adddialogVisible = true;
+            },
+            addindexdialogshow() {
+                this.addindexdialogVisible = true;
+            }
+
+        },
+        watch: {
+            dialogdata() {
+                Object.assign(this.form, this.dialogdata);
+            },
+
+        }
+    })
+
+</script>
+

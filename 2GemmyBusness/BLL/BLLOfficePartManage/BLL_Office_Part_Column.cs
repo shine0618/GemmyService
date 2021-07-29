@@ -1,4 +1,5 @@
-﻿using _1GemmyModel.Model;
+﻿using _1GemmyModel;
+using _1GemmyModel.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,52 @@ namespace _2GemmyBusness.BLL.BLLOfficePartManage
             }
         }
 
+        public bool UpdateColumnInfo(T_Part_office_Column t)
+        {
+            bool issuccess = false;
+            if (t != null)
+            {
+                Update<T_Part_office_Column>(t);
+                issuccess = true;
+            }
+            return issuccess;
+        }
+
+        public bool AddColumnInfo(T_Part_office_Column t)
+        {
+            bool issuccess = false;
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                if (t != null)
+                {
+                    var entity = db.T_Part_office_Column.Any(m=>m.Mode==t.Mode);
+                    if (entity != true)
+                    {
+                        db.T_Part_office_Column.Add(t);
+                        db.SaveChanges();
+                        issuccess = true;
+                    }
+                    
+                }
+               
+            }
+            return issuccess;
+        }
+
+        public bool DeleteColumnInfo(T_Part_office_Column t)
+        {
+            bool issuccess = false;
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                var entity = db.T_Part_office_Column.Any(m => m.Mode == t.Mode);
+                if (entity == true)
+                {
+                    DeleteEntityByid<T_Part_office_Column>(t.Id);
+                    issuccess = true;
+                }
+
+            }
+            return issuccess;
+        }
     }
 }

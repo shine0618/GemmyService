@@ -1,0 +1,969 @@
+﻿
+@{
+    ViewBag.Title = "partHandset";
+}
+
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+<script src="/Scripts/vueAjax.js"></script>
+<style>
+    .el-dialog {
+        margin-top: 0vh !important;
+    }
+
+    .size-icon {
+        font-size: 30px;
+    }
+</style>
+<div id="partHandset">
+    <h1 style="text-align:center">手控器信息</h1>
+
+    <el-row>
+        <span>手控器型号</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+        <el-button @@click="addformshow" icon="el-icon-circle-plus-outline" align="right">新增</el-button>
+    </el-row>
+
+    <el-table :table="parthandsettableData"
+              :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+              :data="parthandsettableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+              stripe
+              height="700"
+              style="width:100%">
+        @*<el-table-column prop="UpdateTime" label="更新时间" sortable>
+            </el-table-column>*@
+        <el-table-column prop="Mode" label="型号" fixed width="200px">
+        </el-table-column>
+        <el-table-column prop="HaveScreen" label="是否有显示屏">
+        </el-table-column>
+        <el-table-column prop="ScreenType" label="显示屏类型">
+        </el-table-column>
+        <el-table-column prop="Touch" label="是否是触摸" width="100px">
+        </el-table-column>
+        <el-table-column prop="Button" label="是否是按键">
+        </el-table-column>
+        <el-table-column prop="HaveUsb" label="是否带USB">
+        </el-table-column>
+        <el-table-column prop="Imbedding" label="是否是嵌入式">
+        </el-table-column>
+        <el-table-column prop="Remote" label="是否遥控">
+        </el-table-column>
+        <el-table-column prop="BlueTooth" label="是否带蓝牙">
+        </el-table-column>
+        <el-table-column prop="MemoryKeys" label="记忆键数量">
+        </el-table-column>
+        <el-table-column prop="OutputVoltage" label="输出电压">
+        </el-table-column>
+        <el-table-column prop="InputVoltage" label="输入电压">
+        </el-table-column>
+        <el-table-column prop="TransformerPower" label="变压器功率">
+        </el-table-column>
+        <el-table-column prop="Voltage" label="额定电压">
+        </el-table-column>
+        <el-table-column prop="Current" label="电流">
+        </el-table-column>
+        <el-table-column prop="HandSetOutLet" label="手控器插口">
+        </el-table-column>
+        <el-table-column prop="DoubleMotor" label="是否可配双电机">
+        </el-table-column>
+        <el-table-column prop="HandCranking" label="是否可配手摇">
+        </el-table-column>
+        <el-table-column prop="GasSpring" label="是否可配气动">
+        </el-table-column>
+        <el-table-column prop="SingleMotor" label="是否可配单电机">
+        </el-table-column>
+        <el-table-column prop="GS" label="是否通过GS">
+        </el-table-column>
+        <el-table-column prop="EN527" label="是否通过EN527" width="200px">
+        </el-table-column>
+        <el-table-column prop="CE" label="是否通过CE">
+        </el-table-column>
+        <el-table-column prop="EMC" label="是否通过EMC">
+        </el-table-column>
+        <el-table-column prop="BIFMA" label="是否通过BIFMA">
+        </el-table-column>
+        <el-table-column prop="UL962" label="是否通过UL962">
+        </el-table-column>
+        <el-table-column prop="PartCode" label="物料代码">
+        </el-table-column>
+        <el-table-column prop="Weight" label="重量">
+        </el-table-column>
+        <el-table-column prop="HandsetWithControlBox" label="手控器连接控制器">
+        </el-table-column>
+        <el-table-column prop="HandsetWithAccessory" label="手控器连接配件">
+        </el-table-column>
+        <el-table-column prop="UseTO" label="是否适用TO">
+        </el-table-column>
+        <el-table-column prop="UseTS" label="是否适用TS">
+        </el-table-column>
+        <el-table-column prop="UseTT" label="是否适用TT">
+        </el-table-column>
+        <el-table-column prop="UseTF" label="是否适用TF">
+        </el-table-column>
+        <el-table-column prop="UseBench" label="是否适用Bench">
+        </el-table-column>
+        <el-table-column label="操作" width="160px">
+            <template slot-scope="scope">
+                <el-button size="mini"
+                           @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <el-button size="mini"
+                           type="danger"
+                           @@click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page="currentPage4"
+                   :page-size="pagesize"
+                   layout="total, prev, pager, next, jumper"
+                   :total="parthandsettableData.length"
+                   align="center">
+    </el-pagination>
+
+    <el-dialog title="手控器信息"
+               :visible.sync="dialogVisible"
+               width="40%">
+        <el-form ref="form" :model="form" label-width="150px">
+            <el-form-item label="手控器型号">
+                <el-input v-model="form.Mode" disabled style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否有显示屏">
+                <span>False</span>
+                <el-switch v-model="form.HaveScreen"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="显示屏类型">               
+                    <el-input v-model="form.ScreenType" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否是触摸">
+                <span>False</span>
+                <el-switch v-model="form.Touch"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否是按键">
+                <span>False</span>
+                <el-switch v-model="form.Button"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否带USB">
+                <span>False</span>
+                <el-switch v-model="form.HaveUsb"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否是嵌入式">
+                <span>False</span>
+                <el-switch v-model="form.Imbedding"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否遥控">
+                <span>False</span>
+                <el-switch v-model="form.Remote"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否带蓝牙">
+                <span>False</span>
+                <el-switch v-model="form.BlueTooth"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="记忆键数量">
+                <el-input v-model="form.MemoryKeys" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="输出电压">
+                <el-input v-model="form.OutputVoltage" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="输入电压">
+                <el-input v-model="form.InputVoltage" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="变压器功率">
+                <el-input v-model="form.TransformerPower" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="额定电压">
+                <el-input v-model="form.Voltage" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="电流">
+                <el-input v-model="form.Current" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="手控器插口">
+                <el-input v-model="form.HandSetOutLet" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否可配双电机">
+                <span>False</span>
+                <el-switch v-model="form.DoubleMotor"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否可配手摇">
+                <span>False</span>
+                <el-switch v-model="form.HandCranking"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否可配气动">
+                <span>False</span>
+                <el-switch v-model="form.GasSpring"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否可配单电机">
+                <span>False</span>
+                <el-switch v-model="form.SingleMotor"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过GS">
+                <span>False</span>
+                <el-switch v-model="form.GS"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过EN527">
+                <span>False</span>
+                <el-switch v-model="form.EN527"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过CE">
+                <span>False</span>
+                <el-switch v-model="form.CE"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过EMC">
+                <span>False</span>
+                <el-switch v-model="form.EMC"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过BIFMA">
+                <span>False</span>
+                <el-switch v-model="form.BIFMA"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过UL962">
+                <span>False</span>
+                <el-switch v-model="form.UL962"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="2D图号">
+                <el-input v-model="form.DrawingNum2D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="3D图号">
+                <el-input v-model="form.DrawingNum3D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="3D图名">
+                <el-input v-model="form.DrawingName3D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="2D图名">
+                <el-input v-model="form.DrawingName2D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图名">
+                <el-input v-model="form.PictureName" disabled style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图号">
+                <el-input v-model="form.PictureNum" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="物料代码">
+                <el-input v-model="form.PartCode" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="重量">
+                <el-input v-model="form.Weight" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="手控器连接控制器">
+                <el-input v-model="form.HandsetWithControlBox" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="手控器连接配件">
+                <el-input v-model="form.HandsetWithAccessory" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="含税成本">
+                <el-input v-model="form.TaxCost" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="转让成本">
+                <el-input v-model="form.TransferPrice" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参考价格">
+                <el-input v-model="form.ReferencePrice" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否带插槽">
+                <span>False</span>
+                <el-switch v-model="form.HaveRabbet"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="定制客户">
+                <el-input v-model="form.Customization" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参数的描述">
+                <el-input v-model="form.parametricTextIndex" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否适用TO">
+                <span>False</span>
+                <el-switch v-model="form.UseTO"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TS">
+                <span>False</span>
+                <el-switch v-model="form.UseTS"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TT">
+                <span>False</span>
+                <el-switch v-model="form.UseTT"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TF">
+                <span>False</span>
+                <el-switch v-model="form.UseTF"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用Bench">
+                <span>False</span>
+                <el-switch v-model="form.UseBench"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-button @@click="onSubmit">更新</el-button>
+        </el-form>
+    </el-dialog>
+
+
+    <el-dialog title="手控器信息"
+               :visible.sync="adddialogVisible"
+               width="40%">
+        <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
+            <el-form-item label="手控器型号" prop="Mode">
+                <el-input v-model="addform.Mode"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否有显示屏">
+                <span>False</span>
+                <el-switch v-model="addform.HaveScreen"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="显示屏类型">
+                <el-input v-model="addform.ScreenType" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否是触摸">
+                <span>False</span>
+                <el-switch v-model="addform.Touch"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否是按键">
+                <span>False</span>
+                <el-switch v-model="addform.Button"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否带USB">
+                <span>False</span>
+                <el-switch v-model="addform.HaveUsb"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否是嵌入式">
+                <span>False</span>
+                <el-switch v-model="addform.Imbedding"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否遥控">
+                <span>False</span>
+                <el-switch v-model="addform.Remote"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否带蓝牙">
+                <span>False</span>
+                <el-switch v-model="addform.BlueTooth"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="记忆键数量"  prop="MemoryKeys">
+                <el-input v-model.number="addform.MemoryKeys" oninput="value=value.replace(/[^\d]/g,'')" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="输出电压">
+                <el-input v-model="addform.OutputVoltage" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="输入电压">
+                <el-input v-model="addform.InputVoltage" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="变压器功率">
+                <el-input v-model="addform.TransformerPower" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="额定电压">
+                <el-input v-model="addform.Voltage" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="电流">
+                <el-input v-model="addform.Current" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="手控器插口">
+                <el-input v-model="addform.HandSetOutLet" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否可配双电机">
+                <span>False</span>
+                <el-switch v-model="addform.DoubleMotor"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否可配手摇">
+                <span>False</span>
+                <el-switch v-model="addform.HandCranking"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否可配气动">
+                <span>False</span>
+                <el-switch v-model="addform.GasSpring"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否可配单电机">
+                <span>False</span>
+                <el-switch v-model="addform.SingleMotor"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过GS">
+                <span>False</span>
+                <el-switch v-model="addform.GS"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过EN527">
+                <span>False</span>
+                <el-switch v-model="addform.EN527"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过CE">
+                <span>False</span>
+                <el-switch v-model="addform.CE"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过EMC">
+                <span>False</span>
+                <el-switch v-model="addform.EMC"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过BIFMA">
+                <span>False</span>
+                <el-switch v-model="addform.BIFMA"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否通过UL962">
+                <span>False</span>
+                <el-switch v-model="addform.UL962"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="2D图号">
+                <el-input v-model="addform.DrawingNum2D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="3D图号">
+                <el-input v-model="addform.DrawingNum3D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="3D图名">
+                <el-input v-model="addform.DrawingName3D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="2D图名">
+                <el-input v-model="addform.DrawingName2D" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图名">
+                <el-input v-model="addform.PictureName"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="效果图号">
+                <el-input v-model="addform.PictureNum" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="物料代码">
+                <el-input v-model="addform.PartCode" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="重量">
+                <el-input v-model="addform.Weight" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="手控器连接控制器">
+                <el-input v-model="addform.HandsetWithControlBox" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="手控器连接配件">
+                <el-input v-model="addform.HandsetWithAccessory" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="含税成本">
+                <el-input v-model="addform.TaxCost" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="转让成本">
+                <el-input v-model="addform.TransferPrice" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参考价格">
+                <el-input v-model="addform.ReferencePrice" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否带插槽">
+                <span>False</span>
+                <el-switch v-model="addform.HaveRabbet"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="定制客户">
+                <el-input v-model="addform.Customization" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="参数的描述"  prop="parametricTextIndex">
+                <el-input v-model="addform.parametricTextIndex" style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否适用TO">
+                <span>False</span>
+                <el-switch v-model="addform.UseTO"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TS">
+                <span>False</span>
+                <el-switch v-model="addform.UseTS"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TT">
+                <span>False</span>
+                <el-switch v-model="addform.UseTT"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用TF">
+                <span>False</span>
+                <el-switch v-model="addform.UseTF"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+            <el-form-item label="是否适用Bench">
+                <span>False</span>
+                <el-switch v-model="addform.UseBench"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+        </el-form>
+        <el-button @@click="addonSubmit('addform')">新增</el-button>
+    </el-dialog>
+</div>
+
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var table = new Array();
+    var parthandsettable = new Array();
+    function GetPartFootInfo() {
+        //用 ajax 写
+        parthandsettable.length = 0;
+        $.ajax(
+            {
+                url: "/JCManage/GetAllPartHandsetInfo",
+                method: 'get',
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+                            //UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            Mode: data[i].Mode,
+                            HaveScreen: data[i].HaveScreen == true ? "True" : "False",
+                            ScreenType: data[i].ScreenType ,
+                            Touch: data[i].Touch == true ? "True" : "False",
+                            Button: data[i].Button == true ? "True" : "False",
+                            HaveUsb: data[i].HaveUsb == true ? "True" : "False",
+                            Imbedding: data[i].Imbedding == true ? "True" : "False",
+                            Remote: data[i].Remote == true ? "True" : "False",
+                            BlueTooth: data[i].BlueTooth == true ? "True" : "False",
+                            MemoryKeys: data[i].MemoryKeys,
+                            OutputVoltage: data[i].OutputVoltage,
+                            InputVoltage: data[i].InputVoltage,
+                            TransformerPower: data[i].TransformerPower,
+                            Voltage: data[i].Voltage,
+                            Current: data[i].Current,
+                            HandSetOutLet: data[i].HandSetOutLet,
+                            DoubleMotor: data[i].DoubleMotor == true ? "True" : "False",
+                            HandCranking: data[i].HandCranking == true ? "True" : "False",
+                            GasSpring: data[i].GasSpring == true ? "True" : "False",
+                            SingleMotor: data[i].SingleMotor == true ? "True" : "False",
+                            GS: data[i].GS == true ? "True" : "False",
+                            EN527: data[i].EN527 == true ? "True" : "False",
+                            CE: data[i].CE == true ? "True" : "False",
+                            EMC: data[i].EMC == true ? "True" : "False",
+                            BIFMA: data[i].BIFMA == true ? "True" : "False",
+                            UL962: data[i].UL962 == true ? "True" : "False",
+                            PartCode: data[i].PartCode,
+                            Weight: data[i].Weight,
+                            HandsetWithControlBox: data[i].HandsetWithControlBox,
+                            HandsetWithAccessory: data[i].HandsetWithAccessory,
+                            UseTO: data[i].UseTO == true ? "True" : "False",
+                            UseTS: data[i].UseTS == true ? "True" : "False",
+                            UseTT: data[i].UseTT == true ? "True" : "False",
+                            UseTF: data[i].UseTF == true ? "True" : "False",
+                            UseBench: data[i].UseBench == true ? "True" : "False",
+                        };
+                        //this.tableData.push(q);
+                        parthandsettable.push(q);
+                    }
+                    table = data;
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+    };
+    GetPartFootInfo();
+    var Register = new Vue({
+        el: '#partHandset',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                parthandsettableData: parthandsettable,
+                currentPage4: 1,
+                pagesize: 12,
+                dialogVisible: false,
+                dialogdata: [],
+                certinfokey: false,
+                adddialogVisible: false,
+                addindexdialogVisible: false,
+                form: {
+                    Mode: '',
+                    HaveScreen: '',
+                    ScreenType: '',
+                    Touch: '',
+                    Button: '',
+                    HaveUsb: '',
+                    Imbedding: '',
+                    Remote: '',
+                    BlueTooth: '',
+                    MemoryKeys: '',
+                    OutputVoltage: '',
+                    InputVoltage: '',
+                    TransformerPower: '',
+                    Voltage: '',
+                    Current: '',
+                    HandSetOutLet: '',
+                    DoubleMotor: '',
+                    HandCranking: '',
+                    GasSpring: '',
+                    SingleMotor: '',
+                    GS: '',
+                    EN527: '',
+                    CE: '',
+                    EMC: '',
+                    BIFMA: '',
+                    UL962: '',
+                    DrawingNum2D: '',
+                    DrawingNum3D: '',
+                    DrawingName3D: '',
+                    DrawingName2D: '',
+                    PictureName: '',
+                    PictureNum: '',
+                    PartCode: '',
+                    Weight: '',
+                    DescriptionZH: '',
+                    DescriptionEN: '',
+                    HandsetWithControlBox: '',
+                    HandsetWithAccessory: '',
+                    TaxCost: '',
+                    TransferPrice: '',
+                    ReferencePrice: '',
+                    HaveRabbet: '',
+                    Customization: '',
+                    SpecialDescriptionZH: '',
+                    SpecialDescriptionEN: '',
+                    parametricTextIndex: '',
+                    UseTO: '',
+                    UseTS: '',
+                    UseTT: '',
+                    UseTF: '',
+                    UseBench: '',
+                },
+                addform: {
+                    Mode: null,
+                    HaveScreen: false,
+                    ScreenType: null,
+                    Touch:false,
+                    Button: false,
+                    HaveUsb: false,
+                    Imbedding: false,
+                    Remote: false,
+                    BlueTooth: false,
+                    MemoryKeys: null,
+                    OutputVoltage: null,
+                    InputVoltage: null,
+                    TransformerPower: null,
+                    Voltage: null,
+                    Current: null,
+                    HandSetOutLet: null,
+                    DoubleMotor: false,
+                    HandCranking: false,
+                    GasSpring: false,
+                    SingleMotor: false,
+                    GS:false,
+                    EN527:false,
+                    CE: false,
+                    EMC: false,
+                    BIFMA:false,
+                    UL962: false,
+                    DrawingNum2D: null,
+                    DrawingNum3D: null,
+                    DrawingName3D: null,
+                    DrawingName2D: null,
+                    PictureName: null,
+                    PictureNum: null,
+                    PartCode: null,
+                    Weight: null,
+                    DescriptionZH: null,
+                    DescriptionEN: null,
+                    HandsetWithControlBox: null,
+                    HandsetWithAccessory: null,
+                    TaxCost: null,
+                    TransferPrice: null,
+                    ReferencePrice: null,
+                    HaveRabbet: false,
+                    Customization: null,
+                    SpecialDescriptionZH: null,
+                    SpecialDescriptionEN: null,
+                    parametricTextIndex: null,
+                    UseTO: false,
+                    UseTS:false,
+                    UseTT: false,
+                    UseTF: false,
+                    UseBench: false,
+                },
+                rules: {
+                    Mode: [
+                        { required: true }
+                    ],
+                    MemoryKeys: [
+                        { required: true }
+                    ],
+                    parametricTextIndex: [
+                        { required: true }
+                    ],
+
+                }
+            }
+        },
+        methods: {
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+            handleEdit(index, row) {
+                console.log(this.currentPage4);
+                console.log(this.pagesize);
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+                console.log(this.dialogdata);
+                this.certinfokey = !this.certinfokey;
+                this.dialogVisible = true;
+            },
+            handleDelete(index, row) {
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+                this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCManage/DeleteHandsetInfo",
+                        params: {
+                            forminfo: JSON.stringify(this.form),
+                        }
+                    }).then(function (response) {
+                        this.isadd = response.body;
+                        if (this.isadd == true) {
+
+                            location.reload();
+                        }
+                    });
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
+                console.log(this.dialogdata);
+            },
+            onSubmit() {
+
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/UpdateHandsetInfo",
+                    params: {
+                        forminfo: JSON.stringify(this.form),
+                    }
+                }).then(function (response) {
+                    this.isadd = response.body;
+                    console.log(this.form);
+                    console.log(JSON.stringify(this.form));
+                    console.log(response.body);
+                    if (this.isadd == true) {
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
+                })
+
+
+            },
+            addonSubmit(formname) {
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.$http({           //调用接口
+                            method: 'POST',
+                            url: "/JCManage/addHandsetInfo",
+                            params: {
+                                forminfo: JSON.stringify(this.addform),
+                            }
+                        }).then(function (response) {
+                            this.isadd = response.body;
+                            console.log(this.addform);
+                            console.log(JSON.stringify(this.addform));
+                            console.log(response.body);
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                location.reload();
+                            }
+                        })
+                        console.log(this.addform);
+
+                    }
+                    else {
+                        this.$notify.error('缺少内容');
+
+                    }
+                })
+            },
+            addformshow() {
+                this.adddialogVisible = true;
+            },
+            addindexdialogshow() {
+                this.addindexdialogVisible = true;
+            }
+        },
+        watch: {
+            dialogdata() {
+                Object.assign(this.form, this.dialogdata);
+            },
+        }
+    })
+
+</script>
+
