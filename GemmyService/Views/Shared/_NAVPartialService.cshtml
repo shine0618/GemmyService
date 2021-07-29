@@ -430,7 +430,8 @@
         <div class="container">
             <div class="logo-box">
                 <a href="/JCSelection/main" aria-label="logo image"><img src="/assets/images/logo-dark.png" width="155" alt=""></a>
-                <span class="fa fa-bars mobile-nav__toggler"></span>
+                <span class="fa fa-bars  mobile-nav__toggler" onclick='$(".mobile-nav__wrapper").toggleClass("expanded");'></span>
+                <span class="fa fa-user mobile-nav__toggler"  v-on:click="changeState(drawer)"></span>
             </div><!-- /.logo-box -->
             <ul class="main-menu__list">
                 <li class="dropdown">
