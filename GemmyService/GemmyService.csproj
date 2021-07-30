@@ -840,6 +840,7 @@
     <Content Include="Views\JCManage\filesDetail.cshtml" />
     <Content Include="Views\JCSelection\FileSearch.cshtml" />
     <Content Include="Views\JCSelection\FileTree.cshtml" />
+    <Content Include="Views\JCManage\userLevel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

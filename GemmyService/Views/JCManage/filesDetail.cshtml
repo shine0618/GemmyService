@@ -290,7 +290,7 @@
                 console.log(this.pagesize);
                 var a = 0;
                 for (var i = 0; i < table.length; i++) {
-                    if (table[i].deskGuid ==row.deskGuid) {
+                    if (table[i].FileName + table[i].Type == row.FileName + row.Type) {
                         a = i;
                     }
                 }
@@ -302,7 +302,7 @@
             handleDelete(index, row) {
                 var a = 0;
                 for (var i = 0; i < table.length; i++) {
-                    if (table[i].deskGuid == row.deskGuid) {
+                    if (table[i].FileName + table[i].Type == row.FileName + row.Type) {
                         a = i;
                     }
                 }

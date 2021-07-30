@@ -86,6 +86,7 @@ namespace _2GemmyBusness.BLL
         {
             using (DBGemmyService2 dbcontext = new DBGemmyService2())
             {
+
                 dbcontext.Set<T>().Attach(entity);
                 PropertyInfo[] props = entity.GetType().GetProperties();
                 foreach (PropertyInfo prop in props)

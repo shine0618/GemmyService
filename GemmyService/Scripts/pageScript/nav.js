@@ -1,4 +1,6 @@
-﻿Vue.component('langu-a', {
+﻿
+
+Vue.component('langu-a', {
     data: function () {
         return {
             data: 'aaaa',
@@ -190,7 +192,7 @@ var nav_langu_box = new Vue({
             dialogVisible_opinionsearch: false,
             table_opinionsearch:'',
             opiniontableData: [],
-
+            managershow: false,
             NAVOpinionSearchTitle:'',
             NAVOpinionTitle:'',
             NAVLogin: "",
@@ -613,6 +615,10 @@ var nav_langu_box = new Vue({
             //}
             var lang = navigator.language || navigator.userLanguage;//常规浏览器语言和IE浏览器
             lang = lang.substr(0, 2);//截取lang前2位字符
+            var level = GetLoginLevel();
+            if (level >= 2) {
+                this.managershow = true;
+            };
             this.$http({           //调用接口
                 method: 'GET',
                 url: "/JCSelectionLanguage/GetLanguagesDetail",
@@ -1120,6 +1126,9 @@ var nav_langu_box = new Vue({
             //$.post('url', json, function () { });
 
         },
+        Tomanager: function (event) {
+            window.location.href = "/JCManage/ManagePage";
+        }
     }
 });
 nav_langu_box.initNav();

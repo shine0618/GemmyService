@@ -49,6 +49,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -68,6 +72,10 @@ namespace GemmyService.Controllers
             if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
             }
             Session.Timeout = 9600;
             return View();
@@ -91,6 +99,10 @@ namespace GemmyService.Controllers
             if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
             }
             Session.Timeout = 9600;
 
@@ -296,6 +308,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             Session.Timeout = 9600;
             ViewBag.productGuid = productGuid;
             ViewBag.Type = Type;
@@ -315,6 +331,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             Session.Timeout = 9600;
             ViewBag.productGuid = productGuid;
 
@@ -333,6 +353,10 @@ namespace GemmyService.Controllers
             if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
             }
             return View();
         }
@@ -684,6 +708,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -697,6 +725,10 @@ namespace GemmyService.Controllers
             if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
             }
             Session.Timeout = 9600;
             return View();
@@ -713,6 +745,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -726,6 +762,10 @@ namespace GemmyService.Controllers
             if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
             }
             Session.Timeout = 9600;
 
@@ -741,6 +781,10 @@ namespace GemmyService.Controllers
             if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
             }
             Session.Timeout = 9600;
             ViewBag.email = email;
@@ -758,6 +802,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
 
@@ -770,6 +818,10 @@ namespace GemmyService.Controllers
             if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
             }
             ViewBag.parttype = parttype;
             ViewBag.nature = nature;

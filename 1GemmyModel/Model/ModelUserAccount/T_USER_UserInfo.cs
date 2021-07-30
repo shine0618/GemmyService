@@ -35,8 +35,10 @@ namespace _1GemmyModel.Model
         /// 账号封禁
         /// </summary>
         public bool Lock { get; set; }
-
-
+        /// <summary>
+        /// 权限等级
+        /// </summary>
+        public int Level { get; set; }
 
         [NotMapped]
         public bool CanLogin { get; set; }

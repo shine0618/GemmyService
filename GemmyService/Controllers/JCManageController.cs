@@ -27,6 +27,7 @@ namespace GemmyService.Controllers
         private BLL_Office_DeskDetail bll_office_deskdetail = new BLL_Office_DeskDetail();
         private BLL_Office_DescDetail bll_office_descdetail = new BLL_Office_DescDetail();
         private BLL_Office_Files bll_office_files = new BLL_Office_Files();
+        private BLL_USER bll_user = new BLL_USER();
         // GET: JCManger
         public ActionResult Index()
         {
@@ -42,6 +43,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             var t= usermanager.getAllUserInfo();
             ViewBag.userInfo = t;
             return View();
@@ -56,7 +61,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
 
@@ -70,7 +78,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
         public ActionResult partFoot()
@@ -83,7 +94,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
         public ActionResult partHandset()
@@ -96,7 +110,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
         public ActionResult partControlbox()
@@ -109,7 +126,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
         public ActionResult partSidebracket()
@@ -122,7 +142,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
 
@@ -136,7 +159,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
         public ActionResult userCompanyInfo()
@@ -149,7 +175,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
 
@@ -163,7 +192,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
         public ActionResult productcolor()
@@ -176,7 +208,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
 
@@ -190,7 +225,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
 
@@ -205,7 +243,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
 
@@ -219,7 +260,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
-
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
 
@@ -233,6 +277,10 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             };
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             ViewBag.textkey = textkey == 0 ? 0 : textkey;
             return View();
         }
@@ -247,11 +295,32 @@ namespace GemmyService.Controllers
             {
                 Session["emailName"] = "";
             }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             if (!string.IsNullOrEmpty(mode))
             {
                 ViewBag.mode = mode;
             }
 
+            return View();
+        }
+
+        public ActionResult userLevel()
+        {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
             return View();
         }
 
@@ -388,6 +457,17 @@ namespace GemmyService.Controllers
         {
             var t = bll_office_files.getFileInfo(mode);
             JsonResult jr = Json(t, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+        [HttpPost]
+        public JsonResult UpdateUserLevel(string forminfo)
+        {
+            bool isadd = false;
+            T_USER_UserInfo t_USER_UserInfo = JsonConvert.DeserializeObject<T_USER_UserInfo>(forminfo);
+            isadd = bll_user.UpdateUserLevel(t_USER_UserInfo);
+            JsonResult jr = Json(isadd, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }

@@ -26,7 +26,8 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                         FirstName=firstname,
                         Password = password,
                         LastName =lastname,
-                        Email = email
+                        Email = email,
+                        Level=1
                     });
                    int n =   db.SaveChanges();
                     if(n>0)
@@ -51,7 +52,7 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                 {
                     //判断是否允许登录 
                     
-                    if (entity.Password == pwd)
+                    if (entity.Password == pwd&&entity.Lock==false )
                     {
                         entity.CanLogin = true;
                     }

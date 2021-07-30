@@ -46,7 +46,7 @@
     @*<script src="~/assets/libs/jsPDF/msyh-normal.js"></script>*@
 
     @*自定义的*@
-    <script>
+<script>
         function dFormat(i) {
             return i < 10 ? "0" + i.toString() : i;
         }
@@ -111,7 +111,19 @@
 
         }
 
+        //获取登录用户名的权限等级
+        function GetLoginLevel() {
 
+                var LoginLevel = @Session["level"];
+                //如果客户语言
+                if (LoginLevel == null) {
+                    return 0;
+                }
+                else {
+                    return LoginLevel;
+                }
+
+        }
 
         function downloadPDF(shouldDownload, $table, pdfName) {
             shouldDownload = shouldDownload || false;    // 预览还是导出
@@ -221,7 +233,7 @@
 
             return format;
         }
-    </script>
+</script>
 
 </head>
 

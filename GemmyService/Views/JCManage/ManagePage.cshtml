@@ -71,7 +71,7 @@
                             </template>
                              <el-menu-item index="1-1" @@click="goTo('../JCManage/userRegisterInfo')">注册情况</el-menu-item>
                             <el-menu-item index="1-2" @@click="goTo('../JCManage/userCompanyInfo')">用户信息</el-menu-item>
-                            <el-menu-item index="/test1" @@click="goTo('../JCManage/partColumn')">用户权限</el-menu-item>
+                            <el-menu-item index="/test1" @@click="goTo('../JCManage/userLevel')">用户权限</el-menu-item>
                         </el-submenu>
                     </el-submenu>
                     <el-submenu index="2">
@@ -172,6 +172,10 @@
                 var code = GetLanguCode();
                 this.langCode = code;
                 this.LoginUsername = GetLoginUsername();
+                var level = GetLoginLevel();
+                if (level < 2) {
+                    window.location.href = "/JCSelection/main";
+                }
                 $.ajaxSettings.async = false;
                 var languText;
                 $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {

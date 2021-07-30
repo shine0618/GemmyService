@@ -74,6 +74,7 @@
     <Compile Include="BLL\BLLOfficePartManage\BLL_Office_Part_Handset.cs" />
     <Compile Include="BLL\BLLOfficePartManage\BLL_Office_Part_Powercable.cs" />
     <Compile Include="BLL\BLLOfficePartManage\BLL_Office_Part_Sidebracket.cs" />
+    <Compile Include="BLL\BLLOfficePartManage\BLL_USER.cs" />
     <Compile Include="BLL\BLLSystem\BLL_SYS_Helper.cs" />
     <Compile Include="BLL\BLLSystem\BLL_SYS_language.cs" />
     <Compile Include="BLL\BLLUserAccount\UserManager.cs" />

@@ -25,13 +25,12 @@
         <el-button @@click="addformshow" icon="el-icon-circle-plus-outline" align="right">新增</el-button>
     </el-row>
     <el-table :table="partpowercabletableData"
-              :default-sort="{prop: 'UpdateTime', order: 'descending'}"
+
               :data="partpowercabletableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
               stripe
               height="700"
               style="width:100%">
-        <el-table-column prop="UpdateTime" label="更新时间" sortable>
-        </el-table-column>
+
         <el-table-column prop="Mode" label="型号" fixed>
         </el-table-column>
         <el-table-column prop="PowercableLength" label="电源线长度">

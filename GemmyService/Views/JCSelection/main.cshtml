@@ -133,7 +133,7 @@
         </div><!-- /.row -->
         <div class="row">
             <div class="col-lg-4">
-                <div class="feature-one__box">
+                <div class="feature-one__box" @@click="Toconfiguration">
                     <i class="pylon-icon-assets"></i>
                     <p>
                         {{MainProductConfigurationTool}}
@@ -141,8 +141,8 @@
                 </div><!-- /.feature-one__box -->
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-                <div class="feature-one__box">
-                    <i class="pylon-icon-verification"></i>
+                <div class="feature-one__box" @@click="Tofiles">
+                    <i class="pylon-icon-verification" ></i>
                     <p>
                         {{MainProductFiles}}
                     </p>
@@ -169,11 +169,13 @@
             MainProductConfigurationTool: "",
             MainProductFiles: "",
             MainMyOrder: "",
+            UserLevel:0,
         },
         // 在 `methods` 对象中定义方法
         methods: {
             initPage: function (event) {
                 var code = GetLanguCode();
+                this.UserLevel = GetLoginLevel();
                 $.ajaxSettings.async = false;
 
                 var languText;
@@ -206,8 +208,28 @@
                 //$.post('url', json, function () { });
 
             },
-
-
+            Toconfiguration: function (event) {
+                if (this.UserLevel >= 1) {
+                    window.location.href = "/JCSelection/office_Eservice_test?Type=TS";
+                }
+                else {
+                    this.$message({
+                        type: 'error',
+                        message: '当前账号没有权限进入'
+                    });
+                }
+            },
+            Tofiles: function (event) {
+                if (this.UserLevel >= 1) {
+                    window.location.href = "/JCSelection/FileSearch";
+                }
+                else {
+                    this.$message({
+                        type: 'error',
+                        message: '当前账号没有权限进入'
+                    });
+                }
+            }
             
         }
     })

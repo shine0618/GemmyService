@@ -165,6 +165,7 @@ namespace GemmyService.Controllers
                 Session["configurationPerson"] = isLogin.FirstName+" "+isLogin.LastName;
                 Session["picName"] = isLogin.FirstName.Substring(0,1)+ isLogin.LastName.Substring(0,1);
                 Session["emailName"] = isLogin.Email;
+                Session["level"] = isLogin.Level;
                 Session.Timeout = 9600;
             }
 
