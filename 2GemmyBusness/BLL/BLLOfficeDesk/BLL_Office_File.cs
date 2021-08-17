@@ -98,14 +98,58 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 {
                     query = query.Where(m => m.partType == parttype);
                 }
-                if (!string.IsNullOrEmpty(nature))
-                {
-                    query = query.Where(m => m.Nature == nature);
-                }
                 if (!string.IsNullOrEmpty(mode))
                 {
                     query = query.Where(m => m.Mode == mode);
                 }
+                if (!string.IsNullOrEmpty(nature))
+                {
+                    if (nature.Contains("|"))
+                    {
+                        var q = nature.Split('|');
+                        var a = new List<T_Office_Files>();
+                        var b = new List<T_Office_Files>();
+                        var c = new List<T_Office_Files>();
+                        var d = new List<T_Office_Files>();
+                        var e = new List<T_Office_Files>();
+                        //IQueryable<T_Office_Files> a;
+                        //IQueryable<T_Office_Files> b;
+                        //IQueryable<T_Office_Files> c;
+                        //IQueryable<T_Office_Files> d;
+                        //IQueryable<T_Office_Files> e;
+                        for (int i = 0; i < q.Length; i++)
+                        {
+                            switch (q[i])
+                            {
+                                case "文件资料":a = query.Where(m => m.Nature == "文件资料").ToList();
+                                    break;
+                                case "认证":
+                                    b = query.Where(m => m.Nature == "认证").ToList();
+                                    break;
+                                case "产品图3D":
+                                    c = query.Where(m => m.Nature == "产品图3D").ToList();
+                                    break;
+                                case "产品图2D":
+                                    d = query.Where(m => m.Nature == "产品图2D").ToList();
+                                    break;
+                                case "产品介绍":
+                                    e = query.Where(m => m.Nature == "产品介绍").ToList();
+                                    break;
+                            }
+                        }
+                        a.AddRange(b);
+                        a.AddRange(c);
+                        a.AddRange(e);
+                        a.AddRange(d);
+                        return a;
+                    }
+                    else
+                    {
+                        query = query.Where(m => m.Nature == nature);
+                    }
+                    
+                }
+                
                 return query.ToList();
             }
             

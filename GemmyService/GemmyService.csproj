@@ -394,6 +394,7 @@
     <Content Include="resourse\page\testqrcode.png" />
     <Content Include="resourse\page\threelegs.png" />
     <Content Include="resourse\page\twolegs.png" />
+    <Content Include="resourse\paramdesc\paramIndex.png" />
     <Content Include="resourse\part_column\JS36DC1-2-S.png" />
     <Content Include="resourse\part_column\JS36DC1-3-R.png" />
     <Content Include="resourse\part_column\JS36DC1-3-S.png" />

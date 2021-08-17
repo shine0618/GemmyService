@@ -63,6 +63,13 @@
     })
     var table = new Array();
     var UserData = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetUserInfo() {
         //用 ajax 写
         UserData.length = 0;

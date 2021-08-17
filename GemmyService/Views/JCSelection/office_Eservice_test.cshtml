@@ -908,7 +908,7 @@
                             });
                         }
                     }, function (error) {
-                        console.log(error);
+                        //console.log(error);
                     })
 
 
@@ -960,6 +960,10 @@
                 var code = GetLanguCode();
                 this.langCode = code;
                 $.ajaxSettings.async = false;
+                var level = GetLoginLevel();
+                if (level < 1) {
+                    window.location.href = "/JCSelection/main";
+                }
                 var languText;
                 $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
                     languText = result.language;
@@ -1015,9 +1019,9 @@
                 }).then(function (response) {  //接口返回数据
 
                     this.detailModel = response.body;
-                    console.log(response.body);
+                    //console.log(response.body);
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
 
                 this.dialogVisible_partDetail = true
@@ -1038,7 +1042,7 @@
                     this.list_column_count = this.list_column.length;
                     //console.log(response.body);
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
             getAllFrame: function (event) {
@@ -1053,7 +1057,7 @@
                     this.list_frame = response.body;
                     this.list_frame_count = this.list_frame.length;
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
             getAllFoot: function (event) {
@@ -1068,11 +1072,11 @@
                     this.list_foot = response.body;
                     this.list_foot_count = this.list_foot.length;
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
             getAllSideBracket: function (event) {
-                console.log(this.select_frame);
+                //console.log(this.select_frame);
                 this.$http({           //调用接口
                     method: 'GET',
                     url: "/JCSelection/GetOfficeSideBracket",
@@ -1084,7 +1088,7 @@
                     this.list_SideBracket = response.body;
                     this.list_SideBracket_count = this.list_SideBracket.length;
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
             getAllControlBox: function (event) {
@@ -1100,7 +1104,7 @@
 
 
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
             getAllHandSet: function (event) {
@@ -1114,7 +1118,7 @@
                     this.list_HandSet = response.body;
                     this.list_HandSet_count = this.list_HandSet.length;
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
             getAllPowercable: function (event) {
@@ -1127,7 +1131,7 @@
                     this.list_Powercable = response.body;
                     this.list_Powercable_count = this.list_Powercable.length;
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
 
@@ -1141,7 +1145,7 @@
                     this.list_Color = response.body;
                     this.list_Color_count = this.list_Color.length;
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
             columnClick: function (id, mode) {
@@ -1245,7 +1249,6 @@
                         this.framesbigWidth = this.list_frame[i].MaxLength;
                     }
                 };
-
                 this.SetFrame();
             },
 
@@ -1352,7 +1355,7 @@
                 //console.log(callback);
                 //console.log(this.url_text);
 
-                console.log(this.IsShowDesktop);
+                //console.log(this.IsShowDesktop);
                 this.SetFrame();
             },
 
@@ -1447,7 +1450,7 @@
                             productGuid: productGuid,
                         }
                     }).then(function (response) {  //接口返回数据
-                        console.log(response.body);
+                        //console.log(response.body);
                         var column = "";
                         var frame = "";
                         var foot = "";
@@ -1538,7 +1541,7 @@
                         this.hc_HandSet = handset;
                         this.colour_color = color;
                     }, function (error) {
-                        console.log(error);
+                        //console.log(error);
                     })
             },
         }

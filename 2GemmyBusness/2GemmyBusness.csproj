@@ -44,6 +44,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -77,6 +78,7 @@
     <Compile Include="BLL\BLLOfficePartManage\BLL_USER.cs" />
     <Compile Include="BLL\BLLSystem\BLL_SYS_Helper.cs" />
     <Compile Include="BLL\BLLSystem\BLL_SYS_language.cs" />
+    <Compile Include="BLL\BLLUserAccount\BLL_USER_Click.cs" />
     <Compile Include="BLL\BLLUserAccount\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

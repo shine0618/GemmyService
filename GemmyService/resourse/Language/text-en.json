@@ -7,6 +7,7 @@
     "MainProductConfigurationTool": "Product Configuration Tool",
     "MainProductFiles": "Product Files",
     "MainMyOrder": "My Order List",
+    "MainAllowNotice": "Has no access permission",
     "NAVLogin": "Login",
     "NAVLoginAccount": "Email",
     "NAVLoginPassword": "Password",
@@ -240,6 +241,39 @@
     "NAVOpinionSubmitFailNotice": "Add fail",
     "NAVOpinionLoginNotice": "Log in first",
     "OfficeStandardsDeleteplansuccessfulnotice": "Delete success",
-    "OfficeStandardsDeleteplanfailnotice": "Delete fail"
+    "OfficeStandardsDeleteplanfailnotice": "Delete fail",
+
+
+
+
+    "FileSearchTitle": "SearchFile",
+    "FileSearchSelectType": "SelectPart",
+    "FileSearchSelectColumn": "Column",
+    "FileSearchSelectHandset": "Handset",
+    "FileSearchSelectControlbox": "Control",
+    "FileSearchSelectFoot": "Foot",
+    "FileSearchSelectSidebracket": "Side",
+    "FileSearchSelectFrame": "Frame",
+    "FileSearchSelectPowercable": "Powercable",
+    "FileSearchSelectAccessory": "Accessory",
+    "FileSearchSelectDesk": "Desl",
+    "FileSearchSelectFileType": "FileType",
+    "FileSearchSelectFileTypeDesc": "Desc.",
+    "FileSearchSelectFileType2D": "2D",
+    "FileSearchSelectFileType3D": "3D",
+    "FileSearchSelectFileTypeCert": "Certification",
+    "FileSearchSelectFileTypeDoc": "Document",
+    "FileSearchMode": "SearchMode",
+    "FileSearchModeBtn": "Search",
+
+    "FileTreeDownloadBtn": "Download Files",
+    "FileTreeDesc": "Description",
+    "FileTree2D": "2D",
+    "FileTree3D": "3D",
+    "FileTreeCert": "Certification",
+    "FileTreeDoc": "Document"
+
+
+
   }
 }

@@ -116,6 +116,13 @@
     })
     var table = new Array();
     var partpowercableboxtable = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetDescInfo() {
         //用 ajax 写
         partpowercableboxtable.length = 0;

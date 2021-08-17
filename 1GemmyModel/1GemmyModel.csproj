@@ -198,6 +198,7 @@
     <Compile Include="Model\ModelProductOffice\T_Product_office_desk_detail.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_text.cs" />
     <Compile Include="Model\ModelSystem\T_SYS_Language.cs" />
+    <Compile Include="Model\ModelUserAccount\T_USER_Click.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Opinion.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Permission.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Permission_menus.cs" />

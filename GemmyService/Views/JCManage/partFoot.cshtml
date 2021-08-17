@@ -25,7 +25,7 @@
         <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
         <el-button @@click="addformshow" icon="el-icon-circle-plus-outline" align="right">新增</el-button>
     </el-row>
-    
+
     <el-table :table="partfoottableData"
               :default-sort="{prop: 'UpdateTime', order: 'descending'}"
               :data="partfoottableData.filter(data => !table_emailsearch || data.Mode.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
@@ -254,7 +254,7 @@
             <el-form-item label="2D图名">
                 <el-input v-model="form.DrawingName2D" style="width:60%;"></el-input>
             </el-form-item>
-            <el-form-item label="效果图名" >
+            <el-form-item label="效果图名">
                 <el-input v-model="form.PictureName" disabled style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="效果图号">
@@ -283,6 +283,7 @@
             </el-form-item>
             <el-form-item label="参数的描述">
                 <el-input v-model="form.parametricTextIndex" style="width:60%;"></el-input>
+                <el-link @@click="addindexdialogshow">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
             <el-form-item label="是否适用TO">
                 <span>False</span>
@@ -330,9 +331,9 @@
     <el-dialog title="地脚信息"
                :visible.sync="adddialogVisible"
                width="40%">
-        <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">            
+        <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
             <el-form-item label="地脚型号" prop="Mode">
-                <el-input v-model="addform.Mode"  style="width:60%;"></el-input>
+                <el-input v-model="addform.Mode" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="最大长度" prop="MaxLength">
                 <el-input v-model="addform.MaxLength" style="width:60%;"></el-input>
@@ -504,6 +505,7 @@
             </el-form-item>
             <el-form-item label="参数的描述" prop="parametricTextIndex">
                 <el-input v-model="addform.parametricTextIndex" style="width:60%;"></el-input>
+                <el-link @@click="addindexdialogshow">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
             <el-form-item label="是否适用TO">
                 <span>False</span>
@@ -548,6 +550,13 @@
             <el-button @@click="addonSubmit('addform')">新增</el-button>
         </el-form>
     </el-dialog>
+
+    <el-dialog title="参数描述的定义"
+               :visible.sync="addindexdialogVisible"
+               width="80%">
+
+        <img src="~/resourse/paramdesc/paramIndex.png" />
+    </el-dialog>
 </div>
 
 
@@ -558,6 +567,13 @@
     })
     var table = new Array();
     var partfoottable = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetPartFootInfo() {
         //用 ajax 写
         partfoottable.length = 0;

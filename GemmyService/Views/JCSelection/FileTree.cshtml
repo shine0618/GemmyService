@@ -32,7 +32,7 @@
 <div id="filedetail">
     <div class="custom-tree-container">
         <div align="right">
-            <el-button @@click="handleCheckChange" style="background-color:#008fd5;color:#fff">下载选中的文件</el-button>
+            <el-button @@click="handleCheckChange" style="background-color:#008fd5;color:#fff">{{FileTreeDownloadBtn}}</el-button>
         </div>
         <div class="block">
 
@@ -59,33 +59,67 @@
                 nature: '@ViewBag.nature',
                 mode: '@ViewBag.mode',
                 filelist: [],
+
+
+                FileTreeDownloadBtn: "",
+                FileTreeDesc: "",
+                FileTree2D: "",
+                FileTree3D: "",
+                FileTreeCert: "",
+                FileTreeDoc: ""
+
             }
         },
         methods: {
             getfile() {
+                var code = GetLanguCode();
+                this.langCode = code;
+                $.ajaxSettings.async = false;
+                var level = GetLoginLevel();
+                if (level < 2) {
+                    window.location.href = "/JCSelection/main";
+                }
+                var languText;
+                $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
+                    languText = result.language;
+                });
+                $.ajaxSettings.async = true;
+                var obj = languText;
+                for (var p in obj) {
+                    // 方法
+                    if (typeof (obj[p]) == "function") {
+                        obj[p]();
+                    } else {
+                        // p 为属性名称，obj[p]为对应属性的值
+                        var key = p;
+                        var value = obj[p];
+                        // console.log('key:' + key + "  value:" + value);
+                        this.setData(key, value);
+                    }
+                }
                 var m = [{
                     id: 1,
-                    label: '产品介绍',
+                    label: this.FileTreeDesc,
                     children:[],
                 },
                 {
                     id: 2,
-                    label: '产品图2D',
+                    label: this.FileTree2D,
                     children: [],
                 },
                 {
                     id: 3,
-                    label: '产品图3D',
+                    label: this.FileTree3D,
                     children: [],
                 },
                 {
                     id: 4,
-                    label: '认证',
+                    label: this.FileTreeCert,
                     children: [],
                 },
                 {
                     id: 5,
-                    label: '文件资料',
+                    label: this.FileTreeDoc,
                     children: [],
                     }];              
                 this.$http({           //调用接口
@@ -132,9 +166,9 @@
                                 break;
                         }
                     }
-                    console.log(this.filelist);
+                    //console.log(this.filelist);
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
                 this.data = m;
             },
@@ -161,7 +195,7 @@
                     }
                     
                 })
-                console.log(arr);
+                //console.log(arr);
                 for (var i = 0; i < arr.length; i++) {
                     var fname = this.filelist[arr[i] - 6].FileName ;
                     if (this.filelist[arr[i] - 6].Type == ".dwg" || this.filelist[arr[i] - 6].Type == ".stp") {
@@ -174,6 +208,9 @@
                     document.body.appendChild(link);
                     link.click();
                 }
+            },
+            setData: function (field, val) {
+                this.$set(this.$data, field, val);//vue 设定值
             },
         },
     })

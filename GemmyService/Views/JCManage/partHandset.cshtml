@@ -137,8 +137,8 @@
                 </el-switch>
                 <span>True</span>
             </el-form-item>
-            <el-form-item label="显示屏类型">               
-                    <el-input v-model="form.ScreenType" style="width:60%;"></el-input>
+            <el-form-item label="显示屏类型">
+                <el-input v-model="form.ScreenType" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="是否是触摸">
                 <span>False</span>
@@ -341,6 +341,7 @@
             </el-form-item>
             <el-form-item label="参数的描述">
                 <el-input v-model="form.parametricTextIndex" style="width:60%;"></el-input>
+                <el-link @@click="addindexdialogshow">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
             <el-form-item label="是否适用TO">
                 <span>False</span>
@@ -392,7 +393,7 @@
                width="40%">
         <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
             <el-form-item label="手控器型号" prop="Mode">
-                <el-input v-model="addform.Mode"  style="width:60%;"></el-input>
+                <el-input v-model="addform.Mode" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="是否有显示屏">
                 <span>False</span>
@@ -453,7 +454,7 @@
                 </el-switch>
                 <span>True</span>
             </el-form-item>
-            <el-form-item label="记忆键数量"  prop="MemoryKeys">
+            <el-form-item label="记忆键数量" prop="MemoryKeys">
                 <el-input v-model.number="addform.MemoryKeys" oninput="value=value.replace(/[^\d]/g,'')" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="输出电压">
@@ -567,7 +568,7 @@
                 <el-input v-model="addform.DrawingName2D" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="效果图名">
-                <el-input v-model="addform.PictureName"  style="width:60%;"></el-input>
+                <el-input v-model="addform.PictureName" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="效果图号">
                 <el-input v-model="addform.PictureNum" style="width:60%;"></el-input>
@@ -604,8 +605,9 @@
             <el-form-item label="定制客户">
                 <el-input v-model="addform.Customization" style="width:60%;"></el-input>
             </el-form-item>
-            <el-form-item label="参数的描述"  prop="parametricTextIndex">
+            <el-form-item label="参数的描述" prop="parametricTextIndex">
                 <el-input v-model="addform.parametricTextIndex" style="width:60%;"></el-input>
+                <el-link @@click="addindexdialogshow">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
             <el-form-item label="是否适用TO">
                 <span>False</span>
@@ -650,6 +652,13 @@
         </el-form>
         <el-button @@click="addonSubmit('addform')">新增</el-button>
     </el-dialog>
+
+    <el-dialog title="参数描述的定义"
+               :visible.sync="addindexdialogVisible"
+               width="80%">
+
+        <img src="~/resourse/paramdesc/paramIndex.png" />
+    </el-dialog>
 </div>
 
 
@@ -660,6 +669,13 @@
     })
     var table = new Array();
     var parthandsettable = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetPartFootInfo() {
         //用 ajax 写
         parthandsettable.length = 0;

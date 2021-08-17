@@ -55,6 +55,13 @@
         $('.main-menu').hide();
     })
     var companytable = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetUserCompanyInfo() {
         //用 ajax 写
 

@@ -9,9 +9,10 @@
 <script src="/assets/eleindex.js"></script>
 <script src="/Scripts/vueAjax.js"></script>
 <style>
-    .el-dialog{
-        margin-top:0vh !important;
+    .el-dialog {
+        margin-top: 0vh !important;
     }
+
     .size-icon {
         font-size: 30px;
     }
@@ -356,7 +357,8 @@
                 <el-input v-model="form.ReferencePrice"></el-input>
             </el-form-item>
             <el-form-item label="参数的描述">
-                <el-input v-model="form.parametricTextIndex"></el-input>
+                <el-input v-model="form.parametricTextIndex" style="width:50%"></el-input>
+                <el-link @@click="addindexdialogshow">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
             <el-form-item label="是否适用TO">
                 <span>False</span>
@@ -409,7 +411,7 @@
                width="40%">
         <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
             <el-form-item label="立柱型号" prop="Mode">
-                <el-input v-model="addform.Mode"  style="width:60%;"></el-input>
+                <el-input v-model="addform.Mode" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="正装倒装" prop="Type">
                 <el-select v-model="addform.Type">
@@ -603,7 +605,7 @@
                 <el-input v-model="addform.DrawingName3D"></el-input>
             </el-form-item>
             <el-form-item label="效果图">
-                <el-input v-model="addform.PictureName" ></el-input>
+                <el-input v-model="addform.PictureName"></el-input>
             </el-form-item>
             <el-form-item label="效果图号">
                 <el-input v-model="addform.PictureNum"></el-input>
@@ -680,11 +682,13 @@
 
     <el-dialog title="参数描述的定义"
                :visible.sync="addindexdialogVisible"
-               width="40%">
+               width="80%">
+
+        <img src="~/resourse/paramdesc/paramIndex.png" />
     </el-dialog>
 
 </div>
-    
+
 
 
 <script>
@@ -694,6 +698,13 @@
     })
     var table = new Array();
     var partcolumntable = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetPartColumnInfo() {
         //用 ajax 写
         partcolumntable.length = 0;
@@ -745,7 +756,7 @@
                             UseTT: data[i].UseTT == true ? "True" : "False",
                             UseTF: data[i].UseTF == true ? "True" : "False",
                             UseBench: data[i].UseBench == true ? "True" : "False",
-                            
+
                         };
                         //this.tableData.push(q);
                         partcolumntable.push(q);
@@ -798,7 +809,7 @@
                     SingleMotor: '',
                     HandCranking: '',
                     GasSpring: '',
-                    Weight:'',
+                    Weight: '',
                     CanEZ: '',
                     CanFold: '',
                     CanTurn: '',
@@ -889,7 +900,7 @@
                     UseTF: false,
                     UseBench: false,
                 },
-                rules: {  
+                rules: {
                     Mode: [
                         { required: true }
                     ],
@@ -930,7 +941,7 @@
             handleEdit(index, row) {
                 console.log(this.currentPage4);
                 console.log(this.pagesize);
-                this.dialogdata = table[index + (this.currentPage4-1) * this.pagesize];
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
                 console.log(this.dialogdata);
                 this.certinfokey = !this.certinfokey;
                 this.dialogVisible = true;
@@ -951,7 +962,7 @@
                     }).then(function (response) {
                         this.isadd = response.body;
                         if (this.isadd == true) {
-                            
+
                             location.reload();
                         }
                     });
@@ -968,28 +979,28 @@
                 console.log(this.dialogdata);
             },
             onSubmit() {
-                
-                        this.$http({           //调用接口
-                            method: 'POST',
-                            url: "/JCManage/UpdateColumnInfo",
-                            params: {
-                                forminfo: JSON.stringify(this.form),
-                            }
-                        }).then(function (response) {
-                            this.isadd = response.body;
-                            console.log(this.form);
-                            console.log(JSON.stringify(this.form));
-                            console.log(response.body);
-                            if (this.isadd == true) {
-                                this.$notify({
-                                    message: '提交成功',
-                                    type: 'success'
-                                });
-                                location.reload();
-                            }
-                        })
-                   
-               
+
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/UpdateColumnInfo",
+                    params: {
+                        forminfo: JSON.stringify(this.form),
+                    }
+                }).then(function (response) {
+                    this.isadd = response.body;
+                    console.log(this.form);
+                    console.log(JSON.stringify(this.form));
+                    console.log(response.body);
+                    if (this.isadd == true) {
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
+                })
+
+
             },
             addonSubmit(formname) {
                 this.$refs[formname].validate((valid) => {
@@ -1014,7 +1025,7 @@
                             }
                         })
                         console.log(this.addform);
-                        
+
                         this.$notify({
                             message: '提交成功',
                             type: 'success'
@@ -1032,13 +1043,14 @@
             },
             addindexdialogshow() {
                 this.addindexdialogVisible = true;
-            }
+            },
+            
         },
         watch: {
             dialogdata() {
                 Object.assign(this.form, this.dialogdata);
             },
-            
+
         }
     })
 

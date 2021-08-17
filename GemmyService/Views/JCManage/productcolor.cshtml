@@ -130,7 +130,7 @@
                 <el-input v-model="form.BValueRGB" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="十六进制数值">
-                <el-input v-model="form.HEXValue"  style="width:60%;"></el-input>
+                <el-input v-model="form.HEXValue" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="Lab的L值">
                 <el-input v-model="form.LValueLab" style="width:60%;"></el-input>
@@ -144,6 +144,7 @@
             <el-form-item label="参数描述">
                 <el-input v-model="form.parametricTextIndex" style="width:60%;"></el-input>
             </el-form-item>
+            <el-button @@click="colorchange">一键生成颜色</el-button>
             <el-button @@click="onSubmit">更新</el-button>
         </el-form>
     </el-dialog>
@@ -152,7 +153,7 @@
                width="40%">
         <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
             <el-form-item label="颜色名称" prop="ColorName">
-            <el-input v-model="addform.ColorName" style="width:60%;"></el-input>
+                <el-input v-model="addform.ColorName" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="颜色标准">
                 <el-select v-model="addform.ColorStandard">
@@ -196,7 +197,7 @@
             <el-form-item label="RGB的G值" prop="GValueRGB">
                 <el-input v-model="addform.GValueRGB" style="width:60%;"></el-input>
             </el-form-item>
-            <el-form-item label="RGB的B值" prop="BValueRGB"> 
+            <el-form-item label="RGB的B值" prop="BValueRGB">
                 <el-input v-model="addform.BValueRGB" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="十六进制数值">
@@ -214,7 +215,8 @@
             <el-form-item label="参数描述" prop="parametricTextIndex">
                 <el-input v-model="addform.parametricTextIndex" style="width:60%;"></el-input>
             </el-form-item>
-        </el-form> 
+        </el-form>
+        <el-button @@click="addcolorchange">一键生成颜色</el-button>
         <el-button @@click="addonSubmit('addform')">新增</el-button>
     </el-dialog>
 </div>
@@ -227,6 +229,13 @@
     })
     var table = new Array();
     var partcolortable = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetPartcolorInfo() {
         //用 ajax 写
         partcolortable.length = 0;
@@ -446,6 +455,38 @@
             },
             addindexdialogshow() {
                 this.addindexdialogVisible = true;
+            },
+            colorchange() {
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/ChangeColor",
+                    params: {
+                        lvalue: this.form.LValueLab,
+                        avalue: this.form.AValueLab,
+                        bvalue: this.form.BValueLab
+                    }
+                }).then(function (response) {
+                    this.form.RValueRGB = response.body.rgb[0];
+                    this.form.GValueRGB = response.body.rgb[1];
+                    this.form.BValueRGB = response.body.rgb[2];
+                    this.form.HEXValue = response.body.hex;
+                })
+            },
+            addcolorchange() {
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/ChangeColor",
+                    params: {
+                        lvalue: this.addform.LValueLab,
+                        avalue: this.addform.AValueLab,
+                        bvalue: this.addform.BValueLab
+                    }
+                }).then(function (response) {
+                    this.addform.RValueRGB = response.body.rgb[0];
+                    this.addform.GValueRGB = response.body.rgb[1];
+                    this.addform.BValueRGB = response.body.rgb[2];
+                    this.addform.HEXValue = response.body.hex;
+                })
             }
         },
         watch: {

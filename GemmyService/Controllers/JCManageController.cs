@@ -751,6 +751,21 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
+        [HttpPost]
+        public JsonResult ChangeColor(double lvalue,double avalue,double bvalue)
+        {
+            int[] rgb = BLL_Office_color.LabToRGB(lvalue,avalue,bvalue);
+            string hex = BLL_Office_color.getHex(rgb);
+            var param = new
+            {
+                rgb = rgb,
+                hex=hex
+            };
+            JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
         #endregion
         #region 捷昌推荐整桌操作
 

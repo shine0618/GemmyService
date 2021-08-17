@@ -169,6 +169,7 @@
             MainProductConfigurationTool: "",
             MainProductFiles: "",
             MainMyOrder: "",
+            MainAllowNotice:"",
             UserLevel:0,
         },
         // 在 `methods` 对象中定义方法
@@ -215,7 +216,7 @@
                 else {
                     this.$message({
                         type: 'error',
-                        message: '当前账号没有权限进入'
+                        message: this.MainAllowNotice
                     });
                 }
             },
@@ -226,7 +227,7 @@
                 else {
                     this.$message({
                         type: 'error',
-                        message: '当前账号没有权限进入'
+                        message: this.MainAllowNotice
                     });
                 }
             }

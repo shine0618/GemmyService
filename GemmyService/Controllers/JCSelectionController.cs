@@ -4,6 +4,7 @@ using _1GemmyModel.Model.ModelProductOffice;
 using _1GemmyModel.Model.ModelUserAccount;
 using _2GemmyBusness.BLL.BLLOfficeDesk;
 using _2GemmyBusness.BLL.BLLSystem;
+using _2GemmyBusness.BLL.BLLUserAccount;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace GemmyService.Controllers
         private BLL_Office_Color bll_color = new BLL_Office_Color();
         private BLL_Office_desk_collect bll_collect = new BLL_Office_desk_collect();
         private BLL_Office_desk_customer bll_customer = new BLL_Office_desk_customer();
+        private UserManager userManager = new UserManager();
+        //private BLL_USER_Click bll_user_click = new BLL_USER_Click();
         #endregion
 
 
@@ -862,8 +865,40 @@ namespace GemmyService.Controllers
 
 
 
-       
+
         #endregion
 
+        #region 热度点击事件
+        //[HttpGet]
+        //public JsonResult getclick(string type,string email)
+        //{
+        //    List<T_USER_Click> list = bll_user_click.GetTypeButton(type,email);
+        //    JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+        //    jr.MaxJsonLength = int.MaxValue;
+        //    return jr;
+        //}
+        #endregion
+
+
+        #region 价格系统
+
+        [HttpGet]
+        public JsonResult getPriceByParts(string productGuid, string lang, string number, string email)
+        {
+            T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
+            T_Product_office_desk_detail _T_Product_office_desk_detail = bll_desk.GetT_Product_office_desk_detail(_T_Product_office_desk.Id, lang);
+            T_USER_UserInfo _T_USER_UserInfo = userManager.getUserinfoModel(email);
+            var param =
+           new
+           {
+               T_Product_office_desk_detail = _T_Product_office_desk_detail,
+               T_USER_UserInfo = _T_USER_UserInfo,
+           };
+            JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+        #endregion
     }
 }

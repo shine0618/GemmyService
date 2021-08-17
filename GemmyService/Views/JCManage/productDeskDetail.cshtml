@@ -100,6 +100,13 @@
     })
     var table = new Array();
     var deskData = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetdeskInfo() {
         //用 ajax 写
         deskData.length = 0;

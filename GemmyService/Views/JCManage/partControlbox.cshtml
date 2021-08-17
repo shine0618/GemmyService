@@ -290,6 +290,7 @@
             </el-form-item>
             <el-form-item label="参数的描述">
                 <el-input v-model="form.parametricTextIndex" style="width:60%;"></el-input>
+                <el-link @@click="addindexdialogshow">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
             <el-form-item label="是否适用TO">
                 <span>False</span>
@@ -510,6 +511,7 @@
             </el-form-item>
             <el-form-item label="参数的描述" prop="parametricTextIndex">
                 <el-input v-model="addform.parametricTextIndex" style="width:60%;"></el-input>
+                <el-link @@click="addindexdialogshow">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
             <el-form-item label="是否适用TO">
                 <span>False</span>
@@ -554,6 +556,14 @@
             <el-button @@click="addonSubmit('addform')">新增</el-button>
         </el-form>
     </el-dialog>
+
+
+    <el-dialog title="参数描述的定义"
+               :visible.sync="addindexdialogVisible"
+               width="80%">
+
+        <img src="~/resourse/paramdesc/paramIndex.png" />
+    </el-dialog>
 </div>
 
 
@@ -564,6 +574,13 @@
     })
     var table = new Array();
     var partcontrolboxtable = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetPartcontrolboxInfo() {
         //用 ajax 写
         partcontrolboxtable.length = 0;

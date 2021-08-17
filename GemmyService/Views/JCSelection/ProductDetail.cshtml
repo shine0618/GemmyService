@@ -520,7 +520,7 @@
                         this.isCollect = false;
                     }
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
             CancelCollectDesk: function() {
@@ -543,7 +543,7 @@
                         this.isCollect = true;
                     }
                 }, function (error) {
-                    console.log(error);
+                    //console.log(error);
                 })
             },
 
@@ -570,7 +570,7 @@
                 }
 
 
-                console.log(url);
+               // console.log(url);
                 //window.open(url);   //该方法只能下载比如xls等不能直接打开的文件，对于png之类的文件会直接打开而非下载
 
                 const link = document.createElement('a');
@@ -776,8 +776,8 @@
                         color = it.ColorNumber;
                     }
 
-                    initQRCode('qrcodebox', this.configurationNo);
-
+                    initQRCode('qrcodebox', 'http://config.jiecang.com:8866/JCSelection/ProductDetail?domain='+'&Type='+ "@ViewBag.Type"+'&recommend='+"@ViewBag.recommend"+'&productName='+'@ViewBag.productName'+'&productGuid='+'@ViewBag.productGuid');
+                    //initQRCode('qrcodebox', 'http://config.jiecang.com:8866/JCSelection/Main');
                    // console.log(this.T_Product_office_desk_detail);
 
                     var ni = 0;
@@ -803,14 +803,14 @@
                         this.isCollect = true;
                     }
                     var url = checkProductDetailUrl(column,frame,foot,side,control, handset, color);
-                    console.log(url);
+                    //console.log(url);
                     var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "' + url + "&languageIso=" + this.langCode+'"/>';
                     $('#asas').append(i);
                     //console.log(response.body);
 
 
                 }, function (error) {
-                        console.log(error);
+                        //console.log(error);
 
 
                 })

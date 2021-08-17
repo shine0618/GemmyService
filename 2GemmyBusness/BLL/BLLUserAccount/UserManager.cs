@@ -141,6 +141,14 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
                 return entity.ToList();
             }
         }
+        public T_USER_UserInfo getUserinfoModel(string email)
+        {
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                var entity = db.T_USER_UserInfo.Where(m => m.Email == email).FirstOrDefault();
+                return entity;
+            }
+        }
         public List<T_USER_UserInfo> getUserinfoLoginReset(string email,string password)
         {
             string pwd= MD5T.MD5Encrypt(password);

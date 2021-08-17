@@ -241,7 +241,7 @@
                 }).then(function (response) {  //接口返回数据
 
                     this.deskList = response.body;
-                    console.log(response.body);
+                    //console.log(response.body);
 
 
                 }, function (error) {
@@ -258,7 +258,7 @@
                 }
             },
             Deleteplan: function (id) {
-                console.log(id);
+                //console.log(id);
                 this.$http({           //调用接口
                     method: 'GET',
                     url: "/JCSelection/DeleteCustomer",
@@ -266,7 +266,7 @@
                         id:id,
                     }
                 }).then(function (response) {  //接口返回数据
-                    console.log(response.body);
+                   // console.log(response.body);
                     if (response.body == true) {
                         this.$notify({
                             message: this.OfficeStandardsDeleteplansuccessfulnotice,

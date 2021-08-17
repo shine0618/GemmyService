@@ -3,6 +3,7 @@ using _1GemmyModel.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,5 +16,10 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             var entity = read_db.T_Office_Color.OrderBy(x=>x.HEXValue).ToList();
             return entity;
         }
+
+        
+
+
+
     }
 }

@@ -48,7 +48,7 @@
                             <img src="~/resourse/page/twolegs.png" />
                         </div><!-- /.service-one__image -->
                         <div class="service-one__content">
-                            <h3><a href="service-details.html">{{OfficeTSDesk}}</a></h3>
+                            <h3>{{OfficeTSDesk}}</h3>
                             <p>{{OfficeTSDeskContent}}</p>
                             <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
                         </div><!-- /.service-one__content -->
@@ -163,6 +163,23 @@
             open1() {
                 this.$message(this.OfficeUnopenNotice);
             },
+
+            TypeClick(type,mode) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/getclick",
+                    params: {
+                        type: type,
+                        mode: mode
+                    }
+                }).then(function (response) {  //接口返回数据
+                    // console.log(response.body);
+                    window.location = '/JCSelection/OfficeStandards?Type=' + type;
+                }, function (error) {
+                    window.location = '/JCSelection/OfficeStandards?Type=' + type;
+                })
+                
+            }
         }
     })
 

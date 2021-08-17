@@ -111,10 +111,10 @@
                 <el-input v-model="form.Mode" disabled style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="最大长度">
-                <el-input-number v-model="form.MaxLength" :min="0" :precision="0"  style="width:60%;"></el-input-number>
+                <el-input-number v-model="form.MaxLength" :min="0" :precision="0" style="width:60%;"></el-input-number>
             </el-form-item>
             <el-form-item label="最小长度">
-                <el-input-number v-model="form.MinLength"  :min="0" :precision="0" style="width:60%;"></el-input-number>
+                <el-input-number v-model="form.MinLength" :min="0" :precision="0" style="width:60%;"></el-input-number>
             </el-form-item>
             <el-form-item label="稳定性等级">
                 <el-input-number v-model="form.StabilityLeave" :min="0" :precision="0" style="width:60%;"></el-input-number>
@@ -280,6 +280,7 @@
             </el-form-item>
             <el-form-item label="参数的描述">
                 <el-input-number v-model="form.parametricTextIndex" :min="0" :precision="0" style="width:60%;"></el-input-number>
+                <el-link @@click="addindexdialogshow">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
             <el-form-item label="是否适用TO">
                 <span>False</span>
@@ -320,7 +321,7 @@
                            inactive-color="#ff4949">
                 </el-switch>
                 <span>True</span>
-            </el-form-item>            
+            </el-form-item>
             <el-button @@click="onSubmit">更新</el-button>
         </el-form>
     </el-dialog>
@@ -331,7 +332,7 @@
                width="40%">
         <el-form ref="addform" :model="addform" :rules="rules" label-width="150px">
             <el-form-item label="侧板型号" prop="Mode">
-                <el-input v-model="addform.Mode"   style="width:60%;"></el-input>
+                <el-input v-model="addform.Mode" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="最大长度" prop="MaxLength">
                 <el-input-number v-model="addform.MaxLength" :min="0" :precision="0" style="width:60%;"></el-input-number>
@@ -475,7 +476,7 @@
                 <el-input v-model="addform.DrawingName2D" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="效果图名">
-                <el-input v-model="addform.PictureName"  style="width:60%;"></el-input>
+                <el-input v-model="addform.PictureName" style="width:60%;"></el-input>
             </el-form-item>
             <el-form-item label="效果图号">
                 <el-input v-model="addform.PictureNum" style="width:60%;"></el-input>
@@ -503,6 +504,7 @@
             </el-form-item>
             <el-form-item label="参数的描述" prop="parametricTextIndex">
                 <el-input-number v-model="addform.parametricTextIndex" :min="0" :precision="0" style="width:60%;"></el-input-number>
+                <el-link @@click="addindexdialogshow">查看<i class="el-icon-view el-icon--right"></i> </el-link>
             </el-form-item>
             <el-form-item label="是否适用TO">
                 <span>False</span>
@@ -547,6 +549,13 @@
         </el-form>
         <el-button @@click="addonSubmit('addform')">新增</el-button>
     </el-dialog>
+
+    <el-dialog title="参数描述的定义"
+               :visible.sync="addindexdialogVisible"
+               width="80%">
+
+        <img src="~/resourse/paramdesc/paramIndex.png" />
+    </el-dialog>
 </div>
 
 
@@ -557,6 +566,13 @@
     })
     var table = new Array();
     var partsidebrackettable = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetPartSidebracketInfo() {
         //用 ajax 写
         partsidebrackettable.length = 0;

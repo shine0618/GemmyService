@@ -16,8 +16,9 @@
         <el-table :table="tableData"
                   :default-sort="{prop: 'UpdateTime', order: 'descending'}"
                   :data="tableData.filter(data => !table_emailsearch || data.Email.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
-                  height="680">
-            <el-table-column prop="UpdateTime" label="更新时间" sortable>
+                  height="680"
+                  >
+            <el-table-column  prop="UpdateTime" label="更新时间" sortable>
             </el-table-column>
             <el-table-column prop="Email" label="电子邮箱">
             </el-table-column>
@@ -45,6 +46,13 @@
         $('.main-menu').hide();
     })
     var UserData = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    Init();
     function GetUserInfo() {
         //用 ajax 写
         UserData.length = 0;
@@ -87,7 +95,11 @@
             handleCurrentChange: function (currentPage) {  //页码更改方法
                 this.currentPage4 = currentPage;
             },
+
+            
         }
+
+        
     })
 
 </script>

@@ -4,6 +4,7 @@
     "MainProductConfigurationTool": "产品配置工具",
     "MainProductFiles": "产品资料",
     "MainMyOrder": "我的订货清单",
+    "MainAllowNotice": "当前账号没有权限进入",
     "NAVLogin": "登录",
     "NAVLoginAccount": "账号",
     "NAVLoginPassword": "密码",
@@ -237,6 +238,34 @@
     "NAVOpinionSubmitFailNotice": "添加失败",
     "NAVOpinionLoginNotice": "请先登录",
     "OfficeStandardsDeleteplansuccessfulnotice": "删除成功",
-    "OfficeStandardsDeleteplanfailnotice": "删除失败"
+    "OfficeStandardsDeleteplanfailnotice": "删除失败",
+
+    "FileSearchTitle": "文档搜索",
+    "FileSearchSelectType": "选择类型",
+    "FileSearchSelectColumn": "立柱",
+    "FileSearchSelectHandset": "手控器",
+    "FileSearchSelectControlbox": "控制器",
+    "FileSearchSelectFoot": "地脚",
+    "FileSearchSelectSidebracket": "侧板",
+    "FileSearchSelectFrame": "框架",
+    "FileSearchSelectPowercable": "电源线",
+    "FileSearchSelectAccessory": "配件",
+    "FileSearchSelectDesk": "整桌",
+    "FileSearchSelectFileType": "选择文件类型",
+    "FileSearchSelectFileTypeDesc": "产品介绍",
+    "FileSearchSelectFileType2D": "产品图2D",
+    "FileSearchSelectFileType3D": "产品图3D",
+    "FileSearchSelectFileTypeCert": "认证",
+    "FileSearchSelectFileTypeDoc": "文件资料",
+    "FileSearchMode": "搜索型号",
+    "FileSearchModeBtn": "搜索",
+
+
+    "FileTreeDownloadBtn": "下载选中的文件",
+    "FileTreeDesc": "产品介绍",
+    "FileTree2D": "产品图2D",
+    "FileTree3D": "产品图3D",
+    "FileTreeCert": "认证",
+    "FileTreeDoc": "文件资料"
   }
 }
