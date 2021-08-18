@@ -187,7 +187,6 @@ namespace _2GemmyBusness.BLL.BLLOfficePartManage
 
         public static string getHex(int[] rgb)
         {
-
             string hex = Rgb216(rgb[0], rgb[1], rgb[2]);
             return hex;
         }
