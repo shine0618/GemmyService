@@ -111,7 +111,7 @@
                             </span>
                             <el-input type="password" v-model="ruleLoginForm.pass" autocomplete="off"></el-input>
                         </el-form-item>
-                        <el-form-item v-show="isLoginCheck">
+                        @*<el-form-item v-show="isLoginCheck">
                             <span slot="label">
                                 <span>{{NAVLoginCode}}</span>
                                 <i class="el-icon-message"></i>
@@ -125,12 +125,12 @@
                             </el-col>
 
 
-                        </el-form-item>
+                        </el-form-item>*@
 
 
                         <el-form-item>
                             @*<el-button v-on:click="login(ruleLoginForm.username,ruleLoginForm.pass,confirmSuccess,isLoginCheck)">登录</el-button>*@
-                            <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="login(ruleLoginForm.username,ruleLoginForm.pass,confirmSuccess,isLoginCheck)"> {{NAVLoginButton}}</button>
+                            <button type="button" class="thm-btn orderbtn" style="width:100%" @@click="login(ruleLoginForm.username,ruleLoginForm.pass)"> {{NAVLoginButton}}</button>
                         </el-form-item>
 
                         <el-form-item>

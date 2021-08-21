@@ -84,6 +84,7 @@ namespace GemmyService.Controllers
             return View();
         }
 
+
         #region  捷昌标准推荐配置选择
         public ActionResult OfficeStandards(string domain,string Type,string recommend)
         {
@@ -363,6 +364,48 @@ namespace GemmyService.Controllers
             }
             return View();
         }
+        public ActionResult office_Eservice_handset(string productName, string productGuid, string Type)
+        { //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
+            Session.Timeout = 9600;
+            ViewBag.productGuid = productGuid;
+            ViewBag.Type = Type;
+
+            return View();
+        }
+
+        public ActionResult office_Eservice_controlbox(string productName, string productGuid, string Type)
+        { //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
+            Session.Timeout = 9600;
+            ViewBag.productGuid = productGuid;
+            ViewBag.Type = Type;
+
+            return View();
+        }
+
         #region 3D选配界面
 
         public ActionResult serviceTWJ()
@@ -680,6 +723,14 @@ namespace GemmyService.Controllers
         public JsonResult GetOfficeColor()
         {
             List<T_Office_Color> list = bll_color.GetColorList();
+            JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+        [HttpGet]
+        public JsonResult GetSimpleOfficeColor()
+        {
+            List<T_Office_Color> list = bll_color.GetSimpleColorList();
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;

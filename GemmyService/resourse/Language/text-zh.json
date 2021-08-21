@@ -79,7 +79,10 @@
     "NAVMainPage_4": "我的定制",
     "NAVMainPage_5": "我的订货清单",
 
-
+    "OfficeHandset": "手控器",
+    "OfficeHandsetContent": "这是捷昌的手控器",
+    "OfficeControlbox": "控制器",
+    "OfficeControlboxContent": "这是捷昌的控制器",
     "NAVOfficePage": "办公标准配置",
     "NAVProductDetailPage": "产品明细",
     "OfficeUnopenNotice": "尽请期待",
@@ -167,6 +170,7 @@
     "CustomAddConfigRedirectNotice": "是否跳转查看",
     "CustomAddConfigChangeColumnNotice": "您已经选了其他部件,继续选择的话会撤销这些选择",
     "CustomAddConfigChangePartsNotice": "您已经选了其他部件,继续选择的话会撤销这些选择",
+    "CustomreturnButton": "返回",
     "PersonalTitle": "列表",
     "PersonalDate": "日期",
     "PersonalConfigName": "配置名称",

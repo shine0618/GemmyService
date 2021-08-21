@@ -842,6 +842,8 @@
     <Content Include="Views\JCSelection\FileSearch.cshtml" />
     <Content Include="Views\JCSelection\FileTree.cshtml" />
     <Content Include="Views\JCManage\userLevel.cshtml" />
+    <Content Include="Views\JCSelection\office_Eservice_handset.cshtml" />
+    <Content Include="Views\JCSelection\office_Eservice_controlbox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

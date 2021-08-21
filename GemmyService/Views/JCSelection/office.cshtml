@@ -28,11 +28,11 @@
 
     <section class="service-page pt-20 pb-60" id="selectSerial">
         <div class="container">
-            <div class="row" >
+            <div class="row">
                 <div class="col-lg-4 col-md-6 mb-60">
                     <div class="service-one__card" v-on:click="open1">
                         <div class="service-one__image">
-                            <img src="~/resourse/page/singleLeg.png" alt="" id="blur"/>
+                            <img src="~/resourse/page/singleLeg.png" alt="" id="blur" />
 
                         </div><!-- /.service-one__image -->
                         <div class="service-one__content">
@@ -57,7 +57,7 @@
                 <div class="col-lg-4 col-md-6 mb-60">
                     <div class="service-one__card" v-on:click="open1">
                         <div class="service-one__image">
-                            <img src="~/resourse/page/threelegs.png" id="blur"/>
+                            <img src="~/resourse/page/threelegs.png" id="blur" />
                         </div><!-- /.service-one__image -->
                         <div class="service-one__content">
                             <h3><a href="service-details.html">{{OfficeTTDesk}}</a></h3>
@@ -69,7 +69,7 @@
                 <div class="col-lg-4 col-md-6 mb-60">
                     <div class="service-one__card" v-on:click="open1">
                         <div class="service-one__image">
-                            <img src="~/resourse/page/forelegs.png" id="blur"/>
+                            <img src="~/resourse/page/forelegs.png" id="blur" />
                         </div><!-- /.service-one__image -->
                         <div class="service-one__content">
                             <h3><a href="service-details.html">{{OfficeTFDesk}}</a></h3>
@@ -82,7 +82,7 @@
                     <div class="service-one__card" v-on:click="open1">
                         <div class="service-one__image">
 
-                            <img src="~/resourse/page/bench.png" id="blur"/>
+                            <img src="~/resourse/page/bench.png" id="blur" />
                         </div><!-- /.service-one__image -->
                         <div class="service-one__content">
                             <h3><a href="service-details.html">{{OfficeBenchDesk}}</a></h3>
@@ -91,6 +91,34 @@
                         </div><!-- /.service-one__content -->
                     </div><!-- /.service-one__card -->
                 </div><!-- /.col-lg-4 col-md-6 mb-60 -->
+                <div class="col-lg-4 col-md-6 mb-60">
+                    <div class="service-one__card" v-on:click="window.location='/JCSelection/office_Eservice_handset'">
+                        <div class="service-one__image">
+                            <img src="~/resourse/part_handset/JCHT35J.png" style="height:317.14px" />
+                            @*<img src="~/resourse/page/bench.png" />*@
+                        </div><!-- /.service-one__image -->
+                        <div class="service-one__content">
+                            <h3><a href="service-details.html">{{OfficeHandset}}</a></h3>
+                            <p>{{OfficeHandsetContent}}</p>
+                            <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        </div><!-- /.service-one__content -->
+                    </div><!-- /.service-one__card -->
+                </div><!-- /.col-lg-4 col-md-6 mb-60 -->
+                <div class="col-lg-4 col-md-6 mb-60">
+                    <div class="service-one__card" v-on:click="window.location='/JCSelection/office_Eservice_controlbox'">
+                        <div class="service-one__image">
+                            
+                            <img src="~/resourse/part_controlbox/JCB35N2.png" style="height:317.14px"/>
+                            @*<img src="~/resourse/page/bench.png" />*@
+                        </div><!-- /.service-one__image -->
+                        <div class="service-one__content">
+                            <h3><a href="service-details.html">{{OfficeControlbox}}</a></h3>
+                            <p>{{OfficeControlboxContent}}</p>
+                            <a href="#" class="pylon-icon-right-arrow service-one__link"></a><!-- /.service-one__link -->
+                        </div><!-- /.service-one__content -->
+                    </div><!-- /.service-one__card -->
+                </div><!-- /.col-lg-4 col-md-6 mb-60 -->
+
             </div><!-- /.row -->
         </div><!-- /.container -->
     </section><!-- /.service-page -->
@@ -119,7 +147,11 @@
             name: 'Vue.js',
             OfficeUnopenNotice: "",
             NAVMainPage: "",
-            NAVOfficePage:"",
+            NAVOfficePage: "",
+            OfficeHandset: "",
+            OfficeHandsetContent: "",
+            OfficeControlbox: "",
+            OfficeControlboxContent:"",
         },
         // 在 `methods` 对象中定义方法
         methods: {

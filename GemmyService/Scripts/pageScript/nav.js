@@ -706,43 +706,9 @@ var nav_langu_box = new Vue({
                 this.$notify.error(this.NAVRegisterInfoEmptyNotice);
             }
         },
-        login(email, password, confirmSuccess, isLoginCheck) {
+        login(email, password) {
             if (email != '' && password != '') {
-                if (isLoginCheck == false) {
-                    this.$http({           //调用接口
-                        method: 'GET',
-                        url: "/JCAccount/Login",
-                        params: {
-                            email: email,
-                            password: password,
-                        }
-                    }).then(function (response) {  //接口返回数据
-                        console.log(response.body);
-                        if (response.body == null) {
-                            this.$notify.error(this.NAVLoginFailNotice);
-                        }
-                        else {
-                            this.islogin = response.body;
-
-                            if (this.islogin == false) {
-                                isLoginCheck = true;
-                            }
-                            if (response.body.CanLogin == true) {
-                                
-                                location.reload();
-                                this.$notify({
-                                    message: this.NAVLoginSuccessNotice,
-                                    type: 'success'
-                                });
-                            }
-                        }
-                        
-                        
-                    }, function (error) {
-                        console.log(error);
-                    })
-                }
-                else if (isLoginCheck == true && confirmSuccess == true) {
+                
                     this.$http({           //调用接口
                         method: 'GET',
                         url: "/JCAccount/Login",
@@ -776,7 +742,7 @@ var nav_langu_box = new Vue({
                     }, function (error) {
                         console.log(error);
                     })
-                }
+                
                 
             }
 

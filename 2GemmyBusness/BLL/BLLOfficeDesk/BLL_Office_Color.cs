@@ -16,9 +16,30 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             var entity = read_db.T_Office_Color.OrderBy(x=>x.HEXValue).ToList();
             return entity;
         }
-
         
 
+        public List<T_Office_Color> GetSimpleColorList()
+        {
+            var q = from x in read_db.T_Office_Color
+                    select x;
+            var entity = new List<T_Office_Color>() { };
+            foreach (var item in q)
+            {
+                if (item.ColorName == "RAL9001")
+                {
+                    entity.Add(item);
+                }
+                if (item.ColorName == "RAL9006")
+                {
+                    entity.Add(item);
+                }
+                if (item.ColorName == "RAL9016")
+                {
+                    entity.Add(item);
+                }
+            }
+            return entity;
+        }
 
 
     }

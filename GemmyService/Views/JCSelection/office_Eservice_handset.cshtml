@@ -1,0 +1,935 @@
+﻿
+@{
+    ViewBag.Title = "office_Eservice_handset";
+}
+
+<style>
+    #shjahs {
+        /*width: 100%;
+
+        padding-top: 10px;
+        padding-bottom: 14px;
+        padding-left: 5px;
+        padding-right: 5px;*/
+        /*background-color: #F2F3F4;*/
+        /*min-height: 500px;
+        height: calc(100vh - 300px);*/
+        border: 0;
+        margin: 0;
+        padding: 0;
+        height: 642px;
+        width: 871px;
+    }
+
+    #iDisplayBox {
+        margin-top: 20px;
+    }
+
+    .selectColumnPart {
+        min-height: 500px;
+        height: calc(100vh - 241px);
+        min-height: 650px;
+        overflow: auto;
+        margin-top: 10px;
+    }
+
+    .about-three {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .navimg {
+        height: 65px;
+        cursor: pointer;
+        padding: 5px;
+    }
+
+        .navimg:hover {
+            background-color: rgb(12 33 57 / 0.3);
+        }
+
+    .selectStep {
+        height: 70px;
+        display: none;
+    }
+
+    .part_img {
+        cursor: pointer;
+        border-radius: 5px;
+        max-height: 100%;
+        width: 100%
+    }
+    /*缩略图鼠标滑过*/
+    /*.part_img:hover {
+            background-color: rgb(12 33 57 / 0.4);
+        }*/
+
+    .imgDiv:hover {
+        background-color: rgb(12 33 57 / 0.3);
+    }
+    /*缩略图选中*/
+    .selectBack {
+        background-color: rgb(12 33 57 / 0.3);
+    }
+
+    .part_detail_icon {
+        width: 18%;
+        height: 20%;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        cursor: pointer
+    }
+
+    .imgDiv {
+        display: inline-block;
+        position: relative;
+    }
+
+    .selectText {
+        font-size: 14px;
+        color: #202733;
+    }
+
+    #searchCondition > div {
+        float: left;
+    }
+
+    .selectColor_span {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        margin: 3px;
+    }
+
+    .selectColor_div {
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        border: 2px solid rgb(12 33 57 / 0.00);
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .selectColorcss {
+        border: 2px solid var(--thm-base);
+    }
+
+    .selectColor_div:hover {
+        border: 2px solid var(--thm-base);
+    }
+</style>
+
+<style>
+    .carNewRightNavTop {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .carNewRightTop {
+        border-bottom: 1px solid rgba(0,0,0,.1);
+        padding: 0;
+        margin: 0;
+    }
+
+    .borderblack {
+        border-bottom: 2px solid #000;
+    }
+
+    .bigWords {
+        font-weight: 500;
+        color: #A8A8A8;
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 0;
+        font-size: 17px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .bigWords2 {
+        font-weight: 500;
+        color: #A8A8A8;
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 0;
+        font-size: 15px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .wordActive {
+        color: #202733;
+        font-weight: 600;
+        /*color: var(--thm-base);*/
+    }
+
+    .smallWords {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-break: break-all;
+        margin-bottom: 0;
+        margin-top: -2px;
+        padding: 0;
+    }
+
+        .smallWords p {
+            margin: 0;
+        }
+
+    .itemStyle {
+        width: 110px;
+        max-width: 150px;
+        min-width: 100px;
+        overflow: hidden;
+        text-align: center;
+        font-weight: 500;
+        cursor: pointer;
+    }
+
+    .carNewRightTop {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        height: 100%;
+        margin-top: 5px;
+        padding: 0;
+        -webkit-box-pack: start;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        border-bottom: 1px solid rgba(0,0,0,.1);
+        font-size: 12px;
+    }
+</style>
+
+<div id="OfficeStandards">
+    <el-dialog :title="text_customer_text1"
+               :visible.sync="dialogVisible_partDetail"
+               width="80%"
+               center>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img class="img-response" style="width:100%" :src="detailModel.imgurl" />
+                </div>
+                <div class="col-lg-6">
+                    <h4 class="drawerh5" v-text="detailModel.mode"></h4>
+                    <br />
+                    <h6 v-for="item in detailModel.des" v-text="item.textValue"></h6>
+
+
+                </div>
+            </div>
+        </div>
+        <template #footer>
+            <span class="dialog-footer">
+
+            </span>
+        </template>
+    </el-dialog>
+
+    <section class="page-header" style="height:53px;">
+        <div class="container" style="padding:10px 10px ">
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a">{{CustomPage}}</a>
+        </div>
+    </section>
+    <section class="about-three">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    @*<div>
+                            <template>
+                                <el-tabs v-model="selectStep" @@tab-click="handleClick">
+                                    <el-tab-pane :label="text_customer_1" name="s1"></el-tab-pane>
+                                    <el-tab-pane :label="text_customer_2" name="s2"></el-tab-pane>
+                                    <el-tab-pane :label="text_customer_3" name="s3"></el-tab-pane>
+                                    <el-tab-pane :label="text_customer_4" name="s4"></el-tab-pane>
+                                    <el-tab-pane :label="text_customer_42_1" name="s5_1"></el-tab-pane>
+                                    <el-tab-pane :label="text_customer_42_2" name="s5_2"></el-tab-pane>
+                                    <el-tab-pane :label="text_customer_42_3" name="s5_3"></el-tab-pane>
+                                    <el-tab-pane :label="text_customer_423" name="s6"></el-tab-pane>
+                                    <el-tab-pane :label="CustomConfigurationListInfo" name="s7"></el-tab-pane>
+                                </el-tabs>
+                            </template>
+                        </div>*@
+
+
+                    <div class="carNewRightNavTop" style="height:60px">
+                        <ul class="carNewRightTop">
+                            
+                            <li :class="{ 'itemStyle': true,'borderblack':selectStep=='s5_2' }" @@click="selectStep='s5_2'">
+                                <a>
+                                    <p :class="{ 'bigWords': true,'wordActive':select_HandSet!=''||selectStep=='s5_2' }">{{text_customer_42_2}}</p>
+                                    <div class="smallWords">
+                                        <p v-text="select_HandSetMode"></p>
+                                    </div>
+                                </a>
+                            </li>
+
+                            
+
+
+
+                        </ul>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </section>
+
+    <section class="about-three" style="padding-top:0px; padding-bottom:0px;">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-lg-4 selectColumnPart">
+                    @*手控器*@
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6" v-for="item in list_HandSet">
+
+                            <div class="imgDiv" @@mouseenter="mouse_HandSet = item.Id" @@mouseleave="mouse_HandSet = ''">
+                                <img :class="{ 'img-response': true, 'part_img': true ,'selectBack':select_HandSet==item.Id}" v-on:click="HandSetClick(item.Id,item.Mode)" :src="item.PictureName" />
+                                <img v-show="mouse_HandSet == item.Id" src="~/resourse/Img/detail_icon2.png" class="part_detail_icon" v-on:click="getpartDetail('HandSet',item.Mode)" />
+                            </div>
+
+
+                            <h6 style="text-align:center" v-text="item.Mode"></h6>
+                        </div>
+                        <div class="col-lg-12" style="text-align:center"><h6>{{list_HandSet_count}}{{CustomResultCount}}</h6></div>
+                    </div>
+                </div>
+
+                
+
+
+                
+
+
+               
+                <!-- 3D图形 -->
+                <div class="col-lg-8">
+
+                    <div id="iDisplayBox"></div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about-three" style="padding-top:10px; padding-bottom:10px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <button @@click="returnback" class="orderbtn thm-btn">{{CustomreturnButton}}</button>
+                     
+                    @*<button class="orderbtn thm-btn" v-if="select_column!=''&& select_frame!=''&& select_foot!=''" @@click="saveConfigurations()">{{CustomSaveConfigurationButton}}</button>*@
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+
+    })
+</script>
+
+
+
+<script>
+    var OfficeStandards = new Vue({
+        el: '#OfficeStandards',
+        data: {
+
+
+            @*OrderValue: "",
+            Order: 0,//1正序 2倒序
+            domain: "@ViewBag.domain",
+            Type: "@ViewBag.Type",
+            recommend: "@ViewBag.recommend",
+            langCode:"",
+            deskList: null,
+
+            productName: '@ViewBag.productName',
+
+            deskSerialName:'',
+            T_Product_office_desk: null,
+            T_Product_office_desk_detail: null,
+            configurationNo: "",*@
+            dialogVisible_partDetail: false,
+            centerDialogVisible: false,
+            list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+            colorConfirm: '#FF0000',
+            selectStep: 's1',//选择的步骤
+            deskType:"@ViewBag.Type",
+            IsShowDesktop: false,
+            search1_column: '',//筛选的正装
+
+            defaultWidth: 0,
+            defaultHeight: 0,
+            frameWidth: 0,
+            frameHeight: 0,
+            framesmallHeight: 0,
+            framebigHeight: 650,
+            framesmallWidth: 1080,
+            framesbigWidth: 1800,
+
+            list_column: null,
+            list_column_count: 0,
+            select_column: "",
+            select_columnMode: "",
+            mouse_column: "",
+            cc_column: "",
+
+            list_frame: null,
+            list_frame_count: 0,
+            select_frame: "",
+            select_frameMode: "",
+            mouse_frame: "",
+            fc_frame: "",
+            list_foot: null,
+            list_foot_count: 0,
+            select_foot: "",
+            select_footMode: "",
+            mouse_foot: "",
+            tfc_foot: "",
+            list_SideBracket: null,
+            list_SideBracket_count: 0,
+            select_SideBracket: "",
+            select_SideBracketMode: "",
+            mouse_SideBracket: "",
+            spc_SideBracket: "",
+            list_ControlBox: null,
+            list_ControlBox_count: 0,
+            select_ControlBox: "",
+            select_ControlBoxMode: "",
+            mouse_ControlBox: "",
+            controller_ControlBox: "",
+            list_HandSet: null,
+            list_HandSet_count: 0,
+            select_HandSet: "",
+            select_HandSetMode: "",
+            mouse_HandSet: "",
+            hc_HandSet: "",
+            list_Powercable: null,
+            list_Powercable_count: 0,
+            select_Powercable: "",
+            select_PowercableMode: "",
+            mouse_Powercable: "",
+
+            list_Color: null,
+            list_Color_count: 0,
+            select_Color: "",
+            select_ColorMode: "",
+            colour_color: "",
+            of_deskboard: "",
+            pos1_value: "",
+            pos2_value: "",
+            url_text: "",
+            T_Product_office_desk: null,
+            T_Product_office_desk_detail: null,
+            productGuid: '',
+
+            //text
+            select_text: "",//请选择
+            text_customer_1: "",
+            text_customer_2: "",
+            text_customer_3: "",
+            text_customer_4: "",
+            text_customer_42_1: "",
+            text_customer_42_2: "",
+            text_customer_42_3: "",
+            text_customer_423: "",
+            text_customer_5: "",
+            text_customer_6: "",
+            text_customer_7: "",
+            text_customer_8: "",
+            text_customer_9: "",
+            text_customer_10: "",
+            text_customer_11: "",
+            text_customer_12: "",
+            text_customer_13: "",
+            text_customer_14: "",
+
+
+
+            NAVMainPage: "",
+            CustomPage: "",
+            CustomConfigurationListInfo: "",
+            CustomSelectFrame: "",
+            CustomSelectFoot: "",
+            CustomSelectSideBracket: "",
+            CustomSelectControlbox: "",
+            CustomSelectHandSet: "",
+            CustomSelectPowerCable: "",
+            CustomSelectColor: "",
+            CustomConfiguration: "",
+            CustomResultCount: "",
+            CustomInputName: "",
+            CustomSelectFrameWidth: "",
+            CustomSelectColumnHeight: "",
+            CustomColumnNum: "",
+            CustomFrameNum: "",
+            CustomFootNum: "",
+            CustomSidebracketNum: "",
+            CustomColorNum: "",
+            CustomControlboxNum: "",
+            CustomHandsetNum: "",
+            CustomPowerCableNum: "",
+            CustomWidthLength: "",
+            CustomHeightLength: "",
+            CustomShowBoard: "",
+            CustomNextButton: "",
+            CustomSaveConfigurationButton: "",
+            CustomSelectColumnNotice: "",
+            CustomAddConfirm: "",
+            CustomAddNotice: "",
+            CustomAddConfirmButton: "",
+            CustomAddCancelButton: "",
+            CustomAddSuccessNotice: "",
+            text_customer_text1: "",
+            CustomSelectFootNotice: "",
+            CustomAddConfigNameNotice: "",
+            CustomAddConfigRedirectNotice: "",
+            CustomAddConfigChangeColumnNotice: "",
+            CustomAddConfigChangePartsNotice:"",
+            MyCollectName: "",
+            custmerName: "",//客户命名方案
+            ControlBox_c1: "",//控制器筛选
+            CustomreturnButton:"",
+            detailModel: {
+                imgurl: "",
+                mode: "",
+                des: [],
+                ColumnWithFoot: "",
+                ColumnWithFrame: "",
+                FrameWithSideBracket: "",
+
+            },
+
+            value: 0,
+        },
+        watch: {
+            select_column: function (val) {
+
+            },
+            select_frame: function (val) {
+
+            },
+
+           
+            
+
+        },
+        methods: {
+            //保存配置
+            saveConfigurations: function (event) {
+
+                if (this.custmerName == "") {
+                    this.selectStep = "s7";
+                    this.$message({
+                        type: 'info',
+                        message: this.CustomAddConfigNameNotice
+                    });
+                    return;
+                }
+
+
+                this.$confirm(this.CustomAddConfirm, this.CustomAddNotice, {
+                    confirmButtonText: this.CustomAddConfirmButton,
+                    cancelButtonText: this.CustomAddCancelButton,
+
+                }).then(() => {
+
+                    this.$http({           //调用接口
+                        method: 'POST',
+                        url: "/JCSelection/saveConfigurations",
+                        params: {
+
+                            select_columnMode: this.select_columnMode,
+                            select_frameMode: this.select_frameMode,
+                            select_footMode: this.select_footMode,
+                            select_SideBracketMode: this.select_SideBracketMode,
+                            select_ColorMode: this.select_ColorMode,
+                            select_ControlBoxMode: this.select_ControlBoxMode,
+                            select_HandSetMode: this.select_HandSetMode,
+                            select_PowercableMode: this.select_PowercableMode,
+                            frameWidth: this.frameWidth,
+                            frameHeight: this.frameHeight,
+                            langCode: this.langCode,
+                            Type: "TS",
+                            custmerName: this.custmerName,//客户命名方案
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        if (response.body.type == "true") {
+                            //this.$message({
+                            //    type: 'success',
+                            //    message: this.CustomAddSuccessNotice
+                            //});
+                            this.$confirm(this.CustomAddConfigRedirectNotice, this.CustomAddSuccessNotice, {
+                                confirmButtonText: this.CustomAddConfirmButton,
+                                cancelButtonText: this.CustomAddCancelButton,
+
+                            }).then(() => {
+                                window.location = "/JCSelection_Customer/personal";
+                            }).catch(() => {
+                                return;
+                            });
+
+
+                        }
+                        else {
+                            //失败
+                            this.$message({
+                                type: 'error',
+                                message: response.body.msg
+                            });
+                        }
+                    }, function (error) {
+                        //console.log(error);
+                    })
+
+
+                }).catch(() => {
+                    return;
+                });
+
+
+
+
+            },
+            returnback: function (event) {
+                window.location = "/JCSelection/office";
+            },
+            handleClick(tab, event) {
+                // console.log(tab);
+
+
+            },
+            initPage: function (event) {
+                var code = GetLanguCode();
+                this.langCode = code;
+                $.ajaxSettings.async = false;
+                var level = GetLoginLevel();
+                if (level < 1) {
+                    window.location.href = "/JCSelection/main";
+                }
+                var languText;
+                $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
+                    languText = result.language;
+                });
+                $.ajaxSettings.async = true;
+                var obj = languText;
+                for (var p in obj) {
+                    // 方法
+                    if (typeof (obj[p]) == "function") {
+                        obj[p]();
+                    } else {
+                        // p 为属性名称，obj[p]为对应属性的值
+                        var key = p;
+                        var value = obj[p];
+                        // console.log('key:' + key + "  value:" + value);
+                        this.setData(key, value);;
+                    }
+                }
+                var url = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&languageIso=" + this.langCode;
+                var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = ""/>';
+
+                $('#iDisplayBox').append(i);
+                //$("#shjahs").attr({
+                //    "src": url + "&languageIso=" + this.langCode
+                //});
+            },
+
+            
+            getpartDetail: function (partType, Mode) {
+
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetPartDetail",
+                    params: {
+                        partType: partType,
+                        Mode: Mode,
+                        langCode: this.langCode,
+                    }
+                }).then(function (response) {  //接口返回数据
+
+                    this.detailModel = response.body;
+                    //console.log(response.body);
+                }, function (error) {
+                    //console.log(error);
+                })
+
+                this.dialogVisible_partDetail = true
+
+
+
+            },
+            
+            getAllHandSet: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetOfficeHandSet",
+                    params: {
+                        deskType: this.deskType
+                    }
+                }).then(function (response) {  //接口返回数据
+                    this.list_HandSet = response.body;
+                    this.list_HandSet_count = this.list_HandSet.length;
+                }, function (error) {
+                    //console.log(error);
+                })
+            },
+            
+            
+            HandSetClick: function (id, mode) {
+                if (this.select_HandSet == id) {
+                    return;
+                }
+                if (this.select_HandSet == id) {
+                    this.select_HandSet = 0;
+                    this.select_HandSetMode = "";
+                }
+                else {
+                    this.select_HandSet = id;
+                    this.select_HandSetMode = mode;
+                }
+                this.SetFrame();
+            },
+            
+            
+
+            SetFrame: function () {
+                var base = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jcht35k9-%E6%89%8B%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%99%A8-%E6%8D%B7%E6%98%8C?info=jiecang%2Fhand_control%2F";
+                var b = ".prj&cwid=6919&showPortlets=preview&hidePortlets=navigation";
+                if (this.select_HandSetMode != "") {
+
+
+                    //var column = this.select_columnMode.replace('-', '').replace('-', '').replace('JS36D', '');
+                    //base += "&varset={CC=" + column+"}";
+
+                    //if (this.select_frameMode != "") {
+                    //    var frame = this.select_frameMode.replace('FRAME', '');
+                    //    base +=  ",{FC=" + frame + "}";
+                    //}
+                    //if (this.select_footMode != "") {
+                    //    var foot = this.select_footMode.replace('JCF', '');
+                    //    base +=  ",{TFC=" + foot + "}";
+                    //}
+                    //if (this.select_SideBracketMode != "") {
+                    //    var side = this.select_SideBracketMode.replace('SIDE', '');
+                    //    base = base + ",{SPC=" + side + "}";
+                    //}
+                    //if (this.select_ControlBoxMode != "") {
+
+                    //    base = base + ",{CONTROLLER=" + this.select_ControlBoxMode + "}";
+                    //}
+                    //if (this.select_HandSetMode  != "") {
+
+                    //    base = base + ",{HC=" + this.select_HandSetMode  + "}";
+                    //}
+                    //if (this.colour_color != "") {
+                    //    base = base + ",{COLOUR=" + this.colour_color + "}";
+                    //}
+                    //else {
+                    //    base = base + ",{COLOUR=H}";
+                    //}
+                    //if (this.pos1_value != "") {
+                    //    base += ",{POS1=" + this.pos1_value + "}";
+                    //}
+                    //if (this.pos2_value != "") {
+                    //    base += ",{POS2=" + this.pos2_value + "}";
+                    //}
+
+                    //if (this.IsShowDesktop == true) {
+                    //    var desktop = "-02";
+                    //    base += ",{OF=" + desktop + "}";
+                    //}
+                    var handsetMode = '';
+                    if (this.select_HandSetMode.search("-1")!=-1) {
+                        handsetMode = this.select_HandSetMode.replace('-1', '-side');
+                    }
+                    if (this.select_HandSetMode.search("-2")!=-1) {
+                        handsetMode = this.select_HandSetMode.replace('-2', '-embed');
+                    }
+                    if (this.select_HandSetMode == "JCHT35M5") {
+                        handsetMode = "jcht35m5_asmtab";
+                    }
+                    if (this.select_HandSetMode.search("-")!=-1) {
+                        if (handsetMode.search("-")!=-1) {
+                            handsetMode = handsetMode.replace('-', '_');
+                        }
+                        else {
+                            handsetMode = this.select_HandSetMode.replace('-', '_');
+                        }
+                        
+                    }
+                    var src = base + handsetMode.toLowerCase() + b + "&languageIso=" + this.langCode;
+                    console.log(handsetMode);
+                //    alert(src);
+
+                    $("#shjahs").attr({
+                        "src": src
+                    });
+
+                }
+                else {
+                    $("#shjahs").attr({
+                        "src": ""
+                    });
+                }
+
+              //  console.log(base);
+
+
+
+
+
+            },
+            orderBtnClick: function (ordervalue) {
+                this.OrderValue = ordervalue;
+                if (this.Order == 1) {
+                    this.Order = 2;
+                }
+                else {
+                    this.Order = 1;
+                }
+            },
+            setData: function (field, val) {
+                this.$set(this.$data, field, val);//vue 设定值
+            },
+            getThisDesk: function (productGuid) {
+                //获取桌子详细信息 从另外一个标准配置跳转过来
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCSelection/GetOfficeDeskDetail2",
+                        params: {
+                            lang: this.langCode,
+                            productGuid: productGuid,
+                        }
+                    }).then(function (response) {  //接口返回数据
+                        //console.log(response.body);
+                        var column = "";
+                        var frame = "";
+                        var foot = "";
+                        var control = "";
+                        var handset = "";
+                        var side = "";
+                        var color = "";
+                        this.T_Product_office_desk = response.body.T_Product_office_desk;
+                        this.T_Product_office_desk_detail = response.body.T_Product_office_desk_detail;
+                        //添加到产品配置列表 立柱
+                        if (this.T_Product_office_desk_detail.T_Part_office_Column != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_Column;
+                            this.select_column = it.Id;
+                            this.select_columnMode = it.Mode;
+                            column = it.Mode;
+                        }
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_Foot != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_Foot;
+                            this.select_foot = it.Id;
+                            this.select_footMode = it.Mode;
+                            foot = it.Mode;
+                        }
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_Frame != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_Frame;
+                            this.select_frame = it.Id;
+                            this.select_frameMode = it.Mode;
+                            frame = it.Mode;
+                        }
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_SideBracket != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_SideBracket;
+                            this.select_SideBracket = it.Id;
+                            this.select_SideBracketMode = it.Mode;
+                            side = it.Mode;
+                        }
+                        //添加到产品配置列表
+                        if (this.T_Product_office_desk_detail.T_Part_office_ControlBox != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_ControlBox;
+                            this.select_ControlBox = it.Id;
+                            this.select_ControlBoxMode = it.Mode;
+                            control = it.Mode;
+                        }
+                        //手控器
+                        if (this.T_Product_office_desk_detail.T_Part_office_HandSet != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_HandSet;
+                            this.select_HandSet = it.Id;
+                            this.select_HandSetMode = it.Mode;
+                            handset = it.Mode;
+                        }
+
+                        //电源线
+                        if (this.T_Product_office_desk_detail.T_Part_office_Powercable != null) {
+                            var it = this.T_Product_office_desk_detail.T_Part_office_Powercable;
+                            this.select_Powercable = it.Id;
+                            this.select_PowercableMode = it.Mode;
+
+                        }
+
+                        if (this.T_Product_office_desk_detail.T_Office_Color != null) {
+                            var it = this.T_Product_office_desk_detail.T_Office_Color;
+                            this.select_Color = it.Id;
+                            this.select_ColorMode = it.ColorName;
+                            color = it.ColorNumber;
+                            this.colour_color = it.ColorNumber;
+                        }
+
+                        if (this.T_Product_office_desk_detail.frameWidth != "") {
+
+                            this.defaultWidth = this.T_Product_office_desk_detail.frameWidth;
+                        }
+                        if (this.T_Product_office_desk_detail.frameHeight != "") {
+                            this.defaultHeight = this.T_Product_office_desk_detail.frameHeight;
+                        }
+                        //this.url_text  = checkProductDetailUrl(column, frame, foot, side, control, handset, color);
+                        //$("#shjahs").attr({
+                        //    "src": this.url_text + "&languageIso=" + this.langCode
+                        //});
+
+                        this.SetFrame();
+
+                        this.cc_column = column;
+                        this.fc_frame = frame;
+                        this.tfc_foot = foot;
+                        this.spc_SideBracket = side;
+                        this.controller_ControlBox = control;
+                        this.hc_HandSet = handset;
+                        this.colour_color = color;
+                    }, function (error) {
+                        //console.log(error);
+                    })
+            },
+        }
+    })
+    //语言加载
+    OfficeStandards.initPage();
+    OfficeStandards.getAllHandSet();
+
+    @*this.productGuid = '@ViewBag.productGuid';
+    if (this.productGuid != undefined && this.productGuid != "") {
+        OfficeStandards.getThisDesk(this.productGuid);
+    }*@
+
+
+</script>
+

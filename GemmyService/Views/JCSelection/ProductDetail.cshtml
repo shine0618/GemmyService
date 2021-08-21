@@ -98,6 +98,9 @@
         margin-top:25px;
         margin-bottom:15px;
     }
+    .selectColor_span{
+        margin-left:15px;
+    }
 </style>
 
 <!-- /.js  加载ele组件 -->
@@ -141,7 +144,7 @@
                                 <h4 class="drawerh5" v-text="deskSerialName"></h4>
                                 <br />
                                 <h5 v-text="introduction" class="titleh5"></h5>
-                              
+
                                 <!--<div class="block-title text-left">
         <p>{{text_detail_1}}</p>
         <h6 v-text="deskSerialName"></h6>
@@ -160,9 +163,9 @@
     </div>-->
                                 <!-- /.block-title -->
 
-                               
+
                                 <h5 v-text="text_detail_3" class="titleh5"></h5>
-                              
+
                                 <h6 v-text="configurationNo"></h6>
 
                                 <!--<div class="block-title text-left">
@@ -171,7 +174,15 @@
     </div>-->
                                 <!-- /.block-title -->
                                 <div style="padding-top:30px" id="qrcodebox"></div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4" v-for="item in list_Color" style="text-align:center;cursor:pointer" v-on:click="colorClick(item.Id,item.ColorName,item.ColorNumber)">
+                                        <div :class="{ 'selectColor_div': true,'selectColorcss':select_Color==item.Id}">
+                                            <span :style="{ 'background-color':item.HEXValue }" class="selectColor_span"></span>
 
+                                        </div>
+                                        <h6 v-text="item.ColorName"></h6>
+                                    </div>
+                                </div>
 
                                 @*   <button class="thm-btn">自定义</button>*@
                             </div><!-- /.about-three__image -->
@@ -421,6 +432,10 @@
             descriptions: null,//关键参数
             configurationNo: "",
             introduction: "",
+            modelurl: '',
+            list_Color: [],
+            select_Color: '',
+            oldcolor:'',
             //文件
             files_d1: [],
             isCollect: false,
@@ -802,12 +817,14 @@
                     if (response.body.collect!=null&&response.body.collect.Id > 0) {
                         this.isCollect = true;
                     }
-                    var url = checkProductDetailUrl(column,frame,foot,side,control, handset, color);
+                    var url = checkProductDetailUrl(column, frame, foot, side, control, handset, color);
+                    this.oldcolor = color;
+                    this.modelurl = url;
                     //console.log(url);
                     var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "' + url + "&languageIso=" + this.langCode+'"/>';
                     $('#asas').append(i);
                     //console.log(response.body);
-
+                    this.getAllColor();
 
                 }, function (error) {
                         //console.log(error);
@@ -887,7 +904,58 @@
                     var day = d.getDay();
                     pdf.save(y.toString() + m.toString() + day.toString() + '@ViewBag.productName');
                 })
-            }
+            },
+            colorClick: function (id, mode, number) {
+                if (this.select_Color == id) {
+                    return;
+                }
+                this.select_Color = id;
+                this.select_ColorMode = mode;
+                this.colour_color = number;
+                this.SetFrame(this.modelurl,this.colour_color);
+            },
+            getAllColor: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/GetSimpleOfficeColor",
+                    params: {
+                    }
+                }).then(function (response) {  //接口返回数据
+
+                    
+                            this.list_Color=response.body;
+                       
+
+                    this.list_Color_count = this.list_Color.length;
+                    console.log(this.list_Color);
+                }, function (error) {
+                    //console.log(error);
+                })
+            },
+            SetFrame: function (url,color) {   
+                if (this.select_Color != "") {
+                    var src = url.replace(",{COLOUR=" + this.oldcolor + "}", ",{COLOUR=" + color + "}");
+
+                    //    alert(src);
+
+                    $("#shjahs").attr({
+                        "src": src
+                    });
+
+                }
+                else {
+                    $("#shjahs").attr({
+                        "src": ""
+                    });
+                }
+                console.log(src);
+                //  console.log(base);
+
+
+
+
+
+            },
         }
     })
     //语言加载

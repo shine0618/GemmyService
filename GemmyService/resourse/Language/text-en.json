@@ -83,7 +83,10 @@
     "NAVMainPage_4": "My custom",
     "NAVMainPage_5": "My Order",
 
-
+    "OfficeHandset": "Handset",
+    "OfficeHandsetContent": "This is Handset",
+    "OfficeControlbox": "Controlbox",
+    "OfficeControlboxContent": "This is Controlbox",
     "NAVOfficePage": "Office Standard",
     "NAVProductDetailPage": "Product details",
     "OfficeUnopenNotice": "Do please look forward to",
@@ -170,6 +173,7 @@
     "CustomAddConfigRedirectNotice": "Whether to jump to view",
     "CustomAddConfigChangeColumnNotice": "Replacement of other parts of the column will be re-selected",
     "CustomAddConfigChangePartsNotice": "Replacement of other parts of the frame will be re-selected",
+    "CustomreturnButton": "Return",
     "PersonalTitle": "List",
     "PersonalDate": "Date",
     "PersonalConfigName": "ConfigName",
