@@ -100,7 +100,7 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 }
                 if (!string.IsNullOrEmpty(mode))
                 {
-                    query = query.Where(m => m.Mode == mode);
+                    query = query.Where(m => m.Mode.Contains(mode));
                 }
                 if (!string.IsNullOrEmpty(nature))
                 {

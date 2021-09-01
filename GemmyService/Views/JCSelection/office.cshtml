@@ -92,7 +92,7 @@
                     </div><!-- /.service-one__card -->
                 </div><!-- /.col-lg-4 col-md-6 mb-60 -->
                 <div class="col-lg-4 col-md-6 mb-60">
-                    <div class="service-one__card" v-on:click="window.location='/JCSelection/office_Eservice_handset'">
+                    <div class="service-one__card" v-on:click="toHandset()">
                         <div class="service-one__image">
                             <img src="~/resourse/part_handset/JCHT35J.png" style="height:317.14px" />
                             @*<img src="~/resourse/page/bench.png" />*@
@@ -105,7 +105,7 @@
                     </div><!-- /.service-one__card -->
                 </div><!-- /.col-lg-4 col-md-6 mb-60 -->
                 <div class="col-lg-4 col-md-6 mb-60">
-                    <div class="service-one__card" v-on:click="window.location='/JCSelection/office_Eservice_controlbox'">
+                    <div class="service-one__card" v-on:click="toControlbox()">
                         <div class="service-one__image">
                             
                             <img src="~/resourse/part_controlbox/JCB35N2.png" style="height:317.14px"/>
@@ -151,12 +151,15 @@
             OfficeHandset: "",
             OfficeHandsetContent: "",
             OfficeControlbox: "",
-            OfficeControlboxContent:"",
+            OfficeControlboxContent: "",
+            MainAllowNotice: "",
+            UserLevel: 0,
         },
         // 在 `methods` 对象中定义方法
         methods: {
             initPage: function (event) {
                 var code = GetLanguCode();
+                this.UserLevel = GetLoginLevel();
                 $.ajaxSettings.async = false;
 
                 var languText; 
@@ -195,7 +198,28 @@
             open1() {
                 this.$message(this.OfficeUnopenNotice);
             },
-
+            toControlbox() {
+                if (this.UserLevel >= 1) {
+                    window.location.href = "/JCSelection/office_Eservice_controlbox";
+                }
+                else {
+                    this.$message({
+                        type: 'error',
+                        message: this.MainAllowNotice
+                    });
+                }
+            },
+            toHandset() {
+                if (this.UserLevel >= 1) {
+                    window.location.href = "/JCSelection/office_Eservice_handset";
+                }
+                else {
+                    this.$message({
+                        type: 'error',
+                        message: this.MainAllowNotice
+                    });
+                }
+            },
             TypeClick(type,mode) {
                 this.$http({           //调用接口
                     method: 'GET',

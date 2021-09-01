@@ -6,16 +6,27 @@
 
 <style>
     #asas {
-        height: calc(100vh - 100px);
+        height: 800px;
        min-width:1230px;
     }
 
     #shjahs {
-        width: 99%;
-        height: 99%;
         border: 0;
         margin: 0;
         padding: 0;
+        height: 642px;
+        width: 871px;
+    }
+    #iDisplayBox {
+        margin-top: 20px;
+        position: relative;
+    }
+    #player {
+        height: 36px;
+        width: 871px;
+        background-color: #fff;
+        position:absolute;
+        bottom:0px;
     }
 </style>
 <section class="page-header" style="height:53px;">
@@ -33,25 +44,82 @@
     <div class="container">
         <div class="col-lg-12">
 
-            <div id="asas">
+
+            <div class="col-lg-8">
+
+                <div id="iDisplayBox">
+                    <div class="player" id="player">
+                    </div>
 
 
+                </div>
             </div>
-
-
+            
 
         </div>
     </div>
+    <div>
+        <h3>选择下载格式</h3>
+        <select id="format">
+            <option value="DXF2D">DXF2D</option>
+            <option value="CREO5">CREO5</option>
+            <option value="SOLIDWORKS">SOLIDWORKS</option>
+            <option value="DWG2D">DWG2D</option>
+            <option value="PDFDATASHEET">PDFDATASHEET</option>
+        </select>
+        <button onclick="order()">文件下载</button>
+    </div>
+    
 </section>
-
-
 <script>
     $(function () {
-        $('.bottom-footer').hide();
-        $('.main-menu').hide();
-        var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation"/>';
-        $('#asas').append(i);
+        var m = '<iframe scrolling="no"  id="shjahs"  alt=""  src = ""/>';
+        $('#iDisplayBox').append(m);
     })
+    var download_xml = "";
+    function render(data) {
+        var doc = $(data);
+        console.log(doc);
+        var htmlfile = doc.find("HTMLFILE").text();
+        console.log(htmlfile);
+        var zipfile = doc.find("ZIPFILE").text();
+        console.log(zipfile);
+        if (htmlfile != "") {
+            $("#shjahs").attr("src", download_xml.replace(/download.xml/, htmlfile));
+            $("#part2cadresult").show();
+        } else {
+            // normal zip file download part...
+            $("#shjahs").attr({ "src": "https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe?cgiaction=preview&part={jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj},{CC=R13S},{COLOUR=B}&firm=jiecang&apikey=e20d66d8bb834f2497a101cff347a2d0"});
+            window.location = download_xml.replace(/download.xml/, zipfile);
+        }
+    }
+    function checkFile() {
+        $.get(download_xml, function (data) {
+            render(data);
+        }).fail(function () {
+            window.setTimeout("checkFile();", 1000);
+        });
+    }
 
+    function order() {
+        console.log(download_xml);
+        $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
+            cgiaction: "download",
+            downloadflags:"ZIP",
+            part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj},{CC=R13S},{COLOUR=B}",
+            firm: "jiecang",
+            format: document.getElementById("format").value,
+            ok_url: "<%download_xml%>", // format of the url to generate
+            ok_url_type: "text", // we want a direct text response (no 302)
+            apikey: "e20d66d8bb834f2497a101cff347a2d0",
+            zipfilename:"Jiecang<%wkbno%>",
+            }).done(function (data) {
+                download_xml = data; // get the file name for polling
+                console.log(data);
+                checkFile(); // start polling
+            });
+
+    }
+    
 
 </script>
