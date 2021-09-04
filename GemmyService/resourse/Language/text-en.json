@@ -275,8 +275,9 @@
     "FileTree2D": "2D",
     "FileTree3D": "3D",
     "FileTreeCert": "Certification",
-    "FileTreeDoc": "Document"
-
+    "FileTreeDoc": "Document",
+    "Downloadbutton": "Download",
+    "Downloadlabel": "DownloadFormat"
 
 
   }

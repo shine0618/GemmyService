@@ -169,10 +169,12 @@
         }
 
         function checkProductDetailUrl(column,frame,foot,side,control,handset,color) {
-            var url = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation";
+            //var url = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation";
+            var url = "https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe?cgiaction=preview&part={jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}";
+            var option = "&firm=jiecang&viewerOptions=%7B%22webglViewerSettings%22%3A%7B%22ColorTL%22%3A%22%23EFF2F6%22%2C%22ColorTR%22%3A%22%23EFF2F6%22%2C%22ColorML%22%3A%22EFF2F6%22%2C%22ColorMR%22%3A%22EFF2F6%22%2C%22ColorBL%22%3A%22%23EFF2F6%22%2C%22ColorBR%22%3A%22%23EFF2F6%22%7D%7D&apikey=e20d66d8bb834f2497a101cff347a2d0";
             if (column != null || column != "") {
                 column = column.replace('-', '').replace('-', '').replace('JS36D', '');
-                url = url + "&varset={CC=" + column + "}";
+                url = url + ",{CC=" + column + "}";
             }
             if (frame != null || frame != "") {
                 frame = frame.replace('FRAME', '');
@@ -200,6 +202,7 @@
             else {
                 url = url + ",{COLOUR=H}" ;
             }
+            url = url + option;
             return url;
         }
 

@@ -53,21 +53,22 @@
 
 
                 </div>
+                <h3>选择下载格式</h3>
+                <select id="format">
+                    <option value="DXF2D">DXF2D</option>
+                    <option value="CREO5">CREO5</option>
+                    <option value="SOLIDWORKS">SOLIDWORKS</option>
+                    <option value="DWG2D">DWG2D</option>
+                    <option value="PDFDATASHEET">PDFDATASHEET</option>
+                </select>
+                <button onclick="order()">文件下载</button>
             </div>
             
 
         </div>
     </div>
-    <div>
-        <h3>选择下载格式</h3>
-        <select id="format">
-            <option value="DXF2D">DXF2D</option>
-            <option value="CREO5">CREO5</option>
-            <option value="SOLIDWORKS">SOLIDWORKS</option>
-            <option value="DWG2D">DWG2D</option>
-            <option value="PDFDATASHEET">PDFDATASHEET</option>
-        </select>
-        <button onclick="order()">文件下载</button>
+    <div class="col-lg-8">
+        
     </div>
     
 </section>
@@ -112,7 +113,8 @@
             ok_url: "<%download_xml%>", // format of the url to generate
             ok_url_type: "text", // we want a direct text response (no 302)
             apikey: "e20d66d8bb834f2497a101cff347a2d0",
-            zipfilename:"Jiecang<%wkbno%>",
+            zipfilename: "Jiecang<%wkbno%>",
+            language:'english',
             }).done(function (data) {
                 download_xml = data; // get the file name for polling
                 console.log(data);

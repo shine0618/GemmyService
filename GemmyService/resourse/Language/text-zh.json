@@ -270,6 +270,8 @@
     "FileTree2D": "产品图2D",
     "FileTree3D": "产品图3D",
     "FileTreeCert": "认证",
-    "FileTreeDoc": "文件资料"
+    "FileTreeDoc": "文件资料",
+    "Downloadbutton": "文件下载",
+    "Downloadlabel": "选择下载格式"
   }
 }

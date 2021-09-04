@@ -19,10 +19,16 @@
         margin: 0;
         padding: 0;
     }
-
+    #player {
+        height: 65px;
+        width: 871px;
+        background-color: #EFF2F6;
+        position: absolute;
+        bottom: 0px;
+    }
     .about-three {
-        padding-top: 20px;
-        padding-bottom: 0px;
+        padding-top: 0px;
+        padding-bottom: 20px;
     }
 
     * {
@@ -98,9 +104,14 @@
         margin-top:25px;
         margin-bottom:15px;
     }
-    /*.selectColor_span{
-        margin-left:15px;
-    }*/
+    .selectColor_span2 {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        margin: 3px;
+        margin-left: 15px;
+    }
 </style>
 
 <!-- /.js  加载ele组件 -->
@@ -128,7 +139,17 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-9 col-md-12 col-xs-12" id="asas">
-
+                            <div class="player" id="player">
+                                <h3>{{Downloadlabel}}</h3>
+                                <el-select v-model="format">
+                                    <el-option v-for="item in options"
+                                               :key="item.value"
+                                               :label="item.label"
+                                               :value="item.value">
+                                    </el-option>
+                                </el-select>
+                                <button class="orderbtn thm-btn"  @@click="order()">{{Downloadbutton}}</button>
+                            </div>
                         </div>
                         <div class="col-lg-3 col-md-9 col-xs-9">
                             @*<i v-show="isCollect" class="el-icon-star-on collect_icon" @@click="isCollect=!isCollect"></i>
@@ -173,11 +194,11 @@
 
     </div>-->
                                 <!-- /.block-title -->
-                                <div style="padding-top:30px" id="qrcodebox"></div>
+                                <div style="padding-top:30px;padding-bottom:20px;" id="qrcodebox"></div>
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4" v-for="item in list_Color" style="text-align:center;cursor:pointer" v-on:click="colorClick(item.Id,item.ColorName,item.ColorNumber)">
                                         <div :class="{ 'selectColor_div': true,'selectColorcss':select_Color==item.Id}">
-                                            <span :style="{ 'background-color':item.HEXValue }" class="selectColor_span"></span>
+                                            <span :style="{ 'background-color':item.HEXValue }" class="selectColor_span2"></span>
 
                                         </div>
                                         <h6 v-text="item.ColorName"></h6>
@@ -410,12 +431,51 @@
             correctLevel: 0 // 二维码结构复杂性 0~3
         });
     }
+    var download_xml = "";
+    function render(data) {
+        var doc = $(data);
+        var htmlfile = doc.find("HTMLFILE").text();
+        var zipfile = doc.find("ZIPFILE").text();
+        if (htmlfile != "") {
+        } else {
+            // normal zip file download part...
+            window.location = download_xml.replace(/download.xml/, zipfile);
+        }
+    }
+    function checkFile() {
+        $.get(download_xml, function (data) {
+            render(data);
+        }).fail(function () {
+            window.setTimeout("checkFile();", 1000);
+        });
+    }
 </script>
 
 <script>
     var OfficeStandards = new Vue({
         el: '#OfficeStandards',
         data: {
+            options: [{
+                value: 'DXF2D',
+                label: 'DXF2D'
+            },
+            {
+                value: 'CREO5',
+                label: 'CREO5'
+            },
+            {
+                value: 'SOLIDWORKS',
+                label: 'SOLIDWORKS'
+            },
+            {
+                value: 'DWG2D',
+                label: 'DWG2D'
+            },
+            {
+                value: 'PDFDATASHEET',
+                label: 'PDFDATASHEET'
+            }],
+            format: '',
             OrderValue: "",
             Order: 0,//1正序 2倒序
             domain: "@ViewBag.domain",
@@ -484,6 +544,8 @@
             ProductDetailLength: "",
             ProductDetailLoad: "",
             ProductDetailSpeed: "",
+            Downloadlabel: "",
+            Downloadbutton: "",
         },
         //watch: {
         //    OrderValue: function (val) {
@@ -821,7 +883,7 @@
                     this.oldcolor = color;
                     this.modelurl = url;
                     //console.log(url);
-                    var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "' + url + "&languageIso=" + this.langCode+'"/>';
+                    var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "'+url+'"/>';
                     $('#asas').append(i);
                     //console.log(response.body);
                     this.getAllColor();
@@ -927,7 +989,7 @@
                        
 
                     this.list_Color_count = this.list_Color.length;
-                    console.log(this.list_Color);
+                    //console.log(this.list_Color);
                 }, function (error) {
                     //console.log(error);
                 })
@@ -954,6 +1016,24 @@
 
 
 
+
+            },
+            order: function (event) {
+                $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
+                    cgiaction: "download",
+                    downloadflags: "ZIP",
+                    part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj},{CC=R13S},{COLOUR=B}",
+                    firm: "jiecang",
+                    format: this.format,
+                    ok_url: "<%download_xml%>", // format of the url to generate
+                    ok_url_type: "text", // we want a direct text response (no 302)
+                    apikey: "e20d66d8bb834f2497a101cff347a2d0",
+                    zipfilename: "Jiecang<%wkbno%>",
+                }).done(function (data) {
+                    download_xml = data; // get the file name for polling
+                    console.log(this.format);
+                    checkFile(); // start polling
+                });
 
             },
         }
