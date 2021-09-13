@@ -106,9 +106,9 @@
     }
     .selectColor_span2 {
         display: block;
-        width: 40px;
-        height: 40px;
-        border-radius: 20px;
+        width: 36px;
+        height: 36px;
+        border-radius: 23px;
         margin: 3px;
         margin-left: 15px;
     }
@@ -194,8 +194,10 @@
 
     </div>-->
                                 <!-- /.block-title -->
-                                <div style="padding-top:30px;padding-bottom:20px;" id="qrcodebox"></div>
-                                <div class="row">
+                                <div style="padding-top:10px;padding-bottom:10px;" id="qrcodebox"></div>
+
+                                <h5  class="titleh5">可选配置</h5>
+                                <div class="row" style="margin-top:10px;">
                                     <div class="col-lg-4 col-md-4" v-for="item in list_Color" style="text-align:center;cursor:pointer" v-on:click="colorClick(item.Id,item.ColorName,item.ColorNumber)">
                                         <div :class="{ 'selectColor_div': true,'selectColorcss':select_Color==item.Id}">
                                             <span :style="{ 'background-color':item.HEXValue }" class="selectColor_span2"></span>
