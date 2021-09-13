@@ -148,7 +148,7 @@
                                                :value="item.value">
                                     </el-option>
                                 </el-select>
-                                <button class="orderbtn thm-btn"  @@click="order()">{{Downloadbutton}}</button>
+                                <button class="orderbtn thm-btn"  @@click="order()" v-loading="loading">{{Downloadbutton}}</button>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-9 col-xs-9">
@@ -438,9 +438,10 @@
         var zipfile = doc.find("ZIPFILE").text();
         if (htmlfile != "") {
         } else {
-            // normal zip file download part...
+             //normal zip file download part...
             window.location = download_xml.replace(/download.xml/, zipfile);
         }
+        setloadingjs();
     }
     function checkFile() {
         $.get(download_xml, function (data) {
@@ -449,6 +450,7 @@
             window.setTimeout("checkFile();", 1000);
         });
     }
+    
 </script>
 
 <script>
@@ -473,8 +475,22 @@
             },
             {
                 value: 'PDFDATASHEET',
-                label: 'PDFDATASHEET'
+                label: 'PDF'
+            },
+            {
+                value: '3DSTUDIOMAX',
+                label: '3DS'
+            },
+            {
+                value: 'STEP-2.14',
+                label: 'STEP'
+            },
+            {
+                value: 'OBJFILE',
+                label: 'OBJ'
             }],
+            loading: false,
+            filename:'',
             format: '',
             OrderValue: "",
             Order: 0,//1正序 2倒序
@@ -555,6 +571,9 @@
         //        this.getallDesk();
         //    }
         //},
+        mounted() {
+            window.setloadingjs = this.setloading
+        },
         methods: {
             handleClick(tab, event) {
 
@@ -881,9 +900,13 @@
                     }
                     var url = checkProductDetailUrl(column, frame, foot, side, control, handset, color);
                     this.oldcolor = color;
-                    this.modelurl = url;
+                    this.filename = url;
+                    var apiaddress = "https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe?cgiaction=preview&part={jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}";
+                    var apioption = "&firm=jiecang&viewerOptions=%7B%22webglViewerSettings%22%3A%7B%22ColorTL%22%3A%22%23EFF2F6%22%2C%22ColorTR%22%3A%22%23EFF2F6%22%2C%22ColorML%22%3A%22EFF2F6%22%2C%22ColorMR%22%3A%22EFF2F6%22%2C%22ColorBL%22%3A%22%23EFF2F6%22%2C%22ColorBR%22%3A%22%23EFF2F6%22%7D%7D&apikey=e20d66d8bb834f2497a101cff347a2d0";
+                    var totalurl = apiaddress + url + apioption;
+                    this.modelurl = totalurl;
                     //console.log(url);
-                    var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "'+url+'"/>';
+                    var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = "' + totalurl+'"/>';
                     $('#asas').append(i);
                     //console.log(response.body);
                     this.getAllColor();
@@ -1010,7 +1033,7 @@
                         "src": ""
                     });
                 }
-                console.log(src);
+                //console.log(src);
                 //  console.log(base);
 
 
@@ -1019,10 +1042,11 @@
 
             },
             order: function (event) {
+                this.loading = true;
                 $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
                     cgiaction: "download",
                     downloadflags: "ZIP",
-                    part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj},{CC=R13S},{COLOUR=B}",
+                    part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}" + this.filename,
                     firm: "jiecang",
                     format: this.format,
                     ok_url: "<%download_xml%>", // format of the url to generate
@@ -1031,11 +1055,13 @@
                     zipfilename: "Jiecang<%wkbno%>",
                 }).done(function (data) {
                     download_xml = data; // get the file name for polling
-                    console.log(this.format);
+                    //console.log(this.format);
                     checkFile(); // start polling
                 });
-
             },
+            setloading() {
+                this.loading = false;
+            }
         }
     })
     //语言加载

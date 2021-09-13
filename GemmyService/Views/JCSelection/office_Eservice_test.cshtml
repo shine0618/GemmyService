@@ -580,7 +580,7 @@
                                        :value="item.value">
                             </el-option>
                         </el-select>
-                        <button class="orderbtn thm-btn" @@click="order()">{{Downloadbutton}}</button>
+                        <button class="orderbtn thm-btn" @@click="order()" v-loading="loading">{{Downloadbutton}}</button>
                     </div>
                 </div>
             </div>
@@ -619,6 +619,7 @@
             // normal zip file download part...
              window.location = download_xml.replace(/download.xml/, zipfile);
         }
+        setloadingjs();
     }
     function checkFile() {
         $.get(download_xml, function (data) {
@@ -658,7 +659,9 @@
                 label: 'PDFDATASHEET'
             }],
             format: '',
-            download_xml:'',
+            download_xml: '',
+            loading: false,
+            filename:'',
             @*OrderValue: "",
             Order: 0,//1正序 2倒序
             domain: "@ViewBag.domain",
@@ -903,6 +906,9 @@
                 }
             },
 
+        },
+        mounted() {
+            window.setloadingjs = this.setloading
         },
         methods: {
             //保存配置
@@ -1425,52 +1431,54 @@
                 //var base = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation";
                 var base = "https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe?cgiaction=preview&part={jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}";
                 var option = "&firm=jiecang&viewerOptions=%7B%22webglViewerSettings%22%3A%7B%22ColorTL%22%3A%22%23EFF2F6%22%2C%22ColorTR%22%3A%22%23EFF2F6%22%2C%22ColorML%22%3A%22EFF2F6%22%2C%22ColorMR%22%3A%22EFF2F6%22%2C%22ColorBL%22%3A%22%23EFF2F6%22%2C%22ColorBR%22%3A%22%23EFF2F6%22%7D%7D&apikey=e20d66d8bb834f2497a101cff347a2d0";
+                var partname = "";
                 if (this.select_columnMode != "") {
 
 
                     var column = this.select_columnMode.replace('-', '').replace('-', '').replace('JS36D', '');
-                    base += ",{CC=" + column + "}";
+                    partname += ",{CC=" + column + "}";
 
                     if (this.select_frameMode != "") {
                         var frame = this.select_frameMode.replace('FRAME', '');
-                        base += ",{FC=" + frame + "}";
+                        partname += ",{FC=" + frame + "}";
                     }
                     if (this.select_footMode != "") {
                         var foot = this.select_footMode.replace('JCF', '');
-                        base += ",{TFC=" + foot + "}";
+                        partname += ",{TFC=" + foot + "}";
                     }
                     if (this.select_SideBracketMode != "") {
                         var side = this.select_SideBracketMode.replace('SIDE', '');
-                        base = base + ",{SPC=" + side + "}";
+                        partname = partname + ",{SPC=" + side + "}";
                     }
                     if (this.select_ControlBoxMode != "") {
 
-                        base = base + ",{CONTROLLER=" + this.select_ControlBoxMode + "}";
+                        partname = partname + ",{CONTROLLER=" + this.select_ControlBoxMode + "}";
                     }
                     if (this.select_HandSetMode != "") {
 
-                        base = base + ",{HC=" + this.select_HandSetMode + "}";
+                        partname = partname + ",{HC=" + this.select_HandSetMode + "}";
                     }
                     if (this.colour_color != "") {
-                        base = base + ",{COLOUR=" + this.colour_color + "}";
+                        partname = partname + ",{COLOUR=" + this.colour_color + "}";
                     }
                     else {
-                        base = base + ",{COLOUR=H}";
+                        partname = partname + ",{COLOUR=H}";
                     }
                     if (this.pos1_value != "") {
-                        base += ",{POS1=" + this.pos1_value + "}";
+                        partname += ",{POS1=" + this.pos1_value + "}";
                     }
                     if (this.pos2_value != "") {
-                        base += ",{POS2=" + this.pos2_value + "}";
+                        partname += ",{POS2=" + this.pos2_value + "}";
                     }
 
                     if (this.IsShowDesktop == true) {
                         var desktop = "-02";
-                        base += ",{OF=" + desktop + "}";
+                        partname += ",{OF=" + desktop + "}";
                     }
-
+                    this.filename = partname;
+                    console.log(this.filename);
                     //var src = base + "&languageIso=" + this.langCode;
-                    var src = base + option;
+                    var src = base + partname + option;
                     //alert(src);
 
                     $("#shjahs").attr({
@@ -1608,23 +1616,32 @@
                     })
             },
             order: function (event) {
-                $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
-                    cgiaction: "download",
-                    downloadflags: "ZIP",
-                    part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj},{CC=R13S},{COLOUR=B}",
-                    firm: "jiecang",
-                    format: this.format,
-                    ok_url: "<%download_xml%>", // format of the url to generate
-                    ok_url_type: "text", // we want a direct text response (no 302)
-                    apikey: "e20d66d8bb834f2497a101cff347a2d0",
-                    zipfilename: "Jiecang<%wkbno%>",
-                }).done(function (data) {
-                    download_xml = data; // get the file name for polling
-                    checkFile(); // start polling
-                });
+                console.log(this.filename);
+                this.loading = true;
+                if (this.filename != '') {                    
+                    $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
+                        cgiaction: "download",
+                        downloadflags: "ZIP",
+                        part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}" + this.filename,
+                        firm: "jiecang",
+                        format: this.format,
+                        ok_url: "<%download_xml%>", // format of the url to generate
+                        ok_url_type: "text", // we want a direct text response (no 302)
+                        apikey: "e20d66d8bb834f2497a101cff347a2d0",
+                        zipfilename: "Jiecang<%wkbno%>",
+                    }).done(function (data) {
+                        download_xml = data; // get the file name for polling
+                        checkFile(); // start polling
+                    });
+                }
+                else {
+
+                }
 
             },
-            
+            setloading() {
+                this.loading = false;
+            }
             
         }
     })

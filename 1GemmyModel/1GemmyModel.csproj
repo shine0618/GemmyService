@@ -178,6 +178,10 @@
     <Compile Include="Migrations\202107290728511_init85746684738549.designer.cs">
       <DependentUpon>202107290728511_init85746684738549.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109130126429_initorder123456222.cs" />
+    <Compile Include="Migrations\202109130126429_initorder123456222.designer.cs">
+      <DependentUpon>202109130126429_initorder123456222.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Accessory.cs" />
     <Compile Include="Model\ModelProductOffice\T_Office_Color.cs" />
@@ -198,6 +202,7 @@
     <Compile Include="Model\ModelProductOffice\T_Product_office_desk_detail.cs" />
     <Compile Include="Model\ModelProductOffice\T_Product_office_text.cs" />
     <Compile Include="Model\ModelSystem\T_SYS_Language.cs" />
+    <Compile Include="Model\ModelUserAccount\T_USER_ApplyOrder.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Click.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Opinion.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Permission.cs" />
@@ -315,6 +320,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107290728511_init85746684738549.resx">
       <DependentUpon>202107290728511_init85746684738549.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109130126429_initorder123456222.resx">
+      <DependentUpon>202109130126429_initorder123456222.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -48,7 +48,7 @@ namespace GemmyService.Controllers
             {
                 Session["PageLanguage"] = "default";
             }
-            if(Session["emailName"] == null)
+            if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
             }
@@ -86,15 +86,15 @@ namespace GemmyService.Controllers
 
 
         #region  捷昌标准推荐配置选择
-        public ActionResult OfficeStandards(string domain,string Type,string recommend)
+        public ActionResult OfficeStandards(string domain, string Type, string recommend)
         {
 
-            if(string.IsNullOrEmpty(recommend))
+            if (string.IsNullOrEmpty(recommend))
             {
                 recommend = "all";
             }
-          
-           
+
+
             //如果语言是默认的话
             if (Session["PageLanguage"] == null)
             {
@@ -123,16 +123,16 @@ namespace GemmyService.Controllers
             return View();
         }
 
-      
+
 
         [HttpGet]
-        public JsonResult GetOfficeStards(string domain,string Type, string recommend, string Order,string OrderValue, string langCode,string searchText)
+        public JsonResult GetOfficeStards(string domain, string Type, string recommend, string Order, string OrderValue, string langCode, string searchText)
         {
 
             List<T_Product_office_desk> list = new List<T_Product_office_desk>();
-            if (recommend=="customer"&&Session["emailName"]==null)
+            if (recommend == "customer" && Session["emailName"] == null)
             {
-                
+
             }
             else
             {
@@ -169,7 +169,7 @@ namespace GemmyService.Controllers
         }
 
         #region 显示产品详细界面
-        public ActionResult ProductDetail(string domain, string Type, string recommend,string productName,string productGuid)
+        public ActionResult ProductDetail(string domain, string Type, string recommend, string productName, string productGuid)
         {
 
             //如果语言是默认的话
@@ -226,7 +226,7 @@ namespace GemmyService.Controllers
 
 
         }
-        
+
         [HttpGet]
         public ActionResult GetCollect(int deskId)
         {
@@ -246,7 +246,7 @@ namespace GemmyService.Controllers
 
 
         [HttpGet]
-        public ActionResult GetOfficeDeskDetail(string productGuid,string lang)
+        public ActionResult GetOfficeDeskDetail(string productGuid, string lang)
         {
 
             T_Product_office_desk _T_Product_office_desk = bll_desk.GetT_Product_office_desk(productGuid);
@@ -260,11 +260,11 @@ namespace GemmyService.Controllers
             List<T_Office_Files> T_Office_Files = bll_file.GetT_Office_Files(_T_Product_office_desk.Id);
             //收藏
             T_Office_desk_collect collect = new T_Office_desk_collect();
-            if (Session["emailName"]!=null && Session["emailName"].ToString()!="")
+            if (Session["emailName"] != null && Session["emailName"].ToString() != "")
             {
                 string pname = Session["emailName"].ToString();
-             
-                 collect =  bll_collect.GetT_Office_desk_collect(_T_Product_office_desk.Id, pname);
+
+                collect = bll_collect.GetT_Office_desk_collect(_T_Product_office_desk.Id, pname);
             }
 
             var list = new
@@ -302,7 +302,7 @@ namespace GemmyService.Controllers
         /// </summary>
         /// <param name="productGuid"></param>
         /// <returns></returns>
-        public ActionResult office_Eservice_test(string productName,string productGuid, string Type)
+        public ActionResult office_Eservice_test(string productName, string productGuid, string Type)
         { //如果语言是默认的话
             if (Session["PageLanguage"] == null)
             {
@@ -412,10 +412,10 @@ namespace GemmyService.Controllers
         {
             //2021.7.6  临时代码
             return View();
-                
+
         }
         [HttpGet]
-        public JsonResult GetPartDetail(string partType, string Mode,string langCode)
+        public JsonResult GetPartDetail(string partType, string Mode, string langCode)
         {
 
             string imgurl = string.Empty;
@@ -429,11 +429,11 @@ namespace GemmyService.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetOfficeColumn(string columnType,string deskType)
+        public JsonResult GetOfficeColumn(string columnType, string deskType)
         {
 
 
-            List<T_Part_office_Column> list = bll_desk.GetT_Part_office_ColumnWithType(columnType,deskType);
+            List<T_Part_office_Column> list = bll_desk.GetT_Part_office_ColumnWithType(columnType, deskType);
 
             //if (OrderValue != null && OrderValue != "")
             //{
@@ -466,7 +466,7 @@ namespace GemmyService.Controllers
         [HttpGet]
         public JsonResult GetOfficeFoot(string select_columnMode, string deskType)
         {
-            List<T_Part_office_Foot> list = bll_desk.GetT_Part_office_FootWithType( select_columnMode, deskType);
+            List<T_Part_office_Foot> list = bll_desk.GetT_Part_office_FootWithType(select_columnMode, deskType);
 
 
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
@@ -506,7 +506,7 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
-        
+
 
 
         [HttpGet]
@@ -531,20 +531,20 @@ namespace GemmyService.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetModelUrl(string url,string modeType,string oldModelid,string newModelid)
+        public JsonResult GetModelUrl(string url, string modeType, string oldModelid, string newModelid)
         {
             var a = modeType + "=" + oldModelid;
-            if (url.Contains(a)==true)
+            if (url.Contains(a) == true)
             {
                 if (modeType != "OF")
                 {
-                    url=url.Replace(modeType + "=" + oldModelid, modeType + "=" + newModelid);
+                    url = url.Replace(modeType + "=" + oldModelid, modeType + "=" + newModelid);
                 }
                 else
                 {
                     if (newModelid != "-02")
                     {
-                        url=url.Replace(",{OF=-02}", "");
+                        url = url.Replace(",{OF=-02}", "");
                     }
 
                 }
@@ -598,7 +598,7 @@ namespace GemmyService.Controllers
                 de.deskImgUrl = "/resourse/desk_TS_picture/effectImg1.png";
                 de.deskMaxLoad = Convert.ToDouble(column.MaxLoad);
                 de.deskNewProduct = false;
-                de.deskJCRecommend = false;                
+                de.deskJCRecommend = false;
                 de.verificationCode = BLL_Ofiice_Configuration.CreateConfigurationCode(de.deskGuid, false, pname, Type, mode);
                 de.deskCustomerName = custmerName;
 
@@ -690,12 +690,12 @@ namespace GemmyService.Controllers
 
                     int suc_cus = bll_customer.AddT_Product_office_desk_customer(cus);
 
-                    
 
-                    
+
+
                     //成功
                     msgType = "true";
-                    msg= BLL_SYS_language.GetTextByKey(langCode, "CustomAddSuccessNotice");
+                    msg = BLL_SYS_language.GetTextByKey(langCode, "CustomAddSuccessNotice");
                 }
 
 
@@ -741,7 +741,7 @@ namespace GemmyService.Controllers
         [HttpGet]
         public JsonResult DeleteCustomer(int id)
         {
-            
+
             bool issuccess = bll_desk.DeleteCustome(id);
             JsonResult jr = Json(issuccess, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
@@ -826,7 +826,7 @@ namespace GemmyService.Controllers
             return View();
 
         }
-        public ActionResult PersonInfo(string email,string name)
+        public ActionResult PersonInfo(string email, string name)
         {
             if (Session["PageLanguage"] == null)
             {
@@ -863,7 +863,7 @@ namespace GemmyService.Controllers
             return View();
         }
 
-        public ActionResult FileTree(string parttype,string nature,string mode)
+        public ActionResult FileTree(string parttype, string nature, string mode)
         {
             if (Session["PageLanguage"] == null)
             {
@@ -886,10 +886,44 @@ namespace GemmyService.Controllers
 
 
         [HttpGet]
-        public JsonResult getFileByDetail(string parttype,string nature,string mode)
+        public JsonResult getFileByDetail(string parttype, string nature, string mode)
         {
             List<T_Office_Files> list = bll_file.GetAllFilesByDetail(parttype, nature, mode);
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+
+        public ActionResult orderlist()
+        { //如果语言是默认的话
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
+            Session.Timeout = 9600;
+            return View();
+        }
+
+        [HttpGet]
+        public JsonResult getCompanyName(string username)
+        {
+           T_USER_UserInfo list = userManager.getCompanyName(username);
+            var param =
+           new
+           {
+               CompanyName = list.CompanyName,
+               isorder = list.isorder,
+           };
+            JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
@@ -930,7 +964,6 @@ namespace GemmyService.Controllers
         //}
         #endregion
 
-
         #region 价格系统
 
         [HttpGet]
@@ -950,6 +983,8 @@ namespace GemmyService.Controllers
             return jr;
         }
 
-        #endregion
+        #endregion       
+
     }
-}
+}   
+    

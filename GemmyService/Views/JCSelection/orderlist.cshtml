@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "orderlist";
+}
+
+<style>
+    #asas {
+        height: 800px;
+        min-width: 1230px;
+    }
+
+    #shjahs {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        height: 642px;
+        width: 871px;
+    }
+
+    #iDisplayBox {
+        margin-top: 20px;
+        position: relative;
+    }
+
+    #player {
+        height: 36px;
+        width: 871px;
+        background-color: #fff;
+        position: absolute;
+        bottom: 0px;
+    }
+</style>
+
+<div id="orderlist">
+    <div class="page-header" style="height:53px;">
+        <div class="container" style="padding:10px 10px ">
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a"></a>
+        </div>
+    </div>
+    <div class="container" style="margin-top:20px;margin-bottom:20px;">
+
+        
+
+            <div class="col-lg-12">
+
+
+                <div class="col-lg-8">
+
+                    <div id="asas">
+                        <div class="player" id="player">
+                        </div>
+
+
+                    </div>                    
+                </div>
+            </div>
+
+    </div>
+
+</div>
+
+<script>
+    var orderlist = new Vue({
+        el: "#orderlist",
+        data: {
+            NAVMainPage: '',
+            CustomPage: '',
+            partType: '',
+            Nature: '',
+            Mode: '',
+            company: '',
+            UserEmail:'',
+
+
+        },
+        methods: {
+            initPage: function (event) {
+                var code = GetLanguCode();
+                this.langCode = code;
+                $.ajaxSettings.async = false;
+                //var level = GetLoginLevel();
+                //if (level < 1) {
+                //    window.location.href = "/JCSelection/main";
+                //}
+                this.UserEmail = GetLoginUsername();
+                if (this.UserEmail == null || this.UserEmail == '') {
+                    window.location.href = "/JCSelection/main";
+                }
+                var i = '<iframe scrolling="yes"  id="shjahs"  alt=""  src = ""/>';
+                $('#asas').append(i);
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/getCompanyName",
+                    params: {
+                        username: this.UserEmail
+                    }
+                }).then(function (response) {  //接口返回数据
+                    console.log(response);
+                    if (response.body.CompanyName != '' && response.body.CompanyName != null && response.body.isorder == true) {
+                        this.company = response.body.CompanyName;
+                        //var url = "http://61.175.247.114:7081/JC_SD/Index?I_STATE=%E5%85%A8%E9%83%A8&I_STATE_prdo=%E5%85%A8%E9%83%A8&type=overview&I_JHJQ_S=2021-09-09&I_JHJQ_E=2021-09-09&I_XSJQ_S=&I_XSJQ_E=&S_ZYD=1200&I_VBELN=&S_ZKHMC=" + this.company + "&S_ZYWY=&S_ZSYB=&S_ZQY=";
+                        //$("#shjahs").attr({
+                        //    "src": url
+                        //});
+                        console.log(url);
+                    }
+                    else {
+                        window.location.href = "/JCSelection/main";
+                    }
+                    //console.log(this.list_Color);
+                }, function (error) {
+                    //console.log(error);
+                });
+
+                var languText;
+                $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
+                    languText = result.language;
+                });
+                $.ajaxSettings.async = true;
+                var obj = languText;
+                for (var p in obj) {
+                    // 方法
+                    if (typeof (obj[p]) == "function") {
+                        obj[p]();
+                    } else {
+                        // p 为属性名称，obj[p]为对应属性的值
+                        var key = p;
+                        var value = obj[p];
+                        // console.log('key:' + key + "  value:" + value);
+                        this.setData(key, value);
+                    }
+                }
+                
+                
+                
+            },
+            setData: function (field, val) {
+                this.$set(this.$data, field, val);//vue 设定值
+            },           
+        },
+    })
+    orderlist.initPage();
+</script>

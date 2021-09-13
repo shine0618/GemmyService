@@ -271,6 +271,23 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
         }
 
 
+        public T_USER_UserInfo getCompanyName(string email)
+        {
+
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                T_USER_UserInfo t = db.T_USER_UserInfo.Where(m => m.Email == email).FirstOrDefault();
+                if (t == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return t;
+                }
+            }
+        }
+
         public T_USER_UserCompanyInfo getCompanyInfo2(string email)
         {
 

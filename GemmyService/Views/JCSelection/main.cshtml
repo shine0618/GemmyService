@@ -149,7 +149,7 @@
                 </div><!-- /.feature-one__box -->
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4">
-                <div class="feature-one__box">
+                <div class="feature-one__box" @@click="ToOrder">
                     <i class="pylon-icon-finance"></i>
                     <p>
                         {{MainMyOrder}}
@@ -170,13 +170,15 @@
             MainProductFiles: "",
             MainMyOrder: "",
             MainAllowNotice:"",
-            UserLevel:0,
+            UserLevel: 0,
+            UserEmail:'',
         },
         // 在 `methods` 对象中定义方法
         methods: {
             initPage: function (event) {
                 var code = GetLanguCode();
                 this.UserLevel = GetLoginLevel();
+                this.UserEmail = GetLoginUsername();
                 $.ajaxSettings.async = false;
 
                 var languText;
@@ -230,6 +232,30 @@
                         message: this.MainAllowNotice
                     });
                 }
+            },
+            ToOrder: function (event) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/getCompanyName",
+                    params: {
+                        username: this.UserEmail
+                    }
+                }).then(function (response) {  //接口返回数据
+                    console.log(response);
+                    console.log(response.body.CompanyName);
+                    if (response.body.CompanyName != '' && response.body.CompanyName != null && response.body.isorder == true) {
+                        window.location.href = "/JCSelection/orderlist";
+                    }
+                    else {
+                        this.$message({
+                            type: 'error',
+                            message: this.MainAllowNotice
+                        });
+                    }
+                    //console.log(this.list_Color);
+                }, function (error) {
+                    //console.log(error);
+                })
             }
             
         }

@@ -39,7 +39,14 @@ namespace _1GemmyModel.Model
         /// 权限等级
         /// </summary>
         public int Level { get; set; }
-
+        /// <summary>
+        /// 公司名称
+        /// </summary>
+        public string CompanyName { get; set; }
+        /// <summary>
+        /// 能否查询订单
+        /// </summary>
+        public bool isorder { get; set; }
         [NotMapped]
         public bool CanLogin { get; set; }
 
