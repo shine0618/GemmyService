@@ -193,6 +193,7 @@ var nav_langu_box = new Vue({
             table_opinionsearch:'',
             opiniontableData: [],
             managershow: false,
+            ordershow: false,
             NAVOpinionSearchTitle:'',
             NAVOpinionTitle:'',
             NAVLogin: "",

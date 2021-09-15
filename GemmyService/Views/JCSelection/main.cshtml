@@ -121,44 +121,61 @@
 </section><!-- /.main-slider -->
 
 <div id="office_selectbox">
-<section class="feature-one">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="block-title text-center">
-                    <p>{{MainConfigurationTool}}</p>
-                    <h2></h2>
-                </div><!-- /.block-title -->
-            </div><!-- /.col-lg-6 -->
-        </div><!-- /.row -->
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="feature-one__box" @@click="Toconfiguration">
-                    <i class="pylon-icon-assets"></i>
-                    <p>
-                        {{MainProductConfigurationTool}}
-                    </p>
-                </div><!-- /.feature-one__box -->
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-                <div class="feature-one__box" @@click="Tofiles">
-                    <i class="pylon-icon-verification" ></i>
-                    <p>
-                        {{MainProductFiles}}
-                    </p>
-                </div><!-- /.feature-one__box -->
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-                <div class="feature-one__box" @@click="ToOrder">
-                    <i class="pylon-icon-finance"></i>
-                    <p>
-                        {{MainMyOrder}}
-                    </p>
-                </div><!-- /.feature-one__box -->
-            </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
-    </div><!-- /.container -->
-</section><!-- /.feature-one -->
+    <section class="feature-one">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="block-title text-center">
+                        <p>{{MainConfigurationTool}}</p>
+                        <h2></h2>
+                    </div><!-- /.block-title -->
+                </div><!-- /.col-lg-6 -->
+            </div><!-- /.row -->
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="feature-one__box" @@click="Toconfiguration">
+                        <i class="pylon-icon-assets"></i>
+                        <p>
+                            {{MainProductConfigurationTool}}
+                        </p>
+                    </div><!-- /.feature-one__box -->
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <div class="feature-one__box" @@click="Tofiles">
+                        <i class="pylon-icon-verification"></i>
+                        <p>
+                            {{MainProductFiles}}
+                        </p>
+                    </div><!-- /.feature-one__box -->
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <div class="feature-one__box" @@click="ToOrder">
+                        <i class="pylon-icon-finance"></i>
+                        <p>
+                            {{MainMyOrder}}
+                        </p>
+                    </div><!-- /.feature-one__box -->
+                </div><!-- /.col-lg-4 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+
+        <el-dialog title="订单系统申请" :visible.sync="dialogorderapply">
+            <el-form ref="orderform" :model="orderform" :rules="rules" label-width="150px">
+                <el-form-item label="申请邮箱" prop="Mode">
+                    <el-input v-model="orderform.email" style="width:60%;" disabled></el-input>
+                </el-form-item>
+                <el-form-item label="公司名称" prop="Mode">
+                    <el-input v-model="orderform.companyname" style="width:60%;"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @@click="addonSubmit('orderform')">申请</el-button>
+            </div>
+        </el-dialog>
+        <el-dialog title="订单系统申请" :visible.sync="dialoghaveorderapply">
+            <i class="el-icon-check">你的申请已经在进行，请耐心等待</i>
+        </el-dialog>
+    </section><!-- /.feature-one -->
 </div>
 
 <script>
@@ -171,7 +188,25 @@
             MainMyOrder: "",
             MainAllowNotice:"",
             UserLevel: 0,
-            UserEmail:'',
+            UserEmail: '',
+            UserCompanyName: '',
+            isorder: false,
+            haveorderapply: false,
+            dialogorderapply: false,
+            dialoghaveorderapply: false,
+            orderform: {
+                email: '',
+                companyname: '',
+            },
+            formLabelWidth: '120px',
+            rules: {
+                email: [
+                    { required: true }
+                ],
+                company: [
+                    { required: true }
+                ],
+            }
         },
         // 在 `methods` 对象中定义方法
         methods: {
@@ -199,7 +234,18 @@
                         this.setData(key, value);;
                     }
                 }
-
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/getCompanyapply",
+                    params: {
+                        username: this.UserEmail
+                    }
+                }).then(function (response) {  //接口返回数据
+                    if (response.body == true) {
+                        this.haveorderapply = true;
+                    }
+                }, function (error) {
+                })
             },
             setData: function (field, val) {
                 this.$set(this.$data, field, val);
@@ -234,30 +280,85 @@
                 }
             },
             ToOrder: function (event) {
-                this.$http({           //调用接口
-                    method: 'GET',
-                    url: "/JCSelection/getCompanyName",
-                    params: {
-                        username: this.UserEmail
-                    }
-                }).then(function (response) {  //接口返回数据
-                    console.log(response);
-                    console.log(response.body.CompanyName);
-                    if (response.body.CompanyName != '' && response.body.CompanyName != null && response.body.isorder == true) {
-                        window.location.href = "/JCSelection/orderlist";
+                console.log(this.haveorderapply);
+                if (this.UserEmail != '' && this.UserEmail != null) {
+                    this.$http({           //调用接口
+                        method: 'GET',
+                        url: "/JCSelection/getCompanyName",
+                        params: {
+                            username: this.UserEmail
+                        }
+                    }).then(function (response) {  //接口返回数据
+
+                        if (response.body.CompanyName == '' || response.body.CompanyName == null) {
+                            if (this.haveorderapply == true) {
+                                this.dialoghaveorderapply = true;
+                            }
+                            else {
+                                this.dialogorderapply = true;
+                                this.orderform.email = this.UserEmail;
+                            }
+
+                        }
+                        else {
+                            if (response.body.isorder == false) {
+                                this.$message({
+                                    type: 'error',
+                                    message: this.MainAllowNotice
+                                });
+                            }
+                            else {
+                                window.location.href = "/JCSelection/orderlist";
+                            }
+                        }
+                        //console.log(response.body);
+                    }, function (error) {
+                        //console.log(error);
+                    })
+                }
+                else {
+                    this.$message({
+                        type: 'error',
+                        message: this.MainAllowNotice
+                    });
+                }
+                                  
+            },
+            addonSubmit(formname) {
+                console.log(this.haveorderapply);
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.$http({           //调用接口
+                            method: 'POST',
+                            url: "/JCSelection/addcompanyapply",
+                            params: {
+                                forminfo: JSON.stringify(this.orderform),
+                            }
+                        }).then(function (response) {
+                            //console.log(response.body);
+                            this.isadd = response.body;
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                //location.reload();
+                            }
+                        })
+
+
+                        //this.$notify({
+                        //    message: '提交成功',
+                        //    type: 'success'
+                        //});
+
                     }
                     else {
-                        this.$message({
-                            type: 'error',
-                            message: this.MainAllowNotice
-                        });
+                        this.$notify.error('缺少内容');
+
                     }
-                    //console.log(this.list_Color);
-                }, function (error) {
-                    //console.log(error);
                 })
-            }
-            
+            },
         }
     })
 

@@ -47,6 +47,7 @@ namespace _1GemmyModel.Model
         /// 能否查询订单
         /// </summary>
         public bool isorder { get; set; }
+
         [NotMapped]
         public bool CanLogin { get; set; }
 

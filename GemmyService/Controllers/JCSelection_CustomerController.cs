@@ -24,6 +24,14 @@ namespace GemmyService.Views
             {
                 Session["emailName"] = "";
             }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
 
 
             return View();
@@ -51,6 +59,14 @@ namespace GemmyService.Views
             if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             return View();
 

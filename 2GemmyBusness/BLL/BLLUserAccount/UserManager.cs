@@ -391,6 +391,41 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
             }
         }
 
-        
+        public bool addcompanyapply(T_USER_ApplyOrder t)
+        {
+            bool isadd = false;
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+
+                if (t != null)
+                {
+                    var entity = db.T_USER_ApplyOrder.Any(m => m.Email == t.Email);
+                    if (entity != true)
+                    {
+                        T_USER_ApplyOrder new_t = new T_USER_ApplyOrder() {
+                            Email = t.Email,
+                            CompanyName = t.CompanyName,
+                            ApplyTime = DateTime.UtcNow,
+                            Pass = false
+                        };
+                        db.T_USER_ApplyOrder.Add(new_t);
+                        db.SaveChanges();
+                        isadd = true;
+                    }
+
+                }
+            }
+            return isadd;
+        }
+
+        public bool getCompanyapply(string email)
+        {
+
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                var t = db.T_USER_ApplyOrder.Any(m => m.Email == email);
+                return t;
+            }
+        }
     }
 }

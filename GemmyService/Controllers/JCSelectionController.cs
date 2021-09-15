@@ -56,6 +56,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -79,6 +83,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             Session.Timeout = 9600;
             return View();
@@ -107,6 +115,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             Session.Timeout = 9600;
 
@@ -180,6 +192,10 @@ namespace GemmyService.Controllers
             if (Session["emailName"] == null)
             {
                 Session["emailName"] = "";
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             Session.Timeout = 9600;
 
@@ -316,6 +332,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             Session.Timeout = 9600;
             ViewBag.productGuid = productGuid;
             ViewBag.Type = Type;
@@ -338,6 +358,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             Session.Timeout = 9600;
             ViewBag.productGuid = productGuid;
@@ -362,6 +386,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
         public ActionResult office_Eservice_handset(string productName, string productGuid, string Type)
@@ -377,6 +405,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             Session.Timeout = 9600;
             ViewBag.productGuid = productGuid;
@@ -398,6 +430,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             Session.Timeout = 9600;
             ViewBag.productGuid = productGuid;
@@ -766,6 +802,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -783,6 +823,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             Session.Timeout = 9600;
             return View();
@@ -803,6 +847,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -820,6 +868,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             Session.Timeout = 9600;
 
@@ -839,6 +891,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             Session.Timeout = 9600;
             ViewBag.email = email;
@@ -860,6 +916,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
 
@@ -876,6 +936,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             ViewBag.parttype = parttype;
             ViewBag.nature = nature;
@@ -909,6 +973,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -924,6 +992,25 @@ namespace GemmyService.Controllers
                isorder = list.isorder,
            };
             JsonResult jr = Json(param, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+        [HttpGet]
+        public JsonResult getCompanyapply(string username)
+        {
+            bool ishave = userManager.getCompanyapply(username);            
+            JsonResult jr = Json(ishave, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+
+        [HttpPost]
+        public JsonResult addcompanyapply(string forminfo)
+        {
+            T_USER_ApplyOrder t_USER_ApplyOrder = Newtonsoft.Json.JsonConvert.DeserializeObject<T_USER_ApplyOrder>(forminfo);
+            bool isadd = userManager.addcompanyapply(t_USER_ApplyOrder);
+            JsonResult jr = Json(isadd, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }

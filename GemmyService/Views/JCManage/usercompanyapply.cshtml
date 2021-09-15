@@ -1,0 +1,279 @@
+﻿
+@{
+    ViewBag.Title = "usercompanyapply";
+}
+
+<script src="/Scripts/vue.min.js"></script>
+<link href="/assets/eleindex.css" rel="stylesheet" />
+<script src="/assets/eleindex.js"></script>
+<script src="/Scripts/vueAjax.js"></script>
+
+<style>
+    .el-dialog {
+        margin-top: 0vh !important;
+    }
+
+    .size-icon {
+        font-size: 30px;
+    }
+</style>
+
+<div id="companyapply">
+    <h1 style="text-align:center">订单系统申请</h1>
+    <el-row>
+        <span>账号查询</span>
+        <el-input v-model="table_emailsearch" style="width:400px;"></el-input>
+
+    </el-row>
+
+    <el-table :table="partfoottableData"
+              :data="partfoottableData.filter(data => !table_emailsearch || data.Email.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
+              height="680">
+        <el-table-column prop="Email" label="电子邮箱">
+        </el-table-column>
+        <el-table-column prop="CompanyName" label="名">
+        </el-table-column>
+        <el-table-column prop="isorder" label="姓">
+        </el-table-column>
+        <el-table-column label="操作" width="160px">
+            <template slot-scope="scope">
+                <el-button size="mini"
+                           @@click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            </template>
+        </el-table-column>
+    </el-table>
+    <el-pagination @@current-change="handleCurrentChange"
+                   :current-page="currentPage4"
+                   :page-size="pagesize"
+                   layout="total, prev, pager, next, jumper"
+                   :total="partfoottableData.length"
+                   align="center">
+    </el-pagination>
+
+    <el-dialog title="订单申请"
+               :visible.sync="dialogVisible"
+               width="40%">
+        <el-form ref="form" :model="form" label-width="150px">
+            <el-form-item label="账号">
+                <el-input v-model="form.Email" disabled style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="申请公司名">
+                <el-input v-model="form.CompanyName"  style="width:60%;"></el-input>
+            </el-form-item>
+            <el-form-item label="是否开通">
+                <span>False</span>
+                <el-switch v-model="form.isorder"
+                           active-color="#13ce66"
+                           inactive-color="#ff4949">
+                </el-switch>
+                <span>True</span>
+            </el-form-item>
+
+            <el-button @@click="onSubmit">更新</el-button>
+        </el-form>
+    </el-dialog>
+
+    <el-dialog title="参数描述的定义"
+               :visible.sync="addindexdialogVisible"
+               width="80%">
+
+        <img src="~/resourse/paramdesc/paramIndex.png" />
+    </el-dialog>
+</div>
+
+
+<script>
+    $(function () {
+        $('.bottom-footer').hide();
+        $('.main-menu').hide();
+    })
+    var table = new Array();
+    var partfoottable = new Array();
+    function Init() {
+        var level = GetLoginLevel();
+        if (level < 2) {
+            window.location.href = "/JCSelection/main";
+        }
+    };
+    //Init();
+    function GetPartFootInfo() {
+        //用 ajax 写
+        partfoottable.length = 0;
+        $.ajax(
+            {
+                url: "/JCManage/GetAllUserInfo",
+                method: 'get',
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var q = {
+                            //UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
+                            Email: data[i].Email,
+                            CompanyName: data[i].CompanyName,
+                            isorder: data[i].isorder
+                        };
+                        //this.tableData.push(q);
+                        partfoottable.push(q);
+                        
+                    }
+                    table = data;
+                    console.log(partfoottable);
+                },
+                error: function (err) {
+                    alert(err);
+                }
+            });
+    };
+    GetPartFootInfo();
+    var Register = new Vue({
+        el: '#companyapply',
+        data() {
+
+            return {
+                table_emailsearch: '',
+                partfoottableData: partfoottable,
+                currentPage4: 1,
+                pagesize: 12,
+                dialogVisible: false,
+                dialogdata: [],
+                certinfokey: false,
+                adddialogVisible: false,
+                addindexdialogVisible: false,
+                form: {
+                    Email: '',
+                    CompanyName: '',
+                    isorder:''
+                },                
+                rules: {
+                    Email: [
+                        { required: true }
+                    ],
+                    isorder: [
+                        { required: true }
+                    ],                   
+                }
+            }
+        },
+        methods: {
+            handleCurrentChange: function (currentPage) {  //页码更改方法
+                this.currentPage4 = currentPage;
+            },
+            handleEdit(index, row) {
+                console.log(this.currentPage4);
+                console.log(this.pagesize);
+                this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+                console.log(this.dialogdata);
+                this.certinfokey = !this.certinfokey;
+                this.dialogVisible = true;
+            },
+            //handleDelete(index, row) {
+            //    this.dialogdata = table[index + (this.currentPage4 - 1) * this.pagesize];
+            //    this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+            //        confirmButtonText: '确定',
+            //        cancelButtonText: '取消',
+            //        type: 'warning'
+            //    }).then(() => {
+            //        this.$http({           //调用接口
+            //            method: 'POST',
+            //            url: "/JCManage/DeleteFootInfo",
+            //            params: {
+            //                forminfo: JSON.stringify(this.form),
+            //            }
+            //        }).then(function (response) {
+            //            this.isadd = response.body;
+            //            if (this.isadd == true) {
+
+            //                location.reload();
+            //            }
+            //        });
+            //        this.$message({
+            //            type: 'success',
+            //            message: '删除成功!'
+            //        });
+            //    }).catch(() => {
+            //        this.$message({
+            //            type: 'info',
+            //            message: '已取消删除'
+            //        });
+            //    });
+            //    console.log(this.dialogdata);
+            //},
+            onSubmit() {
+                console.log(JSON.stringify(this.form));
+                console.log(GetLoginUsername());
+                this.$http({           //调用接口
+                    method: 'POST',
+                    url: "/JCManage/UpdateOrderApply",
+                    params: {
+                        forminfo: JSON.stringify(this.form),
+                        user: GetLoginUsername(),
+                    }
+                }).then(function (response) {
+                    this.isadd = response.body;
+                    console.log(this.form);
+                    console.log(JSON.stringify(this.form));
+                    console.log(response.body);
+                    if (this.isadd == true) {
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+                        location.reload();
+                    }
+                })
+
+
+            },
+            addonSubmit(formname) {
+                this.$refs[formname].validate((valid) => {
+                    if (valid) {
+                        this.$http({           //调用接口
+                            method: 'POST',
+                            url: "/JCManage/addFootInfo",
+                            params: {
+                                forminfo: JSON.stringify(this.addform),
+                            }
+                        }).then(function (response) {
+                            this.isadd = response.body;
+                            console.log(this.addform);
+                            console.log(JSON.stringify(this.addform));
+                            console.log(response.body);
+                            if (this.isadd == true) {
+                                this.$notify({
+                                    message: '提交成功',
+                                    type: 'success'
+                                });
+                                location.reload();
+                            }
+                        })
+                        console.log(this.addform);
+
+                        this.$notify({
+                            message: '提交成功',
+                            type: 'success'
+                        });
+
+                    }
+                    else {
+                        this.$notify.error('缺少内容');
+
+                    }
+                })
+            },
+            addformshow() {
+                this.adddialogVisible = true;
+            },
+            addindexdialogshow() {
+                this.addindexdialogVisible = true;
+            }
+        },
+        watch: {
+            dialogdata() {
+                Object.assign(this.form, this.dialogdata);
+            },
+
+        }
+    })
+
+</script>
+
+

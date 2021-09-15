@@ -845,6 +845,7 @@
     <Content Include="Views\JCSelection\office_Eservice_handset.cshtml" />
     <Content Include="Views\JCSelection\office_Eservice_controlbox.cshtml" />
     <Content Include="Views\JCSelection\orderlist.cshtml" />
+    <Content Include="Views\JCManage\usercompanyapply.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

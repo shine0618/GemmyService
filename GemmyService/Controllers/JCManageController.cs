@@ -1,5 +1,6 @@
 ﻿using _1GemmyModel.Model;
 using _1GemmyModel.Model.ModelProductOffice;
+using _1GemmyModel.Model.ModelUserAccount;
 using _2GemmyBusness.BLL.BLLOfficePartManage;
 using _2GemmyBusness.BLL.BLLUserAccount;
 using Newtonsoft.Json;
@@ -47,6 +48,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             var t= usermanager.getAllUserInfo();
             ViewBag.userInfo = t;
             return View();
@@ -65,6 +70,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
 
@@ -82,6 +91,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
         public ActionResult partFoot()
@@ -97,6 +110,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             return View();
         }
@@ -114,6 +131,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
         public ActionResult partControlbox()
@@ -130,6 +151,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
         public ActionResult partSidebracket()
@@ -145,6 +170,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             return View();
         }
@@ -163,6 +192,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
         public ActionResult userCompanyInfo()
@@ -178,6 +211,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             return View();
         }
@@ -196,6 +233,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
         public ActionResult productcolor()
@@ -211,6 +252,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             return View();
         }
@@ -228,6 +273,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             return View();
         }
@@ -247,6 +296,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
 
@@ -263,6 +316,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             return View();
         }
@@ -281,6 +338,10 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             ViewBag.textkey = textkey == 0 ? 0 : textkey;
             return View();
         }
@@ -298,6 +359,10 @@ namespace GemmyService.Controllers
             if (Session["level"] == null)
             {
                 Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
             }
             if (!string.IsNullOrEmpty(mode))
             {
@@ -321,8 +386,34 @@ namespace GemmyService.Controllers
             {
                 Session["level"] = 0;
             }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
             return View();
         }
+
+        public ActionResult usercompanyapply()
+        {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
+            return View();
+        }
+
 
         [HttpGet]
         public JsonResult GetAllUserInfo()
@@ -766,6 +857,7 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
         #endregion
         #region 捷昌推荐整桌操作
 
@@ -867,6 +959,19 @@ namespace GemmyService.Controllers
             bool isadd = false;
             T_Office_Files t_Part_office_describe = JsonConvert.DeserializeObject<T_Office_Files>(forminfo);
             isadd = bll_office_files.DeleteFileInfo(t_Part_office_describe);
+            JsonResult jr = Json(isadd, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
+        #endregion
+        #region 订单权限修改
+
+        [HttpPost]
+        public JsonResult UpdateOrderApply(string forminfo,string user)
+        {
+            bool isadd = false;
+            T_USER_UserInfo t_USER_UserInfo = JsonConvert.DeserializeObject<T_USER_UserInfo>(forminfo);
+            isadd = bll_user.UpdateCompanyLevel(t_USER_UserInfo, user);
             JsonResult jr = Json(isadd, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;

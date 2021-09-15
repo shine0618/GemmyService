@@ -20,7 +20,7 @@
         padding: 0;
     }
     #player {
-        height: 65px;
+        height: 93px;
         width: 871px;
         background-color: #EFF2F6;
         position: absolute;
@@ -492,6 +492,7 @@
                 label: 'OBJ'
             }],
             loading: false,
+            username:'',
             filename:'',
             format: '',
             OrderValue: "",
@@ -684,6 +685,7 @@
             initPage: function (event) {
                 var code = GetLanguCode();
                 this.langCode = code;
+                this.username = GetLoginUsername();
                 $.ajaxSettings.async = false;
                 var languText;
                 $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
@@ -1044,22 +1046,30 @@
 
             },
             order: function (event) {
-                this.loading = true;
-                $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
-                    cgiaction: "download",
-                    downloadflags: "ZIP",
-                    part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}" + this.filename,
-                    firm: "jiecang",
-                    format: this.format,
-                    ok_url: "<%download_xml%>", // format of the url to generate
-                    ok_url_type: "text", // we want a direct text response (no 302)
-                    apikey: "e20d66d8bb834f2497a101cff347a2d0",
-                    zipfilename: "Jiecang<%wkbno%>",
-                }).done(function (data) {
-                    download_xml = data; // get the file name for polling
-                    //console.log(this.format);
-                    checkFile(); // start polling
-                });
+                if (this.username != '') {
+                    this.loading = true;
+                    $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
+                        cgiaction: "download",
+                        downloadflags: "ZIP",
+                        part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}" + this.filename,
+                        firm: "jiecang",
+                        format: this.format,
+                        ok_url: "<%download_xml%>", // format of the url to generate
+                        ok_url_type: "text", // we want a direct text response (no 302)
+                        apikey: "e20d66d8bb834f2497a101cff347a2d0",
+                        zipfilename: "Jiecang<%wkbno%>",
+                    }).done(function (data) {
+                        download_xml = data; // get the file name for polling
+                        //console.log(this.format);
+                        checkFile(); // start polling
+                    });
+                }
+                else {
+                    this.$message({
+                        type: 'error',
+                        message: this.MainAllowNotice
+                    });
+                }
             },
             setloading() {
                 this.loading = false;

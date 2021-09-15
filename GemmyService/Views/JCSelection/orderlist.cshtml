@@ -29,35 +29,41 @@
         position: absolute;
         bottom: 0px;
     }
+    .el-date-editor--daterange.el-input, .el-date-editor--daterange.el-input__inner, .el-date-editor--timerange.el-input, .el-date-editor--timerange.el-input__inner{
+        width:500px;
+        left:200px;
+    }
 </style>
 
 <div id="orderlist">
     <div class="page-header" style="height:53px;">
         <div class="container" style="padding:10px 10px ">
             <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
-            <a class="navigation_a"></a>
+            <a class="navigation_a">订单系统</a>
         </div>
     </div>
-    <div class="container" style="margin-top:20px;margin-bottom:20px;">
-
-        
-
-            <div class="col-lg-12">
-
-
-                <div class="col-lg-8">
-
-                    <div id="asas">
-                        <div class="player" id="player">
-                        </div>
-
-
-                    </div>                    
+    <div class="container" style="margin-top:20px;margin-bottom:20px;">       
+        <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div>
+                    <span>日期选择</span>
+                    <el-date-picker v-model="value1"
+                                    type="daterange"
+                                    range-separator="至"
+                                    start-placeholder="开始日期"
+                                    value-format="yyyy-MM-dd"
+                                    end-placeholder="结束日期">
+                    </el-date-picker>
+                </div>
+                <div id="asas">
+                    <div class="player" id="player">
+                    </div>
                 </div>
             </div>
-
+            
+            
+        </div>
     </div>
-
 </div>
 
 <script>
@@ -69,10 +75,22 @@
             partType: '',
             Nature: '',
             Mode: '',
-            company: '',
             UserEmail:'',
-
-
+            value1: '',
+            UserCompanyName: '',
+            dateStart: '',
+            dateEnd:'',
+        },
+        watch: {
+            value1() {
+                console.log(this.value1);
+                if (this.value1.length >= 2) {
+                    this.dateStart = this.value1[0];
+                    this.dateEnd = this.value1[1];
+                }
+                console.log(this.dateStart);
+                console.log(this.dateEnd);
+            }
         },
         methods: {
             initPage: function (event) {
@@ -87,32 +105,15 @@
                 if (this.UserEmail == null || this.UserEmail == '') {
                     window.location.href = "/JCSelection/main";
                 }
-                var i = '<iframe scrolling="yes"  id="shjahs"  alt=""  src = ""/>';
-                $('#asas').append(i);
-                this.$http({           //调用接口
-                    method: 'GET',
-                    url: "/JCSelection/getCompanyName",
-                    params: {
-                        username: this.UserEmail
-                    }
-                }).then(function (response) {  //接口返回数据
-                    console.log(response);
-                    if (response.body.CompanyName != '' && response.body.CompanyName != null && response.body.isorder == true) {
-                        this.company = response.body.CompanyName;
-                        //var url = "http://61.175.247.114:7081/JC_SD/Index?I_STATE=%E5%85%A8%E9%83%A8&I_STATE_prdo=%E5%85%A8%E9%83%A8&type=overview&I_JHJQ_S=2021-09-09&I_JHJQ_E=2021-09-09&I_XSJQ_S=&I_XSJQ_E=&S_ZYD=1200&I_VBELN=&S_ZKHMC=" + this.company + "&S_ZYWY=&S_ZSYB=&S_ZQY=";
-                        //$("#shjahs").attr({
-                        //    "src": url
-                        //});
-                        console.log(url);
-                    }
-                    else {
-                        window.location.href = "/JCSelection/main";
-                    }
-                    //console.log(this.list_Color);
-                }, function (error) {
-                    //console.log(error);
-                });
-
+                this.UserCompanyName = GetLoginCompanyName();
+                if (this.UserCompanyName == '') {
+                    window.location.href = "/JCSelection/main";
+                }               
+                //var url = "http://61.175.247.114:7081/JC_SD/Index?I_STATE=%E5%85%A8%E9%83%A8&I_STATE_prdo=%E5%85%A8%E9%83%A8&type=overview&I_JHJQ_S=2021-09-09&I_JHJQ_E=2021-09-09&I_XSJQ_S=&I_XSJQ_E=&S_ZYD=1200&I_VBELN=&S_ZKHMC=" + this.UserCompanyName + "&S_ZYWY=&S_ZSYB=&S_ZQY=";
+                //$("#shjahs").attr({
+                //    "src": url
+                //});
+                //console.log(url);
                 var languText;
                 $.getJSON("/resourse/Language/text-" + code + ".json", function (result) {
                     languText = result.language;
@@ -130,10 +131,9 @@
                         // console.log('key:' + key + "  value:" + value);
                         this.setData(key, value);
                     }
-                }
-                
-                
-                
+                }                
+                var i = '<iframe scrolling="yes"  id="shjahs"  alt=""  src = ""/>';
+                $('#asas').append(i);                
             },
             setData: function (field, val) {
                 this.$set(this.$data, field, val);//vue 设定值
