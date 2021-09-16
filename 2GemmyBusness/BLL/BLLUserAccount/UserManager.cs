@@ -326,6 +326,24 @@ namespace _2GemmyBusness.BLL.BLLUserAccount
             }
         }
 
+        public List<T_USER_ApplyOrder> getAllUserCompanyApply()
+        {
+
+            using (DBGemmyService2 db = new DBGemmyService2())
+            {
+                var t = from x in db.T_USER_ApplyOrder
+                        select x;
+                if (t != null)
+                {
+                    return t.ToList();
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
         public bool addOpinion(string email, string content, string name)
         {
             bool issuccess = false;

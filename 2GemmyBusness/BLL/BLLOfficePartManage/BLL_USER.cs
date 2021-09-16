@@ -16,31 +16,35 @@ namespace _2GemmyBusness.BLL.BLLOfficePartManage
             using (DBGemmyService2 db=new DBGemmyService2())
             {
                 bool issuccess = false;
-                if (t != null)
+                T_USER_UserInfo t1 = db.T_USER_UserInfo.Where(m => m.Email == t.Email).FirstOrDefault();
+                if (t1 != null)
                 {
-                    Update<T_USER_UserInfo>(t);
+                    t1.Level = t.Level;
+                    Update<T_USER_UserInfo>(t1);
                     issuccess = true;
                 }
                 return issuccess;
             }
                
         }
-        public bool UpdateCompanyLevel(T_USER_UserInfo t,string user)
+        public bool UpdateCompanyLevel(T_USER_ApplyOrder t,string user)
         {
             using (DBGemmyService2 db = new DBGemmyService2())
             {
                 bool issuccess = false;
                 if (t != null)
                 {
-                    Update<T_USER_UserInfo>(t);
+                    t.passemail = user;
+                    t.passtime = DateTime.UtcNow;
+                    Update<T_USER_ApplyOrder>(t);
                     issuccess = true;
-                    T_USER_ApplyOrder t1 = db.T_USER_ApplyOrder.Where(m => m.Email == t.Email).FirstOrDefault();
+                    T_USER_UserInfo t1 = db.T_USER_UserInfo.Where(m => m.Email == t.Email).FirstOrDefault();
                     if (t1 != null)
                     {                        
-                        t1.Pass = t.isorder;
-                        t1.passemail = user;
-                        t1.passtime = DateTime.UtcNow;
-                        Update<T_USER_ApplyOrder>(t1);
+                        t1.CompanyName = t.CompanyName;
+                        t1.isorder = t.Pass;
+
+                        Update<T_USER_UserInfo>(t1);
                     }
                 }
                 return issuccess;

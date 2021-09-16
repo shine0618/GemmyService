@@ -424,6 +424,14 @@ namespace GemmyService.Controllers
             return jr;
         }
 
+        [HttpGet]
+        public JsonResult GetUserCompanyApply()
+        {
+            var t = usermanager.getAllUserCompanyApply();
+            JsonResult jr = Json(t, JsonRequestBehavior.AllowGet);
+            jr.MaxJsonLength = int.MaxValue;
+            return jr;
+        }
 
         [HttpGet]
         public JsonResult GetAllUserCompanyInfo()
@@ -970,8 +978,8 @@ namespace GemmyService.Controllers
         public JsonResult UpdateOrderApply(string forminfo,string user)
         {
             bool isadd = false;
-            T_USER_UserInfo t_USER_UserInfo = JsonConvert.DeserializeObject<T_USER_UserInfo>(forminfo);
-            isadd = bll_user.UpdateCompanyLevel(t_USER_UserInfo, user);
+            T_USER_ApplyOrder t_USER_ApplyOrder = JsonConvert.DeserializeObject<T_USER_ApplyOrder>(forminfo);
+            isadd = bll_user.UpdateCompanyLevel(t_USER_ApplyOrder, user);
             JsonResult jr = Json(isadd, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;

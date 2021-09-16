@@ -24,6 +24,8 @@ namespace _1GemmyModel
         //{
         //    //不映射到数据库中
         //    modelBuilder.Entity<T_USER_UserInfo>().Ignore(p => p.CanLogin);
+        //    modelBuilder.Entity<T_USER_UserInfo>().Ignore(p => p.NoPassword);
+        //    modelBuilder.Entity<T_USER_UserInfo>().Ignore(p => p.NoUsername);
         //}
 
         public virtual DbSet<T_SYS_Language> T_SYS_Language { get; set; }

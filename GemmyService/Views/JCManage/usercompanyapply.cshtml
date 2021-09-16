@@ -29,11 +29,17 @@
     <el-table :table="partfoottableData"
               :data="partfoottableData.filter(data => !table_emailsearch || data.Email.toLowerCase().includes(table_emailsearch.toLowerCase())).slice((currentPage4-1)*pagesize,currentPage4*pagesize)"
               height="680">
+        <el-table-column prop="ApplyTime" label="申请时间">
+        </el-table-column>
         <el-table-column prop="Email" label="电子邮箱">
         </el-table-column>
-        <el-table-column prop="CompanyName" label="名">
+        <el-table-column prop="CompanyName" label="公司名">
         </el-table-column>
-        <el-table-column prop="isorder" label="姓">
+        <el-table-column prop="Pass" label="是否通过">
+        </el-table-column>
+        <el-table-column prop="passemail" label="通过人">
+        </el-table-column>
+        <el-table-column prop="passtime" label="通过时间">
         </el-table-column>
         <el-table-column label="操作" width="160px">
             <template slot-scope="scope">
@@ -62,7 +68,7 @@
             </el-form-item>
             <el-form-item label="是否开通">
                 <span>False</span>
-                <el-switch v-model="form.isorder"
+                <el-switch v-model="form.Pass"
                            active-color="#13ce66"
                            inactive-color="#ff4949">
                 </el-switch>
@@ -101,7 +107,7 @@
         partfoottable.length = 0;
         $.ajax(
             {
-                url: "/JCManage/GetAllUserInfo",
+                url: "/JCManage/GetUserCompanyApply",
                 method: 'get',
                 success: function (data) {
                     for (var i = 0; i < data.length; i++) {
@@ -109,7 +115,10 @@
                             //UpdateTime: convertTime(data[i].UpdateTime, "yyyy-MM-dd"),
                             Email: data[i].Email,
                             CompanyName: data[i].CompanyName,
-                            isorder: data[i].isorder
+                            ApplyTime: convertTime(data[i].ApplyTime, "yyyy-MM-dd"),
+                            Pass: data[i].Pass == true?"True":"False",
+                            passemail: data[i].passemail,
+                            passtime: convertTime(data[i].passtime, "yyyy-MM-dd")
                         };
                         //this.tableData.push(q);
                         partfoottable.push(q);
@@ -141,13 +150,13 @@
                 form: {
                     Email: '',
                     CompanyName: '',
-                    isorder:''
+                    Pass:''
                 },                
                 rules: {
                     Email: [
                         { required: true }
                     ],
-                    isorder: [
+                    Pass: [
                         { required: true }
                     ],                   
                 }

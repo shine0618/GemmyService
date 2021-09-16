@@ -37,7 +37,7 @@
                        align="center">
         </el-pagination>
     </div>
-    <el-dialog title="电源线信息"
+    <el-dialog title="权限等级信息"
                :visible.sync="dialogVisible"
                width="40%">
         <el-form ref="form" :model="form" label-width="150px">
@@ -140,7 +140,7 @@
             },
             
             onSubmit() {
-
+                console.log(this.form);
                 this.$http({           //调用接口
                     method: 'POST',
                     url: "/JCManage/UpdateUserLevel",

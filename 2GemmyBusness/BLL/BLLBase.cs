@@ -91,14 +91,17 @@ namespace _2GemmyBusness.BLL
                 PropertyInfo[] props = entity.GetType().GetProperties();
                 foreach (PropertyInfo prop in props)
                 {
-                    if (prop.GetValue(entity, null) != null)
-                    {
-                        if (prop.GetValue(entity, null).ToString() == " ")
-                            dbcontext.Entry(entity).Property(prop.Name).CurrentValue = null;
+                    if(prop.Name != "CanLogin" && prop.Name != "NoUsername" && prop.Name != "NoPassword") {
+                        if (prop.GetValue(entity, null) != null)
+                        {
+                            if (prop.GetValue(entity, null).ToString() == " ")
+                                dbcontext.Entry(entity).Property(prop.Name).CurrentValue = null;
 
 
-                        dbcontext.Entry(entity).Property(prop.Name).IsModified = true;
+                            dbcontext.Entry(entity).Property(prop.Name).IsModified = true;
+                        }
                     }
+                    
                 }
                 return dbcontext.SaveChanges();
 
