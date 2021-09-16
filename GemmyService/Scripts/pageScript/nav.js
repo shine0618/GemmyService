@@ -629,8 +629,16 @@ var nav_langu_box = new Vue({
                     pagecode: lang,
                 }
             }).then(function (response) {  //接口返回数据
-                this.defaultLanguage = response.body.LanguageShortDesript;
-                this.defaultLanguageCode = response.body.LanguageCode;
+                if (response.body.LanguageShortDesript != "中文") {
+                    this.defaultLanguage = "EN";
+                    this.defaultLanguageCode = "en";
+                }
+                else {
+                    this.defaultLanguage = response.body.LanguageShortDesript;
+                    this.defaultLanguageCode = response.body.LanguageCode;
+                }
+                
+               
             }, function (error) {
 
                 console.log(error);
