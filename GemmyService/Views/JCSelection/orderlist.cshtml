@@ -14,7 +14,7 @@
         margin: 0;
         padding: 0;
         height: 642px;
-        width: 871px;
+        width: 1095px;
     }
 
     #iDisplayBox {
@@ -31,7 +31,7 @@
     }
     .el-date-editor--daterange.el-input, .el-date-editor--daterange.el-input__inner, .el-date-editor--timerange.el-input, .el-date-editor--timerange.el-input__inner{
         width:500px;
-        left:200px;
+        left:120px;
     }
 </style>
 
@@ -39,21 +39,22 @@
     <div class="page-header" style="height:53px;">
         <div class="container" style="padding:10px 10px ">
             <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
-            <a class="navigation_a">订单系统</a>
+            <a class="navigation_a">{{ordersystem}}</a>
         </div>
     </div>
     <div class="container" style="margin-top:20px;margin-bottom:20px;">       
         <div class="col-lg-12">
             <div class="col-lg-8">
-                <div>
-                    <span>日期选择</span>
+                <div style="width:1000px">
+                    <span>{{orderdate}}</span>
                     <el-date-picker v-model="value1"
                                     type="daterange"
-                                    range-separator="至"
-                                    start-placeholder="开始日期"
+                                    :range-separator="orderto"
+                                    :start-placeholder="orderstartdate"
                                     value-format="yyyy-MM-dd"
-                                    end-placeholder="结束日期">
+                                    :end-placeholder="orderenddate">
                     </el-date-picker>
+                    <button class="orderbtn thm-btn" style="margin-left:240px" @@click="ordersearch">{{orderlookbtn}}</button>
                 </div>
                 <div id="asas">
                     <div class="player" id="player">
@@ -79,17 +80,23 @@
             value1: '',
             UserCompanyName: '',
             dateStart: '',
-            dateEnd:'',
+            dateEnd: '',
+            ordersystem: '',
+            orderdate: '',
+            orderto: '',
+            orderstartdate: '',
+            orderenddate: '',
+            orderlookbtn:'',
         },
         watch: {
             value1() {
-                console.log(this.value1);
+                //console.log(this.value1);
                 if (this.value1.length >= 2) {
                     this.dateStart = this.value1[0];
                     this.dateEnd = this.value1[1];
                 }
-                console.log(this.dateStart);
-                console.log(this.dateEnd);
+                //console.log(this.dateStart);
+                //console.log(this.dateEnd);
             }
         },
         methods: {
@@ -133,11 +140,36 @@
                     }
                 }                
                 var i = '<iframe scrolling="yes"  id="shjahs"  alt=""  src = ""/>';
-                $('#asas').append(i);                
+                $('#asas').append(i);
+                var date = new Date();
+                var year = date.getFullYear();
+                var month = date.getMonth()+1;
+                if (month >= 1 && month <= 9) {
+                    month = "0" + month;
+                }
+                var strDate = date.getDate();
+                if (strDate >= 0 && strDate <= 9) {
+                    strDate = "0" + strDate;
+                }
+                this.dateStart = year + "-" + month + "-" + strDate;
+                this.dateEnd = year + "-" + month + "-" + strDate;
             },
             setData: function (field, val) {
                 this.$set(this.$data, field, val);//vue 设定值
-            },           
+            }, 
+            ordersearch() {
+                var url = "http://61.175.247.114:7081/JC_SD/Index?I_STATE=%E5%85%A8%E9%83%A8&I_STATE_prdo=%E5%85%A8%E9%83%A8&type=overview";
+                if (this.dateStart != "") {
+                    url += "&I_JHJQ_S=" + this.dateStart;
+                }
+                if (this.dateEnd != "") {
+                    url += "&I_JHJQ_E=" + this.dateEnd;
+                }
+                url += "&I_XSJQ_S=&I_XSJQ_E=&S_ZYD=1200&I_VBELN=&S_ZKHMC=" + this.UserCompanyName + "&S_ZYWY=&S_ZSYB=&S_ZQY=";
+                $("#shjahs").attr({
+                    "src": url
+                });
+            }
         },
     })
     orderlist.initPage();

@@ -277,7 +277,13 @@
     "FileTreeCert": "Certification",
     "FileTreeDoc": "Document",
     "Downloadbutton": "Download",
-    "Downloadlabel": "DownloadFormat"
+    "Downloadlabel": "DownloadFormat",
+    "ordersystem": "Order",
+    "orderdate": "Orderdate",
+    "orderto": "To",
+    "orderstartdate": "StartDate",
+    "orderenddate": "EndDate",
+    "orderlookbtn": "Search"
 
 
   }

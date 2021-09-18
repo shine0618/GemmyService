@@ -272,6 +272,12 @@
     "FileTreeCert": "认证",
     "FileTreeDoc": "文件资料",
     "Downloadbutton": "文件下载",
-    "Downloadlabel": "选择下载格式"
+    "Downloadlabel": "选择下载格式",
+    "ordersystem": "订单系统",
+    "orderdate": "订单日期",
+    "orderto": "至",
+    "orderstartdate": "开始日期",
+    "orderenddate": "结束日期",
+    "orderlookbtn": "查看"
   }
 }
