@@ -1103,7 +1103,7 @@ var nav_langu_box = new Vue({
         },
         Tomanager: function (event) {
             window.location.href = "/JCManage/ManagePage";
-        }
+        },
     }
 });
 nav_langu_box.initNav();

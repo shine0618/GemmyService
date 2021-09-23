@@ -684,12 +684,39 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
                 T_Part_office_Column column = GetT_Part_office_Column(select_columnMode, "");
                 if(column!=null)
                 {
-                    list = list.Where(x => x.FootWithColumn == column.ColumnWithFoot).ToList();
+                    List<T_Part_office_Foot> checklist = new List<T_Part_office_Foot>();
+                    foreach (var item in list)
+                    {
+                        if (item.FootWithColumn.Contains('|'))
+                        {
+                            var a = item.FootWithColumn.Split('|');
+                            if (a[0] == column.ColumnWithFoot)
+                            {
+                                var b = a[1].Split('*');
+                                var footlength = int.Parse(b[0]);
+                                var footwidth = int.Parse(b[1]);
+                                var e = column.Size_Out.Split('*');
+                                var columnlength = int.Parse(e[0]);
+                                var columnwidth = int.Parse(e[1]);
+                                if (footlength >= columnlength && footwidth >= columnwidth)
+                                {
+                                    checklist.Add(item);
+                                }
+                            }
+                        }
+                        else if(item.FootWithColumn==column.ColumnWithFoot)
+                        {
+                            checklist.Add(item);
+                        }
+                    }
+                    list = checklist;
                 }
+                
             }
             
             return list;
         }
+
         public List<T_Part_office_SideBracket> GetT_Part_office_SideBracketWithType(string select_frame, string deskType)
         {
             var query = from x in read_db.T_Part_office_SideBracket
