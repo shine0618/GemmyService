@@ -178,7 +178,7 @@ var nav_langu_box = new Vue({
             islogin: false,
             isReset: false,
             count: '',
-            count2:'',
+            count2: '',
             registershow: true,
             show: true,
             timer: null,
@@ -187,15 +187,15 @@ var nav_langu_box = new Vue({
             logincode: '',
             isSuccess: false,
             opinioncontent: '',
-            opinionname:'',
+            opinionname: '',
             dialogVisible_opinion: false,
             dialogVisible_opinionsearch: false,
-            table_opinionsearch:'',
+            table_opinionsearch: '',
             opiniontableData: [],
             managershow: false,
             ordershow: false,
-            NAVOpinionSearchTitle:'',
-            NAVOpinionTitle:'',
+            NAVOpinionSearchTitle: '',
+            NAVOpinionTitle: '',
             NAVLogin: "",
             NAVLoginAccount: "",
             NAVLoginPassword: "",
@@ -263,7 +263,7 @@ var nav_langu_box = new Vue({
             NAVResetPasswordFailNotice: "",
             NAVLoginCodeSuccessNotice: "",
             NAVMainPage: "",
-            NAVMainPage_0 :"",
+            NAVMainPage_0: "",
             NAVMainPage_1: "",
             NAVMainPage_2: "",
             NAVMainPage_3: "",
@@ -282,7 +282,7 @@ var nav_langu_box = new Vue({
             NAVOpinionLookTableSearchTitle: "",
             NAVOpinionSubmitSuccessNotice: "",
             NAVOpinionSubmitFailNotice: "",
-            NAVOpinionLoginNotice:"",
+            NAVOpinionLoginNotice: "",
 
 
 
@@ -346,7 +346,7 @@ var nav_langu_box = new Vue({
                 oldPassword: [{ validator: resetloginoldpsd, trigger: 'blur' }],
                 newPassword: [{ validator: resetloginnewpsd, trigger: 'blur' }],
                 checkNewPassword: [{ validator: resetloginchecknewpsd, trigger: 'blur' }],
-            },            
+            },
             Email: '',
             Name: '',
             Sex: '',
@@ -356,6 +356,10 @@ var nav_langu_box = new Vue({
             CompanyLocation: '',
             CompanyNation: '',
             CompanyWebsite: '',
+            OfficeUnopenNotice: '',
+            LoginNotice: '',
+            MainAllowNotice: '',
+            OpinionContentRepeatNotice: '',
             infoDataForm_contact: [
 
                 //{
@@ -680,7 +684,8 @@ var nav_langu_box = new Vue({
         resetForm(formName) {
             this.$refs[formName].resetFields();
         },
-        register(username, pass, code, checkPass, firstname, lastname) {               
+        register(username, pass, code, checkPass, firstname, lastname) {   
+            this.$notify.closeAll();
             if (username != '' && pass != '' && code != '' && checkPass != '' && firstname != '' && lastname != '') {
                 this.$http({           //调用接口
                     method: 'POST',
@@ -716,6 +721,7 @@ var nav_langu_box = new Vue({
             }
         },
         login(email, password) {
+            this.$notify.closeAll();
             if (email != '' && password != '') {
                 
                     this.$http({           //调用接口
@@ -757,6 +763,7 @@ var nav_langu_box = new Vue({
 
         },
         LoginOut() {
+            this.$notify.closeAll();
             var emailaddress = '';
             this.$http({           //退出登录
                 method: 'GET',
@@ -860,6 +867,7 @@ var nav_langu_box = new Vue({
             })
         },
         sendEmail(emailaddress) {
+            this.$notify.closeAll();
             if (emailaddress != '') {
                 if (!this.timer2) {
                     this.count2 = TIME_COUNT;
@@ -901,6 +909,7 @@ var nav_langu_box = new Vue({
             }
         },
         sendResetEmail(emailaddress) {
+            this.$notify.closeAll();
             if (emailaddress != '') {
                 if (!this.timer) {
                     this.count = TIME_COUNT;
@@ -943,6 +952,7 @@ var nav_langu_box = new Vue({
             }
         },
         reset(email, password, code) {
+            this.$notify.closeAll();
             if (email != '' && password != '' && code != '') {
                 if (email != '') {
                     this.$http({           //调用接口
@@ -972,7 +982,8 @@ var nav_langu_box = new Vue({
             }
 
         },
-        resetLogin(email, oldpassword,newpassword) {
+        resetLogin(email, oldpassword, newpassword) {
+            this.$notify.closeAll();
             if (email != '' && oldpassword != '' && newpassword != '') {
                 if (email != '') {
                     this.$http({           //调用接口
@@ -1059,6 +1070,7 @@ var nav_langu_box = new Vue({
 
         },
         submitOpinion(content, name) {
+            this.$notify.closeAll();
             if (this.Email != '') {
                 if (content != '') {
                     this.$http({           //调用接口
@@ -1077,9 +1089,11 @@ var nav_langu_box = new Vue({
                                 message: this.NAVOpinionSubmitSuccessNotice,
                                 type: 'success'
                             });
+                            this.opinioncontent = "";
+                            this.dialogVisible_opinion = false;
                         }
                         else {
-                            this.$notify.error(this.NAVOpinionSubmitFailNotice);
+                            this.$notify.error(this.OpinionContentRepeatNotice);
                         }
                     }, function (error) {
                         console.log(error);
@@ -1104,6 +1118,57 @@ var nav_langu_box = new Vue({
         Tomanager: function (event) {
             window.location.href = "/JCManage/ManagePage";
         },
+        open1() {
+            this.$message(this.OfficeUnopenNotice);
+        },
+        open2() {
+            this.$message(this.LoginNotice);
+        },
+        topersonal() {
+            if (this.loginEmail != '' && this.loginEmail != null) {
+                window.location.href = "/JCSelection_Customer/personal";
+            }
+            else {
+                this.$message(this.LoginNotice);
+            }
+        },
+        toorder() {
+            if (this.loginEmail != '' && this.loginEmail != null) {
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCSelection/getCompanyName",
+                    params: {
+                        username: this.loginEmail
+                    }
+                }).then(function (response) {  //接口返回数据
+
+                    if (response.body.CompanyName == '' || response.body.CompanyName == null) {
+                        this.$message({
+                            type: 'error',
+                            message: this.MainAllowNotice
+                        });
+
+                    }
+                    else {
+                        if (response.body.isorder == false) {
+                            this.$message({
+                                type: 'error',
+                                message: this.MainAllowNotice
+                            });
+                        }
+                        else {
+                            window.location.href = "/JCSelection/orderlist";
+                        }
+                    }
+                    //console.log(response.body);
+                }, function (error) {
+                    //console.log(error);
+                })
+            }
+            else {
+                this.$message(this.LoginNotice);
+            }
+        }
     }
 });
 nav_langu_box.initNav();

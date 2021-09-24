@@ -283,8 +283,8 @@
     "orderto": "To",
     "orderstartdate": "StartDate",
     "orderenddate": "EndDate",
-    "orderlookbtn": "Search"
-
-
+    "orderlookbtn": "Search",
+    "LoginNotice": "Please login first",
+    "OpinionContentRepeatNotice": "Content duplicate, add failed"
   }
 }

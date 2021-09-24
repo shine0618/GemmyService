@@ -460,27 +460,27 @@
                         <li class="dropdown">
                             <a href="#">{{NAVMainPage_1}}</a>
                             <ul>
-                                <li><a href="#">TO</a></li>
+                                <li><a v-on:click="open1">TO</a></li>
                                 <li><a href="/JCSelection/OfficeStandards?Type=TS">TS</a></li>
-                                <li><a href="#">TT</a></li>
-                                <li><a href="#">TF</a></li>
-                                <li><a href="#">{{NAVMainPage_2}}</a></li>
+                                <li><a v-on:click="open1">TT</a></li>
+                                <li><a v-on:click="open1">TF</a></li>
+                                <li><a v-on:click="open2">{{NAVMainPage_2}}</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#">{{NAVMainPage_3}}</a>
                             <ul>
-                                <li><a href="/JCSelection_Customer/personal">{{NAVMainPage_4}}</a></li>
-                                <li><a href="#">{{NAVMainPage_5}}</a></li>
+                                <li><a v-on:click="topersonal">{{NAVMainPage_4}}</a></li>
+                                <li><a v-on:click="toorder">{{NAVMainPage_5}}</a></li>
                             </ul>
                         </li>
 
                     </ul>
                 </li>
 
-                <li class="search-btn search-toggler">
+                @*<li class="search-btn search-toggler">
                     <a href="#"><i class="pylon-icon-magnifying-glass"></i></a>
-                </li>
+                </li>*@
             </ul>
             <!-- /.main-menu__list -->
 

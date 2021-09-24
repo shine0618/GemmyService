@@ -278,6 +278,8 @@
     "orderto": "至",
     "orderstartdate": "开始日期",
     "orderenddate": "结束日期",
-    "orderlookbtn": "查看"
+    "orderlookbtn": "查看",
+    "LoginNotice": "请先登录",
+    "OpinionContentRepeatNotice": "内容重复，添加失败"
   }
 }
