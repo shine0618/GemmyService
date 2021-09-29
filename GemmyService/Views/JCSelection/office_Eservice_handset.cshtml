@@ -25,6 +25,14 @@
         margin-top: 20px;
     }
 
+    #player {
+        height: 115px;
+        width: 871px;
+        background-color: #EFF2F6;
+        position: absolute;
+        top: 640px;
+    }
+
     .selectColumnPart {
         min-height: 500px;
         height: calc(100vh - 241px);
@@ -320,8 +328,21 @@
                 <!-- 3D图形 -->
                 <div class="col-lg-8">
 
-                    <div id="iDisplayBox"></div>
-
+                    <div id="iDisplayBox">
+                        <div class="player" id="player">
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <h3>{{Downloadlabel}}</h3>
+                        <el-select v-model="format">
+                            <el-option v-for="item in options"
+                                       :key="item.value"
+                                       :label="item.label"
+                                       :value="item.value">
+                            </el-option>
+                        </el-select>
+                        <button class="orderbtn thm-btn" @@click="order()" v-loading="loading">{{Downloadbutton}}</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -349,6 +370,25 @@
         $('.bottom-footer').hide();
 
     })
+    var download_xml = "";
+    function render(data) {
+        var doc = $(data);
+        var htmlfile = doc.find("HTMLFILE").text();
+        var zipfile = doc.find("ZIPFILE").text();
+        if (htmlfile != "") {
+        } else {
+            // normal zip file download part...
+            window.location = download_xml.replace(/download.xml/, zipfile);
+        }
+        setloadingjs();
+    }
+    function checkFile() {
+        $.get(download_xml, function (data) {
+            render(data);
+        }).fail(function () {
+            window.setTimeout("checkFile();", 1000);
+        });
+    }
 </script>
 
 
@@ -358,7 +398,42 @@
         el: '#OfficeStandards',
         data: {
 
-
+            options: [{
+                value: 'DXF2D',
+                label: 'DXF2D'
+            },
+            {
+                value: 'CREO5',
+                label: 'CREO5'
+            },
+            {
+                value: 'SOLIDWORKS',
+                label: 'SOLIDWORKS'
+            },
+            {
+                value: 'DWG2D',
+                label: 'DWG2D'
+            },
+            {
+                value: 'PDFDATASHEET',
+                label: 'PDF'
+            },
+            {
+                value: '3DSTUDIOMAX',
+                label: '3DS'
+            },
+            {
+                value: 'STEP-2.14',
+                label: 'STEP'
+            },
+            {
+                value: 'OBJFILE',
+                label: 'OBJ'
+            }],
+            format: '',
+            download_xml: '',
+            loading: false,
+            filename: '',
             @*OrderValue: "",
             Order: 0,//1正序 2倒序
             domain: "@ViewBag.domain",
@@ -513,7 +588,9 @@
             MyCollectName: "",
             custmerName: "",//客户命名方案
             ControlBox_c1: "",//控制器筛选
-            CustomreturnButton:"",
+            CustomreturnButton: "",
+            Downloadlabel: "",
+            Downloadbutton: "",
             detailModel: {
                 imgurl: "",
                 mode: "",
@@ -537,6 +614,9 @@
            
             
 
+        },
+        mounted() {
+            window.setloadingjs = this.setloading
         },
         methods: {
             //保存配置
@@ -717,11 +797,14 @@
             
 
             SetFrame: function () {
-                var base = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jcht35k9-%E6%89%8B%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%99%A8-%E6%8D%B7%E6%98%8C?info=jiecang%2Fhand_control%2F";
+                //var base = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jcht35k9-%E6%89%8B%E5%8A%A8%E6%8E%A7%E5%88%B6%E5%99%A8-%E6%8D%B7%E6%98%8C?info=jiecang%2Fhand_control%2F";
+                var base = "https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe?cgiaction=preview&part={jiecang/hand_control/hand_control_zp.prj}";
+                var option = "&firm=jiecang&viewerOptions=%7B%22webglViewerSettings%22%3A%7B%22ColorTL%22%3A%22%23EFF2F6%22%2C%22ColorTR%22%3A%22%23EFF2F6%22%2C%22ColorML%22%3A%22EFF2F6%22%2C%22ColorMR%22%3A%22EFF2F6%22%2C%22ColorBL%22%3A%22%23EFF2F6%22%2C%22ColorBR%22%3A%22%23EFF2F6%22%7D%7D&apikey=e20d66d8bb834f2497a101cff347a2d0";
                 var b = ".prj&cwid=6919&showPortlets=preview&hidePortlets=navigation";
+/*                console.log(this.select_HandSetMode);*/
                 if (this.select_HandSetMode != "") {
 
-
+                    //console.log(this.select_HandSetMode);
                     //var column = this.select_columnMode.replace('-', '').replace('-', '').replace('JS36D', '');
                     //base += "&varset={CC=" + column+"}";
 
@@ -763,25 +846,38 @@
                     //    base += ",{OF=" + desktop + "}";
                     //}
                     var handsetMode = '';
-                    if (this.select_HandSetMode.search("-1")!=-1) {
-                        handsetMode = this.select_HandSetMode.replace('-1', '-side');
-                    }
-                    if (this.select_HandSetMode.search("-2")!=-1) {
-                        handsetMode = this.select_HandSetMode.replace('-2', '-embed');
-                    }
-                    if (this.select_HandSetMode == "JCHT35M5") {
-                        handsetMode = "jcht35m5_asmtab";
-                    }
-                    if (this.select_HandSetMode.search("-")!=-1) {
-                        if (handsetMode.search("-")!=-1) {
-                            handsetMode = handsetMode.replace('-', '_');
-                        }
-                        else {
-                            handsetMode = this.select_HandSetMode.replace('-', '_');
-                        }
-                        
-                    }
-                    var src = base + handsetMode.toLowerCase() + b + "&languageIso=" + this.langCode;
+                    handsetMode = this.select_HandSetMode;
+                    //if (this.select_HandSetMode.search("-1") != -1) {
+                    //    console.log('1');
+                    //    handsetMode = this.select_HandSetMode.replace('-1', '-side');
+                    //}
+                    //if (this.select_HandSetMode.search("-2") != -1) {
+                    //    console.log('2');
+                    //    handsetMode = this.select_HandSetMode.replace('-2', '-embed');
+                    //}
+                    //if (this.select_HandSetMode == "JCHT35M5") {
+                    //    console.log('3');
+                    //    handsetMode = "jcht35m5_asmtab";
+                    //}
+                    //if (this.select_HandSetMode.search("-") != -1) {
+                    //    console.log('4');
+                    //    if (handsetMode.search("-") != -1) {
+                    //        console.log('5');
+                    //        handsetMode = handsetMode.replace('-', '_');
+                    //    }
+                    //    else {
+                    //        console.log('6');
+                    //        handsetMode = this.select_HandSetMode.replace('-', '_');
+                    //    }
+
+                    //}
+                    //else {
+                    //    handsetMode = this.select_HandSetMode;
+                    //}
+                    this.filename = handsetMode;
+                    var src = base +",{PN="+ handsetMode +"}"+ option;
+                    //var src = base + handsetMode.toLowerCase() + b + "&languageIso=" + this.langCode;
+                    console.log(src);
                     console.log(handsetMode);
                 //    alert(src);
 
@@ -919,6 +1015,33 @@
                         //console.log(error);
                     })
             },
+            order: function (event) {
+                console.log(this.filename);
+                this.loading = true;
+                if (this.filename != '') {
+                    $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
+                        cgiaction: "download",
+                        downloadflags: "ZIP",
+                        part: "{jiecang/hand_control/hand_control_zp.prj}" + ",{PN="+this.filename+"}",
+                        firm: "jiecang",
+                        format: this.format,
+                        ok_url: "<%download_xml%>", // format of the url to generate
+                        ok_url_type: "text", // we want a direct text response (no 302)
+                        apikey: "e20d66d8bb834f2497a101cff347a2d0",
+                        zipfilename: "Jiecang<%wkbno%>",
+                    }).done(function (data) {
+                        download_xml = data; // get the file name for polling
+                        checkFile(); // start polling
+                    });
+                }
+                else {
+
+                }
+
+            },
+            setloading() {
+                this.loading = false;
+            }
         }
     })
     //语言加载
