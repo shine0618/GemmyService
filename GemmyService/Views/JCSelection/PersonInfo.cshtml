@@ -60,8 +60,8 @@
     </el-form>
 </div>
 
-
-<script>
+<script src="~/Scripts/pageScript/personinfo.js"></script>
+@*<script>
     var OfficeStandards = new Vue({
         el: '#OfficeStandards',
         data() {
@@ -121,9 +121,9 @@
                             }
                         }).then(function (response) {
                             this.isadd = response.body;
-                            console.log(this.ruleForm);
-                            console.log(JSON.stringify(this.ruleForm));
-                            console.log(response.body);
+                            //console.log(this.ruleForm);
+                            //console.log(JSON.stringify(this.ruleForm));
+                            //console.log(response.body);
                             if (this.isadd == true) {
                                 this.$notify({
                                     message: '提交成功',
@@ -159,4 +159,4 @@
     }
     )
     OfficeStandards.initPages();
-</script>
+</script>*@

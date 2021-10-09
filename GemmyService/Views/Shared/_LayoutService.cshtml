@@ -113,7 +113,19 @@
                 }
 
         }
+        //获取登录的用户所定义的用户名
+        function GetLoginCustomname() {
 
+                var LoginCustomname = '@Session["name"].ToString()';
+                //如果客户语言
+                if (LoginCustomname == '') {
+                    return LoginCustomname;
+                }
+                else {
+                    return LoginCustomname;
+                }
+
+        }
         //获取登录用户名的权限等级
         function GetLoginLevel() {
 
@@ -127,6 +139,7 @@
                 }
 
         }
+        //获取登陆用户名的公司名称
         function GetLoginCompanyName() {
 
             var LoginCompanyName = '@Session["companyName"].ToString()';
@@ -136,6 +149,110 @@
                 }
                 else {
                     return LoginCompanyName;
+                }
+
+        }
+        //获取桌子类型
+        function GetDeskType() {
+
+            var DeskType = '@Session["desktype"].ToString()';
+                //如果客户语言
+                if (DeskType == '') {
+                    return DeskType;
+                }
+                else {
+                    return DeskType;
+                }
+
+        }
+        //获取选型桌子的分类词
+        function GetDeskrecommend() {
+
+            var Deskrecommend = '@Session["deskrecommend"].ToString()';
+                //如果客户语言
+                if (Deskrecommend == '') {
+                    return Deskrecommend;
+                }
+                else {
+                    return Deskrecommend;
+                }
+
+        }
+        //获取桌子的domain
+        function GetDeskdomain() {
+
+            var Deskdomain = '@Session["deskdomain"].ToString()';
+                //如果客户语言
+                if (Deskdomain == '') {
+                    return Deskdomain;
+                }
+                else {
+                    return Deskdomain;
+                }
+
+        }
+        //获取桌子productName
+        function GetDeskproductName() {
+
+            var DeskproductName = '@Session["deskproductName"].ToString()';
+                //如果客户语言
+                if (DeskproductName == '') {
+                    return DeskproductName;
+                }
+                else {
+                    return DeskproductName;
+                }
+
+        }
+        //获取桌子productGuid
+        function GetDeskproductGuid() {
+
+            var DeskproductGuid = '@Session["deskproductGuid"].ToString()';
+                //如果客户语言
+                if (DeskproductGuid == '') {
+                    return DeskproductGuid;
+                }
+                else {
+                    return DeskproductGuid;
+                }
+
+        }
+        //获取搜索文件的parttype
+        function GetFileparttype() {
+
+            var Fileparttype = '@Session["fileparttype"].ToString()';
+                //如果客户语言
+                if (Fileparttype == '') {
+                    return Fileparttype;
+                }
+                else {
+                    return Fileparttype;
+                }
+
+        }
+        //获取搜索文件的nature
+        function GetFilenature() {
+
+            var Filenature = '@Session["filenature"].ToString()';
+                //如果客户语言
+                if (Filenature == '') {
+                    return Filenature;
+                }
+                else {
+                    return Filenature;
+                }
+
+        }
+        //获取搜索文件的mode
+        function GetFilemode() {
+
+            var Filemode = '@Session["filemode"].ToString()';
+                //如果客户语言
+                if (Filemode == '') {
+                    return Filemode;
+                }
+                else {
+                    return Filemode;
                 }
 
         }

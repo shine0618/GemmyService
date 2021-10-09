@@ -60,6 +60,42 @@ namespace GemmyService.Controllers
             {
                 Session["companyName"] = "";
             }
+            if (Session["desktype"] == null)
+            {
+                Session["desktype"] = "";
+            }
+            if (Session["deskrecommend"] == null)
+            {
+                Session["deskrecommend"] = "";
+            }
+            if (Session["deskdomain"] == null)
+            {
+                Session["deskdomain"] = "";
+            }
+            if (Session["deskproductGuid"] == null)
+            {
+                Session["deskproductGuid"] = "";
+            }
+            if (Session["deskproductName"] == null)
+            {
+                Session["deskproductName"] = "";
+            }
+            if (Session["fileparttype"] == null)
+            {
+                Session["fileparttype"] = "";
+            }
+            if (Session["filenature"] == null)
+            {
+                Session["filenature"] = "";
+            }
+            if (Session["filemode"] == null)
+            {
+                Session["filemode"] = "";
+            }
+            if (Session["name"] == null)
+            {
+                Session["name"] = "";
+            }
             Session.Timeout = 9600;
             return View();
         }
@@ -87,6 +123,42 @@ namespace GemmyService.Controllers
             if (Session["companyName"] == null)
             {
                 Session["companyName"] = "";
+            }
+            if (Session["desktype"] == null)
+            {
+                Session["desktype"] = "";
+            }
+            if (Session["deskrecommend"] == null)
+            {
+                Session["deskrecommend"] = "";
+            }
+            if (Session["deskdomain"] == null)
+            {
+                Session["deskdomain"] = "";
+            }
+            if (Session["deskproductGuid"] == null)
+            {
+                Session["deskproductGuid"] = "";
+            }
+            if (Session["deskproductName"] == null)
+            {
+                Session["deskproductName"] = "";
+            }
+            if (Session["fileparttype"] == null)
+            {
+                Session["fileparttype"] = "";
+            }
+            if (Session["filenature"] == null)
+            {
+                Session["filenature"] = "";
+            }
+            if (Session["filemode"] == null)
+            {
+                Session["filemode"] = "";
+            }
+            if (Session["name"] == null)
+            {
+                Session["name"] = "";
             }
             Session.Timeout = 9600;
             return View();
@@ -120,13 +192,57 @@ namespace GemmyService.Controllers
             {
                 Session["companyName"] = "";
             }
+            if (Session["desktype"] == null)
+            {
+                Session["desktype"] = "";
+            }
+            else
+            {
+                Session["desktype"] = Type;
+            }
+            if (Session["deskrecommend"] == null)
+            {
+                Session["deskrecommend"] = "";
+            }
+            else
+            {
+                Session["deskrecommend"] = recommend;
+            }
+            if (Session["deskdomain"] == null)
+            {
+                Session["deskdomain"] = "";
+            }
+            if (Session["deskproductGuid"] == null)
+            {
+                Session["deskproductGuid"] = "";
+            }
+            if (Session["deskproductName"] == null)
+            {
+                Session["deskproductName"] = "";
+            }
+            if (Session["fileparttype"] == null)
+            {
+                Session["fileparttype"] = "";
+            }
+            if (Session["filenature"] == null)
+            {
+                Session["filenature"] = "";
+            }
+            if (Session["filemode"] == null)
+            {
+                Session["filemode"] = "";
+            }
+            if (Session["name"] == null)
+            {
+                Session["name"] = "";
+            }
             Session.Timeout = 9600;
 
             if (Type == null || Type == "")
             {
                 return View("office");
             }
-
+            
 
             ViewBag.domain = domain;
             ViewBag.recommend = recommend;
@@ -196,6 +312,54 @@ namespace GemmyService.Controllers
             if (Session["companyName"] == null)
             {
                 Session["companyName"] = "";
+            }
+            if (Session["desktype"] == null)
+            {
+                Session["desktype"] = "";
+            }
+            if (!string.IsNullOrEmpty(domain))
+            {
+                Session["domain"] = domain;
+            }
+            else
+            {
+                Session["domain"] = "";
+            }
+            if (!string.IsNullOrEmpty(Type))
+            {
+                Session["desktype"] = Type;
+            }
+            else
+            {
+                Session["desktype"] = "";
+            }
+            if (!string.IsNullOrEmpty(recommend))
+            {
+                Session["deskrecommend"] = recommend;
+            }
+            else
+            {
+                Session["deskrecommend"] = "";
+            }
+            if (!string.IsNullOrEmpty(productGuid))
+            {
+                Session["deskproductGuid"] = productGuid;
+            }
+            else
+            {
+                Session["deskproductGuid"] = "";
+            }
+            if (!string.IsNullOrEmpty(productName))
+            {
+                Session["deskproductName"] = productName;
+            }
+            else
+            {
+                Session["deskproductName"] = "";
+            }
+            if (Session["name"] == null)
+            {
+                Session["name"] = "";
             }
             Session.Timeout = 9600;
 
@@ -336,6 +500,31 @@ namespace GemmyService.Controllers
             {
                 Session["companyName"] = "";
             }
+            if (Session["desktype"] == null)
+            {
+                Session["desktype"] = "";
+            }
+            if (Session["deskrecommend"] == null)
+            {
+                Session["deskrecommend"] = "";
+            }
+            if (Session["deskdomain"] == null)
+            {
+                Session["deskdomain"] = "";
+            }
+            if (Session["deskproductName"] == null)
+            {
+                Session["deskproductName"] = "";
+            }
+            if (productGuid == null)
+            {
+                Session["deskproductGuid"] = "";
+            }
+            else
+            {
+                Session["deskproductGuid"] = productGuid;
+            }
+            
             Session.Timeout = 9600;
             ViewBag.productGuid = productGuid;
             ViewBag.Type = Type;
@@ -518,17 +707,17 @@ namespace GemmyService.Controllers
             return jr;
         }
         [HttpGet]
-        public JsonResult GetOfficeControlBox(string deskType)
+        public JsonResult GetOfficeControlBox()
         {
-            List<T_Part_office_ControlBox> list = bll_desk.GetT_Part_office_ControlBoxWithType(deskType);
+            List<T_Part_office_ControlBox> list = bll_desk.GetT_Part_office_ControlBox();
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
         [HttpGet]
-        public JsonResult GetOfficeHandSet(string deskType)
+        public JsonResult GetOfficeHandSet()
         {
-            List<T_Part_office_HandSet> list = bll_desk.GetT_Part_office_HandSetWithType(deskType);
+            List<T_Part_office_HandSet> list = bll_desk.GetT_Part_office_HandSetWithType();
             JsonResult jr = Json(list, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
@@ -896,6 +1085,14 @@ namespace GemmyService.Controllers
             {
                 Session["companyName"] = "";
             }
+            if (!string.IsNullOrEmpty(name))
+            {
+                Session["name"] = name;
+            }
+            else
+            {
+                Session["name"] = "";
+            }
             Session.Timeout = 9600;
             ViewBag.email = email;
             ViewBag.name = name;
@@ -940,6 +1137,30 @@ namespace GemmyService.Controllers
             if (Session["companyName"] == null)
             {
                 Session["companyName"] = "";
+            }
+            if (!String.IsNullOrEmpty(parttype))
+            {
+                Session["fileparttype"] = parttype;
+            }
+            else
+            {
+                Session["fileparttype"] = "";
+            }
+            if (!String.IsNullOrEmpty(mode))
+            {
+                Session["filemode"] = mode;
+            }
+            else
+            {
+                Session["filemode"] = "";
+            }
+            if (!String.IsNullOrEmpty(nature))
+            {
+                Session["filenature"] = nature;
+            }
+            else
+            {
+                Session["filenature"] = "";
             }
             ViewBag.parttype = parttype;
             ViewBag.nature = nature;

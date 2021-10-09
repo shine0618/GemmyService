@@ -354,6 +354,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="resourse\desk_Bench_picture\JC35TF-R13S-4.png" />
     <Content Include="resourse\desk_TS_picture\effectImg1.png" />
     <Content Include="resourse\desk_TS_picture\JC35TS-R13S-196-101-84-0-06-0.png" />
     <Content Include="resourse\desk_TS_picture\JC35TS-C12S.png" />
@@ -677,7 +678,18 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pageScript\filesearch.js" />
+    <Content Include="Scripts\pageScript\filetree.js" />
+    <Content Include="Scripts\pageScript\main.js" />
     <Content Include="Scripts\pageScript\nav.js" />
+    <Content Include="Scripts\pageScript\office.js" />
+    <Content Include="Scripts\pageScript\officestandards.js" />
+    <Content Include="Scripts\pageScript\office_eservice_controlbox.js" />
+    <Content Include="Scripts\pageScript\office_Eservice_desk.js" />
+    <Content Include="Scripts\pageScript\office_eservice_handset.js" />
+    <Content Include="Scripts\pageScript\orderlist.js" />
+    <Content Include="Scripts\pageScript\personinfo.js" />
+    <Content Include="Scripts\pageScript\productdetail.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />

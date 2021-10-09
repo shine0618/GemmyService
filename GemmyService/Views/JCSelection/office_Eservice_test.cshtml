@@ -21,10 +21,11 @@
         height: 642px;
         width: 871px;
     }
-    #iDisplayBox
-    {
-        margin-top:20px;
+
+    #iDisplayBox {
+        margin-top: 20px;
     }
+
     #player {
         height: 115px;
         width: 871px;
@@ -32,6 +33,7 @@
         position: absolute;
         top: 640px;
     }
+
     .selectColumnPart {
         min-height: 500px;
         height: calc(100vh - 241px);
@@ -57,7 +59,7 @@
 
     .selectStep {
         height: 70px;
-        display:none;
+        display: none;
     }
 
     .part_img {
@@ -131,8 +133,8 @@
 <style>
     .carNewRightNavTop {
         width: 100%;
-        padding:0;
-        margin:0;
+        padding: 0;
+        margin: 0;
     }
 
     .carNewRightTop {
@@ -155,6 +157,7 @@
         padding: 0;
         margin: 0;
     }
+
     .bigWords2 {
         font-weight: 500;
         color: #A8A8A8;
@@ -166,11 +169,11 @@
         margin: 0;
     }
 
-        .wordActive {
-            color: #202733;
-            font-weight: 600;
-            /*color: var(--thm-base);*/
-        }
+    .wordActive {
+        color: #202733;
+        font-weight: 600;
+        /*color: var(--thm-base);*/
+    }
 
     .smallWords {
         white-space: nowrap;
@@ -178,8 +181,8 @@
         overflow: hidden;
         word-break: break-all;
         margin-bottom: 0;
-        margin-top:-2px;
-        padding:0;
+        margin-top: -2px;
+        padding: 0;
     }
 
         .smallWords p {
@@ -187,7 +190,7 @@
         }
 
     .itemStyle {
-        width:110px;
+        width: 110px;
         max-width: 150px;
         min-width: 100px;
         overflow: hidden;
@@ -202,8 +205,8 @@
         display: -ms-flexbox;
         display: flex;
         height: 100%;
-        margin-top:5px;
-        padding:0;
+        margin-top: 5px;
+        padding: 0;
         -webkit-box-pack: start;
         -webkit-justify-content: flex-start;
         -ms-flex-pack: start;
@@ -211,7 +214,6 @@
         border-bottom: 1px solid rgba(0,0,0,.1);
         font-size: 12px;
     }
-
 </style>
 
 <div id="OfficeStandards">
@@ -241,10 +243,10 @@
     </el-dialog>
 
     <section class="page-header" style="height:53px;">
-    <div class="container" style="padding:10px 10px ">
-        <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
-        <a class="navigation_a">{{CustomPage}}</a>
-    </div>
+        <div class="container" style="padding:10px 10px ">
+            <a class="navigation_a" href="/JCSelection/main">{{NAVMainPage}}</a>/
+            <a class="navigation_a">{{CustomPage}}</a>
+        </div>
     </section>
     <section class="about-three">
         <div class="container">
@@ -355,7 +357,7 @@
             </div>
 
 
-          
+
         </div>
     </section>
 
@@ -500,11 +502,11 @@
 
 
                     @*<div class="row">
-                <div class="col-lg-6 col-md-6" v-for="item in list_Color">
-                        <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
-                        <h6 style="text-align:center" v-text="item.HEXValue"></h6>
-                </div>
-            </div>*@
+                            <div class="col-lg-6 col-md-6" v-for="item in list_Color">
+                                    <el-button :style="{'background':colorConfirm=item.HEXValue}" circle></el-button>
+                                    <h6 style="text-align:center" v-text="item.HEXValue"></h6>
+                            </div>
+                        </div>*@
                 </div>
                 <div class="col-lg-4 selectColumnPart" v-if="selectStep=='s7'">
 
@@ -565,8 +567,8 @@
 
                 </div>
                 <!-- 3D图形 -->
-                <div class="col-lg-8" >
-                    
+                <div class="col-lg-8">
+
                     <div id="iDisplayBox">
                         <div class="player" id="player">
                         </div>
@@ -617,7 +619,7 @@
         if (htmlfile != "") {
         } else {
             // normal zip file download part...
-             window.location = download_xml.replace(/download.xml/, zipfile);
+            window.location = download_xml.replace(/download.xml/, zipfile);
         }
         setloadingjs();
     }
@@ -632,8 +634,8 @@
 </script>
 
 
-
-<script>
+<script src="~/Scripts/pageScript/office_Eservice_desk.js"></script>
+@*<!--<script>
     var OfficeStandards = new Vue({
         el: '#OfficeStandards',
         data: {
@@ -673,7 +675,7 @@
             format: '',
             download_xml: '',
             loading: false,
-            filename:'',
+            filename:'',-->
             @*OrderValue: "",
             Order: 0,//1正序 2倒序
             domain: "@ViewBag.domain",
@@ -687,8 +689,8 @@
             deskSerialName:'',
             T_Product_office_desk: null,
             T_Product_office_desk_detail: null,
-            configurationNo: "",*@
-            dialogVisible_partDetail: false,
+            configurationNo: "",
+<!--dialogVisible_partDetail: false,
             centerDialogVisible: false,
             list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             colorConfirm: '#FF0000',
@@ -782,7 +784,7 @@
             text_customer_12: "",
             text_customer_13: "",
             text_customer_14: "",
-            
+
 
 
             NAVMainPage: "",
@@ -1061,10 +1063,10 @@
                         this.setData(key, value);;
                     }
                 }
-                
+
                 var url = "https://jiecang-embedded.partcommunity.com/3d-cad-models/sso/jc36tViewBag-%E5%8D%87%E9%99%8D%E6%A1%8C-%E6%8D%B7%E6%98%8C?info=jiecang%2Flifting_table%2Fjc36ts_asmtab.prj&cwid=6919&showPortlets=preview&hidePortlets=navigation&languageIso=" + this.langCode;
                 var i = '<iframe scrolling="no"  id="shjahs"  alt=""  src = ""/>';
-                
+
                 $('#iDisplayBox').append(i);
                 //$("#shjahs").attr({
                 //    "src": url + "&languageIso=" + this.langCode
@@ -1630,7 +1632,7 @@
             order: function (event) {
                 console.log(this.filename);
                 this.loading = true;
-                if (this.filename != '') {                    
+                if (this.filename != '') {
                     $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
                         cgiaction: "download",
                         downloadflags: "ZIP",
@@ -1654,7 +1656,7 @@
             setloading() {
                 this.loading = false;
             }
-            
+
         }
     })
     //语言加载
@@ -1662,10 +1664,10 @@
     OfficeStandards.getAllColumn();
     OfficeStandards.getAllColor();
 
-    this.productGuid = '@ViewBag.productGuid';
+    this.productGuid = 'ViewBag.productGuid';
     if (this.productGuid != undefined && this.productGuid != "") {
         OfficeStandards.getThisDesk(this.productGuid);
     }
 
 
-</script>
+</script>-->*@

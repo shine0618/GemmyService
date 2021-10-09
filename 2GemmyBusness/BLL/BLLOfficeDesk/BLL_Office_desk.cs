@@ -780,30 +780,22 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             return query.ToList();
         }
 
+        public List<T_Part_office_ControlBox> GetT_Part_office_ControlBox()
+        {
+            var query = from x in read_db.T_Part_office_ControlBox
+                        where x.deleteSign != 1
+                        select x;
+            
+            return query.ToList();
+        }
 
-        public List<T_Part_office_HandSet> GetT_Part_office_HandSetWithType(string deskType)
+
+        public List<T_Part_office_HandSet> GetT_Part_office_HandSetWithType()
         {
             var query = from x in read_db.T_Part_office_HandSet
                         where x.deleteSign != 1
                         select x;
-            switch (deskType)
-            {
-                case "TS":
-                    query = query.Where(x => x.UseTS == true);
-                    break;
-                case "TO":
-                    query = query.Where(x => x.UseTO == true);
-                    break;
-                case "TT":
-                    query = query.Where(x => x.UseTT == true);
-                    break;
-                case "TF":
-                    query = query.Where(x => x.UseTF == true);
-                    break;
-                case "Bench":
-                    query = query.Where(x => x.UseBench == true);
-                    break;
-            }
+           
             return query.ToList();
         }
         public List<T_Part_office_Powercable> GetT_Part_office_Powercable()
