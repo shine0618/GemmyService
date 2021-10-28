@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace _2GemmyBusness.BLL.BLLOfficePartManage
 {
    public class BLL_USER:BLLBase
-    {
+   {
         public bool UpdateUserLevel(T_USER_UserInfo t)
         {
             using (DBGemmyService2 db=new DBGemmyService2())
@@ -24,8 +24,7 @@ namespace _2GemmyBusness.BLL.BLLOfficePartManage
                     issuccess = true;
                 }
                 return issuccess;
-            }
-               
+            }               
         }
         public bool UpdateCompanyLevel(T_USER_ApplyOrder t,string user)
         {
@@ -51,5 +50,22 @@ namespace _2GemmyBusness.BLL.BLLOfficePartManage
             }
 
         }
+        ////保存下载信息
+        //public bool DownloadFileInfo(T_USER_DownloadInfo t, string user)
+        //{
+        //    using (DBGemmyService2 db = new DBGemmyService2())
+        //    {
+        //        bool issuccess = false;
+                
+        //        db.T_USER_DownloadInfo.Add(t);
+        //        int num=db.SaveChanges();
+        //        if (num>0)
+        //        {
+        //            issuccess = true;
+        //        }
+        //        return issuccess;
+        //    }
+
+        //}
     }
 }

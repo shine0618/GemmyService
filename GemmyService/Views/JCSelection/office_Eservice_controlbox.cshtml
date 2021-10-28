@@ -329,7 +329,7 @@
                                        :value="item.value">
                             </el-option>
                         </el-select>
-                        <button class="orderbtn thm-btn" @@click="order()" v-loading="loading">{{Downloadbutton}}</button>
+                        <button :disabled="isAble" class="orderbtn thm-btn" @@click="order()" v-loading="loading">{{Downloadbutton}}</button>
                     </div>
                 </div>
             </div>

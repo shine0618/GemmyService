@@ -2,7 +2,7 @@
 var OfficeStandards = new Vue({
     el: '#OfficeStandards',
     data: {
-
+        isAble: false,
         options: [{
             value: 'DXF2D',
             label: 'DXF2D'
@@ -538,31 +538,34 @@ methods: {
         })
     },
     order: function (event) {
-        console.log(this.filename);
-        this.loading = true;
-        if (this.filename != '') {
-            $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
-                cgiaction: "download",
-                downloadflags: "ZIP",
-                part: "{jiecang/controller/controller_zp.prj}" + ",{MODEL=" + this.filename + "}",
-                firm: "jiecang",
-                format: this.format,
-                ok_url: "<%download_xml%>", // format of the url to generate
-                ok_url_type: "text", // we want a direct text response (no 302)
-                apikey: "e20d66d8bb834f2497a101cff347a2d0",
-                zipfilename: "Jiecang<%wkbno%>",
-            }).done(function (data) {
-                download_xml = data; // get the file name for polling
-                checkFile(); // start polling
-            });
-        }
-        else {
+        if (this.format != '') {
+            console.log(this.filename);
+            this.loading = true;
+            this.isAble = true;
+            if (this.filename != '') {
+                $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
+                    cgiaction: "download",
+                    downloadflags: "ZIP",
+                    part: "{jiecang/controller/controller_zp.prj}" + ",{MODEL=" + this.filename + "}",
+                    firm: "jiecang",
+                    format: this.format,
+                    ok_url: "<%download_xml%>", // format of the url to generate
+                    ok_url_type: "text", // we want a direct text response (no 302)
+                    apikey: "e20d66d8bb834f2497a101cff347a2d0",
+                    zipfilename: "Jiecang<%wkbno%>",
+                }).done(function (data) {
+                    download_xml = data; // get the file name for polling
+                    checkFile(); // start polling
+                });
+            }
+            else {
 
+            }
         }
-
     },
     setloading() {
         this.loading = false;
+        this.isAble = false;
     }
 }
     })

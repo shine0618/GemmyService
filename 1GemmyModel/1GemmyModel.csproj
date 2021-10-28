@@ -204,6 +204,7 @@
     <Compile Include="Model\ModelSystem\T_SYS_Language.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_ApplyOrder.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Click.cs" />
+    <Compile Include="Model\ModelUserAccount\T_USER_DownloadInfo.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Opinion.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Permission.cs" />
     <Compile Include="Model\ModelUserAccount\T_USER_Permission_menus.cs" />

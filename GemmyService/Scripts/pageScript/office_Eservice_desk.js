@@ -3,7 +3,7 @@ var type = GetDeskType();
     var OfficeStandards = new Vue({
         el: '#OfficeStandards',
         data: {
-
+        isAble: false,
         options: [{
         value: 'DXF2D',
                 label: 'DXF2D'
@@ -993,32 +993,36 @@ var type = GetDeskType();
             //console.log(error);
         })
     },
-            order: function (event) {
+    order: function (event) {
         console.log(this.filename);
-                this.loading = true;
-                if (this.filename != '') {
-        $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
-            cgiaction: "download",
-            downloadflags: "ZIP",
-            part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}" + this.filename,
-            firm: "jiecang",
-            format: this.format,
-            ok_url: "<%download_xml%>", // format of the url to generate
-            ok_url_type: "text", // we want a direct text response (no 302)
-            apikey: "e20d66d8bb834f2497a101cff347a2d0",
-            zipfilename: "Jiecang<%wkbno%>",
-        }).done(function (data) {
-            download_xml = data; // get the file name for polling
-            checkFile(); // start polling
-        });
-                }
-                else {
+        if (this.format != '') {
+            this.loading = true;
+            this.isAble = true;
+            if (this.filename != '') {
+                $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
+                    cgiaction: "download",
+                    downloadflags: "ZIP",
+                    part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}" + this.filename,
+                    firm: "jiecang",
+                    format: this.format,
+                    ok_url: "<%download_xml%>", // format of the url to generate
+                    ok_url_type: "text", // we want a direct text response (no 302)
+                    apikey: "e20d66d8bb834f2497a101cff347a2d0",
+                    zipfilename: "Jiecang<%wkbno%>",
+                }).done(function (data) {
+                    download_xml = data; // get the file name for polling
+                    checkFile(); // start polling
+                });
+            }
+            else {
 
-    }
+            }
+        }
 
-            },
-            setloading() {
+    },
+    setloading() {
         this.loading = false;
+        this.isAble = false;
             }
 
         }

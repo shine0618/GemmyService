@@ -579,6 +579,42 @@ namespace GemmyService.Controllers
             {
                 Session["companyName"] = "";
             }
+            if (Session["desktype"] == null)
+            {
+                Session["desktype"] = "";
+            }
+            if (Session["deskrecommend"] == null)
+            {
+                Session["deskrecommend"] = "";
+            }
+            if (Session["deskdomain"] == null)
+            {
+                Session["deskdomain"] = "";
+            }
+            if (Session["deskproductName"] == null)
+            {
+                Session["deskproductName"] = "";
+            }
+            if (Session["name"] == null)
+            {
+                Session["name"] = "";
+            }
+            if (Session["deskproductGuid"] == null)
+            {
+                Session["deskproductGuid"] = "";
+            }
+            if (Session["fileparttype"] == null)
+            {
+                Session["fileparttype"] = "";
+            }
+            if (Session["filenature"] == null)
+            {
+                Session["filenature"] = "";
+            }
+            if (Session["filemode"] == null)
+            {
+                Session["filemode"] = "";
+            }
             return View();
         }
         public ActionResult office_Eservice_handset(string productName, string productGuid, string Type)

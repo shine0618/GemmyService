@@ -3,9 +3,11 @@ var type = GetDeskType();
 var recommend = GetDeskrecommend();
 var name = GetDeskproductName();
 var guid = GetDeskproductGuid();
+console.log(name);
 var OfficeStandards = new Vue({
     el: '#OfficeStandards',
     data: {
+        isAble: false,
         options: [{
             value: 'DXF2D',
             label: 'DXF2D'
@@ -39,6 +41,7 @@ var OfficeStandards = new Vue({
             label: 'OBJ'
         }],
         loading: false,
+        MainAllowNotice:'',
         username: '',
         filename: '',
         format: '',
@@ -47,7 +50,7 @@ var OfficeStandards = new Vue({
         domain: domain,
         Type: type,
         recommend: recommend,
-        langCode: "",
+        langCode: "",                     
         deskList: null,
         activeName: 'd2',
         productName: name,
@@ -112,6 +115,8 @@ var OfficeStandards = new Vue({
         ProductDetailSpeed: "",
         Downloadlabel: "",
         Downloadbutton: "",
+        DownloadNoRight: '',
+        DownloadChooseOneType:'',
     },
     //watch: {
     //    OrderValue: function (val) {
@@ -422,11 +427,9 @@ var OfficeStandards = new Vue({
                     this.paramTableData.push(q);
                     color = it.ColorNumber;
                 }
-
                 initQRCode('qrcodebox', 'http://config.jiecang.com:8866/JCSelection/ProductDetail?domain=' + '&Type=' + this.Type + '&recommend=' + this.recommend + '&productName=' + this.productName + '&productGuid=' + this.productGuid);
                 //initQRCode('qrcodebox', 'http://config.jiecang.com:8866/JCSelection/Main');
                 // console.log(this.T_Product_office_desk_detail);
-
                 var ni = 0;
                 for (ni in response.body.T_Office_Files) {
                     var item = response.body.T_Office_Files[ni];
@@ -444,7 +447,6 @@ var OfficeStandards = new Vue({
                     }
 
                 }
-
                 //收藏的逻辑
                 if (response.body.collect != null && response.body.collect.Id > 0) {
                     this.isCollect = true;
@@ -464,12 +466,9 @@ var OfficeStandards = new Vue({
 
             }, function (error) {
                 //console.log(error);
-
-
             })
         },
         orderBtnClick: function (ordervalue) {
-
             this.OrderValue = ordervalue;
             if (this.Order == 1) {
                 this.Order = 2;
@@ -478,7 +477,6 @@ var OfficeStandards = new Vue({
                 this.Order = 1;
             }
         },
-
         setData: function (field, val) {
             this.$set(this.$data, field, val);//vue 设定值
         },
@@ -514,11 +512,8 @@ var OfficeStandards = new Vue({
                 //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
                 var imgWidth = 595.28;
                 var imgHeight = 592.28 / contentWidth * contentHeight;
-
                 var pageData = canvas.toDataURL('image/jpeg', 1.0);
-
                 var pdf = new jsPDF('', 'pt', 'a4');
-
                 //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
                 //当内容未超过pdf一页显示的范围，无需分页
                 if (leftHeight < pageHeight) {
@@ -536,9 +531,9 @@ var OfficeStandards = new Vue({
                 }
                 var d = new Date();
                 var y = d.getFullYear();
-                var m = d.getMonth();
-                var day = d.getDay();
-                pdf.save(y.toString() + m.toString() + day.toString() + this.productName);
+                var m = d.getMonth()+1;
+                var day = d.getDate();               
+                pdf.save(y.toString() + m.toString() + day.toString() + name);
             })
         },
         colorClick: function (id, mode, number) {
@@ -593,33 +588,42 @@ var OfficeStandards = new Vue({
 
         },
         order: function (event) {
-            if (this.username != '') {
-                this.loading = true;
-                $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
-                    cgiaction: "download",
-                    downloadflags: "ZIP",
-                    part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}" + this.filename,
-                    firm: "jiecang",
-                    format: this.format,
-                    ok_url: "<%download_xml%>", // format of the url to generate
-                    ok_url_type: "text", // we want a direct text response (no 302)
-                    apikey: "e20d66d8bb834f2497a101cff347a2d0",
-                    zipfilename: "Jiecang<%wkbno%>",
-                }).done(function (data) {
-                    download_xml = data; // get the file name for polling
-                    //console.log(this.format);
-                    checkFile(); // start polling
-                });
+            this.$notify.closeAll();
+            if (this.format != '') {
+                if (this.username != '') {
+                    console.log("1");
+                    this.loading = true;
+                    this.isAble = true;
+                    $.post("https://webapi.partcommunity.com/cgi-bin/cgi2pview.exe", {
+                        cgiaction: "download",
+                        downloadflags: "ZIP",
+                        part: "{jiecang/lifting_table/jc36ts/jc36ts_asmtab.prj}" + this.filename,
+                        firm: "jiecang",
+                        format: this.format,
+                        ok_url: "<%download_xml%>", // format of the url to generate
+                        ok_url_type: "text", // we want a direct text response (no 302)
+                        apikey: "e20d66d8bb834f2497a101cff347a2d0",
+                        zipfilename: "Jiecang<%wkbno%>",
+                    }).done(function (data) {
+                        download_xml = data; // get the file name for polling
+                        //console.log(this.format);
+                        checkFile(); // start polling
+                    });
+                }
+                else {
+                    this.$message({
+                        type: 'error',
+                        message: this.DownloadNoRight
+                    });
+                }
             }
             else {
-                this.$message({
-                    type: 'error',
-                    message: this.MainAllowNotice
-                });
+                this.$notify.error(this.DownloadChooseOneType);
             }
         },
         setloading() {
             this.loading = false;
+            this.isAble = false;
         }
     }
 })

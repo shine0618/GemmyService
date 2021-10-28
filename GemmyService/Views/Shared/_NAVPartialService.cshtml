@@ -405,6 +405,7 @@
             <div style="margin-top:20px;">
                 <el-table :data="opiniontableData.filter(data => !table_opinionsearch || data.Content.toLowerCase().includes(table_opinionsearch.toLowerCase()))"
                           style="width: 100%"
+                          :empty-text="OpinionLoginFirst"
                           :default-sort = "{prop: 'CreateTime', order: 'descending'}"
                           stripe>
                     <el-table-column :label="NAVOpinionLookTableDate"

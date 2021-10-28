@@ -94,5 +94,22 @@ namespace _2GemmyBusness.BLL.BLLOfficePartManage
             }
             return issuccess;
         }
+
+        public List<T_Product_office_desk> getDeskCustomerInfo(string customername)
+        {
+            var t = from x in read_db.T_Product_office_desk
+                    where x.deleteSign == 0
+                    where x.deskCustmoer != true
+                    where x.deskCustomerName.ToLower()==customername.ToLower()
+                    select x;
+            if (t != null)
+            {
+                return t.ToList();
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

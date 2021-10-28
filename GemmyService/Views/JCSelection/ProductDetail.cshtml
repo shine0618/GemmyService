@@ -148,10 +148,10 @@
                                                :value="item.value">
                                     </el-option>
                                 </el-select>
-                                <button class="orderbtn thm-btn"  @@click="order()" v-loading="loading">{{Downloadbutton}}</button>
+                                <button :disabled="isAble" class="orderbtn thm-btn"  @@click="order()" v-loading="loading">{{Downloadbutton}}</button>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-9 col-xs-9">
+                        <div class="col-lg-3 col-md-9 col-xs-9" style="top:45px">
                             @*<i v-show="isCollect" class="el-icon-star-on collect_icon" @@click="isCollect=!isCollect"></i>
                                 <i v-show="!isCollect" class="el-icon-star-off collect_icon" @@click="isCollect=!isCollect"></i>*@
 

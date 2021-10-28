@@ -283,9 +283,9 @@ var nav_langu_box = new Vue({
             NAVOpinionSubmitSuccessNotice: "",
             NAVOpinionSubmitFailNotice: "",
             NAVOpinionLoginNotice: "",
-
-
-
+            NAVLoginEmailorPassEmpty:'',
+            NAVRegisterSendEmailEmptyFailNotice:'',
+            OpinionLoginFirst:'',
             ruleLoginForm: {
                 pass: '',
                 code: '',
@@ -723,42 +723,45 @@ var nav_langu_box = new Vue({
         login(email, password) {
             this.$notify.closeAll();
             if (email != '' && password != '') {
-                
-                    this.$http({           //调用接口
-                        method: 'GET',
-                        url: "/JCAccount/Login",
-                        params: {
-                            email: email,
-                            password: password,
-                        }
-                    }).then(function (response) {  //接口返回数据
-                       // this.islogin = response.body;
 
-                        if (response.body.CanLogin == true) {
-                            location.reload();
-                            
-                            this.$notify({
-                                message: this.NAVLoginSuccessNotice ,
-                                type: 'success'
-                            });
-                        }
-                        else if (response.body.NoPassword) {
-                            this.$notify.error(this.NAVLoginFailPasswordNotice);
-                        }
-                        else {
-                            this.$notify.error(this.NAVLoginFailEmailNotice);
-                        }
-                     //   console.log(response);
-                        if (this.islogin == false) {
-                            isLoginCheck = true;
-                            
-                        }
+                this.$http({           //调用接口
+                    method: 'GET',
+                    url: "/JCAccount/Login",
+                    params: {
+                        email: email,
+                        password: password,
+                    }
+                }).then(function (response) {  //接口返回数据
+                    // this.islogin = response.body;
 
-                    }, function (error) {
-                        console.log(error);
-                    })
-                
-                
+                    if (response.body.CanLogin == true) {
+                        location.reload();
+
+                        this.$notify({
+                            message: this.NAVLoginSuccessNotice,
+                            type: 'success'
+                        });
+                    }
+                    else if (response.body.NoPassword) {
+                        this.$notify.error(this.NAVLoginFailPasswordNotice);
+                    }
+                    else {
+                        this.$notify.error(this.NAVLoginFailEmailNotice);
+                    }
+                    //   console.log(response);
+                    if (this.islogin == false) {
+                        isLoginCheck = true;
+
+                    }
+
+                }, function (error) {
+                    console.log(error);
+                })
+
+
+            }
+            else {
+                this.$notify.error(this.NAVLoginEmailorPassEmpty);
             }
 
         },
@@ -906,6 +909,9 @@ var nav_langu_box = new Vue({
                         console.log(error);
                     })
                 }
+            }
+            else {
+                this.$notify.error(this.NAVRegisterSendEmailEmptyFailNotice);
             }
         },
         sendResetEmail(emailaddress) {
