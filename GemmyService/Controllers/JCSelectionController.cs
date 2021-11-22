@@ -68,9 +68,9 @@ namespace GemmyService.Controllers
             {
                 Session["deskrecommend"] = "";
             }
-            if (Session["deskdomain"] == null)
+            if (Session["domain"] == null)
             {
-                Session["deskdomain"] = "";
+                Session["domain"] = "";
             }
             if (Session["deskproductGuid"] == null)
             {
@@ -132,9 +132,9 @@ namespace GemmyService.Controllers
             {
                 Session["deskrecommend"] = "";
             }
-            if (Session["deskdomain"] == null)
+            if (Session["domain"] == null)
             {
-                Session["deskdomain"] = "";
+                Session["domain"] = "";
             }
             if (Session["deskproductGuid"] == null)
             {
@@ -208,9 +208,9 @@ namespace GemmyService.Controllers
             {
                 Session["deskrecommend"] = recommend;
             }
-            if (Session["deskdomain"] == null)
+            if (Session["domain"] == null)
             {
-                Session["deskdomain"] = "";
+                Session["domain"] = "";
             }
             if (Session["deskproductGuid"] == null)
             {
@@ -316,6 +316,22 @@ namespace GemmyService.Controllers
             if (Session["desktype"] == null)
             {
                 Session["desktype"] = "";
+            }
+            if (Session["fileparttype"] == null)
+            {
+                Session["fileparttype"] = "";
+            }
+            if (Session["filenature"] == null)
+            {
+                Session["filenature"] = "";
+            }
+            if (Session["filemode"] == null)
+            {
+                Session["filemode"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
             }
             if (!string.IsNullOrEmpty(domain))
             {
@@ -508,9 +524,9 @@ namespace GemmyService.Controllers
             {
                 Session["deskrecommend"] = "";
             }
-            if (Session["deskdomain"] == null)
+            if (Session["domain"] == null)
             {
-                Session["deskdomain"] = "";
+                Session["domain"] = "";
             }
             if (Session["deskproductName"] == null)
             {
@@ -587,9 +603,9 @@ namespace GemmyService.Controllers
             {
                 Session["deskrecommend"] = "";
             }
-            if (Session["deskdomain"] == null)
+            if (Session["domain"] == null)
             {
-                Session["deskdomain"] = "";
+                Session["domain"] = "";
             }
             if (Session["deskproductName"] == null)
             {
@@ -1004,6 +1020,13 @@ namespace GemmyService.Controllers
         {
 
             bool issuccess = bll_desk.DeleteCustome(id);
+            //T_Product_office_desk_customer deskcusguid = bll_desk.DeleteCustomerGuid(id);
+            //var param =new 
+            //{
+                
+            //    user=deskcusguid
+
+            //};
             JsonResult jr = Json(issuccess, JsonRequestBehavior.AllowGet);
             jr.MaxJsonLength = int.MaxValue;
             return jr;
@@ -1271,6 +1294,65 @@ namespace GemmyService.Controllers
             jr.MaxJsonLength = int.MaxValue;
             return jr;
         }
+
+        public ActionResult canvastest()
+        {
+            if (Session["PageLanguage"] == null)
+            {
+                Session["PageLanguage"] = "default";
+            }
+            if (Session["emailName"] == null)
+            {
+                Session["emailName"] = "";
+            }
+            if (Session["level"] == null)
+            {
+                Session["level"] = 0;
+            }
+            if (Session["companyName"] == null)
+            {
+                Session["companyName"] = "";
+            }
+            if (Session["desktype"] == null)
+            {
+                Session["desktype"] = "";
+            }
+            if (Session["deskrecommend"] == null)
+            {
+                Session["deskrecommend"] = "";
+            }
+            if (Session["domain"] == null)
+            {
+                Session["domain"] = "";
+            }
+            if (Session["deskproductName"] == null)
+            {
+                Session["deskproductName"] = "";
+            }
+            if (Session["name"] == null)
+            {
+                Session["name"] = "";
+            }
+            if (Session["deskproductGuid"] == null)
+            {
+                Session["deskproductGuid"] = "";
+            }
+            if (Session["fileparttype"] == null)
+            {
+                Session["fileparttype"] = "";
+            }
+            if (Session["filenature"] == null)
+            {
+                Session["filenature"] = "";
+            }
+            if (Session["filemode"] == null)
+            {
+                Session["filemode"] = "";
+            }
+
+            return View();
+        }
+
 
         #region 方法集
 

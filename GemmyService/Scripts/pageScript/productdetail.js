@@ -254,7 +254,7 @@ var OfficeStandards = new Vue({
                     var key = p;
                     var value = obj[p];
                     // console.log('key:' + key + "  value:" + value);
-                    this.setData(key, value);;
+                    this.setData(key, value);
                 }
             }
 

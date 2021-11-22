@@ -813,7 +813,6 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             T_Product_office_desk t = read_db.T_Product_office_desk.FirstOrDefault(m => m.Id == id);
             if (t != null)
             {
-
                 t.deleteSign = 1;
                 t.deskCustmoer = false;
                 read_db.Configuration.ValidateOnSaveEnabled = false;
@@ -823,7 +822,22 @@ namespace _2GemmyBusness.BLL.BLLOfficeDesk
             }
             return issuccess;
         }
-
+        public T_Product_office_desk_customer DeleteCustomerGuid(int id)
+        {
+            T_Product_office_desk_customer t_user = new T_Product_office_desk_customer();
+            T_Product_office_desk t = read_db.T_Product_office_desk.FirstOrDefault(m => m.Id == id);
+            if (t != null)
+            {
+                t_user = read_db.T_Product_office_desk_customer.FirstOrDefault(m => m.deskGuid == t.deskGuid);
+                if (t_user != null)
+                {
+                    t_user.deleteSign = 1;
+                    Update(t_user);
+                }
+            }
+            
+            return t_user;
+        }
         #endregion
     }
 }

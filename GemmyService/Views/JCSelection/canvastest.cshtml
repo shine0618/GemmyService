@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "canvastest";
+}
+
+<section id="content">
+    <ul id="tool">
+        <li>
+            <h3>图像</h3><hr>
+            <ul id="image">
+                <li id="saveimg">
+                    <form id="myform" method="post">
+                        <input type="hidden" id="imgsave" name="dataImg" value="">
+                        <button>保存图片</button>
+                    </form>
+                </li>
+                <li id="clearimg">
+                    <button>清空画板</button>
+                </li>
+            </ul>
+        </li>
+       <li>
+            <h3>工具</h3><hr>
+            <ul id="tools">
+                <li id="means_brush"><img src="~/resourse/imgs/Brush.png" alt="画笔" title="画笔"></li>
+                <li id="means_eraser"><img src="~/resourse/imgs/Eraser.png" alt="" title="橡皮"></li>
+                <li id="means_paint"><img src="~/resourse/imgs/Paint.png" alt="" title="喷漆"></li>
+                 <li id="means_straw"><img src="~/resourse/imgs/Straw.png" alt="" title="吸管"></li>
+                <li id="means_text"><img src="~/resourse/imgs/text.png" alt="" title="文字"></li>
+                <li id="means_magnifier"><img src="~/resourse/imgs/Magnifier.png" alt="" title="放大镜"></li>
+            </ul>
+        </li>
+        <li>
+            <h3>形状</h3>
+            <ul id="shape">
+                <li id="means_line"><img src="~/resourse/imgs/line.png"/></li>
+                <li id="means_arc"><img src="~/resourse/imgs/arc.png"/></li>
+                <li id="means_rect"><img src="~/resourse/imgs/rect.png"/></li>
+                <li id="means_poly"><img src="~/resourse/imgs/poly.png"/></li>
+                <li id="means_arcfill"><img src="~/resourse/imgs/arcfill.png"/></li>
+                <li id="means_rectfill"><img src="~/resourse/imgs/rectfill.png"/></li>
+            </ul>
+        </li>
+        <li>
+            <h3>线宽</h3>
+            <ul id="size">
+                <li id="width_1"><img src="~/resourse/imgs/line1px.png"/></li>
+                <li id="width_3"><img src="~/resourse/imgs/line3px.png"/></li>
+                <li id="width_5"><img src="~/resourse/imgs/line5px.png"/></li>
+                <li id="width_7"><img src="~/resourse/imgs/line7px.png"/></li>
+            </ul>
+        </li>
+        <li>
+            <h3>颜色</h3>
+            <ul id="color">
+                <li id="red"></li>
+                <li id="green"></li>
+                <li id="blue"></li>
+                <li id="yellow"></li>
+                <li id="white"></li>
+                <li id="black"></li>
+                <li id="pink"></li>
+                <li id="purple"></li>
+                <li id="cyan"></li>
+                <li id="orange"></li>
+            </ul>
+        </li>
+    </ul>
+    <canvas id="canvas" width="880" height="400">您的浏览器不支持canvas</canvas>
+</section>
+
+<script src="~/Scripts/canvas.js"></script>

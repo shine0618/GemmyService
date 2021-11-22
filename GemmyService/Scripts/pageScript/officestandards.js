@@ -111,6 +111,9 @@ var OfficeStandards = new Vue({
                 }
             }).then(function (response) {  //接口返回数据
                 // console.log(response.body);
+                //console.log(response.body.user);
+
+
                 if (response.body == true) {
                     this.$notify({
                         message: this.OfficeStandardsDeleteplansuccessfulnotice,

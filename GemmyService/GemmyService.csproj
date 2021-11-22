@@ -373,6 +373,23 @@
     <Content Include="resourse\desk_TS_picture\JC35TS-R13S1.png" />
     <Content Include="resourse\desk_TS_picture\JC35TS-S13S.png" />
     <Content Include="resourse\desk_TS_picture\JC35TS-S13S1.png" />
+    <Content Include="resourse\imgs\1.gif" />
+    <Content Include="resourse\imgs\arc.png" />
+    <Content Include="resourse\imgs\arcfill.png" />
+    <Content Include="resourse\imgs\Brush.png" />
+    <Content Include="resourse\imgs\Eraser.png" />
+    <Content Include="resourse\imgs\line.png" />
+    <Content Include="resourse\imgs\line1px.png" />
+    <Content Include="resourse\imgs\line3px.png" />
+    <Content Include="resourse\imgs\line5px.png" />
+    <Content Include="resourse\imgs\line7px.png" />
+    <Content Include="resourse\imgs\Magnifier.png" />
+    <Content Include="resourse\imgs\Paint.png" />
+    <Content Include="resourse\imgs\poly.png" />
+    <Content Include="resourse\imgs\rect.png" />
+    <Content Include="resourse\imgs\rectfill.png" />
+    <Content Include="resourse\imgs\Straw.png" />
+    <Content Include="resourse\imgs\text.png" />
     <Content Include="resourse\Img\2D_icon.png" />
     <Content Include="resourse\Img\3D_icon.png" />
     <Content Include="resourse\Img\delete_icon.png" />
@@ -588,6 +605,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\canvas.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -866,6 +884,7 @@
     <Content Include="Views\JCSelection\office_Eservice_controlbox.cshtml" />
     <Content Include="Views\JCSelection\orderlist.cshtml" />
     <Content Include="Views\JCManage\usercompanyapply.cshtml" />
+    <Content Include="Views\JCSelection\canvastest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
